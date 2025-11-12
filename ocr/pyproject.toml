@@ -9,5 +9,6 @@ dependencies = [
     "paddlepaddle",
     "pillow",
     "numpy",
+    "rapidfuzz",
 ]
 
