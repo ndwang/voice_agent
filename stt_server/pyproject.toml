@@ -1,0 +1,13 @@
+[project]
+name = "stt-server"
+version = "0.1.0"
+description = "Speech-to-text server using faster-whisper"
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi",
+    "uvicorn[standard]",
+    "faster-whisper>=1.2.1",
+    "torch==2.8.*+cu124",
+    "numpy",
+]
+

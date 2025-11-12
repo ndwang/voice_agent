@@ -1,5 +1,0 @@
-websockets
-sounddevice
-numpy
-torch
-matplotlib
