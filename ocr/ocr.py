@@ -131,15 +131,17 @@ class OcrMonitorApp:
         # --- State Variables ---
         self.master = master
         self.region = None  # Will store (x, y, width, height)
-        self.interval_ms = 3000  # Interval in milliseconds
+        self.region2 = None  # Second region (x, y, width, height)
+        self.interval_ms = 1000  # Interval in milliseconds
         self.is_running = False
         self.previous_image_hash = None
+        self.previous_image_hash2 = None
         self.after_id = None  # To store the ID of the scheduled job
 
         # --- OCR Engine ---
         # Initialize OCR reader once to avoid reloading the model
         # lang='ch' supports both Chinese and English
-        self.ocr_reader = PaddleOCR(lang='ch', use_doc_orientation_classify=False, use_doc_unwarping=False, ocr_version="PP-OCRv3")
+        self.ocr_reader = PaddleOCR(lang='ch', use_doc_orientation_classify=False, use_doc_unwarping=False, ocr_version="PP-OCRv4")
 
         # --- Text Hook ---
         self.text_handler_hook = self.default_text_handler
@@ -158,13 +160,26 @@ class OcrMonitorApp:
         main_frame = ttk.Frame(self.master, padding="10")
         main_frame.grid(row=0, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
         
-        # Select Region button
+        # Region selection buttons
+        region_frame = ttk.Frame(main_frame)
+        region_frame.grid(row=0, column=0, columnspan=2, pady=5, sticky=(tk.W, tk.E))
+        
         self.select_region_btn = ttk.Button(
-            main_frame, 
-            text="Select Region", 
+            region_frame, 
+            text="Select Region 1", 
             command=self.select_region
         )
-        self.select_region_btn.grid(row=0, column=0, columnspan=2, pady=5, sticky=(tk.W, tk.E))
+        self.select_region_btn.grid(row=0, column=0, padx=5, sticky=(tk.W, tk.E))
+        
+        self.select_region2_btn = ttk.Button(
+            region_frame, 
+            text="Select Region 2", 
+            command=self.select_region2
+        )
+        self.select_region2_btn.grid(row=0, column=1, padx=5, sticky=(tk.W, tk.E))
+        
+        region_frame.columnconfigure(0, weight=1)
+        region_frame.columnconfigure(1, weight=1)
         
         # Interval frame
         interval_frame = ttk.Frame(main_frame)
@@ -193,7 +208,7 @@ class OcrMonitorApp:
         # Status label
         self.status_label = ttk.Label(
             main_frame, 
-            text="Status: Stopped | Region: Not selected",
+            text="Status: Stopped | Region 1: Not selected | Region 2: Not selected",
             wraplength=300
         )
         self.status_label.grid(row=3, column=0, columnspan=2, pady=5)
@@ -212,6 +227,22 @@ class OcrMonitorApp:
             """Callback when region selection is complete."""
             if region is not None:
                 self.region = region
+                self.previous_image_hash = None  # Reset hash when region changes
+                self.update_status()
+        
+        selector = RegionSelector(self.master, on_region_selected)
+        selector.start_selection()
+    
+    def select_region2(self):
+        """
+        Hides the main window, shows a transparent overlay for selection,
+        and then stores the selected region in self.region2.
+        """
+        def on_region_selected(region):
+            """Callback when region selection is complete."""
+            if region is not None:
+                self.region2 = region
+                self.previous_image_hash2 = None  # Reset hash when region changes
                 self.update_status()
         
         selector = RegionSelector(self.master, on_region_selected)
@@ -244,12 +275,12 @@ class OcrMonitorApp:
 
     def start_monitoring(self):
         """
-        Performs pre-flight checks (is a region selected?) and starts the
+        Performs pre-flight checks (is at least one region selected?) and starts the
         monitoring loop using tkinter's `after()` method.
         """
-        # 1. Check if self.region is set. If not, show an error.
-        if self.region is None:
-            messagebox.showerror("Error", "Please select a region first!")
+        # 1. Check if at least one region is set. If not, show an error.
+        if self.region is None and self.region2 is None:
+            messagebox.showerror("Error", "Please select at least one region first!")
             return
         
         # 2. Set self.is_running = True.
@@ -258,6 +289,7 @@ class OcrMonitorApp:
         # 3. Update GUI elements (button text, status label).
         self.toggle_btn.config(text="Stop Monitoring")
         self.select_region_btn.config(state='disabled')
+        self.select_region2_btn.config(state='disabled')
         self.set_interval_btn.config(state='disabled')
         self.update_status()
         
@@ -279,76 +311,118 @@ class OcrMonitorApp:
         # 3. Update GUI elements.
         self.toggle_btn.config(text="Start Monitoring")
         self.select_region_btn.config(state='normal')
+        self.select_region2_btn.config(state='normal')
         self.set_interval_btn.config(state='normal')
         self.update_status()
 
+    def _process_region(self, region, previous_hash):
+        """
+        Process a single region: take screenshot, check hash, perform OCR if changed.
+        
+        Returns:
+            tuple: (result_data, new_hash)
+            - result_data: dict with 'rec_texts' and 'rec_polys' keys, or None if unchanged
+            - new_hash: str - New hash value
+        """
+        if region is None:
+            return None, previous_hash
+        
+        try:
+            # Take screenshot
+            x, y, width, height = region
+            screenshot = pyautogui.screenshot(region=(x, y, width, height))
+            
+            # Calculate hash
+            img_array = np.array(screenshot)
+            current_hash = hashlib.md5(img_array.tobytes()).hexdigest()
+            
+            # If unchanged, return None
+            if current_hash == previous_hash:
+                return None, previous_hash
+            
+            # If changed, perform OCR
+            results = self.ocr_reader.predict(img_array)
+            
+            # Extract rec_texts and rec_polys from OCR results
+            if results and results[0]:
+                result_data = {
+                    'rec_texts': results[0]['rec_texts'],
+                    'rec_polys': results[0]['rec_polys']
+                }
+            else:
+                result_data = {
+                    'rec_texts': [],
+                    'rec_polys': []
+                }
+            
+            return result_data, current_hash
+        
+        except Exception as e:
+            print(f"Error processing region: {e}")
+            return None, previous_hash
+    
     def perform_check(self):
         """
         This is the core OCR logic, executed on each interval.
-        It replaces the old blocking `while` loop.
+        Monitors both regions and passes a list of outputs to the handler.
         """
         if not self.is_running:
             return
         
-        try:
-            # 1. Take screenshot of self.region.
-            x, y, width, height = self.region
-            screenshot = pyautogui.screenshot(region=(x, y, width, height))
-            
-            # 2. Calculate the hash of the new screenshot efficiently.
-            # Convert PIL Image to numpy array for both hashing and OCR
-            img_array = np.array(screenshot)
-            # Hash the numpy array directly
-            current_hash = hashlib.md5(img_array.tobytes()).hexdigest()
-            
-            # 3. Compare with self.previous_image_hash. If same, do nothing.
-            if current_hash == self.previous_image_hash:
-                # Schedule next check
-                if self.is_running:
-                    self.after_id = self.master.after(self.interval_ms, self.perform_check)
-                return
-            
-            # 4. If different:
-            #    a. Update self.previous_image_hash.
-            self.previous_image_hash = current_hash
-            
-            #    b. Perform OCR on the image.
-            # PaddleOCR accepts numpy array or PIL Image
-            results = self.ocr_reader.predict(img_array)
-            
-            # Extract text from OCR results
-            if results and results[0]:
-                extracted_text = '\n'.join(results[0]['rec_texts'])
-            else:
-                extracted_text = ''
-            
-            #    c. If text is extracted, call self.text_handler_hook(text).
-            if extracted_text.strip():
-                self.text_handler_hook(extracted_text)
+        # Process both regions
+        result1, new_hash1 = self._process_region(self.region, self.previous_image_hash)
+        result2, new_hash2 = self._process_region(self.region2, self.previous_image_hash2)
         
-        except Exception as e:
-            print(f"Error during OCR check: {e}")
+        # Update hashes
+        if self.region is not None:
+            self.previous_image_hash = new_hash1
+        if self.region2 is not None:
+            self.previous_image_hash2 = new_hash2
         
-        # 5. *** THE CRITICAL STEP ***
-        #    If self.is_running is still True, schedule this same function
-        #    to be called again after the specified interval.
+        # Create list of outputs (None if region didn't change, otherwise dict with rec_texts and rec_polys)
+        outputs = [result1, result2]
+        
+        # Call handler with list of outputs (even if both are None)
+        self.text_handler_hook(outputs)
+        
+        # Schedule next check
         if self.is_running:
             self.after_id = self.master.after(self.interval_ms, self.perform_check)
 
-    def default_text_handler(self, text):
-        """The default hook: prints text to the terminal."""
-        print(f"{text}")
+    def default_text_handler(self, outputs):
+        """
+        The default hook: prints list of outputs to the terminal.
+        
+        Args:
+            outputs: List of dicts or None [region1_result, region2_result]
+                    None if region didn't change
+                    Dict with 'rec_texts' and 'rec_polys' keys if changed
+        """
+        for i, result in enumerate(outputs, 1):
+            if result is not None:  # Only print if region changed
+                texts = result['rec_texts']
+                if texts:
+                    text_output = '\n'.join(texts)
+                    print(f"Region {i}:\n{text_output}\n")
     
     def update_status(self):
         """Updates the status label with current state."""
         status = "Running" if self.is_running else "Stopped"
+        
         if self.region:
             x, y, w, h = self.region
-            region_str = f"({x}, {y}, {w}x{h})"
+            region1_str = f"({x}, {y}, {w}x{h})"
         else:
-            region_str = "Not selected"
+            region1_str = "Not selected"
+        
+        if self.region2:
+            x, y, w, h = self.region2
+            region2_str = f"({x}, {y}, {w}x{h})"
+        else:
+            region2_str = "Not selected"
+        
         self.status_label.config(
-            text=f"Status: {status} | Region: {region_str} | Interval: {self.interval_ms/1000:.1f}s"
+            text=f"Status: {status} | R1: {region1_str} | R2: {region2_str} | Interval: {self.interval_ms/1000:.1f}s"
         )
     
     def cleanup(self):
