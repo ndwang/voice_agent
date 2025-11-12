@@ -3,7 +3,7 @@ from tkinter import messagebox, ttk
 import time
 import hashlib
 import pyautogui
-import easyocr
+from paddleocr import PaddleOCR
 from PIL import Image
 import io
 import numpy as np
@@ -138,7 +138,8 @@ class OcrMonitorApp:
 
         # --- OCR Engine ---
         # Initialize OCR reader once to avoid reloading the model
-        self.ocr_reader = easyocr.Reader(['ch_sim', 'en'])
+        # lang='ch' supports both Chinese and English
+        self.ocr_reader = PaddleOCR(lang='ch', use_doc_orientation_classify=False, use_doc_unwarping=False, ocr_version="PP-OCRv3")
 
         # --- Text Hook ---
         self.text_handler_hook = self.default_text_handler
@@ -226,7 +227,6 @@ class OcrMonitorApp:
             if interval_seconds <= 0:
                 raise ValueError("Interval must be positive")
             self.interval_ms = int(interval_seconds * 1000)
-            messagebox.showinfo("Success", f"Interval set to {interval_seconds} seconds")
             self.update_status()
         except ValueError as e:
             messagebox.showerror("Invalid Input", f"Please enter a valid positive number.\n{str(e)}")
@@ -313,10 +313,14 @@ class OcrMonitorApp:
             self.previous_image_hash = current_hash
             
             #    b. Perform OCR on the image.
-            results = self.ocr_reader.readtext(img_array)
+            # PaddleOCR accepts numpy array or PIL Image
+            results = self.ocr_reader.predict(img_array)
             
             # Extract text from OCR results
-            extracted_text = '\n'.join([result[1] for result in results])
+            if results and results[0]:
+                extracted_text = '\n'.join(results[0]['rec_texts'])
+            else:
+                extracted_text = ''
             
             #    c. If text is extracted, call self.text_handler_hook(text).
             if extracted_text.strip():
@@ -333,8 +337,7 @@ class OcrMonitorApp:
 
     def default_text_handler(self, text):
         """The default hook: prints text to the terminal."""
-        print(f"Timestamp: {time.ctime()}")
-        print(f"Extracted Text:\n{text}")
+        print(f"{text}")
     
     def update_status(self):
         """Updates the status label with current state."""
@@ -357,7 +360,7 @@ class OcrMonitorApp:
         if self.is_running:
             self.stop_monitoring()
         
-        # Clean up OCR reader if needed (EasyOCR doesn't have explicit cleanup,
+        # Clean up OCR reader if needed (PaddleOCR doesn't have explicit cleanup,
         # but we can set it to None for garbage collection)
         if hasattr(self, 'ocr_reader'):
             self.ocr_reader = None

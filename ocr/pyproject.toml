@@ -5,7 +5,8 @@ description = "OCR monitoring tool with region selection and periodic text extra
 requires-python = ">=3.10"
 dependencies = [
     "pyautogui",
-    "easyocr",
+    "paddleocr",
+    "paddlepaddle",
     "pillow",
     "numpy",
 ]

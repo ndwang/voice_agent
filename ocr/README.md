@@ -8,7 +8,7 @@ A Python application for monitoring screen regions and extracting text using OCR
 - **Periodic Monitoring**: Automatically captures and processes screenshots at configurable intervals
 - **Smart Optimization**: Skips OCR when screenshots are identical (hash-based comparison)
 - **Customizable Hooks**: Easy integration with custom text processing logic
-- **Chinese & English Support**: Uses EasyOCR for multi-language text extraction
+- **Chinese & English Support**: Uses PaddleOCR for multi-language text extraction
 
 ## Installation
 
@@ -110,7 +110,7 @@ app = OcrMonitorApp(master)
 - `interval_ms`: Integer - Monitoring interval in milliseconds (default: 3000)
 - `is_running`: Boolean - Whether monitoring is currently active
 - `text_handler_hook`: Callable - Function to call when text is extracted
-- `ocr_reader`: EasyOCR Reader instance - Direct access to OCR engine
+- `ocr_reader`: PaddleOCR instance - Direct access to OCR engine
 
 #### Methods
 
@@ -153,7 +153,8 @@ See `example_usage.py` for comprehensive examples including:
 ## Dependencies
 
 - `pyautogui`: Screenshot capture
-- `easyocr`: OCR engine (supports Chinese and English)
+- `paddleocr`: OCR engine (supports Chinese and English)
+- `paddlepaddle`: Required by PaddleOCR
 - `pillow`: Image processing
 - `numpy`: Array operations
 - `tkinter`: GUI (usually included with Python)

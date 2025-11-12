@@ -125,8 +125,12 @@ def example_direct_ocr_access():
             img_array = np.array(screenshot)
             
             # Use the OCR reader directly
-            results = app.ocr_reader.readtext(img_array)
-            text = '\n'.join([result[1] for result in results])
+            # PaddleOCR returns: [[[bbox], (text, confidence)], ...] or None
+            results = app.ocr_reader.ocr(img_array, cls=True)
+            if results and results[0]:
+                text = '\n'.join([line[1][0] for line in results[0]])
+            else:
+                text = ""
             print(f"One-off OCR result: {text}")
         else:
             print("Please select a region first!")
