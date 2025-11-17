@@ -9,7 +9,6 @@ import json
 import asyncio
 from typing import Optional
 from fastapi import FastAPI, HTTPException
-from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 import uvicorn
 from sse_starlette.sse import EventSourceResponse
@@ -64,7 +63,9 @@ async def generate(request: GenerateRequest):
         )
         return {"response": response}
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        # Handle provider-specific errors gracefully
+        status_code, error_message = llm_provider.parse_error(e)
+        raise HTTPException(status_code=status_code, detail=error_message)
 
 
 async def generate_stream_events(request: GenerateRequest):
@@ -88,9 +89,14 @@ async def generate_stream_events(request: GenerateRequest):
             "data": json.dumps({"status": "complete"})
         }
     except Exception as e:
+        # Handle provider-specific errors gracefully
+        status_code, error_message = llm_provider.parse_error(e)
         yield {
             "event": "error",
-            "data": json.dumps({"error": str(e)})
+            "data": json.dumps({
+                "error": error_message,
+                "status_code": status_code
+            })
         }
 
 
