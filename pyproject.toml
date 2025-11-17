@@ -4,14 +4,33 @@ version = "0.1.0"
 description = "Voice agent workspace"
 readme = "README.md"
 requires-python = ">=3.10"
-
-[workspace]
-members = [
-    "orchestrator",
-    "stt_server",
-    "index-tts",
-    "ocr",
+dependencies = [
+    # Web framework and server
+    "fastapi",
+    "uvicorn[standard]",
+    "websockets",
+    # HTTP clients
+    "httpx",
+    "sse-starlette",
+    # Data validation
+    "pydantic",
+    # Audio processing
+    "sounddevice",
+    "numpy",
+    "matplotlib",
+    # ML/AI frameworks
+    "torch==2.8.*",
+    "torchaudio",
+    "faster-whisper>=1.2.1",
+    # OCR
+    "pyautogui",
+    "paddleocr",
+    "paddlepaddle",
+    "pillow",
+    "rapidfuzz",
+    "google-genai",
 ]
+
 
 [tool.uv.sources]
 # Install PyTorch with CUDA support on Linux/Windows (CUDA doesn't exist for Mac).
@@ -28,8 +47,8 @@ torchvision = [
 
 [[tool.uv.index]]
 name = "pytorch-cuda"
-# Use PyTorch built for NVIDIA Toolkit version 12.8.
+# Use PyTorch built for NVIDIA Toolkit version 12.6.
 # Available versions: https://pytorch.org/get-started/locally/
-url = "https://download.pytorch.org/whl/cu128"
+url = "https://download.pytorch.org/whl/cu126"
 # Only use this index when explicitly requested by `tool.uv.sources`.
 explicit = true
