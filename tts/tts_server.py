@@ -255,8 +255,9 @@ async def websocket_endpoint(websocket: WebSocket):
                     break
             
             # Calculate timeout: use shorter of remaining time until next ping or max receive timeout
+            # Use very long timeout to prevent connection timeouts (1 hour)
             time_until_next_ping = max(0, KEEPALIVE_INTERVAL - time_since_last_ping)
-            receive_timeout = min(time_until_next_ping if time_until_next_ping > 0 else KEEPALIVE_INTERVAL, 10.0)
+            receive_timeout = min(time_until_next_ping if time_until_next_ping > 0 else KEEPALIVE_INTERVAL, 3600.0)
             
             # Receive message with timeout
             try:
@@ -519,11 +520,12 @@ if __name__ == "__main__":
     logger.info(f"Output sample rate: {OUTPUT_SAMPLE_RATE} Hz")
     # Configure uvicorn to send WebSocket pings for keepalive
     # Fast ping intervals to prevent client timeout during Edge-TTS connection establishment
+    # ws_ping_timeout=None disables timeout enforcement to prevent connection drops
     uvicorn.run(
         app, 
         host=HOST, 
         port=PORT,
         ws_ping_interval=5.0,  # Ping every 5 seconds
-        ws_ping_timeout=5.0
+        ws_ping_timeout=None   # Disable ping timeout to prevent connection drops
     )
 

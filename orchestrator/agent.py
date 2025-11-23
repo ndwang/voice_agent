@@ -241,8 +241,8 @@ class Agent:
                 
                 try:
                     # Wait for message with timeout to allow checking if we should continue
-                    # Use longer timeout for long synthesis operations
-                    message = await asyncio.wait_for(self.tts_websocket.recv(), timeout=10.0)
+                    # Use very long timeout to prevent connection timeouts (1 hour)
+                    message = await asyncio.wait_for(self.tts_websocket.recv(), timeout=3600.0)
                     
                     # Reset timeout counter on successful receive
                     consecutive_timeouts = 0
