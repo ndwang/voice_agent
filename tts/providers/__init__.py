@@ -1,0 +1,10 @@
+"""
+TTS Providers
+
+Export all available TTS providers.
+"""
+from tts.providers.edge_tts import EdgeTTSProvider
+from tts.providers.chattts import ChatTTSProvider
+
+__all__ = ["EdgeTTSProvider", "ChatTTSProvider"]
+

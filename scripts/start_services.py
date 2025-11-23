@@ -9,7 +9,18 @@ import sys
 import subprocess
 import time
 import os
+import logging
 from pathlib import Path
+
+# Configure logging with time info
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S',
+    stream=sys.stdout,
+    force=True
+)
+logger = logging.getLogger(__name__)
 
 # Service definitions
 SERVICES = [
@@ -55,7 +66,7 @@ def check_venv():
     """Check if virtual environment exists."""
     venv_path = Path(".venv")
     if not venv_path.exists():
-        print("Error: Virtual environment not found. Run 'uv sync' first.")
+        logger.error("Virtual environment not found. Run 'uv sync' first.")
         sys.exit(1)
     
     # Check for activation script
@@ -67,14 +78,14 @@ def check_venv():
         python_exe = venv_path / "bin" / "python"
     
     if not python_exe.exists():
-        print(f"Error: Python executable not found at {python_exe}")
+        logger.error(f"Python executable not found at {python_exe}")
         sys.exit(1)
     
     return python_exe
 
 def start_service(python_exe, service, project_root):
     """Start a service in a new window/process."""
-    print(f"Starting {service['name']}...")
+    logger.info(f"Starting {service['name']}...")
     
     # Build command
     cmd = [str(python_exe), "-m", service["module"]]
@@ -119,7 +130,7 @@ def start_service(python_exe, service, project_root):
                 ])
             except FileNotFoundError:
                 # Last resort: run in background
-                print(f"  Warning: No terminal emulator found. Running {service['name']} in background.")
+                logger.warning(f"No terminal emulator found. Running {service['name']} in background.")
                 subprocess.Popen(
                     cmd,
                     cwd=project_root,
@@ -129,10 +140,10 @@ def start_service(python_exe, service, project_root):
 
 def main():
     """Main function to start all services."""
-    print("=" * 60)
-    print("Starting Voice Agent Services")
-    print("=" * 60)
-    print()
+    logger.info("=" * 60)
+    logger.info("Starting Voice Agent Services")
+    logger.info("=" * 60)
+    logger.info("")
     
     # Check virtual environment
     python_exe = check_venv()
@@ -144,32 +155,32 @@ def main():
         
         # Wait between services (longer wait before orchestrator)
         if service["name"] == "OCR Service":
-            print("  Waiting for services to initialize...")
+            logger.info("  Waiting for services to initialize...")
             time.sleep(3)
         elif service["name"] == "Orchestrator":
-            print("  Waiting before starting orchestrator...")
+            logger.info("  Waiting before starting orchestrator...")
             time.sleep(2)
         else:
             time.sleep(1)
     
-    print()
-    print("=" * 60)
-    print("All services started!")
-    print("=" * 60)
-    print()
-    print("Check each window for service status.")
-    print()
-    print("To check orchestrator health:")
-    print("  python check_services.py")
-    print("  or")
-    print("  curl http://localhost:8000/health")
-    print()
+    logger.info("")
+    logger.info("=" * 60)
+    logger.info("All services started!")
+    logger.info("=" * 60)
+    logger.info("")
+    logger.info("Check each window for service status.")
+    logger.info("")
+    logger.info("To check orchestrator health:")
+    logger.info("  python check_services.py")
+    logger.info("  or")
+    logger.info("  curl http://localhost:8000/health")
+    logger.info("")
 
 if __name__ == "__main__":
     try:
         main()
     except KeyboardInterrupt:
-        print("\n\nInterrupted. Services may still be running.")
-        print("Use 'python stop_services.py' to stop all services.")
+        logger.info("\n\nInterrupted. Services may still be running.")
+        logger.info("Use 'python stop_services.py' to stop all services.")
         sys.exit(0)
 

@@ -12,11 +12,23 @@ import time
 import glob
 import numpy as np
 import pyautogui
+import logging
+import sys
 from paddleocr import PaddleOCR
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect, HTTPException
 from pydantic import BaseModel
 from typing import Optional, Tuple
 import uvicorn
+
+# Configure logging with time info
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S',
+    stream=sys.stdout,
+    force=True
+)
+logger = logging.getLogger(__name__)
 
 # --- Configuration ---
 HOST = "0.0.0.0"
@@ -28,7 +40,7 @@ INTERVAL_MS = 1000  # Default monitoring interval
 TEXTS_STORAGE_FILE_PREFIX = "ocr_detected_texts"  # Prefix for text storage files
 
 # --- Global OCR Reader ---
-print("Loading OCR model...")
+logger.info("Loading OCR model...")
 try:
     ocr_reader = PaddleOCR(
         lang=LANGUAGE,
@@ -36,9 +48,9 @@ try:
         use_doc_unwarping=False,
         ocr_version="PP-OCRv4"
     )
-    print("OCR model loaded successfully.")
+    logger.info("OCR model loaded successfully.")
 except Exception as e:
-    print(f"Error loading OCR model: {e}")
+    logger.error(f"Error loading OCR model: {e}", exc_info=True)
     ocr_reader = None
 
 # --- Monitoring State ---
@@ -105,7 +117,7 @@ def process_region(region: Tuple[int, int, int, int], previous_hash: Optional[st
         return result_data, current_hash
     
     except Exception as e:
-        print(f"Error processing region: {e}")
+        logger.error(f"Error processing region: {e}", exc_info=True)
         return None, previous_hash
 
 
@@ -140,7 +152,7 @@ def save_texts_to_file():
                 # Write as plain text: just the text, separated by double newlines
                 f.write(f"{text}\n\n")
     except Exception as e:
-        print(f"Error saving texts to file: {e}")
+        logger.error(f"Error saving texts to file: {e}", exc_info=True)
 
 
 def load_texts_from_file():
@@ -171,9 +183,9 @@ def load_texts_from_file():
                     "timestamp": file_mtime
                 })
         
-        print(f"Loaded {len(detected_texts)} text entries from {latest_file}")
+        logger.info(f"Loaded {len(detected_texts)} text entries from {latest_file}")
     except Exception as e:
-        print(f"Error loading texts from file: {e}")
+        logger.error(f"Error loading texts from file: {e}", exc_info=True)
 
 
 async def monitoring_loop():
@@ -201,7 +213,7 @@ async def monitoring_loop():
             await asyncio.sleep(monitoring_interval_ms / 1000.0)
         
         except Exception as e:
-            print(f"Error in monitoring loop: {e}")
+            logger.error(f"Error in monitoring loop: {e}", exc_info=True)
             await asyncio.sleep(1)
 
 
@@ -269,7 +281,7 @@ async def monitor_stream(websocket: WebSocket):
     """
     await websocket.accept()
     websocket_clients.add(websocket)
-    print(f"OCR WebSocket client connected. Total clients: {len(websocket_clients)}")
+    logger.info(f"OCR WebSocket client connected. Total clients: {len(websocket_clients)}")
     
     try:
         # Send initial status
@@ -302,10 +314,10 @@ async def monitor_stream(websocket: WebSocket):
     except WebSocketDisconnect:
         pass
     except Exception as e:
-        print(f"Error in OCR WebSocket: {e}")
+        logger.error(f"Error in OCR WebSocket: {e}", exc_info=True)
     finally:
         websocket_clients.discard(websocket)
-        print(f"OCR WebSocket client disconnected. Total clients: {len(websocket_clients)}")
+        logger.info(f"OCR WebSocket client disconnected. Total clients: {len(websocket_clients)}")
 
 
 @app.post("/region/set")
@@ -391,9 +403,9 @@ async def health():
 
 if __name__ == "__main__":
     # Load texts from file on startup
-    print("Loading stored texts from file...")
+    logger.info("Loading stored texts from file...")
     load_texts_from_file()
     
-    print(f"Starting OCR server on {HOST}:{PORT}...")
+    logger.info(f"Starting OCR server on {HOST}:{PORT}...")
     uvicorn.run(app, host=HOST, port=PORT)
 

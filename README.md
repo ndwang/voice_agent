@@ -31,9 +31,10 @@ The system consists of six main components:
    - Supports multiple LLM providers
 
 3. **TTS Service** (Port 8003)
-   - Text-to-Speech synthesis with WebSocket streaming
-   - Real-time audio generation and playback
-   - Supports multiple TTS backends
+   - Text-to-Speech synthesis with streaming and non-streaming support
+   - Real-time audio generation via WebSocket streaming
+   - Complete audio generation via REST API
+   - Supports multiple TTS providers (Edge TTS, ChatTTS)
 
 4. **OCR Service** (Port 8004)
    - Optical Character Recognition for screen monitoring
@@ -94,9 +95,12 @@ The system consists of six main components:
    GEMINI_API_KEY=your_api_key_here
 
    # TTS Configuration
-   TTS_BACKEND=cosyvoice
-   COSYVOICE_MODEL_DIR=path/to/model
-   COSYVOICE_SPEAKER=中文女
+   TTS_PROVIDER=edge-tts  # "edge-tts" or "chattts"
+   TTS_VOICE=zh-CN-XiaoxiaoNeural  # Edge TTS voice (for edge-tts provider)
+   TTS_RATE=+0%  # Speech rate (for edge-tts)
+   TTS_PITCH=+0Hz  # Pitch (for edge-tts)
+   CHATTTS_MODEL_SOURCE=local  # "local", "huggingface", or "custom" (for chattts provider)
+   CHATTTS_DEVICE=cuda  # "cuda", "cpu", or None for auto (for chattts provider)
 
    # Service URLs (defaults shown)
    STT_WEBSOCKET_URL=ws://localhost:8001/ws/transcribe
@@ -213,9 +217,18 @@ Set environment variables:
 ### TTS Configuration
 
 Set environment variables:
-- `TTS_BACKEND`: TTS backend to use
-- `COSYVOICE_MODEL_DIR`: Path to TTS model directory
-- `COSYVOICE_SPEAKER`: Speaker name/voice
+- `TTS_PROVIDER`: TTS provider to use (`edge-tts` or `chattts`, default: `edge-tts`)
+
+**For Edge TTS provider:**
+- `TTS_VOICE`: Voice name (default: `zh-CN-XiaoxiaoNeural`)
+- `TTS_RATE`: Speech rate (default: `+0%`, e.g., `-50%` for slower, `+50%` for faster)
+- `TTS_PITCH`: Pitch adjustment (default: `+0Hz`)
+
+**For ChatTTS provider:**
+- `CHATTTS_MODEL_SOURCE`: Model source (`local`, `huggingface`, or `custom`, default: `local`)
+- `CHATTTS_DEVICE`: Device to use (`cuda`, `cpu`, or leave unset for auto-detection)
+
+**Note:** Edge TTS requires `ffmpeg` to be installed on your system for audio format conversion.
 
 ### OCR Configuration
 
@@ -236,6 +249,11 @@ voice_agent/
 ├── orchestrator/        # Main orchestration logic
 ├── stt/                 # Speech-to-text service
 ├── tts/                 # Text-to-speech service
+│   ├── base.py          # TTS provider base class
+│   ├── providers/       # TTS provider implementations
+│   │   ├── edge_tts.py # Edge TTS provider
+│   │   └── chattts.py  # ChatTTS provider
+│   └── tts_server.py   # TTS service server
 ├── scripts/             # Utility scripts
 └── pyproject.toml       # Project dependencies
 ```
@@ -282,7 +300,11 @@ python scripts/verify_gpu_setup.py
 
 ### TTS Service
 
-- `WebSocket /synthesize/stream`: Text streaming endpoint
+- `GET /`: Service status and provider information
+- `GET /health`: Health check
+- `GET /voices`: List available voices for the current provider
+- `POST /synthesize`: Non-streaming synthesis (returns complete audio as binary PCM)
+- `WebSocket /synthesize/stream`: Streaming synthesis (receives text chunks, sends audio chunks)
 
 ### OCR Service
 

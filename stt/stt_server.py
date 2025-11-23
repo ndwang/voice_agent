@@ -5,8 +5,20 @@ import numpy as np
 import torch
 import uvicorn
 import asyncio
+import logging
+import sys
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from faster_whisper import WhisperModel
+
+# Configure logging with time info
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S',
+    stream=sys.stdout,
+    force=True
+)
+logger = logging.getLogger(__name__)
 
 # --- Configuration ---
 # 1. Model Configuration
@@ -26,12 +38,12 @@ FLUSH_COMMAND = b'\x00' # Special byte command to finalize transcription
 
 # --- Global Model ---
 # Load the model once at startup
-print(f"Loading STT model '{MODEL_SIZE}' on {DEVICE} ({COMPUTE_TYPE})...")
+logger.info(f"Loading STT model '{MODEL_SIZE}' on {DEVICE} ({COMPUTE_TYPE})...")
 try:
     stt_model = WhisperModel(MODEL_SIZE, device=DEVICE, compute_type=COMPUTE_TYPE)
-    print("STT model loaded successfully.")
+    logger.info("STT model loaded successfully.")
 except Exception as e:
-    print(f"Error loading STT model: {e}")
+    logger.error(f"Error loading STT model: {e}", exc_info=True)
     # Exit if model fails to load
     exit(1)
 
@@ -52,10 +64,10 @@ async def broadcast_to_clients(message: dict):
             try:
                 await client.send_text(message_str)
             except Exception as e:
-                print(f"Error broadcasting to client: {e}")
+                logger.error(f"Error broadcasting to client: {e}", exc_info=True)
                 disconnected.add(client)
-        # Remove disconnected clients
-        connected_clients.difference_update(disconnected)
+    # Remove disconnected clients
+    connected_clients.difference_update(disconnected)
 
 
 @app.websocket("/ws/transcribe")
@@ -67,7 +79,7 @@ async def websocket_endpoint(websocket: WebSocket):
     """
     # Accept the WebSocket connection first
     await websocket.accept()
-    print("Client connected to STT server.")
+    logger.info("Client connected to STT server.")
     
     # Add client to connected clients set
     async with clients_lock:
@@ -97,7 +109,7 @@ async def websocket_endpoint(websocket: WebSocket):
                 
                 # Check for the "flush" command
                 if data == FLUSH_COMMAND:
-                    print("Flush command received. Finalizing transcription.")
+                    logger.info("Flush command received. Finalizing transcription.")
                     if audio_buffer.size > 0:
                         # Run final transcription with VAD filter
                         segments, info = stt_model.transcribe(
@@ -110,7 +122,7 @@ async def websocket_endpoint(websocket: WebSocket):
                         # Broadcast final transcript to all clients
                         if final_text.strip():
                             await broadcast_to_clients({"type": "final", "text": final_text})
-                            print(f"Broadcast final transcript: {final_text[:50]}...")
+                            logger.info(f"Broadcast final transcript: {final_text[:50]}...")
                     else:
                         # Broadcast empty final if no audio was received
                         await broadcast_to_clients({"type": "final", "text": ""})
@@ -148,9 +160,9 @@ async def websocket_endpoint(websocket: WebSocket):
                 pass
 
     except WebSocketDisconnect:
-        print("Client disconnected from STT server.")
+        logger.info("Client disconnected from STT server.")
     except Exception as e:
-        print(f"An error occurred in STT WebSocket: {e}")
+        logger.error(f"An error occurred in STT WebSocket: {e}", exc_info=True)
     finally:
         # Remove client from connected clients set
         async with clients_lock:
@@ -158,12 +170,12 @@ async def websocket_endpoint(websocket: WebSocket):
         # Clean up client-specific resources
         if is_audio_client:
             del audio_buffer
-        print("STT client connection closed.")
+        logger.info("STT client connection closed.")
 
 @app.get("/")
 async def root():
     return {"message": "STT Server is running. Connect to /ws/transcribe for real-time transcription."}
 
 if __name__ == "__main__":
-    print(f"Starting STT server on {HOST}:{PORT}...")
+    logger.info(f"Starting STT server on {HOST}:{PORT}...")
     uvicorn.run(app, host=HOST, port=PORT)

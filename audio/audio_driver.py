@@ -17,9 +17,20 @@ import time
 import torch
 import websockets
 import matplotlib.pyplot as plt
+import logging
 from collections import deque
 
 # Windows-specific: ctypes for console API
+
+# Configure logging with time info
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S',
+    stream=sys.stdout,
+    force=True
+)
+logger = logging.getLogger(__name__)
 
 # --- Configuration ---
 STT_WEBSOCKET_URL = "ws://localhost:8001/ws/transcribe"
@@ -137,6 +148,8 @@ display = TerminalDisplay()
 def audio_callback(indata, frames, time, status):
     """This is called from a separate thread by sounddevice."""
     if status:
+        # Note: logging from callback thread is safe, but we use print here
+        # because this is a real-time callback and we want immediate output
         print(f"Audio callback status: {status}", flush=True)
     chunk = indata.copy()
     audio_queue.put_nowait(chunk)
@@ -147,7 +160,7 @@ async def listen_to_server(websocket):
     """
     Receives JSON messages from the STT server and updates the transcript via display manager.
     """
-    print("Listening to STT server...")
+    logger.info("Listening to STT server...")
     try:
         async for message in websocket:
             data = json.loads(message)
@@ -160,7 +173,7 @@ async def listen_to_server(websocket):
         # Connection closed - will be handled by main retry loop
         raise
     except Exception as e:
-        print(f"\nError listening to server: {e}")
+        logger.error(f"Error listening to server: {e}", exc_info=True)
         raise
 
 def setup_plot():
@@ -219,31 +232,31 @@ async def stream_mic_to_server(websocket, enable_plot=False):
         enable_plot: If True, show real-time waveform plot
     """
     # List available input devices
-    print("Available audio input devices:")
-    print("-" * 80)
+    logger.info("Available audio input devices:")
+    logger.info("-" * 80)
     devices = sd.query_devices()
     default_input = sd.default.device[0]  # Get default input device index
     
     for i, device in enumerate(devices):
         if device['max_input_channels'] > 0:
             marker = " (DEFAULT)" if i == default_input else ""
-            print(f"  [{i}] {device['name']}{marker}")
-            print(f"      Channels: {device['max_input_channels']}, "
+            logger.info(f"  [{i}] {device['name']}{marker}")
+            logger.info(f"      Channels: {device['max_input_channels']}, "
                   f"Sample Rate: {device['default_samplerate']:.0f} Hz")
     
-    print("-" * 80)
+    logger.info("-" * 80)
     
     # Determine which device to use
     if INPUT_DEVICE is not None:
         device_index = INPUT_DEVICE
         device_name = devices[device_index]['name']
-        print(f"Using specified device [{device_index}]: {device_name}")
+        logger.info(f"Using specified device [{device_index}]: {device_name}")
     else:
         device_index = default_input
         device_name = devices[device_index]['name']
-        print(f"Using default input device [{device_index}]: {device_name}")
+        logger.info(f"Using default input device [{device_index}]: {device_name}")
     
-    print("Loading VAD model...")
+    logger.info("Loading VAD model...")
     try:
         vad_model, _ = torch.hub.load(
             repo_or_dir='snakers4/silero-vad',
@@ -251,19 +264,19 @@ async def stream_mic_to_server(websocket, enable_plot=False):
             force_reload=False
         )
     except Exception as e:
-        print(f"Error loading VAD model: {e}")
-        print("Please ensure you have an internet connection for the first run,")
-        print("and that PyTorch is installed (pip install torch).")
+        logger.error(f"Error loading VAD model: {e}", exc_info=True)
+        logger.error("Please ensure you have an internet connection for the first run,")
+        logger.error("and that PyTorch is installed (pip install torch).")
         return
 
-    print("Opening microphone stream...")
+    logger.info("Opening microphone stream...")
     
     # Set up the plot if enabled
     fig = None
     ax = None
     line = None
     if enable_plot:
-        print("Initializing waveform plot...")
+        logger.info("Initializing waveform plot...")
         fig, ax, line = setup_plot()
         plt.show(block=False)
     
@@ -279,11 +292,11 @@ async def stream_mic_to_server(websocket, enable_plot=False):
             blocksize=BLOCK_SIZE,
             callback=audio_callback
         ):
-            print("\n--- Microphone is live. Start speaking. ---\n")
+            logger.info("\n--- Microphone is live. Start speaking. ---\n")
             if enable_plot:
-                print("Waveform plot window opened. Press Ctrl+C to stop.\n")
+                logger.info("Waveform plot window opened. Press Ctrl+C to stop.\n")
             else:
-                print("Press Ctrl+C to stop.\n")
+                logger.info("Press Ctrl+C to stop.\n")
             
             # Initialize display with 3 fixed lines: status, probability, transcript
             await display.initialize()
@@ -394,7 +407,7 @@ async def stream_mic_to_server(websocket, enable_plot=False):
         # Connection errors should propagate to trigger reconnection
         raise
     except Exception as e:
-        print(f"\nError in microphone stream: {e}")
+        logger.error(f"Error in microphone stream: {e}", exc_info=True)
         if enable_plot:
             plt.close('all')  # Close all plots on error
         # Re-raise to trigger reconnection
@@ -418,12 +431,12 @@ async def main(stt_url=None, device=None, enable_plot=False):
     if device is not None:
         INPUT_DEVICE = device
     
-    print(f"Connecting to STT server at {STT_WEBSOCKET_URL}...")
+    logger.info(f"Connecting to STT server at {STT_WEBSOCKET_URL}...")
     
     while True:
         try:
             async with websockets.connect(STT_WEBSOCKET_URL) as websocket:
-                print("Successfully connected to STT server.")
+                logger.info("Successfully connected to STT server.")
                 
                 # Run the two tasks concurrently
                 listen_task = asyncio.create_task(listen_to_server(websocket))
@@ -432,33 +445,33 @@ async def main(stt_url=None, device=None, enable_plot=False):
                 try:
                     await asyncio.gather(listen_task, stream_task)
                 except (websockets.exceptions.ConnectionClosed, ConnectionError) as e:
-                    print(f"\nConnection lost: {e}")
-                    print("Reconnecting in 5 seconds...")
+                    logger.warning(f"Connection lost: {e}")
+                    logger.info("Reconnecting in 5 seconds...")
                     await asyncio.sleep(5)
                     continue
                 except KeyboardInterrupt:
                     # User interrupted - exit gracefully
                     raise
                 except Exception as e:
-                    print(f"\nError during operation: {e}")
-                    print("Reconnecting in 5 seconds...")
+                    logger.error(f"Error during operation: {e}", exc_info=True)
+                    logger.info("Reconnecting in 5 seconds...")
                     await asyncio.sleep(5)
                     continue
             
         except websockets.exceptions.InvalidURI:
-            print(f"Error: Invalid WebSocket URI: {STT_WEBSOCKET_URL}")
-            print("Cannot retry with invalid URI. Exiting.")
+            logger.error(f"Invalid WebSocket URI: {STT_WEBSOCKET_URL}")
+            logger.error("Cannot retry with invalid URI. Exiting.")
             break
         except ConnectionRefusedError:
-            print(f"Connection refused. Is the STT server running at {STT_WEBSOCKET_URL}?")
-            print("Retrying in 5 seconds...")
+            logger.warning(f"Connection refused. Is the STT server running at {STT_WEBSOCKET_URL}?")
+            logger.info("Retrying in 5 seconds...")
             await asyncio.sleep(5)
         except KeyboardInterrupt:
-            print("\nStopping audio driver...")
+            logger.info("\nStopping audio driver...")
             break
         except Exception as e:
-            print(f"Failed to connect: {e}")
-            print("Retrying in 5 seconds...")
+            logger.error(f"Failed to connect: {e}", exc_info=True)
+            logger.info("Retrying in 5 seconds...")
             await asyncio.sleep(5)
 
 if __name__ == "__main__":
@@ -485,4 +498,4 @@ if __name__ == "__main__":
     try:
         asyncio.run(main(stt_url=args.stt_url, device=args.device, enable_plot=args.plot))
     except KeyboardInterrupt:
-        print("\nStopping audio driver...")
+        logger.info("\nStopping audio driver...")

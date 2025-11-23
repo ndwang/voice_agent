@@ -29,6 +29,10 @@ dependencies = [
     "pillow",
     "rapidfuzz",
     "google-genai",
+    # TTS
+    "edge-tts==7.2.1",
+    "pydub",
+    "scipy",  # For audio resampling (optional but recommended)
 ]
 
 

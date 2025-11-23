@@ -8,7 +8,20 @@ import numpy as np
 import sounddevice as sd
 from typing import Optional
 from collections import deque
+import logging
+import sys
+
 from orchestrator.config import Config
+
+# Configure logging with time info
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S',
+    stream=sys.stdout,
+    force=True
+)
+logger = logging.getLogger(__name__)
 
 
 class AudioPlayer:
@@ -44,6 +57,7 @@ class AudioPlayer:
     
     async def _playback_loop(self):
         """Background task for audio playback."""
+        logger.info("Audio playback started")
         try:
             while True:
                 try:
@@ -62,6 +76,10 @@ class AudioPlayer:
                     else:
                         audio_float = audio_float.reshape(-1, self.channels)
                     
+                    # Calculate duration for logging
+                    duration_ms = len(audio_float) / self.sample_rate * 1000
+                    logger.info(f"Playing audio chunk: {len(audio_bytes)} bytes, {duration_ms:.1f}ms duration")
+                    
                     # Play audio
                     sd.play(audio_float, samplerate=self.sample_rate)
                     sd.wait()  # Wait for playback to finish
@@ -74,12 +92,13 @@ class AudioPlayer:
                         if self.audio_queue.empty():
                             break
                 except Exception as e:
-                    print(f"Audio playback error: {e}")
+                    logger.error(f"Audio playback error: {e}", exc_info=True)
         
         except Exception as e:
-            print(f"Playback loop error: {e}")
+            logger.error(f"Playback loop error: {e}", exc_info=True)
         finally:
             self.playing = False
+            logger.info("Audio playback stopped")
     
     async def stop(self):
         """Stop audio playback."""

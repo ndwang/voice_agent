@@ -1,0 +1,92 @@
+"""
+STT Client
+
+WebSocket client for receiving transcripts from STT server.
+The orchestrator connects to STT server to receive transcripts broadcast by the server.
+"""
+import json
+import asyncio
+import websockets
+from typing import Callable, Optional
+import logging
+
+from orchestrator.config import Config
+from orchestrator.logging_config import setup_logging, get_logger
+
+# Set up logging
+setup_logging()
+logger = get_logger(__name__)
+
+
+class STTClient:
+    """WebSocket client for STT server."""
+    
+    def __init__(self, on_transcript: Callable[[str], None]):
+        """
+        Initialize STT client.
+        
+        Args:
+            on_transcript: Async callback function called when transcript is received
+        """
+        self.on_transcript = on_transcript
+        self.websocket: Optional[websockets.WebSocketClientProtocol] = None
+        self.running = False
+        self._connect_task: Optional[asyncio.Task] = None
+    
+    async def connect(self, url: Optional[str] = None):
+        """Connect to STT server WebSocket and listen for transcripts."""
+        url = url or Config.get_stt_websocket_url()
+        logger.info(f"STT Client: Connecting to {url}...")
+        
+        while True:
+            try:
+                async with websockets.connect(url) as websocket:
+                    self.websocket = websocket
+                    self.running = True
+                    logger.info("STT Client: Connected to STT server")
+                    
+                    # Listen for transcript messages
+                    async for message in websocket:
+                        try:
+                            # STT server sends text messages (JSON)
+                            if isinstance(message, str):
+                                data = json.loads(message)
+                            else:
+                                data = json.loads(message.decode('utf-8'))
+                            
+                            # Only process final transcripts (ignore interim)
+                            if data.get("type") == "final":
+                                text = data.get("text", "")
+                                if text.strip():
+                                    # Call the callback (which should be async)
+                                    if asyncio.iscoroutinefunction(self.on_transcript):
+                                        await self.on_transcript(text)
+                                    else:
+                                        self.on_transcript(text)
+                        except json.JSONDecodeError:
+                            logger.warning(f"STT Client: Invalid JSON: {message}")
+                        except Exception as e:
+                            logger.error(f"STT Client: Error processing message: {e}", exc_info=True)
+            
+            except websockets.exceptions.ConnectionClosed:
+                logger.warning("STT Client: Connection closed")
+                self.running = False
+                await asyncio.sleep(5)  # Wait before reconnecting
+            except Exception as e:
+                logger.error(f"STT Client: Connection error: {e}", exc_info=True)
+                self.running = False
+                await asyncio.sleep(5)  # Wait before reconnecting
+    
+    def is_connected(self) -> bool:
+        """Check if client is connected."""
+        return self.running and self.websocket is not None
+    
+    async def close(self):
+        """Close connection."""
+        self.running = False
+        if self.websocket:
+            try:
+                await self.websocket.close()
+            except:
+                pass
+
