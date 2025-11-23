@@ -33,6 +33,15 @@ class Config:
     AUDIO_SAMPLE_RATE = 16000
     AUDIO_CHANNELS = 1
     
+<<<<<<< Updated upstream
+=======
+    # Latency Tracking
+    ENABLE_LATENCY_TRACKING = True
+    
+    # Logging
+    LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO").upper()
+    
+>>>>>>> Stashed changes
     @classmethod
     def get_stt_websocket_url(cls) -> str:
         """Get STT WebSocket URL."""

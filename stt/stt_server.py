@@ -110,6 +110,12 @@ async def websocket_endpoint(websocket: WebSocket):
                 # Check for the "flush" command
                 if data == FLUSH_COMMAND:
                     logger.info("Flush command received. Finalizing transcription.")
+<<<<<<< Updated upstream
+=======
+                    # Mark speech end time for latency tracking
+                    speech_end_time = time.time()
+                    
+>>>>>>> Stashed changes
                     if audio_buffer.size > 0:
                         # Run final transcription with VAD filter
                         segments, info = stt_model.transcribe(
@@ -119,13 +125,30 @@ async def websocket_endpoint(websocket: WebSocket):
                         )
                         final_text = "".join([seg.text for seg in segments])
                         
-                        # Broadcast final transcript to all clients
+                        # Calculate STT processing latency
+                        stt_latency = time.time() - speech_end_time
+                        
+                        # Broadcast final transcript to all clients with timing info
                         if final_text.strip():
+<<<<<<< Updated upstream
                             await broadcast_to_clients({"type": "final", "text": final_text})
                             logger.info(f"Broadcast final transcript: {final_text[:50]}...")
+=======
+                            await broadcast_to_clients({
+                                "type": "final", 
+                                "text": final_text,
+                                "speech_end_time": speech_end_time,
+                                "stt_latency": stt_latency
+                            })
+                            logger.info(f"Broadcast final transcript: {final_text[:50]}... (STT latency: {stt_latency*1000:.0f}ms)")
+>>>>>>> Stashed changes
                     else:
                         # Broadcast empty final if no audio was received
-                        await broadcast_to_clients({"type": "final", "text": ""})
+                        await broadcast_to_clients({
+                            "type": "final", 
+                            "text": "",
+                            "speech_end_time": speech_end_time
+                        })
                     
                     # Clear the buffer for the next turn
                     audio_buffer = np.array([], dtype=np.float32)

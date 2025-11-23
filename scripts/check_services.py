@@ -82,22 +82,6 @@ def check_http_service(service: Dict[str, Any]) -> Tuple[bool, Optional[Dict[str
     except requests.exceptions.RequestException:
         return False, None
 
-def find_audio_driver_process() -> Optional[psutil.Process]:
-    """Find audio driver process."""
-    project_root = str(Path.cwd())
-    
-    for proc in psutil.process_iter(['pid', 'name', 'cmdline']):
-        try:
-            cmdline = proc.info.get('cmdline', [])
-            if cmdline:
-                cmdline_str = ' '.join(cmdline)
-                if 'audio_driver' in cmdline_str and project_root in cmdline_str:
-                    return proc
-        except (psutil.NoSuchProcess, psutil.AccessDenied):
-            continue
-    
-    return None
-
 def main():
     """Main function to check all services."""
     print("=" * 60)
@@ -125,13 +109,6 @@ def main():
             print(f"    OCR:  {'✓' if data.get('ocr_connected') else '✗'}")
     
     # Check audio driver
-    print()
-    audio_driver = find_audio_driver_process()
-    if audio_driver:
-        print(f"Audio Driver: \033[92m✓ Running\033[0m (PID: {audio_driver.pid})")
-    else:
-        print("Audio Driver: \033[91m✗ Not Running\033[0m")
-    
     print()
     print("=" * 60)
 
