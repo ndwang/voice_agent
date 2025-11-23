@@ -8,11 +8,7 @@ import asyncio
 import json
 import httpx
 import websockets
-<<<<<<< Updated upstream
-from typing import Optional
-=======
 from typing import Optional, Dict
->>>>>>> Stashed changes
 from fastapi import FastAPI
 import uvicorn
 import logging
@@ -21,20 +17,13 @@ from orchestrator.config import Config
 from orchestrator.logging_config import setup_logging, get_logger
 from orchestrator.context_manager import ContextManager
 from orchestrator.ocr_client import OCRClient
-<<<<<<< Updated upstream
-=======
 from orchestrator.latency_tracker import LatencyTracker
->>>>>>> Stashed changes
 from audio.audio_player import AudioPlayer
 from orchestrator.stt_client import STTClient
 
 # Set up logging
-<<<<<<< Updated upstream
-setup_logging()
-=======
 log_level = getattr(logging, Config.LOG_LEVEL, logging.INFO)
 setup_logging(level=log_level)
->>>>>>> Stashed changes
 logger = get_logger(__name__)
 
 
@@ -51,13 +40,6 @@ class Agent:
         self.tts_websocket: Optional[websockets.WebSocketClientProtocol] = None
         self.tts_receiver_task: Optional[asyncio.Task] = None
         self.tts_receiver_running = False
-<<<<<<< Updated upstream
-    
-    async def on_transcript(self, text: str):
-        """Handle transcript from STT."""
-        logger.info(f"Transcript received: {text}")
-        
-=======
         
         # Latency tracking
         self.latency_tracker = LatencyTracker() if Config.ENABLE_LATENCY_TRACKING else None
@@ -115,7 +97,6 @@ class Agent:
             self._llm_first_token_received = False
             self._tts_first_audio_received = False
             
->>>>>>> Stashed changes
         # Add to conversation history
         self.context_manager.add_user_message(text)
         
@@ -137,22 +118,15 @@ class Agent:
             # Format context for LLM
             context_data = self.context_manager.format_context_for_llm(user_text)
             
-<<<<<<< Updated upstream
-=======
             # Track LLM start
             if self.latency_tracker:
                 self.latency_tracker.start("llm_total")
             
->>>>>>> Stashed changes
             # Stream LLM response
             async for token in self.stream_llm_response(context_data["prompt"]):
                 # Stream token to TTS
                 await self.stream_tts_text(token)
             
-<<<<<<< Updated upstream
-            # Finalize TTS
-            await self.finalize_tts()
-=======
             # Track LLM completion
             if self.latency_tracker:
                 self.latency_tracker.end("llm_total")
@@ -176,7 +150,6 @@ class Agent:
                     logger.info("=" * 60)
                     logger.info(self.latency_tracker.format_round(round_data))
                     logger.info("=" * 60)
->>>>>>> Stashed changes
         
         except Exception as e:
             logger.error(f"Error processing user input: {e}", exc_info=True)
@@ -186,14 +159,11 @@ class Agent:
         full_response = ""
         try:
             logger.info("LLM response starting...")
-<<<<<<< Updated upstream
-=======
             
             # Track LLM request start (for time-to-first-token)
             if self.latency_tracker:
                 self.latency_tracker.start("llm_time_to_first_token")
             
->>>>>>> Stashed changes
             async with httpx.AsyncClient() as client:
                 # Use SSE streaming endpoint
                 async with client.stream(
@@ -226,15 +196,12 @@ class Agent:
                                     # Data format: {"token": "..."}
                                     token = data.get("token", "")
                                     if token:
-<<<<<<< Updated upstream
-=======
                                         # Track first token latency
                                         if self.latency_tracker and not self._llm_first_token_received:
                                             self.latency_tracker.end("llm_time_to_first_token")
                                             self.latency_tracker.mark("llm_first_token")
                                             self._llm_first_token_received = True
                                         
->>>>>>> Stashed changes
                                         full_response += token
                                         yield token
                                 elif current_event == "done":
@@ -263,12 +230,9 @@ class Agent:
     async def _tts_receiver_loop(self):
         """Background task to receive audio chunks from TTS WebSocket and queue them for playback."""
         logger.info("TTS receiver loop started")
-<<<<<<< Updated upstream
-=======
         consecutive_timeouts = 0
         MAX_CONSECUTIVE_TIMEOUTS = 300  # Allow up to 5 minutes of no messages (for long synthesis)
         
->>>>>>> Stashed changes
         try:
             while self.tts_receiver_running:
                 if self.tts_websocket is None:
@@ -277,13 +241,6 @@ class Agent:
                 
                 try:
                     # Wait for message with timeout to allow checking if we should continue
-<<<<<<< Updated upstream
-                    message = await asyncio.wait_for(self.tts_websocket.recv(), timeout=1.0)
-                    
-                    if isinstance(message, bytes):
-                        # Audio chunk - queue it for playback (non-blocking)
-                        await self.audio_player.play_audio_chunk(message)
-=======
                     # Use longer timeout for long synthesis operations
                     message = await asyncio.wait_for(self.tts_websocket.recv(), timeout=10.0)
                     
@@ -299,7 +256,6 @@ class Agent:
                             self._tts_first_audio_received = True
                         
                         await self.audio_player.play_audio_chunk(message, latency_tracker=self.latency_tracker)
->>>>>>> Stashed changes
                     else:
                         # JSON message
                         try:
@@ -311,13 +267,10 @@ class Agent:
                             elif msg_type == "error":
                                 error_msg = data.get("message", "Unknown error")
                                 logger.error(f"TTS error: {error_msg}")
-<<<<<<< Updated upstream
-=======
                             elif msg_type == "progress":
                                 # Progress update during long synthesis
                                 progress_msg = data.get("message", "")
                                 logger.debug(f"TTS synthesis progress: {progress_msg}")
->>>>>>> Stashed changes
                             elif msg_type == "ping":
                                 # Respond to server ping with pong
                                 try:
@@ -331,13 +284,6 @@ class Agent:
                             logger.warning(f"Received non-JSON text message: {message}")
                 
                 except asyncio.TimeoutError:
-<<<<<<< Updated upstream
-                    # No message received, continue loop
-                    continue
-                except (websockets.exceptions.ConnectionClosed, ConnectionError, OSError) as e:
-                    logger.warning(f"TTS WebSocket connection closed: {e}")
-                    break
-=======
                     # No message received - this is normal during long synthesis
                     consecutive_timeouts += 1
                     if consecutive_timeouts >= MAX_CONSECUTIVE_TIMEOUTS:
@@ -353,7 +299,6 @@ class Agent:
                     # Continue loop to wait for reconnection (don't break)
                     # The loop will check if tts_websocket is None and wait
                     continue
->>>>>>> Stashed changes
                 except Exception as e:
                     logger.error(f"Error in TTS receiver loop: {e}", exc_info=True)
                     await asyncio.sleep(0.1)
@@ -365,42 +310,6 @@ class Agent:
     
     async def stream_tts_text(self, text: str):
         """Stream text chunk to TTS service (non-blocking)."""
-<<<<<<< Updated upstream
-        try:
-            # Connect to TTS WebSocket if not already connected
-            if not hasattr(self, 'tts_websocket') or self.tts_websocket is None:
-                logger.info("TTS streaming starting...")
-                # Configure websocket with ping_interval and ping_timeout for keepalive
-                self.tts_websocket = await websockets.connect(
-                    Config.get_tts_websocket_url(),
-                    ping_interval=20,  # Send ping every 20 seconds
-                    ping_timeout=10    # Wait 10 seconds for pong response
-                )
-                
-                # Start receiver task if not already running
-                if not self.tts_receiver_running:
-                    self.tts_receiver_running = True
-                    self.tts_receiver_task = asyncio.create_task(self._tts_receiver_loop())
-            
-            # Send text chunk (TTS server will synthesize immediately)
-            # Audio chunks will be received by the background receiver task
-            await self.tts_websocket.send(json.dumps({
-                "type": "text",
-                "text": text,
-                "finalize": False
-            }))
-            logger.debug(f"TTS text chunk sent: {text[:50]}...")
-        
-        except Exception as e:
-            logger.error(f"Error streaming TTS: {e}", exc_info=True)
-            # Reset TTS connection
-            if hasattr(self, 'tts_websocket'):
-                try:
-                    await self.tts_websocket.close()
-                except:
-                    pass
-                self.tts_websocket = None
-=======
         max_retries = 2
         retry_count = 0
         
@@ -490,7 +399,6 @@ class Agent:
                     self.tts_websocket = None
                 # Don't retry on unexpected errors
                 break
->>>>>>> Stashed changes
     
     async def finalize_tts(self):
         """Finalize TTS synthesis. Audio chunks will be received by the background receiver task."""
@@ -502,17 +410,6 @@ class Agent:
             logger.info("Finalizing TTS...")
             # Send finalize message (may trigger synthesis if there's buffered text)
             # The background receiver task will handle receiving any remaining audio chunks
-<<<<<<< Updated upstream
-            await self.tts_websocket.send(json.dumps({
-                "type": "text",
-                "text": "",
-                "finalize": True
-            }))
-            
-            # Give the receiver task a moment to process the finalize message
-            # and any remaining audio chunks
-            await asyncio.sleep(0.5)
-=======
             try:
                 await self.tts_websocket.send(json.dumps({
                     "type": "text",
@@ -528,7 +425,6 @@ class Agent:
             # Give the receiver task a moment to process the finalize message
             # and any remaining audio chunks (longer wait for long synthesis)
             await asyncio.sleep(1.0)
->>>>>>> Stashed changes
         
         except Exception as e:
             logger.error(f"Error finalizing TTS: {e}", exc_info=True)
@@ -619,8 +515,6 @@ async def get_ocr_texts():
     }
 
 
-<<<<<<< Updated upstream
-=======
 @app.get("/latency/latest")
 async def get_latest_latency():
     """Get latest latency measurement results."""
@@ -651,7 +545,6 @@ async def get_latest_latency():
     }
 
 
->>>>>>> Stashed changes
 if __name__ == "__main__":
     logger.info(f"Starting Orchestrator server on {Config.ORCHESTRATOR_HOST}:{Config.ORCHESTRATOR_PORT}...")
     uvicorn.run(app, host=Config.ORCHESTRATOR_HOST, port=Config.ORCHESTRATOR_PORT)

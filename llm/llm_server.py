@@ -123,32 +123,23 @@ async def generate_stream_events(request: GenerateRequest):
             prompt=request.prompt,
             **kwargs
         ):
-<<<<<<< Updated upstream
-=======
             # Track first token latency
             if first_token_time is None:
                 first_token_time = time.perf_counter()
                 time_to_first_token = first_token_time - request_start_time
                 logger.info(f"LLM time-to-first-token: {time_to_first_token*1000:.0f}ms")
             
->>>>>>> Stashed changes
             full_response += token
             yield {
                 "event": "token",
                 "data": json.dumps({"token": token})
             }
         
-<<<<<<< Updated upstream
-        # Log output
-        if full_response:
-            logger.info(f"{full_response}")
-=======
         # Log output and total latency
         if full_response:
             total_time = time.perf_counter() - request_start_time
             logger.info(f"LLM response: {full_response}")
             logger.info(f"LLM total generation time: {total_time*1000:.0f}ms")
->>>>>>> Stashed changes
         
         yield {
             "event": "done",

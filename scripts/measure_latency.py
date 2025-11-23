@@ -44,10 +44,13 @@ def print_latency_results(results: Dict, round_number: int = None):
     # Define display order and labels
     display_order = [
         ("stt_latency", "STT (speech end → transcript)"),
+        ("context_formatting", "Context Formatting"),
         ("llm_time_to_first_token", "LLM Time-to-First Token"),
         ("token_processing_overhead", "Token Processing Overhead"),
         ("llm_total", "LLM Total Generation"),
         ("tts_time_to_first_audio", "TTS Time-to-First Audio"),
+        ("audio_playback_latency", "Audio Playback Start"),
+        ("end_to_end_speech_to_audio", "End-to-End (speech end → first audio)"),
     ]
     
     # Print measurements in order

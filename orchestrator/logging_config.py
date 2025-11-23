@@ -20,11 +20,7 @@ def setup_logging(level=logging.INFO, format_string=None):
     """
     if format_string is None:
         # Default format with time info: YYYY-MM-DD HH:MM:SS,mmm - name - level - message
-<<<<<<< Updated upstream
-        format_string = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-=======
         format_string = '%(asctime)s,%(msecs)03d - %(name)s - %(levelname)s - %(message)s'
->>>>>>> Stashed changes
         date_format = '%Y-%m-%d %H:%M:%S'
     else:
         date_format = None

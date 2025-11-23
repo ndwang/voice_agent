@@ -235,27 +235,34 @@ async def websocket_endpoint(websocket: WebSocket):
     provider_params = {}
     
     # Keepalive ping interval (seconds)
-    KEEPALIVE_INTERVAL = 20.0  # Send ping every 20 seconds
+    KEEPALIVE_INTERVAL = 2.0  # Send ping every 20 seconds
     last_ping_time = asyncio.get_event_loop().time()
     
     try:
         while True:
-            # Receive message with timeout to allow periodic keepalive pings
+            # Check if we need to send a keepalive ping before waiting for messages
+            current_time = asyncio.get_event_loop().time()
+            time_since_last_ping = current_time - last_ping_time
+            
+            if time_since_last_ping >= KEEPALIVE_INTERVAL:
+                # Send keepalive ping proactively
+                try:
+                    await websocket.send_text(json.dumps({"type": "ping"}))
+                    last_ping_time = current_time
+                    logger.debug("Sent keepalive ping")
+                except Exception:
+                    # Connection likely closed
+                    break
+            
+            # Calculate timeout: use shorter of remaining time until next ping or max receive timeout
+            time_until_next_ping = max(0, KEEPALIVE_INTERVAL - time_since_last_ping)
+            receive_timeout = min(time_until_next_ping if time_until_next_ping > 0 else KEEPALIVE_INTERVAL, 10.0)
+            
+            # Receive message with timeout
             try:
-                # Use wait_for to allow periodic keepalive pings
-                message = await asyncio.wait_for(websocket.receive_text(), timeout=1.0)
+                message = await asyncio.wait_for(websocket.receive_text(), timeout=receive_timeout)
             except asyncio.TimeoutError:
-                # Timeout is normal - check if we need to send a keepalive ping
-                current_time = asyncio.get_event_loop().time()
-                if current_time - last_ping_time >= KEEPALIVE_INTERVAL:
-                    try:
-                        # Send keepalive ping
-                        await websocket.send_text(json.dumps({"type": "ping"}))
-                        last_ping_time = current_time
-                        logger.debug("Sent keepalive ping")
-                    except Exception:
-                        # Connection likely closed
-                        break
+                # Timeout is normal - continue loop to check for ping or receive again
                 continue
             except Exception:
                 break
@@ -286,26 +293,102 @@ async def websocket_endpoint(websocket: WebSocket):
                 if text:
                     text_buffer.append(text)
                 
-                # Synthesize if finalizing or buffer has content
-                if finalize or len(text_buffer) > 0:
-                    if text_buffer:
-                        full_text = "".join(text_buffer)
-                        text_buffer.clear()
+                # Synthesize immediately when we have text (don't wait for finalize)
+                # This enables true streaming: TTS starts as soon as first token arrives
+                if text_buffer:
+                    full_text = "".join(text_buffer)
+                    text_buffer.clear()
+                    
+                    # Track synthesis start time (only on first synthesis)
+                    import time
+                    if not hasattr(websocket, '_synthesis_started'):
+                        synthesis_start_time = time.perf_counter()
+                        websocket._synthesis_started = True
+                        websocket._synthesis_start_time = synthesis_start_time
+                    else:
+                        synthesis_start_time = websocket._synthesis_start_time
+                    
+                    first_audio_sent = getattr(websocket, '_first_audio_sent', False)
+                    
+                    # Log request info
+                    request_info = {
+                        "text": full_text,
+                        "finalize": finalize,
+                        **provider_params
+                    }
+                    logger.info(f"WebSocket synthesis request: {json.dumps(request_info, ensure_ascii=False)}")
+                    
+                    # --- IMMEDIATE ACK: Send status message instantly to reset client timer ---
+                    await websocket.send_text(json.dumps({"type": "status", "message": "received"}))
+                    
+                    # Synthesize audio using the configured provider
+                    try:
+                        # Track last keepalive time for long synthesis
+                        last_keepalive_time = synthesis_start_time
+                        KEEPALIVE_DURING_SYNTHESIS = 10.0  # Send keepalive every 10 seconds during synthesis
+                        chunk_count = 0
                         
-                        # Log request info
-                        request_info = {
-                            "text": full_text,
-                            "finalize": finalize,
-                            **provider_params
-                        }
-                        logger.info(f"WebSocket synthesis request: {json.dumps(request_info, ensure_ascii=False)}")
+                        # --- PARALLEL HEARTBEAT: Keep socket alive while waiting for Edge-TTS connection ---
+                        async def send_heartbeats():
+                            """Background task to send heartbeats while waiting for TTS provider to connect."""
+                            try:
+                                while True:
+                                    await asyncio.sleep(0.5)  # Send every 0.5 seconds (beating the 1s timeout)
+                                    await websocket.send_text(json.dumps({"type": "ping_processing"}))
+                            except asyncio.CancelledError:
+                                pass
+                            except Exception as e:
+                                # Connection likely closed
+                                logger.debug(f"Heartbeat task stopped: {e}")
                         
-                        # Synthesize audio using the configured provider
+                        # Start the heartbeat task BEFORE calling TTS provider
+                        heartbeat_task = asyncio.create_task(send_heartbeats())
+                        
                         try:
                             # Stream audio chunks from provider
+                            # The heartbeat_task runs in the background while this line waits for Edge-TTS connection
                             async for audio_chunk in tts_provider.synthesize_stream(full_text, **provider_params):
+                                # Once we have audio, we can cancel the heartbeat
+                                if not heartbeat_task.cancelled():
+                                    heartbeat_task.cancel()
+                                    try:
+                                        await heartbeat_task
+                                    except asyncio.CancelledError:
+                                        pass
+                                
+                                # Track first audio chunk latency
+                                if not first_audio_sent:
+                                    first_audio_time = time.perf_counter()
+                                    time_to_first_audio = first_audio_time - synthesis_start_time
+                                    logger.info(f"TTS time-to-first-audio: {time_to_first_audio*1000:.0f}ms")
+                                    first_audio_sent = True
+                                    websocket._first_audio_sent = True
+                                
                                 # Send audio chunk
-                                await websocket.send_bytes(audio_chunk)
+                                try:
+                                    await websocket.send_bytes(audio_chunk)
+                                    chunk_count += 1
+                                except Exception as send_error:
+                                    logger.error(f"Error sending audio chunk: {send_error}")
+                                    raise
+                                
+                                # Send periodic keepalive during long synthesis
+                                current_time = time.perf_counter()
+                                if current_time - last_keepalive_time >= KEEPALIVE_DURING_SYNTHESIS:
+                                    try:
+                                        await websocket.send_text(json.dumps({
+                                            "type": "progress",
+                                            "message": f"Synthesizing... ({chunk_count} chunks sent)"
+                                        }))
+                                        last_keepalive_time = current_time
+                                        logger.debug(f"Sent synthesis progress: {chunk_count} chunks")
+                                    except Exception:
+                                        # If we can't send keepalive, connection might be closed
+                                        logger.warning("Failed to send synthesis progress keepalive")
+                            
+                            # Calculate total synthesis time
+                            total_synthesis_time = time.perf_counter() - synthesis_start_time
+                            logger.info(f"TTS total synthesis time: {total_synthesis_time*1000:.0f}ms, {chunk_count} chunks")
                             
                             # Send completion message
                             await websocket.send_text(json.dumps({
@@ -313,16 +396,78 @@ async def websocket_endpoint(websocket: WebSocket):
                             }))
                             
                         except Exception as e:
+                            logger.error(f"Error during TTS synthesis: {e}", exc_info=True)
                             status_code, error_message = tts_provider.parse_error(e)
+                            try:
+                                await websocket.send_text(json.dumps({
+                                    "type": "error",
+                                    "message": error_message
+                                }))
+                            except Exception:
+                                # Connection might already be closed
+                                logger.warning("Could not send error message, connection may be closed")
+                        finally:
+                            # Ensure heartbeat is killed
+                            if not heartbeat_task.cancelled():
+                                heartbeat_task.cancel()
+                                try:
+                                    await heartbeat_task
+                                except asyncio.CancelledError:
+                                    pass
+                    except Exception as outer_e:
+                        # Handle any errors that occur before or during synthesis setup
+                        logger.error(f"Error in synthesis setup: {outer_e}", exc_info=True)
+                        # If heartbeat_task was created, clean it up
+                        if 'heartbeat_task' in locals() and not heartbeat_task.cancelled():
+                            heartbeat_task.cancel()
+                            try:
+                                await heartbeat_task
+                            except asyncio.CancelledError:
+                                pass
+                        # Try to send error message
+                        try:
+                            status_code, error_message = tts_provider.parse_error(outer_e)
                             await websocket.send_text(json.dumps({
                                 "type": "error",
                                 "message": error_message
                             }))
-                    elif finalize:
-                        # Empty text but finalize requested
-                        await websocket.send_text(json.dumps({
-                            "type": "done"
-                        }))
+                        except Exception:
+                            logger.warning("Could not send error message, connection may be closed")
+                
+                elif finalize:
+                        # Finalize requested - synthesize any remaining buffered text
+                        if text_buffer:
+                            full_text = "".join(text_buffer)
+                            text_buffer.clear()
+                            
+                            # Use existing synthesis start time if available
+                            if hasattr(websocket, '_synthesis_start_time'):
+                                synthesis_start_time = websocket._synthesis_start_time
+                            else:
+                                import time
+                                synthesis_start_time = time.perf_counter()
+                                websocket._synthesis_start_time = synthesis_start_time
+                            
+                            first_audio_sent = getattr(websocket, '_first_audio_sent', False)
+                            
+                            # Synthesize remaining text
+                            async for audio_chunk in tts_provider.synthesize_stream(full_text, **provider_params):
+                                if not first_audio_sent:
+                                    import time
+                                    first_audio_time = time.perf_counter()
+                                    time_to_first_audio = first_audio_time - synthesis_start_time
+                                    logger.info(f"TTS time-to-first-audio: {time_to_first_audio*1000:.0f}ms")
+                                    first_audio_sent = True
+                                    websocket._first_audio_sent = True
+                                
+                                await websocket.send_bytes(audio_chunk)
+                            
+                            await websocket.send_text(json.dumps({"type": "done"}))
+                        else:
+                            # Empty text but finalize requested
+                            await websocket.send_text(json.dumps({
+                                "type": "done"
+                            }))
             
             elif msg_type == "config":
                 # Update provider configuration
@@ -373,11 +518,12 @@ if __name__ == "__main__":
     logger.info(f"Provider: {TTS_PROVIDER}")
     logger.info(f"Output sample rate: {OUTPUT_SAMPLE_RATE} Hz")
     # Configure uvicorn to send WebSocket pings for keepalive
+    # Fast ping intervals to prevent client timeout during Edge-TTS connection establishment
     uvicorn.run(
         app, 
         host=HOST, 
         port=PORT,
-        ws_ping_interval=20,  # Send ping every 20 seconds
-        ws_ping_timeout=10    # Wait 10 seconds for pong response
+        ws_ping_interval=5.0,  # Ping every 5 seconds
+        ws_ping_timeout=5.0
     )
 

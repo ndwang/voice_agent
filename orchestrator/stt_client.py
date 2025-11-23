@@ -57,12 +57,6 @@ class STTClient:
                             # Only process final transcripts (ignore interim)
                             if data.get("type") == "final":
                                 text = data.get("text", "")
-<<<<<<< Updated upstream
-                                if text.strip():
-                                    # Call the callback (which should be async)
-                                    if asyncio.iscoroutinefunction(self.on_transcript):
-                                        await self.on_transcript(text)
-=======
                                 speech_end_time = data.get("speech_end_time")  # Optional timestamp from STT server
                                 stt_latency = data.get("stt_latency")  # Optional STT processing latency
                                 if text.strip():
@@ -78,7 +72,6 @@ class STTClient:
                                             await self.on_transcript(text, speech_end_time)
                                         else:
                                             await self.on_transcript(text)
->>>>>>> Stashed changes
                                     else:
                                         self.on_transcript(text)
                         except json.JSONDecodeError:
