@@ -13,13 +13,15 @@ import requests
 from typing import Optional, Dict, List
 from pathlib import Path
 
-# Add parent directory to path to import orchestrator modules
-sys.path.insert(0, str(Path(__file__).parent.parent))
+# Add parent directory to path to import config_loader
+project_root = Path(__file__).parent.parent
+sys.path.insert(0, str(project_root))
 
-from orchestrator.config import Config
+from config_loader import get_config
 
 
-ORCHESTRATOR_URL = f"http://localhost:{Config.ORCHESTRATOR_PORT}"
+orchestrator_port = int(get_config("orchestrator", "port", default=8000))
+ORCHESTRATOR_URL = f"http://localhost:{orchestrator_port}"
 
 
 def format_latency(seconds: float) -> str:
@@ -104,10 +106,9 @@ def check_services():
 
 def enable_latency_tracking():
     """Enable latency tracking in config."""
-    # Modify config to enable tracking
-    Config.ENABLE_LATENCY_TRACKING = True
-    print("Latency tracking enabled in config")
-    print("Note: You may need to restart the orchestrator for this to take effect")
+    # Note: This is informational only - actual config is in config.yaml
+    print("Note: Enable latency tracking by setting 'enable_latency_tracking: true' in config.yaml")
+    print("You may need to restart the orchestrator for this to take effect")
 
 
 def get_latest_latency() -> Optional[Dict]:
@@ -206,7 +207,7 @@ def main():
     response = input("Is the orchestrator running with latency tracking enabled? (y/n): ")
     if response.lower() != 'y':
         print("\nPlease:")
-        print("1. Set ENABLE_LATENCY_TRACKING = True in orchestrator/config.py")
+        print("1. Set 'enable_latency_tracking: true' in config.yaml")
         print("2. Restart the orchestrator")
         print("3. Run this script again")
         sys.exit(1)

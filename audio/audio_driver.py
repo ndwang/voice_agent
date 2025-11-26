@@ -19,6 +19,7 @@ import websockets
 import matplotlib.pyplot as plt
 import logging
 from collections import deque
+from pathlib import Path
 
 # Windows-specific: ctypes for console API
 
@@ -32,21 +33,33 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+# Add project root to path to import config_loader
+project_root = Path(__file__).parent.parent
+if str(project_root) not in sys.path:
+    sys.path.insert(0, str(project_root))
+
+from config_loader import get_config
+
 # --- Configuration ---
-STT_WEBSOCKET_URL = "ws://localhost:8001/ws/transcribe"
-SAMPLE_RATE = 16000
-CHANNELS = 1
-DTYPE = 'float32'
+STT_WEBSOCKET_URL = get_config("services", "stt_websocket_url", default="ws://localhost:8001/ws/transcribe")
+SAMPLE_RATE = get_config("audio", "sample_rate", default=16000)
+CHANNELS = get_config("audio", "channels", default=1)
+DTYPE = get_config("audio", "dtype", default="float32")
 # BLOCK_SIZE_MS determines VAD sensitivity. 50-100ms is good.
-BLOCK_SIZE_MS = 100
+BLOCK_SIZE_MS = get_config("audio", "block_size_ms", default=100)
 BLOCK_SIZE = int(SAMPLE_RATE * (BLOCK_SIZE_MS / 1000))
-FLUSH_COMMAND = b'\x00' # Must match the server's command
+FLUSH_COMMAND_STR = get_config("audio", "flush_command", default="\x00")
+# Convert string to bytes (YAML "\x00" is already a null byte character)
+if isinstance(FLUSH_COMMAND_STR, str):
+    FLUSH_COMMAND = FLUSH_COMMAND_STR.encode('latin-1')
+else:
+    FLUSH_COMMAND = bytes([FLUSH_COMMAND_STR]) if isinstance(FLUSH_COMMAND_STR, int) else FLUSH_COMMAND_STR
 # Set to None to use default device, or specify device index/name
-INPUT_DEVICE = None
+INPUT_DEVICE = get_config("audio", "input_device", default=None)
 
 # VAD Configuration
-SILENCE_THRESHOLD_MS = 500 # 500ms of silence triggers a "flush"
-VAD_MIN_SPEECH_PROB = 0.5
+SILENCE_THRESHOLD_MS = get_config("audio", "silence_threshold_ms", default=500)  # 500ms of silence triggers a "flush"
+VAD_MIN_SPEECH_PROB = get_config("audio", "vad_min_speech_prob", default=0.5)
 silence_blocks = int(SILENCE_THRESHOLD_MS / BLOCK_SIZE_MS)
 
 # Global audio queue
@@ -56,8 +69,8 @@ audio_queue = asyncio.Queue()
 waveform_buffer = deque(maxlen=int(SAMPLE_RATE * 2))  # Store 2 seconds of audio
 
 # Plot configuration
-PLOT_WINDOW_SECONDS = 2  # Show last 2 seconds of audio
-PLOT_UPDATE_INTERVAL_MS = 50  # Update plot every 50ms
+PLOT_WINDOW_SECONDS = get_config("audio", "plot_window_seconds", default=2)  # Show last 2 seconds of audio
+PLOT_UPDATE_INTERVAL_MS = get_config("audio", "plot_update_interval_ms", default=50)  # Update plot every 50ms
 
 # ANSI color codes
 GREEN = '\033[92m'

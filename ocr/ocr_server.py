@@ -14,11 +14,19 @@ import numpy as np
 import pyautogui
 import logging
 import sys
+from pathlib import Path
 from paddleocr import PaddleOCR
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect, HTTPException
 from pydantic import BaseModel
 from typing import Optional, Tuple
 import uvicorn
+
+# Add project root to path to import config_loader
+project_root = Path(__file__).parent.parent
+if str(project_root) not in sys.path:
+    sys.path.insert(0, str(project_root))
+
+from config_loader import get_config
 
 # Configure logging with time info
 logging.basicConfig(
@@ -31,13 +39,13 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # --- Configuration ---
-HOST = "0.0.0.0"
-PORT = 8004
+HOST = get_config("ocr", "host", default="0.0.0.0")
+PORT = get_config("ocr", "port", default=8004)
 
 # OCR Configuration
-LANGUAGE = "ch"  # Chinese and English support
-INTERVAL_MS = 1000  # Default monitoring interval
-TEXTS_STORAGE_FILE_PREFIX = "ocr_detected_texts"  # Prefix for text storage files
+LANGUAGE = get_config("ocr", "language", default="ch")  # Chinese and English support
+INTERVAL_MS = get_config("ocr", "interval_ms", default=1000)  # Default monitoring interval
+TEXTS_STORAGE_FILE_PREFIX = get_config("ocr", "texts_storage_file_prefix", default="ocr_detected_texts")  # Prefix for text storage files
 
 # --- Global OCR Reader ---
 logger.info("Loading OCR model...")

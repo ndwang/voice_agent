@@ -8,10 +8,16 @@ import numpy as np
 import sounddevice as sd
 from typing import Optional
 from collections import deque
+from pathlib import Path
 import logging
 import sys
 
-from orchestrator.config import Config
+# Add project root to path to import config_loader
+project_root = Path(__file__).parent.parent
+if str(project_root) not in sys.path:
+    sys.path.insert(0, str(project_root))
+
+from config_loader import get_config
 
 # Configure logging with time info
 logging.basicConfig(
@@ -27,7 +33,13 @@ logger = logging.getLogger(__name__)
 class AudioPlayer:
     """Streaming audio player."""
     
-    def __init__(self, sample_rate: int = None, channels: int = None):
+    def __init__(
+        self,
+        sample_rate: int = None,
+        channels: int = None,
+        output_sample_rate: Optional[int] = None,
+        output_device: Optional[str] = None,
+    ):
         """
         Initialize audio player.
         
@@ -35,8 +47,13 @@ class AudioPlayer:
             sample_rate: Audio sample rate (default: from config)
             channels: Number of audio channels (default: from config)
         """
-        self.sample_rate = sample_rate or Config.AUDIO_SAMPLE_RATE
-        self.channels = channels or Config.AUDIO_CHANNELS
+        self.sample_rate = sample_rate or get_config("audio", "sample_rate", default=16000)
+        self.channels = channels or get_config("audio", "channels", default=1)
+        self.playback_sample_rate = (
+            output_sample_rate
+            or get_config("audio", "output_sample_rate", default=self.sample_rate)
+        )
+        self.output_device = output_device or get_config("audio", "output_device")
         self.audio_queue: asyncio.Queue = asyncio.Queue()
         self.playing = False
         self.play_task: Optional[asyncio.Task] = None
@@ -81,8 +98,15 @@ class AudioPlayer:
                     duration_ms = len(audio_float) / self.sample_rate * 1000
                     logger.info(f"Playing audio chunk: {len(audio_bytes)} bytes, {duration_ms:.1f}ms duration")
                     
+                    # Resample if playback device requires a different rate
+                    playback_audio = self._resample_audio(audio_float)
+
                     # Play audio
-                    sd.play(audio_float, samplerate=self.sample_rate)
+                    sd.play(
+                        playback_audio,
+                        samplerate=self.playback_sample_rate,
+                        device=self.output_device,
+                    )
                     sd.wait()  # Wait for playback to finish
                 
                 except asyncio.TimeoutError:
@@ -100,6 +124,34 @@ class AudioPlayer:
         finally:
             self.playing = False
             logger.info("Audio playback stopped")
+
+    def _resample_audio(self, audio: np.ndarray) -> np.ndarray:
+        """Resample audio to the playback sample rate if needed."""
+        if (
+            audio.size == 0
+            or self.playback_sample_rate == self.sample_rate
+        ):
+            return audio
+
+        src_len = audio.shape[0]
+        target_len = max(
+            1, int(round(src_len * self.playback_sample_rate / self.sample_rate))
+        )
+
+        if target_len == src_len:
+            return audio
+
+        x_old = np.linspace(0, src_len - 1, src_len)
+        x_new = np.linspace(0, src_len - 1, target_len)
+
+        if audio.ndim == 1 or audio.shape[1] == 1:
+            resampled = np.interp(x_new, x_old, audio.reshape(-1)).astype(np.float32)
+            return resampled.reshape(-1, 1)
+
+        resampled = np.empty((target_len, audio.shape[1]), dtype=np.float32)
+        for ch in range(audio.shape[1]):
+            resampled[:, ch] = np.interp(x_new, x_old, audio[:, ch])
+        return resampled
     
     async def stop(self):
         """Stop audio playback."""

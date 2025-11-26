@@ -7,8 +7,16 @@ import uvicorn
 import asyncio
 import logging
 import sys
+from pathlib import Path
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from faster_whisper import WhisperModel
+
+# Add project root to path to import config_loader
+project_root = Path(__file__).parent.parent
+if str(project_root) not in sys.path:
+    sys.path.insert(0, str(project_root))
+
+from config_loader import get_config
 
 # Configure logging with time info
 logging.basicConfig(
@@ -22,19 +30,24 @@ logger = logging.getLogger(__name__)
 
 # --- Configuration ---
 # 1. Model Configuration
-MODEL_SIZE = "small"
+MODEL_SIZE = get_config("stt", "model_size", default="small")
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 COMPUTE_TYPE = "int8" if DEVICE == "cuda" else "default"
 
 # 2. Server Configuration
-HOST = "0.0.0.0"
-PORT = 8001
+HOST = get_config("stt", "host", default="0.0.0.0")
+PORT = get_config("stt", "port", default=8001)
 
 # 3. Transcription Configuration
-LANGUAGE_CODE = "zh"  # Chinese
-SAMPLE_RATE = 16000  # 16kHz
-INTERIM_TRANSCRIPT_MIN_SAMPLES = int(0.3 * SAMPLE_RATE) # Min audio (0.3s) to run an interim transcription
-FLUSH_COMMAND = b'\x00' # Special byte command to finalize transcription
+LANGUAGE_CODE = get_config("stt", "language_code", default="zh")  # Chinese
+SAMPLE_RATE = get_config("stt", "sample_rate", default=16000)  # 16kHz
+INTERIM_TRANSCRIPT_MIN_SAMPLES = get_config("stt", "interim_transcript_min_samples", default=int(0.3 * 16000))  # Min audio (0.3s) to run an interim transcription
+FLUSH_COMMAND_STR = get_config("stt", "flush_command", default="\x00")
+# Convert string to bytes (YAML "\x00" is already a null byte character)
+if isinstance(FLUSH_COMMAND_STR, str):
+    FLUSH_COMMAND = FLUSH_COMMAND_STR.encode('latin-1')
+else:
+    FLUSH_COMMAND = bytes([FLUSH_COMMAND_STR]) if isinstance(FLUSH_COMMAND_STR, int) else FLUSH_COMMAND_STR
 
 # --- Global Model ---
 # Load the model once at startup

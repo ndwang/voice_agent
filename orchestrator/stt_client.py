@@ -8,9 +8,16 @@ import json
 import asyncio
 import websockets
 from typing import Callable, Optional
+from pathlib import Path
 import logging
+import sys
 
-from orchestrator.config import Config
+# Add project root to path to import config_loader
+project_root = Path(__file__).parent.parent
+if str(project_root) not in sys.path:
+    sys.path.insert(0, str(project_root))
+
+from config_loader import get_config
 from orchestrator.logging_config import setup_logging, get_logger
 
 # Set up logging
@@ -35,7 +42,7 @@ class STTClient:
     
     async def connect(self, url: Optional[str] = None):
         """Connect to STT server WebSocket and listen for transcripts."""
-        url = url or Config.get_stt_websocket_url()
+        url = url or get_config("services", "stt_websocket_url", default="ws://localhost:8001/ws/transcribe")
         logger.info(f"STT Client: Connecting to {url}...")
         
         while True:

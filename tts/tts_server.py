@@ -9,12 +9,20 @@ import json
 import asyncio
 import logging
 from typing import Optional
+from pathlib import Path
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect, HTTPException
 from fastapi.responses import JSONResponse, Response
 from pydantic import BaseModel
 from typing import Optional
 import uvicorn
+import sys
 
+# Add project root to path to import config_loader
+project_root = Path(__file__).parent.parent
+if str(project_root) not in sys.path:
+    sys.path.insert(0, str(project_root))
+
+from config_loader import get_config
 from tts.base import TTSProvider
 from tts.providers import EdgeTTSProvider, ChatTTSProvider
 
@@ -26,21 +34,29 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # --- Configuration ---
-HOST = "0.0.0.0"
-PORT = 8003
+HOST = get_config("tts", "host", default="0.0.0.0")
+PORT = get_config("tts", "port", default=8003)
 
 # TTS Provider Configuration
-TTS_PROVIDER = os.getenv("TTS_PROVIDER", "edge-tts")  # "edge-tts" or "chattts"
-OUTPUT_SAMPLE_RATE = 16000  # Output sample rate (matches audio player)
+TTS_PROVIDER = get_config("tts", "provider", default="edge-tts")  # "edge-tts" or "chattts"
+
+# Output sample rate inherits from audio.output_sample_rate unless explicitly overridden
+_audio_output_sr = get_config("audio", "output_sample_rate")
+if _audio_output_sr is None:
+    _audio_output_sr = get_config("audio", "sample_rate", default=16000)
+
+OUTPUT_SAMPLE_RATE = get_config("tts", "output_sample_rate")
+if OUTPUT_SAMPLE_RATE is None:
+    OUTPUT_SAMPLE_RATE = _audio_output_sr
 
 # Edge TTS Configuration
-EDGE_TTS_VOICE = os.getenv("TTS_VOICE", "zh-CN-XiaoxiaoNeural")
-EDGE_TTS_RATE = os.getenv("TTS_RATE", "+0%")
-EDGE_TTS_PITCH = os.getenv("TTS_PITCH", "+0Hz")
+EDGE_TTS_VOICE = get_config("tts", "providers", "edge-tts", "voice", default="zh-CN-XiaoxiaoNeural")
+EDGE_TTS_RATE = get_config("tts", "providers", "edge-tts", "rate", default="+0%")
+EDGE_TTS_PITCH = get_config("tts", "providers", "edge-tts", "pitch", default="+0Hz")
 
 # ChatTTS Configuration
-CHATTTS_MODEL_SOURCE = os.getenv("CHATTTS_MODEL_SOURCE", "local")  # "local", "huggingface", "custom"
-CHATTTS_DEVICE = os.getenv("CHATTTS_DEVICE", None)  # "cuda", "cpu", or None for auto
+CHATTTS_MODEL_SOURCE = get_config("tts", "providers", "chattts", "model_source", default="local")  # "local", "huggingface", "custom"
+CHATTTS_DEVICE = get_config("tts", "providers", "chattts", "device", default=None)  # "cuda", "cpu", or None for auto
 
 # --- Initialize TTS Provider ---
 tts_provider: Optional[TTSProvider] = None

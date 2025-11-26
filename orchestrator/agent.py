@@ -9,11 +9,18 @@ import json
 import httpx
 import websockets
 from typing import Optional, Dict
+from pathlib import Path
 from fastapi import FastAPI
 import uvicorn
 import logging
+import sys
 
-from orchestrator.config import Config
+# Add project root to path to import config_loader
+project_root = Path(__file__).parent.parent
+if str(project_root) not in sys.path:
+    sys.path.insert(0, str(project_root))
+
+from config_loader import get_config
 from orchestrator.logging_config import setup_logging, get_logger
 from orchestrator.context_manager import ContextManager
 from orchestrator.ocr_client import OCRClient
@@ -22,7 +29,7 @@ from audio.audio_player import AudioPlayer
 from orchestrator.stt_client import STTClient
 
 # Set up logging
-log_level = getattr(logging, Config.LOG_LEVEL, logging.INFO)
+log_level = getattr(logging, get_config("orchestrator", "log_level", default="INFO").upper(), logging.INFO)
 setup_logging(level=log_level)
 logger = get_logger(__name__)
 
@@ -42,7 +49,7 @@ class Agent:
         self.tts_receiver_running = False
         
         # Latency tracking
-        self.latency_tracker = LatencyTracker() if Config.ENABLE_LATENCY_TRACKING else None
+        self.latency_tracker = LatencyTracker() if get_config("orchestrator", "enable_latency_tracking", default=True) else None
         self._current_speech_end_time: Optional[float] = None
         self._llm_first_token_received = False
         self._tts_first_audio_received = False
@@ -166,9 +173,11 @@ class Agent:
             
             async with httpx.AsyncClient() as client:
                 # Use SSE streaming endpoint
+                llm_base_url = get_config("services", "llm_base_url", default="http://localhost:8002")
+                llm_stream_url = f"{llm_base_url}/generate/stream"
                 async with client.stream(
                     "POST",
-                    Config.get_llm_stream_url(),
+                    llm_stream_url,
                     json={
                         "prompt": prompt
                     },
@@ -251,8 +260,17 @@ class Agent:
                         # Audio chunk - queue it for playback (non-blocking)
                         # Track first audio chunk received
                         if self.latency_tracker and not self._tts_first_audio_received:
-                            self.latency_tracker.end("tts_time_to_first_audio")
-                            self.latency_tracker.mark("tts_first_audio")
+                            # Ensure timer is started before trying to end it
+                            if "tts_time_to_first_audio" not in self.latency_tracker.active_timers:
+                                # Timer wasn't started - start it now (late start, but better than nothing)
+                                logger.warning("TTS timer not started before first audio received, starting now")
+                                self.latency_tracker.start("tts_time_to_first_audio")
+                            
+                            elapsed = self.latency_tracker.end("tts_time_to_first_audio")
+                            if elapsed is not None:
+                                self.latency_tracker.mark("tts_first_audio")
+                            else:
+                                logger.warning("Failed to end TTS timer - measurement may be missing")
                             self._tts_first_audio_received = True
                         
                         await self.audio_player.play_audio_chunk(message, latency_tracker=self.latency_tracker)
@@ -320,8 +338,9 @@ class Agent:
                     logger.info("TTS streaming starting...")
                     
                     # Configure websocket with ping_interval and ping_timeout for keepalive
+                    tts_websocket_url = get_config("services", "tts_websocket_url", default="ws://localhost:8003/synthesize/stream")
                     self.tts_websocket = await websockets.connect(
-                        Config.get_tts_websocket_url(),
+                        tts_websocket_url,
                         # Increase these to ensure the library doesn't close the connection 
                         # if the server is busy generating for a few seconds.
                         ping_interval=None,  # Let the Server drive the Pings (Server-side pings)
@@ -329,6 +348,12 @@ class Agent:
                         close_timeout=10     # Give 10s for a graceful close
                     )
                     logger.info("TTS WebSocket connected")
+                    
+                    # Start TTS timer when we connect (before any text is sent)
+                    # This ensures the timer is started before any audio arrives
+                    if self.latency_tracker and not self._tts_first_audio_received:
+                        if "tts_time_to_first_audio" not in self.latency_tracker.active_timers:
+                            self.latency_tracker.start("tts_time_to_first_audio")
                     
                     # Start receiver task if not already running or if it has stopped
                     if not self.tts_receiver_running:
@@ -355,10 +380,16 @@ class Agent:
                         self.tts_receiver_task = asyncio.create_task(self._tts_receiver_loop())
                         logger.debug("TTS receiver task restarted")
                 
-                # Track TTS start when sending first text chunk (not when connecting)
-                # This ensures we track from when we actually send text, not when connection is established
+                # Reset TTS timer when sending first text chunk to measure from text send time
+                # Timer was already started when we connected, but we want to measure from when we send text
                 if self.latency_tracker and not self._tts_first_audio_received:
-                    self.latency_tracker.start("tts_time_to_first_audio")
+                    # Restart timer to measure from when we actually send text
+                    if "tts_time_to_first_audio" in self.latency_tracker.active_timers:
+                        # Timer was started on connection, restart it now for accurate measurement
+                        self.latency_tracker.start("tts_time_to_first_audio")
+                    elif "tts_time_to_first_audio" not in self.latency_tracker.active_timers:
+                        # Timer wasn't started on connection (shouldn't happen), start it now
+                        self.latency_tracker.start("tts_time_to_first_audio")
                 
                 # Send text chunk (TTS server will synthesize immediately)
                 # Audio chunks will be received by the background receiver task
@@ -521,7 +552,7 @@ async def get_latest_latency():
     if not agent:
         return {"error": "Agent not initialized"}
     
-    if not Config.ENABLE_LATENCY_TRACKING:
+    if not get_config("orchestrator", "enable_latency_tracking", default=True):
         return {"error": "Latency tracking is not enabled"}
     
     if agent._latest_latency_results is None:
@@ -546,6 +577,8 @@ async def get_latest_latency():
 
 
 if __name__ == "__main__":
-    logger.info(f"Starting Orchestrator server on {Config.ORCHESTRATOR_HOST}:{Config.ORCHESTRATOR_PORT}...")
-    uvicorn.run(app, host=Config.ORCHESTRATOR_HOST, port=Config.ORCHESTRATOR_PORT)
+    orchestrator_host = get_config("orchestrator", "host", default="0.0.0.0")
+    orchestrator_port = int(get_config("orchestrator", "port", default=8000))
+    logger.info(f"Starting Orchestrator server on {orchestrator_host}:{orchestrator_port}...")
+    uvicorn.run(app, host=orchestrator_host, port=orchestrator_port)
 
