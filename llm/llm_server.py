@@ -8,6 +8,7 @@ import os
 import json
 import asyncio
 from typing import Optional
+from pathlib import Path
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 import uvicorn
@@ -15,7 +16,13 @@ from sse_starlette.sse import EventSourceResponse
 import logging
 import sys
 
-from llm.models import LLMProvider, GeminiProvider
+# Add project root to path to import config_loader
+project_root = Path(__file__).parent.parent
+if str(project_root) not in sys.path:
+    sys.path.insert(0, str(project_root))
+
+from config_loader import get_config
+from llm import LLMProvider, GeminiProvider, LlamaCppProvider
 
 # Configure logging with time info
 logging.basicConfig(
@@ -28,24 +35,39 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # --- Configuration ---
-HOST = "0.0.0.0"
-PORT = 8002
+HOST = get_config("llm", "host", default="0.0.0.0")
+PORT = get_config("llm", "port", default=8002)
 
 # LLM Provider Configuration
-LLM_PROVIDER = os.getenv("LLM_PROVIDER", "gemini")
-LLM_MODEL = os.getenv("LLM_MODEL", "gemini-2.5-flash")
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
+LLM_PROVIDER = get_config("llm", "provider", default="gemini")
+LLM_MODEL = get_config("llm", "providers", "gemini", "model", default="gemini-2.5-flash")
+GEMINI_API_KEY = get_config("llm", "providers", "gemini", "api_key", default="")
+
+# Llama.cpp Configuration
+LLAMACPP_MODEL_PATH = get_config("llm", "providers", "llamacpp", "model_path", default="")
+LLAMACPP_N_CTX = int(get_config("llm", "providers", "llamacpp", "n_ctx", default=4096))
+LLAMACPP_N_THREADS = int(get_config("llm", "providers", "llamacpp", "n_threads", default=0)) or None
+LLAMACPP_N_GPU_LAYERS = int(get_config("llm", "providers", "llamacpp", "n_gpu_layers", default=-1))
 
 # --- Initialize LLM Provider ---
 llm_provider: Optional[LLMProvider] = None
 
 if LLM_PROVIDER == "gemini":
-    if not GEMINI_API_KEY:
-        raise ValueError("GEMINI_API_KEY environment variable is required for Gemini provider")
-    # Default model for Gemini if not specified
-    llm_provider = GeminiProvider(model=LLM_MODEL)
+    # If API key is provided in config, pass it to provider (overrides environment)
+    # Otherwise, provider will use GEMINI_API_KEY from environment automatically
+    api_key = GEMINI_API_KEY if GEMINI_API_KEY else None
+    llm_provider = GeminiProvider(model=LLM_MODEL, api_key=api_key)
+elif LLM_PROVIDER == "llamacpp":
+    if not LLAMACPP_MODEL_PATH:
+        raise ValueError("LLAMACPP_MODEL_PATH must be set in config.yaml for Llama.cpp provider")
+    llm_provider = LlamaCppProvider(
+        model_path=LLAMACPP_MODEL_PATH,
+        n_ctx=LLAMACPP_N_CTX,
+        n_threads=LLAMACPP_N_THREADS,
+        n_gpu_layers=LLAMACPP_N_GPU_LAYERS
+    )
 else:
-    raise ValueError(f"Unknown LLM provider: {LLM_PROVIDER}. Supported: gemini")
+    raise ValueError(f"Unknown LLM provider: {LLM_PROVIDER}. Supported: gemini, llamacpp")
 
 if llm_provider is None:
     raise ValueError("LLM provider not initialized. Please implement provider initialization.")
@@ -168,10 +190,11 @@ async def generate_stream(request: GenerateRequest):
 
 @app.get("/")
 async def root():
+    model_info = LLM_MODEL if LLM_PROVIDER == "gemini" else LLAMACPP_MODEL_PATH
     return {
         "message": "LLM Service is running",
         "provider": LLM_PROVIDER,
-        "model": LLM_MODEL
+        "model": model_info
     }
 
 
