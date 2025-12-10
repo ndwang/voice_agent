@@ -8,9 +8,10 @@ import asyncio
 import json
 import re
 import websockets
-from typing import Optional, Dict
+from typing import Optional, Dict, Set
 from pathlib import Path
-from fastapi import FastAPI
+from fastapi import FastAPI, WebSocket, WebSocketDisconnect
+from fastapi.responses import FileResponse
 import uvicorn
 import logging
 import sys
@@ -43,13 +44,23 @@ class Agent:
     def __init__(self):
         """Initialize voice agent."""
         self.context_manager = ContextManager()
-        self.audio_player = AudioPlayer()
+        self.audio_player = AudioPlayer(on_play_state=self.on_play_state_changed)
         self.ocr_client = OCRClient()
-        self.stt_client = STTClient(self.on_transcript)
+        self.stt_client = STTClient(self.on_transcript, on_event=self.on_stt_event)
         self.running = False
         self.tts_websocket: Optional[websockets.WebSocketClientProtocol] = None
         self.tts_receiver_task: Optional[asyncio.Task] = None
         self.tts_receiver_running = False
+        self.cancel_event = asyncio.Event()
+        self.event_subscribers: Set[asyncio.Queue] = set()
+        self.event_lock = asyncio.Lock()
+        self.activity_state: Dict[str, bool] = {
+            "listening": True,
+            "transcribing": False,
+            "responding": False,
+            "synthesizing": False,
+            "playing": False,
+        }
         
         # Initialize LLM provider directly
         self.llm_provider = self._initialize_llm_provider()
@@ -67,6 +78,9 @@ class Agent:
         self.first_audio_received_time: Optional[float] = None
         self.first_audio_queued_time: Optional[float] = None
 
+        # Track how many TTS synthesis requests are in flight
+        self.pending_tts_requests: int = 0
+
         # Enable/disable latency tracking logs
         self.enable_latency_tracking = get_config("orchestrator", "enable_latency_tracking", default=False)
 
@@ -74,6 +88,49 @@ class Agent:
         """Helper to conditionally emit latency logs."""
         if self.enable_latency_tracking:
             logger.info(message)
+    
+    async def subscribe_events(self) -> asyncio.Queue:
+        """Create a subscriber queue for UI event streaming."""
+        queue: asyncio.Queue = asyncio.Queue(maxsize=200)
+        async with self.event_lock:
+            self.event_subscribers.add(queue)
+        return queue
+    
+    async def unsubscribe_events(self, queue: asyncio.Queue):
+        """Remove a subscriber queue."""
+        async with self.event_lock:
+            self.event_subscribers.discard(queue)
+    
+    async def publish_event(self, event: Dict):
+        """Publish an event to all subscribers without blocking."""
+        async with self.event_lock:
+            subscribers = list(self.event_subscribers)
+        
+        for queue in subscribers:
+            try:
+                queue.put_nowait(event)
+            except asyncio.QueueFull:
+                # Drop oldest item to make room, then retry once
+                try:
+                    queue.get_nowait()
+                except asyncio.QueueEmpty:
+                    pass
+                try:
+                    queue.put_nowait(event)
+                except asyncio.QueueFull:
+                    logger.warning("UI event queue full; dropping event")
+    
+    async def set_activity(self, **kwargs):
+        """Update activity flags and broadcast to UI."""
+        self.activity_state.update(kwargs)
+        await self.publish_event({
+            "event": "activity",
+            "state": self.activity_state.copy()
+        })
+    
+    async def on_play_state_changed(self, is_playing: bool):
+        """Callback from AudioPlayer to indicate playback activity."""
+        await self.set_activity(playing=is_playing)
     
     def _initialize_llm_provider(self) -> LLMProvider:
         """Initialize LLM provider based on configuration."""
@@ -97,6 +154,23 @@ class Agent:
         else:
             raise ValueError(f"Unknown LLM provider: {provider_name}. Supported: gemini, ollama")
     
+    async def on_stt_event(self, event: Dict):
+        """Forward STT interim/final events to UI subscribers."""
+        try:
+            await self.publish_event({
+                "event": "stt",
+                "stage": event.get("type"),
+                "text": event.get("text", "")
+            })
+            
+            stage = event.get("type")
+            if stage == "interim":
+                await self.set_activity(transcribing=True)
+            elif stage == "final":
+                await self.set_activity(transcribing=False)
+        except Exception as e:
+            logger.warning(f"Failed to publish STT event: {e}", exc_info=True)
+    
     async def on_transcript(self, text: str):
         """
         Handle transcript from STT.
@@ -104,6 +178,9 @@ class Agent:
         Args:
             text: Transcript text
         """
+        # Clear any previous cancel signals for the new interaction
+        self.cancel_event.clear()
+        
         # Reset latency tracking for new interaction
         self.speech_end_time = time.time()
         self.llm_request_sent_time = None
@@ -148,10 +225,13 @@ class Agent:
             # Sentence-ending punctuation (English and Chinese)
             # Pattern matches punctuation followed by whitespace or end of string
             # This ensures we only match complete sentences
-            sentence_end_pattern = re.compile(r'[.!?。！？](?=[\s\n]|$)')
+            sentence_end_pattern = re.compile(r'[!?。！？](?=[\s\n]|$)')
             
             # Stream LLM response
             async for token in self.stream_llm_response(context_data["prompt"]):
+                if self.cancel_event.is_set():
+                    break
+                
                 # Accumulate tokens in buffer
                 sentence_buffer += token
                 
@@ -183,6 +263,10 @@ class Agent:
                     match = sentence_end_pattern.search(sentence_buffer)
             
             # After streaming completes, send any remaining text in buffer
+            if self.cancel_event.is_set():
+                await self.stop_tts_stream()
+                return
+            
             if sentence_buffer.strip():
                 await self.stream_tts_text(sentence_buffer.strip())
                 logger.debug(f"Sent final sentence to TTS: {sentence_buffer.strip()[:100]}...")
@@ -234,9 +318,15 @@ class Agent:
             readable_time = datetime.fromtimestamp(self.llm_request_sent_time).isoformat()
             self._latency_log(f"[LATENCY] LLM_REQUEST_SENT: timestamp={self.llm_request_sent_time:.6f}, readable_time={readable_time}")
             logger.info("LLM response starting...")
-            
+            await self.set_activity(responding=True)
+
             # Stream directly from provider
             async for token in self.llm_provider.generate_stream(prompt=prompt):
+                if self.cancel_event.is_set():
+                    logger.info("LLM stream cancelled; stopping token processing")
+                    await self.set_activity(responding=False)
+                    break
+                
                 if token:
                     full_response += token
                     
@@ -281,12 +371,14 @@ class Agent:
                                 # Clean up whitespace and yield
                                 safe_to_yield = re.sub(r'\s+', ' ', safe_to_yield).strip()
                                 if safe_to_yield:
+                                    await self.publish_event({"event": "llm_token", "token": safe_to_yield})
                                     yield safe_to_yield
                             else:
                                 # Complete tag found - yield everything and reset buffer
                                 # Clean up whitespace
                                 filtered_buffer = re.sub(r'\s+', ' ', filtered_buffer).strip()
                                 if filtered_buffer:
+                                    await self.publish_event({"event": "llm_token", "token": filtered_buffer})
                                     yield filtered_buffer
                                 thinking_buffer = ""
                         else:
@@ -294,10 +386,12 @@ class Agent:
                             # Clean up whitespace
                             filtered_buffer = re.sub(r'\s+', ' ', filtered_buffer).strip()
                             if filtered_buffer:
+                                await self.publish_event({"event": "llm_token", "token": filtered_buffer})
                                 yield filtered_buffer
                             thinking_buffer = ""
                     else:
                         # Thinking not disabled - yield token directly
+                        await self.publish_event({"event": "llm_token", "token": token})
                         yield token
             
             # After streaming completes, yield any remaining buffer content (if thinking is disabled)
@@ -307,7 +401,14 @@ class Agent:
                 remaining = thinking_pattern.sub('', thinking_buffer)
                 remaining = re.sub(r'\s+', ' ', remaining).strip()
                 if remaining:
+                    await self.publish_event({"event": "llm_token", "token": remaining})
                     yield remaining
+            
+            if self.cancel_event.is_set():
+                await self.publish_event({"event": "llm_cancelled"})
+                await self.set_activity(responding=False)
+                logger.info("LLM streaming cancelled before completion")
+                return
             
             # Log when full response is complete
             self.llm_full_response_time = time.time()
@@ -317,6 +418,9 @@ class Agent:
                 self._latency_log(f"[LATENCY] LLM_FULL_RESPONSE: timestamp={self.llm_full_response_time:.6f}, readable_time={readable_time}, latency_from_llm_request={latency:.6f}s")
             else:
                 self._latency_log(f"[LATENCY] LLM_FULL_RESPONSE: timestamp={self.llm_full_response_time:.6f}, readable_time={readable_time}")
+            
+            await self.publish_event({"event": "llm_done"})
+            await self.set_activity(responding=False)
         
         except Exception as e:
             # Handle provider-specific errors
@@ -324,7 +428,7 @@ class Agent:
             logger.error(f"LLM error ({status_code}): {error_message}", exc_info=True)
         finally:
             # Always log and add to context, even if there was an error
-            if full_response:
+            if full_response and not self.cancel_event.is_set():
                 # Filter thinking tags from full response for logging and history
                 if self.disable_thinking:
                     thinking_pattern = re.compile(r'<think>.*?</think>', re.DOTALL)
@@ -384,6 +488,14 @@ class Agent:
                             
                             if msg_type == "done":
                                 logger.debug("TTS synthesis chunk complete")
+                                if self.pending_tts_requests > 0:
+                                    self.pending_tts_requests -= 1
+                                else:
+                                    logger.warning("Received TTS done with no pending requests")
+
+                                # Only clear synthesizing when all pending requests are finished
+                                if self.pending_tts_requests == 0:
+                                    await self.set_activity(synthesizing=False)
                             elif msg_type == "error":
                                 error_msg = data.get("message", "Unknown error")
                                 logger.error(f"TTS error: {error_msg}")
@@ -414,6 +526,7 @@ class Agent:
                 except (websockets.exceptions.ConnectionClosed, ConnectionError, OSError) as e:
                     # Connection closed - log and reset connection state
                     logger.warning(f"TTS WebSocket connection closed: {e}")
+                    await self.set_activity(synthesizing=False)
                     # Reset websocket reference so it can be reconnected
                     self.tts_websocket = None
                     # Continue loop to wait for reconnection (don't break)
@@ -475,14 +588,18 @@ class Agent:
                         self.tts_receiver_running = True
                         self.tts_receiver_task = asyncio.create_task(self._tts_receiver_loop())
                         logger.debug("TTS receiver task restarted")
-                
+
                 # Send text chunk (TTS server will synthesize immediately)
                 # Audio chunks will be received by the background receiver task
+                await self.set_activity(synthesizing=True)
                 await self.tts_websocket.send(json.dumps({
                     "type": "text",
                     "text": text,
                     "finalize": False
                 }))
+
+                # Track in-flight synthesis requests
+                self.pending_tts_requests += 1
                 
                 # Log first TTS request sent
                 if self.first_tts_request_time is None:
@@ -534,37 +651,31 @@ class Agent:
             # Send finalize message (may trigger synthesis if there's buffered text)
             # The background receiver task will handle receiving any remaining audio chunks
             try:
+                if self.pending_tts_requests == 0:
+                    await self.set_activity(synthesizing=True)
                 await self.tts_websocket.send(json.dumps({
                     "type": "text",
                     "text": "",
                     "finalize": True
                 }))
+
+                # Track the finalize as an in-flight request (server will emit a final done)
+                self.pending_tts_requests += 1
             except (websockets.exceptions.ConnectionClosed, ConnectionError, OSError) as e:
                 logger.warning(f"TTS WebSocket connection closed during finalize: {e}")
                 # Connection may have closed, but synthesis might still complete
                 # The receiver loop will handle any remaining audio if connection is re-established
                 return
-            
-            # Give the receiver task a moment to process the finalize message
-            # and any remaining audio chunks (longer wait for long synthesis)
-            await asyncio.sleep(1.0)
         
         except Exception as e:
             logger.error(f"Error finalizing TTS: {e}", exc_info=True)
     
-    async def start(self):
-        """Start the agent."""
-        self.running = True
-        # Connect to STT server
-        asyncio.create_task(self.stt_client.connect())
-        logger.info("Voice Agent started")
-    
-    async def stop(self):
-        """Stop the agent."""
-        self.running = False
-        
-        # Stop TTS receiver task
+    async def stop_tts_stream(self):
+        """Stop any active TTS playback and close the WebSocket."""
         self.tts_receiver_running = False
+        # Reset pending synthesis tracking
+        self.pending_tts_requests = 0
+        
         if self.tts_receiver_task:
             self.tts_receiver_task.cancel()
             try:
@@ -572,17 +683,40 @@ class Agent:
             except asyncio.CancelledError:
                 pass
         
-        # Close TTS WebSocket
         if self.tts_websocket:
             try:
                 await self.tts_websocket.close()
-            except:
+            except Exception:
                 pass
             self.tts_websocket = None
         
-        # Stop audio playback
         await self.audio_player.stop()
-        
+        await self.set_activity(synthesizing=False)
+    
+    async def cancel_current_interaction(self):
+        """Signal cancellation to LLM/TTS and clear playback."""
+        self.cancel_event.set()
+        await self.publish_event({"event": "cancelled"})
+        await self.stop_tts_stream()
+    
+    async def start(self):
+        """Start the agent."""
+        self.running = True
+        await self.set_activity(
+            listening=True,
+            transcribing=False,
+            responding=False,
+            synthesizing=False,
+            playing=False,
+        )
+        # Connect to STT server
+        asyncio.create_task(self.stt_client.connect())
+        logger.info("Voice Agent started")
+    
+    async def stop(self):
+        """Stop the agent."""
+        self.running = False
+        await self.stop_tts_stream()
         # Close STT client connection
         await self.stt_client.close()
 
@@ -636,6 +770,45 @@ async def get_ocr_texts():
         "texts": texts,
         "count": len(texts.split("\n")) if texts else 0
     }
+
+
+@app.get("/ui")
+async def ui_page():
+    """Serve simple control panel UI."""
+    static_file = Path(__file__).parent / "static" / "ui.html"
+    if not static_file.exists():
+        return {"error": "UI not found"}
+    return FileResponse(static_file)
+
+
+@app.websocket("/ui/events")
+async def ui_events(websocket: WebSocket):
+    """WebSocket that streams STT and LLM events to the browser UI."""
+    await websocket.accept()
+    
+    if not agent:
+        await websocket.close(code=1011)
+        return
+    
+    queue = await agent.subscribe_events()
+    try:
+        while True:
+            event = await queue.get()
+            await websocket.send_json(event)
+    except WebSocketDisconnect:
+        pass
+    finally:
+        await agent.unsubscribe_events(queue)
+
+
+@app.post("/ui/cancel")
+async def ui_cancel():
+    """Cancel current LLM/TTS interaction and stop playback."""
+    if not agent:
+        return {"error": "Agent not initialized"}
+    
+    await agent.cancel_current_interaction()
+    return {"status": "cancelled"}
 
 
 if __name__ == "__main__":

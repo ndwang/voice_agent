@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voice Agent Control Panel</title>
+  <style>
+    :root { color-scheme: light dark; font-family: system-ui, sans-serif; }
+    body { margin: 0; padding: 16px; display: grid; gap: 12px; background: #0b0c10; color: #e5e7eb; }
+    h1 { margin: 0 0 8px 0; font-size: 1.25rem; }
+    .grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+    .card { padding: 12px; border-radius: 8px; background: #111827; border: 1px solid #1f2937; }
+    .label { font-weight: 600; margin-bottom: 6px; display: block; }
+    .box { min-height: 140px; padding: 10px; border-radius: 6px; background: #0f172a; border: 1px solid #1f2937; white-space: pre-wrap; word-break: break-word; }
+    button { padding: 10px 14px; border-radius: 6px; border: 1px solid #ef4444; background: #991b1b; color: #fff; cursor: pointer; font-weight: 600; }
+    button:disabled { opacity: 0.5; cursor: not-allowed; }
+    .status { font-size: 0.9rem; color: #9ca3af; }
+    .row { display: flex; gap: 10px; align-items: center; }
+    .activity { display: flex; gap: 6px; margin-top: 4px; }
+    .segment { flex: 1; padding: 10px 8px; text-align: center; border-radius: 6px; background: #0f172a; border: 1px solid #1f2937; color: #9ca3af; font-weight: 600; font-size: 0.9rem; }
+    .segment.active { background: #2563eb; color: #e5e7eb; border-color: #1d4ed8; box-shadow: 0 0 0 1px #1d4ed8 inset; }
+  </style>
+</head>
+<body>
+  <div class="row">
+    <h1>Voice Agent Control Panel</h1>
+    <button id="cancel-btn">Cancel Speech</button>
+    <span id="status" class="status">Connecting…</span>
+  </div>
+
+  <div class="activity" aria-label="Agent activity">
+    <div id="seg-listening" class="segment">Listening</div>
+    <div id="seg-transcribing" class="segment">Transcribing</div>
+    <div id="seg-responding" class="segment">Responding</div>
+    <div id="seg-synthesizing" class="segment">Synthesizing</div>
+    <div id="seg-playing" class="segment">Playing</div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <span class="label">STT Transcript</span>
+      <div id="stt-box" class="box"></div>
+    </div>
+    <div class="card">
+      <span class="label">LLM Response</span>
+      <div id="llm-box" class="box"></div>
+    </div>
+  </div>
+
+  <script>
+    const sttBox = document.getElementById('stt-box');
+    const llmBox = document.getElementById('llm-box');
+    const statusEl = document.getElementById('status');
+    const cancelBtn = document.getElementById('cancel-btn');
+    const segments = {
+      listening: document.getElementById('seg-listening'),
+      transcribing: document.getElementById('seg-transcribing'),
+      responding: document.getElementById('seg-responding'),
+      synthesizing: document.getElementById('seg-synthesizing'),
+      playing: document.getElementById('seg-playing'),
+    };
+
+    let llmBuffer = '';
+    let sttFinal = '';
+    let sttInterim = '';
+    let activityState = {
+      listening: true,
+      transcribing: false,
+      responding: false,
+      synthesizing: false,
+      playing: false,
+    };
+
+    function updateStt() {
+      const interimLine = sttInterim ? `\n[interim] ${sttInterim}` : '';
+      sttBox.textContent = `${sttFinal}${interimLine}`.trim();
+    }
+
+    function appendLlm(token) {
+      llmBuffer += token;
+      llmBox.textContent = llmBuffer;
+    }
+
+    function setStatus(text) {
+      statusEl.textContent = text;
+    }
+
+    function renderActivity(state) {
+      activityState = { ...activityState, ...state };
+      Object.entries(activityState).forEach(([key, isOn]) => {
+        if (segments[key]) {
+          segments[key].classList.toggle('active', !!isOn);
+        }
+      });
+    }
+
+    function connect() {
+      const wsProto = location.protocol === 'https:' ? 'wss' : 'ws';
+      const ws = new WebSocket(`${wsProto}://${location.host}/ui/events`);
+
+      ws.onopen = () => setStatus('Connected');
+      ws.onclose = () => {
+        setStatus('Disconnected – retrying…');
+        setTimeout(connect, 1500);
+      };
+      ws.onerror = () => setStatus('Error – retrying…');
+
+      ws.onmessage = (event) => {
+        try {
+          const data = JSON.parse(event.data);
+          switch (data.event) {
+            case 'stt':
+              if (data.stage === 'final') {
+                sttFinal = data.text ? `${sttFinal}${data.text}\n` : sttFinal;
+                sttInterim = '';
+              } else if (data.stage === 'interim') {
+                sttInterim = data.text || '';
+              }
+              updateStt();
+              break;
+            case 'llm_token':
+              appendLlm(data.token || '');
+              break;
+            case 'llm_done':
+              setStatus('LLM complete');
+              break;
+            case 'llm_cancelled':
+              setStatus('LLM cancelled');
+              break;
+            case 'cancelled':
+              setStatus('Speech cancelled');
+              break;
+            case 'activity':
+              renderActivity(data.state || {});
+              break;
+            default:
+              break;
+          }
+        } catch (e) {
+          console.error('Bad message', e);
+        }
+      };
+    }
+
+    cancelBtn.onclick = async () => {
+      cancelBtn.disabled = true;
+      setStatus('Cancelling…');
+      try {
+        await fetch('/ui/cancel', { method: 'POST' });
+      } finally {
+        cancelBtn.disabled = false;
+      }
+    };
+
+    connect();
+  </script>
+</body>
+</html>
+

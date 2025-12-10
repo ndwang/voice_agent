@@ -6,7 +6,7 @@ Streaming audio playback using sounddevice.
 import asyncio
 import numpy as np
 import sounddevice as sd
-from typing import Optional
+from typing import Optional, Callable, Awaitable
 from collections import deque
 from pathlib import Path
 import logging
@@ -39,6 +39,7 @@ class AudioPlayer:
         channels: int = None,
         output_sample_rate: Optional[int] = None,
         output_device: Optional[str] = None,
+        on_play_state: Optional[Callable[[bool], Awaitable[None]]] = None,
     ):
         """
         Initialize audio player.
@@ -57,6 +58,8 @@ class AudioPlayer:
         self.audio_queue: asyncio.Queue = asyncio.Queue()
         self.playing = False
         self.play_task: Optional[asyncio.Task] = None
+        self.on_play_state = on_play_state
+        self._audio_active = False
     
     async def play_audio_chunk(self, audio_data: bytes):
         """
@@ -105,8 +108,19 @@ class AudioPlayer:
                         playback_audio,
                         samplerate=self.playback_sample_rate,
                         device=self.output_device,
+                        blocking=False,
                     )
-                    sd.wait()  # Wait for playback to finish
+                    
+                    if self.on_play_state and not self._audio_active:
+                        self._audio_active = True
+                        await self.on_play_state(True)
+                    
+                    # Wait for playback to finish, but allow stop() to interrupt via sd.stop()
+                    await asyncio.to_thread(sd.wait)
+                    
+                    if self.audio_queue.empty() and self.on_play_state and self._audio_active:
+                        self._audio_active = False
+                        await self.on_play_state(False)
                 
                 except asyncio.TimeoutError:
                     # No audio for 1 second, check if we should continue
@@ -123,6 +137,9 @@ class AudioPlayer:
         finally:
             self.playing = False
             logger.info("Audio playback stopped")
+            if self.on_play_state and self._audio_active:
+                self._audio_active = False
+                await self.on_play_state(False)
 
     def _resample_audio(self, audio: np.ndarray) -> np.ndarray:
         """Resample audio to the playback sample rate if needed."""
@@ -155,6 +172,10 @@ class AudioPlayer:
     async def stop(self):
         """Stop audio playback."""
         self.playing = False
+        try:
+            sd.stop()
+        except Exception:
+            pass
         if self.play_task:
             self.play_task.cancel()
             try:
@@ -168,4 +189,8 @@ class AudioPlayer:
                 self.audio_queue.get_nowait()
             except asyncio.QueueEmpty:
                 break
+        
+        if self.on_play_state and self._audio_active:
+            self._audio_active = False
+            await self.on_play_state(False)
 

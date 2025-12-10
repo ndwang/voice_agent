@@ -7,7 +7,7 @@ The orchestrator connects to STT server to receive transcripts broadcast by the 
 import json
 import asyncio
 import websockets
-from typing import Callable, Optional
+from typing import Callable, Optional, Dict, Any
 from pathlib import Path
 import logging
 import sys
@@ -28,14 +28,16 @@ logger = get_logger(__name__)
 class STTClient:
     """WebSocket client for STT server."""
     
-    def __init__(self, on_transcript: Callable[[str], None]):
+    def __init__(self, on_transcript: Callable[[str], None], on_event: Optional[Callable[[Dict[str, Any]], None]] = None):
         """
         Initialize STT client.
         
         Args:
-            on_transcript: Async callback function called when transcript is received
+            on_transcript: Async callback function called when a final transcript is received.
+            on_event: Optional callback invoked for any STT event (e.g., interim/final updates).
         """
         self.on_transcript = on_transcript
+        self.on_event = on_event
         self.websocket: Optional[websockets.WebSocketClientProtocol] = None
         self.running = False
         self._connect_task: Optional[asyncio.Task] = None
@@ -61,13 +63,31 @@ class STTClient:
                             else:
                                 data = json.loads(message.decode('utf-8'))
                             
-                            # Only process final transcripts (ignore interim)
+                            # Fire generic event callback if provided (interim/final)
+                            if self.on_event:
+                                if asyncio.iscoroutinefunction(self.on_event):
+                                    await self.on_event(data)
+                                else:
+                                    self.on_event(data)
+                            
+                            # Only process final transcripts (ignore interim for transcript callback)
                             if data.get("type") == "final":
                                 text = data.get("text", "")
+                                speech_end_time = data.get("speech_end_time")  # Optional timestamp from STT server
+                                stt_latency = data.get("stt_latency")  # Optional STT processing latency
                                 if text.strip():
                                     # Call the callback (which should be async)
                                     if asyncio.iscoroutinefunction(self.on_transcript):
-                                        await self.on_transcript(text)
+                                        # Check if callback accepts additional parameters
+                                        import inspect
+                                        sig = inspect.signature(self.on_transcript)
+                                        param_count = len(sig.parameters)
+                                        if param_count > 2:
+                                            await self.on_transcript(text, speech_end_time, stt_latency)
+                                        elif param_count > 1:
+                                            await self.on_transcript(text, speech_end_time)
+                                        else:
+                                            await self.on_transcript(text)
                                     else:
                                         self.on_transcript(text)
                         except json.JSONDecodeError:
