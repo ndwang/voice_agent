@@ -6,15 +6,13 @@ This document provides a comprehensive step-by-step plan to manually test all co
 
 - **STT Service** (Port 8001): Speech-to-Text transcription
   - WebSocket endpoint: `/ws/transcribe` - accepts audio and broadcasts transcripts to all connected clients
-- **LLM Service** (Port 8002): Language model for generating responses
-  - HTTP endpoint: `/generate/stream` - SSE streaming for token generation
 - **TTS Service** (Port 8003): Text-to-Speech synthesis
   - WebSocket endpoint: `/synthesize/stream` - streams text and receives audio chunks
 - **OCR Service** (Port 8004): Optical Character Recognition for screen monitoring
   - HTTP endpoint: `/texts/get` - fetches detected texts on demand
 - **Orchestrator** (Port 8000): Main coordinator that connects all services
   - Connects to STT server WebSocket as a listener to receive broadcast transcripts
-  - Makes HTTP requests to LLM service for streaming responses
+  - Contains LLM provider classes (Gemini, Ollama) that connect to external LLM services
   - Connects to TTS service WebSocket to stream text and receive audio
   - Makes HTTP requests to OCR service to fetch texts on demand
 - **Audio Driver**: Microphone input capture
@@ -44,29 +42,27 @@ This document provides a comprehensive step-by-step plan to manually test all co
                         │  └─────────┘ │
                         │              │
                         │  ┌─────────┐ │
+                        │  │ LLM     │ │ (integrated)
+                        │  │Provider │ │ (Gemini/Ollama)
+                        │  └─────────┘ │
+                        │              │
+                        │  ┌─────────┐ │
                         │  │  Audio  │ │
                         │  │ Player  │ │
                         │  └─────────┘ │
                         └──────┬───────┘
                                │
-                    ┌──────────┼──────────┐
-                    │          │          │
-                    ▼          ▼          ▼
-            ┌──────────┐ ┌──────────┐ ┌──────────┐
-            │   LLM    │ │   TTS    │ │   OCR    │
-            │ Service  │ │ Service  │ │ Service  │
-            │(Port 8002)│ │(Port 8003)│ │(Port 8004)│
-            └──────────┘ └──────────┘ └──────────┘
-               ▲            ▲            ▲
-               │            │            │
-               │ HTTP SSE   │ WebSocket  │ HTTP GET
-               │ (tokens)   │ (text→audio│ (on-demand)
-               │            │  chunks)   │
-               └────────────┴────────────┘
-                        │
-                        │
-                  Orchestrator
-              (coordinates all flows)
+                  ┌────────────┼────────────┐
+                  │            │            │
+                  │ WebSocket  │ HTTP GET   │ HTTP
+                  │ (text→audio│ (on-demand)│ (if Ollama)
+                  │  chunks)   │            │
+                  ▼            ▼            ▼
+            ┌───────────┐ ┌───────────┐ ┌────────────┐
+            │    TTS    │ │    OCR    │ │   Ollama   │
+            │  Service  │ │  Service  │ │   Server   │
+            │(Port 8003)│ │(Port 8004)│ │(Port 11434)│
+            └───────────┘ └───────────┘ └────────────┘
 ```
 
 **Flow Description:**
@@ -74,13 +70,13 @@ This document provides a comprehensive step-by-step plan to manually test all co
 1. **Audio Input**: Audio Driver captures microphone input and sends audio bytes to STT Server via WebSocket
 2. **Speech Recognition**: STT Server transcribes audio and broadcasts transcripts to all connected clients (including Orchestrator's STTClient)
 3. **Context Building**: Orchestrator's ContextManager formats the prompt, optionally fetching OCR texts on-demand
-4. **LLM Generation**: Orchestrator sends prompt to LLM Service via HTTP SSE, receives streaming tokens
+4. **LLM Generation**: Orchestrator uses LLM provider classes to generate responses. The Ollama provider connects to Ollama server (localhost:11434). The Gemini provider connects to Google Gemini API.
 5. **Speech Synthesis**: Orchestrator streams tokens to TTS Service via WebSocket, receives audio chunks
 6. **Audio Output**: Orchestrator's Audio Player plays the received audio chunks
 
 **Key Connection Patterns**:
 - **STT**: Broadcast pattern - STT server broadcasts transcripts to all connected WebSocket clients (both audio driver and orchestrator can be connected simultaneously)
-- **LLM**: HTTP SSE streaming - Orchestrator makes HTTP POST requests, receives streaming tokens via Server-Sent Events
+- **LLM**: Orchestrator contains LLM provider classes that connect to external services. The Ollama provider connects to Ollama server (localhost:11434) via HTTP. The Gemini provider uses the Google Gemini API via the `google.genai` library.
 - **TTS**: Bidirectional WebSocket - Orchestrator sends text chunks, receives audio chunks in real-time
 - **OCR**: On-demand HTTP - Orchestrator fetches OCR texts via HTTP GET when building context (not in main voice flow)
 - **Audio Player**: Internal component of Orchestrator - receives audio chunks from TTS and plays them
@@ -138,54 +134,52 @@ This document provides a comprehensive step-by-step plan to manually test all co
 
 ---
 
-### Test 1.2: LLM Service (Standalone)
+### Test 1.2: LLM Provider Configuration
 
-**Objective**: Verify LLM service generates responses correctly.
+**Objective**: Verify LLM providers are configured correctly and can generate responses.
+
+**Note**: LLM providers are classes in the Orchestrator package (`llm/providers/`). They connect to external services (Ollama server or Google Gemini API). Providers are tested as part of the Orchestrator.
 
 **Steps**:
-1. Ensure LLM service dependencies are configured (Ollama running, API keys set, etc.)
-2. Start LLM service:
-   ```powershell
-   uv run python -m llm.llm_server
-   ```
-3. **Test Cases**:
-   - **Test 1.2a**: Test non-streaming endpoint:
-     ```powershell
-     curl -X POST http://localhost:8002/generate -H "Content-Type: application/json" -d "{\"prompt\": \"你好，请介绍一下你自己\"}"
+1. Ensure LLM provider dependencies are configured:
+   - **For Ollama**: Ensure Ollama server is running (`ollama serve`) and model is pulled (e.g., `ollama pull qwen2.5`)
+   - **For Gemini**: Ensure `GEMINI_API_KEY` environment variable is set or configured in `config.yaml`
+2. **Test Cases**:
+   - **Test 1.2a**: Verify provider configuration in `config.yaml`:
+     ```yaml
+     llm:
+       provider: "ollama"  # or "gemini"
+       providers:
+         ollama:
+           model: "qwen2.5"
+           base_url: "http://localhost:11434"
+         gemini:
+           model: "gemini-2.5-flash"
+           api_key: ""  # or set GEMINI_API_KEY env var
      ```
    
-   - **Test 1.2b**: Test streaming endpoint (using Python script - RECOMMENDED):
-     ```powershell
-     uv run python scripts/test_llm_stream.py "用一句话解释什么是人工智能"
-     ```
-     This script will show tokens arriving incrementally and verify streaming works.
+   - **Test 1.2b**: Test provider initialization (via Orchestrator):
+     - Start Orchestrator and check console for provider initialization message
+     - Should see: "Initialized Ollama provider..." or "Initialized Gemini provider..."
    
-   - **Test 1.2b-alt**: Test streaming endpoint using curl (may buffer):
-     ```powershell
-     curl -N -X POST http://localhost:8002/generate/stream -H "Content-Type: application/json" -d "{\"prompt\": \"用一句话解释什么是人工智能\"}"
-     ```
-     Note: The `-N` flag disables buffering. You should see SSE format output with `event: token` and `data: {...}` lines.
-   
-   - **Test 1.2c**: Test with temperature parameter:
-     ```powershell
-     curl -X POST http://localhost:8002/generate -H "Content-Type: application/json" -d "{\"prompt\": \"用一句话解释什么是人工智能\", \"temperature\": 0.7}"
-     ```
+   - **Test 1.2c**: Test LLM generation (via full voice flow):
+     - Start all services (see Phase 3)
+     - Speak a test phrase
+     - Verify LLM generates response
+     - Check Orchestrator logs for LLM generation
 
 **Expected Results**:
-- `/generate` returns complete response in JSON format: `{"response": "..."}`
-- `/generate/stream` returns SSE stream with tokens arriving incrementally
-- SSE format: `event: token` followed by `data: {"token": "..."}` lines
-- Final event: `event: done` with `data: {"status": "complete"}`
-- Temperature parameter is respected when provided
-- No errors or timeouts
+- Provider initializes correctly based on config
+- LLM generates appropriate responses
+- Streaming works (tokens arrive incrementally)
+- No initialization errors
+- Provider-specific errors are handled gracefully
 
 **Verification**:
-- **For streaming test script**: Tokens should appear one by one on screen (not all at once)
-- **For curl**: You should see multiple `event: token` lines appearing over time
-- Check LLM server console for request logs
-- Verify response quality and relevance
-- **Key indicator**: If streaming works, you'll see tokens appearing gradually (not all at once)
-- **If buffered**: All tokens appear simultaneously after a delay
+- Check Orchestrator console for provider initialization logs
+- Verify provider type matches config
+- Test with both Ollama and Gemini providers (if available)
+- Verify responses are generated correctly in voice flow
 
 ---
 
@@ -198,7 +192,7 @@ This document provides a comprehensive step-by-step plan to manually test all co
    ```powershell
    uv run python -m tts.tts_server
    ```
-   Note: Default provider is Edge TTS. To use ChatTTS, set `TTS_PROVIDER=chattts` environment variable.
+   Note: Default provider is Edge TTS.
 
 2. **Test Cases**:
    
@@ -423,33 +417,38 @@ This document provides a comprehensive step-by-step plan to manually test all co
 
 ---
 
-### Test 2.2: LLM → Orchestrator Integration
+### Test 2.2: LLM Provider Integration
 
-**Objective**: Verify orchestrator can call LLM service and receive responses.
+**Objective**: Verify orchestrator's integrated LLM provider generates responses correctly.
 
 **Steps**:
-1. Start LLM service:
-   ```powershell
-   uv run python -m llm.llm_server
-   ```
-2. Start Orchestrator:
+1. Ensure LLM provider is configured in `config.yaml` (Ollama or Gemini)
+2. For Ollama provider: Ensure Ollama server is running (`ollama serve`)
+3. Start Orchestrator:
    ```powershell
    uv run python -m orchestrator.agent
    ```
-3. Send a test request directly to orchestrator's LLM flow (this happens automatically when STT sends a transcript, but you can also test via context manager):
-   - Use STT → Orchestrator flow from Test 2.1
+4. Verify provider initialization:
+   - Check console for "Initialized Ollama provider..." or "Initialized Gemini provider..."
+5. Test LLM generation via full flow:
+   - Start STT service and audio driver
    - Speak: "你好，请说一句话"
-   - Verify orchestrator calls LLM and receives streaming tokens
+   - Verify orchestrator uses LLM provider directly (no HTTP calls to LLM service)
+   - Verify streaming tokens are generated
 
 **Expected Results**:
-- Orchestrator successfully calls LLM streaming endpoint
-- Tokens are received and processed
+- Orchestrator initializes LLM provider class correctly
+- Provider class connects to external service (Ollama server or Gemini API)
+- Provider generates streaming tokens
+- Tokens are processed and sent to TTS
 - Response is added to conversation history
 
 **Verification**:
-- Check orchestrator console for LLM streaming logs
-- Check LLM server console for request logs
-- Verify no connection errors
+- Check orchestrator console for provider initialization logs
+- Check orchestrator console for LLM generation logs
+- For Ollama: Verify connection to Ollama server (localhost:11434)
+- For Gemini: Verify API calls to Google Gemini API
+- Verify provider generates responses correctly
 
 ---
 
@@ -540,11 +539,11 @@ This document provides a comprehensive step-by-step plan to manually test all co
    uv run python scripts/start_services.py
    ```
    Or start manually in order:
+   - **For Ollama provider**: Start Ollama server (`ollama serve`) if not already running
    - STT Service (must start before orchestrator and audio driver)
-   - LLM Service  
    - TTS Service
    - OCR Service
-   - Orchestrator (connects to STT, LLM, TTS, OCR)
+   - Orchestrator (connects to STT, TTS, OCR; integrates LLM provider directly)
    - Audio Driver (connects to STT)
 
 2. Wait for all services to initialize (check each console window)
@@ -772,7 +771,7 @@ This document provides a comprehensive step-by-step plan to manually test all co
 
 ### Individual Components
 - [x] STT Service: Transcription works
-- [x] LLM Service: Generation works (streaming and non-streaming)
+- [x] LLM Provider: Generation works (integrated in Orchestrator)
 - [x] TTS Service: Synthesis works (streaming and non-streaming)
   - [x] Non-streaming REST endpoint (`POST /synthesize`)
   - [x] Streaming WebSocket endpoint (`WS /synthesize/stream`)
@@ -784,7 +783,7 @@ This document provides a comprehensive step-by-step plan to manually test all co
 
 ### Integration
 - [x] STT → Orchestrator connection
-- [x] LLM → Orchestrator integration
+- [x] LLM Provider integration (direct, no service)
 - [x] TTS → Orchestrator integration
 - [ ] OCR → Orchestrator integration
 
@@ -818,9 +817,12 @@ This document provides a comprehensive step-by-step plan to manually test all co
 - Check STT server logs for errors
 
 ### LLM Not Responding
-- Verify LLM provider is configured (Ollama running, API keys set)
-- Check LLM service logs
-- Test LLM service directly with curl
+- Verify LLM provider is configured in `config.yaml` (provider: "ollama" or "gemini")
+- For Ollama provider: Verify Ollama server is running (`ollama serve`) and model is pulled
+- For Gemini provider: Verify API key is set (environment variable or config.yaml)
+- Check Orchestrator console for provider initialization errors
+- For Ollama: Verify Orchestrator can connect to Ollama server (localhost:11434)
+- For Gemini: Verify network connectivity to Google API
 
 ### TTS Not Playing Audio
 - Verify audio output device
@@ -871,12 +873,11 @@ uv run python scripts/stop_services.py
 # Health checks
 curl http://localhost:8000/health  # Orchestrator
 curl http://localhost:8001/        # STT
-curl http://localhost:8002/health  # LLM
 curl http://localhost:8003/health  # TTS
 curl http://localhost:8004/health  # OCR
 
-# Test LLM
-curl -X POST http://localhost:8002/generate -H "Content-Type: application/json" -d "{\"prompt\": \"你好\"}"
+# LLM providers are classes in Orchestrator package
+# Test LLM via full voice flow or check Orchestrator logs
 
 # Test TTS
 curl http://localhost:8003/  # Service status

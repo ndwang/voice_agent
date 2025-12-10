@@ -30,7 +30,8 @@ logger = logging.getLogger(__name__)
 
 # --- Configuration ---
 # 1. Model Configuration
-MODEL_SIZE = get_config("stt", "model_size", default="small")
+# Use local model in faster-whisper-small directory
+MODEL_PATH = Path(__file__).parent / "faster-whisper-small"
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 COMPUTE_TYPE = "int8" if DEVICE == "cuda" else "default"
 
@@ -51,9 +52,9 @@ else:
 
 # --- Global Model ---
 # Load the model once at startup
-logger.info(f"Loading STT model '{MODEL_SIZE}' on {DEVICE} ({COMPUTE_TYPE})...")
+logger.info(f"Loading STT model from '{MODEL_PATH}' on {DEVICE} ({COMPUTE_TYPE})...")
 try:
-    stt_model = WhisperModel(MODEL_SIZE, device=DEVICE, compute_type=COMPUTE_TYPE)
+    stt_model = WhisperModel(str(MODEL_PATH), device=DEVICE, compute_type=COMPUTE_TYPE)
     logger.info("STT model loaded successfully.")
 except Exception as e:
     logger.error(f"Error loading STT model: {e}", exc_info=True)
@@ -123,8 +124,6 @@ async def websocket_endpoint(websocket: WebSocket):
                 # Check for the "flush" command
                 if data == FLUSH_COMMAND:
                     logger.info("Flush command received. Finalizing transcription.")
-                    # Mark speech end time for latency tracking
-                    speech_end_time = time.time()
                     
                     if audio_buffer.size > 0:
                         # Run final transcription with VAD filter
@@ -135,24 +134,18 @@ async def websocket_endpoint(websocket: WebSocket):
                         )
                         final_text = "".join([seg.text for seg in segments])
                         
-                        # Calculate STT processing latency
-                        stt_latency = time.time() - speech_end_time
-                        
-                        # Broadcast final transcript to all clients with timing info
+                        # Broadcast final transcript to all clients
                         if final_text.strip():
                             await broadcast_to_clients({
                                 "type": "final", 
-                                "text": final_text,
-                                "speech_end_time": speech_end_time,
-                                "stt_latency": stt_latency
+                                "text": final_text
                             })
-                            logger.info(f"Broadcast final transcript: {final_text[:50]}... (STT latency: {stt_latency*1000:.0f}ms)")
+                            logger.info(f"Broadcast final transcript: {final_text[:50]}...")
                     else:
                         # Broadcast empty final if no audio was received
                         await broadcast_to_clients({
                             "type": "final", 
-                            "text": "",
-                            "speech_end_time": speech_end_time
+                            "text": ""
                         })
                     
                     # Clear the buffer for the next turn

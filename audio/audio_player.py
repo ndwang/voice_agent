@@ -58,22 +58,21 @@ class AudioPlayer:
         self.playing = False
         self.play_task: Optional[asyncio.Task] = None
     
-    async def play_audio_chunk(self, audio_data: bytes, latency_tracker=None):
+    async def play_audio_chunk(self, audio_data: bytes):
         """
         Add audio chunk to playback queue.
         
         Args:
             audio_data: Audio data as bytes (int16 format)
-            latency_tracker: Optional LatencyTracker instance for latency measurement
         """
         await self.audio_queue.put(audio_data)
         
         # Start playback task if not already running
         if not self.playing:
             self.playing = True
-            self.play_task = asyncio.create_task(self._playback_loop(latency_tracker))
+            self.play_task = asyncio.create_task(self._playback_loop())
     
-    async def _playback_loop(self, latency_tracker=None):
+    async def _playback_loop(self):
         """Background task for audio playback."""
         logger.info("Audio playback started")
         try:

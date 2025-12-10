@@ -69,8 +69,7 @@ class ConfigLoader:
                 "host": "0.0.0.0",
                 "port": 8000,
                 "stt_websocket_path": "/ws/stt",
-                "log_level": "INFO",
-                "enable_latency_tracking": True
+                "log_level": "INFO"
             },
             "stt": {
                 "host": "0.0.0.0",

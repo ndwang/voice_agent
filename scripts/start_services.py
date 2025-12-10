@@ -31,12 +31,6 @@ SERVICES = [
         "description": "STT Service (Port 8001) - Speech-to-Text"
     },
     {
-        "name": "LLM Service",
-        "module": "llm.llm_server",
-        "port": 8002,
-        "description": "LLM Service (Port 8002) - Language Model"
-    },
-    {
         "name": "TTS Service",
         "module": "tts.tts_server",
         "port": 8003,

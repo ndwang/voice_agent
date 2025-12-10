@@ -8,6 +8,6 @@ wheels/
 ocr/__pycache__/
 ocr/output/
 ocr/input/
-
+stt/faster-whisper-small/
 # Virtual environments
 .venv

@@ -21,7 +21,6 @@ except ImportError:
 SERVICE_PORTS = {
     8000: "Orchestrator",
     8001: "STT Service",
-    8002: "LLM Service",
     8003: "TTS Service",
     8004: "OCR Service",
 }

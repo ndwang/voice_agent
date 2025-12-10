@@ -6,7 +6,7 @@ Coordinates STT, LLM, TTS, and OCR services.
 """
 import asyncio
 import json
-import httpx
+import re
 import websockets
 from typing import Optional, Dict
 from pathlib import Path
@@ -14,6 +14,8 @@ from fastapi import FastAPI
 import uvicorn
 import logging
 import sys
+import time
+from datetime import datetime
 
 # Add project root to path to import config_loader
 project_root = Path(__file__).parent.parent
@@ -24,9 +26,10 @@ from config_loader import get_config
 from orchestrator.logging_config import setup_logging, get_logger
 from orchestrator.context_manager import ContextManager
 from orchestrator.ocr_client import OCRClient
-from orchestrator.latency_tracker import LatencyTracker
 from audio.audio_player import AudioPlayer
 from orchestrator.stt_client import STTClient
+from llm.providers import GeminiProvider, OllamaProvider
+from llm.base import LLMProvider
 
 # Set up logging
 log_level = getattr(logging, get_config("orchestrator", "log_level", default="INFO").upper(), logging.INFO)
@@ -48,62 +51,72 @@ class Agent:
         self.tts_receiver_task: Optional[asyncio.Task] = None
         self.tts_receiver_running = False
         
-        # Latency tracking
-        self.latency_tracker = LatencyTracker() if get_config("orchestrator", "enable_latency_tracking", default=True) else None
-        self._current_speech_end_time: Optional[float] = None
-        self._llm_first_token_received = False
-        self._tts_first_audio_received = False
-        self._latest_latency_results: Optional[Dict] = None
+        # Initialize LLM provider directly
+        self.llm_provider = self._initialize_llm_provider()
+        
+        # Check if thinking should be disabled
+        provider_name = get_config("llm", "provider", default="ollama")
+        self.disable_thinking = get_config("llm", "providers", provider_name, "disable_thinking", default=False) if provider_name == "ollama" else False
+        
+        # Latency tracking state
+        self.speech_end_time: Optional[float] = None
+        self.llm_request_sent_time: Optional[float] = None
+        self.first_token_time: Optional[float] = None
+        self.llm_full_response_time: Optional[float] = None
+        self.first_tts_request_time: Optional[float] = None
+        self.first_audio_received_time: Optional[float] = None
+        self.first_audio_queued_time: Optional[float] = None
+
+        # Enable/disable latency tracking logs
+        self.enable_latency_tracking = get_config("orchestrator", "enable_latency_tracking", default=False)
+
+    def _latency_log(self, message: str):
+        """Helper to conditionally emit latency logs."""
+        if self.enable_latency_tracking:
+            logger.info(message)
     
-    async def on_transcript(self, text: str, speech_end_time: Optional[float] = None, stt_latency: Optional[float] = None):
+    def _initialize_llm_provider(self) -> LLMProvider:
+        """Initialize LLM provider based on configuration."""
+        provider_name = get_config("llm", "provider", default="ollama")
+        
+        if provider_name == "gemini":
+            model = get_config("llm", "providers", "gemini", "model", default="gemini-2.5-flash")
+            api_key = get_config("llm", "providers", "gemini", "api_key", default="")
+            api_key = api_key if api_key else None  # Empty string becomes None
+            logger.info(f"Initializing Gemini provider with model: {model}")
+            return GeminiProvider(model=model, api_key=api_key)
+            
+        elif provider_name == "ollama":
+            model = get_config("llm", "providers", "ollama", "model", default="llama3")
+            base_url = get_config("llm", "providers", "ollama", "base_url", default="http://localhost:11434")
+            timeout = float(get_config("llm", "providers", "ollama", "timeout", default=300.0))
+            disable_thinking = get_config("llm", "providers", "ollama", "disable_thinking", default=False)
+            logger.info(f"Initializing Ollama provider with model: {model}, base_url: {base_url}, disable_thinking: {disable_thinking}")
+            return OllamaProvider(model=model, base_url=base_url, timeout=timeout, disable_thinking=disable_thinking)
+            
+        else:
+            raise ValueError(f"Unknown LLM provider: {provider_name}. Supported: gemini, ollama")
+    
+    async def on_transcript(self, text: str):
         """
         Handle transcript from STT.
         
         Args:
             text: Transcript text
-            speech_end_time: Optional timestamp when speech ended (from STT server)
-            stt_latency: Optional STT processing latency in seconds
         """
+        # Reset latency tracking for new interaction
+        self.speech_end_time = time.time()
+        self.llm_request_sent_time = None
+        self.first_token_time = None
+        self.llm_full_response_time = None
+        self.first_tts_request_time = None
+        self.first_audio_received_time = None
+        self.first_audio_queued_time = None
+        
+        readable_time = datetime.fromtimestamp(self.speech_end_time).isoformat()
+        self._latency_log(f"[LATENCY] SPEECH_END: timestamp={self.speech_end_time:.6f}, readable_time={readable_time}, text={text[:50]}")
         logger.info(f"Transcript received: {text}")
         
-        # Track speech end time for latency measurement
-        if self.latency_tracker:
-            self.latency_tracker.start_round()
-            transcript_received_time = self.latency_tracker.mark("transcript_received")
-            
-            # Convert speech_end_time to perf_counter time base
-            # If we have speech_end_time from STT (time.time()) and stt_latency,
-            # we can calculate when speech ended relative to transcript_received
-            if speech_end_time and stt_latency is not None:
-                # speech_end_time is in time.time() (wall clock)
-                # transcript_received_time is in time.perf_counter() (monotonic)
-                # We need to convert: speech_end = transcript_received - stt_latency
-                # This gives us speech_end in perf_counter time base
-                import time
-                self._current_speech_end_time = transcript_received_time - stt_latency
-                self.latency_tracker.marks["speech_end"] = self._current_speech_end_time
-            elif speech_end_time:
-                # If we have speech_end_time but no stt_latency, estimate
-                # Assume minimal network delay and use transcript_received - small offset
-                import time
-                # Estimate: speech ended slightly before transcript received
-                # Use a small default STT latency estimate (e.g., 0.3s)
-                estimated_stt_latency = 0.3
-                self._current_speech_end_time = transcript_received_time - estimated_stt_latency
-                self.latency_tracker.marks["speech_end"] = self._current_speech_end_time
-            else:
-                # Use current time as fallback (slightly less accurate)
-                self._current_speech_end_time = self.latency_tracker.mark("speech_end")
-            
-            # Record STT latency if provided
-            if stt_latency is not None:
-                self.latency_tracker.measurements["stt_latency"].append(stt_latency)
-                if self.latency_tracker.current_round is not None:
-                    self.latency_tracker.current_round["stt_latency"] = stt_latency
-            
-            self._llm_first_token_received = False
-            self._tts_first_audio_received = False
-            
         # Add to conversation history
         self.context_manager.add_user_message(text)
         
@@ -122,117 +135,201 @@ class Agent:
     async def process_user_input(self, user_text: str):
         """Process user input through LLM and TTS pipeline."""
         try:
+            process_start_time = time.time()
+            readable_time = datetime.fromtimestamp(process_start_time).isoformat()
+            self._latency_log(f"[LATENCY] PROCESS_START: timestamp={process_start_time:.6f}, readable_time={readable_time}")
+            
             # Format context for LLM
             context_data = self.context_manager.format_context_for_llm(user_text)
             
-            # Track LLM start
-            if self.latency_tracker:
-                self.latency_tracker.start("llm_total")
+            # Buffer to accumulate tokens into sentences
+            sentence_buffer = ""
+            
+            # Sentence-ending punctuation (English and Chinese)
+            # Pattern matches punctuation followed by whitespace or end of string
+            # This ensures we only match complete sentences
+            sentence_end_pattern = re.compile(r'[.!?。！？](?=[\s\n]|$)')
             
             # Stream LLM response
             async for token in self.stream_llm_response(context_data["prompt"]):
-                # Stream token to TTS
-                await self.stream_tts_text(token)
+                # Accumulate tokens in buffer
+                sentence_buffer += token
+                
+                # Check if we have a complete sentence
+                # Find all sentence endings in the buffer
+                match = sentence_end_pattern.search(sentence_buffer)
+                
+                while match:
+                    # Found a complete sentence ending
+                    # Position after the punctuation mark
+                    punct_pos = match.end()
+                    
+                    # Extract the complete sentence (including the punctuation)
+                    # Skip trailing whitespace after punctuation for sentence boundary
+                    sentence_end_pos = punct_pos
+                    while sentence_end_pos < len(sentence_buffer) and sentence_buffer[sentence_end_pos].isspace():
+                        sentence_end_pos += 1
+                    
+                    complete_sentence = sentence_buffer[:sentence_end_pos].strip()
+                    if complete_sentence:
+                        # Send complete sentence to TTS
+                        await self.stream_tts_text(complete_sentence)
+                        logger.debug(f"Sent complete sentence to TTS: {complete_sentence[:100]}...")
+                    
+                    # Remove sent sentence from buffer
+                    sentence_buffer = sentence_buffer[sentence_end_pos:]
+                    
+                    # Check for more complete sentences in remaining buffer
+                    match = sentence_end_pattern.search(sentence_buffer)
             
-            # Track LLM completion
-            if self.latency_tracker:
-                self.latency_tracker.end("llm_total")
+            # After streaming completes, send any remaining text in buffer
+            if sentence_buffer.strip():
+                await self.stream_tts_text(sentence_buffer.strip())
+                logger.debug(f"Sent final sentence to TTS: {sentence_buffer.strip()[:100]}...")
             
             # Finalize TTS
             await self.finalize_tts()
             
-            # Calculate and log latencies if tracking is enabled
-            if self.latency_tracker:
-                round_data = self.latency_tracker.end_round()
-                if round_data:
-                    # Debug: Log what measurements we have
-                    logger.debug(f"Latency measurements captured: {list(round_data.keys())}")
-                    
-                    # Store latest results for API access
-                    self._latest_latency_results = round_data.copy()
-                    
-                    # Log formatted results
-                    logger.info("=" * 60)
-                    logger.info("Latency Measurement Results")
-                    logger.info("=" * 60)
-                    logger.info(self.latency_tracker.format_round(round_data))
-                    logger.info("=" * 60)
+            # Log latency summary
+            process_end_time = time.time()
+            readable_time = datetime.fromtimestamp(process_end_time).isoformat()
+            self._latency_log(f"[LATENCY] PROCESS_END: timestamp={process_end_time:.6f}, readable_time={readable_time}")
+            
+            # Summary of key latency metrics
+            if self.llm_request_sent_time and self.first_token_time:
+                llm_to_first_token = self.first_token_time - self.llm_request_sent_time
+                llm_request_readable = datetime.fromtimestamp(self.llm_request_sent_time).isoformat()
+                first_token_readable = datetime.fromtimestamp(self.first_token_time).isoformat()
+                self._latency_log(f"[LATENCY] SUMMARY: llm_request_to_first_token={llm_to_first_token:.6f}s (request={llm_request_readable}, first_token={first_token_readable})")
+            
+            if self.llm_request_sent_time and self.llm_full_response_time:
+                llm_to_full_response = self.llm_full_response_time - self.llm_request_sent_time
+                llm_request_readable = datetime.fromtimestamp(self.llm_request_sent_time).isoformat()
+                full_response_readable = datetime.fromtimestamp(self.llm_full_response_time).isoformat()
+                self._latency_log(f"[LATENCY] SUMMARY: llm_request_to_full_response={llm_to_full_response:.6f}s (request={llm_request_readable}, full_response={full_response_readable})")
+            
+            if self.first_tts_request_time and self.first_audio_received_time:
+                tts_to_first_audio = self.first_audio_received_time - self.first_tts_request_time
+                tts_request_readable = datetime.fromtimestamp(self.first_tts_request_time).isoformat()
+                first_audio_readable = datetime.fromtimestamp(self.first_audio_received_time).isoformat()
+                self._latency_log(f"[LATENCY] SUMMARY: tts_request_to_first_audio={tts_to_first_audio:.6f}s (request={tts_request_readable}, first_audio={first_audio_readable})")
+            
+            if self.speech_end_time and self.first_audio_queued_time:
+                e2e_latency = self.first_audio_queued_time - self.speech_end_time
+                speech_end_readable = datetime.fromtimestamp(self.speech_end_time).isoformat()
+                audio_queued_readable = datetime.fromtimestamp(self.first_audio_queued_time).isoformat()
+                self._latency_log(f"[LATENCY] SUMMARY: e2e_transcript_to_audio_queued={e2e_latency:.6f}s (transcript={speech_end_readable}, audio_queued={audio_queued_readable})")
         
         except Exception as e:
             logger.error(f"Error processing user input: {e}", exc_info=True)
     
     async def stream_llm_response(self, prompt: str) -> str:
-        """Stream LLM response tokens."""
+        """Stream LLM response tokens directly from provider."""
         full_response = ""
+        thinking_buffer = ""  # Buffer to handle thinking tags that span chunks
+        
         try:
+            # Log when LLM request is sent (right before starting the async iteration)
+            self.llm_request_sent_time = time.time()
+            readable_time = datetime.fromtimestamp(self.llm_request_sent_time).isoformat()
+            self._latency_log(f"[LATENCY] LLM_REQUEST_SENT: timestamp={self.llm_request_sent_time:.6f}, readable_time={readable_time}")
             logger.info("LLM response starting...")
             
-            # Track LLM request start (for time-to-first-token)
-            if self.latency_tracker:
-                self.latency_tracker.start("llm_time_to_first_token")
-            
-            async with httpx.AsyncClient() as client:
-                # Use SSE streaming endpoint
-                llm_base_url = get_config("services", "llm_base_url", default="http://localhost:8002")
-                llm_stream_url = f"{llm_base_url}/generate/stream"
-                async with client.stream(
-                    "POST",
-                    llm_stream_url,
-                    json={
-                        "prompt": prompt
-                    },
-                    timeout=60.0
-                ) as response:
-                    response.raise_for_status()
+            # Stream directly from provider
+            async for token in self.llm_provider.generate_stream(prompt=prompt):
+                if token:
+                    full_response += token
                     
-                    current_event = None
-                    async for line in response.aiter_lines():
-                        # Skip empty lines
-                        if not line.strip():
-                            continue
+                    # Log first token
+                    if self.first_token_time is None:
+                        self.first_token_time = time.time()
+                        readable_time = datetime.fromtimestamp(self.first_token_time).isoformat()
+                        if self.llm_request_sent_time:
+                            latency = self.first_token_time - self.llm_request_sent_time
+                            self._latency_log(f"[LATENCY] LLM_FIRST_TOKEN: timestamp={self.first_token_time:.6f}, readable_time={readable_time}, latency_from_llm_request={latency:.6f}s")
+                        else:
+                            self._latency_log(f"[LATENCY] LLM_FIRST_TOKEN: timestamp={self.first_token_time:.6f}, readable_time={readable_time}")
+                    
+                    # Filter thinking tags if disabled (handle tags that span chunks)
+                    if self.disable_thinking:
+                        # Add token to buffer
+                        thinking_buffer += token
                         
-                        # Parse SSE format: event: <type> and data: <json>
-                        if line.startswith("event: "):
-                            current_event = line[7:].strip()
-                            continue
-                            
-                        if line.startswith("data: "):
-                            data_str = line[6:].strip()  # Remove "data: " prefix
-                            try:
-                                data = json.loads(data_str)
+                        # Check for complete <think>...</think> tags
+                        thinking_pattern = re.compile(r'<think>.*?</think>', re.DOTALL)
+                        
+                        # Remove complete tags from buffer
+                        filtered_buffer = thinking_pattern.sub('', thinking_buffer)
+                        
+                        # Check if we have an incomplete opening tag at the end
+                        # Look for <think> without a matching </think>
+                        opening_tag = '<think>'
+                        closing_tag = '</think>'
+                        
+                        # Find the last occurrence of opening tag
+                        last_open_pos = filtered_buffer.rfind(opening_tag)
+                        
+                        if last_open_pos != -1:
+                            # Check if there's a closing tag after this opening tag
+                            remaining_text = filtered_buffer[last_open_pos:]
+                            if closing_tag not in remaining_text:
+                                # Incomplete tag - keep everything from the opening tag in buffer
+                                # Yield only the safe portion (before the incomplete tag)
+                                safe_to_yield = filtered_buffer[:last_open_pos]
+                                thinking_buffer = filtered_buffer[last_open_pos:]
                                 
-                                if current_event == "token":
-                                    # Data format: {"token": "..."}
-                                    token = data.get("token", "")
-                                    if token:
-                                        # Track first token latency
-                                        if self.latency_tracker and not self._llm_first_token_received:
-                                            self.latency_tracker.end("llm_time_to_first_token")
-                                            self.latency_tracker.mark("llm_first_token")
-                                            self._llm_first_token_received = True
-                                        
-                                        full_response += token
-                                        yield token
-                                elif current_event == "done":
-                                    # Data format: {"status": "complete"}
-                                    break
-                                elif current_event == "error":
-                                    # Data format: {"error": "...", "status_code": ...}
-                                    error = data.get("error", "Unknown error")
-                                    logger.error(f"LLM error: {error}")
-                                    break
-                                
-                                # Reset event after processing
-                                current_event = None
-                            except json.JSONDecodeError:
-                                current_event = None
-                                continue
+                                # Clean up whitespace and yield
+                                safe_to_yield = re.sub(r'\s+', ' ', safe_to_yield).strip()
+                                if safe_to_yield:
+                                    yield safe_to_yield
+                            else:
+                                # Complete tag found - yield everything and reset buffer
+                                # Clean up whitespace
+                                filtered_buffer = re.sub(r'\s+', ' ', filtered_buffer).strip()
+                                if filtered_buffer:
+                                    yield filtered_buffer
+                                thinking_buffer = ""
+                        else:
+                            # No incomplete tags - yield everything and reset buffer
+                            # Clean up whitespace
+                            filtered_buffer = re.sub(r'\s+', ' ', filtered_buffer).strip()
+                            if filtered_buffer:
+                                yield filtered_buffer
+                            thinking_buffer = ""
+                    else:
+                        # Thinking not disabled - yield token directly
+                        yield token
+            
+            # After streaming completes, yield any remaining buffer content (if thinking is disabled)
+            if self.disable_thinking and thinking_buffer:
+                # Filter any remaining tags and yield
+                thinking_pattern = re.compile(r'<think>.*?</think>', re.DOTALL)
+                remaining = thinking_pattern.sub('', thinking_buffer)
+                remaining = re.sub(r'\s+', ' ', remaining).strip()
+                if remaining:
+                    yield remaining
+            
+            # Log when full response is complete
+            self.llm_full_response_time = time.time()
+            readable_time = datetime.fromtimestamp(self.llm_full_response_time).isoformat()
+            if self.llm_request_sent_time:
+                latency = self.llm_full_response_time - self.llm_request_sent_time
+                self._latency_log(f"[LATENCY] LLM_FULL_RESPONSE: timestamp={self.llm_full_response_time:.6f}, readable_time={readable_time}, latency_from_llm_request={latency:.6f}s")
+            else:
+                self._latency_log(f"[LATENCY] LLM_FULL_RESPONSE: timestamp={self.llm_full_response_time:.6f}, readable_time={readable_time}")
         
         except Exception as e:
-            logger.error(f"Error streaming LLM response: {e}", exc_info=True)
+            # Handle provider-specific errors
+            status_code, error_message = self.llm_provider.parse_error(e)
+            logger.error(f"LLM error ({status_code}): {error_message}", exc_info=True)
         finally:
             # Always log and add to context, even if there was an error
             if full_response:
+                # Filter thinking tags from full response for logging and history
+                if self.disable_thinking:
+                    thinking_pattern = re.compile(r'<think>.*?</think>', re.DOTALL)
+                    full_response = thinking_pattern.sub('', full_response)
+                    full_response = re.sub(r'\s+', ' ', full_response).strip()
                 logger.info(f"LLM response: {full_response}")
                 self.context_manager.add_assistant_message(full_response)
     
@@ -257,23 +354,28 @@ class Agent:
                     consecutive_timeouts = 0
                     
                     if isinstance(message, bytes):
-                        # Audio chunk - queue it for playback (non-blocking)
-                        # Track first audio chunk received
-                        if self.latency_tracker and not self._tts_first_audio_received:
-                            # Ensure timer is started before trying to end it
-                            if "tts_time_to_first_audio" not in self.latency_tracker.active_timers:
-                                # Timer wasn't started - start it now (late start, but better than nothing)
-                                logger.warning("TTS timer not started before first audio received, starting now")
-                                self.latency_tracker.start("tts_time_to_first_audio")
-                            
-                            elapsed = self.latency_tracker.end("tts_time_to_first_audio")
-                            if elapsed is not None:
-                                self.latency_tracker.mark("tts_first_audio")
+                        # Log first audio chunk received
+                        if self.first_audio_received_time is None:
+                            self.first_audio_received_time = time.time()
+                            readable_time = datetime.fromtimestamp(self.first_audio_received_time).isoformat()
+                            if self.first_tts_request_time:
+                                latency = self.first_audio_received_time - self.first_tts_request_time
+                                self._latency_log(f"[LATENCY] TTS_FIRST_AUDIO_RECEIVED: timestamp={self.first_audio_received_time:.6f}, readable_time={readable_time}, latency_from_tts_request={latency:.6f}s, chunk_size={len(message)}")
                             else:
-                                logger.warning("Failed to end TTS timer - measurement may be missing")
-                            self._tts_first_audio_received = True
+                                self._latency_log(f"[LATENCY] TTS_FIRST_AUDIO_RECEIVED: timestamp={self.first_audio_received_time:.6f}, readable_time={readable_time}, chunk_size={len(message)}")
                         
-                        await self.audio_player.play_audio_chunk(message, latency_tracker=self.latency_tracker)
+                        # Log first audio chunk queued for playback
+                        if self.first_audio_queued_time is None:
+                            self.first_audio_queued_time = time.time()
+                            readable_time = datetime.fromtimestamp(self.first_audio_queued_time).isoformat()
+                            if self.speech_end_time:
+                                e2e_latency = self.first_audio_queued_time - self.speech_end_time
+                                self._latency_log(f"[LATENCY] TTS_FIRST_AUDIO_QUEUED: timestamp={self.first_audio_queued_time:.6f}, readable_time={readable_time}, e2e_latency_from_transcript={e2e_latency:.6f}s, chunk_size={len(message)}")
+                            else:
+                                self._latency_log(f"[LATENCY] TTS_FIRST_AUDIO_QUEUED: timestamp={self.first_audio_queued_time:.6f}, readable_time={readable_time}, chunk_size={len(message)}")
+                        
+                        # Audio chunk - queue it for playback
+                        await self.audio_player.play_audio_chunk(message)
                     else:
                         # JSON message
                         try:
@@ -349,12 +451,6 @@ class Agent:
                     )
                     logger.info("TTS WebSocket connected")
                     
-                    # Start TTS timer when we connect (before any text is sent)
-                    # This ensures the timer is started before any audio arrives
-                    if self.latency_tracker and not self._tts_first_audio_received:
-                        if "tts_time_to_first_audio" not in self.latency_tracker.active_timers:
-                            self.latency_tracker.start("tts_time_to_first_audio")
-                    
                     # Start receiver task if not already running or if it has stopped
                     if not self.tts_receiver_running:
                         # Receiver not running - start it
@@ -380,17 +476,6 @@ class Agent:
                         self.tts_receiver_task = asyncio.create_task(self._tts_receiver_loop())
                         logger.debug("TTS receiver task restarted")
                 
-                # Reset TTS timer when sending first text chunk to measure from text send time
-                # Timer was already started when we connected, but we want to measure from when we send text
-                if self.latency_tracker and not self._tts_first_audio_received:
-                    # Restart timer to measure from when we actually send text
-                    if "tts_time_to_first_audio" in self.latency_tracker.active_timers:
-                        # Timer was started on connection, restart it now for accurate measurement
-                        self.latency_tracker.start("tts_time_to_first_audio")
-                    elif "tts_time_to_first_audio" not in self.latency_tracker.active_timers:
-                        # Timer wasn't started on connection (shouldn't happen), start it now
-                        self.latency_tracker.start("tts_time_to_first_audio")
-                
                 # Send text chunk (TTS server will synthesize immediately)
                 # Audio chunks will be received by the background receiver task
                 await self.tts_websocket.send(json.dumps({
@@ -398,6 +483,13 @@ class Agent:
                     "text": text,
                     "finalize": False
                 }))
+                
+                # Log first TTS request sent
+                if self.first_tts_request_time is None:
+                    self.first_tts_request_time = time.time()
+                    readable_time = datetime.fromtimestamp(self.first_tts_request_time).isoformat()
+                    self._latency_log(f"[LATENCY] TTS_REQUEST_SENT: timestamp={self.first_tts_request_time:.6f}, readable_time={readable_time}, text={text[:50]}")
+                
                 logger.debug(f"TTS text chunk sent: {text[:50]}...")
                 # Success - break out of retry loop
                 break
@@ -543,36 +635,6 @@ async def get_ocr_texts():
     return {
         "texts": texts,
         "count": len(texts.split("\n")) if texts else 0
-    }
-
-
-@app.get("/latency/latest")
-async def get_latest_latency():
-    """Get latest latency measurement results."""
-    if not agent:
-        return {"error": "Agent not initialized"}
-    
-    if not get_config("orchestrator", "enable_latency_tracking", default=True):
-        return {"error": "Latency tracking is not enabled"}
-    
-    if agent._latest_latency_results is None:
-        return {"message": "No latency measurements yet"}
-    
-    # Format results with readable names
-    formatted_results = {}
-    for key, value in agent._latest_latency_results.items():
-        if isinstance(value, float):
-            formatted_results[key] = {
-                "seconds": value,
-                "milliseconds": value * 1000,
-                "formatted": agent.latency_tracker.format_latency(value) if agent.latency_tracker else f"{value*1000:.0f}ms"
-            }
-        else:
-            formatted_results[key] = value
-    
-    return {
-        "results": formatted_results,
-        "raw": agent._latest_latency_results
     }
 
 

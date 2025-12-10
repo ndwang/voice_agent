@@ -13,26 +13,23 @@ orchestrator:
 stt:
   host: "0.0.0.0"
   port: 8001
-  model_size: "small"  # Options: tiny, base, small, medium, large, large-v2, large-v3
   language_code: "zh"  # Language code for transcription
   sample_rate: 16000
   interim_transcript_min_samples: 4800  # Minimum audio samples (0.3s at 16kHz) for interim transcription
   flush_command: "\x00"  # Special byte command to finalize transcription
 
-# LLM (Language Model) Service Configuration
+# LLM (Language Model) Configuration
 llm:
-  host: "0.0.0.0"
-  port: 8002
-  provider: "gemini"  # Options: gemini, llamacpp
+  provider: "ollama"  # Options: gemini, ollama
   providers:
     gemini:
       model: "gemini-2.5-flash"  # Model name
       api_key: ""  # Optional: Override GEMINI_API_KEY environment variable. Leave empty to use env var.
-    llamacpp:
-      model_path: "C:/Users/wdong/.cache/huggingface/hub/models--Qwen--Qwen3-8B-GGUF/snapshots/7c41481f57cb95916b40956ab2f0b139b296d974/Qwen3-8B-Q6_K.gguf"  # Path to GGUF model file
-      n_ctx: 4096  # Context window size
-      n_threads: 0  # Number of threads (0 = auto)
-      n_gpu_layers: -1  # Number of layers to offload to GPU (-1 = all layers)
+    ollama:
+      model: "Qwen3-8B-Q4-8kcontext"  # Model name from `ollama list`
+      base_url: "http://localhost:11434"  # Default Ollama URL
+      timeout: 300.0  # Request timeout in seconds
+      disable_thinking: true  # Set to true to disable thinking/reasoning mode in models that support it
 
 # TTS (Text-to-Speech) Service Configuration
 tts:
@@ -66,8 +63,8 @@ audio:
   block_size_ms: 100  # Determines VAD sensitivity
   flush_command: "\x00"  # Special byte command to finalize transcription
   input_device: null  # Set to device index or name, null for default
-  output_device: 31  # Set to device index or name, null for default
-  silence_threshold_ms: 500  # 500ms of silence triggers a flush
+  output_device: null #31  # Set to device index or name, null for default
+  silence_threshold_ms: 1000  # 500ms of silence triggers a flush
   vad_min_speech_prob: 0.5  # Minimum speech probability for VAD
   plot_window_seconds: 2  # Show last 2 seconds of audio in plot
   plot_update_interval_ms: 50  # Update plot every 50ms
@@ -75,7 +72,6 @@ audio:
 # Service URLs (used by orchestrator to connect to other services)
 services:
   stt_websocket_url: "ws://localhost:8001/ws/transcribe"
-  llm_base_url: "http://localhost:8002"
   tts_websocket_url: "ws://localhost:8003/synthesize/stream"
   ocr_websocket_url: "ws://localhost:8004/monitor/stream"
   ocr_base_url: "http://localhost:8004"

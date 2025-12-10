@@ -325,8 +325,6 @@ async def websocket_endpoint(websocket: WebSocket):
                     else:
                         synthesis_start_time = websocket._synthesis_start_time
                     
-                    first_audio_sent = getattr(websocket, '_first_audio_sent', False)
-                    
                     # Log request info
                     request_info = {
                         "text": full_text,
@@ -372,14 +370,6 @@ async def websocket_endpoint(websocket: WebSocket):
                                         await heartbeat_task
                                     except asyncio.CancelledError:
                                         pass
-                                
-                                # Track first audio chunk latency
-                                if not first_audio_sent:
-                                    first_audio_time = time.perf_counter()
-                                    time_to_first_audio = first_audio_time - synthesis_start_time
-                                    logger.info(f"TTS time-to-first-audio: {time_to_first_audio*1000:.0f}ms")
-                                    first_audio_sent = True
-                                    websocket._first_audio_sent = True
                                 
                                 # Send audio chunk
                                 try:
@@ -465,17 +455,8 @@ async def websocket_endpoint(websocket: WebSocket):
                                 synthesis_start_time = time.perf_counter()
                                 websocket._synthesis_start_time = synthesis_start_time
                             
-                            first_audio_sent = getattr(websocket, '_first_audio_sent', False)
-                            
                             # Synthesize remaining text
                             async for audio_chunk in tts_provider.synthesize_stream(full_text, **provider_params):
-                                if not first_audio_sent:
-                                    import time
-                                    first_audio_time = time.perf_counter()
-                                    time_to_first_audio = first_audio_time - synthesis_start_time
-                                    logger.info(f"TTS time-to-first-audio: {time_to_first_audio*1000:.0f}ms")
-                                    first_audio_sent = True
-                                    websocket._first_audio_sent = True
                                 
                                 await websocket.send_bytes(audio_chunk)
                             

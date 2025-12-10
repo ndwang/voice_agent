@@ -32,12 +32,6 @@ SERVICES = [
         "endpoint": "/"
     },
     {
-        "name": "LLM Service",
-        "port": 8002,
-        "url": "http://localhost:8002/health",
-        "endpoint": "/health"
-    },
-    {
         "name": "TTS Service",
         "port": 8003,
         "url": "http://localhost:8003/health",
@@ -104,9 +98,9 @@ def main():
         if service["name"] == "Orchestrator" and data:
             print("  Connections:")
             print(f"    STT:  {'✓' if data.get('stt_connected') else '✗'}")
-            print(f"    LLM:  {'✓' if data.get('llm_connected') else '✗'}")
             print(f"    TTS:  {'✓' if data.get('tts_connected') else '✗'}")
             print(f"    OCR:  {'✓' if data.get('ocr_connected') else '✗'}")
+            print("    LLM:  ✓ (integrated directly)")
     
     # Check audio driver
     print()
