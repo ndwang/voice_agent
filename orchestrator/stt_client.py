@@ -41,6 +41,10 @@ class STTClient:
         self.websocket: Optional[websockets.WebSocketClientProtocol] = None
         self.running = False
         self._connect_task: Optional[asyncio.Task] = None
+        self._reconnect_delay = 1.0  # Start with 1 second delay
+        self._max_reconnect_delay = 60.0  # Max 60 seconds between retries
+        self._consecutive_failures = 0
+        self._last_error_logged = None
     
     async def connect(self, url: Optional[str] = None):
         """Connect to STT server WebSocket and listen for transcripts."""
@@ -52,6 +56,10 @@ class STTClient:
                 async with websockets.connect(url) as websocket:
                     self.websocket = websocket
                     self.running = True
+                    # Reset reconnect delay and failure count on successful connection
+                    self._reconnect_delay = 1.0
+                    self._consecutive_failures = 0
+                    self._last_error_logged = None
                     logger.info("STT Client: Connected to STT server")
                     
                     # Listen for transcript messages
@@ -96,13 +104,82 @@ class STTClient:
                             logger.error(f"STT Client: Error processing message: {e}", exc_info=True)
             
             except websockets.exceptions.ConnectionClosed:
-                logger.warning("STT Client: Connection closed")
                 self.running = False
-                await asyncio.sleep(5)  # Wait before reconnecting
+                self._consecutive_failures += 1
+                logger.warning(f"STT Client: Connection closed. Reconnecting in {self._reconnect_delay:.1f}s...")
+                await asyncio.sleep(self._reconnect_delay)
+                self._reconnect_delay = min(self._reconnect_delay * 2, self._max_reconnect_delay)
+            
+            except (ConnectionRefusedError, OSError, websockets.exceptions.InvalidStatusCode) as e:
+                # Handle connection refused and other OS-level connection errors
+                # Suppress full traceback for connection errors
+                self.running = False
+                self._consecutive_failures += 1
+                error_msg = str(e)
+                error_type = type(e).__name__
+                
+                # Only log detailed message on first failure or if error message changed
+                if self._last_error_logged != error_msg or self._consecutive_failures == 1:
+                    if isinstance(e, ConnectionRefusedError):
+                        logger.error(
+                            f"STT Client: Cannot connect to STT server at {url}. "
+                            f"The server may not be running or the address is incorrect."
+                        )
+                    else:
+                        logger.error(
+                            f"STT Client: Connection error ({error_type}): {error_msg}"
+                        )
+                    self._last_error_logged = error_msg
+                else:
+                    # For repeated same errors, log less verbosely (no traceback)
+                    if self._consecutive_failures % 10 == 0:
+                        # Log every 10th attempt to avoid spam
+                        logger.warning(
+                            f"STT Client: Still cannot connect after {self._consecutive_failures} attempts. "
+                            f"Retrying in {self._reconnect_delay:.1f}s..."
+                        )
+                
+                await asyncio.sleep(self._reconnect_delay)
+                self._reconnect_delay = min(self._reconnect_delay * 2, self._max_reconnect_delay)
+            
+            except asyncio.TimeoutError:
+                self.running = False
+                self._consecutive_failures += 1
+                if self._consecutive_failures == 1 or self._consecutive_failures % 10 == 0:
+                    logger.warning(
+                        f"STT Client: Connection timeout to {url}. "
+                        f"Retrying in {self._reconnect_delay:.1f}s... (attempt {self._consecutive_failures})"
+                    )
+                await asyncio.sleep(self._reconnect_delay)
+                self._reconnect_delay = min(self._reconnect_delay * 2, self._max_reconnect_delay)
+            
+            except websockets.exceptions.InvalidURI as e:
+                # Invalid URI is a configuration error, don't retry
+                logger.error(f"STT Client: Invalid WebSocket URL '{url}': {e}")
+                self.running = False
+                break  # Don't retry on invalid URI
+            
             except Exception as e:
-                logger.error(f"STT Client: Connection error: {e}", exc_info=True)
+                # Catch-all for other unexpected errors
+                # Only show full traceback on first occurrence or if it's a different error
                 self.running = False
-                await asyncio.sleep(5)  # Wait before reconnecting
+                self._consecutive_failures += 1
+                error_msg = f"{type(e).__name__}: {str(e)}"
+                
+                if self._last_error_logged != error_msg or self._consecutive_failures == 1:
+                    logger.error(
+                        f"STT Client: Unexpected connection error: {error_msg}",
+                        exc_info=True  # Full traceback only for first occurrence
+                    )
+                    self._last_error_logged = error_msg
+                else:
+                    # For repeated same errors, just log the message
+                    logger.warning(
+                        f"STT Client: Still encountering error (attempt {self._consecutive_failures}): {error_msg}"
+                    )
+                
+                await asyncio.sleep(self._reconnect_delay)
+                self._reconnect_delay = min(self._reconnect_delay * 2, self._max_reconnect_delay)
     
     def is_connected(self) -> bool:
         """Check if client is connected."""

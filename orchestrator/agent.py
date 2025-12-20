@@ -717,6 +717,10 @@ class Agent:
         await self.publish_event({"event": "cancelled"})
         await self.stop_tts_stream()
     
+    def get_history(self):
+        """Get conversation history from ContextManager (single source of truth)."""
+        return self.context_manager.conversation_history
+    
     async def start(self):
         """Start the agent."""
         self.running = True
@@ -788,6 +792,16 @@ async def get_ocr_texts():
         "texts": texts,
         "count": len(texts.split("\n")) if texts else 0
     }
+
+
+@app.get("/ui/history")
+async def get_history():
+    """Get conversation history from ContextManager."""
+    if not agent:
+        return {"error": "Agent not initialized"}
+    
+    history = agent.get_history()
+    return {"history": history}
 
 
 @app.get("/ui")

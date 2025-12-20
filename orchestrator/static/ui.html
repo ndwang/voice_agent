@@ -6,23 +6,192 @@
   <title>Voice Agent Control Panel</title>
   <style>
     :root { color-scheme: light dark; font-family: system-ui, sans-serif; }
-    body { margin: 0; padding: 16px; display: grid; gap: 12px; background: #0b0c10; color: #e5e7eb; }
-    h1 { margin: 0 0 8px 0; font-size: 1.25rem; }
-    .grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
-    .card { padding: 12px; border-radius: 8px; background: #111827; border: 1px solid #1f2937; }
-    .label { font-weight: 600; margin-bottom: 6px; display: block; }
-    .box { min-height: 140px; padding: 10px; border-radius: 6px; background: #0f172a; border: 1px solid #1f2937; white-space: pre-wrap; word-break: break-word; }
-    button { padding: 10px 14px; border-radius: 6px; border: 1px solid #ef4444; background: #991b1b; color: #fff; cursor: pointer; font-weight: 600; }
+    body { 
+      margin: 0; 
+      padding: 0; 
+      background: #0b0c10; 
+      color: #e5e7eb; 
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
+    }
+    
+    .header {
+      padding: 16px;
+      border-bottom: 1px solid #1f2937;
+      background: #111827;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    
+    h1 { 
+      margin: 0; 
+      font-size: 1.25rem; 
+      flex: 1;
+    }
+    
+    button { 
+      padding: 10px 14px; 
+      border-radius: 6px; 
+      border: 1px solid #ef4444; 
+      background: #991b1b; 
+      color: #fff; 
+      cursor: pointer; 
+      font-weight: 600; 
+      font-size: 0.9rem;
+    }
     button:disabled { opacity: 0.5; cursor: not-allowed; }
-    .status { font-size: 0.9rem; color: #9ca3af; }
-    .row { display: flex; gap: 10px; align-items: center; }
-    .activity { display: flex; gap: 6px; margin-top: 4px; }
-    .segment { flex: 1; padding: 10px 8px; text-align: center; border-radius: 6px; background: #0f172a; border: 1px solid #1f2937; color: #9ca3af; font-weight: 600; font-size: 0.9rem; }
-    .segment.active { background: #2563eb; color: #e5e7eb; border-color: #1d4ed8; box-shadow: 0 0 0 1px #1d4ed8 inset; }
+    
+    .status { 
+      font-size: 0.9rem; 
+      color: #9ca3af; 
+    }
+    
+    .activity { 
+      display: flex; 
+      gap: 6px; 
+      padding: 0 16px 12px 16px;
+      flex-shrink: 0;
+    }
+    .segment { 
+      flex: 1; 
+      padding: 8px 6px; 
+      text-align: center; 
+      border-radius: 6px; 
+      background: #0f172a; 
+      border: 1px solid #1f2937; 
+      color: #9ca3af; 
+      font-weight: 600; 
+      font-size: 0.85rem; 
+    }
+    .segment.active { 
+      background: #2563eb; 
+      color: #e5e7eb; 
+      border-color: #1d4ed8; 
+      box-shadow: 0 0 0 1px #1d4ed8 inset; 
+    }
+    
+    .main-container {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      overflow: hidden;
+    }
+    
+    .history-panel {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    
+    .message {
+      display: flex;
+      flex-direction: column;
+      max-width: 75%;
+      animation: fadeIn 0.3s ease-in;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .message.user {
+      align-self: flex-end;
+      align-items: flex-end;
+    }
+    
+    .message.assistant {
+      align-self: flex-start;
+      align-items: flex-start;
+    }
+    
+    .message-bubble {
+      padding: 12px 16px;
+      border-radius: 12px;
+      word-wrap: break-word;
+      white-space: pre-wrap;
+      line-height: 1.5;
+    }
+    
+    .message.user .message-bubble {
+      background: #2563eb;
+      color: #e5e7eb;
+      border-bottom-right-radius: 4px;
+    }
+    
+    .message.assistant .message-bubble {
+      background: #1f2937;
+      color: #e5e7eb;
+      border-bottom-left-radius: 4px;
+      border: 1px solid #374151;
+    }
+    
+    .message-timestamp {
+      font-size: 0.75rem;
+      color: #6b7280;
+      margin-top: 4px;
+      padding: 0 4px;
+    }
+    
+    .live-panel {
+      border-top: 1px solid #1f2937;
+      background: #111827;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+    
+    .live-card {
+      padding: 12px;
+      border-radius: 8px;
+      background: #0f172a;
+      border: 1px solid #1f2937;
+    }
+    
+    .live-label {
+      font-weight: 600;
+      margin-bottom: 8px;
+      display: block;
+      font-size: 0.9rem;
+      color: #9ca3af;
+    }
+    
+    .live-content {
+      min-height: 60px;
+      padding: 10px;
+      border-radius: 6px;
+      background: #0a0f1a;
+      border: 1px solid #1f2937;
+      white-space: pre-wrap;
+      word-break: break-word;
+      color: #e5e7eb;
+    }
+    
+    .live-content:empty::before {
+      content: 'Waiting...';
+      color: #6b7280;
+      font-style: italic;
+    }
+    
+    .empty-history {
+      text-align: center;
+      color: #6b7280;
+      padding: 40px 20px;
+      font-style: italic;
+    }
   </style>
 </head>
 <body>
-  <div class="row">
+  <div class="header">
     <h1>Voice Agent Control Panel</h1>
     <button id="cancel-btn">Cancel Speech</button>
     <span id="status" class="status">Connecting…</span>
@@ -36,20 +205,27 @@
     <div id="seg-playing" class="segment">Playing</div>
   </div>
 
-  <div class="grid">
-    <div class="card">
-      <span class="label">STT Transcript</span>
-      <div id="stt-box" class="box"></div>
+  <div class="main-container">
+    <div id="history-panel" class="history-panel">
+      <div class="empty-history">No conversation history yet</div>
     </div>
-    <div class="card">
-      <span class="label">LLM Response</span>
-      <div id="llm-box" class="box"></div>
+
+    <div class="live-panel">
+      <div class="live-card">
+        <span class="live-label">Current Transcript</span>
+        <div id="current-transcript" class="live-content"></div>
+      </div>
+      <div class="live-card">
+        <span class="live-label">Agent Response</span>
+        <div id="current-response" class="live-content"></div>
+      </div>
     </div>
   </div>
 
   <script>
-    const sttBox = document.getElementById('stt-box');
-    const llmBox = document.getElementById('llm-box');
+    const historyPanel = document.getElementById('history-panel');
+    const currentTranscript = document.getElementById('current-transcript');
+    const currentResponse = document.getElementById('current-response');
     const statusEl = document.getElementById('status');
     const cancelBtn = document.getElementById('cancel-btn');
     const segments = {
@@ -60,9 +236,11 @@
       playing: document.getElementById('seg-playing'),
     };
 
-    let llmBuffer = '';
-    let sttFinal = '';
+    // State for current interaction
+    let currentTranscriptText = '';
+    let currentResponseText = '';
     let sttInterim = '';
+    
     let activityState = {
       listening: true,
       transcribing: false,
@@ -70,16 +248,6 @@
       synthesizing: false,
       playing: false,
     };
-
-    function updateStt() {
-      const interimLine = sttInterim ? `\n[interim] ${sttInterim}` : '';
-      sttBox.textContent = `${sttFinal}${interimLine}`.trim();
-    }
-
-    function appendLlm(token) {
-      llmBuffer += token;
-      llmBox.textContent = llmBuffer;
-    }
 
     function setStatus(text) {
       statusEl.textContent = text;
@@ -94,11 +262,105 @@
       });
     }
 
+    function formatTimestamp(isoString) {
+      if (!isoString) return '';
+      const date = new Date(isoString);
+      return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    }
+
+    function renderHistoryMessage(message) {
+      const messageDiv = document.createElement('div');
+      messageDiv.className = `message ${message.role}`;
+      
+      const bubble = document.createElement('div');
+      bubble.className = 'message-bubble';
+      bubble.textContent = message.content;
+      
+      const timestamp = document.createElement('div');
+      timestamp.className = 'message-timestamp';
+      timestamp.textContent = formatTimestamp(message.timestamp);
+      
+      messageDiv.appendChild(bubble);
+      messageDiv.appendChild(timestamp);
+      
+      return messageDiv;
+    }
+
+    function renderHistory(history) {
+      // Clear empty message if present
+      const emptyMsg = historyPanel.querySelector('.empty-history');
+      if (emptyMsg) {
+        emptyMsg.remove();
+      }
+      
+      // Clear existing history
+      historyPanel.innerHTML = '';
+      
+      if (!history || history.length === 0) {
+        historyPanel.innerHTML = '<div class="empty-history">No conversation history yet</div>';
+        return;
+      }
+      
+      // Render all messages
+      history.forEach(msg => {
+        historyPanel.appendChild(renderHistoryMessage(msg));
+      });
+      
+      // Scroll to bottom
+      historyPanel.scrollTop = historyPanel.scrollHeight;
+    }
+
+    async function fetchHistory() {
+      try {
+        const response = await fetch('/ui/history');
+        if (!response.ok) {
+          console.error('Failed to fetch history');
+          return;
+        }
+        const data = await response.json();
+        if (data.history) {
+          renderHistory(data.history);
+        }
+      } catch (e) {
+        console.error('Error fetching history:', e);
+      }
+    }
+
+    function updateCurrentTranscript() {
+      const interimLine = sttInterim ? `\n[interim] ${sttInterim}` : '';
+      currentTranscript.textContent = `${currentTranscriptText}${interimLine}`.trim() || '';
+    }
+
+    function updateCurrentResponse() {
+      currentResponse.textContent = currentResponseText || '';
+    }
+
+    function clearLivePanel() {
+      currentTranscriptText = '';
+      sttInterim = '';
+      currentResponseText = '';
+      updateCurrentTranscript();
+      updateCurrentResponse();
+    }
+
+    function commitCurrentTurn() {
+      // Only commit if we have both transcript and response
+      if (currentTranscriptText.trim() && currentResponseText.trim()) {
+        // Reload history from server to get the latest (which includes the committed turn)
+        fetchHistory();
+      }
+      clearLivePanel();
+    }
+
     function connect() {
       const wsProto = location.protocol === 'https:' ? 'wss' : 'ws';
       const ws = new WebSocket(`${wsProto}://${location.host}/ui/events`);
 
-      ws.onopen = () => setStatus('Connected');
+      ws.onopen = () => {
+        setStatus('Connected');
+        // Fetch history when connected
+        fetchHistory();
+      };
       ws.onclose = () => {
         setStatus('Disconnected – retrying…');
         setTimeout(connect, 1500);
@@ -111,24 +373,32 @@
           switch (data.event) {
             case 'stt':
               if (data.stage === 'final') {
-                sttFinal = data.text ? `${sttFinal}${data.text}\n` : sttFinal;
+                // New final transcript - clear previous live state and start fresh
+                currentTranscriptText = data.text || '';
+                currentResponseText = '';
                 sttInterim = '';
+                updateCurrentResponse();
               } else if (data.stage === 'interim') {
                 sttInterim = data.text || '';
               }
-              updateStt();
+              updateCurrentTranscript();
               break;
             case 'llm_token':
-              appendLlm(data.token || '');
+              currentResponseText += data.token || '';
+              updateCurrentResponse();
               break;
             case 'llm_done':
               setStatus('LLM complete');
+              // Commit current turn to history
+              commitCurrentTurn();
               break;
             case 'llm_cancelled':
               setStatus('LLM cancelled');
+              clearLivePanel();
               break;
             case 'cancelled':
               setStatus('Speech cancelled');
+              clearLivePanel();
               break;
             case 'activity':
               renderActivity(data.state || {});
@@ -156,4 +426,3 @@
   </script>
 </body>
 </html>
-

@@ -36,12 +36,12 @@ SERVICES = [
         "port": 8003,
         "description": "TTS Service (Port 8003) - Text-to-Speech"
     },
-    {
-        "name": "OCR Service",
-        "module": "ocr.ocr_server",
-        "port": 8004,
-        "description": "OCR Service (Port 8004) - Optical Character Recognition"
-    },
+    # {
+    #     "name": "OCR Service",
+    #     "module": "ocr.ocr_server",
+    #     "port": 8004,
+    #     "description": "OCR Service (Port 8004) - Optical Character Recognition"
+    # },
     {
         "name": "Orchestrator",
         "module": "orchestrator.agent",

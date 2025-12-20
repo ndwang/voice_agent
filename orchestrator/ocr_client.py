@@ -36,9 +36,9 @@ class OCRClient:
         Returns:
             List of text entries, each containing 'text' and 'timestamp' keys
         """
+        ocr_base_url = get_config("services", "ocr_base_url", default="http://localhost:8004")
         try:
             async with httpx.AsyncClient() as client:
-                ocr_base_url = get_config("services", "ocr_base_url", default="http://localhost:8004")
                 response = await client.get(
                     f"{ocr_base_url}/texts/get",
                     timeout=5.0
@@ -46,11 +46,17 @@ class OCRClient:
                 response.raise_for_status()
                 data = response.json()
                 return data.get("texts", [])
+        except (httpx.ConnectError, httpx.ConnectTimeout, ConnectionRefusedError, OSError) as e:
+            # Connection errors - no need for full traceback
+            logger.error(f"OCR Client: Cannot connect to OCR service at {ocr_base_url}: {e}")
+            return []
         except httpx.RequestError as e:
-            logger.error(f"OCR Client: Error fetching texts: {e}", exc_info=True)
+            # Other HTTP errors - log without full traceback
+            logger.error(f"OCR Client: Request error fetching texts: {e}")
             return []
         except Exception as e:
-            logger.error(f"OCR Client: Error fetching texts: {e}", exc_info=True)
+            # Unexpected errors - show full traceback only for truly unexpected cases
+            logger.error(f"OCR Client: Unexpected error fetching texts: {e}", exc_info=True)
             return []
     
     async def get_all_texts(self) -> str:
