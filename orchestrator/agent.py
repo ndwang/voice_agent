@@ -12,6 +12,7 @@ from typing import Optional, Dict, Set, List
 from pathlib import Path
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.responses import FileResponse
+from pydantic import BaseModel
 import uvicorn
 import logging
 import sys
@@ -43,7 +44,9 @@ class Agent:
     
     def __init__(self):
         """Initialize voice agent."""
-        self.context_manager = ContextManager()
+        # Load system prompt file path from config if available
+        system_prompt_file = get_config("orchestrator", "system_prompt_file", default=None)
+        self.context_manager = ContextManager(system_prompt_file=system_prompt_file)
         self.audio_player = AudioPlayer(on_play_state=self.on_play_state_changed)
         self.ocr_client = OCRClient()
         self.stt_client = STTClient(self.on_transcript, on_event=self.on_stt_event)
@@ -731,6 +734,9 @@ class Agent:
             synthesizing=False,
             playing=False,
         )
+        # Enable hot-reload for system prompt
+        check_interval = float(get_config("orchestrator", "system_prompt_reload_interval", default=1.0))
+        self.context_manager.enable_hot_reload(check_interval=check_interval)
         # Connect to STT server
         asyncio.create_task(self.stt_client.connect())
         logger.info("Voice Agent started")
@@ -738,6 +744,8 @@ class Agent:
     async def stop(self):
         """Stop the agent."""
         self.running = False
+        # Disable hot-reload
+        self.context_manager.disable_hot_reload()
         await self.stop_tts_stream()
         # Close STT client connection
         await self.stt_client.close()
@@ -841,6 +849,45 @@ async def ui_cancel():
     
     await agent.cancel_current_interaction()
     return {"status": "cancelled"}
+
+
+@app.get("/ui/system-prompt")
+async def get_system_prompt():
+    """Get current system prompt."""
+    if not agent:
+        return {"error": "Agent not initialized"}
+    
+    prompt = agent.context_manager.get_system_prompt()
+    file_path = agent.context_manager.get_system_prompt_file_path()
+    return {
+        "prompt": prompt,
+        "file_path": file_path
+    }
+
+
+class SystemPromptUpdate(BaseModel):
+    """Request model for updating system prompt."""
+    prompt: str
+
+
+@app.post("/ui/system-prompt")
+async def update_system_prompt(request: SystemPromptUpdate):
+    """Update system prompt and save to file."""
+    if not agent:
+        return {"error": "Agent not initialized"}
+    
+    if not request.prompt:
+        return {"error": "Prompt cannot be empty"}
+    
+    success = agent.context_manager.set_system_prompt(request.prompt)
+    if success:
+        return {
+            "status": "success",
+            "message": "System prompt updated",
+            "file_path": agent.context_manager.get_system_prompt_file_path()
+        }
+    else:
+        return {"error": "Failed to save system prompt"}
 
 
 if __name__ == "__main__":
