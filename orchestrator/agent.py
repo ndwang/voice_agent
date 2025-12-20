@@ -8,7 +8,7 @@ import asyncio
 import json
 import re
 import websockets
-from typing import Optional, Dict, Set
+from typing import Optional, Dict, Set, List
 from pathlib import Path
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.responses import FileResponse
@@ -227,8 +227,11 @@ class Agent:
             # This ensures we only match complete sentences
             sentence_end_pattern = re.compile(r'[!?。！？](?=[\s\n]|$)')
             
-            # Stream LLM response
-            async for token in self.stream_llm_response(context_data["prompt"]):
+            # Stream LLM response - pass messages and system_prompt for stateless providers
+            async for token in self.stream_llm_response(
+                messages=context_data["messages"],
+                system_prompt=context_data.get("system_prompt")
+            ):
                 if self.cancel_event.is_set():
                     break
                 
@@ -307,8 +310,20 @@ class Agent:
         except Exception as e:
             logger.error(f"Error processing user input: {e}", exc_info=True)
     
-    async def stream_llm_response(self, prompt: str) -> str:
-        """Stream LLM response tokens directly from provider."""
+    async def stream_llm_response(
+        self,
+        messages: List[Dict[str, str]],
+        system_prompt: Optional[str] = None
+    ) -> str:
+        """
+        Stream LLM response tokens directly from provider.
+        
+        Args:
+            messages: List of message dicts with "role" and "content" keys.
+                     Must include system message (if any) and conversation history.
+                     The last message should be the current user message.
+            system_prompt: Optional system prompt.
+        """
         full_response = ""
         thinking_buffer = ""  # Buffer to handle thinking tags that span chunks
         
@@ -320,8 +335,11 @@ class Agent:
             logger.info("LLM response starting...")
             await self.set_activity(responding=True)
 
-            # Stream directly from provider
-            async for token in self.llm_provider.generate_stream(prompt=prompt):
+            # Stream directly from provider - pass messages and system_prompt for stateless operation
+            async for token in self.llm_provider.generate_stream(
+                messages=messages,
+                system_prompt=system_prompt
+            ):
                 if self.cancel_event.is_set():
                     logger.info("LLM stream cancelled; stopping token processing")
                     await self.set_activity(responding=False)

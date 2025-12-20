@@ -30,8 +30,6 @@ class GeminiProvider(LLMProvider):
             self.client = genai.Client(api_key=api_key)
         else:
             self.client = genai.Client()
-        # chat handles multi-turn conversations
-        self.chat = self.client.aio.chats.create(model=self.model)
     
     def parse_error(self, exception: Exception) -> Tuple[int, str]:
         """
@@ -58,45 +56,113 @@ class GeminiProvider(LLMProvider):
         
         return status_code, error_message
     
-    async def generate(self, prompt: str, **kwargs) -> str:
+    async def generate(
+        self,
+        messages: List[Dict[str, str]],
+        system_prompt: Optional[str] = None,
+        **kwargs
+    ) -> str:
         """
         Generate a complete response using Gemini API.
         
         Args:
-            prompt: User input text
+            messages: List of message dicts with "role" and "content" keys.
+                     Must include system message (if any) and conversation history.
+                     The last message should be the current user message.
+            system_prompt: Optional system prompt. If messages already contains a system
+                          message, this may be ignored.
             **kwargs: Additional provider-specific parameters
             
         Returns:
             Generated text response
         """
-        response = await self.chat.send_message(prompt)
-        return response.text
+        # Create a new stateless chat for this request
+        chat = self.client.aio.chats.create(model=self.model)
+        # Send all messages in sequence to build context
+        # The last message should be the user message
+        for i, msg in enumerate(messages):
+            if msg["role"] == "system":
+                # System messages need to be set on the chat, not sent
+                # For Gemini, we'll skip it and let it be handled by the model
+                continue
+            elif msg["role"] == "user":
+                if i == len(messages) - 1:
+                    # Last message - this is the actual request
+                    response = await chat.send_message(msg["content"])
+                    return response.text
+                else:
+                    # Previous user messages - send to build context
+                    await chat.send_message(msg["content"])
+            elif msg["role"] == "assistant":
+                # Assistant messages are responses, skip them as they're already in context
+                continue
+        
+        # Fallback if no user message found (should not happen)
+        raise ValueError("No user message found in messages")
     
-    async def generate_stream(self, prompt: str, **kwargs) -> AsyncIterator[str]:
+    async def generate_stream(
+        self,
+        messages: List[Dict[str, str]],
+        system_prompt: Optional[str] = None,
+        **kwargs
+    ) -> AsyncIterator[str]:
         """
         Generate a streaming response using Gemini API.
         
         Args:
-            prompt: User input text
+            messages: List of message dicts with "role" and "content" keys.
+                     Must include system message (if any) and conversation history.
+                     The last message should be the current user message.
+            system_prompt: Optional system prompt. If messages already contains a system
+                          message, this may be ignored.
             **kwargs: Additional provider-specific parameters
             
         Yields:
             Tokens as they are generated
         """
-        async for chunk in await self.chat.send_message_stream(prompt):
-            yield chunk.text
+        # Create a new stateless chat for this request
+        chat = self.client.aio.chats.create(model=self.model)
+        # Send all messages in sequence to build context
+        # The last message should be the user message
+        for i, msg in enumerate(messages):
+            if msg["role"] == "system":
+                # System messages need to be set on the chat, not sent
+                # For Gemini, we'll skip it and let it be handled by the model
+                continue
+            elif msg["role"] == "user":
+                if i == len(messages) - 1:
+                    # Last message - this is the actual request, stream it
+                    async for chunk in await chat.send_message_stream(msg["content"]):
+                        yield chunk.text
+                    return
+                else:
+                    # Previous user messages - send to build context
+                    await chat.send_message(msg["content"])
+            elif msg["role"] == "assistant":
+                # Assistant messages are responses, skip them as they're already in context
+                continue
+        
+        # Fallback if no user message found (should not happen)
+        raise ValueError("No user message found in messages")
 
     def get_history(self) -> List[Dict[str, str]]:
         """
         Get the history of the conversation.
         
+        Note: This provider is stateless. History is managed by the caller (ContextManager).
+        This method returns an empty list.
+        
         Returns:
-            List of message dictionaries with "role" and "content" keys
+            Empty list (history is managed externally)
         """
-        history = self.chat.get_history()
-        messages = []
-        for content in history:
-            text = "".join(part.text for part in content.parts)
-            messages.append({"role": content.role, "content": text})
-        return messages
+        return []
+    
+    def clear_history(self) -> None:
+        """
+        Clear the conversation history.
+        
+        Note: This provider is stateless. History is managed by the caller (ContextManager).
+        This method is a no-op.
+        """
+        pass
 

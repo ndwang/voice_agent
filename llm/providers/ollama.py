@@ -52,9 +52,6 @@ class OllamaProvider(LLMProvider):
         # Initialize the async client
         self.client = AsyncClient(host=base_url, timeout=timeout)
         
-        # Conversation history management
-        self.conversation_history: List[Dict[str, str]] = []
-        
         logger.info(f"Initialized Ollama provider with model: {model}, base_url: {base_url}, disable_thinking: {disable_thinking}")
     
     def _filter_thinking_markers(self, text: str) -> str:
@@ -100,7 +97,7 @@ class OllamaProvider(LLMProvider):
     
     async def generate(
         self,
-        prompt: str,
+        messages: List[Dict[str, str]],
         system_prompt: Optional[str] = None,
         temperature: Optional[float] = None,
         top_p: Optional[float] = None,
@@ -112,8 +109,11 @@ class OllamaProvider(LLMProvider):
         Generate a complete response using Ollama.
         
         Args:
-            prompt: User input text
-            system_prompt: Optional system prompt
+            messages: List of message dicts with "role" and "content" keys.
+                     Must include system message (if any) and conversation history.
+                     The last message should be the current user message.
+            system_prompt: Optional system prompt. If messages already contains a system
+                          message, this may be ignored.
             temperature: Sampling temperature
             top_p: Top-p sampling parameter
             top_k: Top-k sampling parameter
@@ -123,21 +123,19 @@ class OllamaProvider(LLMProvider):
         Returns:
             Generated text response
         """
-        # Build messages from conversation history
-        messages = []
+        # Use provided messages directly
+        final_messages = messages.copy()
         
-        # Add system prompt if provided
-        if system_prompt:
-            messages.append({"role": "system", "content": system_prompt})
-        
-        # Add conversation history
-        messages.extend(self.conversation_history)
-        
-        # Add current user prompt, appending '/no_think' if thinking is disabled
-        user_prompt = prompt
+        # Apply /no_think to the last user message if thinking is disabled
         if self.disable_thinking:
-            user_prompt = prompt + " /no_think"
-        messages.append({"role": "user", "content": user_prompt})
+            # Find the last user message and append /no_think
+            for i in range(len(final_messages) - 1, -1, -1):
+                if final_messages[i]["role"] == "user":
+                    final_messages[i] = {
+                        "role": "user",
+                        "content": final_messages[i]["content"] + " /no_think"
+                    }
+                    break
         
         # Prepare generation options
         options = {}
@@ -156,7 +154,7 @@ class OllamaProvider(LLMProvider):
         # Generate response
         response = await self.client.chat(
             model=self.model,
-            messages=messages,
+            messages=final_messages,
             options=options if options else None
         )
         
@@ -165,15 +163,11 @@ class OllamaProvider(LLMProvider):
         if self.disable_thinking:
             text = self._filter_thinking_markers(text)
         
-        # Update conversation history (store original prompt, not the modified one)
-        self.conversation_history.append({"role": "user", "content": prompt})
-        self.conversation_history.append({"role": "assistant", "content": text})
-        
         return text
     
     async def generate_stream(
         self,
-        prompt: str,
+        messages: List[Dict[str, str]],
         system_prompt: Optional[str] = None,
         temperature: Optional[float] = None,
         top_p: Optional[float] = None,
@@ -185,8 +179,11 @@ class OllamaProvider(LLMProvider):
         Generate a streaming response using Ollama.
         
         Args:
-            prompt: User input text
-            system_prompt: Optional system prompt
+            messages: List of message dicts with "role" and "content" keys.
+                     Must include system message (if any) and conversation history.
+                     The last message should be the current user message.
+            system_prompt: Optional system prompt. If messages already contains a system
+                          message, this may be ignored.
             temperature: Sampling temperature
             top_p: Top-p sampling parameter
             top_k: Top-k sampling parameter
@@ -196,21 +193,19 @@ class OllamaProvider(LLMProvider):
         Yields:
             Tokens as they are generated
         """
-        # Build messages from conversation history
-        messages = []
+        # Use provided messages directly
+        final_messages = messages.copy()
         
-        # Add system prompt if provided
-        if system_prompt:
-            messages.append({"role": "system", "content": system_prompt})
-        
-        # Add conversation history
-        messages.extend(self.conversation_history)
-        
-        # Add current user prompt, appending '/no_think' if thinking is disabled
-        user_prompt = prompt
+        # Apply /no_think to the last user message if thinking is disabled
         if self.disable_thinking:
-            user_prompt = prompt + " /no_think"
-        messages.append({"role": "user", "content": user_prompt})
+            # Find the last user message and append /no_think
+            for i in range(len(final_messages) - 1, -1, -1):
+                if final_messages[i]["role"] == "user":
+                    final_messages[i] = {
+                        "role": "user",
+                        "content": final_messages[i]["content"] + " /no_think"
+                    }
+                    break
         
         # Prepare generation options
         options = {}
@@ -226,13 +221,10 @@ class OllamaProvider(LLMProvider):
         # Merge any additional options from kwargs
         options.update(kwargs.get("options", {}))
         
-        # Collect full response for history
-        full_response = ""
-        
         # Stream response - await the coroutine to get the async iterator
         stream = await self.client.chat(
             model=self.model,
-            messages=messages,
+            messages=final_messages,
             options=options if options else None,
             stream=True
         )
@@ -240,27 +232,26 @@ class OllamaProvider(LLMProvider):
             if "message" in chunk and "content" in chunk["message"]:
                 content = chunk["message"]["content"]
                 if content:
-                    full_response += content
                     yield content
-        
-        # Filter the full response for history
-        if self.disable_thinking:
-            full_response = self._filter_thinking_markers(full_response)
-        
-        # Update conversation history after streaming completes (store original prompt)
-        self.conversation_history.append({"role": "user", "content": prompt})
-        self.conversation_history.append({"role": "assistant", "content": full_response})
     
     def get_history(self) -> List[Dict[str, str]]:
         """
         Get the history of the conversation.
         
+        Note: This provider is stateless. History is managed by the caller (ContextManager).
+        This method returns an empty list for backward compatibility.
+        
         Returns:
-            List of message dictionaries with "role" and "content" keys
+            Empty list (history is managed externally)
         """
-        return self.conversation_history.copy()
+        return []
     
     def clear_history(self) -> None:
-        """Clear the conversation history."""
-        self.conversation_history.clear()
+        """
+        Clear the conversation history.
+        
+        Note: This provider is stateless. History is managed by the caller (ContextManager).
+        This method is a no-op for backward compatibility.
+        """
+        pass
 

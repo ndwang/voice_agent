@@ -100,7 +100,6 @@ def main():
             print(f"    STT:  {'✓' if data.get('stt_connected') else '✗'}")
             print(f"    TTS:  {'✓' if data.get('tts_connected') else '✗'}")
             print(f"    OCR:  {'✓' if data.get('ocr_connected') else '✗'}")
-            print("    LLM:  ✓ (integrated directly)")
     
     # Check audio driver
     print()

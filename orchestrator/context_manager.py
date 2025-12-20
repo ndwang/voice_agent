@@ -94,26 +94,10 @@ class ContextManager:
         # Add current user message
         messages.append({"role": "user", "content": user_message})
         
-        # Format as single prompt for simple LLM providers
-        prompt_parts = []
-        if system_message:
-            prompt_parts.append(system_message)
-        
-        # Add conversation history (same filtering as above)
-        for msg in history_to_include:
-            role = "User" if msg["role"] == "user" else "Assistant"
-            prompt_parts.append(f"{role}: {msg['content']}")
-        
-        # Add current message
-        prompt_parts.append(f"User: {user_message}")
-        prompt_parts.append("Assistant:")
-        
-        prompt = "\n\n".join(prompt_parts)
-        
         return {
-            "prompt": prompt,
-            "context": self.ocr_text or "",
-            "messages": messages  # For providers that support message format
+            "messages": messages,
+            "system_prompt": system_message,
+            "context": self.ocr_text or ""
         }
     
     def clear_history(self):
