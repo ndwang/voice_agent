@@ -2,14 +2,12 @@ import os
 import json
 import time
 import numpy as np
-import torch
 import uvicorn
 import asyncio
 import logging
 import sys
 from pathlib import Path
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
-from faster_whisper import WhisperModel
 
 # Add project root to path to import config_loader
 project_root = Path(__file__).parent.parent
@@ -17,6 +15,7 @@ if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
 from config_loader import get_config
+from stt.providers import FasterWhisperProvider, FunASRProvider
 
 # Configure logging with time info
 logging.basicConfig(
@@ -29,17 +28,11 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # --- Configuration ---
-# 1. Model Configuration
-# Use local model in faster-whisper-small directory
-MODEL_PATH = Path(__file__).parent / "faster-whisper-small"
-DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
-COMPUTE_TYPE = "int8" if DEVICE == "cuda" else "default"
-
-# 2. Server Configuration
+# 1. Server Configuration
 HOST = get_config("stt", "host", default="0.0.0.0")
 PORT = get_config("stt", "port", default=8001)
 
-# 3. Transcription Configuration
+# 2. Transcription Configuration
 LANGUAGE_CODE = get_config("stt", "language_code", default="zh")  # Chinese
 SAMPLE_RATE = get_config("stt", "sample_rate", default=16000)  # 16kHz
 INTERIM_TRANSCRIPT_MIN_SAMPLES = get_config("stt", "interim_transcript_min_samples", default=int(0.3 * 16000))  # Min audio (0.3s) to run an interim transcription
@@ -50,15 +43,46 @@ if isinstance(FLUSH_COMMAND_STR, str):
 else:
     FLUSH_COMMAND = bytes([FLUSH_COMMAND_STR]) if isinstance(FLUSH_COMMAND_STR, int) else FLUSH_COMMAND_STR
 
-# --- Global Model ---
-# Load the model once at startup
-logger.info(f"Loading STT model from '{MODEL_PATH}' on {DEVICE} ({COMPUTE_TYPE})...")
+# 3. Provider Configuration
+STT_PROVIDER = get_config("stt", "provider", default="faster-whisper")
+
+# --- Global STT Provider ---
+# Load the provider once at startup
+logger.info(f"Initializing STT provider: {STT_PROVIDER}...")
 try:
-    stt_model = WhisperModel(str(MODEL_PATH), device=DEVICE, compute_type=COMPUTE_TYPE)
-    logger.info("STT model loaded successfully.")
+    if STT_PROVIDER == "faster-whisper":
+        # Faster-Whisper configuration
+        model_path = get_config("stt", "providers", "faster-whisper", "model_path", default="faster-whisper-small")
+        device = get_config("stt", "providers", "faster-whisper", "device", default=None)
+        compute_type = get_config("stt", "providers", "faster-whisper", "compute_type", default=None)
+        
+        stt_provider = FasterWhisperProvider(
+            model_path=model_path,
+            device=device,
+            compute_type=compute_type
+        )
+    elif STT_PROVIDER == "funasr":
+        # FunASR configuration
+        model_name = get_config("stt", "providers", "funasr", "model_name", default="FunAudioLLM/Fun-ASR-Nano-2512")
+        vad_model = get_config("stt", "providers", "funasr", "vad_model", default="fsmn-vad")
+        vad_kwargs = get_config("stt", "providers", "funasr", "vad_kwargs", default={"max_single_segment_time": 30000})
+        device = get_config("stt", "providers", "funasr", "device", default=None)
+        batch_size_s = get_config("stt", "providers", "funasr", "batch_size_s", default=0)
+        
+        stt_provider = FunASRProvider(
+            model_name=model_name,
+            vad_model=vad_model,
+            vad_kwargs=vad_kwargs,
+            device=device,
+            batch_size_s=batch_size_s
+        )
+    else:
+        raise ValueError(f"Unknown STT provider: {STT_PROVIDER}. Supported: faster-whisper, funasr")
+    
+    logger.info(f"STT provider '{STT_PROVIDER}' loaded successfully.")
 except Exception as e:
-    logger.error(f"Error loading STT model: {e}", exc_info=True)
-    # Exit if model fails to load
+    logger.error(f"Error loading STT provider: {e}", exc_info=True)
+    # Exit if provider fails to load
     exit(1)
 
 # --- FastAPI Server ---
@@ -127,7 +151,7 @@ async def websocket_endpoint(websocket: WebSocket):
                     
                     if audio_buffer.size > 0:
                         # Run final transcription with VAD filter
-                        segments, info = stt_model.transcribe(
+                        segments, info = stt_provider.transcribe(
                             audio_buffer,
                             language=LANGUAGE_CODE,
                             vad_filter=True
@@ -159,12 +183,14 @@ async def websocket_endpoint(websocket: WebSocket):
                     audio_buffer = np.concatenate([audio_buffer, new_chunk])
 
                     # Send interim transcription if buffer has enough audio
+                    # Skip interim transcripts for FunASR (non-streaming model, slower)
                     # Throttle to avoid sending too frequently
                     current_time = time.time() * 1000  # Convert to milliseconds
-                    if (audio_buffer.size > INTERIM_TRANSCRIPT_MIN_SAMPLES and 
+                    if (STT_PROVIDER != "funasr" and  # Skip interim for FunASR
+                        audio_buffer.size > INTERIM_TRANSCRIPT_MIN_SAMPLES and 
                         current_time - last_interim_time > INTERIM_THROTTLE_MS):
                         # Run non-VAD transcription for speed
-                        segments, info = stt_model.transcribe(
+                        segments, info = stt_provider.transcribe(
                             audio_buffer,
                             language=LANGUAGE_CODE
                         )

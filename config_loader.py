@@ -74,11 +74,27 @@ class ConfigLoader:
             "stt": {
                 "host": "0.0.0.0",
                 "port": 8001,
-                "model_size": "small",
+                "provider": "faster-whisper",
                 "language_code": "zh",
                 "sample_rate": 16000,
                 "interim_transcript_min_samples": 4800,
-                "flush_command": "\x00"
+                "flush_command": "\x00",
+                "providers": {
+                    "faster-whisper": {
+                        "model_path": "faster-whisper-small",
+                        "device": None,
+                        "compute_type": None
+                    },
+                    "funasr": {
+                        "model_name": "FunAudioLLM/Fun-ASR-Nano-2512",
+                        "vad_model": "fsmn-vad",
+                        "vad_kwargs": {
+                            "max_single_segment_time": 30000
+                        },
+                        "device": None,
+                        "batch_size_s": 0
+                    }
+                }
             },
             "llm": {
                 "host": "0.0.0.0",

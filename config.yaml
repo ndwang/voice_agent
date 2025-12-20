@@ -8,15 +8,30 @@ orchestrator:
   stt_websocket_path: "/ws/stt"
   log_level: "INFO"
   enable_latency_tracking: true
+  # system_prompt_file: "orchestrator/system_prompt.txt"  # Optional: path to system prompt file (default: orchestrator/system_prompt.txt)
+  # system_prompt_reload_interval: 1.0  # Optional: seconds between file checks for hot-reload (default: 1.0)
 
 # STT (Speech-to-Text) Service Configuration
 stt:
   host: "0.0.0.0"
   port: 8001
+  provider: "funasr"  # Options: faster-whisper, funasr
   language_code: "zh"  # Language code for transcription
   sample_rate: 16000
-  interim_transcript_min_samples: 4800  # Minimum audio samples (0.3s at 16kHz) for interim transcription
+  interim_transcript_min_samples: 16000  # Minimum audio samples (1s at 16kHz) for interim transcription
   flush_command: "\x00"  # Special byte command to finalize transcription
+  providers:
+    faster-whisper:
+      model_path: "faster-whisper-small"  # relative to stt/
+      device: null  # null = auto-detect (cuda if available, else cpu)
+      compute_type: null  # null = auto-detect (int8 if cuda, else default)
+    funasr:
+      model_name: "FunAudioLLM/Fun-ASR-Nano-2512"
+      vad_model: "fsmn-vad"  # VAD model name
+      vad_kwargs:
+        max_single_segment_time: 30000  # Max segment time in ms
+      device: null  # null = auto-detect (cpu), or "cuda:0", "cuda", "cpu"
+      batch_size_s: 0  # Batch size for processing
 
 # LLM (Language Model) Configuration
 llm:

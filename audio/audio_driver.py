@@ -274,12 +274,11 @@ async def stream_mic_to_server(websocket, enable_plot=False):
         vad_model, _ = torch.hub.load(
             repo_or_dir='snakers4/silero-vad',
             model='silero_vad',
-            force_reload=False
+            force_reload=False,
+            skip_validation=True
         )
     except Exception as e:
         logger.error(f"Error loading VAD model: {e}", exc_info=True)
-        logger.error("Please ensure you have an internet connection for the first run,")
-        logger.error("and that PyTorch is installed (pip install torch).")
         return
 
     logger.info("Opening microphone stream...")
