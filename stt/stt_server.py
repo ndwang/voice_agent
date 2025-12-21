@@ -203,8 +203,19 @@ async def websocket_endpoint(websocket: WebSocket):
             
             elif "text" in message:
                 # Client sent a text message (e.g., keepalive or control message)
-                # For now, we ignore text messages from clients
-                pass
+                try:
+                    data = json.loads(message["text"])
+                    msg_type = data.get("type")
+                    
+                    if msg_type == "speech_start":
+                        # Broadcast speech_start event to all clients for interruption
+                        await broadcast_to_clients({"type": "speech_start"})
+                        logger.debug("Broadcast speech_start event")
+                except json.JSONDecodeError:
+                    # Not a JSON message, ignore
+                    pass
+                except Exception as e:
+                    logger.warning(f"Error processing text message: {e}")
 
     except WebSocketDisconnect:
         logger.info("Client disconnected from STT server.")

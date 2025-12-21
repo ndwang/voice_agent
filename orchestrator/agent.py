@@ -28,6 +28,7 @@ from config_loader import get_config
 from orchestrator.logging_config import setup_logging, get_logger
 from orchestrator.context_manager import ContextManager
 from orchestrator.ocr_client import OCRClient
+from orchestrator.hotkey_manager import HotkeyManager
 from audio.audio_player import AudioPlayer
 from orchestrator.stt_client import STTClient
 from llm.providers import GeminiProvider, OllamaProvider
@@ -57,6 +58,7 @@ class Agent:
         self.cancel_event = asyncio.Event()
         self.event_subscribers: Set[asyncio.Queue] = set()
         self.event_lock = asyncio.Lock()
+        self.listening_enabled = True
         self.activity_state: Dict[str, bool] = {
             "listening": True,
             "transcribing": False,
@@ -64,6 +66,17 @@ class Agent:
             "synthesizing": False,
             "playing": False,
         }
+        
+        # Initialize hotkey manager
+        self.hotkey_manager = HotkeyManager()
+        
+        # Store toggle_listening callback for later updates
+        # We'll set the event loop when starting
+        self._toggle_listening_callback = None
+        
+        # Register toggle_listening hotkey from config (callback will be set in start())
+        toggle_listening_hotkey = get_config("orchestrator", "hotkeys", "toggle_listening", default="ctrl+shift+l")
+        self._toggle_listening_hotkey = toggle_listening_hotkey
         
         # Initialize LLM provider directly
         self.llm_provider = self._initialize_llm_provider()
@@ -125,6 +138,8 @@ class Agent:
     
     async def set_activity(self, **kwargs):
         """Update activity flags and broadcast to UI."""
+        # Always include listening state from listening_enabled
+        kwargs["listening"] = self.listening_enabled
         self.activity_state.update(kwargs)
         await self.publish_event({
             "event": "activity",
@@ -160,13 +175,29 @@ class Agent:
     async def on_stt_event(self, event: Dict):
         """Forward STT interim/final events to UI subscribers."""
         try:
+            stage = event.get("type")
+            
+            # Handle speech_start event for interruption
+            if stage == "speech_start":
+                # Check if agent is currently playing audio
+                if self.activity_state.get("playing", False):
+                    logger.info("Speech detected while agent is playing - interrupting")
+                    await self.cancel_current_interaction()
+                # Publish event to UI
+                await self.publish_event({
+                    "event": "stt",
+                    "stage": "speech_start",
+                    "text": ""
+                })
+                return
+            
+            # Handle other STT events (interim/final)
             await self.publish_event({
                 "event": "stt",
-                "stage": event.get("type"),
+                "stage": stage,
                 "text": event.get("text", "")
             })
             
-            stage = event.get("type")
             if stage == "interim":
                 await self.set_activity(transcribing=True)
             elif stage == "final":
@@ -181,6 +212,11 @@ class Agent:
         Args:
             text: Transcript text
         """
+        # Check if listening is enabled
+        if not self.listening_enabled:
+            logger.debug(f"Ignoring transcript (listening disabled): {text}")
+            return
+        
         # Clear any previous cancel signals for the new interaction
         self.cancel_event.clear()
         
@@ -196,6 +232,14 @@ class Agent:
         readable_time = datetime.fromtimestamp(self.speech_end_time).isoformat()
         self._latency_log(f"[LATENCY] SPEECH_END: timestamp={self.speech_end_time:.6f}, readable_time={readable_time}, text={text[:50]}")
         logger.info(f"Transcript received: {text}")
+        
+        # Check if previous user message was interrupted (no assistant response)
+        # If last message is a user message, add a cancelled assistant message to preserve history
+        history = self.context_manager.conversation_history
+        if history and history[-1].get("role") == "user":
+            # Previous user message was interrupted - add cancelled response to preserve conversation
+            logger.info("Previous interaction was interrupted - adding cancelled response to history")
+            self.context_manager.add_assistant_message("[Interrupted]")
         
         # Add to conversation history
         self.context_manager.add_user_message(text)
@@ -720,6 +764,27 @@ class Agent:
         await self.publish_event({"event": "cancelled"})
         await self.stop_tts_stream()
     
+    async def toggle_listening(self):
+        """Toggle listening state."""
+        self.listening_enabled = not self.listening_enabled
+        await self.set_activity(listening=self.listening_enabled)
+        await self.publish_event({
+            "event": "listening_state_changed",
+            "enabled": self.listening_enabled
+        })
+        logger.info(f"Listening {'enabled' if self.listening_enabled else 'disabled'}")
+    
+    async def set_listening(self, enabled: bool):
+        """Set listening state explicitly."""
+        if self.listening_enabled != enabled:
+            self.listening_enabled = enabled
+            await self.set_activity(listening=self.listening_enabled)
+            await self.publish_event({
+                "event": "listening_state_changed",
+                "enabled": self.listening_enabled
+            })
+            logger.info(f"Listening {'enabled' if self.listening_enabled else 'disabled'}")
+    
     def get_history(self):
         """Get conversation history from ContextManager (single source of truth)."""
         return self.context_manager.conversation_history
@@ -728,7 +793,7 @@ class Agent:
         """Start the agent."""
         self.running = True
         await self.set_activity(
-            listening=True,
+            listening=self.listening_enabled,
             transcribing=False,
             responding=False,
             synthesizing=False,
@@ -739,6 +804,17 @@ class Agent:
         self.context_manager.enable_hot_reload(check_interval=check_interval)
         # Connect to STT server
         asyncio.create_task(self.stt_client.connect())
+        # Set up toggle_listening callback with event loop
+        event_loop = asyncio.get_event_loop()
+        self._toggle_listening_callback = lambda: asyncio.run_coroutine_threadsafe(self.toggle_listening(), event_loop)
+        # Register toggle_listening hotkey
+        self.hotkey_manager.register_hotkey(
+            "toggle_listening",
+            self._toggle_listening_hotkey,
+            self._toggle_listening_callback
+        )
+        # Start hotkey manager
+        self.hotkey_manager.start(event_loop=event_loop)
         logger.info("Voice Agent started")
     
     async def stop(self):
@@ -746,6 +822,8 @@ class Agent:
         self.running = False
         # Disable hot-reload
         self.context_manager.disable_hot_reload()
+        # Stop hotkey manager
+        self.hotkey_manager.stop()
         await self.stop_tts_stream()
         # Close STT client connection
         await self.stt_client.close()
@@ -888,6 +966,131 @@ async def update_system_prompt(request: SystemPromptUpdate):
         }
     else:
         return {"error": "Failed to save system prompt"}
+
+
+# Listening endpoints
+@app.post("/ui/listening/toggle")
+async def toggle_listening():
+    """Toggle listening state."""
+    if not agent:
+        return {"error": "Agent not initialized"}
+    
+    await agent.toggle_listening()
+    return {"status": "success", "enabled": agent.listening_enabled}
+
+
+class ListeningSetRequest(BaseModel):
+    """Request model for setting listening state."""
+    enabled: bool
+
+
+@app.post("/ui/listening/set")
+async def set_listening(request: ListeningSetRequest):
+    """Set listening state explicitly."""
+    if not agent:
+        return {"error": "Agent not initialized"}
+    
+    await agent.set_listening(request.enabled)
+    return {"status": "success", "enabled": agent.listening_enabled}
+
+
+@app.get("/ui/listening/status")
+async def get_listening_status():
+    """Get current listening state."""
+    if not agent:
+        return {"error": "Agent not initialized"}
+    
+    return {"enabled": agent.listening_enabled}
+
+
+# Hotkey endpoints
+@app.get("/ui/hotkeys")
+async def get_all_hotkeys():
+    """Get all registered hotkeys."""
+    if not agent:
+        return {"error": "Agent not initialized"}
+    
+    hotkeys = agent.hotkey_manager.get_registered_hotkeys()
+    return {"hotkeys": hotkeys}
+
+
+@app.get("/ui/hotkeys/{hotkey_id}")
+async def get_hotkey(hotkey_id: str):
+    """Get specific hotkey."""
+    if not agent:
+        return {"error": "Agent not initialized"}
+    
+    hotkey = agent.hotkey_manager.get_hotkey(hotkey_id)
+    if hotkey is None:
+        return {"error": f"Hotkey {hotkey_id} not found"}
+    
+    return {"hotkey_id": hotkey_id, "hotkey": hotkey}
+
+
+class HotkeyUpdateRequest(BaseModel):
+    """Request model for updating hotkey."""
+    hotkey: str
+
+
+@app.post("/ui/hotkeys/{hotkey_id}")
+async def update_hotkey(hotkey_id: str, request: HotkeyUpdateRequest):
+    """Register or update a hotkey."""
+    if not agent:
+        return {"error": "Agent not initialized"}
+    
+    # Get existing hotkey
+    existing_hotkey = agent.hotkey_manager.get_hotkey(hotkey_id)
+    
+    if existing_hotkey:
+        # Update existing hotkey
+        success = agent.hotkey_manager.update_hotkey(hotkey_id, request.hotkey)
+    else:
+        # For new hotkeys, we need a callback
+        # Only allow registering toggle_listening if it doesn't exist (shouldn't happen)
+        if hotkey_id == "toggle_listening":
+            if agent._toggle_listening_callback is None:
+                # Create callback if it doesn't exist
+                event_loop = asyncio.get_event_loop()
+                agent._toggle_listening_callback = lambda: asyncio.run_coroutine_threadsafe(agent.toggle_listening(), event_loop)
+            success = agent.hotkey_manager.register_hotkey(
+                hotkey_id,
+                request.hotkey,
+                agent._toggle_listening_callback
+            )
+        else:
+            # For other hotkeys, we need a callback - this is a limitation
+            return {"error": f"Cannot register new hotkey {hotkey_id} via API. Hotkeys must be registered in code."}
+    
+    if success:
+        await agent.publish_event({
+            "event": "hotkey_registered",
+            "hotkey_id": hotkey_id,
+            "hotkey": request.hotkey
+        })
+        return {"status": "success", "hotkey_id": hotkey_id, "hotkey": request.hotkey}
+    else:
+        return {"error": f"Failed to update hotkey {hotkey_id}"}
+
+
+@app.delete("/ui/hotkeys/{hotkey_id}")
+async def delete_hotkey(hotkey_id: str):
+    """Unregister a hotkey."""
+    if not agent:
+        return {"error": "Agent not initialized"}
+    
+    # Don't allow deleting toggle_listening hotkey
+    if hotkey_id == "toggle_listening":
+        return {"error": "Cannot delete toggle_listening hotkey"}
+    
+    success = agent.hotkey_manager.unregister_hotkey(hotkey_id)
+    if success:
+        await agent.publish_event({
+            "event": "hotkey_unregistered",
+            "hotkey_id": hotkey_id
+        })
+        return {"status": "success", "hotkey_id": hotkey_id}
+    else:
+        return {"error": f"Failed to unregister hotkey {hotkey_id}"}
 
 
 if __name__ == "__main__":

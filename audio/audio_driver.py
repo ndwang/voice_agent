@@ -18,6 +18,7 @@ import torch
 import websockets
 import matplotlib.pyplot as plt
 import logging
+import httpx
 from collections import deque
 from pathlib import Path
 
@@ -42,6 +43,8 @@ from config_loader import get_config
 
 # --- Configuration ---
 STT_WEBSOCKET_URL = get_config("services", "stt_websocket_url", default="ws://localhost:8001/ws/transcribe")
+ORCHESTRATOR_BASE_URL = get_config("services", "orchestrator_base_url", default="http://localhost:8000")
+LISTENING_STATUS_POLL_INTERVAL = get_config("audio", "listening_status_poll_interval", default=1.0)
 SAMPLE_RATE = get_config("audio", "sample_rate", default=16000)
 CHANNELS = get_config("audio", "channels", default=1)
 DTYPE = get_config("audio", "dtype", default="float32")
@@ -236,6 +239,30 @@ async def plot_updater(fig, ax, line):
     except asyncio.CancelledError:
         pass
 
+async def poll_listening_status(listening_enabled_flag):
+    """
+    Periodically poll orchestrator for listening status.
+    
+    Args:
+        listening_enabled_flag: Dict with 'enabled' key to update
+    """
+    async with httpx.AsyncClient(timeout=5.0) as client:
+        while True:
+            try:
+                response = await client.get(f"{ORCHESTRATOR_BASE_URL}/ui/listening/status")
+                if response.status_code == 200:
+                    data = response.json()
+                    listening_enabled_flag['enabled'] = data.get('enabled', True)
+                else:
+                    logger.warning(f"Failed to get listening status: {response.status_code}")
+            except Exception as e:
+                logger.debug(f"Error polling listening status: {e}")
+                # On error, assume listening is enabled to avoid blocking
+                listening_enabled_flag['enabled'] = True
+            
+            await asyncio.sleep(LISTENING_STATUS_POLL_INTERVAL)
+
+
 async def stream_mic_to_server(websocket, enable_plot=False):
     """
     Manages VAD and sends audio from the mic to the server.
@@ -244,6 +271,11 @@ async def stream_mic_to_server(websocket, enable_plot=False):
         websocket: WebSocket connection to STT server
         enable_plot: If True, show real-time waveform plot
     """
+    # Listening status flag (shared with polling task)
+    listening_enabled_flag = {'enabled': True}
+    
+    # Start polling task
+    polling_task = asyncio.create_task(poll_listening_status(listening_enabled_flag))
     # List available input devices
     logger.info("Available audio input devices:")
     logger.info("-" * 80)
@@ -358,20 +390,38 @@ async def stream_mic_to_server(websocket, enable_plot=False):
                     # Use the last known speech probability
                     speech_prob = last_speech_prob
 
+                    # Check listening status
+                    listening_enabled = listening_enabled_flag['enabled']
+                    
                     # VAD Logic - Determine status text
                     status_text = ""
-                    if speech_prob > VAD_MIN_SPEECH_PROB:
+                    if not listening_enabled:
+                        # Listening disabled - don't send audio
+                        status_text = f"{RED}Listening disabled{RESET}"
+                        # Reset speaking state if we were speaking
+                        if is_speaking:
+                            is_speaking = False
+                            silence_counter = 0
+                    elif speech_prob > VAD_MIN_SPEECH_PROB:
                         # Speaking
                         if not is_speaking:
+                            # Silence→Speech transition: Send speech_start message for interruption
                             is_speaking = True
+                            if listening_enabled:
+                                try:
+                                    await websocket.send(json.dumps({"type": "speech_start"}))
+                                except (websockets.exceptions.ConnectionClosed, ConnectionError):
+                                    # Connection lost - propagate to trigger reconnection
+                                    raise
                         status_text = f"{GREEN}Speaking detected{RESET}"
                         
-                        # Send audio to server
-                        try:
-                            await websocket.send(chunk.tobytes())
-                        except (websockets.exceptions.ConnectionClosed, ConnectionError):
-                            # Connection lost - propagate to trigger reconnection
-                            raise
+                        # Send audio to server only if listening is enabled
+                        if listening_enabled:
+                            try:
+                                await websocket.send(chunk.tobytes())
+                            except (websockets.exceptions.ConnectionClosed, ConnectionError):
+                                # Connection lost - propagate to trigger reconnection
+                                raise
                         silence_counter = 0
                     else:
                         # Not speaking
@@ -380,11 +430,12 @@ async def stream_mic_to_server(websocket, enable_plot=False):
                             silence_counter += 1
                             if silence_counter > silence_blocks:
                                 # Silence threshold reached - change to red status
-                                try:
-                                    await websocket.send(FLUSH_COMMAND)
-                                except (websockets.exceptions.ConnectionClosed, ConnectionError):
-                                    # Connection lost - propagate to trigger reconnection
-                                    raise
+                                if listening_enabled:
+                                    try:
+                                        await websocket.send(FLUSH_COMMAND)
+                                    except (websockets.exceptions.ConnectionClosed, ConnectionError):
+                                        # Connection lost - propagate to trigger reconnection
+                                        raise
                                 is_speaking = False
                                 silence_counter = 0
                         status_text = f"{RED}Speaking not detected{RESET}"
@@ -400,6 +451,12 @@ async def stream_mic_to_server(websocket, enable_plot=False):
                 raise
             finally:
                 # Clean up tasks
+                polling_task.cancel()
+                try:
+                    await polling_task
+                except asyncio.CancelledError:
+                    pass
+                
                 flush_task.cancel()
                 try:
                     await flush_task

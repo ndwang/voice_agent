@@ -98,3 +98,5 @@ class FasterWhisperProvider(STTProvider):
         
         return segment_list, info
 
+
+

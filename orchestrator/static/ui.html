@@ -365,6 +365,7 @@
   <div class="header">
     <h1>Voice Agent Control Panel</h1>
     <button id="system-prompt-btn" class="system-prompt-btn">System Prompt</button>
+    <button id="toggle-listening-btn" class="system-prompt-btn">Stop Listening</button>
     <button id="cancel-btn">Cancel Speech</button>
     <span id="status" class="status">Connecting…</span>
   </div>
@@ -390,6 +391,33 @@
       <div class="modal-footer">
         <button class="btn-secondary" id="modal-cancel">Cancel</button>
         <button class="btn-primary" id="modal-save">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hotkey Configuration Modal -->
+  <div id="hotkey-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">Hotkey Configuration</h2>
+        <button class="modal-close" id="hotkey-modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div>
+          <span class="live-label">Toggle Listening Hotkey:</span>
+          <div style="display: flex; gap: 8px; align-items: center;">
+            <input type="text" id="hotkey-input" class="prompt-textarea" style="min-height: 40px; flex: 1;" placeholder="Press keys..." readonly />
+            <button class="btn-secondary" id="hotkey-capture-btn">Capture</button>
+          </div>
+          <div style="font-size: 0.85rem; color: #6b7280; margin-top: 4px;">
+            Current: <span id="current-hotkey-display">Loading...</span>
+          </div>
+        </div>
+        <div id="hotkey-status-message" class="status-message"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" id="hotkey-modal-cancel">Cancel</button>
+        <button class="btn-primary" id="hotkey-modal-save">Save</button>
       </div>
     </div>
   </div>
@@ -425,6 +453,7 @@
     const currentResponse = document.getElementById('current-response');
     const statusEl = document.getElementById('status');
     const cancelBtn = document.getElementById('cancel-btn');
+    const toggleListeningBtn = document.getElementById('toggle-listening-btn');
     const systemPromptBtn = document.getElementById('system-prompt-btn');
     const systemPromptModal = document.getElementById('system-prompt-modal');
     const modalClose = document.getElementById('modal-close');
@@ -433,6 +462,20 @@
     const promptTextarea = document.getElementById('prompt-textarea');
     const promptFilePath = document.getElementById('prompt-file-path');
     const statusMessage = document.getElementById('status-message');
+    
+    // Hotkey modal elements
+    const hotkeyModal = document.getElementById('hotkey-modal');
+    const hotkeyModalClose = document.getElementById('hotkey-modal-close');
+    const hotkeyModalCancel = document.getElementById('hotkey-modal-cancel');
+    const hotkeyModalSave = document.getElementById('hotkey-modal-save');
+    const hotkeyInput = document.getElementById('hotkey-input');
+    const hotkeyCaptureBtn = document.getElementById('hotkey-capture-btn');
+    const currentHotkeyDisplay = document.getElementById('current-hotkey-display');
+    const hotkeyStatusMessage = document.getElementById('hotkey-status-message');
+    
+    let currentHotkey = '';
+    let isCapturingHotkey = false;
+    let capturedKeys = [];
     const segments = {
       listening: document.getElementById('seg-listening'),
       transcribing: document.getElementById('seg-transcribing'),
@@ -607,6 +650,22 @@
               break;
             case 'activity':
               renderActivity(data.state || {});
+              updateToggleListeningButton();
+              break;
+            case 'listening_state_changed':
+              updateToggleListeningButton();
+              break;
+            case 'hotkey_registered':
+              if (data.hotkey_id === 'toggle_listening') {
+                currentHotkey = data.hotkey || '';
+                updateHotkeyDisplay();
+              }
+              break;
+            case 'hotkey_unregistered':
+              if (data.hotkey_id === 'toggle_listening') {
+                currentHotkey = '';
+                updateHotkeyDisplay();
+              }
               break;
             default:
               break;
@@ -626,6 +685,225 @@
         cancelBtn.disabled = false;
       }
     };
+
+    // Toggle Listening Button
+    toggleListeningBtn.onclick = async () => {
+      toggleListeningBtn.disabled = true;
+      try {
+        const response = await fetch('/ui/listening/toggle', { method: 'POST' });
+        if (!response.ok) {
+          throw new Error('Failed to toggle listening');
+        }
+      } catch (e) {
+        console.error('Error toggling listening:', e);
+        setStatus('Error toggling listening');
+      } finally {
+        toggleListeningBtn.disabled = false;
+      }
+    };
+
+    function updateToggleListeningButton() {
+      const isListening = activityState.listening;
+      toggleListeningBtn.textContent = isListening ? 'Stop Listening' : 'Start Listening';
+      toggleListeningBtn.style.background = isListening ? '#1e40af' : '#991b1b';
+      toggleListeningBtn.style.borderColor = isListening ? '#3b82f6' : '#ef4444';
+    }
+
+    // Hotkey Configuration
+    async function loadHotkey() {
+      try {
+        const response = await fetch('/ui/hotkeys/toggle_listening');
+        if (!response.ok) {
+          throw new Error('Failed to load hotkey');
+        }
+        const data = await response.json();
+        currentHotkey = data.hotkey || '';
+        updateHotkeyDisplay();
+      } catch (e) {
+        console.error('Error loading hotkey:', e);
+        currentHotkeyDisplay.textContent = 'Error loading';
+      }
+    }
+
+    function updateHotkeyDisplay() {
+      currentHotkeyDisplay.textContent = currentHotkey || 'Not set';
+      hotkeyInput.value = currentHotkey || '';
+    }
+
+    function formatHotkeyString(keys) {
+      const parts = [];
+      if (keys.includes('ctrl') || keys.includes('control')) parts.push('Ctrl');
+      if (keys.includes('shift')) parts.push('Shift');
+      if (keys.includes('alt')) parts.push('Alt');
+      if (keys.includes('meta') || keys.includes('cmd')) parts.push('Cmd');
+      
+      // Get the main key (not a modifier)
+      const mainKey = keys.find(k => !['ctrl', 'control', 'shift', 'alt', 'meta', 'cmd'].includes(k));
+      if (mainKey) {
+        parts.push(mainKey.toUpperCase());
+      }
+      
+      return parts.join('+');
+    }
+
+    function parseHotkeyString(hotkeyStr) {
+      // Convert display format to API format
+      return hotkeyStr.toLowerCase().replace(/\s+/g, '').replace(/\+/g, '+');
+    }
+
+    hotkeyCaptureBtn.onclick = () => {
+      if (isCapturingHotkey) {
+        // Stop capturing
+        isCapturingHotkey = false;
+        hotkeyCaptureBtn.textContent = 'Capture';
+        hotkeyInput.placeholder = 'Press keys...';
+        document.removeEventListener('keydown', captureHotkeyHandler);
+      } else {
+        // Start capturing
+        isCapturingHotkey = true;
+        hotkeyCaptureBtn.textContent = 'Stop';
+        hotkeyInput.value = '';
+        hotkeyInput.placeholder = 'Press your hotkey combination...';
+        capturedKeys = [];
+        document.addEventListener('keydown', captureHotkeyHandler, true);
+      }
+    };
+
+    function captureHotkeyHandler(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      const keys = [];
+      if (e.ctrlKey) keys.push('ctrl');
+      if (e.shiftKey) keys.push('shift');
+      if (e.altKey) keys.push('alt');
+      if (e.metaKey) keys.push('meta');
+      
+      // Get the main key
+      let mainKey = '';
+      if (e.key.length === 1) {
+        mainKey = e.key.toLowerCase();
+      } else if (e.key.startsWith('F') && e.key.length <= 3) {
+        mainKey = e.key.toLowerCase();
+      } else {
+        // Map special keys
+        const keyMap = {
+          ' ': 'space',
+          'Enter': 'enter',
+          'Tab': 'tab',
+          'Escape': 'esc',
+          'Backspace': 'backspace',
+          'Delete': 'delete',
+          'ArrowUp': 'up',
+          'ArrowDown': 'down',
+          'ArrowLeft': 'left',
+          'ArrowRight': 'right',
+        };
+        mainKey = keyMap[e.key] || e.key.toLowerCase();
+      }
+      
+      if (mainKey && !keys.includes(mainKey)) {
+        keys.push(mainKey);
+      }
+      
+      if (keys.length > 0) {
+        capturedKeys = keys;
+        const displayStr = formatHotkeyString(keys);
+        hotkeyInput.value = displayStr;
+        
+        // Stop capturing after a short delay
+        setTimeout(() => {
+          isCapturingHotkey = false;
+          hotkeyCaptureBtn.textContent = 'Capture';
+          document.removeEventListener('keydown', captureHotkeyHandler);
+        }, 500);
+      }
+    }
+
+    toggleListeningBtn.oncontextmenu = async (e) => {
+      e.preventDefault();
+      hotkeyModal.classList.add('active');
+      await loadHotkey();
+    };
+
+    function closeHotkeyModal() {
+      hotkeyModal.classList.remove('active');
+      isCapturingHotkey = false;
+      hotkeyCaptureBtn.textContent = 'Capture';
+      document.removeEventListener('keydown', captureHotkeyHandler);
+      hotkeyStatusMessage.className = 'status-message';
+    }
+
+    hotkeyModalClose.onclick = closeHotkeyModal;
+    hotkeyModalCancel.onclick = closeHotkeyModal;
+
+    hotkeyModalSave.onclick = async () => {
+      const hotkeyValue = hotkeyInput.value.trim();
+      if (!hotkeyValue) {
+        showHotkeyStatusMessage('Hotkey cannot be empty', true);
+        return;
+      }
+
+      // Convert display format to API format
+      const apiHotkey = parseHotkeyString(hotkeyValue);
+      
+      hotkeyModalSave.disabled = true;
+      try {
+        const response = await fetch('/ui/hotkeys/toggle_listening', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ hotkey: apiHotkey }),
+        });
+
+        if (!response.ok) {
+          const data = await response.json();
+          throw new Error(data.error || 'Failed to save hotkey');
+        }
+
+        showHotkeyStatusMessage('Hotkey saved successfully!');
+        await loadHotkey();
+        setTimeout(closeHotkeyModal, 1000);
+      } catch (e) {
+        console.error('Error saving hotkey:', e);
+        showHotkeyStatusMessage(e.message || 'Failed to save hotkey', true);
+      } finally {
+        hotkeyModalSave.disabled = false;
+      }
+    };
+
+    function showHotkeyStatusMessage(text, isError = false) {
+      hotkeyStatusMessage.textContent = text;
+      hotkeyStatusMessage.className = `status-message ${isError ? 'error' : 'success'}`;
+      setTimeout(() => {
+        hotkeyStatusMessage.className = 'status-message';
+      }, 3000);
+    }
+
+    // Close hotkey modal when clicking outside
+    hotkeyModal.onclick = (e) => {
+      if (e.target === hotkeyModal) {
+        closeHotkeyModal();
+      }
+    };
+
+    // Load initial state on page load
+    async function loadInitialState() {
+      await loadHotkey();
+      try {
+        const response = await fetch('/ui/listening/status');
+        if (response.ok) {
+          const data = await response.json();
+          activityState.listening = data.enabled || true;
+          updateToggleListeningButton();
+        }
+      } catch (e) {
+        console.error('Error loading listening status:', e);
+      }
+    }
+
+    loadInitialState();
 
     // System Prompt Modal Functions
     function showStatusMessage(text, isError = false) {

@@ -53,3 +53,5 @@ class STTProvider(ABC):
         # Default implementation
         return 500, f"STT transcription error: {str(exception)}"
 
+
+

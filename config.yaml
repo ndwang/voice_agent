@@ -10,6 +10,8 @@ orchestrator:
   enable_latency_tracking: true
   # system_prompt_file: "orchestrator/system_prompt.txt"  # Optional: path to system prompt file (default: orchestrator/system_prompt.txt)
   # system_prompt_reload_interval: 1.0  # Optional: seconds between file checks for hot-reload (default: 1.0)
+  hotkeys:
+    toggle_listening: "ctrl+shift+l"  # Default hotkey for toggling listening
 
 # STT (Speech-to-Text) Service Configuration
 stt:
@@ -83,9 +85,11 @@ audio:
   vad_min_speech_prob: 0.5  # Minimum speech probability for VAD
   plot_window_seconds: 2  # Show last 2 seconds of audio in plot
   plot_update_interval_ms: 50  # Update plot every 50ms
+  listening_status_poll_interval: 1.0  # Seconds between polling orchestrator for listening status
 
 # Service URLs (used by orchestrator to connect to other services)
 services:
+  orchestrator_base_url: "http://localhost:8000"  # Base URL for orchestrator API (used by audio driver)
   stt_websocket_url: "ws://localhost:8001/ws/transcribe"
   tts_websocket_url: "ws://localhost:8003/synthesize/stream"
   ocr_websocket_url: "ws://localhost:8004/monitor/stream"

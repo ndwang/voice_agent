@@ -8,3 +8,5 @@ from stt.providers.funasr import FunASRProvider
 
 __all__ = ["FasterWhisperProvider", "FunASRProvider"]
 
+
+
