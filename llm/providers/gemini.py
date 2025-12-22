@@ -5,8 +5,12 @@ Implementation of LLMProvider for Google Gemini API.
 """
 from typing import AsyncIterator, Optional, List, Dict, Tuple
 from google import genai
+from google.genai import types
 
 from llm.base import LLMProvider
+
+# Access types through genai module
+
 
 
 class GeminiProvider(LLMProvider):
@@ -60,6 +64,10 @@ class GeminiProvider(LLMProvider):
         self,
         messages: List[Dict[str, str]],
         system_prompt: Optional[str] = None,
+        temperature: Optional[float] = None,
+        top_p: Optional[float] = None,
+        top_k: Optional[int] = None,
+        max_tokens: Optional[int] = None,
         **kwargs
     ) -> str:
         """
@@ -71,39 +79,69 @@ class GeminiProvider(LLMProvider):
                      The last message should be the current user message.
             system_prompt: Optional system prompt. If messages already contains a system
                           message, this may be ignored.
+            temperature: Sampling temperature
+            top_p: Top-p sampling parameter
+            top_k: Top-k sampling parameter
+            max_tokens: Maximum tokens to generate
             **kwargs: Additional provider-specific parameters
             
         Returns:
             Generated text response
         """
-        # Create a new stateless chat for this request
-        chat = self.client.aio.chats.create(model=self.model)
-        # Send all messages in sequence to build context
-        # The last message should be the user message
-        for i, msg in enumerate(messages):
-            if msg["role"] == "system":
-                # System messages need to be set on the chat, not sent
-                # For Gemini, we'll skip it and let it be handled by the model
-                continue
-            elif msg["role"] == "user":
-                if i == len(messages) - 1:
-                    # Last message - this is the actual request
-                    response = await chat.send_message(msg["content"])
-                    return response.text
-                else:
-                    # Previous user messages - send to build context
-                    await chat.send_message(msg["content"])
-            elif msg["role"] == "assistant":
-                # Assistant messages are responses, skip them as they're already in context
-                continue
+        # Extract system prompt from messages or use provided parameter
+        final_system_prompt = system_prompt
+        filtered_messages = []
         
-        # Fallback if no user message found (should not happen)
-        raise ValueError("No user message found in messages")
+        for msg in messages:
+            if msg["role"] == "system":
+                # Extract system prompt from messages if not provided
+                if final_system_prompt is None:
+                    final_system_prompt = msg["content"]
+            else:
+                # Keep non-system messages (user and assistant)
+                filtered_messages.append(msg)
+        
+        # Convert messages to Gemini format (list of Content objects)
+        contents = []
+        for msg in filtered_messages:
+            role = "user" if msg["role"] == "user" else "model"  # Gemini uses "model" not "assistant"
+            contents.append(types.Content(role=role, parts=[types.Part(text=msg["content"])]))
+        
+        # Prepare generation config
+        config_kwargs = {}
+        if final_system_prompt:
+            config_kwargs["system_instruction"] = final_system_prompt
+        if temperature is not None:
+            config_kwargs["temperature"] = temperature
+        if top_p is not None:
+            config_kwargs["top_p"] = top_p
+        if top_k is not None:
+            config_kwargs["top_k"] = top_k
+        if max_tokens is not None:
+            config_kwargs["max_output_tokens"] = max_tokens
+        
+        # Merge any additional config from kwargs
+        if "generation_config" in kwargs:
+            config_kwargs.update(kwargs["generation_config"])
+        
+        # Use generate_content API with proper structure
+        config = types.GenerateContentConfig(**config_kwargs) if config_kwargs else None
+        
+        response = await self.client.aio.models.generate_content(
+            model=self.model,
+            config=config,
+            contents=contents
+        )
+        return response.text
     
     async def generate_stream(
         self,
         messages: List[Dict[str, str]],
         system_prompt: Optional[str] = None,
+        temperature: Optional[float] = None,
+        top_p: Optional[float] = None,
+        top_k: Optional[int] = None,
+        max_tokens: Optional[int] = None,
         **kwargs
     ) -> AsyncIterator[str]:
         """
@@ -115,35 +153,62 @@ class GeminiProvider(LLMProvider):
                      The last message should be the current user message.
             system_prompt: Optional system prompt. If messages already contains a system
                           message, this may be ignored.
+            temperature: Sampling temperature
+            top_p: Top-p sampling parameter
+            top_k: Top-k sampling parameter
+            max_tokens: Maximum tokens to generate
             **kwargs: Additional provider-specific parameters
             
         Yields:
             Tokens as they are generated
         """
-        # Create a new stateless chat for this request
-        chat = self.client.aio.chats.create(model=self.model)
-        # Send all messages in sequence to build context
-        # The last message should be the user message
-        for i, msg in enumerate(messages):
-            if msg["role"] == "system":
-                # System messages need to be set on the chat, not sent
-                # For Gemini, we'll skip it and let it be handled by the model
-                continue
-            elif msg["role"] == "user":
-                if i == len(messages) - 1:
-                    # Last message - this is the actual request, stream it
-                    async for chunk in await chat.send_message_stream(msg["content"]):
-                        yield chunk.text
-                    return
-                else:
-                    # Previous user messages - send to build context
-                    await chat.send_message(msg["content"])
-            elif msg["role"] == "assistant":
-                # Assistant messages are responses, skip them as they're already in context
-                continue
+        # Extract system prompt from messages or use provided parameter
+        final_system_prompt = system_prompt
+        filtered_messages = []
         
-        # Fallback if no user message found (should not happen)
-        raise ValueError("No user message found in messages")
+        for msg in messages:
+            if msg["role"] == "system":
+                # Extract system prompt from messages if not provided
+                if final_system_prompt is None:
+                    final_system_prompt = msg["content"]
+            else:
+                # Keep non-system messages (user and assistant)
+                filtered_messages.append(msg)
+        
+        # Convert messages to Gemini format (list of Content objects)
+        contents = []
+        for msg in filtered_messages:
+            role = "user" if msg["role"] == "user" else "model"  # Gemini uses "model" not "assistant"
+            contents.append(types.Content(role=role, parts=[types.Part(text=msg["content"])]))
+        
+        # Prepare generation config
+        config_kwargs = {}
+        if final_system_prompt:
+            config_kwargs["system_instruction"] = final_system_prompt
+        if temperature is not None:
+            config_kwargs["temperature"] = temperature
+        if top_p is not None:
+            config_kwargs["top_p"] = top_p
+        if top_k is not None:
+            config_kwargs["top_k"] = top_k
+        if max_tokens is not None:
+            config_kwargs["max_output_tokens"] = max_tokens
+        
+        # Merge any additional config from kwargs
+        if "generation_config" in kwargs:
+            config_kwargs.update(kwargs["generation_config"])
+        
+        # Use generate_content_stream API with proper structure
+        config = types.GenerateContentConfig(**config_kwargs) if config_kwargs else None
+        
+        stream = await self.client.aio.models.generate_content_stream(
+            model=self.model,
+            config=config,
+            contents=contents
+        )
+        async for chunk in stream:
+            if hasattr(chunk, 'text') and chunk.text:
+                yield chunk.text
 
     def get_history(self) -> List[Dict[str, str]]:
         """

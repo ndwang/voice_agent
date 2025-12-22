@@ -32,7 +32,7 @@ class ContextManager:
         # System prompt file management
         if system_prompt_file is None:
             # Default to orchestrator/system_prompt.txt
-            project_root = Path(__file__).parent.parent
+            project_root = Path(__file__).parent.parent.parent
             system_prompt_file = str(project_root / "orchestrator" / "system_prompt.txt")
         
         self.system_prompt_file = Path(system_prompt_file)

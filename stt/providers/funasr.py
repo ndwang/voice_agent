@@ -13,11 +13,6 @@ import numpy as np
 import scipy.io.wavfile as wavfile
 import torch
 
-# Add project root to path to import config_loader
-project_root = Path(__file__).parent.parent.parent
-if str(project_root) not in sys.path:
-    sys.path.insert(0, str(project_root))
-
 from stt.base import STTProvider, Segment
 
 logger = logging.getLogger(__name__)
@@ -69,7 +64,8 @@ class FunASRProvider(STTProvider):
                 model=self.model_name,
                 vad_model=self.vad_model,
                 vad_kwargs=self.vad_kwargs,
-                device=self.device
+                device=self.device,
+                disable_update=True
             )
             logger.info("FunASR model loaded successfully.")
         except Exception as e:

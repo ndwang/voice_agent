@@ -12,39 +12,34 @@ import os
 import logging
 from pathlib import Path
 
-# Configure logging with time info
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    datefmt='%Y-%m-%d %H:%M:%S',
-    stream=sys.stdout,
-    force=True
-)
-logger = logging.getLogger(__name__)
+# Ensure project root is in path
+project_root = Path(__file__).parent.parent
+if str(project_root) not in sys.path:
+    sys.path.insert(0, str(project_root))
+
+from core.logging import setup_logging, get_logger
+
+# Set up logging
+setup_logging()
+logger = get_logger(__name__)
 
 # Service definitions
 SERVICES = [
     {
         "name": "STT Service",
-        "module": "stt.stt_server",
+        "module": "stt.server",
         "port": 8001,
         "description": "STT Service (Port 8001) - Speech-to-Text"
     },
     {
         "name": "TTS Service",
-        "module": "tts.tts_server",
+        "module": "tts.server",
         "port": 8003,
         "description": "TTS Service (Port 8003) - Text-to-Speech"
     },
-    # {
-    #     "name": "OCR Service",
-    #     "module": "ocr.ocr_server",
-    #     "port": 8004,
-    #     "description": "OCR Service (Port 8004) - Optical Character Recognition"
-    # },
     {
         "name": "Orchestrator",
-        "module": "orchestrator.agent",
+        "module": "orchestrator.server",
         "port": 8000,
         "description": "Orchestrator (Port 8000) - Main Coordinator"
     },

@@ -97,22 +97,22 @@ def stop_process(proc, service_name):
         # Wait up to 5 seconds for graceful shutdown
         try:
             proc.wait(timeout=5)
-            print("✓ Stopped")
+            print("[+] Stopped")
             return True
         except psutil.TimeoutExpired:
             # Force kill if still running
             proc.kill()
             proc.wait(timeout=2)
-            print("✓ Force stopped")
+            print("[+] Force stopped")
             return True
     except psutil.NoSuchProcess:
         print("(already stopped)")
         return False
     except psutil.AccessDenied:
-        print("✗ Permission denied")
+        print("[X] Permission denied")
         return False
     except Exception as e:
-        print(f"✗ Error: {e}")
+        print(f"[X] Error: {e}")
         return False
 
 def main():

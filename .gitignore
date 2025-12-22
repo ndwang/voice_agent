@@ -9,5 +9,6 @@ ocr/__pycache__/
 ocr/output/
 ocr/input/
 stt/faster-whisper-small/
+.cursor
 # Virtual environments
 .venv

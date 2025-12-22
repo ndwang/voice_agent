@@ -9,13 +9,8 @@ from pathlib import Path
 import logging
 import sys
 
-# Add project root to path to import config_loader
-project_root = Path(__file__).parent.parent
-if str(project_root) not in sys.path:
-    sys.path.insert(0, str(project_root))
-
-from config_loader import get_config
-from orchestrator.logging_config import setup_logging, get_logger
+from core.config import get_config
+from core.logging import setup_logging, get_logger
 
 # Set up logging
 setup_logging()

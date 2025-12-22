@@ -41,7 +41,8 @@ class ConfigLoader:
         
         if config_path is None:
             # Look for config.yaml in project root
-            project_root = Path(__file__).parent
+            # Assume core/config.py -> core/ -> project_root
+            project_root = Path(__file__).parent.parent
             config_path = project_root / "config.yaml"
         else:
             config_path = Path(config_path)
@@ -138,18 +139,30 @@ class ConfigLoader:
                 "texts_storage_file_prefix": "ocr_detected_texts"
             },
             "audio": {
-                "sample_rate": 16000,
-                "output_sample_rate": 16000,
-                "channels": 1,
+                "input": {
+                    "sample_rate": 16000,
+                    "channels": 1,
+                    "device": None
+                },
+                "output": {
+                    "sample_rate": 16000,
+                    "channels": 1,
+                    "device": None
+                },
                 "dtype": "float32",
                 "block_size_ms": 100,
                 "flush_command": "\x00",
-                "input_device": None,
-                "output_device": None,
                 "silence_threshold_ms": 500,
                 "vad_min_speech_prob": 0.5,
                 "plot_window_seconds": 2,
                 "plot_update_interval_ms": 50
+            },
+            "obs": {
+                "websocket": {
+                    "host": "localhost",
+                    "port": 4455,
+                    "password": ""
+                }
             },
             "services": {
                 "stt_websocket_url": "ws://localhost:8001/ws/transcribe",
@@ -200,4 +213,5 @@ def load_config(config_path: Optional[str] = None) -> Dict[str, Any]:
 def get_config(*keys: str, default: Any = None) -> Any:
     """Get configuration value using dot notation."""
     return _loader.get(*keys, default=default)
+
 

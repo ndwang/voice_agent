@@ -53,10 +53,10 @@ tts:
   host: "0.0.0.0"
   port: 8003
   provider: "edge-tts"  # Options: edge-tts, chattts
-  output_sample_rate: null  # When null, inherits audio.output_sample_rate
+  output_sample_rate: null  # When null, inherits audio.output.sample_rate
   providers:
     edge-tts:
-      voice: "zh-CN-XiaoxiaoNeural"  # Voice name
+      voice: "zh-CN-XiaoyiNeural"  # Voice name
       rate: "+0%"  # Speech rate (e.g., -50% for slower, +50% for faster)
       pitch: "+0Hz"  # Pitch adjustment
     chattts:
@@ -73,19 +73,31 @@ ocr:
 
 # Audio Driver Configuration
 audio:
-  sample_rate: 16000
-  output_sample_rate: 16000  # Playback sample rate and TTS target (e.g., 48000)
-  channels: 1
+  input:
+    sample_rate: 16000
+    channels: 1
+    device: null  # Set to device index or name, null for default
+  output:
+    sample_rate: 16000  # Playback sample rate and TTS target (e.g., 48000)
+    channels: 1
+    device: null #31  # Set to device index or name, null for default
   dtype: "float32"
   block_size_ms: 100  # Determines VAD sensitivity
   flush_command: "\x00"  # Special byte command to finalize transcription
-  input_device: null  # Set to device index or name, null for default
-  output_device: null #31  # Set to device index or name, null for default
-  silence_threshold_ms: 1000  # 500ms of silence triggers a flush
+  silence_threshold_ms: 500  # 500ms of silence triggers a flush
   vad_min_speech_prob: 0.5  # Minimum speech probability for VAD
+  vad_lookback_ms: 500  # Amount of audio to buffer before speech detection (prevents missing sentence beginnings)
   plot_window_seconds: 2  # Show last 2 seconds of audio in plot
   plot_update_interval_ms: 50  # Update plot every 50ms
   listening_status_poll_interval: 1.0  # Seconds between polling orchestrator for listening status
+
+# OBS Websocket Configuration
+obs:
+  websocket:
+    host: "localhost"
+    port: 4455
+    password: "j22KXyZ1ONOk5m70"
+  subtitle_source: "subtitle"  # Name of the text source in OBS for subtitles
 
 # Service URLs (used by orchestrator to connect to other services)
 services:

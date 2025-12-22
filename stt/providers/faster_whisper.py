@@ -11,11 +11,6 @@ import numpy as np
 import torch
 from faster_whisper import WhisperModel
 
-# Add project root to path to import config_loader
-project_root = Path(__file__).parent.parent.parent
-if str(project_root) not in sys.path:
-    sys.path.insert(0, str(project_root))
-
 from stt.base import STTProvider, Segment
 
 logger = logging.getLogger(__name__)
@@ -97,6 +92,7 @@ class FasterWhisperProvider(STTProvider):
         segment_list = [Segment(seg.text) for seg in segments]
         
         return segment_list, info
+
 
 
 

@@ -653,7 +653,14 @@
               updateToggleListeningButton();
               break;
             case 'listening_state_changed':
+              if (data.enabled !== undefined) {
+                activityState.listening = data.enabled;
+              }
               updateToggleListeningButton();
+              break;
+            case 'history_updated':
+              // Refresh history when it's updated
+              fetchHistory();
               break;
             case 'hotkey_registered':
               if (data.hotkey_id === 'toggle_listening') {

@@ -21,22 +21,12 @@ from pydantic import BaseModel
 from typing import Optional, Tuple
 import uvicorn
 
-# Add project root to path to import config_loader
-project_root = Path(__file__).parent.parent
-if str(project_root) not in sys.path:
-    sys.path.insert(0, str(project_root))
+from core.config import get_config
+from core.logging import setup_logging, get_logger
 
-from config_loader import get_config
-
-# Configure logging with time info
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    datefmt='%Y-%m-%d %H:%M:%S',
-    stream=sys.stdout,
-    force=True
-)
-logger = logging.getLogger(__name__)
+# Set up logging
+setup_logging()
+logger = get_logger(__name__)
 
 # --- Configuration ---
 HOST = get_config("ocr", "host", default="0.0.0.0")

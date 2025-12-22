@@ -12,22 +12,12 @@ from pathlib import Path
 import logging
 import sys
 
-# Add project root to path to import config_loader
-project_root = Path(__file__).parent.parent
-if str(project_root) not in sys.path:
-    sys.path.insert(0, str(project_root))
+from core.config import get_config
+from core.logging import setup_logging, get_logger
 
-from config_loader import get_config
-
-# Configure logging with time info
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    datefmt='%Y-%m-%d %H:%M:%S',
-    stream=sys.stdout,
-    force=True
-)
-logger = logging.getLogger(__name__)
+# Set up logging
+setup_logging()
+logger = get_logger(__name__)
 
 
 class AudioPlayer:
@@ -48,13 +38,13 @@ class AudioPlayer:
             sample_rate: Audio sample rate (default: from config)
             channels: Number of audio channels (default: from config)
         """
-        self.sample_rate = sample_rate or get_config("audio", "sample_rate", default=16000)
-        self.channels = channels or get_config("audio", "channels", default=1)
+        self.sample_rate = sample_rate or get_config("audio", "output", "sample_rate", default=16000)
+        self.channels = channels or get_config("audio", "output", "channels", default=1)
         self.playback_sample_rate = (
             output_sample_rate
-            or get_config("audio", "output_sample_rate", default=self.sample_rate)
+            or get_config("audio", "output", "sample_rate", default=self.sample_rate)
         )
-        self.output_device = output_device or get_config("audio", "output_device")
+        self.output_device = output_device or get_config("audio", "output", "device")
         self.audio_queue: asyncio.Queue = asyncio.Queue()
         self.playing = False
         self.play_task: Optional[asyncio.Task] = None

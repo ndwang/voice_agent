@@ -24,29 +24,19 @@ from pathlib import Path
 
 # Windows-specific: ctypes for console API
 
-# Configure logging with time info
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    datefmt='%Y-%m-%d %H:%M:%S',
-    stream=sys.stdout,
-    force=True
-)
-logger = logging.getLogger(__name__)
+from core.config import get_config
+from core.logging import setup_logging, get_logger
 
-# Add project root to path to import config_loader
-project_root = Path(__file__).parent.parent
-if str(project_root) not in sys.path:
-    sys.path.insert(0, str(project_root))
-
-from config_loader import get_config
+# Set up logging
+setup_logging()
+logger = get_logger(__name__)
 
 # --- Configuration ---
 STT_WEBSOCKET_URL = get_config("services", "stt_websocket_url", default="ws://localhost:8001/ws/transcribe")
 ORCHESTRATOR_BASE_URL = get_config("services", "orchestrator_base_url", default="http://localhost:8000")
 LISTENING_STATUS_POLL_INTERVAL = get_config("audio", "listening_status_poll_interval", default=1.0)
-SAMPLE_RATE = get_config("audio", "sample_rate", default=16000)
-CHANNELS = get_config("audio", "channels", default=1)
+SAMPLE_RATE = get_config("audio", "input", "sample_rate", default=16000)
+CHANNELS = get_config("audio", "input", "channels", default=1)
 DTYPE = get_config("audio", "dtype", default="float32")
 # BLOCK_SIZE_MS determines VAD sensitivity. 50-100ms is good.
 BLOCK_SIZE_MS = get_config("audio", "block_size_ms", default=100)
@@ -58,12 +48,14 @@ if isinstance(FLUSH_COMMAND_STR, str):
 else:
     FLUSH_COMMAND = bytes([FLUSH_COMMAND_STR]) if isinstance(FLUSH_COMMAND_STR, int) else FLUSH_COMMAND_STR
 # Set to None to use default device, or specify device index/name
-INPUT_DEVICE = get_config("audio", "input_device", default=None)
+INPUT_DEVICE = get_config("audio", "input", "device", default=None)
 
 # VAD Configuration
 SILENCE_THRESHOLD_MS = get_config("audio", "silence_threshold_ms", default=500)  # 500ms of silence triggers a "flush"
 VAD_MIN_SPEECH_PROB = get_config("audio", "vad_min_speech_prob", default=0.5)
+VAD_LOOKBACK_MS = get_config("audio", "vad_lookback_ms", default=500)  # Amount of audio to buffer before speech detection
 silence_blocks = int(SILENCE_THRESHOLD_MS / BLOCK_SIZE_MS)
+lookback_chunks = int(VAD_LOOKBACK_MS / BLOCK_SIZE_MS)  # Number of chunks to keep in lookback buffer
 
 # Global audio queue
 audio_queue = asyncio.Queue()
@@ -263,19 +255,18 @@ async def poll_listening_status(listening_enabled_flag):
             await asyncio.sleep(LISTENING_STATUS_POLL_INTERVAL)
 
 
-async def stream_mic_to_server(websocket, enable_plot=False):
+def initialize_audio(enable_plot=False):
     """
-    Manages VAD and sends audio from the mic to the server.
+    Initialize audio hardware and VAD model.
+    This is called before connecting to STT server.
     
     Args:
-        websocket: WebSocket connection to STT server
-        enable_plot: If True, show real-time waveform plot
+        enable_plot: If True, set up waveform plot
+        
+    Returns:
+        tuple: (device_index, device_name, vad_model, fig, ax, line)
+            fig, ax, line are None if plotting is disabled
     """
-    # Listening status flag (shared with polling task)
-    listening_enabled_flag = {'enabled': True}
-    
-    # Start polling task
-    polling_task = asyncio.create_task(poll_listening_status(listening_enabled_flag))
     # List available input devices
     logger.info("Available audio input devices:")
     logger.info("-" * 80)
@@ -311,9 +302,7 @@ async def stream_mic_to_server(websocket, enable_plot=False):
         )
     except Exception as e:
         logger.error(f"Error loading VAD model: {e}", exc_info=True)
-        return
-
-    logger.info("Opening microphone stream...")
+        raise
     
     # Set up the plot if enabled
     fig = None
@@ -323,6 +312,31 @@ async def stream_mic_to_server(websocket, enable_plot=False):
         logger.info("Initializing waveform plot...")
         fig, ax, line = setup_plot()
         plt.show(block=False)
+    
+    logger.info("Audio initialization complete.")
+    return device_index, device_name, vad_model, fig, ax, line
+
+
+async def stream_mic_to_server(websocket, device_index, vad_model, enable_plot=False, fig=None, ax=None, line=None):
+    """
+    Manages VAD and sends audio from the mic to the server.
+    
+    Args:
+        websocket: WebSocket connection to STT server
+        device_index: Audio input device index
+        vad_model: Pre-loaded VAD model
+        enable_plot: If True, show real-time waveform plot
+        fig: Matplotlib figure (if plotting enabled)
+        ax: Matplotlib axes (if plotting enabled)
+        line: Matplotlib line (if plotting enabled)
+    """
+    # Listening status flag (shared with polling task)
+    listening_enabled_flag = {'enabled': True}
+    
+    # Start polling task
+    polling_task = asyncio.create_task(poll_listening_status(listening_enabled_flag))
+    
+    logger.info("Opening microphone stream...")
     
     is_speaking = False
     silence_counter = 0
@@ -349,6 +363,9 @@ async def stream_mic_to_server(websocket, enable_plot=False):
             VAD_CHUNK_SIZE = 512
             vad_buffer = np.array([], dtype=np.float32)
             last_speech_prob = 0.0  # Track last known speech probability
+            
+            # Initialize lookback buffer for storing recent audio chunks
+            lookback_buffer = deque(maxlen=lookback_chunks)
             
             # Start plot updater task if plotting is enabled
             plot_task = None
@@ -390,6 +407,10 @@ async def stream_mic_to_server(websocket, enable_plot=False):
                     # Use the last known speech probability
                     speech_prob = last_speech_prob
 
+                    # Always add chunk to lookback buffer (before VAD decision)
+                    chunk_bytes = chunk.tobytes()
+                    lookback_buffer.append(chunk_bytes)
+
                     # Check listening status
                     listening_enabled = listening_enabled_flag['enabled']
                     
@@ -404,21 +425,28 @@ async def stream_mic_to_server(websocket, enable_plot=False):
                             silence_counter = 0
                     elif speech_prob > VAD_MIN_SPEECH_PROB:
                         # Speaking
+                        just_transitioned = False
                         if not is_speaking:
-                            # Silence→Speech transition: Send speech_start message for interruption
+                            # Silence→Speech transition: Send speech_start message and buffered audio
                             is_speaking = True
+                            just_transitioned = True
                             if listening_enabled:
                                 try:
                                     await websocket.send(json.dumps({"type": "speech_start"}))
+                                    # Send all buffered chunks from lookback buffer first
+                                    # This includes the current chunk, so we'll skip sending it again below
+                                    for buffered_chunk in lookback_buffer:
+                                        await websocket.send(buffered_chunk)
                                 except (websockets.exceptions.ConnectionClosed, ConnectionError):
                                     # Connection lost - propagate to trigger reconnection
                                     raise
                         status_text = f"{GREEN}Speaking detected{RESET}"
                         
-                        # Send audio to server only if listening is enabled
-                        if listening_enabled:
+                        # Send current audio chunk to server only if listening is enabled
+                        # Skip if we just transitioned (already sent via lookback buffer)
+                        if listening_enabled and not just_transitioned:
                             try:
-                                await websocket.send(chunk.tobytes())
+                                await websocket.send(chunk_bytes)
                             except (websockets.exceptions.ConnectionClosed, ConnectionError):
                                 # Connection lost - propagate to trigger reconnection
                                 raise
@@ -429,7 +457,7 @@ async def stream_mic_to_server(websocket, enable_plot=False):
                             # We were speaking, but now we're not
                             silence_counter += 1
                             if silence_counter > silence_blocks:
-                                # Silence threshold reached - change to red status
+                                # Silence threshold reached - send flush command and clear buffer
                                 if listening_enabled:
                                     try:
                                         await websocket.send(FLUSH_COMMAND)
@@ -438,6 +466,8 @@ async def stream_mic_to_server(websocket, enable_plot=False):
                                         raise
                                 is_speaking = False
                                 silence_counter = 0
+                                # Clear lookback buffer when speech ends
+                                lookback_buffer.clear()
                         status_text = f"{RED}Speaking not detected{RESET}"
                     
                     await display.update_status_and_probability(status_text, speech_prob)
@@ -485,7 +515,7 @@ async def stream_mic_to_server(websocket, enable_plot=False):
 
 async def main(stt_url=None, device=None, enable_plot=False):
     """
-    Main function to connect to WebSocket and run concurrent tasks.
+    Main function to initialize audio, then connect to WebSocket and run concurrent tasks.
     Automatically reconnects if connection is lost.
     
     Args:
@@ -500,6 +530,15 @@ async def main(stt_url=None, device=None, enable_plot=False):
     if device is not None:
         INPUT_DEVICE = device
     
+    # Initialize audio hardware and VAD model first
+    logger.info("Initializing audio hardware and VAD model...")
+    try:
+        device_index, device_name, vad_model, fig, ax, line = initialize_audio(enable_plot=enable_plot)
+    except Exception as e:
+        logger.error(f"Failed to initialize audio: {e}", exc_info=True)
+        logger.error("Cannot proceed without audio initialization. Exiting.")
+        return
+    
     logger.info(f"Connecting to STT server at {STT_WEBSOCKET_URL}...")
     
     while True:
@@ -509,7 +548,9 @@ async def main(stt_url=None, device=None, enable_plot=False):
                 
                 # Run the two tasks concurrently
                 listen_task = asyncio.create_task(listen_to_server(websocket))
-                stream_task = asyncio.create_task(stream_mic_to_server(websocket, enable_plot=enable_plot))
+                stream_task = asyncio.create_task(stream_mic_to_server(
+                    websocket, device_index, vad_model, enable_plot=enable_plot, fig=fig, ax=ax, line=line
+                ))
                 
                 try:
                     await asyncio.gather(listen_task, stream_task)
@@ -542,6 +583,10 @@ async def main(stt_url=None, device=None, enable_plot=False):
             logger.error(f"Failed to connect: {e}", exc_info=True)
             logger.info("Retrying in 5 seconds...")
             await asyncio.sleep(5)
+    
+    # Clean up plot if it was initialized
+    if enable_plot and fig is not None:
+        plt.close(fig)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Audio driver service - captures microphone and streams to STT")

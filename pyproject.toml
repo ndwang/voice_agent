@@ -37,6 +37,10 @@ dependencies = [
     "edge-tts==7.2.1",
     "pydub",
     "scipy",  # For audio resampling (optional but recommended)
+    # Hotkey management
+    "pynput",
+    # OBS
+    "obs-websocket-py",
 ]
 
 
@@ -60,3 +64,9 @@ name = "pytorch-cuda"
 url = "https://download.pytorch.org/whl/cu126"
 # Only use this index when explicitly requested by `tool.uv.sources`.
 explicit = true
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.2",
+    "pytest-asyncio>=1.3.0",
+]

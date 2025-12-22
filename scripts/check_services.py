@@ -12,6 +12,11 @@ from typing import Optional, Tuple, Dict, Any
 try:
     import requests
     import psutil
+    
+    # Ensure project root is in path
+    project_root = Path(__file__).parent.parent
+    if str(project_root) not in sys.path:
+        sys.path.insert(0, str(project_root))
 except ImportError as e:
     print("Error: Missing required package.")
     print("Install dependencies with: pip install psutil requests")
@@ -28,8 +33,8 @@ SERVICES = [
     {
         "name": "STT Service",
         "port": 8001,
-        "url": "http://localhost:8001/",
-        "endpoint": "/"
+        "url": "http://localhost:8001/health",
+        "endpoint": "/health"
     },
     {
         "name": "TTS Service",
@@ -88,18 +93,18 @@ def main():
         port_ok = check_port(service["port"])
         http_ok, data = check_http_service(service)
         
-        status = "✓ Running" if (port_ok or http_ok) else "✗ Not Running"
+        status = "Running" if (port_ok or http_ok) else "Not Running"
+        status_symbol = "[+]" if (port_ok or http_ok) else "[X]"
         status_color = "\033[92m" if (port_ok or http_ok) else "\033[91m"
         reset_color = "\033[0m"
         
-        print(f"{service['name']} (Port {service['port']}): {status_color}{status}{reset_color}")
+        print(f"{service['name']} (Port {service['port']}): {status_color}{status_symbol} {status}{reset_color}")
         
-        # Show orchestrator connection details
-        if service["name"] == "Orchestrator" and data:
-            print("  Connections:")
-            print(f"    STT:  {'✓' if data.get('stt_connected') else '✗'}")
-            print(f"    TTS:  {'✓' if data.get('tts_connected') else '✗'}")
-            print(f"    OCR:  {'✓' if data.get('ocr_connected') else '✗'}")
+        # Show service details from health endpoint
+        if data:
+            print("  Details:")
+            print(f"    Service: {data.get('service', 'N/A')}")
+            print(f"    Status:  {data.get('status', 'N/A')}")
     
     # Check audio driver
     print()
@@ -114,4 +119,3 @@ if __name__ == "__main__":
     except Exception as e:
         print(f"\nError: {e}")
         sys.exit(1)
-

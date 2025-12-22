@@ -1,0 +1,27 @@
+from enum import Enum, auto
+
+class EventType(Enum):
+    # System
+    STARTUP = "system.startup"
+    SHUTDOWN = "system.shutdown"
+    
+    # Input
+    SPEECH_START = "input.speech_start"
+    TRANSCRIPT_INTERIM = "input.transcript.interim"
+    TRANSCRIPT_FINAL = "input.transcript.final"
+    
+    # LLM
+    LLM_REQUEST = "llm.request"
+    LLM_TOKEN = "llm.token"
+    LLM_RESPONSE_DONE = "llm.response_done"
+    LLM_CANCELLED = "llm.cancelled"
+    
+    # TTS
+    TTS_REQUEST = "tts.request"
+    TTS_AUDIO_CHUNK = "tts.audio_chunk"
+    TTS_DONE = "tts.done"
+    
+    # Audio
+    AUDIO_PLAYING = "audio.playing"
+    AUDIO_STOPPED = "audio.stopped"
+
