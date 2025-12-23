@@ -28,12 +28,20 @@ stt:
       device: null  # null = auto-detect (cuda if available, else cpu)
       compute_type: null  # null = auto-detect (int8 if cuda, else default)
     funasr:
-      model_name: "FunAudioLLM/Fun-ASR-Nano-2512"
+      model_name: "paraformer-zh-streaming" #"FunAudioLLM/Fun-ASR-Nano-2512"
       vad_model: "fsmn-vad"  # VAD model name
       vad_kwargs:
         max_single_segment_time: 30000  # Max segment time in ms
+      punc_model: "ct-punc"  # Punctuation model name (e.g., "ct-punc" or "damo/punc_ct-transformer_zh-cn-common-vocab272727-pytorch")
       device: null  # null = auto-detect (cpu), or "cuda:0", "cuda", "cpu"
       batch_size_s: 0  # Batch size for processing
+      streaming:
+        enabled: true  # Enable streaming mode
+        chunk_size: [0, 8, 4]  # ASR chunk configuration [0, 8, 4] = 480ms
+        encoder_chunk_look_back: 4  # Number of chunks to lookback for encoder self-attention
+        decoder_chunk_look_back: 1  # Number of encoder chunks to lookback for decoder cross-attention
+        vad_chunk_size_ms: 100  # VAD processing chunk size in milliseconds
+        silence_threshold_ms: 300  # Silence duration threshold to trigger finalization (ms)
 
 # LLM (Language Model) Configuration
 llm:

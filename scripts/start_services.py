@@ -41,14 +41,9 @@ SERVICES = [
         "name": "Orchestrator",
         "module": "orchestrator.server",
         "port": 8000,
-        "description": "Orchestrator (Port 8000) - Main Coordinator"
+        "description": "Orchestrator (Port 8000) - Main Coordinator (includes Audio Driver)"
     },
-    {
-        "name": "Audio Driver",
-        "module": "audio.audio_driver",
-        "port": None,
-        "description": "Audio Driver - Microphone Input"
-    },
+    # Audio Driver is now integrated into the Orchestrator and started automatically
 ]
 
 def check_venv():

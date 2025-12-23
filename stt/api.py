@@ -19,10 +19,6 @@ async def websocket_endpoint(websocket: WebSocket):
     await websocket.accept()
     await stt_manager.add_client(websocket)
     
-    # Client-specific state
-    audio_buffer = np.array([], dtype=np.float32)
-    last_interim_time = 0
-    
     try:
         while True:
             try:
@@ -33,11 +29,9 @@ async def websocket_endpoint(websocket: WebSocket):
                 continue
                 
             if "bytes" in message:
-                # Process audio
+                # Process audio - manager handles all state internally
                 data = message["bytes"]
-                audio_buffer, last_interim_time = await stt_manager.process_audio_chunk(
-                    data, audio_buffer, last_interim_time
-                )
+                await stt_manager.process_audio_chunk(websocket, data)
                 
             elif "text" in message:
                 # Process control messages

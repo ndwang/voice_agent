@@ -30,6 +30,7 @@ class TTSManager(BaseManager):
         self.event_bus.subscribe(EventType.TTS_REQUEST.value, self.on_tts_request)
         self.event_bus.subscribe(EventType.LLM_CANCELLED.value, self.on_cancel)
         self.event_bus.subscribe(EventType.LLM_RESPONSE_DONE.value, self.on_llm_done)
+        self.event_bus.subscribe(EventType.SPEECH_START.value, self.on_speech_start)
         
     async def _on_play_state_changed(self, is_playing: bool):
         """Callback when audio playback state changes."""
@@ -56,6 +57,14 @@ class TTSManager(BaseManager):
         if self.websocket:
             # We might want to send a clear message to TTS server if supported
             pass
+    
+    async def on_speech_start(self, event: Event):
+        """Interrupt TTS playback and synthesis when user starts speaking."""
+        self.logger.info("User speech detected - interrupting TTS playback")
+        await self.audio_player.stop()
+        # Reset activity states
+        self._synthesizing = False
+        await publish_activity(self.event_bus, {"synthesizing": False, "playing": False})
             
     async def on_tts_request(self, event: Event):
         text = event.data.get("text")

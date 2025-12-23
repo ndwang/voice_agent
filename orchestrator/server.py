@@ -26,6 +26,7 @@ from orchestrator.sources.stt_source import STTSource
 from orchestrator.tools.registry import ToolRegistry
 from orchestrator.hotkey_manager import HotkeyManager
 from orchestrator.ocr_client import OCRClient
+from audio.audio_driver import AudioDriver
 
 logger = get_logger(__name__)
 
@@ -37,6 +38,9 @@ class OrchestratorServer:
         
         # Sources
         self.stt_source = STTSource(self.event_bus)
+        
+        # Audio driver (captures microphone and streams to STT)
+        self.audio_driver = AudioDriver()
         
         # Managers
         self.interaction_manager = InteractionManager(self.event_bus)
@@ -50,6 +54,9 @@ class OrchestratorServer:
     async def start(self):
         # Start sources
         await self.stt_source.start()
+        
+        # Start audio driver
+        await self.audio_driver.start()
         
         # Setup hotkeys
         toggle_key = get_config("orchestrator", "hotkeys", "toggle_listening", default="ctrl+shift+l")
@@ -68,6 +75,7 @@ class OrchestratorServer:
         logger.info("Orchestrator Logic Started")
 
     async def stop(self):
+        await self.audio_driver.stop()
         await self.stt_source.stop()
         self.hotkey_manager.stop()
         logger.info("Orchestrator Logic Stopped")
