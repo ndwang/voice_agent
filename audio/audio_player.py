@@ -69,10 +69,15 @@ class AudioPlayer:
         """Background task for audio playback."""
         logger.info("Audio playback started")
         try:
-            while True:
+            while self.playing:
                 try:
                     # Get audio chunk from queue (with timeout)
                     audio_bytes = await asyncio.wait_for(self.audio_queue.get(), timeout=1.0)
+                    
+                    # Check if we should stop before processing this chunk
+                    if not self.playing:
+                        # Put the chunk back if we're stopping (or just discard it)
+                        break
                     
                     # Convert bytes to numpy array (int16)
                     audio_array = np.frombuffer(audio_bytes, dtype=np.int16)
@@ -93,6 +98,10 @@ class AudioPlayer:
                     # Resample if playback device requires a different rate
                     playback_audio = self._resample_audio(audio_float)
 
+                    # Check again before playing
+                    if not self.playing:
+                        break
+
                     # Play audio
                     sd.play(
                         playback_audio,
@@ -106,7 +115,16 @@ class AudioPlayer:
                         await self.on_play_state(True)
                     
                     # Wait for playback to finish, but allow stop() to interrupt via sd.stop()
-                    await asyncio.to_thread(sd.wait)
+                    # Check playing flag periodically during wait
+                    try:
+                        await asyncio.to_thread(sd.wait)
+                    except Exception:
+                        # sd.wait() might be interrupted by sd.stop()
+                        pass
+                    
+                    # Check if we should continue after playback
+                    if not self.playing:
+                        break
                     
                     if self.audio_queue.empty() and self.on_play_state and self._audio_active:
                         self._audio_active = False
@@ -114,10 +132,12 @@ class AudioPlayer:
                 
                 except asyncio.TimeoutError:
                     # No audio for 1 second, check if we should continue
+                    if not self.playing:
+                        break
                     if self.audio_queue.empty():
                         # Wait a bit more before stopping
                         await asyncio.sleep(0.5)
-                        if self.audio_queue.empty():
+                        if self.audio_queue.empty() or not self.playing:
                             break
                 except Exception as e:
                     logger.error(f"Audio playback error: {e}", exc_info=True)
@@ -160,12 +180,29 @@ class AudioPlayer:
         return resampled
     
     async def stop(self):
-        """Stop audio playback."""
+        """Stop audio playback and clear all queued chunks."""
+        # Set playing flag first to signal the playback loop to stop
         self.playing = False
+        
+        # Stop current playback immediately
         try:
             sd.stop()
         except Exception:
             pass
+        
+        # Clear queue immediately to prevent any queued chunks from playing
+        cleared_count = 0
+        while not self.audio_queue.empty():
+            try:
+                self.audio_queue.get_nowait()
+                cleared_count += 1
+            except asyncio.QueueEmpty:
+                break
+        
+        if cleared_count > 0:
+            logger.info(f"Cleared {cleared_count} audio chunk(s) from queue")
+        
+        # Cancel the playback task
         if self.play_task:
             self.play_task.cancel()
             try:
@@ -173,13 +210,7 @@ class AudioPlayer:
             except asyncio.CancelledError:
                 pass
         
-        # Clear queue
-        while not self.audio_queue.empty():
-            try:
-                self.audio_queue.get_nowait()
-            except asyncio.QueueEmpty:
-                break
-        
+        # Update play state callback
         if self.on_play_state and self._audio_active:
             self._audio_active = False
             await self.on_play_state(False)

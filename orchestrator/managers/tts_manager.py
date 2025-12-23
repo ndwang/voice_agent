@@ -23,6 +23,7 @@ class TTSManager(BaseManager):
         self.url = get_config("services", "tts_websocket_url", default="ws://localhost:8003/synthesize/stream")
         self.audio_player = AudioPlayer(on_play_state=self._on_play_state_changed)
         self.websocket = None
+        self._receiver_task = None
         self._synthesizing = False
         super().__init__(event_bus)
         
@@ -50,18 +51,57 @@ class TTSManager(BaseManager):
                 self.logger.error(f"Failed to finalize TTS stream: {e}")
     
     async def on_cancel(self, event: Event):
+        """Cancel TTS synthesis and stop all audio playback."""
+        self.logger.info("Cancelling TTS synthesis and playback")
+        
+        # Stop audio playback and clear queue
         await self.audio_player.stop()
+        
+        # Cancel receiver loop to stop processing incoming audio chunks
+        if self._receiver_task and not self._receiver_task.done():
+            self._receiver_task.cancel()
+            try:
+                await self._receiver_task
+            except asyncio.CancelledError:
+                pass
+            self._receiver_task = None
+        
+        # Close WebSocket connection to stop TTS service from sending more chunks
+        if self.websocket:
+            try:
+                await self.websocket.close()
+            except Exception as e:
+                self.logger.debug(f"Error closing TTS WebSocket: {e}")
+            self.websocket = None
+        
         # Reset activity states
         self._synthesizing = False
         await publish_activity(self.event_bus, {"synthesizing": False, "playing": False})
-        if self.websocket:
-            # We might want to send a clear message to TTS server if supported
-            pass
     
     async def on_speech_start(self, event: Event):
         """Interrupt TTS playback and synthesis when user starts speaking."""
         self.logger.info("User speech detected - interrupting TTS playback")
+        
+        # Stop audio playback and clear queue
         await self.audio_player.stop()
+        
+        # Cancel receiver loop to stop processing incoming audio chunks
+        if self._receiver_task and not self._receiver_task.done():
+            self._receiver_task.cancel()
+            try:
+                await self._receiver_task
+            except asyncio.CancelledError:
+                pass
+            self._receiver_task = None
+        
+        # Close WebSocket connection to stop TTS service from sending more chunks
+        if self.websocket:
+            try:
+                await self.websocket.close()
+            except Exception as e:
+                self.logger.debug(f"Error closing TTS WebSocket: {e}")
+            self.websocket = None
+        
         # Reset activity states
         self._synthesizing = False
         await publish_activity(self.event_bus, {"synthesizing": False, "playing": False})
@@ -96,8 +136,8 @@ class TTSManager(BaseManager):
     async def _connect(self):
         try:
             self.websocket = await websockets.connect(self.url)
-            # Start receiver task
-            asyncio.create_task(self._receiver_loop())
+            # Start receiver task and track it
+            self._receiver_task = asyncio.create_task(self._receiver_loop())
         except Exception as e:
             self.logger.error(f"Could not connect to TTS service: {e}")
 
@@ -124,9 +164,13 @@ class TTSManager(BaseManager):
                                 await publish_activity(self.event_bus, {"synthesizing": False})
                     except json.JSONDecodeError:
                         pass
+        except asyncio.CancelledError:
+            self.logger.info("TTS receiver loop cancelled")
+            raise
         except websockets.exceptions.ConnectionClosed:
             self.logger.info("TTS WebSocket connection closed")
             self.websocket = None
+            self._receiver_task = None
             # Reset synthesizing state when connection closes
             if self._synthesizing:
                 self._synthesizing = False
@@ -134,6 +178,7 @@ class TTSManager(BaseManager):
         except Exception as e:
             self.logger.error(f"TTS Receiver error: {e}")
             self.websocket = None
+            self._receiver_task = None
             # Reset activity states on error
             self._synthesizing = False
             await publish_activity(self.event_bus, {"synthesizing": False, "playing": False})

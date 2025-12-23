@@ -60,16 +60,26 @@ class OrchestratorServer:
         
         # Setup hotkeys
         toggle_key = get_config("orchestrator", "hotkeys", "toggle_listening", default="ctrl+shift+l")
+        cancel_key = get_config("orchestrator", "hotkeys", "cancel_speech", default="ctrl+shift+c")
         
         # Set up toggle_listening callback with event loop
         event_loop = asyncio.get_event_loop()
         def toggle_cb():
             asyncio.run_coroutine_threadsafe(self.toggle_listening(), event_loop)
+        
+        # Set up cancel_speech callback with event loop
+        def cancel_cb():
+            asyncio.run_coroutine_threadsafe(self.cancel_interaction(), event_loop)
             
         self.hotkey_manager.register_hotkey(
             "toggle_listening", 
             toggle_key, 
             toggle_cb
+        )
+        self.hotkey_manager.register_hotkey(
+            "cancel_speech", 
+            cancel_key, 
+            cancel_cb
         )
         self.hotkey_manager.start(event_loop)
         logger.info("Orchestrator Logic Started")
