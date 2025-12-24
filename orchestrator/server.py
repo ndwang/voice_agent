@@ -23,6 +23,7 @@ from orchestrator.managers.subtitle_manager import SubtitleManager
 from orchestrator.managers.latency_manager import LatencyTracker
 from orchestrator.managers.tts_manager import TTSManager
 from orchestrator.sources.stt_source import STTSource
+from orchestrator.sources.bilibili_source import BilibiliSource
 from orchestrator.tools.registry import ToolRegistry
 from orchestrator.hotkey_manager import HotkeyManager
 from orchestrator.ocr_client import OCRClient
@@ -38,6 +39,7 @@ class OrchestratorServer:
         
         # Sources
         self.stt_source = STTSource(self.event_bus)
+        self.bilibili_source = BilibiliSource(self.event_bus)
         
         # Audio driver (captures microphone and streams to STT)
         self.audio_driver = AudioDriver()
@@ -54,6 +56,8 @@ class OrchestratorServer:
     async def start(self):
         # Start sources
         await self.stt_source.start()
+        if get_config("bilibili", "enabled", default=False):
+            await self.bilibili_source.start()
         
         # Start audio driver
         await self.audio_driver.start()
@@ -87,6 +91,7 @@ class OrchestratorServer:
     async def stop(self):
         await self.audio_driver.stop()
         await self.stt_source.stop()
+        await self.bilibili_source.stop()
         self.hotkey_manager.stop()
         logger.info("Orchestrator Logic Stopped")
 

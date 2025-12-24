@@ -12,6 +12,7 @@ orchestrator:
   # system_prompt_reload_interval: 1.0  # Optional: seconds between file checks for hot-reload (default: 1.0)
   hotkeys:
     toggle_listening: "ctrl+shift+l"  # Default hotkey for toggling listening
+    cancel_speech: "ctrl+shift+c"  # Default hotkey for canceling speech/TTS
 
 # STT (Speech-to-Text) Service Configuration
 stt:
@@ -98,6 +99,13 @@ audio:
   plot_window_seconds: 2  # Show last 2 seconds of audio in plot
   plot_update_interval_ms: 50  # Update plot every 50ms
   listening_status_poll_interval: 1.0  # Seconds between polling orchestrator for listening status
+
+# Bilibili Configuration
+bilibili:
+  enabled: true
+  room_id: 31232063  # Example room ID
+  sessdata: ""       # Optional SESSDATA cookie for higher user detail
+  danmaku_ttl_seconds: 60
 
 # OBS Websocket Configuration
 obs:
