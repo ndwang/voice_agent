@@ -16,13 +16,19 @@ from llm.base import LLMProvider
 class GeminiProvider(LLMProvider):
     """Google Gemini API provider implementation."""
 
-    def __init__(self, model: Optional[str] = None, api_key: Optional[str] = None):
+    def __init__(
+        self,
+        model: Optional[str] = None,
+        api_key: Optional[str] = None,
+        generation_config: Optional[Dict] = None
+    ):
         """
         Initialize Gemini provider.
         
         Args:
             model: Model name (e.g., "gemini-2.5-flash", "gemini-2.5-pro")
             api_key: API key for Gemini. If None, uses GEMINI_API_KEY from environment.
+            generation_config: Dictionary of default generation parameters (temperature, top_p, top_k, max_output_tokens, etc.)
         """
         if model is None:
             self.model = "gemini-2.5-flash"
@@ -34,6 +40,9 @@ class GeminiProvider(LLMProvider):
             self.client = genai.Client(api_key=api_key)
         else:
             self.client = genai.Client()
+        
+        # Store default generation config
+        self.default_generation_config = generation_config or {}
     
     def parse_error(self, exception: Exception) -> Tuple[int, str]:
         """
@@ -107,8 +116,8 @@ class GeminiProvider(LLMProvider):
             role = "user" if msg["role"] == "user" else "model"  # Gemini uses "model" not "assistant"
             contents.append(types.Content(role=role, parts=[types.Part(text=msg["content"])]))
         
-        # Prepare generation config
-        config_kwargs = {}
+        # Prepare generation config - start with defaults from config
+        config_kwargs = self.default_generation_config.copy()
         if final_system_prompt:
             config_kwargs["system_instruction"] = final_system_prompt
         if temperature is not None:
@@ -120,11 +129,24 @@ class GeminiProvider(LLMProvider):
         if max_tokens is not None:
             config_kwargs["max_output_tokens"] = max_tokens
         
-        # Merge any additional config from kwargs
+        # Merge any additional config from kwargs (overrides defaults and explicit params)
         if "generation_config" in kwargs:
             config_kwargs.update(kwargs["generation_config"])
         
+        # Extract thinking config if present (thinking_level takes priority over thinking_budget)
+        thinking_config = None
+        if "thinking_level" in config_kwargs:
+            thinking_level = config_kwargs.pop("thinking_level")
+            thinking_config = types.ThinkingConfig(thinking_level=thinking_level)
+            # Remove thinking_budget if present (thinking_level takes priority)
+            config_kwargs.pop("thinking_budget", None)
+        elif "thinking_budget" in config_kwargs:
+            thinking_budget = config_kwargs.pop("thinking_budget")
+            thinking_config = types.ThinkingConfig(thinking_budget=thinking_budget)
+        
         # Use generate_content API with proper structure
+        if thinking_config:
+            config_kwargs["thinking_config"] = thinking_config
         config = types.GenerateContentConfig(**config_kwargs) if config_kwargs else None
         
         response = await self.client.aio.models.generate_content(
@@ -181,8 +203,8 @@ class GeminiProvider(LLMProvider):
             role = "user" if msg["role"] == "user" else "model"  # Gemini uses "model" not "assistant"
             contents.append(types.Content(role=role, parts=[types.Part(text=msg["content"])]))
         
-        # Prepare generation config
-        config_kwargs = {}
+        # Prepare generation config - start with defaults from config
+        config_kwargs = self.default_generation_config.copy()
         if final_system_prompt:
             config_kwargs["system_instruction"] = final_system_prompt
         if temperature is not None:
@@ -194,11 +216,24 @@ class GeminiProvider(LLMProvider):
         if max_tokens is not None:
             config_kwargs["max_output_tokens"] = max_tokens
         
-        # Merge any additional config from kwargs
+        # Merge any additional config from kwargs (overrides defaults and explicit params)
         if "generation_config" in kwargs:
             config_kwargs.update(kwargs["generation_config"])
         
+        # Extract thinking config if present (thinking_level takes priority over thinking_budget)
+        thinking_config = None
+        if "thinking_level" in config_kwargs:
+            thinking_level = config_kwargs.pop("thinking_level")
+            thinking_config = types.ThinkingConfig(thinking_level=thinking_level)
+            # Remove thinking_budget if present (thinking_level takes priority)
+            config_kwargs.pop("thinking_budget", None)
+        elif "thinking_budget" in config_kwargs:
+            thinking_budget = config_kwargs.pop("thinking_budget")
+            thinking_config = types.ThinkingConfig(thinking_budget=thinking_budget)
+        
         # Use generate_content_stream API with proper structure
+        if thinking_config:
+            config_kwargs["thinking_config"] = thinking_config
         config = types.GenerateContentConfig(**config_kwargs) if config_kwargs else None
         
         stream = await self.client.aio.models.generate_content_stream(
