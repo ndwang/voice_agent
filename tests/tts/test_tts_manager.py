@@ -1,11 +1,11 @@
 import pytest
 import json
 from unittest.mock import MagicMock, AsyncMock, patch
-from tts.manager import TTSManager
+from tts.engine import TTSEngine
 
 @pytest.fixture
 def mock_config():
-    with patch("tts.manager.get_config") as mock:
+    with patch("tts.engine.get_config") as mock:
         mock.side_effect = lambda section, key, *args, **kwargs: {
             "output_sample_rate": 16000,
             "provider": "edge-tts",
@@ -18,7 +18,7 @@ def mock_config():
 
 @pytest.fixture
 def mock_provider():
-    with patch("tts.manager.EdgeTTSProvider") as mock_cls:
+    with patch("tts.engine.EdgeTTSProvider") as mock_cls:
         provider = AsyncMock()
         provider.list_voices.return_value = [{"Name": "Test Voice"}]
         # Mock streaming synthesis
@@ -32,13 +32,13 @@ def mock_provider():
 
 @pytest.mark.asyncio
 async def test_tts_manager_init(mock_config, mock_provider):
-    manager = TTSManager()
+    manager = TTSEngine()
     assert manager.provider_name == "edge-tts"
     assert manager.output_sample_rate == 16000
 
 @pytest.mark.asyncio
 async def test_websocket_text_handling(mock_config, mock_provider):
-    manager = TTSManager()
+    manager = TTSEngine()
     mock_ws = AsyncMock()
     
     # Simulate a text message
@@ -62,7 +62,7 @@ async def test_websocket_text_handling(mock_config, mock_provider):
 
 @pytest.mark.asyncio
 async def test_websocket_config_update(mock_config, mock_provider):
-    manager = TTSManager()
+    manager = TTSEngine()
     params = {"voice": "old-voice"}
     
     data = {"type": "config", "voice": "new-voice", "rate": "+50%"}

@@ -129,24 +129,39 @@ class ChatTTSProvider(TTSProvider):
             if len(wav.shape) > 1:
                 wav = wav.flatten()
             
+            # Skip empty chunks
+            if len(wav) == 0:
+                continue
+            
             # Resample if needed (using scipy if available, otherwise simple decimation)
             if chat_sample_rate != self.output_sample_rate:
                 try:
                     from scipy import signal
                     # Proper resampling using scipy
                     num_samples = int(len(wav) * self.output_sample_rate / chat_sample_rate)
-                    wav = signal.resample(wav, num_samples)
+                    # Skip resampling if num_samples is 0 (empty chunk)
+                    if num_samples > 0:
+                        wav = signal.resample(wav, num_samples)
+                    else:
+                        continue
                 except ImportError:
                     # Fallback: simple decimation/interpolation
                     ratio = self.output_sample_rate / chat_sample_rate
                     if ratio < 1:
                         # Decimation
                         step = int(1 / ratio)
-                        wav = wav[::step]
+                        if step > 0:
+                            wav = wav[::step]
+                        else:
+                            continue
                     else:
                         # Interpolation (simple linear)
-                        indices = np.linspace(0, len(wav) - 1, int(len(wav) * ratio))
-                        wav = np.interp(indices, np.arange(len(wav)), wav)
+                        num_samples = int(len(wav) * ratio)
+                        if num_samples > 0:
+                            indices = np.linspace(0, len(wav) - 1, num_samples)
+                            wav = np.interp(indices, np.arange(len(wav)), wav)
+                        else:
+                            continue
             
             # Convert float32 to int16
             wav_int16 = self.float_to_int16(wav)
@@ -221,20 +236,35 @@ class ChatTTSProvider(TTSProvider):
             if len(wav.shape) > 1:
                 wav = wav.flatten()
             
+            # Skip empty chunks
+            if len(wav) == 0:
+                continue
+            
             # Resample if needed
             if chat_sample_rate != self.output_sample_rate:
                 try:
                     from scipy import signal
                     num_samples = int(len(wav) * self.output_sample_rate / chat_sample_rate)
-                    wav = signal.resample(wav, num_samples)
+                    # Skip resampling if num_samples is 0 (empty chunk)
+                    if num_samples > 0:
+                        wav = signal.resample(wav, num_samples)
+                    else:
+                        continue
                 except ImportError:
                     ratio = self.output_sample_rate / chat_sample_rate
                     if ratio < 1:
                         step = int(1 / ratio)
-                        wav = wav[::step]
+                        if step > 0:
+                            wav = wav[::step]
+                        else:
+                            continue
                     else:
-                        indices = np.linspace(0, len(wav) - 1, int(len(wav) * ratio))
-                        wav = np.interp(indices, np.arange(len(wav)), wav)
+                        num_samples = int(len(wav) * ratio)
+                        if num_samples > 0:
+                            indices = np.linspace(0, len(wav) - 1, num_samples)
+                            wav = np.interp(indices, np.arange(len(wav)), wav)
+                        else:
+                            continue
             
             # Convert float32 to int16
             wav_int16 = self.float_to_int16(wav)

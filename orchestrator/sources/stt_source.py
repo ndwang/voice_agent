@@ -65,7 +65,7 @@ class STTSource(BaseSource):
             except (websockets.exceptions.ConnectionClosed, ConnectionRefusedError):
                 logger.warning(f"STT connection lost. Retrying in {self._reconnect_delay}s...")
                 await asyncio.sleep(self._reconnect_delay)
-                self._reconnect_delay = min(self._reconnect_delay * 2, 60.0)
+                self._reconnect_delay = min(self._reconnect_delay * 2, 10.0)
             except Exception as e:
                 logger.error(f"STT Source error: {e}", exc_info=True)
                 await asyncio.sleep(5.0)

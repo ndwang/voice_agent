@@ -3,13 +3,13 @@ from typing import Optional
 from fastapi import APIRouter, WebSocket, HTTPException, Response
 from pydantic import BaseModel
 from core.logging import get_logger
-from .manager import TTSManager
+from .engine import TTSEngine
 
 logger = get_logger(__name__)
 router = APIRouter()
 
-# Global manager instance
-tts_manager = TTSManager()
+# Global TTS engine instance
+tts_engine = TTSEngine()
 
 class SynthesizeRequest(BaseModel):
     """Request model for non-streaming TTS."""
@@ -26,14 +26,14 @@ class SynthesizeRequest(BaseModel):
 async def root():
     return {
         "message": "TTS Service is running",
-        "provider": tts_manager.provider_name,
-        "output_sample_rate": tts_manager.output_sample_rate
+        "provider": tts_engine.provider_name,
+        "output_sample_rate": tts_engine.output_sample_rate
     }
 
 @router.get("/voices")
 async def list_voices():
     try:
-        voices = await tts_manager.list_voices()
+        voices = await tts_engine.list_voices()
         return {"voices": voices}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
@@ -46,7 +46,7 @@ async def find_voices(
 ):
     try:
         filters = {k: v for k, v in locals().items() if v is not None}
-        voices = await tts_manager.find_voices(**filters)
+        voices = await tts_engine.find_voices(**filters)
         return {"voices": voices}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
@@ -58,14 +58,14 @@ async def synthesize(request: SynthesizeRequest):
         # Filter None values
         params = request.model_dump(exclude_none=True, exclude={"text"})
         
-        audio_bytes = await tts_manager.synthesize(request.text, **params)
+        audio_bytes = await tts_engine.synthesize(request.text, **params)
         
         return Response(
             content=audio_bytes,
             media_type="audio/pcm",
             headers={
                 "Content-Type": "audio/pcm",
-                "Sample-Rate": str(tts_manager.output_sample_rate),
+                "Sample-Rate": str(tts_engine.output_sample_rate),
                 "Channels": "1",
                 "Format": "int16"
             }
@@ -76,6 +76,6 @@ async def synthesize(request: SynthesizeRequest):
 @router.websocket("/synthesize/stream")
 async def websocket_endpoint(websocket: WebSocket):
     """WebSocket endpoint for streaming TTS synthesis."""
-    await tts_manager.handle_websocket_session(websocket)
+    await tts_engine.handle_websocket_session(websocket)
 
 
