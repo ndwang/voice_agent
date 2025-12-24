@@ -25,7 +25,9 @@ from core.config import get_config
 from core.logging import setup_logging, get_logger
 
 # Set up logging
-setup_logging()
+log_level = get_config("ocr", "log_level", default="INFO")
+log_file = get_config("ocr", "log_file", default=None)
+setup_logging(level=log_level, log_file=log_file, service_name="ocr")
 logger = get_logger(__name__)
 
 # --- Configuration ---
