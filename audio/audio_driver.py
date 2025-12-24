@@ -25,13 +25,14 @@ class AudioDriver:
     Can be started/stopped programmatically or run standalone.
     """
     
-    def __init__(self, stt_url: Optional[str] = None, device: Optional[int] = None):
+    def __init__(self, stt_url: Optional[str] = None, device: Optional[int] = None, event_bus=None):
         """
         Initialize audio driver.
         
         Args:
             stt_url: WebSocket URL for STT server (default: from config)
             device: Audio input device index (default: from config)
+            event_bus: Optional EventBus for in-process communication
         """
         self.stt_url = stt_url or get_config("services", "stt_websocket_url", default="ws://localhost:8001/ws/transcribe")
         self.orchestrator_base_url = get_config("services", "orchestrator_base_url", default="http://localhost:8000")
@@ -50,6 +51,7 @@ class AudioDriver:
         self._device_index = None
         self._device_name = None
         self._reconnect_delay = 1.0
+        self.event_bus = event_bus
     
     def _audio_callback(self, indata, frames, time, status):
         """This is called from a separate thread by sounddevice."""
@@ -125,11 +127,18 @@ class AudioDriver:
             websocket: WebSocket connection to STT server
             device_index: Audio input device index
         """
-        # Listening status flag (shared with polling task)
+        # Listening status flag (shared with polling/event task)
         listening_enabled_flag = {'enabled': True}
         
-        # Start polling task
-        polling_task = asyncio.create_task(self._poll_listening_status(listening_enabled_flag))
+        # Start status tracking task
+        if self.event_bus:
+            # Use event bus if available (in-process)
+            logger.info("Using event bus for listening status updates")
+            status_task = asyncio.create_task(self._listen_for_status_changes(listening_enabled_flag))
+        else:
+            # Fall back to polling (standalone mode)
+            logger.info(f"Using HTTP polling for listening status updates ({self.listening_status_poll_interval}s)")
+            status_task = asyncio.create_task(self._poll_listening_status(listening_enabled_flag))
         
         logger.info("Opening microphone stream...")
 
@@ -165,10 +174,10 @@ class AudioDriver:
                     # Periodically yield to event loop
                     await asyncio.sleep(0)
             finally:
-                # Clean up polling task
-                polling_task.cancel()
+                # Clean up status tracking task
+                status_task.cancel()
                 try:
-                    await polling_task
+                    await status_task
                 except asyncio.CancelledError:
                     pass
                 
@@ -179,6 +188,29 @@ class AudioDriver:
             logger.error(f"Error in microphone stream: {e}", exc_info=True)
             # Re-raise to trigger reconnection
             raise
+    
+    async def _listen_for_status_changes(self, listening_enabled_flag):
+        """Subscribe to event bus for listening status changes."""
+        if not self.event_bus:
+            return
+
+        async def handle_change(event):
+            listening_enabled_flag['enabled'] = event.data.get('enabled', True)
+
+        # Import constant here to avoid top-level orchestrator dependency in standalone mode
+        try:
+            from orchestrator.core.constants import UI_LISTENING_STATE_CHANGED
+            topic = UI_LISTENING_STATE_CHANGED
+        except ImportError:
+            topic = "ui.listening_state_changed"
+
+        self.event_bus.subscribe(topic, handle_change)
+        try:
+            # Keep the task alive until cancelled
+            while self.running:
+                await asyncio.sleep(1)
+        finally:
+            self.event_bus.unsubscribe(topic, handle_change)
     
     async def start(self):
         """Start the audio driver."""
@@ -235,7 +267,7 @@ class AudioDriver:
             except (websockets.exceptions.ConnectionClosed, ConnectionRefusedError):
                 logger.warning(f"STT connection lost. Retrying in {self._reconnect_delay}s...")
                 await asyncio.sleep(self._reconnect_delay)
-                self._reconnect_delay = min(self._reconnect_delay * 2, 60.0)
+                self._reconnect_delay = min(self._reconnect_delay * 2, 10.0)
             except websockets.exceptions.InvalidURI:
                 logger.error(f"Invalid WebSocket URI: {self.stt_url}")
                 logger.error("Cannot retry with invalid URI. Exiting.")
