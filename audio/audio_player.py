@@ -11,6 +11,7 @@ from collections import deque
 from pathlib import Path
 import logging
 import sys
+import threading
 
 from core.config import get_config
 from core.logging import setup_logging, get_logger
@@ -50,6 +51,15 @@ class AudioPlayer:
         self.play_task: Optional[asyncio.Task] = None
         self.on_play_state = on_play_state
         self._audio_active = False
+        
+        # Streaming buffer for continuous playback
+        self._buffer_lock = threading.Lock()
+        self._audio_buffer = deque()  # Queue of numpy arrays ready to play
+        self._stream: Optional[sd.OutputStream] = None
+        
+        # Buffer size in frames (smaller = lower latency, but more overhead)
+        # ~50ms buffer for low latency
+        self._frames_per_chunk = int(self.playback_sample_rate * 0.05)  # 50ms chunks
     
     async def play_audio_chunk(self, audio_data: bytes):
         """
@@ -65,18 +75,94 @@ class AudioPlayer:
             self.playing = True
             self.play_task = asyncio.create_task(self._playback_loop())
     
+    def _audio_callback(self, outdata, frames, time, status):
+        """Callback function for sounddevice stream - called in audio thread."""
+        if status:
+            logger.warning(f"Audio callback status: {status}")
+        
+        # Get data from buffer
+        with self._buffer_lock:
+            if len(self._audio_buffer) == 0:
+                # No data available - output silence
+                outdata.fill(0)
+                return
+            
+            # Collect enough frames from buffer
+            collected = []
+            total_frames = 0
+            
+            while total_frames < frames and len(self._audio_buffer) > 0:
+                chunk = self._audio_buffer.popleft()
+                collected.append(chunk)
+                total_frames += len(chunk)
+            
+            if total_frames == 0:
+                outdata.fill(0)
+                return
+            
+            # Concatenate chunks
+            if len(collected) == 1:
+                audio_data = collected[0]
+            else:
+                audio_data = np.concatenate(collected, axis=0)
+            
+            # If we have more than needed, put excess back
+            if total_frames > frames:
+                excess = audio_data[frames:]
+                self._audio_buffer.appendleft(excess)
+                audio_data = audio_data[:frames]
+            
+            # Copy to output
+            if len(audio_data) == frames:
+                outdata[:] = audio_data
+            else:
+                # Pad with zeros if needed (shouldn't happen, but safety check)
+                outdata.fill(0)
+                outdata[:len(audio_data)] = audio_data
+    
     async def _playback_loop(self):
-        """Background task for audio playback."""
+        """Background task for audio playback - processes queue and feeds stream."""
         logger.info("Audio playback started")
+        
         try:
+            # Start the audio stream
+            self._stream = sd.OutputStream(
+                samplerate=self.playback_sample_rate,
+                channels=self.channels,
+                dtype=np.float32,
+                device=self.output_device,
+                blocksize=self._frames_per_chunk,
+                callback=self._audio_callback,
+                latency='low'  # Low latency mode
+            )
+            
+            self._stream.start()
+            
+            if self.on_play_state and not self._audio_active:
+                self._audio_active = True
+                await self.on_play_state(True)
+            
+            # Process incoming audio chunks
             while self.playing:
                 try:
-                    # Get audio chunk from queue (with timeout)
-                    audio_bytes = await asyncio.wait_for(self.audio_queue.get(), timeout=1.0)
+                    # Get audio chunk from queue (with timeout to check playing flag)
+                    try:
+                        audio_bytes = await asyncio.wait_for(self.audio_queue.get(), timeout=0.1)
+                    except asyncio.TimeoutError:
+                        # Check if we should continue
+                        if not self.playing:
+                            break
+                        # Check if buffer is empty and queue is empty
+                        with self._buffer_lock:
+                            buffer_empty = len(self._audio_buffer) == 0
+                        if buffer_empty and self.audio_queue.empty():
+                            # No more data - check if we should stop
+                            await asyncio.sleep(0.05)
+                            if self.audio_queue.empty() and not self.playing:
+                                break
+                        continue
                     
-                    # Check if we should stop before processing this chunk
                     if not self.playing:
-                        # Put the chunk back if we're stopping (or just discard it)
                         break
                     
                     # Convert bytes to numpy array (int16)
@@ -91,62 +177,56 @@ class AudioPlayer:
                     else:
                         audio_float = audio_float.reshape(-1, self.channels)
                     
-                    # Calculate duration for logging
-                    duration_ms = len(audio_float) / self.sample_rate * 1000
-                    logger.info(f"Playing audio chunk: {len(audio_bytes)} bytes, {duration_ms:.1f}ms duration")
-                    
                     # Resample if playback device requires a different rate
                     playback_audio = self._resample_audio(audio_float)
-
-                    # Check again before playing
-                    if not self.playing:
-                        break
-
-                    # Play audio
-                    sd.play(
-                        playback_audio,
-                        samplerate=self.playback_sample_rate,
-                        device=self.output_device,
-                        blocking=False,
-                    )
                     
-                    if self.on_play_state and not self._audio_active:
-                        self._audio_active = True
-                        await self.on_play_state(True)
+                    # Add to buffer (thread-safe)
+                    with self._buffer_lock:
+                        self._audio_buffer.append(playback_audio)
                     
-                    # Wait for playback to finish, but allow stop() to interrupt via sd.stop()
-                    # Check playing flag periodically during wait
-                    try:
-                        await asyncio.to_thread(sd.wait)
-                    except Exception:
-                        # sd.wait() might be interrupted by sd.stop()
-                        pass
+                    logger.debug(f"Added audio chunk: {len(playback_audio)} frames to buffer")
                     
-                    # Check if we should continue after playback
-                    if not self.playing:
-                        break
-                    
-                    if self.audio_queue.empty() and self.on_play_state and self._audio_active:
-                        self._audio_active = False
-                        await self.on_play_state(False)
-                
-                except asyncio.TimeoutError:
-                    # No audio for 1 second, check if we should continue
-                    if not self.playing:
-                        break
-                    if self.audio_queue.empty():
-                        # Wait a bit more before stopping
-                        await asyncio.sleep(0.5)
-                        if self.audio_queue.empty() or not self.playing:
-                            break
                 except Exception as e:
-                    logger.error(f"Audio playback error: {e}", exc_info=True)
+                    logger.error(f"Audio processing error: {e}", exc_info=True)
+            
+            # Wait for buffer to drain
+            max_wait = 5.0  # Maximum wait time in seconds
+            wait_start = asyncio.get_event_loop().time()
+            while self.playing:
+                with self._buffer_lock:
+                    buffer_empty = len(self._audio_buffer) == 0
+                
+                if buffer_empty and self.audio_queue.empty():
+                    break
+                
+                # Check timeout
+                if asyncio.get_event_loop().time() - wait_start > max_wait:
+                    logger.warning("Timeout waiting for audio buffer to drain")
+                    break
+                
+                await asyncio.sleep(0.1)
+            
+            # Update play state
+            if self.on_play_state and self._audio_active:
+                self._audio_active = False
+                await self.on_play_state(False)
         
         except Exception as e:
             logger.error(f"Playback loop error: {e}", exc_info=True)
         finally:
+            # Stop and close stream
+            if self._stream is not None:
+                try:
+                    self._stream.stop()
+                    self._stream.close()
+                except Exception as e:
+                    logger.error(f"Error closing stream: {e}")
+                finally:
+                    self._stream = None
+            
             self.playing = False
             logger.info("Audio playback stopped")
+            
             if self.on_play_state and self._audio_active:
                 self._audio_active = False
                 await self.on_play_state(False)
@@ -184,11 +264,16 @@ class AudioPlayer:
         # Set playing flag first to signal the playback loop to stop
         self.playing = False
         
-        # Stop current playback immediately
-        try:
-            sd.stop()
-        except Exception:
-            pass
+        # Stop stream immediately
+        if self._stream is not None:
+            try:
+                self._stream.stop()
+            except Exception as e:
+                logger.debug(f"Error stopping stream: {e}")
+        
+        # Clear buffer
+        with self._buffer_lock:
+            self._audio_buffer.clear()
         
         # Clear queue immediately to prevent any queued chunks from playing
         cleared_count = 0
@@ -209,6 +294,15 @@ class AudioPlayer:
                 await self.play_task
             except asyncio.CancelledError:
                 pass
+        
+        # Close stream
+        if self._stream is not None:
+            try:
+                self._stream.close()
+            except Exception as e:
+                logger.debug(f"Error closing stream: {e}")
+            finally:
+                self._stream = None
         
         # Update play state callback
         if self.on_play_state and self._audio_active:
