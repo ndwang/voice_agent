@@ -2,7 +2,7 @@ import asyncio
 import json
 import numpy as np
 import time
-from typing import Dict, Set, Optional, Tuple, Any
+from typing import Dict, Set, Optional, Any
 from dataclasses import dataclass, field
 from fastapi import WebSocket, WebSocketDisconnect
 from core.logging import get_logger
@@ -21,7 +21,6 @@ class ClientStreamingState:
     asr_chunk_buffer: np.ndarray = field(default_factory=lambda: np.array([], dtype=np.float32))  # Buffer for ASR chunks
     vad_chunk_buffer: np.ndarray = field(default_factory=lambda: np.array([], dtype=np.float32))  # Buffer for VAD chunks
     silence_start_time: Optional[float] = None  # Timestamp when silence started (ms)
-    last_speech_end_time: Optional[float] = None  # Timestamp when speech ended (ms)
     current_transcript: str = ""  # Accumulated transcript text
     is_speaking: bool = False  # Whether currently detecting speech
     last_interim_time: float = 0.0  # Last time interim transcript was sent (for batch mode)
@@ -38,12 +37,6 @@ class STTManager:
         self.language_code = get_config("stt", "language_code", default="zh")
         self.sample_rate = get_config("stt", "sample_rate", default=16000)
         self.interim_min_samples = get_config("stt", "interim_transcript_min_samples", default=int(0.3 * 16000))
-        
-        flush_cmd = get_config("stt", "flush_command", default="\x00")
-        if isinstance(flush_cmd, str):
-            self.flush_command = flush_cmd.encode('latin-1')
-        else:
-            self.flush_command = bytes([flush_cmd]) if isinstance(flush_cmd, int) else flush_cmd
 
         # Provider setup
         self.provider_name = get_config("stt", "provider", default="faster-whisper")
@@ -160,6 +153,26 @@ class STTManager:
         async with self.client_states_lock:
             self.client_states.pop(websocket, None)
 
+    def _should_filter_transcript(self, text: str) -> bool:
+        """
+        Check if a transcript should be filtered out (just "嗯。").
+        
+        Args:
+            text: The transcript text to check
+            
+        Returns:
+            True if the transcript should be filtered out, False otherwise
+        """
+        if not text:
+            return True
+        
+        # Just filter out "嗯。"
+        if text.strip() == "嗯。":
+            logger.debug(f"Filtering transcript: {repr(text)}")
+            return True
+        
+        return False
+
     async def broadcast(self, message: dict):
         """Broadcast message to all connected clients."""
         message_str = json.dumps(message)
@@ -187,18 +200,6 @@ class STTManager:
         )
         return "".join([seg.text for seg in segments])
 
-    def transcribe_final(self, audio_buffer: np.ndarray) -> str:
-        """Perform full transcription with VAD."""
-        if audio_buffer.size == 0:
-            return ""
-            
-        segments, _ = self.provider.transcribe(
-            audio_buffer,
-            language=self.language_code,
-            vad_filter=True
-        )
-        return "".join([seg.text for seg in segments])
-
     async def process_audio_chunk(
         self,
         websocket: WebSocket,
@@ -212,68 +213,11 @@ class STTManager:
             websocket: WebSocket connection for the client
             chunk: Audio chunk bytes
         """
-        # Check for flush command first
-        if chunk == self.flush_command:
-            logger.info("Flush command received.")
-            if self.streaming_enabled:
-                await self._handle_flush_streaming(websocket)
-            else:
-                await self._handle_flush_batch(websocket)
-            return
-        
         # Route to appropriate handler
         if self.streaming_enabled:
             await self._process_streaming_chunk(websocket, chunk)
         else:
             await self._process_batch_chunk(websocket, chunk)
-    
-    async def _handle_flush_streaming(self, websocket: WebSocket):
-        """Handle flush command in streaming mode."""
-        async with self.client_states_lock:
-            state = self.client_states.get(websocket)
-            if not state:
-                return
-            
-            # Finalize current transcript
-            if state.current_transcript:
-                # Apply punctuation to the complete transcript
-                if isinstance(self.provider, FunASRProvider):
-                    transcript_to_send = self.provider.apply_punctuation(state.current_transcript)
-                else:
-                    transcript_to_send = state.current_transcript
-                
-                await self.broadcast({
-                    "type": "final",
-                    "text": transcript_to_send
-                })
-                logger.info(f"Final transcript: {transcript_to_send[:50]}...")
-            else:
-                await self.broadcast({
-                    "type": "final",
-                    "text": ""
-                })
-            
-            # Reset state
-            cache_dict = self.provider.initialize_streaming()
-            state.asr_cache = cache_dict["asr_cache"]
-            state.vad_cache = cache_dict["vad_cache"]
-            state.audio_buffer = np.array([], dtype=np.float32)
-            state.asr_chunk_buffer = np.array([], dtype=np.float32)
-            state.vad_chunk_buffer = np.array([], dtype=np.float32)
-            state.current_transcript = ""
-            state.silence_start_time = None
-            state.last_speech_end_time = None
-            state.is_speaking = False
-    
-    async def _handle_flush_batch(self, websocket: WebSocket):
-        """Handle flush command in batch mode."""
-        # For batch mode, we need to get the buffer from somewhere
-        # This is a fallback - batch mode should maintain its own buffer
-        # For now, just send empty final
-        await self.broadcast({
-            "type": "final",
-            "text": ""
-        })
     
     async def _process_streaming_chunk(self, websocket: WebSocket, chunk: bytes):
         """Process audio chunk in streaming mode."""
@@ -293,8 +237,7 @@ class STTManager:
         # Convert chunk to numpy array
         audio_chunk = np.frombuffer(chunk, dtype=np.float32)
         
-        # Add to buffers
-        state.audio_buffer = np.concatenate([state.audio_buffer, audio_chunk])
+        # Add to processing buffers
         state.asr_chunk_buffer = np.concatenate([state.asr_chunk_buffer, audio_chunk])
         state.vad_chunk_buffer = np.concatenate([state.vad_chunk_buffer, audio_chunk])
         
@@ -324,12 +267,10 @@ class STTManager:
                             await self.broadcast({"type": "speech_start"})
                         state.is_speaking = True
                         state.silence_start_time = None
-                        state.last_speech_end_time = None
                     elif beg == -1 and end != -1:
                         # Speech end detected
                         logger.info("Speech end detected")
                         state.is_speaking = False
-                        state.last_speech_end_time = current_time
                         state.silence_start_time = current_time
         
         # Process ASR when we have enough samples (600ms chunks)
@@ -426,28 +367,26 @@ class STTManager:
                 
                 logger.info(f"Finalizing transcript (accumulated, length: {len(transcript_to_send)} chars): {transcript_to_send[:100]}...")
                 
-                if transcript_to_send:
+                # Filter out short/noise transcripts
+                if transcript_to_send and not self._should_filter_transcript(transcript_to_send):
                     await self.broadcast({
                         "type": "final",
                         "text": transcript_to_send
                     })
                     logger.info(f"Final transcript: {transcript_to_send[:50]}...")
                 else:
-                    await self.broadcast({
-                        "type": "final",
-                        "text": ""
-                    })
+                    # Filtered out or empty - don't send anything
+                    if transcript_to_send:
+                        logger.debug(f"Filtered out transcript: {transcript_to_send[:50]}...")
                 
                 # Reset state (clear current_transcript after sending final)
                 cache_dict = self.provider.initialize_streaming()
                 state.asr_cache = cache_dict["asr_cache"]
                 state.vad_cache = cache_dict["vad_cache"]
-                state.audio_buffer = np.array([], dtype=np.float32)
                 state.asr_chunk_buffer = np.array([], dtype=np.float32)
                 state.vad_chunk_buffer = np.array([], dtype=np.float32)
                 state.current_transcript = ""  # Clear after sending final
                 state.silence_start_time = None
-                state.last_speech_end_time = None
                 state.is_speaking = False
     
     async def _process_batch_chunk(self, websocket: WebSocket, chunk: bytes):

@@ -79,7 +79,6 @@ class ConfigLoader:
                 "language_code": "zh",
                 "sample_rate": 16000,
                 "interim_transcript_min_samples": 4800,
-                "flush_command": "\x00",
                 "providers": {
                     "faster-whisper": {
                         "model_path": "faster-whisper-small",
@@ -151,7 +150,6 @@ class ConfigLoader:
                 },
                 "dtype": "float32",
                 "block_size_ms": 100,
-                "flush_command": "\x00",
                 "silence_threshold_ms": 500,
                 "vad_min_speech_prob": 0.5,
                 "plot_window_seconds": 2,
