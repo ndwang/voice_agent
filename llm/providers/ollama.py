@@ -26,6 +26,7 @@ class OllamaProvider(LLMProvider):
         base_url: str = "http://localhost:11434",
         timeout: float = 300.0,
         disable_thinking: bool = False,
+        generation_config: Optional[Dict] = None,
         **kwargs
     ):
         """
@@ -36,6 +37,7 @@ class OllamaProvider(LLMProvider):
             base_url: Base URL for Ollama API (default: "http://localhost:11434")
             timeout: Request timeout in seconds (default: 300.0)
             disable_thinking: If True, disables thinking/reasoning mode for models that support it
+            generation_config: Dictionary of default generation parameters (temperature, top_p, top_k, num_predict, etc.)
             **kwargs: Additional parameters
         """
         if AsyncClient is None:
@@ -48,6 +50,9 @@ class OllamaProvider(LLMProvider):
         self.base_url = base_url
         self.timeout = timeout
         self.disable_thinking = disable_thinking
+        
+        # Store default generation config
+        self.default_generation_config = generation_config or {}
         
         # Initialize the async client
         self.client = AsyncClient(host=base_url, timeout=timeout)
@@ -137,8 +142,8 @@ class OllamaProvider(LLMProvider):
                     }
                     break
         
-        # Prepare generation options
-        options = {}
+        # Prepare generation options - start with defaults from config
+        options = self.default_generation_config.copy()
         if temperature is not None:
             options["temperature"] = temperature
         if top_p is not None:
@@ -148,7 +153,7 @@ class OllamaProvider(LLMProvider):
         if max_tokens is not None:
             options["num_predict"] = max_tokens
         
-        # Merge any additional options from kwargs
+        # Merge any additional options from kwargs (overrides defaults and explicit params)
         options.update(kwargs.get("options", {}))
         
         # Generate response
@@ -207,8 +212,8 @@ class OllamaProvider(LLMProvider):
                     }
                     break
         
-        # Prepare generation options
-        options = {}
+        # Prepare generation options - start with defaults from config
+        options = self.default_generation_config.copy()
         if temperature is not None:
             options["temperature"] = temperature
         if top_p is not None:
@@ -218,7 +223,7 @@ class OllamaProvider(LLMProvider):
         if max_tokens is not None:
             options["num_predict"] = max_tokens
         
-        # Merge any additional options from kwargs
+        # Merge any additional options from kwargs (overrides defaults and explicit params)
         options.update(kwargs.get("options", {}))
         
         # Stream response - await the coroutine to get the async iterator

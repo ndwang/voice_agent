@@ -43,16 +43,20 @@ class InteractionManager(BaseManager):
     def _init_llm(self):
         provider = get_config("llm", "provider", default="ollama")
         if provider == "gemini":
+            generation_config = get_config("llm", "providers", "gemini", "generation_config", default={})
             return GeminiProvider(
                 model=get_config("llm", "providers", "gemini", "model"),
-                api_key=get_config("llm", "providers", "gemini", "api_key")
+                api_key=get_config("llm", "providers", "gemini", "api_key"),
+                generation_config=generation_config if generation_config else None
             )
         else:
+            generation_config = get_config("llm", "providers", "ollama", "generation_config", default={})
             return OllamaProvider(
                 model=get_config("llm", "providers", "ollama", "model"),
                 base_url=get_config("llm", "providers", "ollama", "base_url"),
                 timeout=float(get_config("llm", "providers", "ollama", "timeout", default=300)),
-                disable_thinking=get_config("llm", "providers", "ollama", "disable_thinking", default=False)
+                disable_thinking=get_config("llm", "providers", "ollama", "disable_thinking", default=False),
+                generation_config=generation_config if generation_config else None
             )
 
     def _register_handlers(self):
