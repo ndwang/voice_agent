@@ -5,13 +5,13 @@ from typing import Dict, Optional, AsyncIterator, Any
 from fastapi import WebSocket, WebSocketDisconnect
 from core.logging import get_logger
 from core.config import get_config
-from tts.providers import EdgeTTSProvider, ChatTTSProvider
+from tts.providers import EdgeTTSProvider, ChatTTSProvider, ElevenLabsProvider
 from tts.base import TTSProvider
 
 logger = get_logger(__name__)
 
 
-class TTSManager:
+class TTSEngine:
     """
     Manages TTS sessions, provider interactions, and streaming state.
     """
@@ -27,9 +27,25 @@ class TTSManager:
         self.provider: TTSProvider = self._load_provider()
         
         # Default settings
-        self.default_voice = get_config("tts", "providers", "edge-tts", "voice", default="zh-CN-XiaoxiaoNeural")
-        self.default_rate = get_config("tts", "providers", "edge-tts", "rate", default="+0%")
-        self.default_pitch = get_config("tts", "providers", "edge-tts", "pitch", default="+0Hz")
+        # These are provider-specific defaults if not provided in synthesis request
+        self.default_params = self._get_default_params()
+
+    def _get_default_params(self) -> dict:
+        """Get default parameters for the current provider."""
+        if self.provider_name == "edge-tts":
+            return {
+                "voice": get_config("tts", "providers", "edge-tts", "voice", default="zh-CN-XiaoxiaoNeural"),
+                "rate": get_config("tts", "providers", "edge-tts", "rate", default="+0%"),
+                "pitch": get_config("tts", "providers", "edge-tts", "pitch", default="+0Hz")
+            }
+        elif self.provider_name == "elevenlabs":
+            return {
+                "voice_id": get_config("tts", "providers", "elevenlabs", "voice_id"),
+                "stability": get_config("tts", "providers", "elevenlabs", "stability", default=0.5),
+                "similarity_boost": get_config("tts", "providers", "elevenlabs", "similarity_boost", default=0.8),
+                "style": get_config("tts", "providers", "elevenlabs", "style", default=0.0)
+            }
+        return {}
 
     def _load_provider(self) -> TTSProvider:
         logger.info(f"Initializing TTS provider: {self.provider_name}...")
@@ -46,6 +62,17 @@ class TTSManager:
                     output_sample_rate=self.output_sample_rate,
                     model_source=get_config("tts", "providers", "chattts", "model_source", default="local"),
                     device=get_config("tts", "providers", "chattts", "device", default=None)
+                )
+            elif self.provider_name == "elevenlabs":
+                voice_id = get_config("tts", "providers", "elevenlabs", "voice_id")
+                if not voice_id:
+                    logger.warning("ElevenLabs voice_id not configured in config.yaml")
+                return ElevenLabsProvider(
+                    default_voice_id=voice_id,
+                    output_sample_rate=self.output_sample_rate,
+                    stability=get_config("tts", "providers", "elevenlabs", "stability", default=0.5),
+                    similarity_boost=get_config("tts", "providers", "elevenlabs", "similarity_boost", default=0.8),
+                    style=get_config("tts", "providers", "elevenlabs", "style", default=0.0)
                 )
             else:
                 raise ValueError(f"Unknown TTS provider: {self.provider_name}")
@@ -200,5 +227,6 @@ class TTSManager:
             pass
         except Exception:
             pass
+
 
 
