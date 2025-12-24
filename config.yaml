@@ -45,7 +45,7 @@ stt:
 
 # LLM (Language Model) Configuration
 llm:
-  provider: "gemini"  # Options: gemini, ollama
+  provider: "ollama"  # Options: gemini, ollama
   providers:
     gemini:
       model: "gemini-2.5-flash"  # Model name
@@ -83,6 +83,11 @@ tts:
     chattts:
       model_source: "local"  # Options: local, huggingface, custom
       device: null  # Options: cuda, cpu, null (auto-detect)
+    elevenlabs:
+      voice_id: "9lHjugDhwqoxA5MhX0az"  # Required: ElevenLabs voice ID
+      stability: 0.5
+      similarity_boost: 0.8
+      style: 0.0
 
 # OCR (Optical Character Recognition) Service Configuration
 ocr:
