@@ -10,5 +10,5 @@ ocr/output/
 ocr/input/
 stt/faster-whisper-small/
 .cursor
-# Virtual environments
 .venv
+orchestrator/system_prompt.txt
