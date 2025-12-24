@@ -895,22 +895,15 @@
       }
     };
 
-    // Load initial state on page load
-    async function loadInitialState() {
+    // Load non-realtime config (like hotkeys) on page load.
+    // Realtime status (listening, activity, etc.) is driven by the WebSocket.
+    async function loadConfig() {
       await loadHotkey();
-      try {
-        const response = await fetch('/ui/listening/status');
-        if (response.ok) {
-          const data = await response.json();
-          activityState.listening = data.enabled || true;
-          updateToggleListeningButton();
-        }
-      } catch (e) {
-        console.error('Error loading listening status:', e);
-      }
+      // Note: We no longer fetch /ui/listening/status here. 
+      // The WebSocket handler in ui.py sends the initial state on connect.
     }
 
-    loadInitialState();
+    loadConfig();
 
     // System Prompt Modal Functions
     function showStatusMessage(text, isError = false) {

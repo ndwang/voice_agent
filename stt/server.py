@@ -21,7 +21,8 @@ def main():
     app = create_app(
         title="STT Service",
         description="Real-time Speech-to-Text Service",
-        version="1.0.0"
+        version="1.0.0",
+        service_name="stt"
     )
     
     # Register router

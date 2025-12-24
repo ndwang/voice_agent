@@ -16,7 +16,8 @@ def create_app(
     title: str,
     description: str = "",
     version: str = "0.1.0",
-    lifespan: Optional[Any] = None
+    lifespan: Optional[Any] = None,
+    service_name: Optional[str] = None
 ) -> FastAPI:
     """
     Create a standardized FastAPI application.
@@ -26,13 +27,19 @@ def create_app(
         description: API description.
         version: API version.
         lifespan: Optional lifespan context manager.
+        service_name: Service name for config lookup (e.g., "orchestrator", "stt", "tts", "ocr").
+                     If None, defaults to "orchestrator" for backward compatibility.
         
     Returns:
         Configured FastAPI app.
     """
     # Initialize configuration
-    log_level = get_config("orchestrator", "log_level", default="INFO")
-    setup_logging(level=log_level)
+    if service_name is None:
+        service_name = "orchestrator"
+    
+    log_level = get_config(service_name, "log_level", default="INFO")
+    log_file = get_config(service_name, "log_file", default=None)
+    setup_logging(level=log_level, log_file=log_file, service_name=service_name)
     
     app = FastAPI(
         title=title,

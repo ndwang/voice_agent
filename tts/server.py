@@ -21,7 +21,8 @@ def main():
     app = create_app(
         title="TTS Service",
         description="Text-to-Speech Service with Streaming Support",
-        version="1.0.0"
+        version="1.0.0",
+        service_name="tts"
     )
     
     app.include_router(tts_router)
