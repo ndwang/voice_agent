@@ -42,7 +42,7 @@ class OrchestratorServer:
         self.bilibili_source = BilibiliSource(self.event_bus)
         
         # Audio driver (captures microphone and streams to STT)
-        self.audio_driver = AudioDriver()
+        self.audio_driver = AudioDriver(event_bus=self.event_bus)
         
         # Managers
         self.interaction_manager = InteractionManager(self.event_bus)
