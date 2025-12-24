@@ -109,6 +109,11 @@ class BilibiliSource(BaseSource):
         self._prune_buffer()
         return list(self.danmaku_buffer)
 
+    def get_danmaku_latest(self) -> Dict[str, Any]:
+        """Return the latest danmaku from the buffer."""
+        self._prune_buffer()
+        return self.danmaku_buffer[-1] if self.danmaku_buffer else {}
+
     async def get_superchat(self) -> Dict[str, Any]:
         """Wait for and return the next superChat from the queue."""
         return await self.superchat_queue.get()
