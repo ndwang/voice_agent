@@ -74,7 +74,6 @@ class TTSManager:
         """
         await websocket.accept()
         
-        text_buffer = []
         provider_params = {}
         
         # Keepalive state
@@ -111,7 +110,7 @@ class TTSManager:
                 msg_type = data.get("type")
                 
                 if msg_type == "text":
-                    await self._handle_text_message(websocket, data, text_buffer, provider_params)
+                    await self._handle_text_message(websocket, data, provider_params)
                 
                 elif msg_type == "config":
                     self._update_params(data, provider_params)
@@ -140,8 +139,8 @@ class TTSManager:
             if k in data:
                 params[k] = data[k]
 
-    async def _handle_text_message(self, websocket: WebSocket, data: dict, text_buffer: list, params: dict):
-        """Handle incoming text for synthesis."""
+    async def _handle_text_message(self, websocket: WebSocket, data: dict, params: dict):
+        """Handle incoming text for synthesis. Synthesizes directly since orchestrator sends complete sentences."""
         text = data.get("text", "")
         finalize = data.get("finalize", False)
         
@@ -149,17 +148,13 @@ class TTSManager:
         self._update_params(data, params)
         
         if text:
-            text_buffer.append(text)
-            
-        # Immediate synthesis if we have buffer (stream as we go)
-        if text_buffer:
-            full_text = "".join(text_buffer)
-            text_buffer.clear()
+            logger.info(f"[TTS] Synthesizing text ({len(text)} chars): {text!r}")
             
             # Ack receipt
             await websocket.send_text(json.dumps({"type": "status", "message": "received"}))
             
-            await self._synthesize_and_stream(websocket, full_text, params)
+            # Synthesize directly - orchestrator already buffers for complete sentences
+            await self._synthesize_and_stream(websocket, text, params)
         elif finalize:
             # Empty text but finalize requested -> just say done
             await websocket.send_text(json.dumps({"type": "done"}))

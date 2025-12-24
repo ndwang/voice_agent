@@ -25,10 +25,12 @@ class TTSManager(BaseManager):
         self.websocket = None
         self._receiver_task = None
         self._synthesizing = False
+        self._connecting = False  # Track connection state to avoid duplicate connections
         super().__init__(event_bus)
         
     def _register_handlers(self):
         self.event_bus.subscribe(EventType.TTS_REQUEST.value, self.on_tts_request)
+        self.event_bus.subscribe(EventType.LLM_REQUEST.value, self.on_llm_request)  # Pre-connect on LLM request
         self.event_bus.subscribe(EventType.LLM_CANCELLED.value, self.on_cancel)
         self.event_bus.subscribe(EventType.LLM_RESPONSE_DONE.value, self.on_llm_done)
         self.event_bus.subscribe(EventType.SPEECH_START.value, self.on_speech_start)
@@ -36,6 +38,13 @@ class TTSManager(BaseManager):
     async def _on_play_state_changed(self, is_playing: bool):
         """Callback when audio playback state changes."""
         await publish_activity(self.event_bus, {"playing": is_playing})
+    
+    async def on_llm_request(self, event: Event):
+        """Pre-connect WebSocket when LLM request is published to reduce latency."""
+        # Pre-connect WebSocket in background to avoid blocking
+        if not self.websocket and not self._connecting:
+            # Use create_task to connect asynchronously without blocking
+            asyncio.create_task(self._ensure_connected())
     
     async def on_llm_done(self, event: Event):
         """Finalize TTS stream when LLM response is complete."""
@@ -73,6 +82,7 @@ class TTSManager(BaseManager):
             except Exception as e:
                 self.logger.debug(f"Error closing TTS WebSocket: {e}")
             self.websocket = None
+        self._connecting = False
         
         # Reset activity states
         self._synthesizing = False
@@ -101,6 +111,7 @@ class TTSManager(BaseManager):
             except Exception as e:
                 self.logger.debug(f"Error closing TTS WebSocket: {e}")
             self.websocket = None
+        self._connecting = False
         
         # Reset activity states
         self._synthesizing = False
@@ -116,9 +127,8 @@ class TTSManager(BaseManager):
             self._synthesizing = True
             await publish_activity(self.event_bus, {"synthesizing": True})
             
-        # Ensure connection
-        if not self.websocket:
-            await self._connect()
+        # Ensure connection (will be fast if already pre-connected)
+        await self._ensure_connected()
             
         if self.websocket:
             try:
@@ -130,16 +140,42 @@ class TTSManager(BaseManager):
                 }))
             except Exception as e:
                 self.logger.error(f"Failed to send to TTS service: {e}")
+                # Connection may have failed, reset and try to reconnect
+                self.websocket = None
                 self._synthesizing = False
                 await publish_activity(self.event_bus, {"synthesizing": False})
                 
+    async def _ensure_connected(self):
+        """Ensure WebSocket is connected. Returns immediately if already connected."""
+        if self.websocket:
+            return  # Already connected
+        
+        if self._connecting:
+            # Connection in progress, wait for it
+            while self._connecting and not self.websocket:
+                await asyncio.sleep(0.01)  # Small delay to avoid busy waiting
+            return
+        
+        # Start connection
+        await self._connect()
+    
     async def _connect(self):
+        """Establish WebSocket connection to TTS service."""
+        if self._connecting:
+            return  # Already connecting
+        
+        self._connecting = True
         try:
+            self.logger.debug("Connecting to TTS service...")
             self.websocket = await websockets.connect(self.url)
             # Start receiver task and track it
             self._receiver_task = asyncio.create_task(self._receiver_loop())
+            self.logger.debug("Connected to TTS service")
         except Exception as e:
             self.logger.error(f"Could not connect to TTS service: {e}")
+            self.websocket = None
+        finally:
+            self._connecting = False
 
     async def _receiver_loop(self):
         try:
@@ -171,6 +207,7 @@ class TTSManager(BaseManager):
             self.logger.info("TTS WebSocket connection closed")
             self.websocket = None
             self._receiver_task = None
+            self._connecting = False
             # Reset synthesizing state when connection closes
             if self._synthesizing:
                 self._synthesizing = False
@@ -179,6 +216,7 @@ class TTSManager(BaseManager):
             self.logger.error(f"TTS Receiver error: {e}")
             self.websocket = None
             self._receiver_task = None
+            self._connecting = False
             # Reset activity states on error
             self._synthesizing = False
             await publish_activity(self.event_bus, {"synthesizing": False, "playing": False})

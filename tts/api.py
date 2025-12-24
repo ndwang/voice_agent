@@ -54,6 +54,7 @@ async def find_voices(
 @router.post("/synthesize")
 async def synthesize(request: SynthesizeRequest):
     try:
+        logger.info(f"[TTS] Non-streaming synthesis request ({len(request.text)} chars): {request.text!r}")
         # Filter None values
         params = request.model_dump(exclude_none=True, exclude={"text"})
         

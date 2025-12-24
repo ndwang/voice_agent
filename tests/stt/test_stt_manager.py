@@ -16,7 +16,6 @@ def mock_config():
             "language_code": "zh",
             "sample_rate": 16000,
             "interim_transcript_min_samples": 100,
-            "flush_command": "\x00",
             "provider": "faster-whisper",
             "providers": {
                 "faster-whisper": {"model_path": "test", "device": "cpu"},
@@ -62,34 +61,6 @@ async def test_broadcast(mock_config, mock_provider):
     
     mock_ws.send_text.assert_called_once()
     assert '"type": "test"' in mock_ws.send_text.call_args[0][0]
-
-@pytest.mark.asyncio
-async def test_process_audio_chunk_flush(mock_config, mock_provider):
-    manager = STTManager()
-    mock_ws = AsyncMock()
-    await manager.add_client(mock_ws)
-    
-    # Create some dummy audio buffer
-    audio_buffer = np.zeros(1000, dtype=np.float32)
-    last_time = 0
-    
-    # Send flush command
-    flush_cmd = b"\x00"
-    new_buffer, new_time = await manager.process_audio_chunk(
-        flush_cmd, audio_buffer, last_time
-    )
-    
-    # Check that transcribe_final was called (via provider)
-    manager.provider.transcribe.assert_called_with(
-        audio_buffer, language="zh", vad_filter=True
-    )
-    
-    # Buffer should be reset
-    assert new_buffer.size == 0
-    
-    # Should broadcast final result
-    mock_ws.send_text.assert_called()
-    assert "final" in mock_ws.send_text.call_args[0][0]
 
 @pytest.mark.asyncio
 async def test_process_audio_chunk_accumulate(mock_config, mock_provider):
