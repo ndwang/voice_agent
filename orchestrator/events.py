@@ -22,7 +22,6 @@ class EventType(Enum):
     # TTS
     TTS_REQUEST = "tts.request"
     TTS_AUDIO_CHUNK = "tts.audio_chunk"
-    TTS_DONE = "tts.done"
     
     # Subtitles
     SUBTITLE_REQUEST = "subtitle.request"

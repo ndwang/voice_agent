@@ -15,29 +15,12 @@ dependencies = [
     # Data validation
     "pydantic",
     "pyyaml",
-    # Audio processing
+    # Audio processing (core)
     "sounddevice",
     "numpy",
     "matplotlib",
-    # ML/AI frameworks
-    "torch==2.8.*",
-    "torchaudio",
-    "faster-whisper>=1.2.1",
-    # OCR
-    "pyautogui",
-    "paddleocr",
-    "paddlepaddle",
-    "pillow",
-    "rapidfuzz",
-    "google-genai",
-    # LLM providers
-    "ollama",
-    "llama-cpp-python",
-    # TTS
-    "edge-tts==7.2.1",
-    "elevenlabs",
     "pydub",
-    "scipy", # For audio resampling (optional but recommended)
+    "scipy", # For audio resampling
     # Hotkey management
     "pynput",
     # OBS
@@ -46,8 +29,81 @@ dependencies = [
     "brotli~=1.1.0",
     "pure-protobuf~=3.1.2",
     "yarl~=1.9.3",
+    # ML/AI frameworks (Core requirement)
+    "torch==2.8.*",
+    "torchaudio",
+]
+
+[project.optional-dependencies]
+# STT Providers
+stt-faster-whisper = [
+    "faster-whisper>=1.2.1",
+]
+stt-funasr = [
     "funasr",
+]
+stt-all = [
+    "faster-whisper>=1.2.1",
+    "funasr",
+]
+
+# LLM Providers
+llm-gemini = [
+    "google-genai",
+]
+llm-ollama = [
+    "ollama",
+]
+llm-llama-cpp = [
+    "llama-cpp-python",
+]
+llm-all = [
+    "google-genai",
+    "ollama",
+    "llama-cpp-python",
+]
+
+# TTS Providers
+tts-edge = [
+    "edge-tts==7.2.1",
+]
+tts-elevenlabs = [
+    "elevenlabs",
+]
+tts-genie = [
     "genie-tts>=2.0.2",
+]
+tts-all = [
+    "edge-tts==7.2.1",
+    "elevenlabs",
+    "genie-tts>=2.0.2",
+]
+
+# OCR (if using OCR features)
+ocr = [
+    "pyautogui",
+    "paddleocr",
+    "paddlepaddle",
+    "pillow",
+    "rapidfuzz",
+]
+
+
+# Convenience group: install all providers
+all = [
+    "faster-whisper>=1.2.1",
+    "funasr",
+    "google-genai",
+    "ollama",
+    "llama-cpp-python",
+    "edge-tts==7.2.1",
+    "elevenlabs",
+    "genie-tts>=2.0.2",
+    "pyautogui",
+    "paddleocr",
+    "paddlepaddle",
+    "pillow",
+    "rapidfuzz",
 ]
 
 
@@ -76,4 +132,6 @@ explicit = true
 dev = [
     "pytest>=9.0.2",
     "pytest-asyncio>=1.3.0",
+    "mkdocs>=1.5.0",
+    "mkdocs-material>=9.0.0",
 ]

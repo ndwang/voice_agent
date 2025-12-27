@@ -158,9 +158,7 @@ class ConfigLoader:
                 "dtype": "float32",
                 "block_size_ms": 100,
                 "silence_threshold_ms": 500,
-                "vad_min_speech_prob": 0.5,
-                "plot_window_seconds": 2,
-                "plot_update_interval_ms": 50
+                "listening_status_poll_interval": 1.0
             },
             "obs": {
                 "websocket": {

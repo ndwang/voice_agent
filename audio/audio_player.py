@@ -6,6 +6,7 @@ Streaming audio playback using sounddevice.
 import asyncio
 import numpy as np
 import sounddevice as sd
+from scipy import signal
 from typing import Optional, Callable, Awaitable
 from collections import deque
 from pathlib import Path
@@ -262,26 +263,11 @@ class AudioPlayer:
         if target_len == src_len:
             return audio
 
-        # Try high-quality resampling with scipy if available
-        try:
-            from scipy import signal
-            # Resample takes (data, num_samples)
-            # audio is (samples, channels)
-            resampled = signal.resample(audio, target_len, axis=0).astype(np.float32)
-            return resampled
-        except ImportError:
-            # Fallback to linear interpolation (lower quality)
-            x_old = np.linspace(0, src_len - 1, src_len)
-            x_new = np.linspace(0, src_len - 1, target_len)
-
-            if audio.ndim == 1 or audio.shape[1] == 1:
-                resampled = np.interp(x_new, x_old, audio.reshape(-1)).astype(np.float32)
-                return resampled.reshape(-1, 1)
-
-            resampled = np.empty((target_len, audio.shape[1]), dtype=np.float32)
-            for ch in range(audio.shape[1]):
-                resampled[:, ch] = np.interp(x_new, x_old, audio[:, ch])
-            return resampled
+        # Use scipy for high-quality resampling
+        # Resample takes (data, num_samples)
+        # audio is (samples, channels)
+        resampled = signal.resample(audio, target_len, axis=0).astype(np.float32)
+        return resampled
     
     async def stop(self):
         """Stop audio playback and clear all queued chunks."""
