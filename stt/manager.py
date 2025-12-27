@@ -265,6 +265,16 @@ class STTManager:
                         # Only broadcast if we weren't already speaking (to avoid duplicate events)
                         if not state.is_speaking:
                             await self.broadcast({"type": "speech_start"})
+                            # Reset caches when resuming from silence to avoid stale state
+                            # This prevents weird characters/nonsense when speech resumes after long silence
+                            logger.info("Resetting ASR and VAD caches after silence period")
+                            cache_dict = self.provider.initialize_streaming()
+                            state.asr_cache = cache_dict["asr_cache"]
+                            state.vad_cache = cache_dict["vad_cache"]
+                            # Clear any buffered audio from before silence
+                            state.asr_chunk_buffer = np.array([], dtype=np.float32)
+                            state.vad_chunk_buffer = np.array([], dtype=np.float32)
+                            state.current_transcript = ""
                         state.is_speaking = True
                         state.silence_start_time = None
                     elif beg == -1 and end != -1:
