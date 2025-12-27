@@ -52,3 +52,4 @@ A local component that handles hardware interaction. It uses **Voice Activity De
 ### 4. AI Services (STT & TTS)
 Stateless services that wrap specific AI models. They expose WebSocket APIs for real-time streaming, allowing the Orchestrator to pipe text or audio through them with minimal overhead.
 
+
