@@ -15,7 +15,7 @@ cd voice_agent
 # Install dependencies using uv
 uv sync
 ```
-*Note: The default setup assumes CUDA 12.6. Optional components like **blivedm**, **ChatTTS**, **Genie TTS**, and **Edge-TTS** require separate installation or system setup. See the [Installation Guide](https://wdong.github.io/voice_agent/guide/installation/) for details.*
+*Note: The default setup assumes CUDA 12.6. Optional components like **blivedm**, **ChatTTS**, **Genie TTS**, and **Edge-TTS** require separate installation or system setup. See the [Installation Guide](https://ndwang.github.io/voice_agent/guide/installation/) for details.*
 
 ### 2. One Step Start
 ```bash
