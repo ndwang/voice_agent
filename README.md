@@ -1,6 +1,8 @@
 # Voice Agent
+[![Documentation](https://img.shields.io/badge/docs-latest-blue)](https://ndwang.github.io/voice_agent/)
 
 An event-driven, multi-service voice agent system that integrates speech-to-text (STT), language models (LLM), and text-to-speech (TTS) to create an intelligent voice assistant.
+
 
 ## 🚀 Quick Start
 
