@@ -8,8 +8,8 @@ orchestrator:
   stt_websocket_path: "/ws/stt"
   log_level: "INFO"
   enable_latency_tracking: true
-  # system_prompt_file: "orchestrator/system_prompt.txt"  # Optional: path to system prompt file (default: orchestrator/system_prompt.txt)
-  # system_prompt_reload_interval: 1.0  # Optional: seconds between file checks for hot-reload (default: 1.0)
+  system_prompt_file: "orchestrator/ema_prompt.txt"  # Optional (default: orchestrator/system_prompt.txt)
+  # system_prompt_reload_interval: 1.0  # Optional: seconds between file checks for hot-reload (default: 1.0) NOT IMPLEMENTED
   hotkeys:
     toggle_listening: "ctrl+shift+l"  # Default hotkey for toggling listening
     cancel_speech: "ctrl+shift+c"  # Default hotkey for canceling speech/TTS
@@ -75,7 +75,6 @@ tts:
   host: "0.0.0.0"
   port: 8003
   provider: "genie-tts"  # Options: edge-tts, chattts, elevenlabs, genie-tts
-  output_sample_rate: null  # When null, inherits audio.output.sample_rate
   providers:
     edge-tts:
       voice: "zh-CN-XiaoyiNeural"  # Voice name
@@ -93,8 +92,8 @@ tts:
       character_name: "ema"
       onnx_model_dir: "CharacterModels/v2ProPlus/ema/onnx_model"  # Required: Directory containing ONNX model
       language: "jp"  # Language code (zh, en, jp)
-      reference_audio_path: "CharacterModels/v2ProPlus/ema/prompt_wav/4.WAV_0000489920_0000654080.wav"  # Optional: path to reference audio
-      reference_audio_text: "アリサちゃんの魔法発火なら気球を浮かせることができるんじゃないかって"  # Optional: text corresponding to reference audio
+      reference_audio_path: "CharacterModels/v2ProPlus/ema/prompt_wav/4.WAV_0000489920_0000654080.wav"
+      reference_audio_text: "アリサちゃんの魔法発火なら気球を浮かせることができるんじゃないかって"
       source_sample_rate: 32000  # Sample rate produced by GenieTTS (standard is 32000 for SoVITS models)
 
 # OCR (Optical Character Recognition) Service Configuration
@@ -112,16 +111,12 @@ audio:
     channels: 1
     device: null  # Set to device index or name, null for default
   output:
-    sample_rate: 16000  # Playback sample rate and TTS target (e.g., 48000)
+    sample_rate: 32000  # Playback sample rate and TTS target (e.g., 48000)
     channels: 1
     device: null #31  # Set to device index or name, null for default
   dtype: "float32"
   block_size_ms: 100  # Determines VAD sensitivity
-  silence_threshold_ms: 500  # 500ms of silence triggers a flush
-  vad_min_speech_prob: 0.5  # Minimum speech probability for VAD
-  vad_lookback_ms: 500  # Amount of audio to buffer before speech detection (prevents missing sentence beginnings)
-  plot_window_seconds: 2  # Show last 2 seconds of audio in plot
-  plot_update_interval_ms: 50  # Update plot every 50ms
+  silence_threshold_ms: 500  # 500ms of silence triggers a flush (used as fallback for STT providers)
   listening_status_poll_interval: 1.0  # Seconds between polling orchestrator for listening status
 
 # Bilibili Configuration
@@ -138,6 +133,10 @@ obs:
     port: 4455
     password: "j22KXyZ1ONOk5m70"
   subtitle_source: "subtitle"  # Name of the text source in OBS for subtitles
+  subtitle_ttl_seconds: 10  # Time to live for subtitles - clears after inactivity (0 = disabled)
+  visibility_source: "AI"  # Optional: Source name that has the filters (null = disabled)
+  appear_filter_name: MoveInRight  # Optional: Filter name to enable when subtitles first appear (null = disabled)
+  clear_filter_name: MoveOutRight  # Optional: Filter name to enable when subtitles are cleared (null = disabled)
 
 # Service URLs (used by orchestrator to connect to other services)
 services:

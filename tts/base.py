@@ -10,6 +10,17 @@ from typing import AsyncIterator
 class TTSProvider(ABC):
     """Abstract base class for TTS providers."""
     
+    @property
+    @abstractmethod
+    def native_sample_rate(self) -> int:
+        """
+        Get the native sample rate produced by this provider.
+        
+        Returns:
+            Native sample rate in Hz
+        """
+        pass
+    
     @abstractmethod
     async def synthesize_stream(self, text: str, **kwargs) -> AsyncIterator[bytes]:
         """
@@ -20,7 +31,7 @@ class TTSProvider(ABC):
             **kwargs: Provider-specific parameters (voice, rate, pitch, etc.)
             
         Yields:
-            Audio chunks as bytes (int16 PCM format)
+            Audio chunks as bytes (float32 PCM format, normalized to [-1, 1])
         """
         pass
     
@@ -36,7 +47,7 @@ class TTSProvider(ABC):
             **kwargs: Provider-specific parameters (voice, rate, pitch, etc.)
             
         Returns:
-            Complete audio as bytes (int16 PCM format)
+            Complete audio as bytes (float32 PCM format, normalized to [-1, 1])
         """
         # Default implementation: collect all stream chunks
         audio_chunks = []

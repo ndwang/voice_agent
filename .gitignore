@@ -13,8 +13,10 @@ stt/faster-whisper-small/
 .venv
 asset/
 logs/
-orchestrator/system_prompt.txt
+orchestrator/*_prompt.txt
 Modelfile
 tts/ChatTTS
 CharacterModels/
 GenieData/
+bilibili/blivedm/
+stt/FunASR/

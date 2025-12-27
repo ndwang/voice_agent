@@ -9,6 +9,7 @@ from core.config import get_full_config, save_config
 from orchestrator.events import EventType
 from orchestrator.core.constants import UI_ACTIVITY, UI_HISTORY_UPDATED, UI_LISTENING_STATE_CHANGED
 from orchestrator.api.models import SystemPromptUpdate, ListeningSetRequest, ConfigUpdate
+from orchestrator.utils.event_helpers import publish_history_updated
 
 logger = get_logger(__name__)
 router = APIRouter()
@@ -32,6 +33,14 @@ async def get_history():
     return {"history": orchestrator.interaction_manager.context_manager.conversation_history}
 
 
+@router.post("/ui/history/clear")
+async def clear_history():
+    """Clear conversation history."""
+    orchestrator.interaction_manager.context_manager.clear_history()
+    await publish_history_updated(orchestrator.event_bus)
+    return {"status": "success", "message": "History cleared"}
+
+
 @router.websocket("/ui/events")
 async def ui_events(websocket: WebSocket):
     """Stream internal events to the browser UI."""
@@ -48,7 +57,6 @@ async def ui_events(websocket: WebSocket):
         EventType.LLM_TOKEN.value, 
         EventType.LLM_RESPONSE_DONE.value,
         EventType.SPEECH_START.value,
-        EventType.AUDIO_PLAYING.value,
         EventType.LLM_CANCELLED.value,
         UI_LISTENING_STATE_CHANGED,
         UI_ACTIVITY,
@@ -58,15 +66,15 @@ async def ui_events(websocket: WebSocket):
     for topic in topics:
         bus.subscribe(topic, forward_event)
     
-    # Send initial listening state
-    initial_state = orchestrator.interaction_manager.listening_enabled
+    # Send initial activity state
+    initial_activity_state = orchestrator.interaction_manager.activity_state
     await websocket.send_json({
         "event": "listening_state_changed",
-        "enabled": initial_state
+        "enabled": initial_activity_state.listening
     })
     await websocket.send_json({
         "event": "activity",
-        "state": {"listening": initial_state}
+        "state": initial_activity_state.to_dict()
     })
     
     # Map internal event names to UI event names
@@ -138,7 +146,7 @@ async def update_system_prompt(request: SystemPromptUpdate):
 @router.get("/ui/listening/status")
 async def get_listening_status():
     """Get listening state."""
-    return {"enabled": orchestrator.interaction_manager.listening_enabled}
+    return {"enabled": orchestrator.interaction_manager.activity_state.listening}
 
 
 @router.post("/ui/listening/toggle")

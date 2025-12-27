@@ -4,6 +4,9 @@ class EventType(Enum):
     # System
     STARTUP = "system.startup"
     SHUTDOWN = "system.shutdown"
+    STATE_CHANGED = "system.state_changed"
+    HISTORY_UPDATED = "system.history_updated"
+    LISTENING_STATE_CHANGED = "system.listening_state_changed"
     
     # Input
     SPEECH_START = "input.speech_start"
@@ -19,9 +22,7 @@ class EventType(Enum):
     # TTS
     TTS_REQUEST = "tts.request"
     TTS_AUDIO_CHUNK = "tts.audio_chunk"
-    TTS_DONE = "tts.done"
     
-    # Audio
-    AUDIO_PLAYING = "audio.playing"
-    AUDIO_STOPPED = "audio.stopped"
+    # Subtitles
+    SUBTITLE_REQUEST = "subtitle.request"
 

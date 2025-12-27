@@ -5,6 +5,7 @@ Microsoft Edge TTS provider implementation.
 """
 import io
 from typing import AsyncIterator, Optional
+import numpy as np
 from pydub import AudioSegment
 
 from tts.base import TTSProvider
@@ -15,8 +16,7 @@ class EdgeTTSProvider(TTSProvider):
     
     def __init__(self, default_voice: str = "zh-CN-XiaoxiaoNeural", 
                  default_rate: str = "+0%", 
-                 default_pitch: str = "+0Hz",
-                 output_sample_rate: int = 16000):
+                 default_pitch: str = "+0Hz"):
         """
         Initialize Edge TTS provider.
         
@@ -24,7 +24,6 @@ class EdgeTTSProvider(TTSProvider):
             default_voice: Default voice to use
             default_rate: Default speech rate (e.g., "+0%", "-50%")
             default_pitch: Default pitch (e.g., "+0Hz", "+50Hz")
-            output_sample_rate: Target output sample rate in Hz
         """
         import edge_tts
         from edge_tts import VoicesManager
@@ -34,8 +33,12 @@ class EdgeTTSProvider(TTSProvider):
         self.default_voice = default_voice
         self.default_rate = default_rate
         self.default_pitch = default_pitch
-        self.output_sample_rate = output_sample_rate
     
+    @property
+    def native_sample_rate(self) -> int:
+        """Edge TTS native rate varies, typically 24kHz."""
+        return 24000
+
     async def synthesize_stream(self, text: str, **kwargs) -> AsyncIterator[bytes]:
         """
         Synthesize text using Edge TTS and stream audio chunks.
@@ -48,7 +51,7 @@ class EdgeTTSProvider(TTSProvider):
                 - pitch: Pitch (default: self.default_pitch)
         
         Yields:
-            Audio chunks as bytes (int16 PCM format)
+            Audio chunks as bytes (float32 PCM format, normalized to [-1, 1])
         """
         if not text or not text.strip():
             # Return empty audio for empty text
@@ -100,21 +103,21 @@ class EdgeTTSProvider(TTSProvider):
         if audio.channels > 1:
             audio = audio.set_channels(1)
         
-        # Resample to target sample rate
-        if audio.frame_rate != self.output_sample_rate:
-            audio = audio.set_frame_rate(self.output_sample_rate)
-        
-        # Convert to int16 PCM
-        # raw_data returns bytes in the format: int16 samples
-        audio_bytes = audio.raw_data
+        # Convert to float32 PCM (normalized to [-1, 1])
+        # Get samples as numpy array and normalize
+        samples = np.array(audio.get_array_of_samples(), dtype=np.float32)
+        # Normalize to [-1, 1] range (int16 range is [-32768, 32767])
+        audio_float = samples / 32768.0
+        # Convert to bytes
+        audio_bytes = audio_float.tobytes()
         
         # Validate output audio
         if len(audio_bytes) == 0:
             raise ValueError("Converted PCM audio is empty")
         
-        # Ensure we have at least 2 bytes (one int16 sample)
-        if len(audio_bytes) < 2:
-            raise ValueError(f"Audio too short: {len(audio_bytes)} bytes (need at least 2)")
+        # Ensure we have at least 4 bytes (one float32 sample)
+        if len(audio_bytes) < 4:
+            raise ValueError(f"Audio too short: {len(audio_bytes)} bytes (need at least 4)")
         
         # Yield as a single chunk (could be split into smaller chunks if needed)
         yield audio_bytes

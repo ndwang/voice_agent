@@ -30,10 +30,15 @@ class ContextManager:
         self.ocr_timestamp: Optional[float] = None
         
         # System prompt file management
+        project_root = Path(__file__).parent.parent.parent
         if system_prompt_file is None:
             # Default to orchestrator/system_prompt.txt
-            project_root = Path(__file__).parent.parent.parent
             system_prompt_file = str(project_root / "orchestrator" / "system_prompt.txt")
+        else:
+            # Resolve relative paths relative to project root
+            prompt_path = Path(system_prompt_file)
+            if not prompt_path.is_absolute():
+                system_prompt_file = str(project_root / prompt_path)
         
         self.system_prompt_file = Path(system_prompt_file)
         self._system_prompt: Optional[str] = None
@@ -171,7 +176,25 @@ class ContextManager:
             "content": text,
             "timestamp": datetime.now().isoformat()
         })
-    
+
+    def update_last_message(self, text: str, role: Optional[str] = None):
+        """Update the content of the last message in history."""
+        if not self.conversation_history:
+            return
+            
+        last_msg = self.conversation_history[-1]
+        if role and last_msg["role"] != role:
+            return
+            
+        last_msg["content"] = text
+        last_msg["timestamp"] = datetime.now().isoformat()
+
+    def get_last_message(self) -> Optional[Dict[str, str]]:
+        """Get the last message in history."""
+        if not self.conversation_history:
+            return None
+        return self.conversation_history[-1]
+
     def update_ocr_context(self, text: str):
         """Update OCR context with latest text."""
         import time

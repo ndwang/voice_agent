@@ -97,20 +97,19 @@ class OrchestratorServer:
 
     async def toggle_listening(self) -> bool:
         """Toggle listening state and return new state."""
-        self.interaction_manager.listening_enabled = not self.interaction_manager.listening_enabled
-        logger.info(f"Listening {'enabled' if self.interaction_manager.listening_enabled else 'disabled'}")
+        new_state = not self.interaction_manager.activity_state.listening
+        logger.info(f"Listening {'enabled' if new_state else 'disabled'}")
         
-        # Publish listening state change event
-        await publish_listening_state_changed(self.event_bus, self.interaction_manager.listening_enabled)
+        # Publish listening state change event (InteractionManager will update local state)
+        await publish_listening_state_changed(self.event_bus, new_state)
         
         # Also publish activity update
-        await publish_activity(self.event_bus, {"listening": self.interaction_manager.listening_enabled})
+        await publish_activity(self.event_bus, {"listening": new_state})
         
-        return self.interaction_manager.listening_enabled
+        return new_state
 
     async def set_listening(self, enabled: bool):
         """Set listening state explicitly."""
-        self.interaction_manager.listening_enabled = enabled
         logger.info(f"Listening set to: {enabled}")
         
         # Publish listening state change event

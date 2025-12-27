@@ -128,6 +128,15 @@ class OBSClient(BaseClient):
                 self._connection_failed = False
                 self._connection_failed_time = None
     
+    async def get_current_scene(self) -> str:
+        """Get the current program scene name."""
+        if not self.ws:
+            return ""
+        response = await self._safe_call(requests.GetCurrentProgramScene())
+        if not response:
+            return ""
+        return response.datain.get("currentProgramSceneName", "")
+    
     async def set_scene(self, new_scene: str):
         """Set the current scene."""
         if not self.ws:

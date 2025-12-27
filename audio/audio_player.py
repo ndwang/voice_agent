@@ -6,6 +6,7 @@ Streaming audio playback using sounddevice.
 import asyncio
 import numpy as np
 import sounddevice as sd
+from scipy import signal
 from typing import Optional, Callable, Awaitable
 from collections import deque
 from pathlib import Path
@@ -52,6 +53,14 @@ class AudioPlayer:
         self.on_play_state = on_play_state
         self._audio_active = False
         
+        # Reactive state management
+        try:
+            self._loop = asyncio.get_running_loop()
+        except RuntimeError:
+            self._loop = asyncio.get_event_loop()
+        self._buffer_empty_event = asyncio.Event()
+        self._buffer_empty_event.set()
+        
         # Streaming buffer for continuous playback
         self._buffer_lock = threading.Lock()
         self._audio_buffer = deque()  # Queue of numpy arrays ready to play
@@ -61,14 +70,17 @@ class AudioPlayer:
         # ~50ms buffer for low latency
         self._frames_per_chunk = int(self.playback_sample_rate * 0.05)  # 50ms chunks
     
-    async def play_audio_chunk(self, audio_data: bytes):
+    async def play_audio_chunk(self, audio_data: bytes, source_sample_rate: int):
         """
         Add audio chunk to playback queue.
         
         Args:
-            audio_data: Audio data as bytes (int16 format)
+            audio_data: Audio data as bytes (float32 format, normalized to [-1, 1])
+            source_sample_rate: Sample rate of the incoming audio
         """
-        await self.audio_queue.put(audio_data)
+        # Store source sample rate for this chunk if needed
+        # We'll process it in the playback loop
+        await self.audio_queue.put((audio_data, source_sample_rate))
         
         # Start playback task if not already running
         if not self.playing:
@@ -85,6 +97,9 @@ class AudioPlayer:
             if len(self._audio_buffer) == 0:
                 # No data available - output silence
                 outdata.fill(0)
+                if self._audio_active:
+                    # Signal that buffer is exhausted
+                    self._loop.call_soon_threadsafe(self._buffer_empty_event.set)
                 return
             
             # Collect enough frames from buffer
@@ -138,78 +153,79 @@ class AudioPlayer:
             
             self._stream.start()
             
-            if self.on_play_state and not self._audio_active:
-                self._audio_active = True
-                await self.on_play_state(True)
-            
             # Process incoming audio chunks
             while self.playing:
-                try:
-                    # Get audio chunk from queue (with timeout to check playing flag)
+                # Wait for data or buffer empty
+                if not self._audio_active:
+                    # Not playing: wait for new data to arrive
+                    item = await self.audio_queue.get()
+                else:
+                    # Currently playing: wait for next chunk OR buffer empty
+                    get_task = asyncio.create_task(self.audio_queue.get())
+                    wait_empty_task = asyncio.create_task(self._buffer_empty_event.wait())
+                    
                     try:
-                        audio_bytes = await asyncio.wait_for(self.audio_queue.get(), timeout=0.1)
-                    except asyncio.TimeoutError:
-                        # Check if we should continue
-                        if not self.playing:
-                            break
-                        # Check if buffer is empty and queue is empty
-                        with self._buffer_lock:
-                            buffer_empty = len(self._audio_buffer) == 0
-                        if buffer_empty and self.audio_queue.empty():
-                            # No more data - check if we should stop
-                            await asyncio.sleep(0.05)
-                            if self.audio_queue.empty() and not self.playing:
-                                break
-                        continue
+                        done, pending = await asyncio.wait(
+                            [get_task, wait_empty_task],
+                            return_when=asyncio.FIRST_COMPLETED
+                        )
+                        
+                        if wait_empty_task in done:
+                            # Buffer exhausted!
+                            trigger_stop = False
+                            with self._buffer_lock:
+                                if self._audio_active:
+                                    self._audio_active = False
+                                    trigger_stop = True
+                            if trigger_stop and self.on_play_state:
+                                await self.on_play_state(False)
+                        
+                        if get_task in done:
+                            item = get_task.result()
+                        else:
+                            # No new data yet, continue loop
+                            continue
+                    finally:
+                        # Always cleanup pending tasks
+                        for t in pending:
+                            t.cancel()
+
+                # Process new item
+                try:
+                    if isinstance(item, tuple):
+                        audio_bytes, source_rate = item
+                    else:
+                        audio_bytes = item
+                        source_rate = self.sample_rate
                     
                     if not self.playing:
                         break
                     
-                    # Convert bytes to numpy array (int16)
-                    audio_array = np.frombuffer(audio_bytes, dtype=np.int16)
-                    
-                    # Convert to float32 and normalize
-                    audio_float = audio_array.astype(np.float32) / 32767.0
-                    
-                    # Reshape if needed
+                    # Convert bytes to numpy array
+                    audio_float = np.frombuffer(audio_bytes, dtype=np.float32)
                     if self.channels == 1:
                         audio_float = audio_float.reshape(-1, 1)
                     else:
                         audio_float = audio_float.reshape(-1, self.channels)
                     
-                    # Resample if playback device requires a different rate
-                    playback_audio = self._resample_audio(audio_float)
+                    playback_audio = self._resample_audio(audio_float, source_rate)
                     
-                    # Add to buffer (thread-safe)
+                    # Push to buffer
+                    trigger_play = False
                     with self._buffer_lock:
                         self._audio_buffer.append(playback_audio)
+                        self._buffer_empty_event.clear()
+                        if not self._audio_active:
+                            self._audio_active = True
+                            trigger_play = True
+                    
+                    if trigger_play and self.on_play_state:
+                        await self.on_play_state(True)
                     
                     logger.debug(f"Added audio chunk: {len(playback_audio)} frames to buffer")
                     
                 except Exception as e:
                     logger.error(f"Audio processing error: {e}", exc_info=True)
-            
-            # Wait for buffer to drain
-            max_wait = 5.0  # Maximum wait time in seconds
-            wait_start = asyncio.get_event_loop().time()
-            while self.playing:
-                with self._buffer_lock:
-                    buffer_empty = len(self._audio_buffer) == 0
-                
-                if buffer_empty and self.audio_queue.empty():
-                    break
-                
-                # Check timeout
-                if asyncio.get_event_loop().time() - wait_start > max_wait:
-                    logger.warning("Timeout waiting for audio buffer to drain")
-                    break
-                
-                await asyncio.sleep(0.1)
-            
-            # Update play state
-            if self.on_play_state and self._audio_active:
-                self._audio_active = False
-                await self.on_play_state(False)
         
         except Exception as e:
             logger.error(f"Playback loop error: {e}", exc_info=True)
@@ -231,32 +247,26 @@ class AudioPlayer:
                 self._audio_active = False
                 await self.on_play_state(False)
 
-    def _resample_audio(self, audio: np.ndarray) -> np.ndarray:
+    def _resample_audio(self, audio: np.ndarray, source_rate: int) -> np.ndarray:
         """Resample audio to the playback sample rate if needed."""
         if (
             audio.size == 0
-            or self.playback_sample_rate == self.sample_rate
+            or self.playback_sample_rate == source_rate
         ):
             return audio
 
         src_len = audio.shape[0]
         target_len = max(
-            1, int(round(src_len * self.playback_sample_rate / self.sample_rate))
+            1, int(round(src_len * self.playback_sample_rate / source_rate))
         )
 
         if target_len == src_len:
             return audio
 
-        x_old = np.linspace(0, src_len - 1, src_len)
-        x_new = np.linspace(0, src_len - 1, target_len)
-
-        if audio.ndim == 1 or audio.shape[1] == 1:
-            resampled = np.interp(x_new, x_old, audio.reshape(-1)).astype(np.float32)
-            return resampled.reshape(-1, 1)
-
-        resampled = np.empty((target_len, audio.shape[1]), dtype=np.float32)
-        for ch in range(audio.shape[1]):
-            resampled[:, ch] = np.interp(x_new, x_old, audio[:, ch])
+        # Use scipy for high-quality resampling
+        # Resample takes (data, num_samples)
+        # audio is (samples, channels)
+        resampled = signal.resample(audio, target_len, axis=0).astype(np.float32)
         return resampled
     
     async def stop(self):

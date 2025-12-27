@@ -271,10 +271,16 @@ class STTManager:
                             cache_dict = self.provider.initialize_streaming()
                             state.asr_cache = cache_dict["asr_cache"]
                             state.vad_cache = cache_dict["vad_cache"]
-                            # Clear any buffered audio from before silence
+                            
+                            # Clear any buffered audio from before silence to discard old noise
                             state.asr_chunk_buffer = np.array([], dtype=np.float32)
                             state.vad_chunk_buffer = np.array([], dtype=np.float32)
                             state.current_transcript = ""
+                            
+                            # BUT preserve the VAD chunk that triggered detection (contains speech start)
+                            # Add it back to asr_chunk_buffer as the starting point
+                            state.asr_chunk_buffer = vad_chunk.copy()
+                            
                         state.is_speaking = True
                         state.silence_start_time = None
                     elif beg == -1 and end != -1:

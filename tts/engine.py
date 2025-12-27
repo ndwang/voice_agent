@@ -17,11 +17,6 @@ class TTSEngine:
     """
 
     def __init__(self):
-        # Configuration
-        self.output_sample_rate = get_config("tts", "output_sample_rate")
-        if self.output_sample_rate is None:
-            self.output_sample_rate = get_config("audio", "output", "sample_rate", default=16000)
-
         # Provider setup
         self.provider_name = get_config("tts", "provider", default="edge-tts")
         self.provider: TTSProvider = self._load_provider()
@@ -60,12 +55,10 @@ class TTSEngine:
                 return EdgeTTSProvider(
                     default_voice=get_config("tts", "providers", "edge-tts", "voice", default="zh-CN-XiaoxiaoNeural"),
                     default_rate=get_config("tts", "providers", "edge-tts", "rate", default="+0%"),
-                    default_pitch=get_config("tts", "providers", "edge-tts", "pitch", default="+0Hz"),
-                    output_sample_rate=self.output_sample_rate
+                    default_pitch=get_config("tts", "providers", "edge-tts", "pitch", default="+0Hz")
                 )
             elif self.provider_name == "chattts":
                 return ChatTTSProvider(
-                    output_sample_rate=self.output_sample_rate,
                     model_source=get_config("tts", "providers", "chattts", "model_source", default="local"),
                     device=get_config("tts", "providers", "chattts", "device", default=None)
                 )
@@ -75,7 +68,6 @@ class TTSEngine:
                     logger.warning("ElevenLabs voice_id not configured in config.yaml")
                 return ElevenLabsProvider(
                     default_voice_id=voice_id,
-                    output_sample_rate=self.output_sample_rate,
                     stability=get_config("tts", "providers", "elevenlabs", "stability", default=0.5),
                     similarity_boost=get_config("tts", "providers", "elevenlabs", "similarity_boost", default=0.8),
                     style=get_config("tts", "providers", "elevenlabs", "style", default=0.0)
@@ -87,8 +79,7 @@ class TTSEngine:
                     language=get_config("tts", "providers", "genie-tts", "language", default="zh"),
                     reference_audio_path=get_config("tts", "providers", "genie-tts", "reference_audio_path"),
                     reference_audio_text=get_config("tts", "providers", "genie-tts", "reference_audio_text"),
-                    source_sample_rate=get_config("tts", "providers", "genie-tts", "source_sample_rate", default=32000),
-                    output_sample_rate=self.output_sample_rate
+                    source_sample_rate=get_config("tts", "providers", "genie-tts", "source_sample_rate", default=32000)
                 )
             else:
                 raise ValueError(f"Unknown TTS provider: {self.provider_name}")
@@ -140,8 +131,14 @@ class TTSEngine:
                     message = await asyncio.wait_for(websocket.receive_text(), timeout=0.5)
                 except asyncio.TimeoutError:
                     continue
-                except Exception:
+                except (WebSocketDisconnect, ConnectionError, RuntimeError) as e:
+                    # Connection-related errors - break the loop
+                    logger.debug(f"WebSocket connection error: {e}")
                     break
+                except Exception as e:
+                    # Other exceptions might be recoverable, log and continue
+                    logger.warning(f"Unexpected error receiving message: {e}")
+                    continue
                 
                 # 3. Process Message
                 try:
@@ -152,19 +149,33 @@ class TTSEngine:
                 
                 msg_type = data.get("type")
                 
-                if msg_type == "text":
-                    await self._handle_text_message(websocket, data, provider_params)
-                
-                elif msg_type == "config":
-                    self._update_params(data, provider_params)
-                    await websocket.send_text(json.dumps({"type": "config_updated"}))
+                # Process message - wrap in try-except to prevent one failed message from closing connection
+                try:
+                    if msg_type == "text":
+                        await self._handle_text_message(websocket, data, provider_params)
                     
-                elif msg_type == "ping":
-                    await websocket.send_text(json.dumps({"type": "pong"}))
-                    last_ping_time = time.time()
-                    
-                elif msg_type == "pong":
-                    last_ping_time = time.time()
+                    elif msg_type == "config":
+                        self._update_params(data, provider_params)
+                        await websocket.send_text(json.dumps({"type": "config_updated"}))
+                        
+                    elif msg_type == "ping":
+                        await websocket.send_text(json.dumps({"type": "pong"}))
+                        last_ping_time = time.time()
+                        
+                    elif msg_type == "pong":
+                        last_ping_time = time.time()
+                except (WebSocketDisconnect, ConnectionError) as e:
+                    # Connection closed during message processing - break the loop
+                    logger.debug(f"WebSocket connection closed during message processing: {e}")
+                    break
+                except Exception as e:
+                    # Synthesis or other errors - log but continue processing
+                    logger.error(f"Error processing message: {e}", exc_info=True)
+                    try:
+                        await websocket.send_text(json.dumps({"type": "error", "message": f"Error processing message: {str(e)}"}))
+                    except:
+                        # If we can't send error, connection is likely dead
+                        break
         
         except WebSocketDisconnect:
             pass
@@ -209,6 +220,12 @@ class TTSEngine:
             heartbeat_task = asyncio.create_task(self._send_processing_heartbeats(websocket))
             
             try:
+                # 1. Send audio configuration before first chunk
+                await websocket.send_text(json.dumps({
+                    "type": "audio_config",
+                    "sample_rate": self.provider.native_sample_rate
+                }))
+                
                 chunk_count = 0
                 async for audio_chunk in self.provider.synthesize_stream(text, **params):
                     # Cancel heartbeat once we start getting audio

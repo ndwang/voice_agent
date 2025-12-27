@@ -7,13 +7,15 @@ from orchestrator.events import EventType
 from orchestrator.managers.base import BaseManager
 from orchestrator.managers.context_manager import ContextManager
 from orchestrator.core.constants import SENTENCE_END_PATTERN
+from orchestrator.core.models import SystemState
 from orchestrator.utils.event_helpers import (
     publish_activity,
     publish_history_updated
 )
 from orchestrator.utils.text_processing import (
     filter_thinking_tags,
-    filter_thinking_tags_final
+    filter_thinking_tags_final,
+    LLMStreamParser
 )
 from llm.providers import GeminiProvider, OllamaProvider
 
@@ -26,17 +28,21 @@ class InteractionManager(BaseManager):
     """
 
     def __init__(self, event_bus: EventBus):
-        # State
-        self.listening_enabled = True
-        
         # Thinking filter state
         provider_name = get_config("llm", "provider", default="ollama")
         self.disable_thinking = get_config("llm", "providers", provider_name, "disable_thinking", default=False)
         
+        # Get system prompt file from config
+        system_prompt_file = get_config("orchestrator", "system_prompt_file", default=None)
+        
         # Components
-        self.context_manager = ContextManager()
+        self.context_manager = ContextManager(system_prompt_file=system_prompt_file)
         self.llm_provider = self._init_llm()
         self.cancel_event = asyncio.Event()
+        
+        # Systematic State Tracking
+        self.activity_state = SystemState()
+        self._interrupted_before_finished = False
         
         super().__init__(event_bus)
 
@@ -62,24 +68,75 @@ class InteractionManager(BaseManager):
     def _register_handlers(self):
         self.event_bus.subscribe(EventType.TRANSCRIPT_FINAL.value, self.on_transcript)
         self.event_bus.subscribe(EventType.SPEECH_START.value, self.on_interruption)
+        self.event_bus.subscribe(EventType.LLM_CANCELLED.value, self.on_cancel)
+        # Unified state tracking
+        self.event_bus.subscribe(EventType.STATE_CHANGED.value, self.on_state_changed)
+        self.event_bus.subscribe(EventType.LISTENING_STATE_CHANGED.value, self.on_listening_state_changed)
+
+    async def on_state_changed(self, event: Event):
+        """Update local state snapshot from system state changes."""
+        new_state = event.data.get("state", {})
+        self.activity_state.update(new_state)
+
+    async def on_listening_state_changed(self, event: Event):
+        """Update local listening state."""
+        self.activity_state.listening = event.data.get("enabled", True)
 
     async def on_interruption(self, event: Event):
-        """User started speaking, cancel current generation."""
+        """User started speaking, publish cancel event if busy."""
+        # Only publish cancel if we are currently active (responding, synthesizing, or playing)
+        is_busy = (
+            self.activity_state.responding or 
+            self.activity_state.synthesizing or 
+            self.activity_state.playing
+        )
+        
+        if is_busy:
+            await self.event_bus.publish(Event(EventType.LLM_CANCELLED.value))
+
+    async def on_cancel(self, event: Event):
+        """Handle cancellation from any source (speech start, hotkey, UI)."""
         self.cancel_event.set()
-        # Publish cancelled event so TTS/Audio can stop
-        await self.event_bus.publish(Event(EventType.LLM_CANCELLED.value))
+        
+        # Point 1: If we finished generating but are still playing, mark as interrupted
+        # if not self.activity_state.responding and self.activity_state.playing:
+        #     last_msg = self.context_manager.get_last_message()
+        #     if last_msg and last_msg["role"] == "assistant":
+        #         if "[interrupted]" not in last_msg["content"]:
+        #             self.logger.info("Marking assistant response as interrupted in history")
+        #             new_content = last_msg["content"].strip() + " [interrupted]"
+        #             self.context_manager.update_last_message(new_content, role="assistant")
+        #             await publish_history_updated(self.event_bus)
+        
+        # Point 2: If we are still responding, the next transcript should be concatenated
+        if self.activity_state.responding:
+            self.logger.info("Interrupted during LLM generation - will concatenate next message")
+            self._interrupted_before_finished = True
 
     async def on_transcript(self, event: Event):
         """Handle final transcript: User -> LLM -> TTS."""
-        if not self.listening_enabled:
+        if not self.activity_state.listening:
             return
             
         text = event.data.get("text")
         if not text:
             return
 
+        # Point 2: Concatenate if previous turn was interrupted before LLM finished
+        if self._interrupted_before_finished:
+            last_msg = self.context_manager.get_last_message()
+            if last_msg and last_msg["role"] == "user":
+                self.logger.info(f"Concatenating interrupted message: '{last_msg['content']}' + '{text}'")
+                combined_text = f"{last_msg['content']} [interrupted] {text}"
+                self.context_manager.update_last_message(combined_text, role="user")
+                text = combined_text # Use combined text for the next LLM request
+            else:
+                self.context_manager.add_user_message(text)
+            self._interrupted_before_finished = False
+        else:
+            self.context_manager.add_user_message(text)
+
         self.logger.info(f"User: {text}")
-        self.context_manager.add_user_message(text)
         self.cancel_event.clear()
         
         # Publish activity: transcribing is done, now responding
@@ -95,8 +152,44 @@ class InteractionManager(BaseManager):
         
         # Stream response state
         full_response = ""
-        sentence_buffer = ""
-        thinking_buffer = "" # Accumulates tokens to detect/filter tags
+        
+        # Setup parser callbacks
+        async def default_callback(text: str):
+            """Handle untagged content (no-op)."""
+            pass
+        
+        async def jp_callback(text: str):
+            """Handle <jp> tag content - send to TTS."""
+            if not self.cancel_event.is_set():
+                await self.event_bus.publish(Event(EventType.TTS_REQUEST.value, {"text": text}))
+        
+        async def zh_callback(text: str):
+            """Handle <zh> tag content - send to OBS subtitles."""
+            if not self.cancel_event.is_set():
+                await self.event_bus.publish(Event(EventType.SUBTITLE_REQUEST.value, {"text": text}))
+        
+        # Configure parser
+        tag_configs = []
+        if self.disable_thinking:
+            # Discard redacted_reasoning tags (no callback)
+            tag_configs.append({"name": "redacted_reasoning"})
+        
+        # Add jp and zh tag handlers
+        tag_configs.append({"name": "think", "callback": default_callback})
+        tag_configs.append({"name": "jp", "callback": jp_callback})
+        tag_configs.append({"name": "zh", "callback": zh_callback})
+        
+        # Create parser
+        parser = LLMStreamParser(tag_configs, default_callback=default_callback)
+        
+        # Configure parser
+        tag_configs = []
+        if self.disable_thinking:
+            # Discard redacted_reasoning tags (no callback)
+            tag_configs.append({"name": "redacted_reasoning"})
+        
+        # Create parser
+        parser = LLMStreamParser(tag_configs, default_callback=default_callback)
         
         try:
             async for token in self.llm_provider.generate_stream(
@@ -111,29 +204,18 @@ class InteractionManager(BaseManager):
 
                 full_response += token
                 
-                if self.disable_thinking:
-                    # Filter thinking tags using utility function
-                    safe_to_process, thinking_buffer = filter_thinking_tags(token, thinking_buffer)
-                    
-                    if not safe_to_process:
-                        continue
-                        
-                    # Process the safe tokens
-                    sentence_buffer = await self._process_tokens(safe_to_process, sentence_buffer)
-                else:
-                    # Thinking not disabled - process token directly
-                    sentence_buffer = await self._process_tokens(token, sentence_buffer)
+                # Publish token for UI display
+                await self.event_bus.publish(Event(EventType.LLM_TOKEN.value, {"token": token}))
+                
+                # Process token through parser
+                await parser.process_token(token)
 
-            # Final flush of remaining buffers
-            if self.disable_thinking and thinking_buffer:
-                final_filtered = filter_thinking_tags_final(thinking_buffer)
-                if final_filtered:
-                    sentence_buffer = await self._process_tokens(final_filtered, sentence_buffer)
-
-            if sentence_buffer.strip() and not self.cancel_event.is_set():
+            # Final flush of parser buffers
+            await parser.finalize()
+            
+            if not self.cancel_event.is_set():
                 # Publish activity: responding done (synthesizing will be set by TTS handler)
                 await publish_activity(self.event_bus, {"responding": False})
-                await self.event_bus.publish(Event(EventType.TTS_REQUEST.value, {"text": sentence_buffer.strip()}))
 
             # Save to history
             if not self.cancel_event.is_set():

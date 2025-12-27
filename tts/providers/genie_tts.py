@@ -1,11 +1,9 @@
 """
 GenieTTS Provider implementation.
 """
-import io
-import asyncio
 import logging
-from typing import AsyncIterator, Optional, Union
-from pathlib import Path
+import numpy as np
+from typing import AsyncIterator, Optional
 
 from tts.base import TTSProvider
 
@@ -21,8 +19,7 @@ class GenieTTSProvider(TTSProvider):
         language: str = "zh",
         reference_audio_path: Optional[str] = None,
         reference_audio_text: Optional[str] = None,
-        source_sample_rate: int = 32000,
-        output_sample_rate: int = 16000
+        source_sample_rate: int = 32000
     ):
         """
         Initialize GenieTTS provider.
@@ -34,7 +31,6 @@ class GenieTTSProvider(TTSProvider):
             reference_audio_path: Path to reference audio for cloning
             reference_audio_text: Text for the reference audio
             source_sample_rate: Sample rate of audio produced by GenieTTS
-            output_sample_rate: Target output sample rate in Hz
         """
         import genie_tts as genie
         self.genie = genie
@@ -44,13 +40,17 @@ class GenieTTSProvider(TTSProvider):
         self.reference_audio_path = reference_audio_path
         self.reference_audio_text = reference_audio_text
         self.source_sample_rate = source_sample_rate
-        self.output_sample_rate = output_sample_rate
         
         self._loaded = False
         self._current_ref_audio = (reference_audio_path, reference_audio_text)
         
         # Load character immediately
         self._load_character()
+
+    @property
+    def native_sample_rate(self) -> int:
+        """Get native sample rate (from config)."""
+        return self.source_sample_rate
 
     def _load_character(self):
         """Load character model and set initial reference audio."""
@@ -87,7 +87,7 @@ class GenieTTSProvider(TTSProvider):
                 - character_name: Override character name (must be loaded)
         
         Yields:
-            Audio chunks as bytes (int16 PCM format)
+            Audio chunks as bytes (float32 PCM format, normalized to [-1, 1])
         """
         if not text or not text.strip():
             return
@@ -110,10 +110,7 @@ class GenieTTSProvider(TTSProvider):
                 )
                 self._current_ref_audio = (ref_path, ref_text)
 
-        # Use pydub for conversion if needed, similar to EdgeTTS
-        from pydub import AudioSegment
-
-        audio_chunks = []
+        # Process chunks as they arrive
         try:
             async for chunk in self.genie.tts_async(
                 character_name=char_name,
@@ -121,50 +118,22 @@ class GenieTTSProvider(TTSProvider):
                 play=False,
                 split_sentence=kwargs.get("split_sentence", False)
             ):
-                audio_chunks.append(chunk)
+                if not chunk:
+                    continue
+                
+                # GenieTTS yields raw PCM (int16, mono)
+                # Convert int16 bytes to float32 normalized array
+                audio_int16 = np.frombuffer(chunk, dtype=np.int16)
+                # Normalize to [-1, 1] range (int16 range is [-32768, 32767])
+                audio_float = audio_int16.astype(np.float32) / 32768.0
+                # Convert back to bytes (float32)
+                audio_bytes = audio_float.tobytes()
+                
+                # Yield immediately
+                yield audio_bytes
+                
         except Exception as e:
             logger.error(f"GenieTTS synthesis error: {e}")
-            raise
-
-        if not audio_chunks:
-            return
-
-        # GenieTTS often yields raw PCM chunks instead of WAV chunks.
-        # We check for the RIFF header to decide how to load it.
-        wav_data = b"".join(audio_chunks)
-        
-        if not wav_data:
-            return
-
-        try:
-            if wav_data.startswith(b"RIFF"):
-                # Load WAV audio from bytes
-                audio = AudioSegment.from_wav(io.BytesIO(wav_data))
-            else:
-                # Load raw PCM audio (assuming int16, mono)
-                audio = AudioSegment.from_raw(
-                    io.BytesIO(wav_data),
-                    sample_width=2,
-                    frame_rate=self.source_sample_rate,
-                    channels=1
-                )
-            
-            # Convert to mono if needed
-            if audio.channels > 1:
-                audio = audio.set_channels(1)
-            
-            # Resample to target sample rate
-            if audio.frame_rate != self.output_sample_rate:
-                audio = audio.set_frame_rate(self.output_sample_rate)
-            
-            # Convert to int16 PCM
-            audio_bytes = audio.raw_data
-            
-            # Yield the processed audio
-            yield audio_bytes
-            
-        except Exception as e:
-            logger.error(f"Failed to process GenieTTS audio: {e}")
             raise
 
     async def list_voices(self) -> list:

@@ -5,6 +5,7 @@ Implementation for ElevenLabs TTS provider with streaming support.
 """
 import os
 import asyncio
+import numpy as np
 from typing import AsyncIterator, Optional
 
 from tts.base import TTSProvider
@@ -17,7 +18,6 @@ class ElevenLabsProvider(TTSProvider):
     
     def __init__(self, 
                  default_voice_id: str,
-                 output_sample_rate: int = 16000,
                  stability: float = 0.5,
                  similarity_boost: float = 0.8,
                  style: float = 0.0,
@@ -27,7 +27,6 @@ class ElevenLabsProvider(TTSProvider):
         
         Args:
             default_voice_id: Default voice ID to use
-            output_sample_rate: Target output sample rate in Hz
             stability: Voice stability setting (0.0 to 1.0)
             similarity_boost: Similarity boost setting (0.0 to 1.0)
             style: Style exaggeration setting (0.0 to 1.0)
@@ -50,13 +49,17 @@ class ElevenLabsProvider(TTSProvider):
             
         self.client = self.AsyncElevenLabs(api_key=self.api_key)
         self.default_voice_id = default_voice_id
-        self.output_sample_rate = output_sample_rate
         self.default_settings = {
             "stability": stability,
             "similarity_boost": similarity_boost,
             "style": style,
             "use_speaker_boost": use_speaker_boost
         }
+
+    @property
+    def native_sample_rate(self) -> int:
+        """ElevenLabs native rate for pcm_16000 is 16kHz."""
+        return 16000
 
     async def synthesize_stream(self, text: str, **kwargs) -> AsyncIterator[bytes]:
         """
@@ -71,7 +74,7 @@ class ElevenLabsProvider(TTSProvider):
                 - style: Style setting
         
         Yields:
-            Audio chunks as bytes (int16 PCM format)
+            Audio chunks as bytes (float32 PCM format, normalized to [-1, 1])
         """
         if not text or not text.strip():
             return
@@ -95,12 +98,17 @@ class ElevenLabsProvider(TTSProvider):
                 output_format="pcm_16000"
             )
 
-            # Stream PCM chunks as they arrive (already in int16 PCM format, 16kHz, mono)
+            # Stream PCM chunks as they arrive (ElevenLabs returns int16 PCM, convert to float32)
             chunk_count = 0
             async for chunk in audio_stream:
                 if chunk:
                     chunk_count += 1
-                    yield chunk
+                    # Convert int16 bytes to float32 normalized array
+                    audio_int16 = np.frombuffer(chunk, dtype=np.int16)
+                    # Normalize to [-1, 1] range
+                    audio_float = audio_int16.astype(np.float32) / 32768.0
+                    # Convert back to bytes (float32)
+                    yield audio_float.tobytes()
             
             # Validate we received at least some audio data
             if chunk_count == 0:
