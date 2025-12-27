@@ -8,7 +8,7 @@ orchestrator:
   stt_websocket_path: "/ws/stt"
   log_level: "INFO"
   enable_latency_tracking: true
-  # system_prompt_file: "orchestrator/system_prompt.txt"  # Optional: path to system prompt file (default: orchestrator/system_prompt.txt)
+  system_prompt_file: "orchestrator/ema_prompt.txt"  # Optional (default: orchestrator/system_prompt.txt)
   # system_prompt_reload_interval: 1.0  # Optional: seconds between file checks for hot-reload (default: 1.0)
   hotkeys:
     toggle_listening: "ctrl+shift+l"  # Default hotkey for toggling listening
@@ -75,7 +75,6 @@ tts:
   host: "0.0.0.0"
   port: 8003
   provider: "genie-tts"  # Options: edge-tts, chattts, elevenlabs, genie-tts
-  output_sample_rate: null  # When null, inherits audio.output.sample_rate
   providers:
     edge-tts:
       voice: "zh-CN-XiaoyiNeural"  # Voice name
@@ -112,7 +111,7 @@ audio:
     channels: 1
     device: null  # Set to device index or name, null for default
   output:
-    sample_rate: 16000  # Playback sample rate and TTS target (e.g., 48000)
+    sample_rate: 32000  # Playback sample rate and TTS target (e.g., 48000)
     channels: 1
     device: null #31  # Set to device index or name, null for default
   dtype: "float32"

@@ -27,7 +27,7 @@ async def root():
     return {
         "message": "TTS Service is running",
         "provider": tts_engine.provider_name,
-        "output_sample_rate": tts_engine.output_sample_rate
+        "native_sample_rate": tts_engine.provider.native_sample_rate
     }
 
 @router.get("/voices")
@@ -65,7 +65,7 @@ async def synthesize(request: SynthesizeRequest):
             media_type="audio/pcm",
             headers={
                 "Content-Type": "audio/pcm",
-                "Sample-Rate": str(tts_engine.output_sample_rate),
+                "Sample-Rate": str(tts_engine.provider.native_sample_rate),
                 "Channels": "1",
                 "Format": "float32"
             }

@@ -15,14 +15,13 @@ from tts.base import TTSProvider
 class ChatTTSProvider(TTSProvider):
     """ChatTTS provider implementation."""
     
-    def __init__(self, output_sample_rate: int = 16000, 
+    def __init__(self, 
                  model_source: str = "local",
                  device: Optional[str] = None):
         """
         Initialize ChatTTS provider.
         
         Args:
-            output_sample_rate: Target output sample rate in Hz
             model_source: Source for loading models ("local", "huggingface", "custom")
             device: Device to use ("cuda", "cpu", None for auto)
         """
@@ -35,7 +34,6 @@ class ChatTTSProvider(TTSProvider):
         import ChatTTS
         
         self.ChatTTS = ChatTTS
-        self.output_sample_rate = output_sample_rate
         self.model_source = model_source
         self.device = device
         
@@ -43,6 +41,11 @@ class ChatTTSProvider(TTSProvider):
         self.chat: Optional[ChatTTS.Chat] = None
         self._loaded = False
     
+    @property
+    def native_sample_rate(self) -> int:
+        """ChatTTS native sample rate is 24kHz."""
+        return 24000
+
     def _ensure_loaded(self):
         """Ensure ChatTTS model is loaded."""
         if not self._loaded or self.chat is None:
@@ -131,36 +134,6 @@ class ChatTTSProvider(TTSProvider):
             if len(wav) == 0:
                 continue
             
-            # Resample if needed (using scipy if available, otherwise simple decimation)
-            if chat_sample_rate != self.output_sample_rate:
-                try:
-                    from scipy import signal
-                    # Proper resampling using scipy
-                    num_samples = int(len(wav) * self.output_sample_rate / chat_sample_rate)
-                    # Skip resampling if num_samples is 0 (empty chunk)
-                    if num_samples > 0:
-                        wav = signal.resample(wav, num_samples)
-                    else:
-                        continue
-                except ImportError:
-                    # Fallback: simple decimation/interpolation
-                    ratio = self.output_sample_rate / chat_sample_rate
-                    if ratio < 1:
-                        # Decimation
-                        step = int(1 / ratio)
-                        if step > 0:
-                            wav = wav[::step]
-                        else:
-                            continue
-                    else:
-                        # Interpolation (simple linear)
-                        num_samples = int(len(wav) * ratio)
-                        if num_samples > 0:
-                            indices = np.linspace(0, len(wav) - 1, num_samples)
-                            wav = np.interp(indices, np.arange(len(wav)), wav)
-                        else:
-                            continue
-            
             # Ensure wav is float32 and normalized to [-1, 1]
             if wav.dtype != np.float32:
                 wav = wav.astype(np.float32)
@@ -240,32 +213,6 @@ class ChatTTSProvider(TTSProvider):
             # Skip empty chunks
             if len(wav) == 0:
                 continue
-            
-            # Resample if needed
-            if chat_sample_rate != self.output_sample_rate:
-                try:
-                    from scipy import signal
-                    num_samples = int(len(wav) * self.output_sample_rate / chat_sample_rate)
-                    # Skip resampling if num_samples is 0 (empty chunk)
-                    if num_samples > 0:
-                        wav = signal.resample(wav, num_samples)
-                    else:
-                        continue
-                except ImportError:
-                    ratio = self.output_sample_rate / chat_sample_rate
-                    if ratio < 1:
-                        step = int(1 / ratio)
-                        if step > 0:
-                            wav = wav[::step]
-                        else:
-                            continue
-                    else:
-                        num_samples = int(len(wav) * ratio)
-                        if num_samples > 0:
-                            indices = np.linspace(0, len(wav) - 1, num_samples)
-                            wav = np.interp(indices, np.arange(len(wav)), wav)
-                        else:
-                            continue
             
             # Ensure wav is float32 and normalized to [-1, 1]
             if wav.dtype != np.float32:

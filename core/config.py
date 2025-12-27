@@ -117,7 +117,6 @@ class ConfigLoader:
                 "host": "0.0.0.0",
                 "port": 8003,
                 "provider": "edge-tts",
-                "output_sample_rate": None,
                 "providers": {
                     "edge-tts": {
                         "voice": "zh-CN-XiaoxiaoNeural",
