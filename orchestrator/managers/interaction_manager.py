@@ -155,9 +155,32 @@ class InteractionManager(BaseManager):
         
         # Setup parser callbacks
         async def default_callback(text: str):
-            """Handle untagged content - send to TTS."""
+            """Handle untagged content (no-op)."""
+            pass
+        
+        async def jp_callback(text: str):
+            """Handle <jp> tag content - send to TTS."""
             if not self.cancel_event.is_set():
                 await self.event_bus.publish(Event(EventType.TTS_REQUEST.value, {"text": text}))
+        
+        async def zh_callback(text: str):
+            """Handle <zh> tag content - send to OBS subtitles."""
+            if not self.cancel_event.is_set():
+                await self.event_bus.publish(Event(EventType.SUBTITLE_REQUEST.value, {"text": text}))
+        
+        # Configure parser
+        tag_configs = []
+        if self.disable_thinking:
+            # Discard redacted_reasoning tags (no callback)
+            tag_configs.append({"name": "redacted_reasoning"})
+        
+        # Add jp and zh tag handlers
+        tag_configs.append({"name": "think", "callback": default_callback})
+        tag_configs.append({"name": "jp", "callback": jp_callback})
+        tag_configs.append({"name": "zh", "callback": zh_callback})
+        
+        # Create parser
+        parser = LLMStreamParser(tag_configs, default_callback=default_callback)
         
         # Configure parser
         tag_configs = []
