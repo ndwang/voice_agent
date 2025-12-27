@@ -5,7 +5,7 @@ from typing import Dict, Optional, AsyncIterator, Any
 from fastapi import WebSocket, WebSocketDisconnect
 from core.logging import get_logger
 from core.config import get_config
-from tts.providers import EdgeTTSProvider, ChatTTSProvider, ElevenLabsProvider
+from tts.providers import EdgeTTSProvider, ChatTTSProvider, ElevenLabsProvider, GenieTTSProvider
 from tts.base import TTSProvider
 
 logger = get_logger(__name__)
@@ -45,6 +45,12 @@ class TTSEngine:
                 "similarity_boost": get_config("tts", "providers", "elevenlabs", "similarity_boost", default=0.8),
                 "style": get_config("tts", "providers", "elevenlabs", "style", default=0.0)
             }
+        elif self.provider_name == "genie-tts":
+            return {
+                "character_name": get_config("tts", "providers", "genie-tts", "character_name", default="default"),
+                "reference_audio_path": get_config("tts", "providers", "genie-tts", "reference_audio_path"),
+                "reference_audio_text": get_config("tts", "providers", "genie-tts", "reference_audio_text")
+            }
         return {}
 
     def _load_provider(self) -> TTSProvider:
@@ -73,6 +79,16 @@ class TTSEngine:
                     stability=get_config("tts", "providers", "elevenlabs", "stability", default=0.5),
                     similarity_boost=get_config("tts", "providers", "elevenlabs", "similarity_boost", default=0.8),
                     style=get_config("tts", "providers", "elevenlabs", "style", default=0.0)
+                )
+            elif self.provider_name == "genie-tts":
+                return GenieTTSProvider(
+                    character_name=get_config("tts", "providers", "genie-tts", "character_name", default="default"),
+                    onnx_model_dir=get_config("tts", "providers", "genie-tts", "onnx_model_dir"),
+                    language=get_config("tts", "providers", "genie-tts", "language", default="zh"),
+                    reference_audio_path=get_config("tts", "providers", "genie-tts", "reference_audio_path"),
+                    reference_audio_text=get_config("tts", "providers", "genie-tts", "reference_audio_text"),
+                    source_sample_rate=get_config("tts", "providers", "genie-tts", "source_sample_rate", default=32000),
+                    output_sample_rate=self.output_sample_rate
                 )
             else:
                 raise ValueError(f"Unknown TTS provider: {self.provider_name}")

@@ -37,7 +37,7 @@ dependencies = [
     "edge-tts==7.2.1",
     "elevenlabs",
     "pydub",
-    "scipy",  # For audio resampling (optional but recommended)
+    "scipy", # For audio resampling (optional but recommended)
     # Hotkey management
     "pynput",
     # OBS
@@ -47,6 +47,7 @@ dependencies = [
     "pure-protobuf~=3.1.2",
     "yarl~=1.9.3",
     "funasr",
+    "genie-tts>=2.0.2",
 ]
 
 

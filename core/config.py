@@ -127,6 +127,14 @@ class ConfigLoader:
                     "chattts": {
                         "model_source": "local",
                         "device": None
+                    },
+                    "genie-tts": {
+                        "character_name": "default",
+                        "onnx_model_dir": "",
+                        "language": "zh",
+                        "reference_audio_path": "",
+                        "reference_audio_text": "",
+                        "source_sample_rate": 32000
                     }
                 }
             },
@@ -198,6 +206,32 @@ class ConfigLoader:
         self._config = None
         return self.load(config_path)
 
+    def save(self, config_path: Optional[str] = None) -> bool:
+        """
+        Save current configuration to YAML file.
+        
+        Args:
+            config_path: Path to config file. If None, uses the path from which config was loaded.
+            
+        Returns:
+            True if successful, False otherwise.
+        """
+        if config_path is None:
+            # Look for config.yaml in project root
+            project_root = Path(__file__).parent.parent
+            config_path = project_root / "config.yaml"
+        else:
+            config_path = Path(config_path)
+            
+        try:
+            with open(config_path, 'w', encoding='utf-8') as f:
+                yaml.dump(self._config, f, allow_unicode=True, sort_keys=False, default_flow_style=False)
+            logger.info(f"Configuration saved to {config_path}")
+            return True
+        except Exception as e:
+            logger.error(f"Error saving config file: {e}")
+            return False
+
 
 # Global instance
 _loader = ConfigLoader()
@@ -206,6 +240,18 @@ _loader = ConfigLoader()
 def load_config(config_path: Optional[str] = None) -> Dict[str, Any]:
     """Load configuration from file."""
     return _loader.load(config_path)
+
+
+def save_config(config_path: Optional[str] = None) -> bool:
+    """Save current configuration to file."""
+    return _loader.save(config_path)
+
+
+def get_full_config() -> Dict[str, Any]:
+    """Get the entire configuration dictionary."""
+    if not _loader._config:
+        _loader.load()
+    return _loader._config
 
 
 def get_config(*keys: str, default: Any = None) -> Any:
