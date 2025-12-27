@@ -66,10 +66,10 @@ graph LR
     TTS --> User
 ```
 
-For a deep dive, see the [Architecture Overview](https://wdong.github.io/voice_agent/architecture/overview/).
+For a deep dive, see the [Architecture Overview](https://ndwang.github.io/voice_agent/architecture/overview/).
 
 ## 🛠️ Configuration
-All settings are managed in `config.yaml`. See the [Configuration Guide](https://wdong.github.io/voice_agent/guide/configuration/) for details.
+All settings are managed in `config.yaml`. See the [Configuration Guide](https://ndwang.github.io/voice_agent/guide/configuration/) for details.
 
 ## 📄 License
 MIT License — see `LICENSE`.
