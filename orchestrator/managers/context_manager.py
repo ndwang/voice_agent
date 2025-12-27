@@ -30,10 +30,15 @@ class ContextManager:
         self.ocr_timestamp: Optional[float] = None
         
         # System prompt file management
+        project_root = Path(__file__).parent.parent.parent
         if system_prompt_file is None:
             # Default to orchestrator/system_prompt.txt
-            project_root = Path(__file__).parent.parent.parent
             system_prompt_file = str(project_root / "orchestrator" / "system_prompt.txt")
+        else:
+            # Resolve relative paths relative to project root
+            prompt_path = Path(system_prompt_file)
+            if not prompt_path.is_absolute():
+                system_prompt_file = str(project_root / prompt_path)
         
         self.system_prompt_file = Path(system_prompt_file)
         self._system_prompt: Optional[str] = None

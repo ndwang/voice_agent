@@ -34,8 +34,11 @@ class InteractionManager(BaseManager):
         provider_name = get_config("llm", "provider", default="ollama")
         self.disable_thinking = get_config("llm", "providers", provider_name, "disable_thinking", default=False)
         
+        # Get system prompt file from config
+        system_prompt_file = get_config("orchestrator", "system_prompt_file", default=None)
+        
         # Components
-        self.context_manager = ContextManager()
+        self.context_manager = ContextManager(system_prompt_file=system_prompt_file)
         self.llm_provider = self._init_llm()
         self.cancel_event = asyncio.Event()
         
