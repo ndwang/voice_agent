@@ -11,11 +11,13 @@ class SubtitleManager(BaseManager):
     """
     Manages OBS subtitles.
     Updates the text source in OBS as audio is played.
+    Accumulates sentences from one conversation round to show the full response.
     """
     
     def __init__(self, event_bus: EventBus):
         self.source_name = get_config("obs", "subtitle_source", default="subtitle")
         self.obs_client = None
+        self.accumulated_text = ""  # Accumulates sentences from current conversation round
         super().__init__(event_bus)
         
         try:
@@ -28,10 +30,11 @@ class SubtitleManager(BaseManager):
 
     def _register_handlers(self):
         self.event_bus.subscribe(EventType.SPEECH_START.value, self.on_speech_start)
-        self.event_bus.subscribe(EventType.TTS_REQUEST.value, self.on_tts_request)
+        self.event_bus.subscribe(EventType.SUBTITLE_REQUEST.value, self.on_subtitle_request)
 
     async def on_speech_start(self, event: Event):
         """Clear subtitles when user starts talking."""
+        self.accumulated_text = ""
         if self.obs_client:
             try:
                 if not self.obs_client.ws:
@@ -40,14 +43,20 @@ class SubtitleManager(BaseManager):
             except Exception as e:
                 self.logger.debug(f"OBS error: {e}")
 
-    async def on_tts_request(self, event: Event):
-        """Update subtitles when TTS starts speaking a sentence."""
+    async def on_subtitle_request(self, event: Event):
+        """Update subtitles when Chinese content is available.
+        Accumulates sentences from the same conversation round."""
         text = event.data.get("text", "")
         if self.obs_client and text:
             try:
                 if not self.obs_client.ws:
                     await self.obs_client.connect()
-                await self.obs_client.set_text(self.source_name, text)
+                
+                # Accumulate the new sentence
+                self.accumulated_text += text
+                
+                # Update OBS with the accumulated text
+                await self.obs_client.set_text(self.source_name, self.accumulated_text)
             except Exception as e:
                 self.logger.debug(f"OBS error: {e}")
 
