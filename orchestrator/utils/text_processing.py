@@ -163,6 +163,20 @@ class LLMStreamParser:
         while self.buffer:
             # 1. State Switching Logic (Detect Tags)
             if self.current_state is None:
+                # First, check if we see a closing tag without an opening tag
+                # This can happen if the opening tag was split and we missed it
+                for config in self.tag_configs:
+                    tag_name = config["name"]
+                    closing_tag = f"</{tag_name}>"
+                    if closing_tag in self.buffer:
+                        # Found closing tag but we're not in that state - skip it
+                        # This means the opening tag was likely split and we missed it
+                        parts = self.buffer.split(closing_tag, 1)
+                        # Discard content before closing tag (it was part of the missed tag)
+                        self.buffer = parts[1] if len(parts) > 1 else ""
+                        # Continue to look for opening tags
+                        continue
+                
                 # Look for opening tags in configuration order
                 found_tag = False
                 for config in self.tag_configs:
@@ -188,16 +202,32 @@ class LLMStreamParser:
                 if not found_tag:
                     # No tag found yet - process as untagged content
                     # But protect against partial tags at the end
-                    # Check if buffer might contain start of any tag
+                    # Check if buffer might contain start of any opening tag
                     max_tag_len = max(len(f"<{cfg['name']}>") for cfg in self.tag_configs) if self.tag_configs else 0
+                    
+                    # Check if buffer ends with a potential partial opening tag
+                    # (e.g., if buffer ends with "<redacted_reason" we should wait)
+                    potential_partial_tag = False
+                    if self.buffer:
+                        for config in self.tag_configs:
+                            tag_name = config["name"]
+                            opening_tag = f"<{tag_name}>"
+                            # Check if buffer ends with a prefix of any opening tag (but not the full tag)
+                            for i in range(1, len(opening_tag)):
+                                if self.buffer.endswith(opening_tag[:i]):
+                                    potential_partial_tag = True
+                                    break
+                            if potential_partial_tag:
+                                break
+                    
                     safe_len = len(self.buffer) - max_tag_len
                     
-                    if safe_len > 0:
+                    if safe_len > 0 and not potential_partial_tag:
                         to_process = self.buffer[:safe_len]
                         self.buffer = self.buffer[safe_len:]
                         await self._process_untagged_content(to_process)
                     else:
-                        # Buffer too short, wait for more tokens
+                        # Buffer too short or contains potential partial tag, wait for more tokens
                         break
             
             # 2. Inside a tag: Look for closing tag or process content
