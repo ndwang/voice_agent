@@ -131,8 +131,14 @@ class TTSEngine:
                     message = await asyncio.wait_for(websocket.receive_text(), timeout=0.5)
                 except asyncio.TimeoutError:
                     continue
-                except Exception:
+                except (WebSocketDisconnect, ConnectionError, RuntimeError) as e:
+                    # Connection-related errors - break the loop
+                    logger.debug(f"WebSocket connection error: {e}")
                     break
+                except Exception as e:
+                    # Other exceptions might be recoverable, log and continue
+                    logger.warning(f"Unexpected error receiving message: {e}")
+                    continue
                 
                 # 3. Process Message
                 try:
@@ -143,19 +149,33 @@ class TTSEngine:
                 
                 msg_type = data.get("type")
                 
-                if msg_type == "text":
-                    await self._handle_text_message(websocket, data, provider_params)
-                
-                elif msg_type == "config":
-                    self._update_params(data, provider_params)
-                    await websocket.send_text(json.dumps({"type": "config_updated"}))
+                # Process message - wrap in try-except to prevent one failed message from closing connection
+                try:
+                    if msg_type == "text":
+                        await self._handle_text_message(websocket, data, provider_params)
                     
-                elif msg_type == "ping":
-                    await websocket.send_text(json.dumps({"type": "pong"}))
-                    last_ping_time = time.time()
-                    
-                elif msg_type == "pong":
-                    last_ping_time = time.time()
+                    elif msg_type == "config":
+                        self._update_params(data, provider_params)
+                        await websocket.send_text(json.dumps({"type": "config_updated"}))
+                        
+                    elif msg_type == "ping":
+                        await websocket.send_text(json.dumps({"type": "pong"}))
+                        last_ping_time = time.time()
+                        
+                    elif msg_type == "pong":
+                        last_ping_time = time.time()
+                except (WebSocketDisconnect, ConnectionError) as e:
+                    # Connection closed during message processing - break the loop
+                    logger.debug(f"WebSocket connection closed during message processing: {e}")
+                    break
+                except Exception as e:
+                    # Synthesis or other errors - log but continue processing
+                    logger.error(f"Error processing message: {e}", exc_info=True)
+                    try:
+                        await websocket.send_text(json.dumps({"type": "error", "message": f"Error processing message: {str(e)}"}))
+                    except:
+                        # If we can't send error, connection is likely dead
+                        break
         
         except WebSocketDisconnect:
             pass
