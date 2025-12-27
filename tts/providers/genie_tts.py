@@ -87,7 +87,7 @@ class GenieTTSProvider(TTSProvider):
                 - character_name: Override character name (must be loaded)
         
         Yields:
-            Audio chunks as bytes (int16 PCM format)
+            Audio chunks as bytes (float32 PCM format, normalized to [-1, 1])
         """
         if not text or not text.strip():
             return
@@ -112,6 +112,7 @@ class GenieTTSProvider(TTSProvider):
 
         # Use pydub for conversion if needed, similar to EdgeTTS
         from pydub import AudioSegment
+        import numpy as np
 
         audio_chunks = []
         try:
@@ -157,8 +158,13 @@ class GenieTTSProvider(TTSProvider):
             if audio.frame_rate != self.output_sample_rate:
                 audio = audio.set_frame_rate(self.output_sample_rate)
             
-            # Convert to int16 PCM
-            audio_bytes = audio.raw_data
+            # Convert to float32 PCM (normalized to [-1, 1])
+            # Get samples as numpy array and normalize
+            samples = np.array(audio.get_array_of_samples(), dtype=np.float32)
+            # Normalize to [-1, 1] range (int16 range is [-32768, 32767])
+            audio_float = samples / 32768.0
+            # Convert to bytes
+            audio_bytes = audio_float.tobytes()
             
             # Yield the processed audio
             yield audio_bytes

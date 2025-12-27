@@ -5,6 +5,7 @@ Implementation for ElevenLabs TTS provider with streaming support.
 """
 import os
 import asyncio
+import numpy as np
 from typing import AsyncIterator, Optional
 
 from tts.base import TTSProvider
@@ -71,7 +72,7 @@ class ElevenLabsProvider(TTSProvider):
                 - style: Style setting
         
         Yields:
-            Audio chunks as bytes (int16 PCM format)
+            Audio chunks as bytes (float32 PCM format, normalized to [-1, 1])
         """
         if not text or not text.strip():
             return
@@ -95,12 +96,17 @@ class ElevenLabsProvider(TTSProvider):
                 output_format="pcm_16000"
             )
 
-            # Stream PCM chunks as they arrive (already in int16 PCM format, 16kHz, mono)
+            # Stream PCM chunks as they arrive (ElevenLabs returns int16 PCM, convert to float32)
             chunk_count = 0
             async for chunk in audio_stream:
                 if chunk:
                     chunk_count += 1
-                    yield chunk
+                    # Convert int16 bytes to float32 normalized array
+                    audio_int16 = np.frombuffer(chunk, dtype=np.int16)
+                    # Normalize to [-1, 1] range
+                    audio_float = audio_int16.astype(np.float32) / 32768.0
+                    # Convert back to bytes (float32)
+                    yield audio_float.tobytes()
             
             # Validate we received at least some audio data
             if chunk_count == 0:

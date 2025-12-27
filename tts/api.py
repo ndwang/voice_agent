@@ -67,7 +67,7 @@ async def synthesize(request: SynthesizeRequest):
                 "Content-Type": "audio/pcm",
                 "Sample-Rate": str(tts_engine.output_sample_rate),
                 "Channels": "1",
-                "Format": "int16"
+                "Format": "float32"
             }
         )
     except Exception as e:
