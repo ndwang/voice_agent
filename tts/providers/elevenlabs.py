@@ -18,7 +18,6 @@ class ElevenLabsProvider(TTSProvider):
     
     def __init__(self, 
                  default_voice_id: str,
-                 output_sample_rate: int = 16000,
                  stability: float = 0.5,
                  similarity_boost: float = 0.8,
                  style: float = 0.0,
@@ -28,7 +27,6 @@ class ElevenLabsProvider(TTSProvider):
         
         Args:
             default_voice_id: Default voice ID to use
-            output_sample_rate: Target output sample rate in Hz
             stability: Voice stability setting (0.0 to 1.0)
             similarity_boost: Similarity boost setting (0.0 to 1.0)
             style: Style exaggeration setting (0.0 to 1.0)
@@ -51,13 +49,17 @@ class ElevenLabsProvider(TTSProvider):
             
         self.client = self.AsyncElevenLabs(api_key=self.api_key)
         self.default_voice_id = default_voice_id
-        self.output_sample_rate = output_sample_rate
         self.default_settings = {
             "stability": stability,
             "similarity_boost": similarity_boost,
             "style": style,
             "use_speaker_boost": use_speaker_boost
         }
+
+    @property
+    def native_sample_rate(self) -> int:
+        """ElevenLabs native rate for pcm_16000 is 16kHz."""
+        return 16000
 
     async def synthesize_stream(self, text: str, **kwargs) -> AsyncIterator[bytes]:
         """

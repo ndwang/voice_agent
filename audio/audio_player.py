@@ -61,14 +61,17 @@ class AudioPlayer:
         # ~50ms buffer for low latency
         self._frames_per_chunk = int(self.playback_sample_rate * 0.05)  # 50ms chunks
     
-    async def play_audio_chunk(self, audio_data: bytes):
+    async def play_audio_chunk(self, audio_data: bytes, source_sample_rate: int):
         """
         Add audio chunk to playback queue.
         
         Args:
             audio_data: Audio data as bytes (float32 format, normalized to [-1, 1])
+            source_sample_rate: Sample rate of the incoming audio
         """
-        await self.audio_queue.put(audio_data)
+        # Store source sample rate for this chunk if needed
+        # We'll process it in the playback loop
+        await self.audio_queue.put((audio_data, source_sample_rate))
         
         # Start playback task if not already running
         if not self.playing:
@@ -147,7 +150,12 @@ class AudioPlayer:
                 try:
                     # Get audio chunk from queue (with timeout to check playing flag)
                     try:
-                        audio_bytes = await asyncio.wait_for(self.audio_queue.get(), timeout=0.1)
+                        item = await asyncio.wait_for(self.audio_queue.get(), timeout=0.1)
+                        if isinstance(item, tuple):
+                            audio_bytes, source_rate = item
+                        else:
+                            audio_bytes = item
+                            source_rate = self.sample_rate  # Fallback (should not happen now)
                     except asyncio.TimeoutError:
                         # Check if we should continue
                         if not self.playing:
@@ -175,7 +183,7 @@ class AudioPlayer:
                         audio_float = audio_float.reshape(-1, self.channels)
                     
                     # Resample if playback device requires a different rate
-                    playback_audio = self._resample_audio(audio_float)
+                    playback_audio = self._resample_audio(audio_float, source_rate)
                     
                     # Add to buffer (thread-safe)
                     with self._buffer_lock:
@@ -228,33 +236,42 @@ class AudioPlayer:
                 self._audio_active = False
                 await self.on_play_state(False)
 
-    def _resample_audio(self, audio: np.ndarray) -> np.ndarray:
+    def _resample_audio(self, audio: np.ndarray, source_rate: int) -> np.ndarray:
         """Resample audio to the playback sample rate if needed."""
         if (
             audio.size == 0
-            or self.playback_sample_rate == self.sample_rate
+            or self.playback_sample_rate == source_rate
         ):
             return audio
 
         src_len = audio.shape[0]
         target_len = max(
-            1, int(round(src_len * self.playback_sample_rate / self.sample_rate))
+            1, int(round(src_len * self.playback_sample_rate / source_rate))
         )
 
         if target_len == src_len:
             return audio
 
-        x_old = np.linspace(0, src_len - 1, src_len)
-        x_new = np.linspace(0, src_len - 1, target_len)
+        # Try high-quality resampling with scipy if available
+        try:
+            from scipy import signal
+            # Resample takes (data, num_samples)
+            # audio is (samples, channels)
+            resampled = signal.resample(audio, target_len, axis=0).astype(np.float32)
+            return resampled
+        except ImportError:
+            # Fallback to linear interpolation (lower quality)
+            x_old = np.linspace(0, src_len - 1, src_len)
+            x_new = np.linspace(0, src_len - 1, target_len)
 
-        if audio.ndim == 1 or audio.shape[1] == 1:
-            resampled = np.interp(x_new, x_old, audio.reshape(-1)).astype(np.float32)
-            return resampled.reshape(-1, 1)
+            if audio.ndim == 1 or audio.shape[1] == 1:
+                resampled = np.interp(x_new, x_old, audio.reshape(-1)).astype(np.float32)
+                return resampled.reshape(-1, 1)
 
-        resampled = np.empty((target_len, audio.shape[1]), dtype=np.float32)
-        for ch in range(audio.shape[1]):
-            resampled[:, ch] = np.interp(x_new, x_old, audio[:, ch])
-        return resampled
+            resampled = np.empty((target_len, audio.shape[1]), dtype=np.float32)
+            for ch in range(audio.shape[1]):
+                resampled[:, ch] = np.interp(x_new, x_old, audio[:, ch])
+            return resampled
     
     async def stop(self):
         """Stop audio playback and clear all queued chunks."""

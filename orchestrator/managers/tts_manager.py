@@ -26,6 +26,7 @@ class TTSManager(BaseManager):
         self._receiver_task = None
         self._synthesizing = False
         self._connecting = False  # Track connection state to avoid duplicate connections
+        self._current_sample_rate = 16000  # Default, will be updated by audio_config
         super().__init__(event_bus)
         
     def _register_handlers(self):
@@ -187,13 +188,18 @@ class TTSManager(BaseManager):
                         self._synthesizing = False
                         await publish_activity(self.event_bus, {"synthesizing": False})
                     
-                    await self.audio_player.play_audio_chunk(message)
+                    await self.audio_player.play_audio_chunk(message, source_sample_rate=self._current_sample_rate)
                     await self.event_bus.publish(Event(EventType.TTS_AUDIO_CHUNK.value, {"size": len(message)}))
                 elif isinstance(message, str):
-                    # Handle text messages (e.g., "done", "error")
+                    # Handle text messages (e.g., "done", "error", "audio_config")
                     try:
                         data = json.loads(message) if message else {}
-                        if data.get("type") == "done":
+                        msg_type = data.get("type")
+                        
+                        if msg_type == "audio_config":
+                            self._current_sample_rate = data.get("sample_rate", 16000)
+                            self.logger.info(f"Received audio config: sample_rate={self._current_sample_rate}")
+                        elif msg_type == "done":
                             # TTS synthesis complete
                             if self._synthesizing:
                                 self._synthesizing = False

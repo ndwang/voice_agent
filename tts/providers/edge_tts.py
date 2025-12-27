@@ -16,8 +16,7 @@ class EdgeTTSProvider(TTSProvider):
     
     def __init__(self, default_voice: str = "zh-CN-XiaoxiaoNeural", 
                  default_rate: str = "+0%", 
-                 default_pitch: str = "+0Hz",
-                 output_sample_rate: int = 16000):
+                 default_pitch: str = "+0Hz"):
         """
         Initialize Edge TTS provider.
         
@@ -25,7 +24,6 @@ class EdgeTTSProvider(TTSProvider):
             default_voice: Default voice to use
             default_rate: Default speech rate (e.g., "+0%", "-50%")
             default_pitch: Default pitch (e.g., "+0Hz", "+50Hz")
-            output_sample_rate: Target output sample rate in Hz
         """
         import edge_tts
         from edge_tts import VoicesManager
@@ -35,8 +33,12 @@ class EdgeTTSProvider(TTSProvider):
         self.default_voice = default_voice
         self.default_rate = default_rate
         self.default_pitch = default_pitch
-        self.output_sample_rate = output_sample_rate
     
+    @property
+    def native_sample_rate(self) -> int:
+        """Edge TTS native rate varies, typically 24kHz."""
+        return 24000
+
     async def synthesize_stream(self, text: str, **kwargs) -> AsyncIterator[bytes]:
         """
         Synthesize text using Edge TTS and stream audio chunks.
@@ -100,10 +102,6 @@ class EdgeTTSProvider(TTSProvider):
         # Convert to mono if needed
         if audio.channels > 1:
             audio = audio.set_channels(1)
-        
-        # Resample to target sample rate
-        if audio.frame_rate != self.output_sample_rate:
-            audio = audio.set_frame_rate(self.output_sample_rate)
         
         # Convert to float32 PCM (normalized to [-1, 1])
         # Get samples as numpy array and normalize
