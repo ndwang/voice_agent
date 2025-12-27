@@ -176,7 +176,25 @@ class ContextManager:
             "content": text,
             "timestamp": datetime.now().isoformat()
         })
-    
+
+    def update_last_message(self, text: str, role: Optional[str] = None):
+        """Update the content of the last message in history."""
+        if not self.conversation_history:
+            return
+            
+        last_msg = self.conversation_history[-1]
+        if role and last_msg["role"] != role:
+            return
+            
+        last_msg["content"] = text
+        last_msg["timestamp"] = datetime.now().isoformat()
+
+    def get_last_message(self) -> Optional[Dict[str, str]]:
+        """Get the last message in history."""
+        if not self.conversation_history:
+            return None
+        return self.conversation_history[-1]
+
     def update_ocr_context(self, text: str):
         """Update OCR context with latest text."""
         import time
