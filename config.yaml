@@ -137,6 +137,10 @@ obs:
     port: 4455
     password: "j22KXyZ1ONOk5m70"
   subtitle_source: "subtitle"  # Name of the text source in OBS for subtitles
+  subtitle_ttl_seconds: 10  # Time to live for subtitles - clears after inactivity (0 = disabled)
+  visibility_source: "AI"  # Optional: Source name that has the filters (null = disabled)
+  appear_filter_name: MoveInRight  # Optional: Filter name to enable when subtitles first appear (null = disabled)
+  clear_filter_name: MoveOutRight  # Optional: Filter name to enable when subtitles are cleared (null = disabled)
 
 # Service URLs (used by orchestrator to connect to other services)
 services:
