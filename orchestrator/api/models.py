@@ -16,3 +16,8 @@ class HotkeyUpdateRequest(BaseModel):
     """Request model for updating hotkey."""
     hotkey: str
 
+
+class ConfigUpdate(BaseModel):
+    """Request model for updating full config."""
+    config: dict
+

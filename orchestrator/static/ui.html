@@ -359,12 +359,116 @@
       border: 1px solid #991b1b;
       display: block;
     }
+
+    /* Accordion Styles */
+    .accordion {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .accordion-item {
+      border: 1px solid #1f2937;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #0f172a;
+    }
+    .accordion-header {
+      padding: 12px 16px;
+      background: #1e293b;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 600;
+      color: #e5e7eb;
+      user-select: none;
+    }
+    .accordion-header:hover {
+      background: #334155;
+    }
+    .accordion-header::after {
+      content: '▼';
+      font-size: 0.8rem;
+      transition: transform 0.2s;
+    }
+    .accordion-item.active .accordion-header::after {
+      transform: rotate(180deg);
+    }
+    .accordion-content {
+      padding: 0;
+      display: none;
+      border-top: 1px solid #1f2937;
+    }
+    .accordion-item.active .accordion-content {
+      display: block;
+      padding: 16px;
+    }
+    
+    /* Form Styles */
+    .config-form-group {
+      margin-bottom: 16px;
+    }
+    .config-label {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 0.85rem;
+      color: #9ca3af;
+    }
+    .config-input {
+      width: 100%;
+      padding: 8px 12px;
+      background: #111827;
+      border: 1px solid #374151;
+      border-radius: 6px;
+      color: #e5e7eb;
+      font-family: inherit;
+      box-sizing: border-box;
+    }
+    .config-input:focus {
+      outline: none;
+      border-color: #3b82f6;
+    }
+    .config-checkbox-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .config-checkbox {
+      width: 16px;
+      height: 16px;
+    }
+    .config-help {
+      font-size: 0.75rem;
+      color: #6b7280;
+      margin-top: 4px;
+    }
+    .provider-section {
+      border-left: 2px solid #3b82f6;
+      padding-left: 12px;
+      margin-top: 12px;
+    }
+    .nested-group {
+      border: 1px solid #374151;
+      border-radius: 6px;
+      padding: 12px;
+      margin-bottom: 12px;
+      background: #111827;
+    }
+    .nested-title {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #6366f1;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
   </style>
 </head>
 <body>
   <div class="header">
     <h1>Voice Agent Control Panel</h1>
     <button id="system-prompt-btn" class="system-prompt-btn">System Prompt</button>
+    <button id="config-btn" class="system-prompt-btn">Config</button>
     <button id="toggle-listening-btn" class="system-prompt-btn">Stop Listening</button>
     <button id="cancel-btn">Cancel Speech</button>
     <span id="status" class="status">Connecting…</span>
@@ -422,6 +526,26 @@
     </div>
   </div>
 
+  <!-- Configuration Modal -->
+  <div id="config-modal" class="modal">
+    <div class="modal-content" style="max-width: 900px; height: 90vh;">
+      <div class="modal-header">
+        <h2 class="modal-title">Configuration Editor</h2>
+        <button class="modal-close" id="config-modal-close">&times;</button>
+      </div>
+      <div class="modal-body" style="overflow-y: auto;">
+        <div id="config-accordion" class="accordion">
+          <!-- Config sections will be injected here -->
+        </div>
+        <div id="config-status-message" class="status-message" style="margin-top: 16px;"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" id="config-modal-cancel">Cancel</button>
+        <button class="btn-primary" id="config-modal-save">Save Configuration</button>
+      </div>
+    </div>
+  </div>
+
   <div class="activity" aria-label="Agent activity">
     <div id="seg-listening" class="segment">Listening</div>
     <div id="seg-transcribing" class="segment">Transcribing</div>
@@ -462,6 +586,17 @@
     const promptTextarea = document.getElementById('prompt-textarea');
     const promptFilePath = document.getElementById('prompt-file-path');
     const statusMessage = document.getElementById('status-message');
+    
+    // Config modal elements
+    const configBtn = document.getElementById('config-btn');
+    const configModal = document.getElementById('config-modal');
+    const configModalClose = document.getElementById('config-modal-close');
+    const configModalCancel = document.getElementById('config-modal-cancel');
+    const configModalSave = document.getElementById('config-modal-save');
+    const configAccordion = document.getElementById('config-accordion');
+    const configStatusMessage = document.getElementById('config-status-message');
+
+    let currentConfig = {};
     
     // Hotkey modal elements
     const hotkeyModal = document.getElementById('hotkey-modal');
@@ -988,6 +1123,422 @@
     systemPromptModal.onclick = (e) => {
       if (e.target === systemPromptModal) {
         closeModal();
+      }
+    };
+
+    // --- Config Editor JavaScript ---
+
+    const CONFIG_SCHEMA = {
+      orchestrator: {
+        title: 'Orchestrator',
+        fields: {
+          host: { type: 'text', label: 'Host' },
+          port: { type: 'number', label: 'Port' },
+          log_level: { type: 'select', label: 'Log Level', options: ['DEBUG', 'INFO', 'WARNING', 'ERROR'] },
+          enable_latency_tracking: { type: 'boolean', label: 'Enable Latency Tracking' }
+        }
+      },
+      stt: {
+        title: 'STT (Speech-to-Text)',
+        fields: {
+          provider: { type: 'provider_select', label: 'Provider', providers: ['funasr', 'faster-whisper'] },
+          language_code: { type: 'text', label: 'Language Code' },
+          sample_rate: { type: 'number', label: 'Sample Rate' }
+        },
+        provider_fields: {
+          'faster-whisper': {
+            model_path: { type: 'text', label: 'Model Path' },
+            device: { type: 'text', label: 'Device (null for auto)' },
+            compute_type: { type: 'text', label: 'Compute Type (null for auto)' }
+          },
+          'funasr': {
+            model_name: { type: 'text', label: 'Model Name' },
+            vad_model: { type: 'text', label: 'VAD Model' },
+            punc_model: { type: 'text', label: 'Punctuation Model' },
+            streaming: {
+              type: 'nested',
+              label: 'Streaming Settings',
+              fields: {
+                enabled: { type: 'boolean', label: 'Enabled' },
+                vad_chunk_size_ms: { type: 'number', label: 'VAD Chunk Size (ms)' },
+                silence_threshold_ms: { type: 'number', label: 'Silence Threshold (ms)' }
+              }
+            }
+          }
+        }
+      },
+      llm: {
+        title: 'LLM (Language Model)',
+        fields: {
+          provider: { type: 'provider_select', label: 'Provider', providers: ['ollama', 'gemini'] }
+        },
+        provider_fields: {
+          gemini: {
+            model: { type: 'text', label: 'Model' },
+            api_key: { type: 'password', label: 'API Key' }
+          },
+          ollama: {
+            model: { type: 'text', label: 'Model' },
+            base_url: { type: 'text', label: 'Base URL' },
+            timeout: { type: 'number', label: 'Timeout (s)' },
+            disable_thinking: { type: 'boolean', label: 'Disable Thinking' }
+          }
+        }
+      },
+      tts: {
+        title: 'TTS (Text-to-Speech)',
+        fields: {
+          provider: { type: 'provider_select', label: 'Provider', providers: ['edge-tts', 'chattts', 'genie-tts', 'elevenlabs'] },
+          output_sample_rate: { type: 'number', label: 'Output Sample Rate (null for auto)' }
+        },
+        provider_fields: {
+          'edge-tts': {
+            voice: { type: 'text', label: 'Voice' },
+            rate: { type: 'text', label: 'Rate' },
+            pitch: { type: 'text', label: 'Pitch' }
+          },
+          'chattts': {
+            model_source: { type: 'select', label: 'Model Source', options: ['local', 'huggingface', 'custom'] },
+            device: { type: 'text', label: 'Device (null for auto)' }
+          },
+          'genie-tts': {
+            character_name: { type: 'text', label: 'Character Name' },
+            onnx_model_dir: { type: 'text', label: 'ONNX Model Dir' },
+            language: { type: 'text', label: 'Language' },
+            reference_audio_path: { type: 'text', label: 'Ref Audio Path' },
+            source_sample_rate: { type: 'number', label: 'Source Sample Rate' }
+          },
+          'elevenlabs': {
+            voice_id: { type: 'text', label: 'Voice ID' },
+            stability: { type: 'number', label: 'Stability (0-1)' },
+            similarity_boost: { type: 'number', label: 'Similarity Boost (0-1)' }
+          }
+        }
+      },
+      ocr: {
+        title: 'OCR',
+        fields: {
+          host: { type: 'text', label: 'Host' },
+          port: { type: 'number', label: 'Port' },
+          language: { type: 'text', label: 'Language' },
+          interval_ms: { type: 'number', label: 'Interval (ms)' }
+        }
+      },
+      audio: {
+        title: 'Audio Settings',
+        fields: {
+          input: {
+            type: 'nested',
+            label: 'Input Settings',
+            fields: {
+              sample_rate: { type: 'number', label: 'Sample Rate' },
+              channels: { type: 'number', label: 'Channels' },
+              device: { type: 'text', label: 'Device Index (null for default)' }
+            }
+          },
+          output: {
+            type: 'nested',
+            label: 'Output Settings',
+            fields: {
+              sample_rate: { type: 'number', label: 'Sample Rate' },
+              channels: { type: 'number', label: 'Channels' },
+              device: { type: 'text', label: 'Device Index (null for default)' }
+            }
+          },
+          silence_threshold_ms: { type: 'number', label: 'Silence Threshold (ms)' },
+          vad_min_speech_prob: { type: 'number', label: 'VAD Min Speech Prob (0-1)' }
+        }
+      },
+      bilibili: {
+        title: 'Bilibili',
+        fields: {
+          enabled: { type: 'boolean', label: 'Enabled' },
+          room_id: { type: 'number', label: 'Room ID' },
+          sessdata: { type: 'password', label: 'SESSDATA' }
+        }
+      },
+      obs: {
+        title: 'OBS',
+        fields: {
+          websocket: {
+            type: 'nested',
+            label: 'Websocket Settings',
+            fields: {
+              host: { type: 'text', label: 'Host' },
+              port: { type: 'number', label: 'Port' },
+              password: { type: 'password', label: 'Password' }
+            }
+          },
+          subtitle_source: { type: 'text', label: 'Subtitle Source Name' }
+        }
+      },
+      services: {
+        title: 'Service URLs',
+        fields: {
+          orchestrator_base_url: { type: 'text', label: 'Orchestrator Base URL' },
+          stt_websocket_url: { type: 'text', label: 'STT WebSocket URL' },
+          tts_websocket_url: { type: 'text', label: 'TTS WebSocket URL' },
+          ocr_websocket_url: { type: 'text', label: 'OCR WebSocket URL' },
+          ocr_base_url: { type: 'text', label: 'OCR Base URL' }
+        }
+      }
+    };
+
+    function createFormField(key, field, value, path = []) {
+      const fullPath = [...path, key].join('.');
+      const group = document.createElement('div');
+      group.className = 'config-form-group';
+      
+      if (field.type === 'nested') {
+        const nestedGroup = document.createElement('div');
+        nestedGroup.className = 'nested-group';
+        const title = document.createElement('div');
+        title.className = 'nested-title';
+        title.textContent = field.label;
+        nestedGroup.appendChild(title);
+        
+        Object.entries(field.fields).forEach(([subKey, subField]) => {
+          const subValue = (value && typeof value === 'object') ? value[subKey] : undefined;
+          nestedGroup.appendChild(createFormField(subKey, subField, subValue, [...path, key]));
+        });
+        return nestedGroup;
+      }
+      
+      const label = document.createElement('label');
+      label.className = 'config-label';
+      label.textContent = field.label;
+      group.appendChild(label);
+      
+      let input;
+      if (field.type === 'select' || field.type === 'provider_select') {
+        input = document.createElement('select');
+        input.className = 'config-input';
+        const options = field.type === 'provider_select' ? field.providers : field.options;
+        options.forEach(opt => {
+          const option = document.createElement('option');
+          option.value = opt;
+          option.textContent = opt;
+          if (opt === value) option.selected = true;
+          input.appendChild(option);
+        });
+        
+        if (field.type === 'provider_select') {
+          input.dataset.isProviderSelect = 'true';
+          input.dataset.section = path[0] || key;
+        }
+      } else if (field.type === 'boolean') {
+        group.className = 'config-form-group config-checkbox-group';
+        input = document.createElement('input');
+        input.type = 'checkbox';
+        input.className = 'config-checkbox';
+        input.checked = !!value;
+        // Swap label and input for checkbox
+        group.innerHTML = '';
+        group.appendChild(input);
+        group.appendChild(label);
+      } else {
+        input = document.createElement('input');
+        input.type = field.type === 'password' ? 'password' : 'text';
+        input.className = 'config-input';
+        input.value = value === null || value === undefined ? '' : value;
+      }
+      
+      input.dataset.path = fullPath;
+      input.name = fullPath;
+      group.appendChild(input);
+      
+      return group;
+    }
+
+    function buildAccordion() {
+      configAccordion.innerHTML = '';
+      
+      Object.entries(CONFIG_SCHEMA).forEach(([sectionKey, section]) => {
+        const item = document.createElement('div');
+        item.className = 'accordion-item';
+        
+        const header = document.createElement('div');
+        header.className = 'accordion-header';
+        header.textContent = section.title;
+        header.onclick = () => {
+          item.classList.toggle('active');
+        };
+        
+        const content = document.createElement('div');
+        content.className = 'accordion-content';
+        content.id = `section-${sectionKey}`;
+        
+        // Add common fields
+        const sectionData = currentConfig[sectionKey] || {};
+        Object.entries(section.fields).forEach(([fieldKey, field]) => {
+          const fieldElement = createFormField(fieldKey, field, sectionData[fieldKey], [sectionKey]);
+          content.appendChild(fieldElement);
+          
+          if (field.type === 'provider_select') {
+            const providerSelect = fieldElement.querySelector('select');
+            providerSelect.onchange = (e) => {
+              updateProviderFields(sectionKey, e.target.value);
+            };
+          }
+        });
+        
+        // Add container for provider-specific fields
+        if (section.provider_fields) {
+          const providerContainer = document.createElement('div');
+          providerContainer.className = 'provider-section';
+          providerContainer.id = `provider-fields-${sectionKey}`;
+          content.appendChild(providerContainer);
+          
+          const currentProvider = sectionData[section.fields.provider ? 'provider' : '']; // Assumes field named 'provider'
+          if (currentProvider) {
+            // This will be called after the initial build
+          }
+        }
+        
+        item.appendChild(header);
+        item.appendChild(content);
+        configAccordion.appendChild(item);
+      });
+    }
+
+    function updateProviderFields(sectionKey, providerKey) {
+      const container = document.getElementById(`provider-fields-${sectionKey}`);
+      if (!container) return;
+      
+      container.innerHTML = '';
+      const sectionSchema = CONFIG_SCHEMA[sectionKey];
+      if (!sectionSchema || !sectionSchema.provider_fields || !sectionSchema.provider_fields[providerKey]) {
+        return;
+      }
+      
+      const providerSchema = sectionSchema.provider_fields[providerKey];
+      const sectionData = currentConfig[sectionKey] || {};
+      const providersData = sectionData.providers || {};
+      const providerData = providersData[providerKey] || {};
+      
+      Object.entries(providerSchema).forEach(([fieldKey, field]) => {
+        container.appendChild(createFormField(fieldKey, field, providerData[fieldKey], [sectionKey, 'providers', providerKey]));
+      });
+    }
+
+    async function loadFullConfig() {
+      try {
+        const response = await fetch('/ui/config');
+        if (!response.ok) throw new Error('Failed to load config');
+        currentConfig = await response.json();
+        
+        buildAccordion();
+        
+        // Initial provider fields update
+        Object.entries(CONFIG_SCHEMA).forEach(([sectionKey, section]) => {
+          const providerSelect = document.querySelector(`select[data-is-provider-select="true"][data-section="${sectionKey}"]`);
+          if (providerSelect) {
+            updateProviderFields(sectionKey, providerSelect.value);
+          }
+        });
+      } catch (e) {
+        console.error('Error loading config:', e);
+        showConfigStatusMessage('Failed to load configuration', true);
+      }
+    }
+
+    function getFormValue(path) {
+      const input = document.querySelector(`[name="${path}"]`);
+      if (!input) return undefined;
+      
+      if (input.type === 'checkbox') return input.checked;
+      if (input.type === 'number') return parseFloat(input.value);
+      
+      let val = input.value;
+      if (val === '' && input.type !== 'password') return null;
+      if (!isNaN(val) && val !== '' && input.type !== 'text' && input.type !== 'password') return parseFloat(val);
+      
+      return val;
+    }
+
+    function setDeepValue(obj, path, value) {
+      const parts = path.split('.');
+      let current = obj;
+      for (let i = 0; i < parts.length - 1; i++) {
+        const part = parts[i];
+        if (!(part in current)) current[part] = {};
+        current = current[part];
+      }
+      current[parts[parts.length - 1]] = value;
+    }
+
+    async function saveFullConfig() {
+      const newConfig = JSON.parse(JSON.stringify(currentConfig)); // Deep copy to maintain original structure
+      
+      const allInputs = configAccordion.querySelectorAll('input, select');
+      allInputs.forEach(input => {
+        const path = input.dataset.path;
+        if (!path) return;
+        
+        let val;
+        if (input.type === 'checkbox') {
+          val = input.checked;
+        } else {
+          val = input.value;
+          // Try to convert to number if appropriate
+          if (input.type === 'number' || (!isNaN(val) && val !== '' && input.type !== 'text' && input.type !== 'password')) {
+            val = val.includes('.') ? parseFloat(val) : parseInt(val, 10);
+          } else if (val === '' && input.type !== 'password') {
+            val = null;
+          }
+        }
+        
+        setDeepValue(newConfig, path, val);
+      });
+      
+      configModalSave.disabled = true;
+      try {
+        const response = await fetch('/ui/config', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ config: newConfig })
+        });
+        
+        if (!response.ok) {
+          const data = await response.json();
+          throw new Error(data.detail || 'Failed to save configuration');
+        }
+        
+        showConfigStatusMessage('Configuration saved successfully! Some changes may require a restart.');
+        currentConfig = newConfig;
+      } catch (e) {
+        console.error('Error saving config:', e);
+        showConfigStatusMessage(e.message, true);
+      } finally {
+        configModalSave.disabled = false;
+      }
+    }
+
+    function showConfigStatusMessage(text, isError = false) {
+      configStatusMessage.textContent = text;
+      configStatusMessage.className = `status-message ${isError ? 'error' : 'success'}`;
+      setTimeout(() => {
+        configStatusMessage.className = 'status-message';
+      }, 5000);
+    }
+
+    function closeConfigModal() {
+      configModal.classList.remove('active');
+    }
+
+    configBtn.onclick = () => {
+      configModal.classList.add('active');
+      loadFullConfig();
+    };
+
+    configModalClose.onclick = closeConfigModal;
+    configModalCancel.onclick = closeConfigModal;
+    configModalSave.onclick = saveFullConfig;
+
+    // Close config modal when clicking outside
+    configModal.onclick = (e) => {
+      if (e.target === configModal) {
+        closeConfigModal();
       }
     };
 

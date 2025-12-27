@@ -16,3 +16,5 @@ logs/
 orchestrator/system_prompt.txt
 Modelfile
 tts/ChatTTS
+CharacterModels/
+GenieData/
