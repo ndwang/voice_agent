@@ -145,6 +145,12 @@ def main():
     
     app.include_router(orchestrator_router)
     
+    # Mount static files for UI
+    from fastapi.staticfiles import StaticFiles
+    static_dir = Path(__file__).parent / "static"
+    if static_dir.exists():
+        app.mount("/ui/assets", StaticFiles(directory=static_dir), name="static")
+    
     logger.info(f"Starting Orchestrator on {HOST}:{PORT}...")
     uvicorn.run(app, host=HOST, port=PORT)
 
