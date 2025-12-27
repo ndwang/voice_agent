@@ -5,9 +5,10 @@ from fastapi import APIRouter, WebSocket, WebSocketDisconnect, HTTPException
 from fastapi.responses import FileResponse
 from pathlib import Path
 from core.logging import get_logger
+from core.config import get_full_config, save_config
 from orchestrator.events import EventType
 from orchestrator.core.constants import UI_ACTIVITY, UI_HISTORY_UPDATED, UI_LISTENING_STATE_CHANGED
-from orchestrator.api.models import SystemPromptUpdate, ListeningSetRequest
+from orchestrator.api.models import SystemPromptUpdate, ListeningSetRequest, ConfigUpdate
 
 logger = get_logger(__name__)
 router = APIRouter()
@@ -152,4 +153,24 @@ async def set_listening(request: ListeningSetRequest):
     """Set listening state."""
     await orchestrator.set_listening(request.enabled)
     return {"status": "success", "enabled": request.enabled}
+
+
+@router.get("/ui/config")
+async def get_ui_config():
+    """Get full configuration."""
+    return get_full_config()
+
+
+@router.post("/ui/config")
+async def update_ui_config(request: ConfigUpdate):
+    """Update full configuration."""
+    # Update the in-memory config
+    config_dict = get_full_config()
+    config_dict.clear()
+    config_dict.update(request.config)
+    
+    # Save to file
+    if save_config():
+        return {"status": "success"}
+    raise HTTPException(status_code=500, detail="Failed to save configuration")
 
