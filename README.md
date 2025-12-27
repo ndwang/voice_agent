@@ -42,7 +42,7 @@ uv run python scripts/stop_services.py
 
 ## 📚 Documentation
 
-For detailed guides on architecture, configuration, and service details, visit our **[Documentation Site](https://wdong.github.io/voice_agent/)**.
+For detailed guides on architecture, configuration, and service details, visit our **[Documentation Site](https://ndwang.github.io/voice_agent/)**.
 
 ### Local Documentation
 To run the documentation site locally:
