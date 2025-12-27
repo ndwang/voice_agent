@@ -13,7 +13,8 @@ from orchestrator.utils.event_helpers import (
 )
 from orchestrator.utils.text_processing import (
     filter_thinking_tags,
-    filter_thinking_tags_final
+    filter_thinking_tags_final,
+    LLMStreamParser
 )
 from llm.providers import GeminiProvider, OllamaProvider
 
@@ -95,8 +96,21 @@ class InteractionManager(BaseManager):
         
         # Stream response state
         full_response = ""
-        sentence_buffer = ""
-        thinking_buffer = "" # Accumulates tokens to detect/filter tags
+        
+        # Setup parser callbacks
+        async def default_callback(text: str):
+            """Handle untagged content - send to TTS."""
+            if not self.cancel_event.is_set():
+                await self.event_bus.publish(Event(EventType.TTS_REQUEST.value, {"text": text}))
+        
+        # Configure parser
+        tag_configs = []
+        if self.disable_thinking:
+            # Discard redacted_reasoning tags (no callback)
+            tag_configs.append({"name": "redacted_reasoning"})
+        
+        # Create parser
+        parser = LLMStreamParser(tag_configs, default_callback=default_callback)
         
         try:
             async for token in self.llm_provider.generate_stream(
@@ -111,29 +125,18 @@ class InteractionManager(BaseManager):
 
                 full_response += token
                 
-                if self.disable_thinking:
-                    # Filter thinking tags using utility function
-                    safe_to_process, thinking_buffer = filter_thinking_tags(token, thinking_buffer)
-                    
-                    if not safe_to_process:
-                        continue
-                        
-                    # Process the safe tokens
-                    sentence_buffer = await self._process_tokens(safe_to_process, sentence_buffer)
-                else:
-                    # Thinking not disabled - process token directly
-                    sentence_buffer = await self._process_tokens(token, sentence_buffer)
+                # Publish token for UI display
+                await self.event_bus.publish(Event(EventType.LLM_TOKEN.value, {"token": token}))
+                
+                # Process token through parser
+                await parser.process_token(token)
 
-            # Final flush of remaining buffers
-            if self.disable_thinking and thinking_buffer:
-                final_filtered = filter_thinking_tags_final(thinking_buffer)
-                if final_filtered:
-                    sentence_buffer = await self._process_tokens(final_filtered, sentence_buffer)
-
-            if sentence_buffer.strip() and not self.cancel_event.is_set():
+            # Final flush of parser buffers
+            await parser.finalize()
+            
+            if not self.cancel_event.is_set():
                 # Publish activity: responding done (synthesizing will be set by TTS handler)
                 await publish_activity(self.event_bus, {"responding": False})
-                await self.event_bus.publish(Event(EventType.TTS_REQUEST.value, {"text": sentence_buffer.strip()}))
 
             # Save to history
             if not self.cancel_event.is_set():
