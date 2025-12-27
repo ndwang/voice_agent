@@ -31,12 +31,10 @@ class ChatTTSProvider(TTSProvider):
         if str(chattts_path) not in sys.path:
             sys.path.insert(0, str(chattts_path))
         
-        # Import ChatTTS and audio utilities
+        # Import ChatTTS
         import ChatTTS
-        from tools.audio.np import float_to_int16
         
         self.ChatTTS = ChatTTS
-        self.float_to_int16 = float_to_int16
         self.output_sample_rate = output_sample_rate
         self.model_source = model_source
         self.device = device
@@ -73,7 +71,7 @@ class ChatTTSProvider(TTSProvider):
                 - stream_speed: Stream speed (default: 1)
         
         Yields:
-            Audio chunks as bytes (int16 PCM format)
+            Audio chunks as bytes (float32 PCM format, normalized to [-1, 1])
         """
         # Run in executor to avoid blocking
         loop = asyncio.get_event_loop()
@@ -163,11 +161,14 @@ class ChatTTSProvider(TTSProvider):
                         else:
                             continue
             
-            # Convert float32 to int16
-            wav_int16 = self.float_to_int16(wav)
+            # Ensure wav is float32 and normalized to [-1, 1]
+            if wav.dtype != np.float32:
+                wav = wav.astype(np.float32)
+            # Ensure values are in [-1, 1] range (ChatTTS should already be normalized)
+            wav = np.clip(wav, -1.0, 1.0)
             
-            # Convert to bytes
-            audio_bytes = wav_int16.astype("<i2").tobytes()
+            # Convert float32 array to bytes
+            audio_bytes = wav.tobytes()
             
             yield audio_bytes
     
@@ -186,7 +187,7 @@ class ChatTTSProvider(TTSProvider):
                 - top_k: Top K for decoding (default: 20)
         
         Returns:
-            Complete audio as bytes (int16 PCM format)
+            Complete audio as bytes (float32 PCM format, normalized to [-1, 1])
         """
         # Run in executor to avoid blocking
         loop = asyncio.get_event_loop()
@@ -266,9 +267,14 @@ class ChatTTSProvider(TTSProvider):
                         else:
                             continue
             
-            # Convert float32 to int16
-            wav_int16 = self.float_to_int16(wav)
-            audio_chunks.append(wav_int16.astype("<i2").tobytes())
+            # Ensure wav is float32 and normalized to [-1, 1]
+            if wav.dtype != np.float32:
+                wav = wav.astype(np.float32)
+            # Ensure values are in [-1, 1] range (ChatTTS should already be normalized)
+            wav = np.clip(wav, -1.0, 1.0)
+            
+            # Convert float32 array to bytes
+            audio_chunks.append(wav.tobytes())
         
         # Combine all audio chunks
         return b"".join(audio_chunks)

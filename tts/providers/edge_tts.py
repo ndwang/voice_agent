@@ -5,6 +5,7 @@ Microsoft Edge TTS provider implementation.
 """
 import io
 from typing import AsyncIterator, Optional
+import numpy as np
 from pydub import AudioSegment
 
 from tts.base import TTSProvider
@@ -48,7 +49,7 @@ class EdgeTTSProvider(TTSProvider):
                 - pitch: Pitch (default: self.default_pitch)
         
         Yields:
-            Audio chunks as bytes (int16 PCM format)
+            Audio chunks as bytes (float32 PCM format, normalized to [-1, 1])
         """
         if not text or not text.strip():
             # Return empty audio for empty text
@@ -104,17 +105,21 @@ class EdgeTTSProvider(TTSProvider):
         if audio.frame_rate != self.output_sample_rate:
             audio = audio.set_frame_rate(self.output_sample_rate)
         
-        # Convert to int16 PCM
-        # raw_data returns bytes in the format: int16 samples
-        audio_bytes = audio.raw_data
+        # Convert to float32 PCM (normalized to [-1, 1])
+        # Get samples as numpy array and normalize
+        samples = np.array(audio.get_array_of_samples(), dtype=np.float32)
+        # Normalize to [-1, 1] range (int16 range is [-32768, 32767])
+        audio_float = samples / 32768.0
+        # Convert to bytes
+        audio_bytes = audio_float.tobytes()
         
         # Validate output audio
         if len(audio_bytes) == 0:
             raise ValueError("Converted PCM audio is empty")
         
-        # Ensure we have at least 2 bytes (one int16 sample)
-        if len(audio_bytes) < 2:
-            raise ValueError(f"Audio too short: {len(audio_bytes)} bytes (need at least 2)")
+        # Ensure we have at least 4 bytes (one float32 sample)
+        if len(audio_bytes) < 4:
+            raise ValueError(f"Audio too short: {len(audio_bytes)} bytes (need at least 4)")
         
         # Yield as a single chunk (could be split into smaller chunks if needed)
         yield audio_bytes

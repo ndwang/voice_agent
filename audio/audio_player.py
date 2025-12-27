@@ -66,7 +66,7 @@ class AudioPlayer:
         Add audio chunk to playback queue.
         
         Args:
-            audio_data: Audio data as bytes (int16 format)
+            audio_data: Audio data as bytes (float32 format, normalized to [-1, 1])
         """
         await self.audio_queue.put(audio_data)
         
@@ -165,11 +165,8 @@ class AudioPlayer:
                     if not self.playing:
                         break
                     
-                    # Convert bytes to numpy array (int16)
-                    audio_array = np.frombuffer(audio_bytes, dtype=np.int16)
-                    
-                    # Convert to float32 and normalize
-                    audio_float = audio_array.astype(np.float32) / 32767.0
+                    # Convert bytes to numpy array (float32, already normalized to [-1, 1])
+                    audio_float = np.frombuffer(audio_bytes, dtype=np.float32)
                     
                     # Reshape if needed
                     if self.channels == 1:
