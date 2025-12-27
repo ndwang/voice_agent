@@ -7,6 +7,7 @@ from orchestrator.events import EventType
 from orchestrator.managers.base import BaseManager
 from orchestrator.managers.context_manager import ContextManager
 from orchestrator.core.constants import SENTENCE_END_PATTERN
+from orchestrator.core.models import SystemState
 from orchestrator.utils.event_helpers import (
     publish_activity,
     publish_history_updated
@@ -27,9 +28,6 @@ class InteractionManager(BaseManager):
     """
 
     def __init__(self, event_bus: EventBus):
-        # State
-        self.listening_enabled = True
-        
         # Thinking filter state
         provider_name = get_config("llm", "provider", default="ollama")
         self.disable_thinking = get_config("llm", "providers", provider_name, "disable_thinking", default=False)
@@ -41,6 +39,10 @@ class InteractionManager(BaseManager):
         self.context_manager = ContextManager(system_prompt_file=system_prompt_file)
         self.llm_provider = self._init_llm()
         self.cancel_event = asyncio.Event()
+        
+        # Systematic State Tracking
+        self.activity_state = SystemState()
+        self._interrupted_before_finished = False
         
         super().__init__(event_bus)
 
@@ -66,24 +68,75 @@ class InteractionManager(BaseManager):
     def _register_handlers(self):
         self.event_bus.subscribe(EventType.TRANSCRIPT_FINAL.value, self.on_transcript)
         self.event_bus.subscribe(EventType.SPEECH_START.value, self.on_interruption)
+        self.event_bus.subscribe(EventType.LLM_CANCELLED.value, self.on_cancel)
+        # Unified state tracking
+        self.event_bus.subscribe(EventType.STATE_CHANGED.value, self.on_state_changed)
+        self.event_bus.subscribe(EventType.LISTENING_STATE_CHANGED.value, self.on_listening_state_changed)
+
+    async def on_state_changed(self, event: Event):
+        """Update local state snapshot from system state changes."""
+        new_state = event.data.get("state", {})
+        self.activity_state.update(new_state)
+
+    async def on_listening_state_changed(self, event: Event):
+        """Update local listening state."""
+        self.activity_state.listening = event.data.get("enabled", True)
 
     async def on_interruption(self, event: Event):
-        """User started speaking, cancel current generation."""
+        """User started speaking, publish cancel event if busy."""
+        # Only publish cancel if we are currently active (responding, synthesizing, or playing)
+        is_busy = (
+            self.activity_state.responding or 
+            self.activity_state.synthesizing or 
+            self.activity_state.playing
+        )
+        
+        if is_busy:
+            await self.event_bus.publish(Event(EventType.LLM_CANCELLED.value))
+
+    async def on_cancel(self, event: Event):
+        """Handle cancellation from any source (speech start, hotkey, UI)."""
         self.cancel_event.set()
-        # Publish cancelled event so TTS/Audio can stop
-        await self.event_bus.publish(Event(EventType.LLM_CANCELLED.value))
+        
+        # Point 1: If we finished generating but are still playing, mark as interrupted
+        # if not self.activity_state.responding and self.activity_state.playing:
+        #     last_msg = self.context_manager.get_last_message()
+        #     if last_msg and last_msg["role"] == "assistant":
+        #         if "[interrupted]" not in last_msg["content"]:
+        #             self.logger.info("Marking assistant response as interrupted in history")
+        #             new_content = last_msg["content"].strip() + " [interrupted]"
+        #             self.context_manager.update_last_message(new_content, role="assistant")
+        #             await publish_history_updated(self.event_bus)
+        
+        # Point 2: If we are still responding, the next transcript should be concatenated
+        if self.activity_state.responding:
+            self.logger.info("Interrupted during LLM generation - will concatenate next message")
+            self._interrupted_before_finished = True
 
     async def on_transcript(self, event: Event):
         """Handle final transcript: User -> LLM -> TTS."""
-        if not self.listening_enabled:
+        if not self.activity_state.listening:
             return
             
         text = event.data.get("text")
         if not text:
             return
 
+        # Point 2: Concatenate if previous turn was interrupted before LLM finished
+        if self._interrupted_before_finished:
+            last_msg = self.context_manager.get_last_message()
+            if last_msg and last_msg["role"] == "user":
+                self.logger.info(f"Concatenating interrupted message: '{last_msg['content']}' + '{text}'")
+                combined_text = f"{last_msg['content']} [interrupted] {text}"
+                self.context_manager.update_last_message(combined_text, role="user")
+                text = combined_text # Use combined text for the next LLM request
+            else:
+                self.context_manager.add_user_message(text)
+            self._interrupted_before_finished = False
+        else:
+            self.context_manager.add_user_message(text)
+
         self.logger.info(f"User: {text}")
-        self.context_manager.add_user_message(text)
         self.cancel_event.clear()
         
         # Publish activity: transcribing is done, now responding

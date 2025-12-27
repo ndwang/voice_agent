@@ -469,6 +469,7 @@
     <h1>Voice Agent Control Panel</h1>
     <button id="system-prompt-btn" class="system-prompt-btn">System Prompt</button>
     <button id="config-btn" class="system-prompt-btn">Config</button>
+    <button id="clear-history-btn" class="system-prompt-btn">Clear History</button>
     <button id="toggle-listening-btn" class="system-prompt-btn">Stop Listening</button>
     <button id="cancel-btn">Cancel Speech</button>
     <span id="status" class="status">Connecting…</span>
@@ -579,6 +580,7 @@
     const cancelBtn = document.getElementById('cancel-btn');
     const toggleListeningBtn = document.getElementById('toggle-listening-btn');
     const systemPromptBtn = document.getElementById('system-prompt-btn');
+    const clearHistoryBtn = document.getElementById('clear-history-btn');
     const systemPromptModal = document.getElementById('system-prompt-modal');
     const modalClose = document.getElementById('modal-close');
     const modalCancel = document.getElementById('modal-cancel');
@@ -746,6 +748,13 @@
       };
       ws.onclose = () => {
         setStatus('Disconnected – retrying…');
+        // Reset transient activity states when disconnected
+        renderActivity({
+          transcribing: false,
+          responding: false,
+          synthesizing: false,
+          playing: false,
+        });
         setTimeout(connect, 1500);
       };
       ws.onerror = () => setStatus('Error – retrying…');
@@ -825,6 +834,28 @@
         await fetch('/ui/cancel', { method: 'POST' });
       } finally {
         cancelBtn.disabled = false;
+      }
+    };
+
+    clearHistoryBtn.onclick = async () => {
+      if (!confirm('Are you sure you want to clear the conversation history?')) {
+        return;
+      }
+      clearHistoryBtn.disabled = true;
+      setStatus('Clearing history…');
+      try {
+        const response = await fetch('/ui/history/clear', { method: 'POST' });
+        if (!response.ok) {
+          throw new Error('Failed to clear history');
+        }
+        setStatus('History cleared');
+        // Refresh history display
+        await fetchHistory();
+      } catch (e) {
+        console.error('Error clearing history:', e);
+        setStatus('Error clearing history');
+      } finally {
+        clearHistoryBtn.disabled = false;
       }
     };
 
