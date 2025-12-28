@@ -5,9 +5,17 @@
 import { state } from '../utils/state.js';
 import { setStatus } from '../utils/helpers.js';
 import { renderActivity, updateToggleListeningButton } from './activity.js';
-import { updateCurrentTranscript, updateCurrentResponse, clearLivePanel, commitCurrentTurn } from './live-panel.js';
-import { fetchHistory } from './history.js';
+import { fetchHistory, updateStreamingMessage, clearStreamingMessages } from './history.js';
 import { updateHotkeyDisplay } from '../modals/hotkey.js';
+
+// Helper to clear state after history fetch completes
+async function fetchHistoryAndClearState() {
+  await fetchHistory();
+  // Clear state after transition completes
+  state.currentTranscriptText = '';
+  state.currentResponseText = '';
+  state.sttInterim = '';
+}
 
 function handleWebSocketEvent(data) {
   switch (data.event) {
@@ -16,31 +24,47 @@ function handleWebSocketEvent(data) {
         state.currentTranscriptText = data.text || '';
         state.currentResponseText = '';
         state.sttInterim = '';
-        updateCurrentResponse();
+        updateStreamingMessage('user', state.currentTranscriptText);
       } else if (data.stage === 'interim') {
         state.sttInterim = data.text || '';
+        const interimLine = state.currentTranscriptText 
+          ? `${state.currentTranscriptText}\n[interim] ${state.sttInterim}`
+          : `[interim] ${state.sttInterim}`;
+        updateStreamingMessage('user', interimLine);
       }
-      updateCurrentTranscript();
       break;
       
     case 'llm_token':
       state.currentResponseText += data.token || '';
-      updateCurrentResponse();
+      updateStreamingMessage('assistant', state.currentResponseText);
       break;
       
     case 'llm_done':
       setStatus('LLM complete');
-      commitCurrentTurn();
+      // Don't clear state yet - renderHistory needs it for smooth transition
+      // State will be cleared after transition completes
+      // Small delay to ensure backend has saved to history
+      setTimeout(() => {
+        fetchHistoryAndClearState();
+      }, 50);
       break;
       
     case 'llm_cancelled':
       setStatus('LLM cancelled');
-      clearLivePanel();
+      state.currentTranscriptText = '';
+      state.currentResponseText = '';
+      state.sttInterim = '';
+      clearStreamingMessages();
+      fetchHistory();
       break;
       
     case 'cancelled':
       setStatus('Speech cancelled');
-      clearLivePanel();
+      state.currentTranscriptText = '';
+      state.currentResponseText = '';
+      state.sttInterim = '';
+      clearStreamingMessages();
+      fetchHistory();
       break;
       
     case 'activity':
@@ -56,7 +80,11 @@ function handleWebSocketEvent(data) {
       break;
       
     case 'history_updated':
-      fetchHistory();
+      // Only fetch if we're not already transitioning (llm_done handles its own fetch)
+      // This prevents double-fetching when both llm_done and history_updated fire
+      if (!state.currentResponseText && !state.currentTranscriptText) {
+        fetchHistory();
+      }
       break;
       
     case 'hotkey_registered':

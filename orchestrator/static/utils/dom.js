@@ -5,8 +5,6 @@
 export const elements = {
   // Main UI elements
   historyPanel: document.getElementById('history-panel'),
-  currentTranscript: document.getElementById('current-transcript'),
-  currentResponse: document.getElementById('current-response'),
   statusEl: document.getElementById('status'),
   
   // Buttons

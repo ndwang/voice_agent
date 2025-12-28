@@ -142,46 +142,21 @@ button:disabled {
   padding: 0 4px;
 }
 
-.live-panel {
-  border-top: 1px solid #1f2937;
+.message.streaming .message-bubble {
+  border-style: dashed;
+  opacity: 0.8;
+}
+
+.message.streaming.user .message-bubble {
+  background: #1e40af;
+}
+
+.message.streaming.assistant .message-bubble {
   background: #111827;
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  flex-shrink: 0;
 }
 
-.live-card {
-  padding: 12px;
-  border-radius: 8px;
-  background: #0f172a;
-  border: 1px solid #1f2937;
-}
-
-.live-label {
-  font-weight: 600;
-  margin-bottom: 8px;
-  display: block;
-  font-size: 0.9rem;
-  color: #9ca3af;
-}
-
-.live-content {
-  min-height: 60px;
-  padding: 10px;
-  border-radius: 6px;
-  background: #0a0f1a;
-  border: 1px solid #1f2937;
-  white-space: pre-wrap;
-  word-break: break-word;
-  color: #e5e7eb;
-}
-
-.live-content:empty::before {
-  content: 'Waiting...';
-  color: #6b7280;
-  font-style: italic;
+.message-bubble.text-transitioning {
+  transition: opacity 0.2s ease-in-out;
 }
 
 .empty-history {
