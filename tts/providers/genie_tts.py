@@ -116,7 +116,7 @@ class GenieTTSProvider(TTSProvider):
                 character_name=char_name,
                 text=text,
                 play=False,
-                split_sentence=kwargs.get("split_sentence", False)
+                split_sentence=kwargs.get("split_sentence", True)
             ):
                 if not chunk:
                     continue

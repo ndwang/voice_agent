@@ -182,15 +182,6 @@ class InteractionManager(BaseManager):
         # Create parser
         parser = LLMStreamParser(tag_configs, default_callback=default_callback)
         
-        # Configure parser
-        tag_configs = []
-        if self.disable_thinking:
-            # Discard redacted_reasoning tags (no callback)
-            tag_configs.append({"name": "redacted_reasoning"})
-        
-        # Create parser
-        parser = LLMStreamParser(tag_configs, default_callback=default_callback)
-        
         try:
             async for token in self.llm_provider.generate_stream(
                 messages=context["messages"],
