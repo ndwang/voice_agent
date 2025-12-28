@@ -164,6 +164,9 @@ class AudioPlayer:
                     get_task = asyncio.create_task(self.audio_queue.get())
                     wait_empty_task = asyncio.create_task(self._buffer_empty_event.wait())
                     
+                    # Initialize pending to avoid UnboundLocalError
+                    pending = {get_task, wait_empty_task}
+                    
                     try:
                         done, pending = await asyncio.wait(
                             [get_task, wait_empty_task],
@@ -185,10 +188,27 @@ class AudioPlayer:
                         else:
                             # No new data yet, continue loop
                             continue
+                            
+                    except asyncio.CancelledError:
+                        # If cancelled, clean up and re-raise
+                        for t in pending:
+                            if not t.done():
+                                t.cancel()
+                        raise
+                        
+                    except Exception as e:
+                        logger.error(f"Error waiting for audio: {e}", exc_info=True)
+                        # Clean up tasks
+                        for t in pending:
+                            if not t.done():
+                                t.cancel()
+                        continue
+                        
                     finally:
                         # Always cleanup pending tasks
                         for t in pending:
-                            t.cancel()
+                            if not t.done():
+                                t.cancel()
 
                 # Process new item
                 try:

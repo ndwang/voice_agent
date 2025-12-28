@@ -162,12 +162,7 @@ class TTSManager(BaseManager):
             async for message in self.websocket:
                 try:
                     if isinstance(message, bytes):
-                        # Play audio
-                        # When first chunk arrives, synthesizing is done
-                        if self._synthesizing:
-                            self._synthesizing = False
-                            await publish_activity(self.event_bus, {"synthesizing": False})
-                        
+                        # Play audio                        
                         await self.audio_player.play_audio_chunk(message, source_sample_rate=self._current_sample_rate)
                         await self.event_bus.publish(Event(EventType.TTS_AUDIO_CHUNK.value, {"size": len(message)}))
                     elif isinstance(message, str):
