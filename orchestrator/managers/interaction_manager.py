@@ -2,7 +2,7 @@ import asyncio
 from typing import Optional, List, Dict
 from core.event_bus import EventBus, Event
 from core.logging import get_logger
-from core.config import get_config
+from core.settings import get_settings, LLMSettings, OrchestratorSettings
 from orchestrator.events import EventType
 from orchestrator.managers.base import BaseManager
 from orchestrator.managers.context_manager import ContextManager
@@ -27,43 +27,74 @@ class InteractionManager(BaseManager):
     Event(Transcript) -> Context -> LLM -> Event(Token) -> Buffer -> TTS -> Event(Audio)
     """
 
-    def __init__(self, event_bus: EventBus):
-        # Thinking filter state
-        provider_name = get_config("llm", "provider", default="ollama")
-        self.disable_thinking = get_config("llm", "providers", provider_name, "disable_thinking", default=False)
-        
-        # Get system prompt file from config
-        system_prompt_file = get_config("orchestrator", "system_prompt_file", default=None)
-        
+    def __init__(
+        self,
+        event_bus: EventBus,
+        llm_settings: Optional[LLMSettings] = None,
+        orch_settings: Optional[OrchestratorSettings] = None
+    ):
+        # Use injected settings if provided, otherwise use global
+        app_settings = get_settings()
+        self.llm_settings = llm_settings or app_settings.llm
+        self.orch_settings = orch_settings or app_settings.orchestrator
+
+        # Type-safe access with IDE autocomplete!
+        self.disable_thinking = self.llm_settings.get_provider_config().disable_thinking
+
         # Components
-        self.context_manager = ContextManager(system_prompt_file=system_prompt_file)
+        self.context_manager = ContextManager(
+            system_prompt_file=self.orch_settings.system_prompt_file
+        )
         self.llm_provider = self._init_llm()
         self.cancel_event = asyncio.Event()
-        
+
         # Systematic State Tracking
         self.activity_state = SystemState()
         self._interrupted_before_finished = False
-        
+
+        # Register for config changes
+        from core.settings import AppSettings
+        AppSettings.add_change_listener(self.on_config_changed)
+
         super().__init__(event_bus)
 
     def _init_llm(self):
-        provider = get_config("llm", "provider", default="ollama")
-        if provider == "gemini":
-            generation_config = get_config("llm", "providers", "gemini", "generation_config", default={})
+        """Initialize LLM provider using typed settings"""
+        provider_config = self.llm_settings.get_provider_config()
+
+        if self.llm_settings.provider == "gemini":
             return GeminiProvider(
-                model=get_config("llm", "providers", "gemini", "model"),
-                api_key=get_config("llm", "providers", "gemini", "api_key"),
-                generation_config=generation_config if generation_config else None
+                model=provider_config.model,
+                api_key=provider_config.api_key,
+                generation_config=provider_config.generation_config
             )
         else:
-            generation_config = get_config("llm", "providers", "ollama", "generation_config", default={})
             return OllamaProvider(
-                model=get_config("llm", "providers", "ollama", "model"),
-                base_url=get_config("llm", "providers", "ollama", "base_url"),
-                timeout=float(get_config("llm", "providers", "ollama", "timeout", default=300)),
-                disable_thinking=get_config("llm", "providers", "ollama", "disable_thinking", default=False),
-                generation_config=generation_config if generation_config else None
+                model=provider_config.model,
+                base_url=provider_config.base_url,
+                timeout=provider_config.timeout,
+                disable_thinking=provider_config.disable_thinking,
+                generation_config=provider_config.generation_config
             )
+
+    def on_config_changed(self, changes: dict):
+        """
+        React to configuration changes.
+
+        Args:
+            changes: Dict with changed config sections
+        """
+        if "llm" in changes:
+            # LLM config changed - reload provider
+            self.llm_settings = get_settings().llm
+            self.disable_thinking = self.llm_settings.get_provider_config().disable_thinking
+            self.llm_provider = self._init_llm()
+            logger.info(f"LLM provider reloaded: {self.llm_settings.provider}")
+
+        if "orchestrator" in changes:
+            # Orchestrator config changed
+            self.orch_settings = get_settings().orchestrator
+            logger.info("Orchestrator settings updated")
 
     def _register_handlers(self):
         self.event_bus.subscribe(EventType.TRANSCRIPT_FINAL.value, self.on_transcript)

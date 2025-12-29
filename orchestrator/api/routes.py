@@ -1,6 +1,6 @@
 """Main API router that combines all route modules."""
 from fastapi import APIRouter
-from . import health, ui, hotkeys
+from . import health, ui, hotkeys, config
 
 router = APIRouter()
 
@@ -8,4 +8,5 @@ router = APIRouter()
 router.include_router(health.router, tags=["health"])
 router.include_router(ui.router, tags=["ui"])
 router.include_router(hotkeys.router, tags=["hotkeys"])
+router.include_router(config.router, tags=["configuration"])
 
