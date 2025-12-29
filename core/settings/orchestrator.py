@@ -9,7 +9,6 @@ class OrchestratorSettings(BaseModel):
     stt_websocket_path: str = "/ws/stt"
     log_level: str = "INFO"
     log_file: Optional[str] = None
-    enable_latency_tracking: bool = False
     system_prompt_file: Optional[str] = None
     hotkeys: dict = Field(default_factory=lambda: {
         "toggle_listening": "ctrl+shift+l",

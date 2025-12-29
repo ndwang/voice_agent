@@ -7,6 +7,7 @@ class EventType(Enum):
     STATE_CHANGED = "system.state_changed"
     HISTORY_UPDATED = "system.history_updated"
     LISTENING_STATE_CHANGED = "system.listening_state_changed"
+    TURN_ENDED = "system.turn_ended"
     
     # Input
     SPEECH_START = "input.speech_start"

@@ -4,7 +4,6 @@ orchestrator:
   stt_websocket_path: /ws/stt
   log_level: INFO
   log_file: null
-  enable_latency_tracking: true
   system_prompt_file: orchestrator/ema_prompt.txt
   hotkeys:
     toggle_listening: ctrl+shift+l
