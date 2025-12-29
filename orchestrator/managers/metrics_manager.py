@@ -34,16 +34,12 @@ class MetricsManager:
         self.event_bus.subscribe(EventType.TTS_AUDIO_CHUNK.value, self.on_audio_start)
         
         # Cleanup/Completion Events
-        self.event_bus.subscribe(EventType.LLM_RESPONSE_DONE.value, self.on_turn_end)
+        self.event_bus.subscribe(EventType.LLM_RESPONSE_DONE.value, self.on_llm_end)
+        self.event_bus.subscribe(EventType.TURN_ENDED.value, self.on_turn_end)
         self.event_bus.subscribe(EventType.LLM_CANCELLED.value, self.on_cancel)
 
     async def on_turn_start(self, event: Event):
         """Triggered when you finish speaking"""
-        if self.active:
-            metrics = self.active.compute()
-            if "e2e_latency_ms" in metrics:
-                self.history.add(metrics)
-        
         self.active = RequestTimeline(
             request_id=str(uuid.uuid4())[:8],
             turn_start=time.perf_counter(),
@@ -79,11 +75,19 @@ class MetricsManager:
                 f"TTS-TTFA: {m.get('tts_ttfa_ms', 0):.0f}ms"
             )
 
-    async def on_turn_end(self, event: Event):
+    async def on_llm_end(self, event: Event):
         """Capture generation stats and finalize turn"""
         if self.active:
             self.active.llm_end = time.perf_counter()
             self.active.completion_tokens = event.data.get("completion_tokens", 0)
+
+    async def on_turn_end(self, event: Event):
+        """Capture turn stats and add to history"""
+        if self.active:
+            metrics = self.active.compute()
+            if "e2e_latency_ms" in metrics:
+                self.history.add(metrics)
+            self.active = None
 
     async def on_cancel(self, event: Event):
         """Wipe tracking on interruption - we don't care about cancelled stats"""

@@ -41,9 +41,10 @@ class MetricsHistory:
             return {"total_requests": 0}
 
         # Extract columns
-        e2e = [m['e2e_latency_ms'] for m in self.history if 'e2e_latency_ms' in m]
         ttft = [m['llm_ttft_ms'] for m in self.history if 'llm_ttft_ms' in m]
         sent = [m['first_sentence_ms'] for m in self.history if 'first_sentence_ms' in m]
+        tts_ttfa = [m['tts_ttfa_ms'] for m in self.history if 'tts_ttfa_ms' in m]
+        e2e = [m['e2e_latency_ms'] for m in self.history if 'e2e_latency_ms' in m]
         tps = [m['tokens_per_sec'] for m in self.history if 'tokens_per_sec' in m]
 
         analysis = {
@@ -51,6 +52,7 @@ class MetricsHistory:
             "e2e": self._summarize(e2e),
             "llm_ttft": self._summarize(ttft),
             "first_sentence": self._summarize(sent),
+            "tts_ttfa": self._summarize(tts_ttfa),
             "throughput": self._summarize(tps)
         }
         
@@ -59,11 +61,11 @@ class MetricsHistory:
         if avg_e2e > 0:
             avg_ttft = analysis["llm_ttft"]["avg"]
             avg_first_sentence = analysis["first_sentence"]["avg"]
-            avg_tts_synthesis = analysis["e2e"]["avg"]
+            avg_tts_synthesis = analysis["tts_ttfa"]["avg"]
 
             analysis["latency_breakdown"] = {
                 "llm_wait": round((avg_ttft / avg_e2e) * 100),
-                "sentence_formation": round((avg_first_sentence / avg_e2e) * 100),
+                "sentence_formation": round(((avg_first_sentence - avg_ttft) / avg_e2e) * 100),
                 "tts_synthesis": round((avg_tts_synthesis / avg_e2e) * 100)
             }
 

@@ -38,6 +38,8 @@ class TTSManager(BaseManager):
     async def _on_play_state_changed(self, is_playing: bool):
         """Callback when audio playback state changes."""
         await publish_activity(self.event_bus, {"playing": is_playing})
+        if not is_playing:
+            await self.event_bus.publish(Event(EventType.TURN_ENDED.value))
     
     async def on_llm_request(self, event: Event):
         """Pre-connect WebSocket when LLM request is published to reduce latency."""
