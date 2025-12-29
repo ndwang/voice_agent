@@ -22,7 +22,6 @@ class AudioSettings(BaseModel):
     output: AudioOutputSettings
     dtype: str = "float32"
     block_size_ms: int = 100
-    silence_threshold_ms: int = 500
     listening_status_poll_interval: float = 1.0
 
     @classmethod
