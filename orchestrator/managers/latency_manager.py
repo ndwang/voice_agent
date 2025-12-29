@@ -3,7 +3,7 @@ from typing import Optional
 from datetime import datetime
 from core.event_bus import EventBus, Event
 from core.logging import get_logger
-from core.config import get_config
+from core.settings import get_settings
 from orchestrator.events import EventType
 from orchestrator.managers.base import BaseManager
 
@@ -16,7 +16,8 @@ class LatencyTracker(BaseManager):
     """
     
     def __init__(self, event_bus: EventBus):
-        self.enabled = get_config("orchestrator", "enable_latency_tracking", default=False)
+        settings = get_settings()
+        self.enabled = settings.orchestrator.enable_latency_tracking
         
         # State
         self.speech_end_time: Optional[float] = None

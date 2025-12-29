@@ -1,177 +1,141 @@
-# Voice Agent Configuration File
-# All submodules use this file for configuration.
-
-# Orchestrator Service Configuration
 orchestrator:
-  host: "0.0.0.0"
+  host: 0.0.0.0
   port: 8000
-  stt_websocket_path: "/ws/stt"
-  log_level: "INFO"
+  stt_websocket_path: /ws/stt
+  log_level: INFO
+  log_file: null
   enable_latency_tracking: true
-  system_prompt_file: "orchestrator/ema_prompt.txt"  # Optional (default: orchestrator/system_prompt.txt)
-  # system_prompt_reload_interval: 1.0  # Optional: seconds between file checks for hot-reload (default: 1.0) NOT IMPLEMENTED
+  system_prompt_file: orchestrator/ema_prompt.txt
   hotkeys:
-    toggle_listening: "ctrl+shift+l"  # Default hotkey for toggling listening
-    cancel_speech: "ctrl+shift+c"  # Default hotkey for canceling speech/TTS
-
-# STT (Speech-to-Text) Service Configuration
-stt:
-  host: "0.0.0.0"
-  port: 8001
-  provider: "funasr"  # Options: faster-whisper, funasr
-  language_code: "zh"  # Language code for transcription
-  sample_rate: 16000
-  interim_transcript_min_samples: 16000  # Minimum audio samples (1s at 16kHz) for interim transcription
-  providers:
-    faster-whisper:
-      model_path: "faster-whisper-small"  # relative to stt/
-      device: null  # null = auto-detect (cuda if available, else cpu)
-      compute_type: null  # null = auto-detect (int8 if cuda, else default)
-    funasr:
-      model_name: "paraformer-zh-streaming" #"FunAudioLLM/Fun-ASR-Nano-2512"
-      vad_model: "fsmn-vad"  # VAD model name
-      vad_kwargs:
-        max_single_segment_time: 30000  # Max segment time in ms
-      punc_model: "ct-punc"  # Punctuation model name (e.g., "ct-punc" or "damo/punc_ct-transformer_zh-cn-common-vocab272727-pytorch")
-      device: "cpu"  # null = auto-detect (gpu), or "cuda:0", "cuda", "cpu"
-      batch_size_s: 0  # Batch size for processing
-      streaming:
-        enabled: true  # Enable streaming mode
-        chunk_size: [0, 8, 4]  # ASR chunk configuration [0, 8, 4] = 480ms
-        encoder_chunk_look_back: 4  # Number of chunks to lookback for encoder self-attention
-        decoder_chunk_look_back: 1  # Number of encoder chunks to lookback for decoder cross-attention
-        vad_chunk_size_ms: 100  # VAD processing chunk size in milliseconds
-        silence_threshold_ms: 300  # Silence duration threshold to trigger finalization (ms)
-
-# LLM (Language Model) Configuration
+    toggle_listening: ctrl+shift+l
+    cancel_speech: ctrl+shift+c
 llm:
-  provider: "ollama"  # Options: gemini, ollama
+  provider: ollama
   providers:
     gemini:
-      model: "gemini-2.5-flash"  # Model name
-      api_key: ""  # Optional: Override GEMINI_API_KEY environment variable. Leave empty to use env var.
+      model: gemini-2.5-flash
+      api_key: ''
       generation_config:
-        # Thinking configuration (choose one):
-        thinking_budget: 0  # 0 = disabled, -1 = dynamic (Gemini 2.5), 2.5 pro 128-32768, 2.5 flash 0-24576
-        # thinking_level: "low"  # Gemini 3 Pro low/high, Flash low/high/medium/minimal
-        # temperature: 1.0  # Sampling temperature (0.0 to 2.0)
-        # top_p: 0.95  # Top-p sampling parameter
-        # top_k: 40  # Top-k sampling parameter
-        # max_output_tokens: 8192  # Maximum tokens to generate
+        thinking_budget: 0
     ollama:
-      model: "Qwen3-8B-Q4-8kcontext"  # Model name from `ollama list`
-      # model: "ema"
-      base_url: "http://localhost:11434"  # Default Ollama URL
-      timeout: 300.0  # Request timeout in seconds
-      disable_thinking: true  # Set to true to disable thinking/reasoning mode in models that support it
-      generation_config:
-        # temperature: 0.7  # Sampling temperature
-        # top_p: 0.9  # Top-p sampling parameter
-        # top_k: 40  # Top-k sampling parameter
-        # num_predict: 2048  # Maximum tokens to generate (Ollama uses num_predict)
-
-# TTS (Text-to-Speech) Service Configuration
+      model: Qwen3-8B-Q4-8kcontext
+      base_url: http://localhost:11434
+      timeout: '300'
+      disable_thinking: true
+      generation_config: null
 tts:
-  host: "0.0.0.0"
+  host: 0.0.0.0
   port: 8003
-  provider: "gpt-sovits"  # Options: edge-tts, chattts, elevenlabs, genie-tts, gpt-sovits
+  provider: gpt-sovits
+  log_level: INFO
+  log_file: null
   providers:
     edge-tts:
-      voice: "zh-CN-XiaoyiNeural"  # Voice name
-      rate: "+0%"  # Speech rate (e.g., -50% for slower, +50% for faster)
-      pitch: "+0Hz"  # Pitch adjustment
+      voice: zh-CN-XiaoyiNeural
+      rate: +0%
+      pitch: +0Hz
     chattts:
-      model_source: "local"  # Options: local, huggingface, custom
-      device: null  # Options: cuda, cpu, null (auto-detect)
+      model_source: local
+      device: null
     elevenlabs:
-      voice_id: "9lHjugDhwqoxA5MhX0az"  # Required: ElevenLabs voice ID
+      voice_id: 9lHjugDhwqoxA5MhX0az
       stability: 0.5
       similarity_boost: 0.8
-      style: 0.0
+      style: 0
     genie-tts:
-      character_name: "ema"
-      onnx_model_dir: "CharacterModels/v2ProPlus/ema/onnx_model"  # Required: Directory containing ONNX model
-      language: "jp"  # Language code (zh, en, jp)
-      reference_audio_path: "CharacterModels/v2ProPlus/ema/prompt_wav/4.WAV_0000489920_0000654080.wav"
-      reference_audio_text: "アリサちゃんの魔法発火なら気球を浮かせることができるんじゃないかって"
-      source_sample_rate: 32000  # Sample rate produced by GenieTTS (standard is 32000 for SoVITS models)
+      character_name: ema
+      onnx_model_dir: CharacterModels/v2ProPlus/ema/onnx_model
+      language: jp
+      reference_audio_path: CharacterModels/v2ProPlus/ema/prompt_wav/4.WAV_0000489920_0000654080.wav
+      reference_audio_text: アリサちゃんの魔法発火なら気球を浮かせることができるんじゃないかって
+      source_sample_rate: 32000
     gpt-sovits:
-      server_url: "http://127.0.0.1:9880"  # GPT-SoVITS API server URL
-      default_reference: "normal"  # Name of the default reference to use
-      default_text_lang: "ja"  # Default language for TTS input text
-      gpt_weights_path: "CharacterModels/v2ProPlus/ema/gpt_sovits_model/Ama-e10.ckpt"  # Path to GPT model weights
-      sovits_weights_path: "CharacterModels/v2ProPlus/ema/gpt_sovits_model/Ama_e8_s1040.pth"  # Path to SoVITS model weights
-      streaming_mode: 2  # 0=off, 1=best quality, 2=medium quality, 3=fastest
-      temperature: 1.0
-      top_p: 1.0
-      top_k: 15
-      speed_factor: 1.0
-      timeout: 30.0
-      # Reference registry - always use this pattern
+      server_url: http://127.0.0.1:9880
+      default_reference: normal
+      default_text_lang: ja
+      gpt_weights_path: CharacterModels/v2ProPlus/ema/gpt_sovits_model/Ama-e10.ckpt
+      sovits_weights_path: CharacterModels/v2ProPlus/ema/gpt_sovits_model/Ama_e8_s1040.pth
+      streaming_mode: '2'
+      temperature: '1'
+      top_p: '1'
+      top_k: '15'
+      speed_factor: '1'
+      timeout: '30'
       references:
         normal:
-          ref_audio_path: "CharacterModels/v2ProPlus/ema/prompt_wav/4.WAV_0000489920_0000654080.wav"
-          prompt_text: "アリサちゃんの魔法発火なら気球を浮かせることができるんじゃないかって"
-          prompt_lang: "all_ja"
-          # "all_zh",#全部按中文识别
-          # "en",#全部按英文识别#######不变
-          # "all_ja",#全部按日文识别
-          # "all_yue",#全部按中文识别
-          # "all_ko",#全部按韩文识别
-          # "zh",#按中英混合识别####不变
-          # "ja",#按日英混合识别####不变
-          # "yue",#按粤英混合识别####不变
-          # "ko",#按韩英混合识别####不变
-          # "auto",#多语种启动切分识别语种
-          # "auto_yue",#多语种启动切分识别语种
-
-# OCR (Optical Character Recognition) Service Configuration
-ocr:
-  host: "0.0.0.0"
-  port: 8004
-  language: "ch"  # Chinese and English support
-  interval_ms: 1000  # Default monitoring interval in milliseconds
-  texts_storage_file_prefix: "ocr_detected_texts"  # Prefix for text storage files
-
-# Audio Driver Configuration
+          ref_audio_path: CharacterModels/v2ProPlus/ema/prompt_wav/4.WAV_0000489920_0000654080.wav
+          prompt_text: アリサちゃんの魔法発火なら気球を浮かせることができるんじゃないかって
+          prompt_lang: all_ja
+stt:
+  host: 0.0.0.0
+  port: 8001
+  provider: funasr
+  language_code: zh
+  sample_rate: 16000
+  interim_transcript_min_samples: 16000
+  log_level: INFO
+  log_file: null
+  providers:
+    faster-whisper:
+      model_path: faster-whisper-small
+      device: null
+      compute_type: null
+    funasr:
+      model_name: paraformer-zh-streaming
+      vad_model: fsmn-vad
+      vad_kwargs:
+        max_single_segment_time: 30000
+      punc_model: ct-punc
+      device: cpu
+      batch_size_s: 0
+      streaming:
+        enabled: true
+        chunk_size:
+        - 0
+        - 8
+        - 4
+        encoder_chunk_look_back: 4
+        decoder_chunk_look_back: 1
+        vad_chunk_size_ms: '100'
+        silence_threshold_ms: '200'
 audio:
   input:
     sample_rate: 16000
     channels: 1
-    device: null  # Set to device index or name, null for default
+    device: null
   output:
-    sample_rate: 32000  # Playback sample rate and TTS target (e.g., 48000)
+    sample_rate: 32000
     channels: 1
-    device: null #31  # Set to device index or name, null for default
-  dtype: "float32"
-  block_size_ms: 100  # Determines VAD sensitivity
-  silence_threshold_ms: 500  # 500ms of silence triggers a flush (used as fallback for STT providers)
-  listening_status_poll_interval: 1.0  # Seconds between polling orchestrator for listening status
-
-# Bilibili Configuration
-bilibili:
-  enabled: true
-  room_id: 31232063  # Example room ID
-  sessdata: " "       # Optional SESSDATA cookie for higher user detail
-  danmaku_ttl_seconds: 60
-
-# OBS Websocket Configuration
+    device: null
+  dtype: float32
+  block_size_ms: 100
+  listening_status_poll_interval: 1.0
+ocr:
+  host: 0.0.0.0
+  port: 8004
+  language: ch
+  interval_ms: 1000
+  texts_storage_file_prefix: ocr_detected_texts
+  log_level: INFO
+  log_file: null
 obs:
   websocket:
-    host: "localhost"
+    host: localhost
     port: 4455
-    password: "j22KXyZ1ONOk5m70"
-  subtitle_source: "subtitle"  # Name of the text source in OBS for subtitles
-  subtitle_ttl_seconds: 10  # Time to live for subtitles - clears after inactivity (0 = disabled)
-  visibility_source: "AI"  # Optional: Source name that has the filters (null = disabled)
-  appear_filter_name: MoveInRight  # Optional: Filter name to enable when subtitles first appear (null = disabled)
-  clear_filter_name: MoveOutRight  # Optional: Filter name to enable when subtitles are cleared (null = disabled)
-
-# Service URLs (used by orchestrator to connect to other services)
+    password: j22KXyZ1ONOk5m70
+  subtitle_source: subtitle
+  subtitle_ttl_seconds: 10
+  visibility_source: AI
+  appear_filter_name: MoveInRight
+  clear_filter_name: MoveOutRight
+bilibili:
+  enabled: true
+  room_id: 31232063
+  sessdata: ' '
+  danmaku_ttl_seconds: 60
 services:
-  orchestrator_base_url: "http://localhost:8000"  # Base URL for orchestrator API (used by audio driver)
-  stt_websocket_url: "ws://localhost:8001/ws/transcribe"
-  tts_websocket_url: "ws://localhost:8003/synthesize/stream"
-  ocr_websocket_url: "ws://localhost:8004/monitor/stream"
-  ocr_base_url: "http://localhost:8004"
-
+  orchestrator_base_url: http://localhost:8000
+  stt_websocket_url: ws://localhost:8001/ws/transcribe
+  tts_websocket_url: ws://localhost:8003/synthesize/stream
+  ocr_websocket_url: ws://localhost:8004/monitor/stream
+  ocr_base_url: http://localhost:8004

@@ -14,7 +14,7 @@ import logging
 import sys
 import threading
 
-from core.config import get_config
+from core.settings import get_settings
 from core.logging import setup_logging, get_logger
 
 # Set up logging
@@ -24,7 +24,7 @@ logger = get_logger(__name__)
 
 class AudioPlayer:
     """Streaming audio player."""
-    
+
     def __init__(
         self,
         sample_rate: int = None,
@@ -35,18 +35,18 @@ class AudioPlayer:
     ):
         """
         Initialize audio player.
-        
+
         Args:
             sample_rate: Audio sample rate (default: from config)
             channels: Number of audio channels (default: from config)
         """
-        self.sample_rate = sample_rate or get_config("audio", "output", "sample_rate", default=16000)
-        self.channels = channels or get_config("audio", "output", "channels", default=1)
+        settings = get_settings()
+        self.sample_rate = sample_rate or settings.audio.output.sample_rate
+        self.channels = channels or settings.audio.output.channels
         self.playback_sample_rate = (
-            output_sample_rate
-            or get_config("audio", "output", "sample_rate", default=self.sample_rate)
+            output_sample_rate or settings.audio.output.sample_rate
         )
-        self.output_device = output_device or get_config("audio", "output", "device")
+        self.output_device = output_device or settings.audio.output.device
         self.audio_queue: asyncio.Queue = asyncio.Queue()
         self.playing = False
         self.play_task: Optional[asyncio.Task] = None

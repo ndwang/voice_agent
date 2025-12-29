@@ -1,7 +1,7 @@
 import asyncio
 from core.event_bus import EventBus, Event
 from core.logging import get_logger
-from core.config import get_config
+from core.settings import get_settings
 from orchestrator.events import EventType
 from orchestrator.managers.base import BaseManager
 from orchestrator.clients.obs_client import OBSClient
@@ -15,13 +15,14 @@ class SubtitleManager(BaseManager):
     Accumulates sentences from one conversation round to show the full response.
     Supports TTL (Time To Live) - clears subtitles after inactivity.
     """
-    
+
     def __init__(self, event_bus: EventBus):
-        self.source_name = get_config("obs", "subtitle_source", default="subtitle")
-        self.ttl_seconds = get_config("obs", "subtitle_ttl_seconds", default=10)
-        self.visibility_source = get_config("obs", "visibility_source", default=None)
-        self.appear_filter_name = get_config("obs", "appear_filter_name", default=None)
-        self.clear_filter_name = get_config("obs", "clear_filter_name", default=None)
+        settings = get_settings()
+        self.source_name = settings.obs.subtitle_source
+        self.ttl_seconds = settings.obs.subtitle_ttl_seconds
+        self.visibility_source = settings.obs.visibility_source
+        self.appear_filter_name = settings.obs.appear_filter_name
+        self.clear_filter_name = settings.obs.clear_filter_name
         self.obs_client = None
         self.accumulated_text = ""  # Accumulates sentences from current conversation round
         self.clear_task = None  # Task for TTL-based clearing

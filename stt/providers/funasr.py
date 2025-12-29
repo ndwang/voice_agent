@@ -15,33 +15,34 @@ import scipy.io.wavfile as wavfile
 import torch
 
 from stt.base import STTProvider, Segment
+from core.settings.stt import FunASRStreamingConfig, FunASRVADKwargs
 
 logger = logging.getLogger(__name__)
 
 
 class FunASRProvider(STTProvider):
     """FunASR STT provider implementation."""
-    
+
     def __init__(
         self,
         model_name: str = "FunAudioLLM/Fun-ASR-Nano-2512",
         vad_model: str = "fsmn-vad",
-        vad_kwargs: Optional[Dict[str, Any]] = None,
+        vad_kwargs: FunASRVADKwargs = None,
         punc_model: Optional[str] = None,
         device: str = None,
         batch_size_s: int = 0,
-        streaming_config: Optional[Dict[str, Any]] = None
+        streaming_config: FunASRStreamingConfig = None
     ):
         """
         Initialize FunASR provider.
-        
+
         Args:
             model_name: Model name or path (e.g., "FunAudioLLM/Fun-ASR-Nano-2512")
             vad_model: VAD model name (default: "fsmn-vad")
-            vad_kwargs: VAD configuration kwargs (e.g., {"max_single_segment_time": 30000})
+            vad_kwargs: VAD configuration (FunASRVADKwargs model)
             device: Device to use ("cuda:0", "cuda", or "cpu")
             batch_size_s: Batch size for processing (default: 0)
-            streaming_config: Streaming configuration dict with chunk_size, encoder_chunk_look_back, etc.
+            streaming_config: Streaming configuration (FunASRStreamingConfig model)
         """
         try:
             from funasr import AutoModel
@@ -49,29 +50,35 @@ class FunASRProvider(STTProvider):
             raise ImportError(
                 "funasr package is not installed. Please install it with: pip install funasr"
             )
-        
+
         self.AutoModel = AutoModel
         self.model_name = model_name
         self.vad_model = vad_model
-        self.vad_kwargs = vad_kwargs or {"max_single_segment_time": 30000}
+
+        # Convert Pydantic model to dict for funasr
+        if vad_kwargs is None:
+            self.vad_kwargs = {"max_single_segment_time": 30000}
+        else:
+            self.vad_kwargs = vad_kwargs.model_dump()
+
         self.punc_model = punc_model
         self.punc_model_instance = None
-        
+
         # Auto-detect device if not specified
         if device is None:
             device = "cuda:0" if torch.cuda.is_available() else "cpu"
         self.device = device
         self.batch_size_s = batch_size_s
-        
+
         # Streaming configuration
-        self.streaming_config = streaming_config or {}
-        self.is_streaming = self.streaming_config.get("enabled", False) and "streaming" in model_name.lower()
-        
-        # Streaming parameters
-        self.chunk_size = self.streaming_config.get("chunk_size", [0, 10, 5])
-        self.encoder_chunk_look_back = self.streaming_config.get("encoder_chunk_look_back", 4)
-        self.decoder_chunk_look_back = self.streaming_config.get("decoder_chunk_look_back", 1)
-        self.vad_chunk_size_ms = self.streaming_config.get("vad_chunk_size_ms", 200)
+        self.streaming_config = streaming_config if streaming_config is not None else FunASRStreamingConfig()
+        self.is_streaming = self.streaming_config.enabled and "streaming" in model_name.lower()
+
+        # Streaming parameters (direct attribute access)
+        self.chunk_size = self.streaming_config.chunk_size
+        self.encoder_chunk_look_back = self.streaming_config.encoder_chunk_look_back
+        self.decoder_chunk_look_back = self.streaming_config.decoder_chunk_look_back
+        self.vad_chunk_size_ms = self.streaming_config.vad_chunk_size_ms
         
         # Load the ASR model
         logger.info(f"Loading FunASR model '{self.model_name}' on {self.device}...")

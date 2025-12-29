@@ -9,7 +9,7 @@ if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
 from core.server import create_app
-from core.config import get_config
+from core.settings import get_settings
 from core.logging import get_logger
 from core.event_bus import EventBus, Event
 from orchestrator.api import router as orchestrator_router
@@ -56,15 +56,16 @@ class OrchestratorServer:
     async def start(self):
         # Start sources
         await self.stt_source.start()
-        if get_config("bilibili", "enabled", default=False):
+        settings = get_settings()
+        if settings.bilibili.enabled:
             await self.bilibili_source.start()
         
         # Start audio driver
         await self.audio_driver.start()
         
         # Setup hotkeys
-        toggle_key = get_config("orchestrator", "hotkeys", "toggle_listening", default="ctrl+shift+l")
-        cancel_key = get_config("orchestrator", "hotkeys", "cancel_speech", default="ctrl+shift+c")
+        toggle_key = settings.orchestrator.hotkeys.get("toggle_listening", "ctrl+shift+l")
+        cancel_key = settings.orchestrator.hotkeys.get("cancel_speech", "ctrl+shift+c")
         
         # Set up toggle_listening callback with event loop
         event_loop = asyncio.get_event_loop()
@@ -123,8 +124,9 @@ class OrchestratorServer:
         await self.event_bus.publish(Event(EventType.LLM_CANCELLED.value))
 
 def main():
-    HOST = get_config("orchestrator", "host", default="0.0.0.0")
-    PORT = get_config("orchestrator", "port", default=8000)
+    settings = get_settings()
+    HOST = settings.orchestrator.host
+    PORT = settings.orchestrator.port
     
     # 1. Initialize Logic
     orch = OrchestratorServer()

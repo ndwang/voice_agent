@@ -337,14 +337,18 @@ class LLMStreamParser:
                 callback = config.get("callback")
                 if callback:
                     await self._process_content(self.buffer, is_final=True)
-        
+
         # Final flush of content_buffer
         if self.content_buffer:
             callback = self._get_current_callback()
             if callback and self.content_buffer.strip():
                 await callback(self.content_buffer.strip())
-        
+
         # Reset state
+        self.reset()
+
+    def reset(self):
+        """Reset parser state for reuse with new stream."""
         self.current_state = None
         self.buffer = ""
         self.content_buffer = ""

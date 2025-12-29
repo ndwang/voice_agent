@@ -3,7 +3,7 @@ import json
 import websockets
 from core.event_bus import EventBus, Event
 from core.logging import get_logger
-from core.config import get_config
+from core.settings import get_settings
 from orchestrator.events import EventType
 from orchestrator.managers.base import BaseManager
 from orchestrator.utils.event_helpers import publish_activity
@@ -20,7 +20,8 @@ class TTSManager(BaseManager):
     """
     
     def __init__(self, event_bus: EventBus):
-        self.url = get_config("services", "tts_websocket_url", default="ws://localhost:8003/synthesize/stream")
+        settings = get_settings()
+        self.url = settings.services.tts_websocket_url
         self.audio_player = AudioPlayer(on_play_state=self._on_play_state_changed)
         self.websocket = None
         self._receiver_task = None

@@ -6,7 +6,7 @@ from typing import Dict, Set, Optional, Any
 from dataclasses import dataclass, field
 from fastapi import WebSocket, WebSocketDisconnect
 from core.logging import get_logger
-from core.config import get_config
+from core.settings import get_settings
 from stt.providers import FasterWhisperProvider, FunASRProvider
 
 logger = get_logger(__name__)
@@ -34,12 +34,13 @@ class STTManager:
 
     def __init__(self):
         # Configuration
-        self.language_code = get_config("stt", "language_code", default="zh")
-        self.sample_rate = get_config("stt", "sample_rate", default=16000)
-        self.interim_min_samples = get_config("stt", "interim_transcript_min_samples", default=int(0.3 * 16000))
+        settings = get_settings()
+        self.language_code = settings.stt.language_code
+        self.sample_rate = settings.stt.sample_rate
+        self.interim_min_samples = settings.stt.interim_transcript_min_samples
 
         # Provider setup
-        self.provider_name = get_config("stt", "provider", default="faster-whisper")
+        self.provider_name = settings.stt.provider
         self.provider = self._load_provider()
         
         # Check if streaming mode is enabled
@@ -57,54 +58,48 @@ class STTManager:
         
         # Silence threshold (use audio config or streaming config)
         if self.streaming_enabled:
-            self.silence_threshold_ms = get_config(
-                "stt", "providers", "funasr", "streaming", "silence_threshold_ms",
-                default=get_config("audio", "silence_threshold_ms", default=500)
-            )
-            # Calculate chunk sizes for streaming
-            streaming_config = get_config("stt", "providers", "funasr", "streaming", default={})
-            chunk_size = streaming_config.get("chunk_size", [0, 10, 5])
-            vad_chunk_size_ms = streaming_config.get("vad_chunk_size_ms", 200)
-            # ASR chunk size: chunk_size[1] * 960 samples = 600ms at 16kHz
-            self.asr_chunk_samples = int(chunk_size[1] * 960) if len(chunk_size) > 1 else 9600
-            # VAD chunk size: 200ms = 3200 samples at 16kHz
-            self.vad_chunk_samples = int(vad_chunk_size_ms * self.sample_rate / 1000)
-            logger.info(f"Streaming chunk sizes: ASR={self.asr_chunk_samples} samples ({self.asr_chunk_samples/self.sample_rate*1000:.0f}ms), VAD={self.vad_chunk_samples} samples ({vad_chunk_size_ms}ms)")
+            # Get streaming config from the FunASR provider
+            streaming_config = self.provider.streaming_config if hasattr(self.provider, 'streaming_config') else None
+
+            if streaming_config:
+                self.silence_threshold_ms = streaming_config.silence_threshold_ms
+                chunk_size = streaming_config.chunk_size
+                vad_chunk_size_ms = streaming_config.vad_chunk_size_ms
+                # ASR chunk size: chunk_size[1] * 960 samples = 600ms at 16kHz
+                self.asr_chunk_samples = int(chunk_size[1] * 960) if len(chunk_size) > 1 else 9600
+                # VAD chunk size: 200ms = 3200 samples at 16kHz
+                self.vad_chunk_samples = int(vad_chunk_size_ms * self.sample_rate / 1000)
+                logger.info(f"Streaming chunk sizes: ASR={self.asr_chunk_samples} samples ({self.asr_chunk_samples/self.sample_rate*1000:.0f}ms), VAD={self.vad_chunk_samples} samples ({vad_chunk_size_ms}ms)")
+            else:
+                self.silence_threshold_ms = settings.audio.silence_threshold_ms
+                self.asr_chunk_samples = 0
+                self.vad_chunk_samples = 0
         else:
-            self.silence_threshold_ms = get_config("audio", "silence_threshold_ms", default=500)
+            self.silence_threshold_ms = settings.audio.silence_threshold_ms
             self.asr_chunk_samples = 0
             self.vad_chunk_samples = 0
     
     def _load_provider(self):
         logger.info(f"Initializing STT provider: {self.provider_name}...")
         try:
+            settings = get_settings()
+            provider_config = settings.stt.get_provider_config()
+
             if self.provider_name == "faster-whisper":
-                model_path = get_config("stt", "providers", "faster-whisper", "model_path", default="faster-whisper-small")
-                device = get_config("stt", "providers", "faster-whisper", "device", default=None)
-                compute_type = get_config("stt", "providers", "faster-whisper", "compute_type", default=None)
-                
                 return FasterWhisperProvider(
-                    model_path=model_path,
-                    device=device,
-                    compute_type=compute_type
+                    model_path=provider_config.model_path,
+                    device=provider_config.device,
+                    compute_type=provider_config.compute_type
                 )
             elif self.provider_name == "funasr":
-                model_name = get_config("stt", "providers", "funasr", "model_name", default="FunAudioLLM/Fun-ASR-Nano-2512")
-                vad_model = get_config("stt", "providers", "funasr", "vad_model", default="fsmn-vad")
-                vad_kwargs = get_config("stt", "providers", "funasr", "vad_kwargs", default={"max_single_segment_time": 30000})
-                punc_model = get_config("stt", "providers", "funasr", "punc_model", default=None)
-                device = get_config("stt", "providers", "funasr", "device", default=None)
-                batch_size_s = get_config("stt", "providers", "funasr", "batch_size_s", default=0)
-                streaming_config = get_config("stt", "providers", "funasr", "streaming", default=None)
-                
                 return FunASRProvider(
-                    model_name=model_name,
-                    vad_model=vad_model,
-                    vad_kwargs=vad_kwargs,
-                    punc_model=punc_model,
-                    device=device,
-                    batch_size_s=batch_size_s,
-                    streaming_config=streaming_config
+                    model_name=provider_config.model_name,
+                    vad_model=provider_config.vad_model,
+                    vad_kwargs=provider_config.vad_kwargs,
+                    punc_model=provider_config.punc_model,
+                    device=provider_config.device,
+                    batch_size_s=provider_config.batch_size_s,
+                    streaming_config=provider_config.streaming
                 )
             else:
                 raise ValueError(f"Unknown STT provider: {self.provider_name}")

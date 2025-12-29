@@ -13,16 +13,32 @@ export const CONFIG_SCHEMA = {
     fields: {
       host: { type: 'text', label: 'Host' },
       port: { type: 'number', label: 'Port' },
+      stt_websocket_path: { type: 'text', label: 'STT WebSocket Path' },
       log_level: { type: 'select', label: 'Log Level', options: ['DEBUG', 'INFO', 'WARNING', 'ERROR'] },
-      enable_latency_tracking: { type: 'boolean', label: 'Enable Latency Tracking' }
+      log_file: { type: 'text', label: 'Log File (null for none)' },
+      enable_latency_tracking: { type: 'boolean', label: 'Enable Latency Tracking' },
+      system_prompt_file: { type: 'text', label: 'System Prompt File' },
+      hotkeys: {
+        type: 'nested',
+        label: 'Hotkeys',
+        fields: {
+          toggle_listening: { type: 'text', label: 'Toggle Listening' },
+          cancel_speech: { type: 'text', label: 'Cancel Speech' }
+        }
+      }
     }
   },
   stt: {
     title: 'STT (Speech-to-Text)',
     fields: {
+      host: { type: 'text', label: 'Host' },
+      port: { type: 'number', label: 'Port' },
       provider: { type: 'provider_select', label: 'Provider', providers: ['funasr', 'faster-whisper'] },
       language_code: { type: 'text', label: 'Language Code' },
-      sample_rate: { type: 'number', label: 'Sample Rate' }
+      sample_rate: { type: 'number', label: 'Sample Rate' },
+      interim_transcript_min_samples: { type: 'number', label: 'Interim Transcript Min Samples' },
+      log_level: { type: 'select', label: 'Log Level', options: ['DEBUG', 'INFO', 'WARNING', 'ERROR'] },
+      log_file: { type: 'text', label: 'Log File (null for none)' }
     },
     provider_fields: {
       'faster-whisper': {
@@ -33,12 +49,24 @@ export const CONFIG_SCHEMA = {
       'funasr': {
         model_name: { type: 'text', label: 'Model Name' },
         vad_model: { type: 'text', label: 'VAD Model' },
+        vad_kwargs: {
+          type: 'nested',
+          label: 'VAD Arguments',
+          fields: {
+            max_single_segment_time: { type: 'number', label: 'Max Single Segment Time (ms)' }
+          }
+        },
         punc_model: { type: 'text', label: 'Punctuation Model' },
+        device: { type: 'text', label: 'Device' },
+        batch_size_s: { type: 'number', label: 'Batch Size (seconds)' },
         streaming: {
           type: 'nested',
           label: 'Streaming Settings',
           fields: {
             enabled: { type: 'boolean', label: 'Enabled' },
+            chunk_size: { type: 'text', label: 'Chunk Size (comma-separated array)' },
+            encoder_chunk_look_back: { type: 'number', label: 'Encoder Chunk Look Back' },
+            decoder_chunk_look_back: { type: 'number', label: 'Decoder Chunk Look Back' },
             vad_chunk_size_ms: { type: 'number', label: 'VAD Chunk Size (ms)' },
             silence_threshold_ms: { type: 'number', label: 'Silence Threshold (ms)' }
           }
@@ -54,21 +82,32 @@ export const CONFIG_SCHEMA = {
     provider_fields: {
       gemini: {
         model: { type: 'text', label: 'Model' },
-        api_key: { type: 'password', label: 'API Key' }
+        api_key: { type: 'password', label: 'API Key' },
+        generation_config: {
+          type: 'nested',
+          label: 'Generation Config',
+          fields: {
+            thinking_budget: { type: 'number', label: 'Thinking Budget' }
+          }
+        }
       },
       ollama: {
         model: { type: 'text', label: 'Model' },
         base_url: { type: 'text', label: 'Base URL' },
         timeout: { type: 'number', label: 'Timeout (s)' },
-        disable_thinking: { type: 'boolean', label: 'Disable Thinking' }
+        disable_thinking: { type: 'boolean', label: 'Disable Thinking' },
+        generation_config: { type: 'text', label: 'Generation Config (null for none)' }
       }
     }
   },
   tts: {
     title: 'TTS (Text-to-Speech)',
     fields: {
+      host: { type: 'text', label: 'Host' },
+      port: { type: 'number', label: 'Port' },
       provider: { type: 'provider_select', label: 'Provider', providers: ['edge-tts', 'chattts', 'genie-tts', 'elevenlabs', 'gpt-sovits'] },
-      output_sample_rate: { type: 'number', label: 'Output Sample Rate (null for auto)' }
+      log_level: { type: 'select', label: 'Log Level', options: ['DEBUG', 'INFO', 'WARNING', 'ERROR'] },
+      log_file: { type: 'text', label: 'Log File (null for none)' }
     },
     provider_fields: {
       'edge-tts': {
@@ -85,23 +124,28 @@ export const CONFIG_SCHEMA = {
         onnx_model_dir: { type: 'text', label: 'ONNX Model Dir' },
         language: { type: 'text', label: 'Language' },
         reference_audio_path: { type: 'text', label: 'Ref Audio Path' },
+        reference_audio_text: { type: 'text', label: 'Ref Audio Text' },
         source_sample_rate: { type: 'number', label: 'Source Sample Rate' }
       },
       'elevenlabs': {
         voice_id: { type: 'text', label: 'Voice ID' },
         stability: { type: 'number', label: 'Stability (0-1)' },
-        similarity_boost: { type: 'number', label: 'Similarity Boost (0-1)' }
+        similarity_boost: { type: 'number', label: 'Similarity Boost (0-1)' },
+        style: { type: 'number', label: 'Style (0-1)' }
       },
       'gpt-sovits': {
         server_url: { type: 'text', label: 'Server URL' },
         default_reference: { type: 'text', label: 'Default Reference' },
         default_text_lang: { type: 'text', label: 'Default Text Language' },
+        gpt_weights_path: { type: 'text', label: 'GPT Weights Path' },
+        sovits_weights_path: { type: 'text', label: 'SoVITS Weights Path' },
         streaming_mode: { type: 'number', label: 'Streaming Mode (0-3)' },
         temperature: { type: 'number', label: 'Temperature' },
         top_p: { type: 'number', label: 'Top P' },
         top_k: { type: 'number', label: 'Top K' },
         speed_factor: { type: 'number', label: 'Speed Factor' },
-        timeout: { type: 'number', label: 'Timeout (seconds)' }
+        timeout: { type: 'number', label: 'Timeout (seconds)' },
+        references: { type: 'text', label: 'References (JSON object, for advanced config)' }
       }
     }
   },
@@ -111,7 +155,10 @@ export const CONFIG_SCHEMA = {
       host: { type: 'text', label: 'Host' },
       port: { type: 'number', label: 'Port' },
       language: { type: 'text', label: 'Language' },
-      interval_ms: { type: 'number', label: 'Interval (ms)' }
+      interval_ms: { type: 'number', label: 'Interval (ms)' },
+      texts_storage_file_prefix: { type: 'text', label: 'Texts Storage File Prefix' },
+      log_level: { type: 'select', label: 'Log Level', options: ['DEBUG', 'INFO', 'WARNING', 'ERROR'] },
+      log_file: { type: 'text', label: 'Log File (null for none)' }
     }
   },
   audio: {
@@ -135,8 +182,9 @@ export const CONFIG_SCHEMA = {
           device: { type: 'text', label: 'Device Index (null for default)' }
         }
       },
-      silence_threshold_ms: { type: 'number', label: 'Silence Threshold (ms)' },
-      vad_min_speech_prob: { type: 'number', label: 'VAD Min Speech Prob (0-1)' }
+      dtype: { type: 'text', label: 'Data Type' },
+      block_size_ms: { type: 'number', label: 'Block Size (ms)' },
+      listening_status_poll_interval: { type: 'number', label: 'Listening Status Poll Interval (s)' }
     }
   },
   bilibili: {
@@ -144,7 +192,8 @@ export const CONFIG_SCHEMA = {
     fields: {
       enabled: { type: 'boolean', label: 'Enabled' },
       room_id: { type: 'number', label: 'Room ID' },
-      sessdata: { type: 'password', label: 'SESSDATA' }
+      sessdata: { type: 'password', label: 'SESSDATA' },
+      danmaku_ttl_seconds: { type: 'number', label: 'Danmaku TTL (seconds)' }
     }
   },
   obs: {
@@ -159,7 +208,11 @@ export const CONFIG_SCHEMA = {
           password: { type: 'password', label: 'Password' }
         }
       },
-      subtitle_source: { type: 'text', label: 'Subtitle Source Name' }
+      subtitle_source: { type: 'text', label: 'Subtitle Source Name' },
+      subtitle_ttl_seconds: { type: 'number', label: 'Subtitle TTL (seconds)' },
+      visibility_source: { type: 'text', label: 'Visibility Source Name' },
+      appear_filter_name: { type: 'text', label: 'Appear Filter Name' },
+      clear_filter_name: { type: 'text', label: 'Clear Filter Name' }
     }
   },
   services: {

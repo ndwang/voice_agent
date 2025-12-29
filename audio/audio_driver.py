@@ -11,7 +11,7 @@ import websockets
 import httpx
 from typing import Optional
 
-from core.config import get_config
+from core.settings import get_settings
 from core.logging import setup_logging, get_logger
 
 # Set up logging
@@ -24,25 +24,26 @@ class AudioDriver:
     Audio driver that captures microphone input and streams to STT server.
     Can be started/stopped programmatically or run standalone.
     """
-    
+
     def __init__(self, stt_url: Optional[str] = None, device: Optional[int] = None, event_bus=None):
         """
         Initialize audio driver.
-        
+
         Args:
             stt_url: WebSocket URL for STT server (default: from config)
             device: Audio input device index (default: from config)
             event_bus: Optional EventBus for in-process communication
         """
-        self.stt_url = stt_url or get_config("services", "stt_websocket_url", default="ws://localhost:8001/ws/transcribe")
-        self.orchestrator_base_url = get_config("services", "orchestrator_base_url", default="http://localhost:8000")
-        self.listening_status_poll_interval = get_config("audio", "listening_status_poll_interval", default=1.0)
-        self.sample_rate = get_config("audio", "input", "sample_rate", default=16000)
-        self.channels = get_config("audio", "input", "channels", default=1)
-        self.dtype = get_config("audio", "dtype", default="float32")
-        block_size_ms = get_config("audio", "block_size_ms", default=100)
+        settings = get_settings()
+        self.stt_url = stt_url or settings.services.stt_websocket_url
+        self.orchestrator_base_url = settings.services.orchestrator_base_url
+        self.listening_status_poll_interval = settings.audio.listening_status_poll_interval
+        self.sample_rate = settings.audio.input.sample_rate
+        self.channels = settings.audio.input.channels
+        self.dtype = settings.audio.dtype
+        block_size_ms = settings.audio.block_size_ms
         self.block_size = int(self.sample_rate * (block_size_ms / 1000))
-        self.input_device = device if device is not None else get_config("audio", "input", "device", default=None)
+        self.input_device = device if device is not None else settings.audio.input.device
         
         self.audio_queue = asyncio.Queue()
         self.running = False
