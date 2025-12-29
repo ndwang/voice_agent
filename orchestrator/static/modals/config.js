@@ -67,7 +67,7 @@ export const CONFIG_SCHEMA = {
   tts: {
     title: 'TTS (Text-to-Speech)',
     fields: {
-      provider: { type: 'provider_select', label: 'Provider', providers: ['edge-tts', 'chattts', 'genie-tts', 'elevenlabs'] },
+      provider: { type: 'provider_select', label: 'Provider', providers: ['edge-tts', 'chattts', 'genie-tts', 'elevenlabs', 'gpt-sovits'] },
       output_sample_rate: { type: 'number', label: 'Output Sample Rate (null for auto)' }
     },
     provider_fields: {
@@ -91,6 +91,17 @@ export const CONFIG_SCHEMA = {
         voice_id: { type: 'text', label: 'Voice ID' },
         stability: { type: 'number', label: 'Stability (0-1)' },
         similarity_boost: { type: 'number', label: 'Similarity Boost (0-1)' }
+      },
+      'gpt-sovits': {
+        server_url: { type: 'text', label: 'Server URL' },
+        default_reference: { type: 'text', label: 'Default Reference' },
+        default_text_lang: { type: 'text', label: 'Default Text Language' },
+        streaming_mode: { type: 'number', label: 'Streaming Mode (0-3)' },
+        temperature: { type: 'number', label: 'Temperature' },
+        top_p: { type: 'number', label: 'Top P' },
+        top_k: { type: 'number', label: 'Top K' },
+        speed_factor: { type: 'number', label: 'Speed Factor' },
+        timeout: { type: 'number', label: 'Timeout (seconds)' }
       }
     }
   },

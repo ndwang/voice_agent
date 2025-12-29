@@ -5,7 +5,7 @@ from typing import Dict, Optional, AsyncIterator, Any
 from fastapi import WebSocket, WebSocketDisconnect
 from core.logging import get_logger
 from core.config import get_config
-from tts.providers import EdgeTTSProvider, ChatTTSProvider, ElevenLabsProvider, GenieTTSProvider
+from tts.providers import EdgeTTSProvider, ChatTTSProvider, ElevenLabsProvider, GenieTTSProvider, GPTSoVITSProvider
 from tts.base import TTSProvider
 
 logger = get_logger(__name__)
@@ -46,10 +46,17 @@ class TTSEngine:
                 "reference_audio_path": get_config("tts", "providers", "genie-tts", "reference_audio_path"),
                 "reference_audio_text": get_config("tts", "providers", "genie-tts", "reference_audio_text")
             }
+        elif self.provider_name == "gpt-sovits":
+            return {
+                "reference_name": get_config("tts", "providers", "gpt-sovits", "default_reference", default="default"),
+                "text_lang": get_config("tts", "providers", "gpt-sovits", "default_text_lang", default="zh")
+            }
         return {}
 
     def _load_provider(self) -> TTSProvider:
         logger.info(f"Initializing TTS provider: {self.provider_name}...")
+        
+        # Synchronous providers
         try:
             if self.provider_name == "edge-tts":
                 return EdgeTTSProvider(
@@ -81,11 +88,27 @@ class TTSEngine:
                     reference_audio_text=get_config("tts", "providers", "genie-tts", "reference_audio_text"),
                     source_sample_rate=get_config("tts", "providers", "genie-tts", "source_sample_rate", default=32000)
                 )
+            elif self.provider_name == "gpt-sovits":
+                return GPTSoVITSProvider(
+                    server_url=get_config("tts", "providers", "gpt-sovits", "server_url", default="http://127.0.0.1:9880"),
+                    default_reference=get_config("tts", "providers", "gpt-sovits", "default_reference", default="default"),
+                    references=get_config("tts", "providers", "gpt-sovits", "references", default={}),
+                    default_text_lang=get_config("tts", "providers", "gpt-sovits", "default_text_lang", default="zh"),
+                    gpt_weights_path=get_config("tts", "providers", "gpt-sovits", "gpt_weights_path", default=None),
+                    sovits_weights_path=get_config("tts", "providers", "gpt-sovits", "sovits_weights_path", default=None),
+                    streaming_mode=get_config("tts", "providers", "gpt-sovits", "streaming_mode", default=2),
+                    temperature=get_config("tts", "providers", "gpt-sovits", "temperature", default=1.0),
+                    top_p=get_config("tts", "providers", "gpt-sovits", "top_p", default=1.0),
+                    top_k=get_config("tts", "providers", "gpt-sovits", "top_k", default=15),
+                    speed_factor=get_config("tts", "providers", "gpt-sovits", "speed_factor", default=1.0),
+                    timeout=get_config("tts", "providers", "gpt-sovits", "timeout", default=30.0)
+                )
             else:
                 raise ValueError(f"Unknown TTS provider: {self.provider_name}")
         except Exception as e:
             logger.error(f"Error loading TTS provider: {e}", exc_info=True)
             raise
+
 
     async def list_voices(self) -> list:
         """List available voices."""
@@ -188,7 +211,8 @@ class TTSEngine:
 
     def _update_params(self, data: dict, params: dict):
         """Update provider parameters from message data."""
-        keys = ["voice", "rate", "pitch", "speaker", "temperature", "top_p", "top_k", "stream_speed"]
+        keys = ["voice", "rate", "pitch", "speaker", "temperature", "top_p", "top_k", "stream_speed", 
+                "reference_name", "text_lang", "speed_factor", "streaming_mode"]
         for k in keys:
             if k in data:
                 params[k] = data[k]
