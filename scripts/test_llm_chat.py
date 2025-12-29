@@ -13,43 +13,43 @@ from pathlib import Path
 project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
 
-from core.config import load_config, get_config
+from core.settings import get_settings
 from llm.providers import OllamaProvider, GeminiProvider
 
 
 async def chat_with_llm(streaming: bool = True):
     """
     Interactive chat interface with LLM provider.
-    
+
     Args:
         streaming: If True, use streaming responses. If False, wait for complete response.
     """
     # Load configuration
-    config = load_config()
-    
+    settings = get_settings()
+
     # Get LLM provider configuration
-    provider_name = get_config("llm", "provider", default="ollama")
-    provider_config = get_config("llm", "providers", provider_name, default={})
+    provider_name = settings.llm.provider
+    provider_config = settings.llm.get_provider_config()
     
     print(f"Loading LLM provider: {provider_name}")
     print(f"Provider config: {provider_config}")
     print("-" * 60)
-    
+
     # Initialize provider
     try:
         if provider_name == "ollama":
             provider = OllamaProvider(
-                model=provider_config.get("model", "Qwen3-8B-Q4-8kcontext"),
-                base_url=provider_config.get("base_url", "http://localhost:11434"),
-                timeout=provider_config.get("timeout", 300.0),
-                disable_thinking=provider_config.get("disable_thinking", False),
-                generation_config=provider_config.get("generation_config", {})
+                model=provider_config.model,
+                base_url=provider_config.base_url,
+                timeout=provider_config.timeout,
+                disable_thinking=provider_config.disable_thinking,
+                generation_config=provider_config.generation_config
             )
         elif provider_name == "gemini":
             provider = GeminiProvider(
-                model=provider_config.get("model", "gemini-2.5-flash"),
-                api_key=provider_config.get("api_key") or None,
-                generation_config=provider_config.get("generation_config", {})
+                model=provider_config.model,
+                api_key=provider_config.api_key or None,
+                generation_config=provider_config.generation_config
             )
         else:
             print(f"Error: Unknown provider '{provider_name}'")
@@ -60,17 +60,17 @@ async def chat_with_llm(streaming: bool = True):
         return
     
     print(f"✓ Initialized {provider_name} provider")
-    print(f"Model: {provider_config.get('model', 'N/A')}")
+    print(f"Model: {provider_config.model}")
     print("-" * 60)
     print("Chat started! Type your messages (or 'exit'/'quit' to end)")
     print("=" * 60)
-    
+
     # Conversation history
     messages = []
-    
+
     # Optional: Load system prompt if available
     system_prompt = None
-    system_prompt_file = get_config("orchestrator", "system_prompt_file")
+    system_prompt_file = settings.orchestrator.system_prompt_file
     if system_prompt_file:
         system_prompt_path = project_root / system_prompt_file
         if system_prompt_path.exists():

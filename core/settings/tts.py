@@ -61,6 +61,8 @@ class TTSSettings(BaseModel):
     host: str = "0.0.0.0"
     port: int = 8003
     provider: Literal["edge-tts", "chattts", "elevenlabs", "genie-tts", "gpt-sovits"] = "edge-tts"
+    log_level: str = "INFO"
+    log_file: Optional[str] = None
     providers: dict[str, Any] = Field(default_factory=dict)
 
     def get_provider_config(self) -> EdgeTTSConfig | ChatTTSConfig | ElevenLabsConfig | GenieTTSConfig | GPTSoVITSConfig:

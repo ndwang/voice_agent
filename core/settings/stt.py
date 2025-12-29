@@ -43,6 +43,8 @@ class STTSettings(BaseModel):
     language_code: str = "zh"
     sample_rate: int = 16000
     interim_transcript_min_samples: int = 16000
+    log_level: str = "INFO"
+    log_file: Optional[str] = None
     providers: dict[str, Any] = Field(default_factory=dict)
 
     def get_provider_config(self) -> FasterWhisperConfig | FunASRConfig:

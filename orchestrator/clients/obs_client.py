@@ -7,7 +7,7 @@ import asyncio
 import time
 from concurrent.futures import ThreadPoolExecutor
 from obswebsocket import obsws, requests  # noqa: E402
-from core.config import get_config
+from core.settings import get_settings
 from core.logging import get_logger
 from orchestrator.clients.base import BaseClient
 
@@ -23,7 +23,7 @@ RETRY_DELAY = 30.0
 
 class OBSClient(BaseClient):
     """Client for OBS Studio WebSocket API."""
-    
+
     def __init__(self):
         """Initialize OBS client."""
         super().__init__()
@@ -31,19 +31,16 @@ class OBSClient(BaseClient):
         self._connection_failed = False  # Track if connection has failed to avoid repeated attempts
         self._connection_failed_time = None  # Timestamp of last connection failure
         self._executor = ThreadPoolExecutor(max_workers=1, thread_name_prefix="obs_client")
-        
+
         # Load configuration
-        host = get_config("obs", "websocket", "host", default="localhost")
-        port = get_config("obs", "websocket", "port", default=4455)
-        password = get_config("obs", "websocket", "password", default="")
-        
-        # Fallback to old config structure for backward compatibility
-        if not password:
-            password = get_config("obs", "password", default="")
-        
+        settings = get_settings()
+        host = settings.obs.websocket.host
+        port = settings.obs.websocket.port
+        password = settings.obs.websocket.password
+
         if not password:
             logger.warning("No OBS WebSocket password configured!")
-        
+
         # Store connection info
         self.host = host
         self.port = port

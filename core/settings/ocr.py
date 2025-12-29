@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from typing import Optional
 
 
 class OCRSettings(BaseModel):
@@ -8,6 +9,8 @@ class OCRSettings(BaseModel):
     language: str = "ch"
     interval_ms: int = 1000
     texts_storage_file_prefix: str = "ocr_detected_texts"
+    log_level: str = "INFO"
+    log_file: Optional[str] = None
 
     @classmethod
     def from_dict(cls, data: dict) -> "OCRSettings":

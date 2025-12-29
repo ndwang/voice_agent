@@ -9,7 +9,7 @@ from pathlib import Path
 import logging
 import sys
 
-from core.config import get_config
+from core.settings import get_settings
 from core.logging import setup_logging, get_logger
 
 # Set up logging
@@ -19,19 +19,20 @@ logger = get_logger(__name__)
 
 class OCRClient:
     """Client for OCR service."""
-    
+
     def __init__(self):
         """Initialize OCR client."""
         pass
-    
+
     async def fetch_texts(self) -> List[Dict[str, Any]]:
         """
         Fetch all stored OCR texts from the OCR service.
-        
+
         Returns:
             List of text entries, each containing 'text' and 'timestamp' keys
         """
-        ocr_base_url = get_config("services", "ocr_base_url", default="http://localhost:8004")
+        settings = get_settings()
+        ocr_base_url = settings.services.ocr_base_url
         try:
             async with httpx.AsyncClient() as client:
                 response = await client.get(

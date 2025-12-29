@@ -4,7 +4,7 @@ import time
 from typing import Dict, Optional, AsyncIterator, Any
 from fastapi import WebSocket, WebSocketDisconnect
 from core.logging import get_logger
-from core.config import get_config
+from core.settings import get_settings
 from tts.providers import EdgeTTSProvider, ChatTTSProvider, ElevenLabsProvider, GenieTTSProvider, GPTSoVITSProvider
 from tts.base import TTSProvider
 
@@ -18,90 +18,67 @@ class TTSEngine:
 
     def __init__(self):
         # Provider setup
-        self.provider_name = get_config("tts", "provider", default="edge-tts")
+        settings = get_settings()
+        self.provider_name = settings.tts.provider
+        self.provider_config = settings.tts.get_provider_config()
         self.provider: TTSProvider = self._load_provider()
-        
-        # Default settings
-        # These are provider-specific defaults if not provided in synthesis request
-        self.default_params = self._get_default_params()
-
-    def _get_default_params(self) -> dict:
-        """Get default parameters for the current provider."""
-        if self.provider_name == "edge-tts":
-            return {
-                "voice": get_config("tts", "providers", "edge-tts", "voice", default="zh-CN-XiaoxiaoNeural"),
-                "rate": get_config("tts", "providers", "edge-tts", "rate", default="+0%"),
-                "pitch": get_config("tts", "providers", "edge-tts", "pitch", default="+0Hz")
-            }
-        elif self.provider_name == "elevenlabs":
-            return {
-                "voice_id": get_config("tts", "providers", "elevenlabs", "voice_id"),
-                "stability": get_config("tts", "providers", "elevenlabs", "stability", default=0.5),
-                "similarity_boost": get_config("tts", "providers", "elevenlabs", "similarity_boost", default=0.8),
-                "style": get_config("tts", "providers", "elevenlabs", "style", default=0.0)
-            }
-        elif self.provider_name == "genie-tts":
-            return {
-                "character_name": get_config("tts", "providers", "genie-tts", "character_name", default="default"),
-                "reference_audio_path": get_config("tts", "providers", "genie-tts", "reference_audio_path"),
-                "reference_audio_text": get_config("tts", "providers", "genie-tts", "reference_audio_text")
-            }
-        elif self.provider_name == "gpt-sovits":
-            return {
-                "reference_name": get_config("tts", "providers", "gpt-sovits", "default_reference", default="default"),
-                "text_lang": get_config("tts", "providers", "gpt-sovits", "default_text_lang", default="zh")
-            }
-        return {}
 
     def _load_provider(self) -> TTSProvider:
         logger.info(f"Initializing TTS provider: {self.provider_name}...")
-        
-        # Synchronous providers
+
         try:
             if self.provider_name == "edge-tts":
                 return EdgeTTSProvider(
-                    default_voice=get_config("tts", "providers", "edge-tts", "voice", default="zh-CN-XiaoxiaoNeural"),
-                    default_rate=get_config("tts", "providers", "edge-tts", "rate", default="+0%"),
-                    default_pitch=get_config("tts", "providers", "edge-tts", "pitch", default="+0Hz")
+                    default_voice=self.provider_config.voice,
+                    default_rate=self.provider_config.rate,
+                    default_pitch=self.provider_config.pitch
                 )
             elif self.provider_name == "chattts":
                 return ChatTTSProvider(
-                    model_source=get_config("tts", "providers", "chattts", "model_source", default="local"),
-                    device=get_config("tts", "providers", "chattts", "device", default=None)
+                    model_source=self.provider_config.model_source,
+                    device=self.provider_config.device
                 )
             elif self.provider_name == "elevenlabs":
-                voice_id = get_config("tts", "providers", "elevenlabs", "voice_id")
-                if not voice_id:
+                if not self.provider_config.voice_id:
                     logger.warning("ElevenLabs voice_id not configured in config.yaml")
                 return ElevenLabsProvider(
-                    default_voice_id=voice_id,
-                    stability=get_config("tts", "providers", "elevenlabs", "stability", default=0.5),
-                    similarity_boost=get_config("tts", "providers", "elevenlabs", "similarity_boost", default=0.8),
-                    style=get_config("tts", "providers", "elevenlabs", "style", default=0.0)
+                    default_voice_id=self.provider_config.voice_id,
+                    stability=self.provider_config.stability,
+                    similarity_boost=self.provider_config.similarity_boost,
+                    style=self.provider_config.style
                 )
             elif self.provider_name == "genie-tts":
                 return GenieTTSProvider(
-                    character_name=get_config("tts", "providers", "genie-tts", "character_name", default="default"),
-                    onnx_model_dir=get_config("tts", "providers", "genie-tts", "onnx_model_dir"),
-                    language=get_config("tts", "providers", "genie-tts", "language", default="zh"),
-                    reference_audio_path=get_config("tts", "providers", "genie-tts", "reference_audio_path"),
-                    reference_audio_text=get_config("tts", "providers", "genie-tts", "reference_audio_text"),
-                    source_sample_rate=get_config("tts", "providers", "genie-tts", "source_sample_rate", default=32000)
+                    character_name=self.provider_config.character_name,
+                    onnx_model_dir=self.provider_config.onnx_model_dir,
+                    language=self.provider_config.language,
+                    reference_audio_path=self.provider_config.reference_audio_path,
+                    reference_audio_text=self.provider_config.reference_audio_text,
+                    source_sample_rate=self.provider_config.source_sample_rate
                 )
             elif self.provider_name == "gpt-sovits":
+                # Convert Pydantic models to dict for references
+                references_dict = {
+                    name: {
+                        "ref_audio_path": ref.ref_audio_path,
+                        "prompt_text": ref.prompt_text,
+                        "prompt_lang": ref.prompt_lang
+                    }
+                    for name, ref in self.provider_config.references.items()
+                }
                 return GPTSoVITSProvider(
-                    server_url=get_config("tts", "providers", "gpt-sovits", "server_url", default="http://127.0.0.1:9880"),
-                    default_reference=get_config("tts", "providers", "gpt-sovits", "default_reference", default="default"),
-                    references=get_config("tts", "providers", "gpt-sovits", "references", default={}),
-                    default_text_lang=get_config("tts", "providers", "gpt-sovits", "default_text_lang", default="zh"),
-                    gpt_weights_path=get_config("tts", "providers", "gpt-sovits", "gpt_weights_path", default=None),
-                    sovits_weights_path=get_config("tts", "providers", "gpt-sovits", "sovits_weights_path", default=None),
-                    streaming_mode=get_config("tts", "providers", "gpt-sovits", "streaming_mode", default=2),
-                    temperature=get_config("tts", "providers", "gpt-sovits", "temperature", default=1.0),
-                    top_p=get_config("tts", "providers", "gpt-sovits", "top_p", default=1.0),
-                    top_k=get_config("tts", "providers", "gpt-sovits", "top_k", default=15),
-                    speed_factor=get_config("tts", "providers", "gpt-sovits", "speed_factor", default=1.0),
-                    timeout=get_config("tts", "providers", "gpt-sovits", "timeout", default=30.0)
+                    server_url=self.provider_config.server_url,
+                    default_reference=self.provider_config.default_reference,
+                    references=references_dict,
+                    default_text_lang=self.provider_config.default_text_lang,
+                    gpt_weights_path=self.provider_config.gpt_weights_path,
+                    sovits_weights_path=self.provider_config.sovits_weights_path,
+                    streaming_mode=self.provider_config.streaming_mode,
+                    temperature=self.provider_config.temperature,
+                    top_p=self.provider_config.top_p,
+                    top_k=self.provider_config.top_k,
+                    speed_factor=self.provider_config.speed_factor,
+                    timeout=self.provider_config.timeout
                 )
             else:
                 raise ValueError(f"Unknown TTS provider: {self.provider_name}")

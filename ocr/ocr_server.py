@@ -21,23 +21,24 @@ from pydantic import BaseModel
 from typing import Optional, Tuple
 import uvicorn
 
-from core.config import get_config
+from core.settings import get_settings
 from core.logging import setup_logging, get_logger
 
 # Set up logging
-log_level = get_config("ocr", "log_level", default="INFO")
-log_file = get_config("ocr", "log_file", default=None)
+settings = get_settings()
+log_level = settings.ocr.log_level
+log_file = settings.ocr.log_file
 setup_logging(level=log_level, log_file=log_file, service_name="ocr")
 logger = get_logger(__name__)
 
 # --- Configuration ---
-HOST = get_config("ocr", "host", default="0.0.0.0")
-PORT = get_config("ocr", "port", default=8004)
+HOST = settings.ocr.host
+PORT = settings.ocr.port
 
 # OCR Configuration
-LANGUAGE = get_config("ocr", "language", default="ch")  # Chinese and English support
-INTERVAL_MS = get_config("ocr", "interval_ms", default=1000)  # Default monitoring interval
-TEXTS_STORAGE_FILE_PREFIX = get_config("ocr", "texts_storage_file_prefix", default="ocr_detected_texts")  # Prefix for text storage files
+LANGUAGE = settings.ocr.language
+INTERVAL_MS = settings.ocr.interval_ms
+TEXTS_STORAGE_FILE_PREFIX = settings.ocr.texts_storage_file_prefix
 
 # --- Global OCR Reader ---
 logger.info("Loading OCR model...")

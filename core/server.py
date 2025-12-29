@@ -6,7 +6,7 @@ Standardized FastAPI application factory.
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from typing import Optional, Dict, Any
-from .config import get_config
+from .settings import get_settings
 from .logging import setup_logging, get_logger
 
 logger = get_logger(__name__)
@@ -36,9 +36,11 @@ def create_app(
     # Initialize configuration
     if service_name is None:
         service_name = "orchestrator"
-    
-    log_level = get_config(service_name, "log_level", default="INFO")
-    log_file = get_config(service_name, "log_file", default=None)
+
+    settings = get_settings()
+    service_settings = getattr(settings, service_name)
+    log_level = service_settings.log_level
+    log_file = service_settings.log_file
     setup_logging(level=log_level, log_file=log_file, service_name=service_name)
     
     app = FastAPI(

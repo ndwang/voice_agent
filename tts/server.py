@@ -8,15 +8,16 @@ if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
 from core.server import create_app
-from core.config import get_config
+from core.settings import get_settings
 from core.logging import get_logger
 from tts.api import router as tts_router
 
 logger = get_logger(__name__)
 
 def main():
-    HOST = get_config("tts", "host", default="0.0.0.0")
-    PORT = get_config("tts", "port", default=8003)
+    settings = get_settings()
+    HOST = settings.tts.host
+    PORT = settings.tts.port
     
     app = create_app(
         title="TTS Service",

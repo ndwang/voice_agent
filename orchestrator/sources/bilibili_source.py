@@ -4,7 +4,7 @@ from collections import deque
 from typing import List, Dict, Optional, Any, Deque
 from core.event_bus import EventBus
 from core.logging import get_logger
-from core.config import get_config
+from core.settings import get_settings
 from orchestrator.sources.base import BaseSource
 from bilibili import BilibiliClient
 
@@ -14,14 +14,15 @@ class BilibiliSource(BaseSource):
     """
     Source that connects to Bilibili live stream and manages danmaku and superChat.
     """
-    
+
     def __init__(self, event_bus: EventBus):
         super().__init__(event_bus)
-        
+
         # Config
-        self.room_id = get_config("bilibili", "room_id", default=0)
-        self.sessdata = get_config("bilibili", "sessdata", default="")
-        self.ttl = get_config("bilibili", "danmaku_ttl_seconds", default=60)
+        settings = get_settings()
+        self.room_id = settings.bilibili.room_id
+        self.sessdata = settings.bilibili.sessdata
+        self.ttl = settings.bilibili.danmaku_ttl_seconds
         
         # Components
         self.client = BilibiliClient(room_id=self.room_id, sessdata=self.sessdata)

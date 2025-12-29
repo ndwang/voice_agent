@@ -2,7 +2,7 @@ import json
 import asyncio
 import websockets
 from typing import Optional
-from core.config import get_config
+from core.settings import get_settings
 from core.logging import get_logger
 from core.event_bus import Event
 from orchestrator.events import EventType
@@ -16,10 +16,11 @@ class STTSource(BaseSource):
     WebSocket client that receives transcripts from STT service
     and publishes them to the event bus.
     """
-    
+
     def __init__(self, event_bus):
         super().__init__(event_bus)
-        self.url = get_config("services", "stt_websocket_url", default="ws://localhost:8001/ws/transcribe")
+        settings = get_settings()
+        self.url = settings.services.stt_websocket_url
         self.websocket = None
         self._reconnect_delay = 1.0
         self._connect_task = None
