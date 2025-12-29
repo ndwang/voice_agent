@@ -33,7 +33,7 @@ stt:
       vad_kwargs:
         max_single_segment_time: 30000  # Max segment time in ms
       punc_model: "ct-punc"  # Punctuation model name (e.g., "ct-punc" or "damo/punc_ct-transformer_zh-cn-common-vocab272727-pytorch")
-      device: null  # null = auto-detect (cpu), or "cuda:0", "cuda", "cpu"
+      device: "cpu"  # null = auto-detect (gpu), or "cuda:0", "cuda", "cpu"
       batch_size_s: 0  # Batch size for processing
       streaming:
         enabled: true  # Enable streaming mode
@@ -74,7 +74,7 @@ llm:
 tts:
   host: "0.0.0.0"
   port: 8003
-  provider: "genie-tts"  # Options: edge-tts, chattts, elevenlabs, genie-tts
+  provider: "gpt-sovits"  # Options: edge-tts, chattts, elevenlabs, genie-tts, gpt-sovits
   providers:
     edge-tts:
       voice: "zh-CN-XiaoyiNeural"  # Voice name
@@ -95,6 +95,35 @@ tts:
       reference_audio_path: "CharacterModels/v2ProPlus/ema/prompt_wav/4.WAV_0000489920_0000654080.wav"
       reference_audio_text: "アリサちゃんの魔法発火なら気球を浮かせることができるんじゃないかって"
       source_sample_rate: 32000  # Sample rate produced by GenieTTS (standard is 32000 for SoVITS models)
+    gpt-sovits:
+      server_url: "http://127.0.0.1:9880"  # GPT-SoVITS API server URL
+      default_reference: "normal"  # Name of the default reference to use
+      default_text_lang: "ja"  # Default language for TTS input text
+      gpt_weights_path: "CharacterModels/v2ProPlus/ema/gpt_sovits_model/Ama-e10.ckpt"  # Path to GPT model weights
+      sovits_weights_path: "CharacterModels/v2ProPlus/ema/gpt_sovits_model/Ama_e8_s1040.pth"  # Path to SoVITS model weights
+      streaming_mode: 2  # 0=off, 1=best quality, 2=medium quality, 3=fastest
+      temperature: 1.0
+      top_p: 1.0
+      top_k: 15
+      speed_factor: 1.0
+      timeout: 30.0
+      # Reference registry - always use this pattern
+      references:
+        normal:
+          ref_audio_path: "CharacterModels/v2ProPlus/ema/prompt_wav/4.WAV_0000489920_0000654080.wav"
+          prompt_text: "アリサちゃんの魔法発火なら気球を浮かせることができるんじゃないかって"
+          prompt_lang: "all_ja"
+          # "all_zh",#全部按中文识别
+          # "en",#全部按英文识别#######不变
+          # "all_ja",#全部按日文识别
+          # "all_yue",#全部按中文识别
+          # "all_ko",#全部按韩文识别
+          # "zh",#按中英混合识别####不变
+          # "ja",#按日英混合识别####不变
+          # "yue",#按粤英混合识别####不变
+          # "ko",#按韩英混合识别####不变
+          # "auto",#多语种启动切分识别语种
+          # "auto_yue",#多语种启动切分识别语种
 
 # OCR (Optical Character Recognition) Service Configuration
 ocr:

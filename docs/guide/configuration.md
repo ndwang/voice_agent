@@ -95,7 +95,7 @@ stt:
 ```
 
 ### TTS Configuration
-Supported: `genie-tts`, `edge-tts`, `chattts`, `elevenlabs`.
+Supported: `genie-tts`, `edge-tts`, `chattts`, `elevenlabs`, `gpt-sovits`.
 
 ```yaml
 tts:
@@ -122,6 +122,25 @@ tts:
       reference_audio_path: ""
       reference_audio_text: ""
       source_sample_rate: 32000
+    gpt-sovits:
+      server_url: "http://127.0.0.1:9880"
+      default_reference: "default"
+      default_text_lang: "zh"  # Default language for TTS input text
+      streaming_mode: 2  # 0=off, 1=best quality, 2=medium, 3=fastest
+      temperature: 1.0
+      top_p: 1.0
+      top_k: 15
+      speed_factor: 1.0
+      timeout: 30.0
+      references:
+        default:
+          ref_audio_path: "references/default.wav"
+          prompt_text: "这是一个默认的参考音频"
+          prompt_lang: "zh"
+        character1:
+          ref_audio_path: "references/character1.wav"
+          prompt_text: "我是角色1，说话温柔优雅"
+          prompt_lang: "zh"
 ```
 
 ### Audio Configuration

@@ -11,7 +11,13 @@ def mock_config():
             "provider": "edge-tts",
             "providers": {
                 "edge-tts": {"voice": "test-voice", "rate": "+0%", "pitch": "+0Hz"},
-                "chattts": {}
+                "chattts": {},
+                "gpt-sovits": {
+                    "server_url": "http://127.0.0.1:9880",
+                    "default_reference": "test",
+                    "default_text_lang": "zh",
+                    "references": {"test": {"ref_audio_path": "test.wav", "prompt_text": "test", "prompt_lang": "zh"}}
+                }
             }
         }.get(key, kwargs.get("default"))
         yield mock

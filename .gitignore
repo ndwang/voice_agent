@@ -16,7 +16,10 @@ logs/
 orchestrator/*_prompt.txt
 Modelfile
 tts/ChatTTS
+tts/GPT-SoVITS/
 CharacterModels/
 GenieData/
 bilibili/blivedm/
 stt/FunASR/
+CLAUDE.md
+.claude/
