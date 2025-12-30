@@ -20,7 +20,7 @@ class STTSource(BaseSource):
     def __init__(self, event_bus):
         super().__init__(event_bus)
         settings = get_settings()
-        self.url = settings.services.stt_websocket_url
+        self.url = settings.services.stt_transcript_url
         self.websocket = None
         self._reconnect_delay = 1.0
         self._connect_task = None

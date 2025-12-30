@@ -176,7 +176,7 @@ class GPTSoVITSProvider(TTSProvider):
             "batch_size": 1,
         }
         
-        logger.info(f"GPT-SoVITS request: text='{text}', text_lang={request_data['text_lang']}, ref={ref_name}, streaming_mode={request_data['streaming_mode']}")
+        logger.info(f"GPT-SoVITS request:, text_lang={request_data['text_lang']}, ref={ref_name}, streaming_mode={request_data['streaming_mode']}")
         
         session = await self._get_session()
         

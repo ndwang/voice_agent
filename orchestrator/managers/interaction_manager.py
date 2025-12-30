@@ -158,7 +158,7 @@ class InteractionManager(BaseManager):
 
                 # Save to history
                 self.context_manager.add_assistant_message(history_response)
-                await self.event_bus.publish(Event(EventType.LLM_RESPONSE_DONE.value))
+                await self.event_bus.publish(Event(EventType.LLM_RESPONSE_DONE.value, self.llm_provider.last_token_count))
 
                 # Publish history update for assistant message
                 await publish_history_updated(self.event_bus)

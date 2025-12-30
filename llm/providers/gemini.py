@@ -43,6 +43,8 @@ class GeminiProvider(LLMProvider):
         
         # Store default generation config
         self.default_generation_config = generation_config or {}
+
+        super().__init__()
     
     def parse_error(self, exception: Exception) -> Tuple[int, str]:
         """
@@ -154,6 +156,10 @@ class GeminiProvider(LLMProvider):
             config=config,
             contents=contents
         )
+
+        self.last_prompt_tokens = response.usage_metadata.prompt_token_count
+        self.last_completion_tokens = response.usage_metadata.candidates_token_count
+
         return response.text
     
     async def generate_stream(
@@ -245,24 +251,6 @@ class GeminiProvider(LLMProvider):
             if hasattr(chunk, 'text') and chunk.text:
                 yield chunk.text
 
-    def get_history(self) -> List[Dict[str, str]]:
-        """
-        Get the history of the conversation.
-        
-        Note: This provider is stateless. History is managed by the caller (ContextManager).
-        This method returns an empty list.
-        
-        Returns:
-            Empty list (history is managed externally)
-        """
-        return []
-    
-    def clear_history(self) -> None:
-        """
-        Clear the conversation history.
-        
-        Note: This provider is stateless. History is managed by the caller (ContextManager).
-        This method is a no-op.
-        """
-        pass
-
+            if hasattr(chunk, 'usage_metadata') and chunk.usage_metadata:
+                self.last_prompt_tokens = chunk.usage_metadata.prompt_token_count
+                self.last_completion_tokens = chunk.usage_metadata.candidates_token_count

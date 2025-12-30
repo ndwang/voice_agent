@@ -15,7 +15,26 @@ class LLMProvider(ABC):
     is handled by the caller (typically ContextManager). Providers accept fully
     prepared messages and return responses without maintaining state.
     """
+
+    def __init__(self):
+        """Initialize provider with token tracking."""
+        self.last_prompt_tokens = 0
+        self.last_completion_tokens = 0
     
+    @property
+    def last_token_count(self) -> Dict[str, int]:
+        """
+        Get token counts from the last generation.
+        
+        Returns:
+            Dictionary with prompt_tokens, completion_tokens, and total_tokens
+        """
+        return {
+            "prompt_tokens": self.last_prompt_tokens,
+            "completion_tokens": self.last_completion_tokens,
+            "total_tokens": self.last_prompt_tokens + self.last_completion_tokens
+        }
+        
     @abstractmethod
     async def generate(
         self,

@@ -56,6 +56,8 @@ class OllamaProvider(LLMProvider):
         
         # Initialize the async client
         self.client = AsyncClient(host=base_url, timeout=timeout)
+
+        super().__init__()
         
         logger.info(f"Initialized Ollama provider with model: {model}, base_url: {base_url}, disable_thinking: {disable_thinking}")
     
@@ -162,6 +164,9 @@ class OllamaProvider(LLMProvider):
             messages=final_messages,
             options=options if options else None
         )
+
+        self.last_prompt_tokens = response.get("prompt_eval_count", 0)
+        self.last_completion_tokens = response.get("eval_count", 0)
         
         # Extract text from response and filter thinking markers
         text = response["message"]["content"]
@@ -238,25 +243,7 @@ class OllamaProvider(LLMProvider):
                 content = chunk["message"]["content"]
                 if content:
                     yield content
-    
-    def get_history(self) -> List[Dict[str, str]]:
-        """
-        Get the history of the conversation.
-        
-        Note: This provider is stateless. History is managed by the caller (ContextManager).
-        This method returns an empty list for backward compatibility.
-        
-        Returns:
-            Empty list (history is managed externally)
-        """
-        return []
-    
-    def clear_history(self) -> None:
-        """
-        Clear the conversation history.
-        
-        Note: This provider is stateless. History is managed by the caller (ContextManager).
-        This method is a no-op for backward compatibility.
-        """
-        pass
 
+            if chunk.get("done"):
+                self.last_prompt_tokens = chunk.get("prompt_eval_count", 0)
+                self.last_completion_tokens = chunk.get("eval_count", 0)

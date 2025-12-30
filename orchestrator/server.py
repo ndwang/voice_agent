@@ -20,7 +20,7 @@ from orchestrator.utils.event_helpers import publish_activity, publish_listening
 # Managers
 from orchestrator.managers.interaction_manager import InteractionManager
 from orchestrator.managers.subtitle_manager import SubtitleManager
-from orchestrator.managers.latency_manager import LatencyTracker
+from orchestrator.managers.metrics_manager import MetricsManager
 from orchestrator.managers.tts_manager import TTSManager
 from orchestrator.sources.stt_source import STTSource
 from orchestrator.sources.bilibili_source import BilibiliSource
@@ -47,7 +47,7 @@ class OrchestratorServer:
         # Managers
         self.interaction_manager = InteractionManager(self.event_bus)
         self.subtitle_manager = SubtitleManager(self.event_bus)
-        self.latency_tracker = LatencyTracker(self.event_bus)
+        self.metrics_manager = MetricsManager(self.event_bus)
         self.tts_manager = TTSManager(self.event_bus)
         
         # Hotkeys
@@ -87,6 +87,9 @@ class OrchestratorServer:
             cancel_cb
         )
         self.hotkey_manager.start(event_loop)
+
+        self.metrics_manager.start()
+
         logger.info("Orchestrator Logic Started")
 
     async def stop(self):
@@ -134,8 +137,10 @@ def main():
     # 2. Inject into API router (Global variable hack for simplicity in refactor)
     import orchestrator.api.ui
     import orchestrator.api.hotkeys
+    import orchestrator.api.metrics
     orchestrator.api.ui.orchestrator = orch
     orchestrator.api.hotkeys.orchestrator = orch
+    orchestrator.api.metrics.metrics_manager = orch.metrics_manager
 
     # 3. Create Server
     app = create_app(

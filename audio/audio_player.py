@@ -137,6 +137,7 @@ class AudioPlayer:
     
     async def _playback_loop(self):
         """Background task for audio playback - processes queue and feeds stream."""
+        self._loop = asyncio.get_running_loop() 
         logger.info("Audio playback started")
         
         try:
@@ -155,60 +156,54 @@ class AudioPlayer:
             
             # Process incoming audio chunks
             while self.playing:
-                # Wait for data or buffer empty
-                if not self._audio_active:
-                    # Not playing: wait for new data to arrive
-                    item = await self.audio_queue.get()
-                else:
-                    # Currently playing: wait for next chunk OR buffer empty
-                    get_task = asyncio.create_task(self.audio_queue.get())
-                    wait_empty_task = asyncio.create_task(self._buffer_empty_event.wait())
+                # Always wait for next chunk OR buffer empty
+                get_task = asyncio.create_task(self.audio_queue.get())
+                wait_empty_task = asyncio.create_task(self._buffer_empty_event.wait())
+                
+                # Initialize pending to avoid UnboundLocalError
+                pending = {get_task, wait_empty_task}
+                try:
+                    done, pending = await asyncio.wait(
+                        [get_task, wait_empty_task],
+                        return_when=asyncio.FIRST_COMPLETED
+                    )
                     
-                    # Initialize pending to avoid UnboundLocalError
-                    pending = {get_task, wait_empty_task}
+                    if wait_empty_task in done:
+                        # Buffer exhausted!
+                        trigger_stop = False
+                        with self._buffer_lock:
+                            if self._audio_active:
+                                self._audio_active = False
+                                trigger_stop = True
+                        if trigger_stop and self.on_play_state:
+                            await self.on_play_state(False)
                     
-                    try:
-                        done, pending = await asyncio.wait(
-                            [get_task, wait_empty_task],
-                            return_when=asyncio.FIRST_COMPLETED
-                        )
-                        
-                        if wait_empty_task in done:
-                            # Buffer exhausted!
-                            trigger_stop = False
-                            with self._buffer_lock:
-                                if self._audio_active:
-                                    self._audio_active = False
-                                    trigger_stop = True
-                            if trigger_stop and self.on_play_state:
-                                await self.on_play_state(False)
-                        
-                        if get_task in done:
-                            item = get_task.result()
-                        else:
-                            # No new data yet, continue loop
-                            continue
-                            
-                    except asyncio.CancelledError:
-                        # If cancelled, clean up and re-raise
-                        for t in pending:
-                            if not t.done():
-                                t.cancel()
-                        raise
-                        
-                    except Exception as e:
-                        logger.error(f"Error waiting for audio: {e}", exc_info=True)
-                        # Clean up tasks
-                        for t in pending:
-                            if not t.done():
-                                t.cancel()
+                    if get_task in done:
+                        item = get_task.result()
+                    else:
+                        # No new data yet, continue loop
                         continue
                         
-                    finally:
-                        # Always cleanup pending tasks
-                        for t in pending:
-                            if not t.done():
-                                t.cancel()
+                except asyncio.CancelledError:
+                    # If cancelled, clean up and re-raise
+                    for t in pending:
+                        if not t.done():
+                            t.cancel()
+                    raise
+                    
+                except Exception as e:
+                    logger.error(f"Error waiting for audio: {e}", exc_info=True)
+                    # Clean up tasks
+                    for t in pending:
+                        if not t.done():
+                            t.cancel()
+                    continue
+                    
+                finally:
+                    # Always cleanup pending tasks
+                    for t in pending:
+                        if not t.done():
+                            t.cancel()
 
                 # Process new item
                 try:

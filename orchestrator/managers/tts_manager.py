@@ -3,7 +3,7 @@ import json
 import websockets
 from core.event_bus import EventBus, Event
 from core.logging import get_logger
-from core.settings import get_settings
+from core.config import get_config
 from orchestrator.events import EventType
 from orchestrator.managers.base import BaseManager
 from orchestrator.utils.event_helpers import publish_activity
@@ -20,8 +20,7 @@ class TTSManager(BaseManager):
     """
     
     def __init__(self, event_bus: EventBus):
-        settings = get_settings()
-        self.url = settings.services.tts_websocket_url
+        self.url = get_config("services", "tts_websocket_url", default="ws://localhost:8003/synthesize/stream")
         self.audio_player = AudioPlayer(on_play_state=self._on_play_state_changed)
         self.websocket = None
         self._receiver_task = None
@@ -39,6 +38,8 @@ class TTSManager(BaseManager):
     async def _on_play_state_changed(self, is_playing: bool):
         """Callback when audio playback state changes."""
         await publish_activity(self.event_bus, {"playing": is_playing})
+        if not is_playing:
+            await self.event_bus.publish(Event(EventType.TURN_ENDED.value))
     
     async def on_llm_request(self, event: Event):
         """Pre-connect WebSocket when LLM request is published to reduce latency."""
