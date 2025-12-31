@@ -27,7 +27,7 @@ from orchestrator.managers.queue_manager import QueueManager
 from orchestrator.managers.queue_consumer import QueueConsumer
 from orchestrator.sources.stt_source import STTSource
 from orchestrator.sources.bilibili_source import BilibiliSource
-from orchestrator.tools.registry import ToolRegistry
+from orchestrator.tools.registry import ToolRegistry, get_registered_tools, discover_and_load_tools
 from orchestrator.hotkey_manager import HotkeyManager
 from orchestrator.ocr_client import OCRClient
 from audio.audio_driver import AudioDriver
@@ -42,6 +42,12 @@ class OrchestratorServer:
         self.activity_state = init_activity_state(self.event_bus)
 
         self.tool_registry = ToolRegistry()
+
+        # Auto-discover and register all tools
+        discover_and_load_tools()
+        for tool in get_registered_tools():
+            self.tool_registry.register(tool)
+
         self.ocr_client = OCRClient()
 
         # Priority Queue System
@@ -56,7 +62,7 @@ class OrchestratorServer:
         self.audio_driver = AudioDriver(event_bus=self.event_bus)
 
         # Managers
-        self.interaction_manager = InteractionManager(self.event_bus)
+        self.interaction_manager = InteractionManager(self.event_bus, self.tool_registry)
         self.subtitle_manager = SubtitleManager(self.event_bus)
         self.metrics_manager = MetricsManager(self.event_bus)
         self.tts_manager = TTSManager(self.event_bus)
@@ -147,9 +153,11 @@ def main():
     import orchestrator.api.ui
     import orchestrator.api.hotkeys
     import orchestrator.api.metrics
+    import orchestrator.api.tools
     orchestrator.api.ui.orchestrator = orch
     orchestrator.api.hotkeys.orchestrator = orch
     orchestrator.api.metrics.metrics_manager = orch.metrics_manager
+    orchestrator.api.tools.tool_registry = orch.tool_registry
 
     # 3. Create Server
     app = create_app(

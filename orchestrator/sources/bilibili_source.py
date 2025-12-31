@@ -2,10 +2,11 @@ import asyncio
 import time
 from collections import deque
 from typing import List, Dict, Optional, Any, Deque
-from core.event_bus import EventBus
+from core.event_bus import EventBus, Event
 from core.logging import get_logger
 from core.settings import get_settings
 from orchestrator.sources.base import BaseSource
+from orchestrator.events import EventType
 from bilibili import BilibiliClient
 
 logger = get_logger(__name__)
@@ -33,6 +34,7 @@ class BilibiliSource(BaseSource):
         
         # State
         self.danmaku_buffer: Deque[Dict[str, Any]] = deque()
+        self.superchat_buffer: Deque[Dict[str, Any]] = deque()  # Persistent storage for UI
         self.superchat_queue: asyncio.Queue = asyncio.Queue()
         self._cleanup_task: Optional[asyncio.Task] = None
 
@@ -73,6 +75,13 @@ class BilibiliSource(BaseSource):
             "timestamp": time.time()
         }
         self.danmaku_buffer.append(normalized)
+
+        # Publish event for UI
+        await self.event_bus.publish(Event(
+            EventType.BILIBILI_DANMAKU.value,
+            normalized
+        ))
+
         logger.debug(f"Danmaku added: {normalized['user']}: {normalized['content']}")
 
     async def _on_super_chat(self, message):
@@ -84,7 +93,15 @@ class BilibiliSource(BaseSource):
             "timestamp": time.time(),
             "amount": message.price
         }
+        self.superchat_buffer.append(normalized)  # Store for UI snapshot
         await self.superchat_queue.put(normalized)
+
+        # Publish event for UI
+        await self.event_bus.publish(Event(
+            EventType.BILIBILI_SUPERCHAT.value,
+            normalized
+        ))
+
         logger.info(f"SuperChat added: {normalized['user']} (¥{normalized['amount']}): {normalized['content']}")
 
     async def _cleanup_loop(self):
@@ -127,4 +144,8 @@ class BilibiliSource(BaseSource):
     def get_superchat_count(self) -> int:
         """Return the number of superChats currently in the queue."""
         return self.superchat_queue.qsize()
+
+    def get_superchat_snapshot(self) -> List[Dict[str, Any]]:
+        """Return a snapshot of all superChats (no expiration)."""
+        return list(self.superchat_buffer)
 

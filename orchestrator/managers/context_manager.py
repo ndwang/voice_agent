@@ -181,6 +181,111 @@ class ContextManager:
             "timestamp": datetime.now().isoformat()
         })
 
+    def add_assistant_message_with_tool_calls(self, tool_calls: List[Dict]):
+        """
+        Add assistant message with tool calls to conversation history.
+
+        Args:
+            tool_calls: List of tool call dicts with "id", "name", "arguments"
+        """
+        self.conversation_history.append({
+            "role": "assistant",
+            "content": "",  # Empty content when tool calls are present
+            "tool_calls": tool_calls,
+            "timestamp": datetime.now().isoformat()
+        })
+
+    def add_tool_result_messages(self, tool_calls: List[Dict], results: List):
+        """
+        Add tool result messages to conversation history.
+
+        Args:
+            tool_calls: List of tool call dicts with "id", "name", "arguments"
+            results: List of tool results (can be any type, will be stringified)
+        """
+        for tool_call, result in zip(tool_calls, results):
+            # Format result as string
+            if isinstance(result, Exception):
+                result_str = f"Error: {str(result)}"
+            else:
+                result_str = str(result)
+
+            self.conversation_history.append({
+                "role": "tool",
+                "tool_call_id": tool_call["id"],
+                "name": tool_call["name"],
+                "content": result_str,
+                "timestamp": datetime.now().isoformat()
+            })
+
+    def get_messages_with_tool_results(
+        self,
+        tool_calls: List[Dict],
+        results: List
+    ) -> List[Dict[str, str]]:
+        """
+        Get messages including tool calls and results for interpretation request.
+
+        Args:
+            tool_calls: List of tool call dicts
+            results: List of tool results
+
+        Returns:
+            List of message dicts formatted for LLM provider
+        """
+        # Add tool calls to history
+        self.add_assistant_message_with_tool_calls(tool_calls)
+
+        # Add tool results
+        self.add_tool_result_messages(tool_calls, results)
+
+        # Build message list with system prompt and history
+        messages = []
+        system_prompt = self.get_system_prompt()
+
+        # Add OCR context to system prompt if available
+        if self.ocr_text:
+            system_prompt = f"{system_prompt}\n\nCurrent story content:\n{self.ocr_text}"
+
+        if system_prompt:
+            messages.append({"role": "system", "content": system_prompt})
+
+        # Add conversation history (including tool calls and results)
+        for msg in self.conversation_history[-self.max_history * 2:]:
+            if msg["role"] == "tool":
+                # Tool result message
+                messages.append({
+                    "role": "tool",
+                    "tool_call_id": msg["tool_call_id"],
+                    "content": msg["content"]
+                })
+            elif "tool_calls" in msg:
+                # Assistant message with tool calls
+                # Convert internal format to OpenAI format
+                openai_tool_calls = []
+                for tc in msg["tool_calls"]:
+                    openai_tool_calls.append({
+                        "type": "function",
+                        "id": tc["id"],
+                        "function": {
+                            "name": tc["name"],
+                            "arguments": tc["arguments"]  # Keep as dict
+                        }
+                    })
+                messages.append({
+                    "role": "assistant",
+                    "content": msg.get("content", ""),
+                    "tool_calls": openai_tool_calls
+                })
+            else:
+                # Regular user/assistant message
+                messages.append({
+                    "role": msg["role"],
+                    "content": msg["content"]
+                })
+
+        return messages
+
     def update_last_message(self, text: str, role: Optional[str] = None):
         """Update the content of the last message in history."""
         if not self.conversation_history:
@@ -244,14 +349,41 @@ class ContextManager:
             history_to_include = history_to_include[:-1]
         
         for msg in history_to_include:
-            messages.append({
-                "role": msg["role"],
-                "content": msg["content"]
-            })
-        
+            if msg["role"] == "tool":
+                # Tool result message
+                messages.append({
+                    "role": "tool",
+                    "tool_call_id": msg["tool_call_id"],
+                    "content": msg["content"]
+                })
+            elif "tool_calls" in msg:
+                # Assistant message with tool calls
+                # Convert internal format to OpenAI format
+                openai_tool_calls = []
+                for tc in msg["tool_calls"]:
+                    openai_tool_calls.append({
+                        "type": "function",
+                        "id": tc["id"],
+                        "function": {
+                            "name": tc["name"],
+                            "arguments": tc["arguments"]  # Keep as dict
+                        }
+                    })
+                messages.append({
+                    "role": "assistant",
+                    "content": msg.get("content", ""),
+                    "tool_calls": openai_tool_calls
+                })
+            else:
+                # Regular user/assistant message
+                messages.append({
+                    "role": msg["role"],
+                    "content": msg["content"]
+                })
+
         # Add current user message
         messages.append({"role": "user", "content": user_message})
-        
+
         return {
             "messages": messages,
             "system_prompt": system_message,

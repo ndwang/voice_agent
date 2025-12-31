@@ -8,6 +8,8 @@ import { connect } from './components/websocket.js';
 import { setupSystemPromptModal } from './modals/system-prompt.js';
 import { setupHotkeyModal, loadHotkey } from './modals/hotkey.js';
 import { setupConfigModal } from './modals/config.js';
+import { initToolsPanel } from './components/tools.js';
+import { initBilibiliPanel } from './components/bilibili.js';
 
 function setupEventListeners() {
   // Action buttons
@@ -23,6 +25,8 @@ function setupEventListeners() {
 
 async function init() {
   setupEventListeners();
+  initToolsPanel();
+  initBilibiliPanel();
   await loadHotkey();
   connect();
 }

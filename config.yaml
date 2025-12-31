@@ -5,6 +5,7 @@ orchestrator:
   log_level: INFO
   log_file: null
   system_prompt_file: orchestrator/ema_prompt.txt
+  queue_cooldown_seconds: 3.0
   hotkeys:
     toggle_listening: ctrl+shift+l
     cancel_speech: ctrl+shift+c
@@ -129,12 +130,14 @@ obs:
   clear_filter_name: MoveOutRight
 bilibili:
   enabled: true
-  room_id: 31232063
-  sessdata: ' '
+  room_id: 22632424
+  sessdata: d10a8829%2C1782692006%2C9540c%2Ac2CjCRf7tmL8kcxPkhHcVlsM3Jgj_zSL2-ZxOx5tj8CFHG3FceyugoVJta1N3bnnHnEwUSVnhVRmsxbmJHQlZabnN0OUx4TnZNVkMydUFUM0R5NDgzSlpRLU1TVjN4OThnbHFucG1ydFNqQk9qRURPX1ZXUGVxMl8yV3J6aXE2eWVyd2ZFa0RwdzhBIIEC
   danmaku_ttl_seconds: 60
 services:
   orchestrator_base_url: http://localhost:8000
   stt_websocket_url: ws://localhost:8001/ws/transcribe
+  stt_audio_url: ws://localhost:8001/ws/audio
+  stt_transcript_url: ws://localhost:8001/ws/transcripts
   tts_websocket_url: ws://localhost:8003/synthesize/stream
   ocr_websocket_url: ws://localhost:8004/monitor/stream
   ocr_base_url: http://localhost:8004

@@ -9,18 +9,44 @@ import { apiCall } from '../utils/api.js';
 function renderHistoryMessage(message) {
   const messageDiv = document.createElement('div');
   messageDiv.className = `message ${message.role}`;
-  
+
   const bubble = document.createElement('div');
   bubble.className = 'message-bubble';
-  bubble.textContent = message.content;
-  
+
+  // Handle different message types
+  if (message.role === 'tool') {
+    // Tool result message
+    bubble.className += ' tool-result';
+    const toolName = document.createElement('div');
+    toolName.className = 'tool-name';
+    toolName.textContent = `🔧 ${message.name}`;
+    bubble.appendChild(toolName);
+
+    const toolContent = document.createElement('div');
+    toolContent.className = 'tool-content';
+    toolContent.textContent = message.content;
+    bubble.appendChild(toolContent);
+  } else if (message.tool_calls && message.tool_calls.length > 0) {
+    // Assistant message with tool calls
+    bubble.className += ' tool-calls';
+    message.tool_calls.forEach(tc => {
+      const toolCall = document.createElement('div');
+      toolCall.className = 'tool-call';
+      toolCall.textContent = `🔧 Calling ${tc.name}(${JSON.stringify(tc.arguments)})`;
+      bubble.appendChild(toolCall);
+    });
+  } else {
+    // Regular message with text content
+    bubble.textContent = message.content || '';
+  }
+
   const timestamp = document.createElement('div');
   timestamp.className = 'message-timestamp';
   timestamp.textContent = formatTimestamp(message.timestamp);
-  
+
   messageDiv.appendChild(bubble);
   messageDiv.appendChild(timestamp);
-  
+
   return messageDiv;
 }
 

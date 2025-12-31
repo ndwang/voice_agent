@@ -7,6 +7,7 @@ import { setStatus } from '../utils/helpers.js';
 import { renderActivity, updateToggleListeningButton } from './activity.js';
 import { fetchHistory, updateStreamingMessage, clearStreamingMessages } from './history.js';
 import { updateHotkeyDisplay } from '../modals/hotkey.js';
+import { fetchBilibiliChat, addBilibiliMessage } from './bilibili.js';
 
 // Helper to clear state after history fetch completes
 async function fetchHistoryAndClearState() {
@@ -100,6 +101,14 @@ function handleWebSocketEvent(data) {
         updateHotkeyDisplay();
       }
       break;
+
+    case 'bilibili_danmaku':
+      addBilibiliMessage(data.message, false);
+      break;
+
+    case 'bilibili_superchat':
+      addBilibiliMessage(data.message, true);
+      break;
   }
 }
 
@@ -110,6 +119,7 @@ export function connect() {
   ws.onopen = () => {
     setStatus('Connected');
     fetchHistory();
+    fetchBilibiliChat();
   };
 
   ws.onclose = () => {

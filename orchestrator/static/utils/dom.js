@@ -5,8 +5,10 @@
 export const elements = {
   // Main UI elements
   historyPanel: document.getElementById('history-panel'),
+  bilibiliPanel: document.getElementById('bilibili-panel'),
+  bilibiliMessages: document.getElementById('bilibili-messages'),
   statusEl: document.getElementById('status'),
-  
+
   // Buttons
   cancelBtn: document.getElementById('cancel-btn'),
   toggleListeningBtn: document.getElementById('toggle-listening-btn'),
@@ -19,6 +21,7 @@ export const elements = {
     listening: document.getElementById('seg-listening'),
     transcribing: document.getElementById('seg-transcribing'),
     responding: document.getElementById('seg-responding'),
+    executing_tools: document.getElementById('seg-executing_tools'),
     synthesizing: document.getElementById('seg-synthesizing'),
     playing: document.getElementById('seg-playing'),
   },

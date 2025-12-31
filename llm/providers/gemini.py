@@ -3,7 +3,7 @@ Google Gemini API Provider
 
 Implementation of LLMProvider for Google Gemini API.
 """
-from typing import AsyncIterator, Optional, List, Dict, Tuple
+from typing import AsyncIterator, Optional, List, Dict, Tuple, Union, Any
 from google import genai
 from google.genai import types
 
@@ -166,12 +166,13 @@ class GeminiProvider(LLMProvider):
         self,
         messages: List[Dict[str, str]],
         system_prompt: Optional[str] = None,
+        tools: Optional[List[Dict[str, Any]]] = None,
         temperature: Optional[float] = None,
         top_p: Optional[float] = None,
         top_k: Optional[int] = None,
         max_tokens: Optional[int] = None,
         **kwargs
-    ) -> AsyncIterator[str]:
+    ) -> AsyncIterator[Union[str, Dict[str, Any]]]:
         """
         Generate a streaming response using Gemini API.
         
@@ -226,6 +227,20 @@ class GeminiProvider(LLMProvider):
         if "generation_config" in kwargs:
             config_kwargs.update(kwargs["generation_config"])
         
+        # Convert tools to Gemini format if provided
+        if tools and len(tools) > 0:
+            function_declarations = []
+            for tool in tools:
+                func = tool["function"]
+                function_declarations.append(
+                    types.FunctionDeclaration(
+                        name=func["name"],
+                        description=func["description"],
+                        parameters=func["parameters"]
+                    )
+                )
+            config_kwargs["tools"] = [types.Tool(function_declarations=function_declarations)]
+
         # Extract thinking config if present (thinking_level takes priority over thinking_budget)
         thinking_config = None
         if "thinking_level" in config_kwargs:
@@ -236,7 +251,7 @@ class GeminiProvider(LLMProvider):
         elif "thinking_budget" in config_kwargs:
             thinking_budget = config_kwargs.pop("thinking_budget")
             thinking_config = types.ThinkingConfig(thinking_budget=thinking_budget)
-        
+
         # Use generate_content_stream API with proper structure
         if thinking_config:
             config_kwargs["thinking_config"] = thinking_config
@@ -248,7 +263,23 @@ class GeminiProvider(LLMProvider):
             contents=contents
         )
         async for chunk in stream:
-            if hasattr(chunk, 'text') and chunk.text:
+            # Check for function calls in the chunk
+            if hasattr(chunk, 'candidates') and chunk.candidates:
+                parts = chunk.candidates[0].content.parts
+                for part in parts:
+                    if hasattr(part, 'function_call'):
+                        # Yield tool call dict
+                        func_call = part.function_call
+                        yield {
+                            "type": "tool_call",
+                            "id": f"call_{hash(func_call.name)}_{id(func_call)}",
+                            "name": func_call.name,
+                            "arguments": dict(func_call.args) if func_call.args else {}
+                        }
+                    elif hasattr(part, 'text') and part.text:
+                        yield part.text
+            elif hasattr(chunk, 'text') and chunk.text:
+                # Fallback for text-only chunks
                 yield chunk.text
 
             if hasattr(chunk, 'usage_metadata') and chunk.usage_metadata:

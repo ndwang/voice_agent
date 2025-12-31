@@ -23,6 +23,7 @@ class InteractionManager(BaseManager):
     def __init__(
         self,
         event_bus: EventBus,
+        tool_registry = None,
         llm_settings: Optional[LLMSettings] = None,
         orch_settings: Optional[OrchestratorSettings] = None
     ):
@@ -33,6 +34,12 @@ class InteractionManager(BaseManager):
 
         # Type-safe access with IDE autocomplete!
         self.disable_thinking = self.llm_settings.get_provider_config().disable_thinking
+
+        # Tool registry and tool execution manager
+        self.tool_registry = tool_registry
+        if self.tool_registry:
+            from orchestrator.managers.tool_execution_manager import ToolExecutionManager
+            self.tool_execution_manager = ToolExecutionManager(event_bus, tool_registry)
 
         # Components
         self.interruption_manager = InterruptionManager(event_bus)
@@ -74,6 +81,8 @@ class InteractionManager(BaseManager):
     def _register_handlers(self):
         self.event_bus.subscribe(EventType.INPUT_RECEIVED.value, self.on_input_received)
         self.event_bus.subscribe(EventType.LLM_CANCELLED.value, self.on_cancel)
+        if self.tool_registry:
+            self.event_bus.subscribe(EventType.TOOL_INTERPRETATION_REQUEST.value, self.on_tool_interpretation_request)
 
     async def on_cancel(self, event: Event):
         """Handle cancellation from any source (speech start, hotkey, UI)."""
@@ -118,35 +127,120 @@ class InteractionManager(BaseManager):
         context = self.context_manager.format_context_for_llm(text)
 
         try:
+            # Get tools schema if tool registry is available
+            tools_schema = None
+            if self.tool_registry:
+                tools_schema = self.tool_registry.get_tools_schema()
+
             # Generate stream from LLM
             stream = self.llm_provider.generate_stream(
                 messages=context["messages"],
-                system_prompt=context.get("system_prompt")
+                system_prompt=context.get("system_prompt"),
+                tools=tools_schema  # Always pass (None or empty list if no tools)
             )
 
             # Process stream with tag routing
-            history_response = await self.stream_processor.process_response(
+            result = await self.stream_processor.process_response(
                 stream,
                 self.cancel_event,
                 self.disable_thinking
             )
 
             if not self.cancel_event.is_set():
-                # Update activity: responding done (synthesizing will be set by TTS handler)
-                await self.activity_state.update({"responding": False})
+                # Check if result contains tool calls
+                if result.get("has_tool_calls"):
+                    # Tool calls detected - publish event and skip history update
+                    self.logger.info(f"Tool calls detected: {[tc for tc in result['tool_calls']]}")
+                    await self.activity_state.update({"responding": False})
+                    await self.event_bus.publish(Event(
+                        EventType.TOOL_CALL_REQUESTED.value,
+                        {"tool_calls": result["tool_calls"]}
+                    ))
+                    # Don't add to history yet - wait for interpretation
+                else:
+                    # Normal response without tool calls
+                    await self.activity_state.update({"responding": False})
 
-                # Save to history
-                self.context_manager.add_assistant_message(history_response)
-                await self.event_bus.publish(Event(EventType.LLM_RESPONSE_DONE.value, self.llm_provider.last_token_count))
+                    # Save to history
+                    self.context_manager.add_assistant_message(result["text"])
+                    await self.event_bus.publish(Event(EventType.LLM_RESPONSE_DONE.value, self.llm_provider.last_token_count))
 
-                # Publish history update for assistant message
-                await publish_history_updated(self.event_bus)
+                    # Publish history update for assistant message
+                    await publish_history_updated(self.event_bus)
             else:
                 # Cancelled - reset activity states
                 await self.activity_state.update({"responding": False, "synthesizing": False, "playing": False})
 
         except Exception as e:
             self.logger.error(f"LLM Error: {e}", exc_info=True)
+            # Reset activity states on error
+            await self.activity_state.update({"responding": False, "synthesizing": False, "playing": False, "executing_tools": False})
+
+    async def on_tool_interpretation_request(self, event: Event):
+        """
+        Handle tool interpretation request.
+
+        Send tool results back to LLM for interpretation and natural language response.
+
+        Args:
+            event: Event with data containing:
+                - tool_calls: List of tool call dicts
+                - tool_results: List of tool results
+        """
+        tool_calls = event.data.get("tool_calls", [])
+        tool_results = event.data.get("tool_results", [])
+
+        self.logger.info("Requesting LLM interpretation of tool results")
+
+        # Clear cancel event for new LLM call
+        self.cancel_event.clear()
+
+        # Update activity state
+        await self.activity_state.update({"responding": True})
+
+        try:
+            # Get messages with tool results formatted for LLM
+            messages = self.context_manager.get_messages_with_tool_results(
+                tool_calls, tool_results
+            )
+
+            # Request LLM interpretation (no tools in this call)
+            stream = self.llm_provider.generate_stream(
+                messages=messages,
+                system_prompt=None  # System prompt already in messages
+            )
+
+            # Process interpretation stream
+            result = await self.stream_processor.process_response(
+                stream,
+                self.cancel_event,
+                self.disable_thinking
+            )
+
+            if not self.cancel_event.is_set():
+                # Update activity state
+                await self.activity_state.update({"responding": False})
+
+                # Add interpretation to history
+                self.context_manager.add_assistant_message(result["text"])
+
+                # Publish completion event
+                await self.event_bus.publish(Event(
+                    EventType.LLM_RESPONSE_DONE.value,
+                    self.llm_provider.last_token_count
+                ))
+
+                # Publish history update
+                await publish_history_updated(self.event_bus)
+
+                self.logger.info("Tool interpretation completed")
+            else:
+                # Cancelled during interpretation
+                await self.activity_state.update({"responding": False, "synthesizing": False, "playing": False})
+                self.logger.info("Tool interpretation cancelled")
+
+        except Exception as e:
+            self.logger.error(f"Tool interpretation error: {e}", exc_info=True)
             # Reset activity states on error
             await self.activity_state.update({"responding": False, "synthesizing": False, "playing": False})
 
