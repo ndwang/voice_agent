@@ -4,8 +4,20 @@
 
 import { apiCall } from '../utils/api.js';
 import { formatTimestamp } from '../utils/helpers.js';
+import { makeCollapsible } from '../utils/panel-collapse.js';
 
-const messagesContainer = document.getElementById('bilibili-messages');
+let messagesContainer = null;
+
+export function initBilibiliPanel() {
+  // Get DOM elements
+  messagesContainer = document.getElementById('bilibili-messages');
+  const bilibiliPanel = document.getElementById('bilibili-panel');
+
+  // Make bilibili panel collapsible
+  if (bilibiliPanel) {
+    makeCollapsible(bilibiliPanel, 'bilibili', false);
+  }
+}
 
 function renderBilibiliMessage(message, isSuperchat = false) {
   const messageDiv = document.createElement('div');
@@ -52,6 +64,11 @@ function renderBilibiliMessage(message, isSuperchat = false) {
 }
 
 export function addBilibiliMessage(message, isSuperchat = false) {
+  if (!messagesContainer) {
+    console.warn('Bilibili messages container not initialized');
+    return;
+  }
+
   const emptyMsg = messagesContainer.querySelector('.empty-chat');
   if (emptyMsg) {
     emptyMsg.remove();
@@ -78,6 +95,11 @@ export function addBilibiliMessage(message, isSuperchat = false) {
 }
 
 export async function fetchBilibiliChat() {
+  if (!messagesContainer) {
+    console.warn('Bilibili messages container not initialized');
+    return;
+  }
+
   try {
     const data = await apiCall('/ui/bilibili/chat');
 

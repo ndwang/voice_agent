@@ -5,7 +5,7 @@ Implementation of LLMProvider for Ollama using the ollama Python library.
 """
 import logging
 import re
-from typing import AsyncIterator, Optional, List, Dict, Tuple
+from typing import AsyncIterator, Optional, List, Dict, Tuple, Union, Any
 
 try:
     from ollama import AsyncClient
@@ -179,12 +179,13 @@ class OllamaProvider(LLMProvider):
         self,
         messages: List[Dict[str, str]],
         system_prompt: Optional[str] = None,
+        tools: Optional[List[Dict[str, Any]]] = None,
         temperature: Optional[float] = None,
         top_p: Optional[float] = None,
         top_k: Optional[int] = None,
         max_tokens: Optional[int] = None,
         **kwargs
-    ) -> AsyncIterator[str]:
+    ) -> AsyncIterator[Union[str, Dict[str, Any]]]:
         """
         Generate a streaming response using Ollama.
         
@@ -230,16 +231,28 @@ class OllamaProvider(LLMProvider):
         
         # Merge any additional options from kwargs (overrides defaults and explicit params)
         options.update(kwargs.get("options", {}))
-        
+
         # Stream response - await the coroutine to get the async iterator
         stream = await self.client.chat(
             model=self.model,
             messages=final_messages,
+            tools=tools,  # Ollama accepts OpenAI format directly
             options=options if options else None,
             stream=True
         )
         async for chunk in stream:
-            if "message" in chunk and "content" in chunk["message"]:
+            # Check for tool calls
+            if "message" in chunk and "tool_calls" in chunk["message"]:
+                for tool_call in chunk["message"]["tool_calls"]:
+                    # Yield tool call in internal format for StreamProcessor
+                    # Ollama returns OpenAI format, convert to internal format
+                    yield {
+                        "type": "tool_call",
+                        "id": tool_call.get("id", f"call_{tool_call['function']['name']}"),
+                        "name": tool_call["function"]["name"],
+                        "arguments": tool_call["function"]["arguments"]
+                    }
+            elif "message" in chunk and "content" in chunk["message"]:
                 content = chunk["message"]["content"]
                 if content:
                     yield content

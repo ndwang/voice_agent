@@ -14,6 +14,7 @@ export const state = {
     listening: true,
     transcribing: false,
     responding: false,
+    executing_tools: false,
     synthesizing: false,
     playing: false,
   },

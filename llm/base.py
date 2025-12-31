@@ -4,7 +4,7 @@ LLM Provider Abstraction
 Abstract base class for LLM providers with streaming support.
 """
 from abc import ABC, abstractmethod
-from typing import AsyncIterator, Optional, Tuple, List, Dict
+from typing import AsyncIterator, Optional, Tuple, List, Dict, Union, Any
 
 
 class LLMProvider(ABC):
@@ -63,21 +63,26 @@ class LLMProvider(ABC):
         self,
         messages: List[Dict[str, str]],
         system_prompt: Optional[str] = None,
+        tools: Optional[List[Dict[str, Any]]] = None,
         **kwargs
-    ) -> AsyncIterator[str]:
+    ) -> AsyncIterator[Union[str, Dict[str, Any]]]:
         """
         Generate a streaming response (token by token).
-        
+
         Args:
             messages: List of message dicts with "role" and "content" keys.
                      Must include system message (if any) and conversation history.
                      The last message should be the current user message.
             system_prompt: Optional system prompt. If messages already contains a system
                           message, this may be ignored.
+            tools: Optional list of tool schemas in OpenAI format:
+                  [{"type": "function", "function": {"name": "...", "description": "...", "parameters": {...}}}]
+                  Providers convert to their native format internally.
             **kwargs: Additional provider-specific parameters
-            
+
         Yields:
-            Tokens as they are generated
+            Either text tokens (str) OR tool call dicts:
+            {"type": "tool_call", "id": "...", "name": "...", "arguments": {...}}
         """
         pass
     

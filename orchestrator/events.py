@@ -25,7 +25,14 @@ class EventType(Enum):
     LLM_TOKEN = "llm.token"
     LLM_RESPONSE_DONE = "llm.response_done"
     LLM_CANCELLED = "llm.cancelled"
-    
+
+    # Tool execution
+    TOOL_CALL_REQUESTED = "tool.call_requested"
+    TOOL_EXECUTING = "tool.executing"
+    TOOL_RESULT = "tool.result"
+    TOOL_ERROR = "tool.error"
+    TOOL_INTERPRETATION_REQUEST = "tool.interpretation_request"
+
     # TTS
     TTS_REQUEST = "tts.request"
     TTS_AUDIO_CHUNK = "tts.audio_chunk"

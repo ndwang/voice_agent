@@ -12,6 +12,7 @@ class SystemState:
     synthesizing: bool = False
     playing: bool = False
     listening: bool = True
+    executing_tools: bool = False
 
     def update(self, changes: Dict[str, Any]):
         """Update fields from a dictionary, ignoring unknown keys."""
@@ -26,6 +27,7 @@ class SystemState:
             "responding": self.responding,
             "synthesizing": self.synthesizing,
             "playing": self.playing,
-            "listening": self.listening
+            "listening": self.listening,
+            "executing_tools": self.executing_tools
         }
 

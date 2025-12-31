@@ -21,6 +21,7 @@ export const elements = {
     listening: document.getElementById('seg-listening'),
     transcribing: document.getElementById('seg-transcribing'),
     responding: document.getElementById('seg-responding'),
+    executing_tools: document.getElementById('seg-executing_tools'),
     synthesizing: document.getElementById('seg-synthesizing'),
     playing: document.getElementById('seg-playing'),
   },

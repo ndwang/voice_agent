@@ -73,20 +73,23 @@ class StreamProcessor:
 
     async def process_response(
         self,
-        stream: AsyncIterator[str],
+        stream: AsyncIterator,
         cancel_event: asyncio.Event,
         disable_thinking: bool
-    ) -> str:
+    ) -> dict:
         """
         Process an LLM token stream, routing content by tags.
 
         Args:
-            stream: Async iterator yielding tokens from LLM
+            stream: Async iterator yielding tokens (str) or tool calls (dict) from LLM
             cancel_event: Event that signals cancellation
             disable_thinking: Whether to filter thinking tags
 
         Returns:
-            Full response text for history (with thinking tags filtered if needed)
+            Dict with:
+            - "text": Full response text for history (with thinking tags filtered if needed)
+            - "has_tool_calls": Boolean indicating if tool calls were detected
+            - "tool_calls": List of tool call dicts (if any)
         """
         # Set current cancel event for callback access
         self.current_cancel_event = cancel_event
@@ -96,22 +99,30 @@ class StreamProcessor:
         parser.reset()
 
         full_response = ""
+        tool_calls = []
 
         # Process stream
-        async for token in stream:
+        async for item in stream:
             if cancel_event.is_set():
                 break
 
-            if not token:
+            if not item:
                 continue
 
-            full_response += token
+            # Check if this is a tool call
+            if isinstance(item, dict) and item.get("type") == "tool_call":
+                tool_calls.append(item)
+                # Don't publish token event for tool calls
+                continue
+
+            # Normal text token
+            full_response += item
 
             # Publish token for UI display
-            await self.event_bus.publish(Event(EventType.LLM_TOKEN.value, {"token": token}))
+            await self.event_bus.publish(Event(EventType.LLM_TOKEN.value, {"token": item}))
 
             # Process token through parser
-            await parser.process_token(token)
+            await parser.process_token(item)
 
         # Final flush of parser buffers
         await parser.finalize()
@@ -121,4 +132,8 @@ class StreamProcessor:
         if disable_thinking:
             history_response = filter_thinking_tags_final(full_response)
 
-        return history_response
+        return {
+            "text": history_response,
+            "has_tool_calls": len(tool_calls) > 0,
+            "tool_calls": tool_calls
+        }
