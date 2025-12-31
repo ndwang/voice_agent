@@ -8,10 +8,7 @@ from typing import Optional
 from core.event_bus import EventBus, Event
 from orchestrator.events import EventType
 from orchestrator.core.models import SystemState
-
-# UI event names (for backwards compatibility)
-UI_ACTIVITY = "activity"
-UI_LISTENING_STATE_CHANGED = "listening_state_changed"
+from orchestrator.core.constants import UI_ACTIVITY, UI_LISTENING_STATE_CHANGED
 
 
 class ActivityState:
