@@ -50,12 +50,13 @@ def test_context_manager_history():
     assert cm.conversation_history[1]["content"] == "Hi there!"
     
     # Test format_context_for_llm
-    context_data = cm.format_context_for_llm("What's the weather?")
+    cm.add_user_message("What's the weather?")
+    context_data = cm.format_context_for_llm()
     assert "messages" in context_data, "format_context_for_llm should return messages"
     assert "system_prompt" in context_data, "format_context_for_llm should return system_prompt"
     assert len(context_data["messages"]) > 0, "messages should not be empty"
-    
-    # Verify messages include system, history, and current message
+
+    # Verify messages include system and history
     messages = context_data["messages"]
     assert messages[0]["role"] == "system", "First message should be system"
     assert messages[-1]["role"] == "user", "Last message should be user"

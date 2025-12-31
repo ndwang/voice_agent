@@ -7,7 +7,7 @@ from core.event_bus import EventBus, Event
 from core.logging import get_logger
 from orchestrator.events import EventType
 from orchestrator.managers.context_manager import ContextManager
-from orchestrator.core.models import SystemState
+from orchestrator.core.activity_state import get_activity_state
 
 logger = get_logger(__name__)
 
@@ -25,61 +25,55 @@ class InterruptionManager:
         self.event_bus = event_bus
         self._interrupted_before_finished = False
 
-    async def check_and_cancel(self, current_state: SystemState):
+        # Access centralized activity state
+        self.activity_state = get_activity_state()
+
+        # Subscribe to all interruption triggers and cancellation
+        self.event_bus.subscribe(EventType.SPEECH_START.value, self.on_speech_start)
+        self.event_bus.subscribe(EventType.CRITICAL_INPUT.value, self.on_critical_input)
+        self.event_bus.subscribe(EventType.LLM_CANCELLED.value, self.on_cancelled)
+
+    async def on_speech_start(self, event: Event):
         """
-        Check if system is busy and publish cancellation event if needed.
+        Handle SPEECH_START - check if busy and cancel if needed.
 
         Args:
-            current_state: Current system activity state
+            event: SPEECH_START event
         """
-        # Only publish cancel if we are currently active (responding, synthesizing, or playing)
-        is_busy = (
-            current_state.responding or
-            current_state.synthesizing or
-            current_state.playing
-        )
-
-        if is_busy:
+        if self.activity_state.is_busy():
             await self.event_bus.publish(Event(EventType.LLM_CANCELLED.value))
 
-    def mark_interrupted(self, is_responding: bool):
+    async def on_critical_input(self, event: Event):
         """
-        Mark that an interruption occurred during LLM generation.
+        Handle critical input (P0) - trigger interruption immediately.
 
         Args:
-            is_responding: Whether the system was still generating a response
+            event: CRITICAL_INPUT event
         """
-        if is_responding:
+        logger.info("Critical input detected - triggering interruption")
+        await self.event_bus.publish(Event(EventType.LLM_CANCELLED.value))
+
+    async def on_cancelled(self, event: Event):
+        """
+        Handle LLM_CANCELLED - mark if we were interrupted during response generation.
+
+        Args:
+            event: LLM_CANCELLED event
+        """
+        # Check if we were still generating a response when cancelled
+        if self.activity_state.state.responding:
             logger.info("Interrupted during LLM generation - will concatenate next message")
             self._interrupted_before_finished = True
 
-    def handle_transcript_history(self, text: str, context: ContextManager) -> str:
+    def was_interrupted(self) -> bool:
         """
-        Handle transcript history with interruption concatenation logic.
-
-        If previous turn was interrupted before LLM finished, concatenates
-        the new transcript with the previous user message.
-
-        Args:
-            text: New transcript text
-            context: Context manager for conversation history
+        Check if previous turn was interrupted before finishing.
 
         Returns:
-            Final text to be processed (either original or concatenated)
+            True if interrupted before LLM finished
         """
-        # Concatenate if previous turn was interrupted before LLM finished
-        if self._interrupted_before_finished:
-            last_msg = context.get_last_message()
-            if last_msg and last_msg["role"] == "user":
-                logger.info(f"Concatenating interrupted message: '{last_msg['content']}' + '{text}'")
-                combined_text = f"{last_msg['content']} [interrupted] {text}"
-                context.update_last_message(combined_text, role="user")
-                self._interrupted_before_finished = False
-                return combined_text
-            else:
-                context.add_user_message(text)
-                self._interrupted_before_finished = False
-                return text
-        else:
-            context.add_user_message(text)
-            return text
+        return self._interrupted_before_finished
+
+    def clear_interrupted(self):
+        """Clear the interrupted flag."""
+        self._interrupted_before_finished = False
