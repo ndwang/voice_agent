@@ -678,23 +678,28 @@ class STTManager:
 
             # Accumulate transcript if ASR produced text
             # ASR always returns text for this chunk only, so we always append it
+            # BUT only if VAD has detected speech - ignore noise when silent
             if asr_text:
-                old_len = len(state.current_transcript)
-                # Append new text to accumulated transcript (no space added - ASR handles spacing)
-                if state.current_transcript:
-                    state.current_transcript += asr_text
+                if state.is_speaking:
+                    old_len = len(state.current_transcript)
+                    # Append new text to accumulated transcript (no space added - ASR handles spacing)
+                    if state.current_transcript:
+                        state.current_transcript += asr_text
+                    else:
+                        # First chunk - set it
+                        state.current_transcript = asr_text
+
+                    logger.info(f"[Process-{client_id}] 📝 Transcript updated: {old_len} → {len(state.current_transcript)} chars (+{len(asr_text)})")
+
+                    # Send accumulated interim transcript
+                    await self.broadcast({
+                        "type": "interim",
+                        "text": state.current_transcript
+                    })
+                    logger.debug(f"[Process-{client_id}] Interim broadcast: '{state.current_transcript[:100]}...'")
                 else:
-                    # First chunk - set it
-                    state.current_transcript = asr_text
-
-                logger.info(f"[Process-{client_id}] 📝 Transcript updated: {old_len} → {len(state.current_transcript)} chars (+{len(asr_text)})")
-
-                # Send accumulated interim transcript
-                await self.broadcast({
-                    "type": "interim",
-                    "text": state.current_transcript
-                })
-                logger.debug(f"[Process-{client_id}] Interim broadcast: '{state.current_transcript[:100]}...'")
+                    # ASR picked up noise during silence - ignore it
+                    logger.debug(f"[Process-{client_id}] ASR produced text during silence (noise), ignoring: '{asr_text}'")
             else:
                 logger.debug(f"[Process-{client_id}] ASR produced no text")
         
