@@ -15,6 +15,7 @@ from core.event_bus import EventBus, Event
 from orchestrator.api import router as orchestrator_router
 from orchestrator.events import EventType
 from orchestrator.core.constants import UI_LISTENING_STATE_CHANGED, UI_ACTIVITY
+from orchestrator.core.activity_state import init_activity_state, get_activity_state
 from orchestrator.utils.event_helpers import publish_activity, publish_listening_state_changed
 
 # Managers
@@ -22,6 +23,8 @@ from orchestrator.managers.interaction_manager import InteractionManager
 from orchestrator.managers.subtitle_manager import SubtitleManager
 from orchestrator.managers.metrics_manager import MetricsManager
 from orchestrator.managers.tts_manager import TTSManager
+from orchestrator.managers.queue_manager import QueueManager
+from orchestrator.managers.queue_consumer import QueueConsumer
 from orchestrator.sources.stt_source import STTSource
 from orchestrator.sources.bilibili_source import BilibiliSource
 from orchestrator.tools.registry import ToolRegistry
@@ -34,56 +37,67 @@ logger = get_logger(__name__)
 class OrchestratorServer:
     def __init__(self):
         self.event_bus = EventBus()
+
+        # Initialize centralized activity state (must be before managers)
+        self.activity_state = init_activity_state(self.event_bus)
+
         self.tool_registry = ToolRegistry()
         self.ocr_client = OCRClient()
-        
+
+        # Priority Queue System
+        self.queue_manager = QueueManager(self.event_bus)
+        self.queue_consumer = QueueConsumer(self.event_bus, self.queue_manager)
+
         # Sources
         self.stt_source = STTSource(self.event_bus)
         self.bilibili_source = BilibiliSource(self.event_bus)
-        
+
         # Audio driver (captures microphone and streams to STT)
         self.audio_driver = AudioDriver(event_bus=self.event_bus)
-        
+
         # Managers
         self.interaction_manager = InteractionManager(self.event_bus)
         self.subtitle_manager = SubtitleManager(self.event_bus)
         self.metrics_manager = MetricsManager(self.event_bus)
         self.tts_manager = TTSManager(self.event_bus)
-        
+
         # Hotkeys
         self.hotkey_manager = HotkeyManager()
         
     async def start(self):
+        # Start queue consumer
+        await self.queue_consumer.start()
+
         # Start sources
         await self.stt_source.start()
         settings = get_settings()
         if settings.bilibili.enabled:
             await self.bilibili_source.start()
-        
+
         # Start audio driver
         await self.audio_driver.start()
-        
+
         # Setup hotkeys
         toggle_key = settings.orchestrator.hotkeys.get("toggle_listening", "ctrl+shift+l")
         cancel_key = settings.orchestrator.hotkeys.get("cancel_speech", "ctrl+shift+c")
-        
+
         # Set up toggle_listening callback with event loop
         event_loop = asyncio.get_event_loop()
         def toggle_cb():
             asyncio.run_coroutine_threadsafe(self.toggle_listening(), event_loop)
-        
+
         # Set up cancel_speech callback with event loop
         def cancel_cb():
             asyncio.run_coroutine_threadsafe(self.cancel_interaction(), event_loop)
-            
+
         self.hotkey_manager.register_hotkey(
-            "toggle_listening", 
-            toggle_key, 
+            "toggle_listening",
+            toggle_key,
             toggle_cb
         )
         self.hotkey_manager.register_hotkey(
-            "cancel_speech", 
-            cancel_key, 
+            "cancel_speech",
+            cancel_key,
             cancel_cb
         )
         self.hotkey_manager.start(event_loop)
@@ -93,6 +107,7 @@ class OrchestratorServer:
         logger.info("Orchestrator Logic Started")
 
     async def stop(self):
+        await self.queue_consumer.stop()
         await self.audio_driver.stop()
         await self.stt_source.stop()
         await self.bilibili_source.stop()
@@ -101,26 +116,20 @@ class OrchestratorServer:
 
     async def toggle_listening(self) -> bool:
         """Toggle listening state and return new state."""
-        new_state = not self.interaction_manager.activity_state.listening
+        new_state = not self.activity_state.state.listening
         logger.info(f"Listening {'enabled' if new_state else 'disabled'}")
-        
-        # Publish listening state change event (InteractionManager will update local state)
-        await publish_listening_state_changed(self.event_bus, new_state)
-        
-        # Also publish activity update
-        await publish_activity(self.event_bus, {"listening": new_state})
-        
+
+        # Update centralized activity state
+        await self.activity_state.set_listening(new_state)
+
         return new_state
 
     async def set_listening(self, enabled: bool):
         """Set listening state explicitly."""
         logger.info(f"Listening set to: {enabled}")
-        
-        # Publish listening state change event
-        await publish_listening_state_changed(self.event_bus, enabled)
-        
-        # Also publish activity update
-        await publish_activity(self.event_bus, {"listening": enabled})
+
+        # Update centralized activity state
+        await self.activity_state.set_listening(enabled)
 
     async def cancel_interaction(self):
         # Fire cancel event

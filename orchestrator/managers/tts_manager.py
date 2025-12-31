@@ -6,7 +6,7 @@ from core.logging import get_logger
 from core.config import get_config
 from orchestrator.events import EventType
 from orchestrator.managers.base import BaseManager
-from orchestrator.utils.event_helpers import publish_activity
+from orchestrator.core.activity_state import get_activity_state
 from audio.audio_player import AudioPlayer
 
 logger = get_logger(__name__)
@@ -27,6 +27,7 @@ class TTSManager(BaseManager):
         self._synthesizing = False
         self._connecting = False  # Track connection state to avoid duplicate connections
         self._current_sample_rate = 16000  # Default, will be updated by audio_config
+        self.activity_state = get_activity_state()  # Access centralized activity state
         super().__init__(event_bus)
         
     def _register_handlers(self):
@@ -37,7 +38,7 @@ class TTSManager(BaseManager):
         
     async def _on_play_state_changed(self, is_playing: bool):
         """Callback when audio playback state changes."""
-        await publish_activity(self.event_bus, {"playing": is_playing})
+        await self.activity_state.update({"playing": is_playing})
         if not is_playing:
             await self.event_bus.publish(Event(EventType.TURN_ENDED.value))
     
@@ -97,7 +98,7 @@ class TTSManager(BaseManager):
         
         # Reset activity states
         self._synthesizing = False
-        await publish_activity(self.event_bus, {"synthesizing": False, "playing": False})
+        await self.activity_state.update({"synthesizing": False, "playing": False})
     
     async def on_tts_request(self, event: Event):
         text = event.data.get("text")
@@ -107,7 +108,7 @@ class TTSManager(BaseManager):
         # Set synthesizing state when TTS request is received
         if not self._synthesizing:
             self._synthesizing = True
-            await publish_activity(self.event_bus, {"synthesizing": True})
+            await self.activity_state.update({"synthesizing": True})
             
         # Ensure connection (will be fast if already pre-connected)
         await self._ensure_connected()
@@ -125,7 +126,7 @@ class TTSManager(BaseManager):
                 # Connection may have failed, reset and try to reconnect
                 self.websocket = None
                 self._synthesizing = False
-                await publish_activity(self.event_bus, {"synthesizing": False})
+                await self.activity_state.update({"synthesizing": False})
                 
     async def _ensure_connected(self):
         """Ensure WebSocket is connected. Returns immediately if already connected."""
@@ -181,7 +182,7 @@ class TTSManager(BaseManager):
                                 self.logger.debug("Received 'done' message from TTS service")
                                 if self._synthesizing:
                                     self._synthesizing = False
-                                    await publish_activity(self.event_bus, {"synthesizing": False})
+                                    await self.activity_state.update({"synthesizing": False})
                             elif msg_type == "error":
                                 # TTS service reported an error
                                 error_msg = data.get("message", "Unknown error")
@@ -209,7 +210,7 @@ class TTSManager(BaseManager):
             # Reset synthesizing state when connection closes
             if self._synthesizing:
                 self._synthesizing = False
-                await publish_activity(self.event_bus, {"synthesizing": False})
+                await self.activity_state.update({"synthesizing": False})
         except Exception as e:
             self.logger.error(f"TTS Receiver error: {e}", exc_info=True)
             self.websocket = None
@@ -218,5 +219,5 @@ class TTSManager(BaseManager):
             # Reset activity states on error
             if self._synthesizing:
                 self._synthesizing = False
-                await publish_activity(self.event_bus, {"synthesizing": False, "playing": False})
+                await self.activity_state.update({"synthesizing": False, "playing": False})
 

@@ -15,11 +15,15 @@ logger = logging.getLogger(__name__)
 
 class ContextManager:
     """Manages conversation history and OCR context."""
-    
-    def __init__(self, max_history: int = 10, system_prompt_file: Optional[str] = None):
+
+    def __init__(
+        self,
+        max_history: int = 10,
+        system_prompt_file: Optional[str] = None
+    ):
         """
         Initialize context manager.
-        
+
         Args:
             max_history: Maximum number of conversation turns to keep
             system_prompt_file: Path to system prompt file. If None, uses default location.
@@ -257,9 +261,97 @@ class ContextManager:
     def clear_history(self):
         """Clear conversation history."""
         self.conversation_history = []
-    
+
     def clear_ocr_context(self):
         """Clear OCR context."""
         self.ocr_text = None
         self.ocr_timestamp = None
+
+    # ========================================================================
+    # Source-specific format functions
+    # ========================================================================
+
+    def format_voice_input(self, raw_text: str, was_interrupted: bool = False) -> str:
+        """
+        Format voice input with interruption concatenation logic.
+
+        When a user interrupts the assistant mid-response and speaks again,
+        this concatenates the new speech with the previous interrupted message.
+
+        Args:
+            raw_text: Raw voice input text
+            was_interrupted: Whether the previous turn was interrupted before completion
+
+        Returns:
+            Formatted text, potentially concatenated with previous interrupted message
+        """
+        # Check if previous turn was interrupted before LLM finished
+        if was_interrupted:
+            last_msg = self.get_last_message()
+            if last_msg and last_msg["role"] == "user":
+                # Concatenate with previous interrupted message
+                logger.info(f"Concatenating interrupted message: '{last_msg['content']}' + '{raw_text}'")
+                formatted_text = last_msg['content'] + raw_text
+                self.update_last_message(formatted_text, role="user")
+                return formatted_text
+
+        # No interruption or no previous user message, add normally
+        self.add_user_message(raw_text)
+        return raw_text
+
+    def format_chat_input(self, raw_text: str) -> str:
+        """
+        Format chat input.
+
+        TODO: Implement chat-specific formatting logic.
+
+        Args:
+            raw_text: Raw chat input text
+
+        Returns:
+            Formatted text
+        """
+        # TBD: Add chat-specific formatting logic here
+        self.add_user_message(raw_text)
+        return raw_text
+
+    def format_ocr_input(self, raw_text: str) -> str:
+        """
+        Format OCR input.
+
+        TODO: Implement OCR-specific formatting logic.
+
+        Args:
+            raw_text: Raw OCR input text
+
+        Returns:
+            Formatted text
+        """
+        # TBD: Add OCR-specific formatting logic here
+        self.add_user_message(raw_text)
+        return raw_text
+
+    def format_input(self, raw_text: str, source: str, was_interrupted: bool = False) -> str:
+        """
+        Format input based on source type.
+
+        Args:
+            raw_text: Raw input text
+            source: Input source ('voice', 'chat', 'ocr', etc.)
+            was_interrupted: Whether the previous turn was interrupted (used for voice inputs)
+
+        Returns:
+            Formatted text
+        """
+        if source == "voice":
+            return self.format_voice_input(raw_text, was_interrupted)
+        elif source == "chat":
+            return self.format_chat_input(raw_text)
+        elif source == "ocr":
+            return self.format_ocr_input(raw_text)
+        else:
+            # Unknown source - just add normally
+            logger.warning(f"Unknown input source: {source}")
+            self.add_user_message(raw_text)
+            return raw_text
 

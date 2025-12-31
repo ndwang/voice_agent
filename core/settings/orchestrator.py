@@ -10,6 +10,7 @@ class OrchestratorSettings(BaseModel):
     log_level: str = "INFO"
     log_file: Optional[str] = None
     system_prompt_file: Optional[str] = None
+    queue_cooldown_seconds: float = 3.0  # Cooldown after TURN_ENDED before processing non-voice queue items
     hotkeys: dict = Field(default_factory=lambda: {
         "toggle_listening": "ctrl+shift+l",
         "cancel_speech": "ctrl+shift+c"

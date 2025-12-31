@@ -8,6 +8,7 @@ from core.logging import get_logger
 from core.settings import get_settings, update_settings
 from orchestrator.events import EventType
 from orchestrator.core.constants import UI_ACTIVITY, UI_HISTORY_UPDATED, UI_LISTENING_STATE_CHANGED
+from orchestrator.core.activity_state import get_activity_state
 from orchestrator.api.models import SystemPromptUpdate, ListeningSetRequest, ConfigUpdate
 from orchestrator.utils.event_helpers import publish_history_updated
 
@@ -67,14 +68,14 @@ async def ui_events(websocket: WebSocket):
         bus.subscribe(topic, forward_event)
     
     # Send initial activity state
-    initial_activity_state = orchestrator.interaction_manager.activity_state
+    activity_state = get_activity_state()
     await websocket.send_json({
         "event": "listening_state_changed",
-        "enabled": initial_activity_state.listening
+        "enabled": activity_state.state.listening
     })
     await websocket.send_json({
         "event": "activity",
-        "state": initial_activity_state.to_dict()
+        "state": activity_state.state.to_dict()
     })
     
     # Map internal event names to UI event names
@@ -146,7 +147,7 @@ async def update_system_prompt(request: SystemPromptUpdate):
 @router.get("/ui/listening/status")
 async def get_listening_status():
     """Get listening state."""
-    return {"enabled": orchestrator.interaction_manager.activity_state.listening}
+    return {"enabled": get_activity_state().state.listening}
 
 
 @router.post("/ui/listening/toggle")

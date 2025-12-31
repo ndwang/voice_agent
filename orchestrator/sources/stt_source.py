@@ -7,7 +7,7 @@ from core.logging import get_logger
 from core.event_bus import Event
 from orchestrator.events import EventType
 from orchestrator.sources.base import BaseSource
-from orchestrator.utils.event_helpers import publish_activity
+from orchestrator.core.activity_state import get_activity_state
 
 logger = get_logger(__name__)
 
@@ -25,6 +25,7 @@ class STTSource(BaseSource):
         self._reconnect_delay = 1.0
         self._connect_task = None
         self.accumulated_transcript = ""  # Accumulate interim transcripts
+        self.activity_state = get_activity_state()  # Access centralized activity state
 
     async def start(self):
         """Start the STT source."""
@@ -84,8 +85,8 @@ class STTSource(BaseSource):
                 final_text = text if text.strip() else self.accumulated_transcript
                 
                 if final_text.strip():
-                    # Publish activity: transcribing done
-                    await publish_activity(self.event_bus, {"transcribing": False})
+                    # Update activity: transcribing done
+                    await self.activity_state.update({"transcribing": False})
                     await self.publish(EventType.TRANSCRIPT_FINAL, {"text": final_text})
                     # Reset accumulated transcript after final
                     self.accumulated_transcript = ""
@@ -101,9 +102,9 @@ class STTSource(BaseSource):
                         # If new text is shorter, it might be a partial update - append if not already included
                         if text not in self.accumulated_transcript:
                             self.accumulated_transcript += text
-                    
-                    # Publish activity: transcribing active
-                    await publish_activity(self.event_bus, {"transcribing": True})
+
+                    # Update activity: transcribing active
+                    await self.activity_state.update({"transcribing": True})
                     # Send the accumulated transcript (STT manager should already send accumulated, but use ours as fallback)
                     await self.publish(EventType.TRANSCRIPT_INTERIM, {"text": self.accumulated_transcript})
             

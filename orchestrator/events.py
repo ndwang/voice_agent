@@ -13,6 +13,8 @@ class EventType(Enum):
     SPEECH_START = "input.speech_start"
     TRANSCRIPT_INTERIM = "input.transcript.interim"
     TRANSCRIPT_FINAL = "input.transcript.final"
+    INPUT_RECEIVED = "input.received"  # From queue consumer to interaction manager
+    CRITICAL_INPUT = "input.critical"  # P0 message that should trigger interruption
     
     # LLM
     LLM_REQUEST = "llm.request"
