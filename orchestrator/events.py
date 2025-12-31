@@ -15,7 +15,11 @@ class EventType(Enum):
     TRANSCRIPT_FINAL = "input.transcript.final"
     INPUT_RECEIVED = "input.received"  # From queue consumer to interaction manager
     CRITICAL_INPUT = "input.critical"  # P0 message that should trigger interruption
-    
+
+    # Bilibili
+    BILIBILI_DANMAKU = "bilibili.danmaku"
+    BILIBILI_SUPERCHAT = "bilibili.superchat"
+
     # LLM
     LLM_REQUEST = "llm.request"
     LLM_TOKEN = "llm.token"

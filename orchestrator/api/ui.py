@@ -42,6 +42,19 @@ async def clear_history():
     return {"status": "success", "message": "History cleared"}
 
 
+@router.get("/ui/bilibili/chat")
+async def get_bilibili_chat():
+    """Get Bilibili chat snapshot."""
+    if not orchestrator.bilibili_source.running:
+        return {"enabled": False, "danmaku": [], "superchats": []}
+
+    return {
+        "enabled": True,
+        "danmaku": orchestrator.bilibili_source.get_danmaku_snapshot(),
+        "superchats": orchestrator.bilibili_source.get_superchat_snapshot()
+    }
+
+
 @router.websocket("/ui/events")
 async def ui_events(websocket: WebSocket):
     """Stream internal events to the browser UI."""
@@ -53,12 +66,14 @@ async def ui_events(websocket: WebSocket):
     
     bus = orchestrator.event_bus
     topics = [
-        EventType.TRANSCRIPT_FINAL.value, 
+        EventType.TRANSCRIPT_FINAL.value,
         EventType.TRANSCRIPT_INTERIM.value,
-        EventType.LLM_TOKEN.value, 
+        EventType.LLM_TOKEN.value,
         EventType.LLM_RESPONSE_DONE.value,
         EventType.SPEECH_START.value,
         EventType.LLM_CANCELLED.value,
+        EventType.BILIBILI_DANMAKU.value,
+        EventType.BILIBILI_SUPERCHAT.value,
         UI_LISTENING_STATE_CHANGED,
         UI_ACTIVITY,
         UI_HISTORY_UPDATED
@@ -102,6 +117,10 @@ async def ui_events(websocket: WebSocket):
             return {"event": "activity", "state": data.get("state", {})}
         elif event_name == UI_HISTORY_UPDATED:
             return {"event": "history_updated"}
+        elif event_name == EventType.BILIBILI_DANMAKU.value:
+            return {"event": "bilibili_danmaku", "message": data}
+        elif event_name == EventType.BILIBILI_SUPERCHAT.value:
+            return {"event": "bilibili_superchat", "message": data}
         else:
             # For other events, pass through with original name
             return {"event": event_name, "data": data}

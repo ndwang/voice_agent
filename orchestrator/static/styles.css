@@ -78,9 +78,10 @@ button:disabled {
 
 .main-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   flex: 1;
   overflow: hidden;
+  gap: 0;
 }
 
 .history-panel {
@@ -90,6 +91,101 @@ button:disabled {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  border-right: 1px solid #1f2937;
+  min-width: 0;
+}
+
+.bilibili-panel {
+  flex: 0 0 400px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: #0f172a;
+}
+
+.panel-header {
+  padding: 12px 16px;
+  border-bottom: 1px solid #1f2937;
+  background: #111827;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #e5e7eb;
+  flex-shrink: 0;
+}
+
+.bilibili-messages {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.bilibili-message {
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #1f2937;
+  border: 1px solid #374151;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.bilibili-message.superchat {
+  background: linear-gradient(135deg, #991b1b 0%, #7f1d1d 100%);
+  border-color: #ef4444;
+  box-shadow: 0 0 12px rgba(239, 68, 68, 0.3);
+}
+
+.bilibili-message-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 6px;
+}
+
+.bilibili-user {
+  font-weight: 600;
+  color: #60a5fa;
+  font-size: 0.85rem;
+}
+
+.bilibili-message.superchat .bilibili-user {
+  color: #fbbf24;
+}
+
+.bilibili-amount {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #fbbf24;
+  background: rgba(251, 191, 36, 0.1);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.bilibili-timestamp {
+  font-size: 0.7rem;
+  color: #6b7280;
+}
+
+.bilibili-content {
+  color: #e5e7eb;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  word-wrap: break-word;
+}
+
+.empty-chat {
+  text-align: center;
+  color: #6b7280;
+  padding: 40px 20px;
+  font-style: italic;
+  font-size: 0.9rem;
 }
 
 .message {
