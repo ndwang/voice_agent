@@ -192,11 +192,33 @@ async def get_ui_config():
 
 @router.post("/ui/config")
 async def update_ui_config(request: ConfigUpdate):
-    """Update full configuration."""
+    """Update full configuration with hot-reload support."""
     try:
-        # Update settings and persist to file
-        update_settings(request.config, persist=True)
-        return {"status": "success"}
+        # Get reload coordinator from orchestrator if available
+        reload_coordinator = None
+        if orchestrator and hasattr(orchestrator, 'reload_coordinator'):
+            reload_coordinator = orchestrator.reload_coordinator
+
+        # Update settings with reload coordination
+        new_settings, reload_results = update_settings(
+            request.config,
+            persist=True,
+            reload_coordinator=reload_coordinator
+        )
+
+        # Build response
+        response = {"status": "success"}
+
+        # Add reload results if available
+        if reload_results:
+            # Collect all restart-required items
+            needs_restart = []
+            for r in reload_results:
+                needs_restart.extend(r.restart_required)
+            response["needs_restart"] = needs_restart
+
+        return response
+
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to save configuration: {str(e)}")
 

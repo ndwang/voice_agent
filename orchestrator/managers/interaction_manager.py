@@ -3,6 +3,7 @@ from typing import Optional
 from core.event_bus import EventBus, Event
 from core.logging import get_logger
 from core.settings import get_settings, LLMSettings, OrchestratorSettings
+from core.settings.reload_result import ReloadResult
 from orchestrator.events import EventType
 from orchestrator.managers.base import BaseManager
 from orchestrator.managers.context_manager import ContextManager
@@ -59,24 +60,61 @@ class InteractionManager(BaseManager):
 
         super().__init__(event_bus)
 
-    def on_config_changed(self, changes: dict):
+    def on_config_changed(self, changes: dict) -> ReloadResult:
         """
         React to configuration changes.
 
         Args:
             changes: Dict with changed config sections
-        """
-        if "llm" in changes:
-            # LLM config changed - reload provider
-            self.llm_settings = get_settings().llm
-            self.disable_thinking = self.llm_settings.get_provider_config().disable_thinking
-            self.llm_provider = create_provider(self.llm_settings)
-            logger.info(f"LLM provider reloaded: {self.llm_settings.provider}")
 
-        if "orchestrator" in changes:
-            # Orchestrator config changed
-            self.orch_settings = get_settings().orchestrator
-            logger.info("Orchestrator settings updated")
+        Returns:
+            ReloadResult with status and details
+        """
+        result = ReloadResult(handler_name="InteractionManager", success=True)
+
+        try:
+            if "llm" in changes:
+                # LLM config changed - reload provider
+                old_provider = self.llm_settings.provider
+                self.llm_settings = get_settings().llm
+                new_provider = self.llm_settings.provider
+                self.disable_thinking = self.llm_settings.get_provider_config().disable_thinking
+                self.llm_provider = create_provider(self.llm_settings)
+
+                result.changes_applied.append(f"llm.provider: {old_provider} -> {new_provider}")
+                logger.info(f"LLM provider reloaded: {new_provider}")
+
+            if "orchestrator" in changes:
+                # Orchestrator config changed
+                orch_changes = changes.get("orchestrator", {})
+
+                # Hot-reloadable: system_prompt_file
+                if "system_prompt_file" in orch_changes:
+                    old_file = self.orch_settings.system_prompt_file
+                    self.orch_settings = get_settings().orchestrator
+                    new_file = self.orch_settings.system_prompt_file
+
+                    # Reload system prompt
+                    self.context_manager.system_prompt_file = new_file
+                    self.context_manager.reload_system_prompt()
+
+                    result.changes_applied.append(f"orchestrator.system_prompt_file: {old_file} -> {new_file}")
+                    logger.info(f"System prompt reloaded: {new_file}")
+                else:
+                    # Other orchestrator settings
+                    self.orch_settings = get_settings().orchestrator
+                    logger.info("Orchestrator settings updated")
+
+                # Restart-required: host/port
+                if "host" in orch_changes or "port" in orch_changes:
+                    result.restart_required.append("orchestrator.host/port requires Orchestrator restart")
+
+        except Exception as e:
+            result.success = False
+            result.errors.append(f"Failed to reload config: {str(e)}")
+            logger.error(f"Config reload error: {e}", exc_info=True)
+
+        return result
 
     def _register_handlers(self):
         self.event_bus.subscribe(EventType.INPUT_RECEIVED.value, self.on_input_received)

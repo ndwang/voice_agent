@@ -12,6 +12,8 @@ import logging
 from typing import Dict, Callable, Optional, Set, Union
 from pynput import keyboard
 from pynput.keyboard import Key, KeyCode
+from core.settings import get_settings
+from core.settings.reload_result import ReloadResult
 
 logger = logging.getLogger(__name__)
 
@@ -338,10 +340,10 @@ class HotkeyManager:
     def get_hotkey(self, hotkey_id: str) -> Optional[str]:
         """
         Get hotkey string for a specific ID.
-        
+
         Args:
             hotkey_id: Unique identifier for the hotkey
-            
+
         Returns:
             Hotkey string if found, None otherwise
         """
@@ -349,7 +351,47 @@ class HotkeyManager:
             if hotkey_id in self._hotkeys:
                 return self._hotkeys[hotkey_id]['hotkey_str']
             return None
-    
+
+    def on_config_changed(self, changes: dict) -> ReloadResult:
+        """
+        Handle configuration changes.
+
+        Args:
+            changes: Dict with changed config sections
+
+        Returns:
+            ReloadResult with status and details
+        """
+        result = ReloadResult(handler_name="HotkeyManager", success=True)
+
+        try:
+            if "orchestrator" in changes:
+                orch_changes = changes.get("orchestrator", {})
+
+                # Hot-reloadable: hotkeys
+                if "hotkeys" in orch_changes:
+                    settings = get_settings()
+                    new_hotkeys = settings.orchestrator.hotkeys
+
+                    # Update each hotkey
+                    for hotkey_id, hotkey_str in new_hotkeys.items():
+                        old_str = self.get_hotkey(hotkey_id)
+                        if old_str != hotkey_str:
+                            # Hotkey changed - update it
+                            success = self.update_hotkey(hotkey_id, hotkey_str)
+                            if success:
+                                result.changes_applied.append(f"hotkey.{hotkey_id}: {old_str} -> {hotkey_str}")
+                                logger.info(f"Hotkey updated: {hotkey_id} = {hotkey_str}")
+                            else:
+                                result.errors.append(f"Failed to update hotkey {hotkey_id}")
+
+        except Exception as e:
+            result.success = False
+            result.errors.append(f"Failed to reload hotkey config: {str(e)}")
+            logger.error(f"Hotkey config reload error: {e}", exc_info=True)
+
+        return result
+
     def _on_press(self, key: Union[Key, KeyCode]):
         """Handle key press events."""
         try:

@@ -7,6 +7,9 @@ import { state } from '../utils/state.js';
 import { apiCall } from '../utils/api.js';
 import { showStatusMessage } from '../utils/helpers.js';
 
+// Store capabilities for hot-reload detection
+let configCapabilities = {};
+
 export const CONFIG_SCHEMA = {
   orchestrator: {
     title: 'Orchestrator',
@@ -378,9 +381,28 @@ function createFormField(key, field, value, path = []) {
   
   input.dataset.path = fullPath;
   input.name = fullPath;
+
+  // Add change listener for restart warnings
+  input.addEventListener('change', () => checkRestartRequired(input, fullPath));
+
   group.appendChild(input);
-  
+
   return group;
+}
+
+function checkRestartRequired(input, fullPath) {
+  // Check if this field requires restart
+  const capability = configCapabilities[fullPath];
+
+  if (capability && capability.hot_reload === false) {
+    // Show immediate warning
+    showStatusMessage(
+      elements.configStatusMessage,
+      `⚠️ ${fullPath} requires a service restart to take effect`,
+      true,
+      5000
+    );
+  }
 }
 
 function buildAccordion() {
@@ -460,9 +482,17 @@ function setDeepValue(obj, path, value) {
 
 export async function loadFullConfig() {
   try {
+    // Load capabilities first
+    try {
+      configCapabilities = await apiCall('/api/config/capabilities');
+    } catch (e) {
+      console.warn('Could not load config capabilities:', e);
+      configCapabilities = {};
+    }
+
     state.currentConfig = await apiCall('/ui/config');
     buildAccordion();
-    
+
     Object.entries(CONFIG_SCHEMA).forEach(([sectionKey]) => {
       const providerSelect = document.querySelector(`select[data-is-provider-select="true"][data-section="${sectionKey}"]`);
       if (providerSelect) {
@@ -602,11 +632,22 @@ export async function saveFullConfig() {
 
   elements.configModalSave.disabled = true;
   try {
-    await apiCall('/ui/config', {
+    const response = await apiCall('/ui/config', {
       method: 'POST',
       body: { config: newConfig },
     });
-    showStatusMessage(elements.configStatusMessage, 'Configuration saved successfully! Some changes may require a restart.', false, 5000);
+
+    // Check if response includes restart requirements
+    let message = '✓ Configuration saved successfully!';
+
+    if (response.needs_restart && response.needs_restart.length > 0) {
+      message += '\n\n⚠️ Restart required for:\n';
+      message += response.needs_restart.map(item => `  • ${item}`).join('\n');
+    } else {
+      message += ' All changes applied immediately.';
+    }
+
+    showStatusMessage(elements.configStatusMessage, message, response.needs_restart && response.needs_restart.length > 0, 8000);
     state.currentConfig = newConfig;
   } catch (e) {
     console.error('Error saving config:', e);

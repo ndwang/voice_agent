@@ -90,7 +90,18 @@ class ContextManager:
         """Get current system prompt (checks file for updates)."""
         self._load_system_prompt()
         return self._system_prompt or "You are a helpful assistant."
-    
+
+    def reload_system_prompt(self) -> str:
+        """
+        Force reload system prompt from file.
+
+        Returns:
+            Reloaded system prompt text
+        """
+        # Reset mtime to force reload
+        self._system_prompt_mtime = None
+        return self._load_system_prompt()
+
     def set_system_prompt(self, prompt: str) -> bool:
         """
         Update system prompt and save to file.
