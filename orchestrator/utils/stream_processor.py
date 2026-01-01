@@ -31,10 +31,10 @@ class StreamProcessor:
         self.disable_thinking = True
 
     async def _default_callback(self, text: str):
-        """Handle untagged content - send to TTS and OBS subtitles."""
-        if not self.current_cancel_event.is_set():
-            await self.event_bus.publish(Event(EventType.TTS_REQUEST.value, {"text": text}))
-            await self.event_bus.publish(Event(EventType.SUBTITLE_REQUEST.value, {"text": text}))
+        """Handle untagged content - no operation"""
+        # if not self.current_cancel_event.is_set():
+        #     await self.event_bus.publish(Event(EventType.TTS_REQUEST.value, {"text": text}))
+        #     await self.event_bus.publish(Event(EventType.SUBTITLE_REQUEST.value, {"text": text}))
 
     async def _jp_callback(self, text: str):
         """Handle <jp> tag content - send to TTS."""

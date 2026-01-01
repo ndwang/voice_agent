@@ -37,14 +37,14 @@ class ContextManager:
         project_root = Path(__file__).parent.parent.parent
         if system_prompt_file is None:
             # Default to orchestrator/system_prompt.txt
-            system_prompt_file = str(project_root / "orchestrator" / "system_prompt.txt")
+            self.system_prompt_file = project_root / "orchestrator" / "system_prompt.txt"
         else:
             # Resolve relative paths relative to project root
             prompt_path = Path(system_prompt_file)
             if not prompt_path.is_absolute():
-                system_prompt_file = str(project_root / prompt_path)
-        
-        self.system_prompt_file = Path(system_prompt_file)
+                self.system_prompt_file = project_root / prompt_path
+            else:
+                self.system_prompt_file = prompt_path
         self._system_prompt: Optional[str] = None
         self._system_prompt_mtime: Optional[float] = None
         self._hot_reload_task: Optional[asyncio.Task] = None
@@ -518,7 +518,7 @@ class ContextManager:
         if source == "voice":
             # Voice input doesn't support images
             return self.format_voice_input(raw_text, was_interrupted)
-        elif source == "chat":
+        elif source == "bilibili_single":
             return self.format_chat_input(raw_text, images=images)
         elif source == "ocr":
             # OCR input doesn't support images
