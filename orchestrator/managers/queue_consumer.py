@@ -208,7 +208,7 @@ class QueueConsumer(BaseManager):
                 # Format single danmaku: "username: message"
                 user = data.get("user", "Unknown")
                 content = data.get("content", "")
-                text = f"{user}: {content}"
+                text = f"来自{user}的留言: {content}"
             elif item.source_type == "bilibili_batch":
                 # Format batch: list of danmaku
                 if isinstance(data, list):

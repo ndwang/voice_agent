@@ -323,7 +323,7 @@ class GeminiProvider(LLMProvider):
             if hasattr(chunk, 'candidates') and chunk.candidates:
                 parts = chunk.candidates[0].content.parts
                 for part in parts:
-                    if hasattr(part, 'function_call'):
+                    if hasattr(part, 'function_call') and part.function_call is not None:
                         # Yield tool call dict
                         func_call = part.function_call
                         yield {

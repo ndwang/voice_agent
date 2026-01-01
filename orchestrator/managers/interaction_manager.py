@@ -132,15 +132,16 @@ class InteractionManager(BaseManager):
 
         This replaces the old on_transcript handler and works with all input sources.
         """
-        if not self.activity_state.state.listening:
-            return
-
         raw_text = event.data.get("text")
         source = event.data.get("source", "unknown")
         priority = event.data.get("priority", 999)
         images = event.data.get("images")  # Optional images field
 
         if not raw_text:
+            return
+
+        if not self.activity_state.state.listening and source == "voice":
+            self.logger.info("Not listening, skipping voice")
             return
 
         # Check interruption state and format input accordingly

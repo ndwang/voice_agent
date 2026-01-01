@@ -50,7 +50,26 @@ class QueueManager(BaseManager):
     def _register_handlers(self):
         """Subscribe to input events from various sources."""
         self.event_bus.subscribe(EventType.TRANSCRIPT_FINAL.value, self.on_transcript_final)
+        self.event_bus.subscribe(EventType.BILIBILI_DANMAKU.value, self.on_bilibili_danmaku)
         # Future: Subscribe to bilibili events, ocr events, game events
+
+    async def on_bilibili_danmaku(self, event: Event):
+        """Handle incoming danmaku."""
+        danmaku = event.data
+
+        if not danmaku['content'].startswith('!'):
+            return
+
+        item = InputItem(
+            priority=self.priorities["bilibili_single"],
+            source_type="bilibili_single",
+            get_data={"user": danmaku['user'], "content": danmaku['content'][1:]}
+        )
+
+        self.logger.info(f"Enqueued bilibili_single: {danmaku['user']}: {danmaku['content']}")
+        await self._enqueue(item)
+
+
 
     async def on_transcript_final(self, event: Event):
         """
