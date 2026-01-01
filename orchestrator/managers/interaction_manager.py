@@ -138,13 +138,14 @@ class InteractionManager(BaseManager):
         raw_text = event.data.get("text")
         source = event.data.get("source", "unknown")
         priority = event.data.get("priority", 999)
+        images = event.data.get("images")  # Optional images field
 
         if not raw_text:
             return
 
         # Check interruption state and format input accordingly
         was_interrupted = self.interruption_manager.was_interrupted()
-        text = self.context_manager.format_input(raw_text, source, was_interrupted)
+        text = self.context_manager.format_input(raw_text, source, images=images, was_interrupted=was_interrupted)
 
         # Clear interruption flag after handling
         if was_interrupted:
@@ -161,8 +162,8 @@ class InteractionManager(BaseManager):
 
         await self.event_bus.publish(Event(EventType.LLM_REQUEST.value))
 
-        # Prepare context
-        context = self.context_manager.format_context_for_llm(text)
+        # Prepare context (includes images for current message)
+        context = self.context_manager.format_context_for_llm(text, images=images)
 
         try:
             # Get tools schema if tool registry is available

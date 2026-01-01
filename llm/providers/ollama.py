@@ -104,7 +104,7 @@ class OllamaProvider(LLMProvider):
     
     async def generate(
         self,
-        messages: List[Dict[str, str]],
+        messages: List[Dict[str, Any]],
         system_prompt: Optional[str] = None,
         temperature: Optional[float] = None,
         top_p: Optional[float] = None,
@@ -114,9 +114,10 @@ class OllamaProvider(LLMProvider):
     ) -> str:
         """
         Generate a complete response using Ollama.
-        
+
         Args:
             messages: List of message dicts with "role" and "content" keys.
+                     User messages may optionally include "images" field with List[str] of file paths.
                      Must include system message (if any) and conversation history.
                      The last message should be the current user message.
             system_prompt: Optional system prompt. If messages already contains a system
@@ -126,22 +127,40 @@ class OllamaProvider(LLMProvider):
             top_k: Top-k sampling parameter
             max_tokens: Maximum tokens to generate
             **kwargs: Additional parameters
-            
+
         Returns:
             Generated text response
         """
-        # Use provided messages directly
-        final_messages = messages.copy()
-        
+        # Process messages - handle images field
+        final_messages = []
+        for msg in messages:
+            processed_msg = {
+                "role": msg["role"],
+                "content": msg["content"]
+            }
+
+            # Handle images if present (Ollama expects file paths directly)
+            if "images" in msg and msg["images"]:
+                from llm.utils.image_utils import validate_image_paths
+                valid_images = validate_image_paths(msg["images"])
+                if valid_images:
+                    processed_msg["images"] = valid_images
+
+            final_messages.append(processed_msg)
+
         # Apply /no_think to the last user message if thinking is disabled
         if self.disable_thinking:
             # Find the last user message and append /no_think
             for i in range(len(final_messages) - 1, -1, -1):
                 if final_messages[i]["role"] == "user":
-                    final_messages[i] = {
+                    # Preserve images if present
+                    updated_msg = {
                         "role": "user",
                         "content": final_messages[i]["content"] + " /no_think"
                     }
+                    if "images" in final_messages[i]:
+                        updated_msg["images"] = final_messages[i]["images"]
+                    final_messages[i] = updated_msg
                     break
         
         # Prepare generation options - start with defaults from config
@@ -177,7 +196,7 @@ class OllamaProvider(LLMProvider):
     
     async def generate_stream(
         self,
-        messages: List[Dict[str, str]],
+        messages: List[Dict[str, Any]],
         system_prompt: Optional[str] = None,
         tools: Optional[List[Dict[str, Any]]] = None,
         temperature: Optional[float] = None,
@@ -188,9 +207,10 @@ class OllamaProvider(LLMProvider):
     ) -> AsyncIterator[Union[str, Dict[str, Any]]]:
         """
         Generate a streaming response using Ollama.
-        
+
         Args:
             messages: List of message dicts with "role" and "content" keys.
+                     User messages may optionally include "images" field with List[str] of file paths.
                      Must include system message (if any) and conversation history.
                      The last message should be the current user message.
             system_prompt: Optional system prompt. If messages already contains a system
@@ -200,22 +220,40 @@ class OllamaProvider(LLMProvider):
             top_k: Top-k sampling parameter
             max_tokens: Maximum tokens to generate
             **kwargs: Additional parameters
-            
+
         Yields:
             Tokens as they are generated
         """
-        # Use provided messages directly
-        final_messages = messages.copy()
-        
+        # Process messages - handle images field
+        final_messages = []
+        for msg in messages:
+            processed_msg = {
+                "role": msg["role"],
+                "content": msg["content"]
+            }
+
+            # Handle images if present (Ollama expects file paths directly)
+            if "images" in msg and msg["images"]:
+                from llm.utils.image_utils import validate_image_paths
+                valid_images = validate_image_paths(msg["images"])
+                if valid_images:
+                    processed_msg["images"] = valid_images
+
+            final_messages.append(processed_msg)
+
         # Apply /no_think to the last user message if thinking is disabled
         if self.disable_thinking:
             # Find the last user message and append /no_think
             for i in range(len(final_messages) - 1, -1, -1):
                 if final_messages[i]["role"] == "user":
-                    final_messages[i] = {
+                    # Preserve images if present
+                    updated_msg = {
                         "role": "user",
                         "content": final_messages[i]["content"] + " /no_think"
                     }
+                    if "images" in final_messages[i]:
+                        updated_msg["images"] = final_messages[i]["images"]
+                    final_messages[i] = updated_msg
                     break
         
         # Prepare generation options - start with defaults from config
