@@ -49,6 +49,7 @@ class SubtitleManager(BaseManager):
 
     def _register_handlers(self):
         self.event_bus.subscribe(EventType.SPEECH_START.value, self.on_speech_start)
+        self.event_bus.subscribe(EventType.INPUT_RECEIVED.value, self.on_input_received)
         self.event_bus.subscribe(EventType.SUBTITLE_REQUEST.value, self.on_subtitle_request)
         self.event_bus.subscribe(EventType.TURN_ENDED.value, self.on_turn_ended)
 
@@ -86,6 +87,7 @@ class SubtitleManager(BaseManager):
         Args:
             hide_character: If True, triggers clear_filter to remove character from screen
         """
+        self.logger.info(f"Clearing subtitles, hide_character: {hide_character}")
         self.accumulated_text = ""
         if self.obs_client:
             try:
@@ -112,12 +114,21 @@ class SubtitleManager(BaseManager):
             pass
 
     async def on_speech_start(self, event: Event):
-        """Cancel TTL timer and mark for new round. Subtitles stay visible until next response."""
+        """Cancel TTL timer when user starts speaking (voice input)"""
         # Cancel any pending TTL timer
         if self.clear_task and not self.clear_task.done():
             self.clear_task.cancel()
 
         # Mark that user spoke - next subtitle will be a new round
+        self.new_round = True
+
+    async def on_input_received(self, event: Event):
+        """Cancel TTL timer when input received from any source (chat, voice, etc)"""
+        # Cancel any pending TTL timer
+        if self.clear_task and not self.clear_task.done():
+            self.clear_task.cancel()
+
+        # Mark new conversation round - next subtitle will clear old text
         self.new_round = True
 
     async def on_subtitle_request(self, event: Event):
@@ -131,6 +142,7 @@ class SubtitleManager(BaseManager):
                 if not self.obs_client.ws:
                     await self.obs_client.connect()
 
+                self.logger.info(f"Subtitle request: {text[:10]}..., new round: {self.new_round}, character on screen: {self.character_on_screen}, accumulated text: {self.accumulated_text[:10]}...")
                 # If new round, clear old subtitles (but keep character)
                 if self.new_round and self.accumulated_text:
                     await self._clear_subtitles(hide_character=False)
