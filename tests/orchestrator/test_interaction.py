@@ -6,8 +6,11 @@ from orchestrator.events import EventType
 from orchestrator.managers.interaction_manager import InteractionManager
 
 @pytest.fixture
-def event_bus():
-    return EventBus()
+async def event_bus():
+    bus = EventBus()
+    await bus.start()
+    yield bus
+    await bus.stop()
 
 @pytest.fixture
 def mock_config():
@@ -39,6 +42,7 @@ def mock_llm_provider():
 
 @pytest.mark.asyncio
 async def test_interaction_flow(event_bus, mock_config, mock_llm_provider):
+    # event_bus is already started by the fixture
     manager = InteractionManager(event_bus)
     
     # Mock publishing
@@ -75,6 +79,7 @@ async def test_interaction_flow(event_bus, mock_config, mock_llm_provider):
 
 @pytest.mark.asyncio
 async def test_thinking_tag_filtering(event_bus, mock_config):
+    # event_bus is already started by the fixture
     # Mock config to disable thinking
     def side_effect(*args, **kwargs):
         if "disable_thinking" in args: return True

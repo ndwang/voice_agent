@@ -79,6 +79,9 @@ class OrchestratorServer:
         logger.debug("ReloadCoordinator initialized with handlers")
         
     async def start(self):
+        # Start event bus processor
+        await self.event_bus.start()
+
         # Start queue consumer
         await self.queue_consumer.start()
 
@@ -126,6 +129,7 @@ class OrchestratorServer:
         await self.stt_source.stop()
         await self.bilibili_source.stop()
         self.hotkey_manager.stop()
+        await self.event_bus.stop()
         logger.info("Orchestrator Logic Stopped")
 
     async def toggle_listening(self) -> bool:
