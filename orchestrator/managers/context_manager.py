@@ -173,19 +173,25 @@ class ContextManager:
                 self._hot_reload_task = None
             logger.info("System prompt hot-reload disabled")
     
-    def add_user_message(self, text: str, images: Optional[List[str]] = None):
+    def add_user_message(self, text: str, images: Optional[List[str]] = None, ephemeral: bool = False):
         """
         Add user message with optional images to conversation history.
 
         Args:
             text: User message text
             images: Optional list of image file paths
+            ephemeral: If True, message will be excluded from LLM context after completion
         """
         message = {
             "role": "user",
             "content": text,
             "timestamp": datetime.now().isoformat()
         }
+
+        # Add ephemeral tracking if needed
+        if ephemeral:
+            message["ephemeral"] = True
+            message["ephemeral_completed"] = False
 
         # Only add images field if provided and valid
         if images:
@@ -199,35 +205,55 @@ class ContextManager:
         if len(self.conversation_history) > self.max_history:
             self.conversation_history = [self.conversation_history[0]] + self.conversation_history[-self.max_history:]
     
-    def add_assistant_message(self, text: str):
-        """Add assistant message to conversation history."""
-        self.conversation_history.append({
+    def add_assistant_message(self, text: str, ephemeral: bool = False):
+        """
+        Add assistant message to conversation history.
+
+        Args:
+            text: Assistant message text
+            ephemeral: If True, message will be excluded from LLM context after completion
+        """
+        message = {
             "role": "assistant",
             "content": text,
             "timestamp": datetime.now().isoformat()
-        })
+        }
 
-    def add_assistant_message_with_tool_calls(self, tool_calls: List[Dict]):
+        if ephemeral:
+            message["ephemeral"] = True
+            message["ephemeral_completed"] = False
+
+        self.conversation_history.append(message)
+
+    def add_assistant_message_with_tool_calls(self, tool_calls: List[Dict], ephemeral: bool = False):
         """
         Add assistant message with tool calls to conversation history.
 
         Args:
             tool_calls: List of tool call dicts with "id", "name", "arguments"
+            ephemeral: If True, message will be excluded from LLM context after completion
         """
-        self.conversation_history.append({
+        message = {
             "role": "assistant",
             "content": "",  # Empty content when tool calls are present
             "tool_calls": tool_calls,
             "timestamp": datetime.now().isoformat()
-        })
+        }
 
-    def add_tool_result_messages(self, tool_calls: List[Dict], results: List):
+        if ephemeral:
+            message["ephemeral"] = True
+            message["ephemeral_completed"] = False
+
+        self.conversation_history.append(message)
+
+    def add_tool_result_messages(self, tool_calls: List[Dict], results: List, ephemeral: bool = False):
         """
         Add tool result messages to conversation history.
 
         Args:
             tool_calls: List of tool call dicts with "id", "name", "arguments"
             results: List of tool results (can be any type, will be stringified)
+            ephemeral: If True, messages will be excluded from LLM context after completion
         """
         for tool_call, result in zip(tool_calls, results):
             # Format result as string
@@ -236,13 +262,19 @@ class ContextManager:
             else:
                 result_str = str(result)
 
-            self.conversation_history.append({
+            message = {
                 "role": "tool",
                 "tool_call_id": tool_call["id"],
                 "name": tool_call["name"],
                 "content": result_str,
                 "timestamp": datetime.now().isoformat()
-            })
+            }
+
+            if ephemeral:
+                message["ephemeral"] = True
+                message["ephemeral_completed"] = False
+
+            self.conversation_history.append(message)
 
     def get_messages_with_tool_results(
         self,
@@ -276,8 +308,11 @@ class ContextManager:
         if system_prompt:
             messages.append({"role": "system", "content": system_prompt})
 
-        # Add conversation history (including tool calls and results)
-        for msg in self.conversation_history[-self.max_history * 2:]:
+        # Add conversation history (including tool calls and results), filtering out completed ephemeral messages
+        history_slice = self.conversation_history[-self.max_history * 2:]
+        filtered_history = self._filter_for_llm(history_slice)
+
+        for msg in filtered_history:
             if msg["role"] == "tool":
                 # Tool result message
                 messages.append({
@@ -330,6 +365,41 @@ class ContextManager:
             return None
         return self.conversation_history[-1]
 
+    def mark_ephemeral_completed(self, count: Optional[int] = None):
+        """
+        Mark ephemeral messages as completed so they are filtered from future LLM context.
+
+        Args:
+            count: Number of recent ephemeral messages to mark as completed.
+                   If None, marks all active ephemeral messages as completed.
+        """
+        marked = 0
+        # Iterate in reverse to mark most recent first
+        for msg in reversed(self.conversation_history):
+            if msg.get("ephemeral") and not msg.get("ephemeral_completed"):
+                msg["ephemeral_completed"] = True
+                marked += 1
+                if count is not None and marked >= count:
+                    break
+
+        if marked > 0:
+            logger.info(f"Marked {marked} ephemeral message(s) as completed")
+
+    def _filter_for_llm(self, messages: List[Dict]) -> List[Dict]:
+        """
+        Filter messages for LLM context, excluding completed ephemeral messages.
+
+        Args:
+            messages: List of messages from conversation history
+
+        Returns:
+            Filtered list of messages
+        """
+        return [
+            msg for msg in messages
+            if not (msg.get("ephemeral") and msg.get("ephemeral_completed"))
+        ]
+
     def update_ocr_context(self, text: str):
         """Update OCR context with latest text."""
         import time
@@ -374,6 +444,9 @@ class ContextManager:
             history_to_include[-1]["role"] == "user" and
             history_to_include[-1]["content"] == user_message):
             history_to_include = history_to_include[:-1]
+
+        # Filter out completed ephemeral messages
+        history_to_include = self._filter_for_llm(history_to_include)
 
         for msg in history_to_include:
             if msg["role"] == "tool":
