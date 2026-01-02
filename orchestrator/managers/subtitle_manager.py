@@ -67,14 +67,12 @@ class SubtitleManager(BaseManager):
         """Enable a filter on the visibility source."""
         if not self.obs_client or not self.visibility_source or not filter_name:
             return
-        
+
         try:
-            if not self.obs_client.ws:
-                await self.obs_client.connect()
-            
+            # OBS client handles connection automatically
             await self.obs_client.set_filter_visibility(
-                self.visibility_source, 
-                filter_name, 
+                self.visibility_source,
+                filter_name,
                 True
             )
             self.logger.debug(f"Enabled filter '{filter_name}' on source '{self.visibility_source}'")
@@ -91,8 +89,7 @@ class SubtitleManager(BaseManager):
         self.accumulated_text = ""
         if self.obs_client:
             try:
-                if not self.obs_client.ws:
-                    await self.obs_client.connect()
+                # OBS client handles connection automatically
                 await self.obs_client.set_text(self.source_name, "")
                 # Only enable clear filter (hide character) when requested (e.g., on TTL expiry)
                 if hide_character:
@@ -139,9 +136,7 @@ class SubtitleManager(BaseManager):
         text = event.data.get("text", "")
         if self.obs_client and text:
             try:
-                if not self.obs_client.ws:
-                    await self.obs_client.connect()
-
+                # OBS client handles connection automatically
                 self.logger.info(f"Subtitle request: {text[:10]}..., new round: {self.new_round}, character on screen: {self.character_on_screen}, accumulated text: {self.accumulated_text[:10]}...")
                 # If new round, clear old subtitles (but keep character)
                 if self.new_round and self.accumulated_text:
