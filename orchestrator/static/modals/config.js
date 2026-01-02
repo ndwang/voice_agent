@@ -86,11 +86,15 @@ export const CONFIG_SCHEMA = {
       gemini: {
         model: { type: 'text', label: 'Model' },
         api_key: { type: 'password', label: 'API Key' },
+        disable_thinking: { type: 'boolean', label: 'Disable Thinking' },
         generation_config: {
           type: 'nested',
           label: 'Generation Config',
           fields: {
-            thinking_budget: { type: 'number', label: 'Thinking Budget' }
+            temperature: { type: 'number', label: 'Temperature (0-2)' },
+            top_p: { type: 'number', label: 'Top P (0-1)' },
+            top_k: { type: 'number', label: 'Top K' },
+            thinking_budget: { type: 'number', label: 'Thinking Budget (0 to disable)' }
           }
         }
       },
@@ -99,7 +103,16 @@ export const CONFIG_SCHEMA = {
         base_url: { type: 'text', label: 'Base URL' },
         timeout: { type: 'number', label: 'Timeout (s)' },
         disable_thinking: { type: 'boolean', label: 'Disable Thinking' },
-        generation_config: { type: 'text', label: 'Generation Config (null for none)' }
+        generation_config: {
+          type: 'nested',
+          label: 'Generation Config',
+          fields: {
+            temperature: { type: 'number', label: 'Temperature (0-2)' },
+            top_p: { type: 'number', label: 'Top P (0-1)' },
+            top_k: { type: 'number', label: 'Top K' },
+            repeat_penalty: { type: 'number', label: 'Repeat Penalty' }
+          }
+        }
       }
     }
   },

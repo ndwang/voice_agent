@@ -17,13 +17,20 @@ llm:
       api_key: null
       disable_thinking: true
       generation_config:
+        temperature: null
+        top_p: null
+        top_k: null
         thinking_budget: 0
     ollama:
       model: Qwen3-8B-Q4-4kcontext
       base_url: http://localhost:11434
       timeout: 300
       disable_thinking: true
-      generation_config: null
+      generation_config:
+        temperature: 1.1
+        top_p: 0.9
+        top_k: 50
+        repeat_penalty: 1.15
 tts:
   host: 0.0.0.0
   port: 8003
