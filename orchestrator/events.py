@@ -19,6 +19,8 @@ class EventType(Enum):
     # Bilibili
     BILIBILI_DANMAKU = "bilibili.danmaku"
     BILIBILI_SUPERCHAT = "bilibili.superchat"
+    BILIBILI_DANMAKU_STATE_CHANGED = "bilibili.danmaku_state_changed"
+    BILIBILI_SUPERCHAT_STATE_CHANGED = "bilibili.superchat_state_changed"
 
     # LLM
     LLM_REQUEST = "llm.request"

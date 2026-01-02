@@ -10,6 +10,8 @@ import re
 UI_ACTIVITY = "ui.activity"
 UI_HISTORY_UPDATED = "ui.history_updated"
 UI_LISTENING_STATE_CHANGED = "ui.listening_state_changed"
+UI_BILIBILI_DANMAKU_STATE_CHANGED = "ui.bilibili_danmaku_state_changed"
+UI_BILIBILI_SUPERCHAT_STATE_CHANGED = "ui.bilibili_superchat_state_changed"
 
 # Text Processing Patterns
 # Sentence detection pattern - matches punctuation followed by space/newline or end of string

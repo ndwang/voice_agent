@@ -10,6 +10,8 @@ export const state = {
   isCapturingHotkey: false,
   capturedKeys: [],
   currentConfig: {},
+  bilibiliDanmakuEnabled: true,
+  bilibiliSuperChatEnabled: true,
   activityState: {
     listening: true,
     transcribing: false,

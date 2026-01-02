@@ -148,6 +148,16 @@ class OrchestratorServer:
         # Update centralized activity state
         await self.activity_state.set_listening(enabled)
 
+    async def set_bilibili_danmaku(self, enabled: bool):
+        """Set bilibili danmaku enabled state."""
+        logger.info(f"Bilibili danmaku set to: {enabled}")
+        await self.activity_state.set_bilibili_danmaku(enabled)
+
+    async def set_bilibili_superchat(self, enabled: bool):
+        """Set bilibili superchat enabled state."""
+        logger.info(f"Bilibili superchat set to: {enabled}")
+        await self.activity_state.set_bilibili_superchat(enabled)
+
     async def cancel_interaction(self):
         # Fire cancel event
         await self.event_bus.publish(Event(EventType.LLM_CANCELLED.value))

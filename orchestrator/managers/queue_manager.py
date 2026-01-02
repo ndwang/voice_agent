@@ -51,12 +51,20 @@ class QueueManager(BaseManager):
         """Subscribe to input events from various sources."""
         self.event_bus.subscribe(EventType.TRANSCRIPT_FINAL.value, self.on_transcript_final)
         self.event_bus.subscribe(EventType.BILIBILI_DANMAKU.value, self.on_bilibili_danmaku)
-        # Future: Subscribe to bilibili events, ocr events, game events
+        self.event_bus.subscribe(EventType.BILIBILI_SUPERCHAT.value, self.on_bilibili_superchat)
+        # Future: Subscribe to ocr events, game events
 
     async def on_bilibili_danmaku(self, event: Event):
         """Handle incoming danmaku."""
+        from orchestrator.core.activity_state import get_activity_state
+
+        # Check toggle state first
+        if not get_activity_state().state.bilibili_danmaku_enabled:
+            return
+
         danmaku = event.data
 
+        # Existing '!' filter
         if not danmaku['content'].startswith('!'):
             return
 
@@ -69,7 +77,28 @@ class QueueManager(BaseManager):
         self.logger.info(f"Enqueued bilibili_single: {danmaku['user']}: {danmaku['content']}")
         await self._enqueue(item)
 
+    async def on_bilibili_superchat(self, event: Event):
+        """Handle incoming SuperChat."""
+        from orchestrator.core.activity_state import get_activity_state
 
+        # Check toggle state
+        if not get_activity_state().state.bilibili_superchat_enabled:
+            return
+
+        superchat = event.data
+
+        item = InputItem(
+            priority=self.priorities["bilibili_single"],  # P3
+            source_type="bilibili_superchat",
+            get_data={
+                "user": superchat['user'],
+                "content": superchat['content'],
+                "amount": superchat['amount']
+            }
+        )
+
+        self.logger.info(f"Enqueued bilibili_superchat: {superchat['user']} (¥{superchat['amount']}): {superchat['content']}")
+        await self._enqueue(item)
 
     async def on_transcript_final(self, event: Event):
         """

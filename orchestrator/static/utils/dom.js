@@ -12,6 +12,8 @@ export const elements = {
   // Buttons
   cancelBtn: document.getElementById('cancel-btn'),
   toggleListeningBtn: document.getElementById('toggle-listening-btn'),
+  toggleBilibiliDanmakuBtn: document.getElementById('toggle-bilibili-danmaku-btn'),
+  toggleBilibiliSuperChatBtn: document.getElementById('toggle-bilibili-superchat-btn'),
   systemPromptBtn: document.getElementById('system-prompt-btn'),
   clearHistoryBtn: document.getElementById('clear-history-btn'),
   configBtn: document.getElementById('config-btn'),

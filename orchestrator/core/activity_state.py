@@ -8,7 +8,12 @@ from typing import Optional
 from core.event_bus import EventBus, Event
 from orchestrator.events import EventType
 from orchestrator.core.models import SystemState
-from orchestrator.core.constants import UI_ACTIVITY, UI_LISTENING_STATE_CHANGED
+from orchestrator.core.constants import (
+    UI_ACTIVITY,
+    UI_LISTENING_STATE_CHANGED,
+    UI_BILIBILI_DANMAKU_STATE_CHANGED,
+    UI_BILIBILI_SUPERCHAT_STATE_CHANGED
+)
 
 
 class ActivityState:
@@ -59,6 +64,42 @@ class ActivityState:
             # Publish UI compatibility event
             await self.event_bus.publish(
                 Event(UI_LISTENING_STATE_CHANGED, {"enabled": enabled})
+            )
+
+    async def set_bilibili_danmaku(self, enabled: bool):
+        """
+        Update bilibili danmaku enabled state.
+
+        Args:
+            enabled: Whether bilibili danmaku input is enabled
+        """
+        async with self._lock:
+            self.state.bilibili_danmaku_enabled = enabled
+            # Publish internal system event
+            await self.event_bus.publish(
+                Event(EventType.BILIBILI_DANMAKU_STATE_CHANGED.value, {"enabled": enabled})
+            )
+            # Publish UI compatibility event
+            await self.event_bus.publish(
+                Event(UI_BILIBILI_DANMAKU_STATE_CHANGED, {"enabled": enabled})
+            )
+
+    async def set_bilibili_superchat(self, enabled: bool):
+        """
+        Update bilibili superchat enabled state.
+
+        Args:
+            enabled: Whether bilibili superchat input is enabled
+        """
+        async with self._lock:
+            self.state.bilibili_superchat_enabled = enabled
+            # Publish internal system event
+            await self.event_bus.publish(
+                Event(EventType.BILIBILI_SUPERCHAT_STATE_CHANGED.value, {"enabled": enabled})
+            )
+            # Publish UI compatibility event
+            await self.event_bus.publish(
+                Event(UI_BILIBILI_SUPERCHAT_STATE_CHANGED, {"enabled": enabled})
             )
 
     def is_busy(self) -> bool:

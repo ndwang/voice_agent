@@ -21,3 +21,21 @@ export function updateToggleListeningButton() {
   elements.toggleListeningBtn.style.borderColor = isListening ? '#3b82f6' : '#ef4444';
 }
 
+export function updateToggleBilibiliDanmakuButton() {
+  const isEnabled = state.bilibiliDanmakuEnabled;
+  elements.toggleBilibiliDanmakuBtn.textContent = '弹幕';
+  elements.toggleBilibiliDanmakuBtn.style.background =
+    isEnabled ? '#1e40af' : '#991b1b';
+  elements.toggleBilibiliDanmakuBtn.style.borderColor =
+    isEnabled ? '#3b82f6' : '#ef4444';
+}
+
+export function updateToggleBilibiliSuperChatButton() {
+  const isEnabled = state.bilibiliSuperChatEnabled;
+  elements.toggleBilibiliSuperChatBtn.textContent = 'SC';
+  elements.toggleBilibiliSuperChatBtn.style.background =
+    isEnabled ? '#1e40af' : '#991b1b';
+  elements.toggleBilibiliSuperChatBtn.style.borderColor =
+    isEnabled ? '#3b82f6' : '#ef4444';
+}
+

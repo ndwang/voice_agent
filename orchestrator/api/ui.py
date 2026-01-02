@@ -7,9 +7,21 @@ from pathlib import Path
 from core.logging import get_logger
 from core.settings import get_settings, update_settings
 from orchestrator.events import EventType
-from orchestrator.core.constants import UI_ACTIVITY, UI_HISTORY_UPDATED, UI_LISTENING_STATE_CHANGED
+from orchestrator.core.constants import (
+    UI_ACTIVITY,
+    UI_HISTORY_UPDATED,
+    UI_LISTENING_STATE_CHANGED,
+    UI_BILIBILI_DANMAKU_STATE_CHANGED,
+    UI_BILIBILI_SUPERCHAT_STATE_CHANGED
+)
 from orchestrator.core.activity_state import get_activity_state
-from orchestrator.api.models import SystemPromptUpdate, ListeningSetRequest, ConfigUpdate
+from orchestrator.api.models import (
+    SystemPromptUpdate,
+    ListeningSetRequest,
+    ConfigUpdate,
+    BilibiliDanmakuSetRequest,
+    BilibiliSuperChatSetRequest
+)
 from orchestrator.utils.event_helpers import publish_history_updated
 
 logger = get_logger(__name__)
@@ -75,6 +87,8 @@ async def ui_events(websocket: WebSocket):
         EventType.BILIBILI_DANMAKU.value,
         EventType.BILIBILI_SUPERCHAT.value,
         UI_LISTENING_STATE_CHANGED,
+        UI_BILIBILI_DANMAKU_STATE_CHANGED,
+        UI_BILIBILI_SUPERCHAT_STATE_CHANGED,
         UI_ACTIVITY,
         UI_HISTORY_UPDATED
     ]
@@ -87,6 +101,14 @@ async def ui_events(websocket: WebSocket):
     await websocket.send_json({
         "event": "listening_state_changed",
         "enabled": activity_state.state.listening
+    })
+    await websocket.send_json({
+        "event": "bilibili_danmaku_state_changed",
+        "enabled": activity_state.state.bilibili_danmaku_enabled
+    })
+    await websocket.send_json({
+        "event": "bilibili_superchat_state_changed",
+        "enabled": activity_state.state.bilibili_superchat_enabled
     })
     await websocket.send_json({
         "event": "activity",
@@ -121,6 +143,10 @@ async def ui_events(websocket: WebSocket):
             return {"event": "bilibili_danmaku", "message": data}
         elif event_name == EventType.BILIBILI_SUPERCHAT.value:
             return {"event": "bilibili_superchat", "message": data}
+        elif event_name == UI_BILIBILI_DANMAKU_STATE_CHANGED:
+            return {"event": "bilibili_danmaku_state_changed", "enabled": data.get("enabled", True)}
+        elif event_name == UI_BILIBILI_SUPERCHAT_STATE_CHANGED:
+            return {"event": "bilibili_superchat_state_changed", "enabled": data.get("enabled", True)}
         else:
             # For other events, pass through with original name
             return {"event": event_name, "data": data}
@@ -180,6 +206,50 @@ async def toggle_listening():
 async def set_listening(request: ListeningSetRequest):
     """Set listening state."""
     await orchestrator.set_listening(request.enabled)
+    return {"status": "success", "enabled": request.enabled}
+
+
+@router.get("/ui/bilibili/danmaku/status")
+async def get_bilibili_danmaku_status():
+    """Get bilibili danmaku enabled state."""
+    return {"enabled": get_activity_state().state.bilibili_danmaku_enabled}
+
+
+@router.post("/ui/bilibili/danmaku/toggle")
+async def toggle_bilibili_danmaku():
+    """Toggle bilibili danmaku state."""
+    current = get_activity_state().state.bilibili_danmaku_enabled
+    new_state = not current
+    await orchestrator.set_bilibili_danmaku(new_state)
+    return {"status": "success", "enabled": new_state}
+
+
+@router.post("/ui/bilibili/danmaku/set")
+async def set_bilibili_danmaku(request: BilibiliDanmakuSetRequest):
+    """Set bilibili danmaku state."""
+    await orchestrator.set_bilibili_danmaku(request.enabled)
+    return {"status": "success", "enabled": request.enabled}
+
+
+@router.get("/ui/bilibili/superchat/status")
+async def get_bilibili_superchat_status():
+    """Get bilibili superchat enabled state."""
+    return {"enabled": get_activity_state().state.bilibili_superchat_enabled}
+
+
+@router.post("/ui/bilibili/superchat/toggle")
+async def toggle_bilibili_superchat():
+    """Toggle bilibili superchat state."""
+    current = get_activity_state().state.bilibili_superchat_enabled
+    new_state = not current
+    await orchestrator.set_bilibili_superchat(new_state)
+    return {"status": "success", "enabled": new_state}
+
+
+@router.post("/ui/bilibili/superchat/set")
+async def set_bilibili_superchat(request: BilibiliSuperChatSetRequest):
+    """Set bilibili superchat state."""
+    await orchestrator.set_bilibili_superchat(request.enabled)
     return {"status": "success", "enabled": request.enabled}
 
 

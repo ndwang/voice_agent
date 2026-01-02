@@ -3,7 +3,13 @@
  */
 
 import { elements } from './utils/dom.js';
-import { handleCancel, handleClearHistory, handleToggleListening } from './components/actions.js';
+import {
+  handleCancel,
+  handleClearHistory,
+  handleToggleListening,
+  handleToggleBilibiliDanmaku,
+  handleToggleBilibiliSuperChat
+} from './components/actions.js';
 import { connect } from './components/websocket.js';
 import { setupSystemPromptModal } from './modals/system-prompt.js';
 import { setupHotkeyModal, loadHotkey } from './modals/hotkey.js';
@@ -16,7 +22,9 @@ function setupEventListeners() {
   elements.cancelBtn.onclick = handleCancel;
   elements.clearHistoryBtn.onclick = handleClearHistory;
   elements.toggleListeningBtn.onclick = handleToggleListening;
-  
+  elements.toggleBilibiliDanmakuBtn.onclick = handleToggleBilibiliDanmaku;
+  elements.toggleBilibiliSuperChatBtn.onclick = handleToggleBilibiliSuperChat;
+
   // Modals
   setupSystemPromptModal();
   setupHotkeyModal();
