@@ -118,7 +118,7 @@ class StreamProcessor:
             # Normal text token
             full_response += item
 
-            # Publish token for UI display
+            # Publish token for UI display (timestamp added automatically by EventBus)
             await self.event_bus.publish(Event(EventType.LLM_TOKEN.value, {"token": item}))
 
             # Process token through parser

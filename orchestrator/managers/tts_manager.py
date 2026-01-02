@@ -95,6 +95,9 @@ class TTSManager(BaseManager):
     def _register_handlers(self):
         self.event_bus.subscribe(EventType.TTS_REQUEST.value, self.on_tts_request)
         self.event_bus.subscribe(EventType.LLM_REQUEST.value, self.on_llm_request)  # Pre-connect on LLM request
+        self.event_bus.subscribe(EventType.VOICE_INTERRUPT.value, self.on_cancel)
+        self.event_bus.subscribe(EventType.CRITICAL_INTERRUPT.value, self.on_cancel)
+        # Keep LLM_CANCELLED for backward compatibility during migration
         self.event_bus.subscribe(EventType.LLM_CANCELLED.value, self.on_cancel)
         self.event_bus.subscribe(EventType.LLM_RESPONSE_DONE.value, self.on_llm_done)
         

@@ -5,6 +5,7 @@ Simple internal event bus for pub/sub communication between components.
 """
 import asyncio
 import threading
+import time
 from typing import Dict, List, Callable, Any, Awaitable, Optional
 from dataclasses import dataclass, field
 from .logging import get_logger
@@ -17,9 +18,10 @@ class Event:
     """Base class for all events."""
     name: str
     data: Dict[str, Any] = field(default_factory=dict)
-    
+    timestamp: float = field(default_factory=time.perf_counter)
+
     def __str__(self):
-        return f"Event(name='{self.name}', data={self.data})"
+        return f"Event(name='{self.name}', data={self.data}, timestamp={self.timestamp})"
 
 
 class EventBus:

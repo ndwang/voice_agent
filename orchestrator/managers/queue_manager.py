@@ -111,6 +111,12 @@ class QueueManager(BaseManager):
         await self.queue.put(item, priority=item.priority)
         self.logger.debug(f"Enqueued {item.source_type} (P{item.priority})")
 
+        # Notify consumer that item was added
+        await self.event_bus.publish(Event("queue.item_added", {
+            "priority": item.priority,
+            "source_type": item.source_type
+        }))
+
     def has_items(self) -> bool:
         """Check if queue has any items."""
         return not self.queue.empty()
@@ -130,3 +136,7 @@ class QueueManager(BaseManager):
     def get_size(self) -> int:
         """Get current queue size."""
         return self.queue.qsize()
+
+    def peek_priority(self) -> Optional[int]:
+        """Get priority of next item without dequeuing."""
+        return self.queue.peek_priority()

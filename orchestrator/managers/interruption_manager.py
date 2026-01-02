@@ -31,34 +31,39 @@ class InterruptionManager:
         # Subscribe to all interruption triggers and cancellation
         self.event_bus.subscribe(EventType.SPEECH_START.value, self.on_speech_start)
         self.event_bus.subscribe(EventType.CRITICAL_INPUT.value, self.on_critical_input)
+        self.event_bus.subscribe(EventType.VOICE_INTERRUPT.value, self.on_cancelled)
+        self.event_bus.subscribe(EventType.CRITICAL_INTERRUPT.value, self.on_cancelled)
+        # Keep LLM_CANCELLED for backward compatibility during migration
         self.event_bus.subscribe(EventType.LLM_CANCELLED.value, self.on_cancelled)
 
     async def on_speech_start(self, event: Event):
         """
-        Handle SPEECH_START - check if busy and cancel if needed.
+        Handle SPEECH_START - check if busy and trigger voice interruption.
 
         Args:
             event: SPEECH_START event
         """
         if self.activity_state.is_busy():
-            await self.event_bus.publish(Event(EventType.LLM_CANCELLED.value))
+            logger.info("Voice interrupt triggered")
+            await self.event_bus.publish(Event(EventType.VOICE_INTERRUPT.value))
 
     async def on_critical_input(self, event: Event):
         """
-        Handle critical input (P0) - trigger interruption immediately.
+        Handle critical input (P0) - trigger critical interruption.
 
         Args:
             event: CRITICAL_INPUT event
         """
-        logger.info("Critical input detected - triggering interruption")
-        await self.event_bus.publish(Event(EventType.LLM_CANCELLED.value))
+        if self.activity_state.is_busy():
+            logger.info("Critical interrupt triggered by P0 item")
+            await self.event_bus.publish(Event(EventType.CRITICAL_INTERRUPT.value))
 
     async def on_cancelled(self, event: Event):
         """
-        Handle LLM_CANCELLED - mark if we were interrupted during response generation.
+        Handle interruption events - mark if we were interrupted during response generation.
 
         Args:
-            event: LLM_CANCELLED event
+            event: VOICE_INTERRUPT, CRITICAL_INTERRUPT, or LLM_CANCELLED event
         """
         # Check if we were still generating a response when cancelled
         if self.activity_state.state.responding:

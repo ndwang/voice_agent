@@ -82,8 +82,7 @@ class OrchestratorServer:
         # Start event bus processor
         await self.event_bus.start()
 
-        # Start queue consumer
-        await self.queue_consumer.start()
+        # Queue consumer is now purely event-driven, no start() needed
 
         # Start sources
         await self.stt_source.start()
@@ -124,7 +123,7 @@ class OrchestratorServer:
         logger.info("Orchestrator Logic Started")
 
     async def stop(self):
-        await self.queue_consumer.stop()
+        # Queue consumer is now purely event-driven, no stop() needed
         await self.audio_driver.stop()
         await self.stt_source.stop()
         await self.bilibili_source.stop()

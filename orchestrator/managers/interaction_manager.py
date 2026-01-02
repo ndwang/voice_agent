@@ -118,6 +118,9 @@ class InteractionManager(BaseManager):
 
     def _register_handlers(self):
         self.event_bus.subscribe(EventType.INPUT_RECEIVED.value, self.on_input_received)
+        self.event_bus.subscribe(EventType.VOICE_INTERRUPT.value, self.on_cancel)
+        self.event_bus.subscribe(EventType.CRITICAL_INTERRUPT.value, self.on_cancel)
+        # Keep LLM_CANCELLED for backward compatibility during migration
         self.event_bus.subscribe(EventType.LLM_CANCELLED.value, self.on_cancel)
         if self.tool_registry:
             self.event_bus.subscribe(EventType.TOOL_INTERPRETATION_REQUEST.value, self.on_tool_interpretation_request)
