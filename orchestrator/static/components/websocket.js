@@ -75,7 +75,7 @@ function handleWebSocketEvent(data) {
       
     case 'listening_state_changed':
       if (data.enabled !== undefined) {
-        state.activityState.listening = data.enabled;
+        renderActivity({ listening: data.enabled });
       }
       updateToggleListeningButton();
       break;

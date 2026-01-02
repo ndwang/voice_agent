@@ -4,12 +4,15 @@ Google Gemini API Provider
 Implementation of LLMProvider for Google Gemini API.
 """
 from typing import AsyncIterator, Optional, List, Dict, Tuple, Union, Any
+import logging
 from google import genai
 from google.genai import types
 
 from llm.base import LLMProvider
 
 # Access types through genai module
+
+logger = logging.getLogger(__name__)
 
 
 
@@ -68,12 +71,55 @@ class GeminiProvider(LLMProvider):
         error_dict = exception.error
         status_code = error_dict.get('code')
         error_message = error_dict.get('message')
-        
+
         return status_code, error_message
-    
+
+    def _create_parts_from_message(self, msg: Dict[str, Any]) -> List[types.Part]:
+        """
+        Convert message to list of Gemini Part objects.
+
+        Args:
+            msg: Message dict with "content" and optional "images"
+
+        Returns:
+            List of Part objects (text and/or images)
+        """
+        parts = []
+
+        # Add text content
+        if msg.get("content"):
+            parts.append(types.Part(text=msg["content"]))
+
+        # Add images if present
+        if "images" in msg and msg["images"]:
+            from llm.utils.image_utils import read_image_file, get_mime_type, validate_image_path
+
+            for image_path in msg["images"]:
+                try:
+                    if not validate_image_path(image_path):
+                        logger.warning(f"Skipping invalid image: {image_path}")
+                        continue
+
+                    # Read image bytes
+                    image_bytes = read_image_file(image_path)
+                    mime_type = get_mime_type(image_path)
+
+                    # Create Part from bytes
+                    parts.append(types.Part.from_bytes(
+                        data=image_bytes,
+                        mime_type=mime_type
+                    ))
+                    logger.debug(f"Added image to message: {image_path} ({mime_type})")
+
+                except Exception as e:
+                    logger.error(f"Failed to load image {image_path}: {e}")
+                    continue
+
+        return parts
+
     async def generate(
         self,
-        messages: List[Dict[str, str]],
+        messages: List[Dict[str, Any]],
         system_prompt: Optional[str] = None,
         temperature: Optional[float] = None,
         top_p: Optional[float] = None,
@@ -83,9 +129,10 @@ class GeminiProvider(LLMProvider):
     ) -> str:
         """
         Generate a complete response using Gemini API.
-        
+
         Args:
             messages: List of message dicts with "role" and "content" keys.
+                     User messages may optionally include "images" field with List[str] of file paths.
                      Must include system message (if any) and conversation history.
                      The last message should be the current user message.
             system_prompt: Optional system prompt. If messages already contains a system
@@ -95,14 +142,14 @@ class GeminiProvider(LLMProvider):
             top_k: Top-k sampling parameter
             max_tokens: Maximum tokens to generate
             **kwargs: Additional provider-specific parameters
-            
+
         Returns:
             Generated text response
         """
         # Extract system prompt from messages or use provided parameter
         final_system_prompt = system_prompt
         filtered_messages = []
-        
+
         for msg in messages:
             if msg["role"] == "system":
                 # Extract system prompt from messages if not provided
@@ -111,12 +158,16 @@ class GeminiProvider(LLMProvider):
             else:
                 # Keep non-system messages (user and assistant)
                 filtered_messages.append(msg)
-        
+
         # Convert messages to Gemini format (list of Content objects)
         contents = []
         for msg in filtered_messages:
             role = "user" if msg["role"] == "user" else "model"  # Gemini uses "model" not "assistant"
-            contents.append(types.Content(role=role, parts=[types.Part(text=msg["content"])]))
+
+            # Create parts from message (handles text + images)
+            parts = self._create_parts_from_message(msg)
+
+            contents.append(types.Content(role=role, parts=parts))
         
         # Prepare generation config - start with defaults from config
         config_kwargs = self.default_generation_config.copy()
@@ -164,7 +215,7 @@ class GeminiProvider(LLMProvider):
     
     async def generate_stream(
         self,
-        messages: List[Dict[str, str]],
+        messages: List[Dict[str, Any]],
         system_prompt: Optional[str] = None,
         tools: Optional[List[Dict[str, Any]]] = None,
         temperature: Optional[float] = None,
@@ -175,9 +226,10 @@ class GeminiProvider(LLMProvider):
     ) -> AsyncIterator[Union[str, Dict[str, Any]]]:
         """
         Generate a streaming response using Gemini API.
-        
+
         Args:
             messages: List of message dicts with "role" and "content" keys.
+                     User messages may optionally include "images" field with List[str] of file paths.
                      Must include system message (if any) and conversation history.
                      The last message should be the current user message.
             system_prompt: Optional system prompt. If messages already contains a system
@@ -187,14 +239,14 @@ class GeminiProvider(LLMProvider):
             top_k: Top-k sampling parameter
             max_tokens: Maximum tokens to generate
             **kwargs: Additional provider-specific parameters
-            
+
         Yields:
             Tokens as they are generated
         """
         # Extract system prompt from messages or use provided parameter
         final_system_prompt = system_prompt
         filtered_messages = []
-        
+
         for msg in messages:
             if msg["role"] == "system":
                 # Extract system prompt from messages if not provided
@@ -203,12 +255,16 @@ class GeminiProvider(LLMProvider):
             else:
                 # Keep non-system messages (user and assistant)
                 filtered_messages.append(msg)
-        
+
         # Convert messages to Gemini format (list of Content objects)
         contents = []
         for msg in filtered_messages:
             role = "user" if msg["role"] == "user" else "model"  # Gemini uses "model" not "assistant"
-            contents.append(types.Content(role=role, parts=[types.Part(text=msg["content"])]))
+
+            # Create parts from message (handles text + images)
+            parts = self._create_parts_from_message(msg)
+
+            contents.append(types.Content(role=role, parts=parts))
         
         # Prepare generation config - start with defaults from config
         config_kwargs = self.default_generation_config.copy()
@@ -266,8 +322,10 @@ class GeminiProvider(LLMProvider):
             # Check for function calls in the chunk
             if hasattr(chunk, 'candidates') and chunk.candidates:
                 parts = chunk.candidates[0].content.parts
+                if parts is None:
+                    continue
                 for part in parts:
-                    if hasattr(part, 'function_call'):
+                    if hasattr(part, 'function_call') and part.function_call is not None:
                         # Yield tool call dict
                         func_call = part.function_call
                         yield {

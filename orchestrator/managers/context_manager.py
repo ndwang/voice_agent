@@ -37,14 +37,14 @@ class ContextManager:
         project_root = Path(__file__).parent.parent.parent
         if system_prompt_file is None:
             # Default to orchestrator/system_prompt.txt
-            system_prompt_file = str(project_root / "orchestrator" / "system_prompt.txt")
+            self.system_prompt_file = project_root / "orchestrator" / "system_prompt.txt"
         else:
             # Resolve relative paths relative to project root
             prompt_path = Path(system_prompt_file)
             if not prompt_path.is_absolute():
-                system_prompt_file = str(project_root / prompt_path)
-        
-        self.system_prompt_file = Path(system_prompt_file)
+                self.system_prompt_file = project_root / prompt_path
+            else:
+                self.system_prompt_file = prompt_path
         self._system_prompt: Optional[str] = None
         self._system_prompt_mtime: Optional[float] = None
         self._hot_reload_task: Optional[asyncio.Task] = None
@@ -90,7 +90,18 @@ class ContextManager:
         """Get current system prompt (checks file for updates)."""
         self._load_system_prompt()
         return self._system_prompt or "You are a helpful assistant."
-    
+
+    def reload_system_prompt(self) -> str:
+        """
+        Force reload system prompt from file.
+
+        Returns:
+            Reloaded system prompt text
+        """
+        # Reset mtime to force reload
+        self._system_prompt_mtime = None
+        return self._load_system_prompt()
+
     def set_system_prompt(self, prompt: str) -> bool:
         """
         Update system prompt and save to file.
@@ -162,13 +173,28 @@ class ContextManager:
                 self._hot_reload_task = None
             logger.info("System prompt hot-reload disabled")
     
-    def add_user_message(self, text: str):
-        """Add user message to conversation history."""
-        self.conversation_history.append({
+    def add_user_message(self, text: str, images: Optional[List[str]] = None):
+        """
+        Add user message with optional images to conversation history.
+
+        Args:
+            text: User message text
+            images: Optional list of image file paths
+        """
+        message = {
             "role": "user",
             "content": text,
             "timestamp": datetime.now().isoformat()
-        })
+        }
+
+        # Only add images field if provided and valid
+        if images:
+            from llm.utils.image_utils import validate_image_paths
+            valid_images = validate_image_paths(images)
+            if valid_images:
+                message["images"] = valid_images
+
+        self.conversation_history.append(message)
         # Keep only last max_history messages
         if len(self.conversation_history) > self.max_history:
             self.conversation_history = [self.conversation_history[0]] + self.conversation_history[-self.max_history:]
@@ -314,40 +340,41 @@ class ContextManager:
         """Get current OCR context."""
         return self.ocr_text
     
-    def format_context_for_llm(self, user_message: str) -> Dict[str, any]:
+    def format_context_for_llm(self, user_message: str, images: Optional[List[str]] = None) -> Dict[str, any]:
         """
-        Format context for LLM request.
-        
+        Format context for LLM request with optional images.
+
         Args:
             user_message: Current user message
-            
+            images: Optional list of image file paths for current message
+
         Returns:
             Dictionary with prompt and context for LLM
         """
         # Get base system prompt from file
         system_parts = [self.get_system_prompt()]
-        
+
         # Append OCR context if available
         if self.ocr_text:
             system_parts.append(f"\n\nCurrent story content:\n{self.ocr_text}")
-        
+
         system_message = "\n".join(system_parts)
-        
+
         # Build conversation history
         messages = []
         if system_message:
             messages.append({"role": "system", "content": system_message})
-        
+
         # Add conversation history (excluding the current message if it's already the last one)
         history_to_include = self.conversation_history[-self.max_history * 2:]
-        
+
         # Check if the last message in history matches the current user message
         # If so, don't include it in history (it will be added separately)
-        if (history_to_include and 
-            history_to_include[-1]["role"] == "user" and 
+        if (history_to_include and
+            history_to_include[-1]["role"] == "user" and
             history_to_include[-1]["content"] == user_message):
             history_to_include = history_to_include[:-1]
-        
+
         for msg in history_to_include:
             if msg["role"] == "tool":
                 # Tool result message
@@ -376,13 +403,24 @@ class ContextManager:
                 })
             else:
                 # Regular user/assistant message
-                messages.append({
+                formatted_msg = {
                     "role": msg["role"],
                     "content": msg["content"]
-                })
+                }
+                # Include images if present in history
+                if "images" in msg:
+                    formatted_msg["images"] = msg["images"]
+                messages.append(formatted_msg)
 
-        # Add current user message
-        messages.append({"role": "user", "content": user_message})
+        # Add current user message with images
+        current_msg = {"role": "user", "content": user_message}
+        if images:
+            from llm.utils.image_utils import validate_image_paths
+            valid_images = validate_image_paths(images)
+            if valid_images:
+                current_msg["images"] = valid_images
+
+        messages.append(current_msg)
 
         return {
             "messages": messages,
@@ -431,20 +469,21 @@ class ContextManager:
         self.add_user_message(raw_text)
         return raw_text
 
-    def format_chat_input(self, raw_text: str) -> str:
+    def format_chat_input(self, raw_text: str, images: Optional[List[str]] = None) -> str:
         """
-        Format chat input.
+        Format chat input with optional images.
 
         TODO: Implement chat-specific formatting logic.
 
         Args:
             raw_text: Raw chat input text
+            images: Optional list of image file paths
 
         Returns:
             Formatted text
         """
         # TBD: Add chat-specific formatting logic here
-        self.add_user_message(raw_text)
+        self.add_user_message(raw_text, images=images)
         return raw_text
 
     def format_ocr_input(self, raw_text: str) -> str:
@@ -463,27 +502,30 @@ class ContextManager:
         self.add_user_message(raw_text)
         return raw_text
 
-    def format_input(self, raw_text: str, source: str, was_interrupted: bool = False) -> str:
+    def format_input(self, raw_text: str, source: str, images: Optional[List[str]] = None, was_interrupted: bool = False) -> str:
         """
-        Format input based on source type.
+        Format input based on source type with optional images.
 
         Args:
             raw_text: Raw input text
             source: Input source ('voice', 'chat', 'ocr', etc.)
+            images: Optional list of image file paths
             was_interrupted: Whether the previous turn was interrupted (used for voice inputs)
 
         Returns:
             Formatted text
         """
         if source == "voice":
+            # Voice input doesn't support images
             return self.format_voice_input(raw_text, was_interrupted)
-        elif source == "chat":
-            return self.format_chat_input(raw_text)
+        elif source == "bilibili_single":
+            return self.format_chat_input(raw_text, images=images)
         elif source == "ocr":
+            # OCR input doesn't support images
             return self.format_ocr_input(raw_text)
         else:
             # Unknown source - just add normally
             logger.warning(f"Unknown input source: {source}")
-            self.add_user_message(raw_text)
+            self.add_user_message(raw_text, images=images)
             return raw_text
 

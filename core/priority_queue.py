@@ -64,3 +64,15 @@ class AsyncPriorityQueue:
             self.queue.get_nowait()
         if reset_counter:
             self.counter = itertools.count()
+
+    def peek_priority(self):
+        """
+        Peek at priority of next item without removing it.
+        Returns None if queue is empty.
+        """
+        if self.queue.empty():
+            return None
+
+        # Python's PriorityQueue uses heapq - peek at heap[0]
+        priority, counter, item = self.queue._queue[0]
+        return priority

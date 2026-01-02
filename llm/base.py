@@ -38,21 +38,22 @@ class LLMProvider(ABC):
     @abstractmethod
     async def generate(
         self,
-        messages: List[Dict[str, str]],
+        messages: List[Dict[str, Any]],
         system_prompt: Optional[str] = None,
         **kwargs
     ) -> str:
         """
         Generate a complete response (non-streaming).
-        
+
         Args:
             messages: List of message dicts with "role" and "content" keys.
+                     User messages may optionally include "images" field with List[str] of file paths.
                      Must include system message (if any) and conversation history.
                      The last message should be the current user message.
             system_prompt: Optional system prompt. If messages already contains a system
                           message, this may be ignored.
             **kwargs: Additional provider-specific parameters
-            
+
         Returns:
             Generated text response
         """
@@ -61,7 +62,7 @@ class LLMProvider(ABC):
     @abstractmethod
     async def generate_stream(
         self,
-        messages: List[Dict[str, str]],
+        messages: List[Dict[str, Any]],
         system_prompt: Optional[str] = None,
         tools: Optional[List[Dict[str, Any]]] = None,
         **kwargs
@@ -71,6 +72,7 @@ class LLMProvider(ABC):
 
         Args:
             messages: List of message dicts with "role" and "content" keys.
+                     User messages may optionally include "images" field with List[str] of file paths.
                      Must include system message (if any) and conversation history.
                      The last message should be the current user message.
             system_prompt: Optional system prompt. If messages already contains a system

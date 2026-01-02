@@ -26,6 +26,8 @@ class SubtitleManager(BaseManager):
         self.obs_client = None
         self.accumulated_text = ""  # Accumulates sentences from current conversation round
         self.clear_task = None  # Task for TTL-based clearing
+        self.new_round = False  # Track if user spoke since last subtitle
+        self.character_on_screen = False  # Track if character is visible
         super().__init__(event_bus)
         
         try:
@@ -47,7 +49,9 @@ class SubtitleManager(BaseManager):
 
     def _register_handlers(self):
         self.event_bus.subscribe(EventType.SPEECH_START.value, self.on_speech_start)
+        self.event_bus.subscribe(EventType.INPUT_RECEIVED.value, self.on_input_received)
         self.event_bus.subscribe(EventType.SUBTITLE_REQUEST.value, self.on_subtitle_request)
+        self.event_bus.subscribe(EventType.TURN_ENDED.value, self.on_turn_ended)
 
     def _reset_ttl_timer(self):
         """Reset the TTL timer. Cancels existing timer and starts a new one if TTL is enabled."""
@@ -77,62 +81,90 @@ class SubtitleManager(BaseManager):
         except Exception as e:
             self.logger.debug(f"OBS error while enabling filter: {e}")
 
-    async def _clear_subtitles(self):
-        """Clear subtitles text and enable clear filter."""
+    async def _clear_subtitles(self, hide_character=False):
+        """Clear subtitles text and optionally hide character.
+
+        Args:
+            hide_character: If True, triggers clear_filter to remove character from screen
+        """
+        self.logger.info(f"Clearing subtitles, hide_character: {hide_character}")
         self.accumulated_text = ""
         if self.obs_client:
             try:
                 if not self.obs_client.ws:
                     await self.obs_client.connect()
                 await self.obs_client.set_text(self.source_name, "")
-                # Enable clear filter when subtitles are cleared
-                await self._enable_filter(self.clear_filter_name)
+                # Only enable clear filter (hide character) when requested (e.g., on TTL expiry)
+                if hide_character:
+                    await self._enable_filter(self.clear_filter_name)
+                    self.character_on_screen = False
             except Exception as e:
                 self.logger.debug(f"OBS error while clearing: {e}")
 
     async def _clear_after_ttl(self):
-        """Clear subtitles after TTL expires."""
+        """Clear subtitles and hide character after TTL expires."""
         try:
             await asyncio.sleep(self.ttl_seconds)
             # Only clear if we still have accumulated text (no new subtitles arrived)
             if self.accumulated_text:
-                await self._clear_subtitles()
-                self.logger.debug(f"Cleared subtitles after {self.ttl_seconds}s TTL")
+                await self._clear_subtitles(hide_character=True)
+                self.logger.debug(f"Cleared subtitles and hid character after {self.ttl_seconds}s TTL")
         except asyncio.CancelledError:
             # Timer was cancelled (new subtitle arrived or speech started)
             pass
 
     async def on_speech_start(self, event: Event):
-        """Clear subtitles when user starts talking."""
+        """Cancel TTL timer when user starts speaking (voice input)"""
         # Cancel any pending TTL timer
         if self.clear_task and not self.clear_task.done():
             self.clear_task.cancel()
-        
-        await self._clear_subtitles()
+
+        # Mark that user spoke - next subtitle will be a new round
+        self.new_round = True
+
+    async def on_input_received(self, event: Event):
+        """Cancel TTL timer when input received from any source (chat, voice, etc)"""
+        # Cancel any pending TTL timer
+        if self.clear_task and not self.clear_task.done():
+            self.clear_task.cancel()
+
+        # Mark new conversation round - next subtitle will clear old text
+        self.new_round = True
 
     async def on_subtitle_request(self, event: Event):
         """Update subtitles when Chinese content is available.
-        Accumulates sentences from the same conversation round.
-        Resets TTL timer on each update.
-        Shows visibility source when subtitles first appear."""
+        Clears old subtitles when new round begins.
+        Shows character when subtitles first appear.
+        Keeps character visible during conversation rounds."""
         text = event.data.get("text", "")
         if self.obs_client and text:
             try:
                 if not self.obs_client.ws:
                     await self.obs_client.connect()
-                
-                # Enable appear filter when subtitles first appear
-                if not self.accumulated_text:
+
+                self.logger.info(f"Subtitle request: {text[:10]}..., new round: {self.new_round}, character on screen: {self.character_on_screen}, accumulated text: {self.accumulated_text[:10]}...")
+                # If new round, clear old subtitles (but keep character)
+                if self.new_round and self.accumulated_text:
+                    await self._clear_subtitles(hide_character=False)
+
+                # Reset the new round flag
+                self.new_round = False
+
+                # Show character when subtitles first appear (character not on screen)
+                if not self.character_on_screen:
                     await self._enable_filter(self.appear_filter_name)
+                    self.character_on_screen = True
 
                 # Accumulate the new sentence
                 self.accumulated_text += text
-                
+
                 # Update OBS with the accumulated text
                 await self.obs_client.set_text(self.source_name, self.accumulated_text)
-                                
-                # Reset TTL timer - new subtitle arrived, so extend the timer
-                self._reset_ttl_timer()
             except Exception as e:
                 self.logger.debug(f"OBS error: {e}")
+
+    async def on_turn_ended(self, event: Event):
+        """Start TTL countdown when turn ends."""
+        # Start TTL timer - subtitles will be cleared after TTL expires
+        self._reset_ttl_timer()
 

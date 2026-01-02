@@ -13,8 +13,12 @@ Usage:
     manager = InteractionManager(event_bus, settings=test_settings)
 """
 
-from typing import Optional
+from typing import Optional, List, Tuple, TYPE_CHECKING
 from .base import AppSettings
+
+if TYPE_CHECKING:
+    from .reload_coordinator import ReloadCoordinator
+    from .reload_result import ReloadResult
 from .llm import LLMSettings, GeminiConfig, OllamaConfig
 from .orchestrator import OrchestratorSettings
 from .tts import (
@@ -75,16 +79,21 @@ def reload_settings(path: str = "config.yaml") -> AppSettings:
     return _settings
 
 
-def update_settings(updates: dict, persist: bool = True) -> AppSettings:
+def update_settings(
+    updates: dict,
+    persist: bool = True,
+    reload_coordinator: Optional["ReloadCoordinator"] = None
+) -> Tuple[AppSettings, Optional[List["ReloadResult"]]]:
     """
-    Update settings with new values.
+    Update settings with new values and optionally coordinate reload.
 
     Args:
         updates: Dict with updates (e.g., {"llm": {"provider": "gemini"}})
         persist: If True, save changes to YAML file
+        reload_coordinator: Optional ReloadCoordinator for hot-reload support
 
     Returns:
-        Updated AppSettings instance
+        Tuple of (updated_settings, reload_results or None)
     """
     global _settings
     current = get_settings()
@@ -93,10 +102,15 @@ def update_settings(updates: dict, persist: bool = True) -> AppSettings:
     if persist:
         _settings.to_yaml()
 
-    # Notify listeners of changes
+    # Notify listeners of changes (legacy support)
     _settings.notify_listeners(updates)
 
-    return _settings
+    # Coordinate reload if provided
+    reload_results = None
+    if reload_coordinator:
+        reload_results = reload_coordinator.reload_config(updates)
+
+    return _settings, reload_results
 
 
 __all__ = [

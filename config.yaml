@@ -14,13 +14,14 @@ llm:
   providers:
     gemini:
       model: gemini-2.5-flash
-      api_key: ''
+      api_key: null
+      disable_thinking: true
       generation_config:
         thinking_budget: 0
     ollama:
-      model: Qwen3-8B-Q4-8kcontext
+      model: Qwen3-8B-Q4-4kcontext
       base_url: http://localhost:11434
-      timeout: '300'
+      timeout: 300
       disable_thinking: true
       generation_config: null
 tts:
@@ -55,12 +56,12 @@ tts:
       default_text_lang: ja
       gpt_weights_path: CharacterModels/v2ProPlus/ema/gpt_sovits_model/Ama-e10.ckpt
       sovits_weights_path: CharacterModels/v2ProPlus/ema/gpt_sovits_model/Ama_e8_s1040.pth
-      streaming_mode: '2'
-      temperature: '1'
-      top_p: '1'
-      top_k: '15'
-      speed_factor: '1'
-      timeout: '30'
+      streaming_mode: 2
+      temperature: 1
+      top_p: 1
+      top_k: 15
+      speed_factor: 1
+      timeout: 30
       references:
         normal:
           ref_audio_path: CharacterModels/v2ProPlus/ema/prompt_wav/4.WAV_0000489920_0000654080.wav
@@ -96,8 +97,8 @@ stt:
         - 4
         encoder_chunk_look_back: 4
         decoder_chunk_look_back: 1
-        vad_chunk_size_ms: '100'
-        silence_threshold_ms: '200'
+        vad_chunk_size_ms: 100
+        silence_threshold_ms: 200
 audio:
   input:
     sample_rate: 16000
@@ -106,7 +107,7 @@ audio:
   output:
     sample_rate: 32000
     channels: 1
-    device: null
+    device: 31
   dtype: float32
   block_size_ms: 100
   listening_status_poll_interval: 1.0
@@ -130,7 +131,7 @@ obs:
   clear_filter_name: MoveOutRight
 bilibili:
   enabled: true
-  room_id: 22632424
+  room_id: 31232063
   sessdata: d10a8829%2C1782692006%2C9540c%2Ac2CjCRf7tmL8kcxPkhHcVlsM3Jgj_zSL2-ZxOx5tj8CFHG3FceyugoVJta1N3bnnHnEwUSVnhVRmsxbmJHQlZabnN0OUx4TnZNVkMydUFUM0R5NDgzSlpRLU1TVjN4OThnbHFucG1ydFNqQk9qRURPX1ZXUGVxMl8yV3J6aXE2eWVyd2ZFa0RwdzhBIIEC
   danmaku_ttl_seconds: 60
 services:

@@ -7,6 +7,9 @@ import { state } from '../utils/state.js';
 import { apiCall } from '../utils/api.js';
 import { showStatusMessage } from '../utils/helpers.js';
 
+// Store capabilities for hot-reload detection
+let configCapabilities = {};
+
 export const CONFIG_SCHEMA = {
   orchestrator: {
     title: 'Orchestrator',
@@ -145,7 +148,16 @@ export const CONFIG_SCHEMA = {
         top_k: { type: 'number', label: 'Top K' },
         speed_factor: { type: 'number', label: 'Speed Factor' },
         timeout: { type: 'number', label: 'Timeout (seconds)' },
-        references: { type: 'text', label: 'References (JSON object, for advanced config)' }
+        references: {
+          type: 'reference_dict',
+          label: 'References',
+          fields: {
+            name: { type: 'text', label: 'Reference Name' },
+            ref_audio_path: { type: 'text', label: 'Reference Audio Path' },
+            prompt_text: { type: 'text', label: 'Prompt Text' },
+            prompt_lang: { type: 'text', label: 'Prompt Language' }
+          }
+        }
       }
     }
   },
@@ -227,11 +239,51 @@ export const CONFIG_SCHEMA = {
   }
 };
 
+function createReferenceBox(refName, refData, fieldSchema, parentPath) {
+  const box = document.createElement('div');
+  box.className = 'reference-box';
+
+  // Create 4 fields in a grid: name, ref_audio_path, prompt_text, prompt_lang
+  Object.entries(fieldSchema).forEach(([fieldKey, fieldDef]) => {
+    const fieldGroup = document.createElement('div');
+    fieldGroup.className = 'config-form-group';
+
+    const label = document.createElement('label');
+    label.className = 'config-label';
+    label.textContent = fieldDef.label;
+    fieldGroup.appendChild(label);
+
+    const input = document.createElement('input');
+    input.type = fieldDef.type === 'password' ? 'password' : 'text';
+    input.className = 'config-input';
+    input.dataset.refField = fieldKey;
+
+    if (fieldKey === 'name') {
+      input.value = refName || '';
+    } else {
+      input.value = (refData && refData[fieldKey]) || '';
+    }
+
+    fieldGroup.appendChild(input);
+    box.appendChild(fieldGroup);
+  });
+
+  // Delete button
+  const deleteBtn = document.createElement('button');
+  deleteBtn.type = 'button';
+  deleteBtn.className = 'delete-reference-btn';
+  deleteBtn.textContent = '× Remove';
+  deleteBtn.onclick = () => box.remove();
+  box.appendChild(deleteBtn);
+
+  return box;
+}
+
 function createFormField(key, field, value, path = []) {
   const fullPath = [...path, key].join('.');
   const group = document.createElement('div');
   group.className = 'config-form-group';
-  
+
   if (field.type === 'nested') {
     const nestedGroup = document.createElement('div');
     nestedGroup.className = 'nested-group';
@@ -239,12 +291,49 @@ function createFormField(key, field, value, path = []) {
     title.className = 'nested-title';
     title.textContent = field.label;
     nestedGroup.appendChild(title);
-    
+
     Object.entries(field.fields).forEach(([subKey, subField]) => {
       const subValue = (value && typeof value === 'object') ? value[subKey] : undefined;
       nestedGroup.appendChild(createFormField(subKey, subField, subValue, [...path, key]));
     });
     return nestedGroup;
+  }
+
+  if (field.type === 'reference_dict') {
+    const refContainer = document.createElement('div');
+    refContainer.className = 'reference-dict-container';
+
+    const title = document.createElement('div');
+    title.className = 'nested-title';
+    title.textContent = field.label;
+    refContainer.appendChild(title);
+
+    const refsWrapper = document.createElement('div');
+    refsWrapper.className = 'references-wrapper';
+    refsWrapper.dataset.path = fullPath;
+
+    // Display existing references
+    if (value && typeof value === 'object') {
+      Object.entries(value).forEach(([refName, refData]) => {
+        const refBox = createReferenceBox(refName, refData, field.fields, fullPath);
+        refsWrapper.appendChild(refBox);
+      });
+    }
+
+    refContainer.appendChild(refsWrapper);
+
+    // Add button to add new reference
+    const addBtn = document.createElement('button');
+    addBtn.type = 'button';
+    addBtn.className = 'add-reference-btn';
+    addBtn.textContent = '+ Add Reference';
+    addBtn.onclick = () => {
+      const refBox = createReferenceBox('', {}, field.fields, fullPath);
+      refsWrapper.appendChild(refBox);
+    };
+    refContainer.appendChild(addBtn);
+
+    return refContainer;
   }
   
   const label = document.createElement('label');
@@ -280,16 +369,40 @@ function createFormField(key, field, value, path = []) {
     group.appendChild(label);
   } else {
     input = document.createElement('input');
-    input.type = field.type === 'password' ? 'password' : 'text';
+    input.type = field.type === 'password' ? 'password' : field.type === 'number' ? 'number' : 'text';
     input.className = 'config-input';
-    input.value = value === null || value === undefined ? '' : value;
+    // Handle array values by converting to comma-separated string
+    if (Array.isArray(value)) {
+      input.value = value.join(', ');
+    } else {
+      input.value = value === null || value === undefined ? '' : value;
+    }
   }
   
   input.dataset.path = fullPath;
   input.name = fullPath;
+
+  // Add change listener for restart warnings
+  input.addEventListener('change', () => checkRestartRequired(input, fullPath));
+
   group.appendChild(input);
-  
+
   return group;
+}
+
+function checkRestartRequired(input, fullPath) {
+  // Check if this field requires restart
+  const capability = configCapabilities[fullPath];
+
+  if (capability && capability.hot_reload === false) {
+    // Show immediate warning
+    showStatusMessage(
+      elements.configStatusMessage,
+      `⚠️ ${fullPath} requires a service restart to take effect`,
+      true,
+      5000
+    );
+  }
 }
 
 function buildAccordion() {
@@ -369,9 +482,17 @@ function setDeepValue(obj, path, value) {
 
 export async function loadFullConfig() {
   try {
+    // Load capabilities first
+    try {
+      configCapabilities = await apiCall('/api/config/capabilities');
+    } catch (e) {
+      console.warn('Could not load config capabilities:', e);
+      configCapabilities = {};
+    }
+
     state.currentConfig = await apiCall('/ui/config');
     buildAccordion();
-    
+
     Object.entries(CONFIG_SCHEMA).forEach(([sectionKey]) => {
       const providerSelect = document.querySelector(`select[data-is-provider-select="true"][data-section="${sectionKey}"]`);
       if (providerSelect) {
@@ -384,36 +505,149 @@ export async function loadFullConfig() {
   }
 }
 
+function getDeepValue(obj, path) {
+  const parts = path.split('.');
+  let current = obj;
+  for (let i = 0; i < parts.length; i++) {
+    if (current === null || current === undefined) return undefined;
+    current = current[parts[i]];
+  }
+  return current;
+}
+
+function inferType(value, originalValue) {
+  // If the input is empty, return null
+  if (value === '' || value === 'null') {
+    return null;
+  }
+
+  // If we have an original value, try to preserve its type
+  if (originalValue !== undefined && originalValue !== null) {
+    // Array type - check if original was an array
+    if (Array.isArray(originalValue)) {
+      // Parse comma-separated values into array
+      if (typeof value === 'string') {
+        return value.split(',').map(v => {
+          const trimmed = v.trim();
+          // Try to parse as number if original array contained numbers
+          if (!isNaN(trimmed) && trimmed !== '') {
+            return trimmed.includes('.') ? parseFloat(trimmed) : parseInt(trimmed, 10);
+          }
+          return trimmed;
+        });
+      }
+      return originalValue; // Keep original if can't parse
+    }
+
+    // Number type - check if original was a number
+    if (typeof originalValue === 'number') {
+      const num = parseFloat(value);
+      return isNaN(num) ? value : num;
+    }
+
+    // Boolean type - check if original was boolean
+    if (typeof originalValue === 'boolean') {
+      return value === true || value === 'true';
+    }
+
+    // Object type - try to parse as JSON if it's a string
+    if (typeof originalValue === 'object' && typeof value === 'string') {
+      try {
+        return JSON.parse(value);
+      } catch {
+        return value;
+      }
+    }
+
+    // For strings, keep as string (don't try to convert to numbers)
+    // The schema's input type should handle number conversion
+    return value;
+  }
+
+  // No original value - just return the string as-is
+  // The schema's input type should determine if it needs to be a number
+  return value;
+}
+
 export async function saveFullConfig() {
   const newConfig = JSON.parse(JSON.stringify(state.currentConfig));
-  
-  const allInputs = elements.configAccordion.querySelectorAll('input, select');
+
+  // First, handle reference dictionaries separately
+  const refWrappers = elements.configAccordion.querySelectorAll('.references-wrapper');
+  refWrappers.forEach(wrapper => {
+    const path = wrapper.dataset.path;
+    if (!path) return;
+
+    const references = {};
+    const refBoxes = wrapper.querySelectorAll('.reference-box');
+
+    refBoxes.forEach(box => {
+      const inputs = box.querySelectorAll('input');
+      let refName = '';
+      const refData = {};
+
+      inputs.forEach(input => {
+        const fieldKey = input.dataset.refField;
+        if (fieldKey === 'name') {
+          refName = input.value.trim();
+        } else {
+          refData[fieldKey] = input.value || null;
+        }
+      });
+
+      if (refName) {
+        references[refName] = refData;
+      }
+    });
+
+    setDeepValue(newConfig, path, references);
+  });
+
+  // Then handle regular inputs (but skip inputs inside reference boxes)
+  const allInputs = elements.configAccordion.querySelectorAll('input:not(.reference-box input), select');
   allInputs.forEach(input => {
     const path = input.dataset.path;
     if (!path) return;
-    
+
     let val;
     if (input.type === 'checkbox') {
       val = input.checked;
+    } else if (input.type === 'password') {
+      // For password fields, keep the value as-is (string or null)
+      val = input.value || null;
+    } else if (input.type === 'number') {
+      // For number inputs, always convert to number
+      val = input.value === '' ? null : parseFloat(input.value);
     } else {
       val = input.value;
-      if (input.type === 'number' || (!isNaN(val) && val !== '' && input.type !== 'text' && input.type !== 'password')) {
-        val = val.includes('.') ? parseFloat(val) : parseInt(val, 10);
-      } else if (val === '' && input.type !== 'password') {
-        val = null;
-      }
+      // Get the original value to preserve type
+      const originalValue = getDeepValue(state.currentConfig, path);
+
+      // Use type inference based on original value
+      val = inferType(val, originalValue);
     }
-    
+
     setDeepValue(newConfig, path, val);
   });
-  
+
   elements.configModalSave.disabled = true;
   try {
-    await apiCall('/ui/config', {
+    const response = await apiCall('/ui/config', {
       method: 'POST',
       body: { config: newConfig },
     });
-    showStatusMessage(elements.configStatusMessage, 'Configuration saved successfully! Some changes may require a restart.', false, 5000);
+
+    // Check if response includes restart requirements
+    let message = '✓ Configuration saved successfully!';
+
+    if (response.needs_restart && response.needs_restart.length > 0) {
+      message += '\n\n⚠️ Restart required for:\n';
+      message += response.needs_restart.map(item => `  • ${item}`).join('\n');
+    } else {
+      message += ' All changes applied immediately.';
+    }
+
+    showStatusMessage(elements.configStatusMessage, message, response.needs_restart && response.needs_restart.length > 0, 8000);
     state.currentConfig = newConfig;
   } catch (e) {
     console.error('Error saving config:', e);

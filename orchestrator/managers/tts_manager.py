@@ -4,6 +4,8 @@ import websockets
 from core.event_bus import EventBus, Event
 from core.logging import get_logger
 from core.config import get_config
+from core.settings import get_settings
+from core.settings.reload_result import ReloadResult
 from orchestrator.events import EventType
 from orchestrator.managers.base import BaseManager
 from orchestrator.core.activity_state import get_activity_state
@@ -30,9 +32,72 @@ class TTSManager(BaseManager):
         self.activity_state = get_activity_state()  # Access centralized activity state
         super().__init__(event_bus)
         
+    def on_config_changed(self, changes: dict) -> ReloadResult:
+        """
+        Handle configuration changes.
+
+        Args:
+            changes: Dict with changed config sections
+
+        Returns:
+            ReloadResult with status and details
+        """
+        result = ReloadResult(handler_name="TTSManager", success=True)
+
+        try:
+            if "audio" in changes:
+                audio_changes = changes.get("audio", {})
+
+                # Hot-reloadable: output device
+                if "output" in audio_changes:
+                    settings = get_settings()
+                    new_device = settings.audio.output.device
+                    old_device = self.audio_player.output_device
+                    self.audio_player.output_device = new_device
+                    result.changes_applied.append(f"audio.output.device: {old_device} -> {new_device}")
+                    logger.info(f"Output device updated: {new_device}")
+
+                # Restart-required: input device
+                if "input" in audio_changes:
+                    result.restart_required.append("audio.input requires AudioDriver restart")
+
+            if "services" in changes:
+                # Update WebSocket URL
+                new_url = get_config("services", "tts_websocket_url", default="ws://localhost:8003/synthesize/stream")
+                if new_url != self.url:
+                    self.url = new_url
+                    # Close existing connection, will reconnect on next request
+                    if self.websocket:
+                        logger.info("Closing TTS WebSocket connection for URL update")
+                        # Note: We can't await here since this is sync, but the connection will close naturally
+                        # and reconnect on next TTS request
+                    result.changes_applied.append(f"services.tts_websocket_url: {self.url}")
+
+            if "tts" in changes:
+                tts_changes = changes.get("tts", {})
+
+                # Restart-required: provider change
+                if "provider" in tts_changes:
+                    result.restart_required.append("tts.provider requires TTS service restart")
+
+                # Restart-required: server URL (for GPT-SoVITS backend)
+                if "providers" in tts_changes and "gpt-sovits" in tts_changes.get("providers", {}):
+                    if "server_url" in tts_changes["providers"]["gpt-sovits"]:
+                        result.restart_required.append("tts.providers.gpt-sovits.server_url requires TTS service restart")
+
+        except Exception as e:
+            result.success = False
+            result.errors.append(f"Failed to reload TTS config: {str(e)}")
+            logger.error(f"TTS config reload error: {e}", exc_info=True)
+
+        return result
+
     def _register_handlers(self):
         self.event_bus.subscribe(EventType.TTS_REQUEST.value, self.on_tts_request)
         self.event_bus.subscribe(EventType.LLM_REQUEST.value, self.on_llm_request)  # Pre-connect on LLM request
+        self.event_bus.subscribe(EventType.VOICE_INTERRUPT.value, self.on_cancel)
+        self.event_bus.subscribe(EventType.CRITICAL_INTERRUPT.value, self.on_cancel)
+        # Keep LLM_CANCELLED for backward compatibility during migration
         self.event_bus.subscribe(EventType.LLM_CANCELLED.value, self.on_cancel)
         self.event_bus.subscribe(EventType.LLM_RESPONSE_DONE.value, self.on_llm_done)
         

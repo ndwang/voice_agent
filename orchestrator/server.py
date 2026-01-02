@@ -10,6 +10,7 @@ if str(project_root) not in sys.path:
 
 from core.server import create_app
 from core.settings import get_settings
+from core.settings.reload_coordinator import ReloadCoordinator
 from core.logging import get_logger
 from core.event_bus import EventBus, Event
 from orchestrator.api import router as orchestrator_router
@@ -69,10 +70,19 @@ class OrchestratorServer:
 
         # Hotkeys
         self.hotkey_manager = HotkeyManager()
+
+        # Reload coordinator for hot config updates
+        self.reload_coordinator = ReloadCoordinator()
+        self.reload_coordinator.register_handler("InteractionManager", self.interaction_manager.on_config_changed)
+        self.reload_coordinator.register_handler("TTSManager", self.tts_manager.on_config_changed)
+        self.reload_coordinator.register_handler("HotkeyManager", self.hotkey_manager.on_config_changed)
+        logger.debug("ReloadCoordinator initialized with handlers")
         
     async def start(self):
-        # Start queue consumer
-        await self.queue_consumer.start()
+        # Start event bus processor
+        await self.event_bus.start()
+
+        # Queue consumer is now purely event-driven, no start() needed
 
         # Start sources
         await self.stt_source.start()
@@ -113,11 +123,12 @@ class OrchestratorServer:
         logger.info("Orchestrator Logic Started")
 
     async def stop(self):
-        await self.queue_consumer.stop()
+        # Queue consumer is now purely event-driven, no stop() needed
         await self.audio_driver.stop()
         await self.stt_source.stop()
         await self.bilibili_source.stop()
         self.hotkey_manager.stop()
+        await self.event_bus.stop()
         logger.info("Orchestrator Logic Stopped")
 
     async def toggle_listening(self) -> bool:
@@ -154,10 +165,12 @@ def main():
     import orchestrator.api.hotkeys
     import orchestrator.api.metrics
     import orchestrator.api.tools
+    import orchestrator.api.config
     orchestrator.api.ui.orchestrator = orch
     orchestrator.api.hotkeys.orchestrator = orch
     orchestrator.api.metrics.metrics_manager = orch.metrics_manager
     orchestrator.api.tools.tool_registry = orch.tool_registry
+    orchestrator.api.config.orchestrator = orch
 
     # 3. Create Server
     app = create_app(

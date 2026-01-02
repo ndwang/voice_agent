@@ -590,6 +590,66 @@ button:disabled {
   letter-spacing: 0.05em;
 }
 
+/* Reference Dictionary Styles */
+.reference-dict-container {
+  margin-bottom: 16px;
+}
+
+.references-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.reference-box {
+  border: 1px solid #374151;
+  border-radius: 8px;
+  padding: 16px;
+  background: #1a1d25;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  position: relative;
+}
+
+.reference-box .config-form-group {
+  margin-bottom: 0;
+}
+
+.delete-reference-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 4px 8px;
+  font-size: 0.75rem;
+  background: #7f1d1d;
+  border: 1px solid #991b1b;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+  grid-column: 2;
+}
+
+.delete-reference-btn:hover {
+  background: #991b1b;
+}
+
+.add-reference-btn {
+  padding: 8px 12px;
+  background: #1e3a8a;
+  border: 1px solid #3b82f6;
+  border-radius: 6px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 0.85rem;
+  align-self: flex-start;
+}
+
+.add-reference-btn:hover {
+  background: #1e40af;
+}
+
 /* Tool Message Styles */
 .message.tool {
   align-self: flex-start;

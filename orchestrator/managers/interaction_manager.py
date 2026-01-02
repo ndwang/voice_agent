@@ -3,6 +3,7 @@ from typing import Optional
 from core.event_bus import EventBus, Event
 from core.logging import get_logger
 from core.settings import get_settings, LLMSettings, OrchestratorSettings
+from core.settings.reload_result import ReloadResult
 from orchestrator.events import EventType
 from orchestrator.managers.base import BaseManager
 from orchestrator.managers.context_manager import ContextManager
@@ -59,27 +60,67 @@ class InteractionManager(BaseManager):
 
         super().__init__(event_bus)
 
-    def on_config_changed(self, changes: dict):
+    def on_config_changed(self, changes: dict) -> ReloadResult:
         """
         React to configuration changes.
 
         Args:
             changes: Dict with changed config sections
-        """
-        if "llm" in changes:
-            # LLM config changed - reload provider
-            self.llm_settings = get_settings().llm
-            self.disable_thinking = self.llm_settings.get_provider_config().disable_thinking
-            self.llm_provider = create_provider(self.llm_settings)
-            logger.info(f"LLM provider reloaded: {self.llm_settings.provider}")
 
-        if "orchestrator" in changes:
-            # Orchestrator config changed
-            self.orch_settings = get_settings().orchestrator
-            logger.info("Orchestrator settings updated")
+        Returns:
+            ReloadResult with status and details
+        """
+        result = ReloadResult(handler_name="InteractionManager", success=True)
+
+        try:
+            if "llm" in changes:
+                # LLM config changed - reload provider
+                old_provider = self.llm_settings.provider
+                self.llm_settings = get_settings().llm
+                new_provider = self.llm_settings.provider
+                self.disable_thinking = self.llm_settings.get_provider_config().disable_thinking
+                self.llm_provider = create_provider(self.llm_settings)
+
+                result.changes_applied.append(f"llm.provider: {old_provider} -> {new_provider}")
+                logger.info(f"LLM provider reloaded: {new_provider}")
+
+            if "orchestrator" in changes:
+                # Orchestrator config changed
+                orch_changes = changes.get("orchestrator", {})
+
+                # Hot-reloadable: system_prompt_file
+                if "system_prompt_file" in orch_changes:
+                    old_file = self.orch_settings.system_prompt_file
+                    self.orch_settings = get_settings().orchestrator
+                    new_file = self.orch_settings.system_prompt_file
+
+                    # Reload system prompt
+                    self.context_manager.system_prompt_file = new_file
+                    self.context_manager.reload_system_prompt()
+
+                    result.changes_applied.append(f"orchestrator.system_prompt_file: {old_file} -> {new_file}")
+                    logger.info(f"System prompt reloaded: {new_file}")
+                else:
+                    # Other orchestrator settings
+                    self.orch_settings = get_settings().orchestrator
+                    logger.info("Orchestrator settings updated")
+
+                # Restart-required: host/port
+                if "host" in orch_changes or "port" in orch_changes:
+                    result.restart_required.append("orchestrator.host/port requires Orchestrator restart")
+
+        except Exception as e:
+            result.success = False
+            result.errors.append(f"Failed to reload config: {str(e)}")
+            logger.error(f"Config reload error: {e}", exc_info=True)
+
+        return result
 
     def _register_handlers(self):
         self.event_bus.subscribe(EventType.INPUT_RECEIVED.value, self.on_input_received)
+        self.event_bus.subscribe(EventType.VOICE_INTERRUPT.value, self.on_cancel)
+        self.event_bus.subscribe(EventType.CRITICAL_INTERRUPT.value, self.on_cancel)
+        # Keep LLM_CANCELLED for backward compatibility during migration
         self.event_bus.subscribe(EventType.LLM_CANCELLED.value, self.on_cancel)
         if self.tool_registry:
             self.event_bus.subscribe(EventType.TOOL_INTERPRETATION_REQUEST.value, self.on_tool_interpretation_request)
@@ -94,19 +135,21 @@ class InteractionManager(BaseManager):
 
         This replaces the old on_transcript handler and works with all input sources.
         """
-        if not self.activity_state.state.listening:
-            return
-
         raw_text = event.data.get("text")
         source = event.data.get("source", "unknown")
         priority = event.data.get("priority", 999)
+        images = event.data.get("images")  # Optional images field
 
         if not raw_text:
             return
 
+        if not self.activity_state.state.listening and source == "voice":
+            self.logger.info("Not listening, skipping voice")
+            return
+
         # Check interruption state and format input accordingly
         was_interrupted = self.interruption_manager.was_interrupted()
-        text = self.context_manager.format_input(raw_text, source, was_interrupted)
+        text = self.context_manager.format_input(raw_text, source, images=images, was_interrupted=was_interrupted)
 
         # Clear interruption flag after handling
         if was_interrupted:
@@ -123,8 +166,8 @@ class InteractionManager(BaseManager):
 
         await self.event_bus.publish(Event(EventType.LLM_REQUEST.value))
 
-        # Prepare context
-        context = self.context_manager.format_context_for_llm(text)
+        # Prepare context (includes images for current message)
+        context = self.context_manager.format_context_for_llm(text, images=images)
 
         try:
             # Get tools schema if tool registry is available

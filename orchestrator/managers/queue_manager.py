@@ -50,7 +50,26 @@ class QueueManager(BaseManager):
     def _register_handlers(self):
         """Subscribe to input events from various sources."""
         self.event_bus.subscribe(EventType.TRANSCRIPT_FINAL.value, self.on_transcript_final)
+        self.event_bus.subscribe(EventType.BILIBILI_DANMAKU.value, self.on_bilibili_danmaku)
         # Future: Subscribe to bilibili events, ocr events, game events
+
+    async def on_bilibili_danmaku(self, event: Event):
+        """Handle incoming danmaku."""
+        danmaku = event.data
+
+        if not danmaku['content'].startswith('!'):
+            return
+
+        item = InputItem(
+            priority=self.priorities["bilibili_single"],
+            source_type="bilibili_single",
+            get_data={"user": danmaku['user'], "content": danmaku['content'][1:]}
+        )
+
+        self.logger.info(f"Enqueued bilibili_single: {danmaku['user']}: {danmaku['content']}")
+        await self._enqueue(item)
+
+
 
     async def on_transcript_final(self, event: Event):
         """
@@ -92,6 +111,12 @@ class QueueManager(BaseManager):
         await self.queue.put(item, priority=item.priority)
         self.logger.debug(f"Enqueued {item.source_type} (P{item.priority})")
 
+        # Notify consumer that item was added
+        await self.event_bus.publish(Event("queue.item_added", {
+            "priority": item.priority,
+            "source_type": item.source_type
+        }))
+
     def has_items(self) -> bool:
         """Check if queue has any items."""
         return not self.queue.empty()
@@ -111,3 +136,7 @@ class QueueManager(BaseManager):
     def get_size(self) -> int:
         """Get current queue size."""
         return self.queue.qsize()
+
+    def peek_priority(self) -> Optional[int]:
+        """Get priority of next item without dequeuing."""
+        return self.queue.peek_priority()

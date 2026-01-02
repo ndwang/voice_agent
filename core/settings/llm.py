@@ -1,12 +1,19 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 from typing import Literal, Optional, Any
 
 
 class GeminiConfig(BaseModel):
     """Configuration for Gemini provider"""
     model: str = "gemini-2.5-flash"
-    api_key: str = ""
+    api_key: Optional[str] = None
+    disable_thinking: bool = False
     generation_config: Optional[dict] = Field(default_factory=dict)
+
+    @field_validator('api_key', mode='before')
+    @classmethod
+    def convert_none_to_empty(cls, v):
+        """Convert None to empty string for api_key"""
+        return v if v is not None else ""
 
 
 class OllamaConfig(BaseModel):
