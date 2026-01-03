@@ -1,23 +1,25 @@
 """Hotkey management endpoints."""
-from fastapi import APIRouter, HTTPException
+from typing import TYPE_CHECKING
+from fastapi import APIRouter, HTTPException, Depends
 from core.logging import get_logger
 from orchestrator.api.models import HotkeyUpdateRequest
+from orchestrator.api.dependencies import get_orchestrator
+
+if TYPE_CHECKING:
+    from orchestrator.server import OrchestratorServer
 
 logger = get_logger(__name__)
 router = APIRouter()
 
-# Global reference (will be injected by server.py)
-orchestrator = None
-
 
 @router.get("/ui/hotkeys")
-async def get_hotkeys():
+async def get_hotkeys(orchestrator: "OrchestratorServer" = Depends(get_orchestrator)):
     """Get all registered hotkeys."""
     return {"hotkeys": orchestrator.hotkey_manager.get_registered_hotkeys()}
 
 
 @router.get("/ui/hotkeys/{hotkey_id}")
-async def get_hotkey(hotkey_id: str):
+async def get_hotkey(hotkey_id: str, orchestrator: "OrchestratorServer" = Depends(get_orchestrator)):
     """Get specific hotkey configuration."""
     hotkey = orchestrator.hotkey_manager.get_hotkey(hotkey_id)
     if not hotkey:
@@ -26,7 +28,7 @@ async def get_hotkey(hotkey_id: str):
 
 
 @router.post("/ui/hotkeys/{hotkey_id}")
-async def update_hotkey(hotkey_id: str, request: HotkeyUpdateRequest):
+async def update_hotkey(hotkey_id: str, request: HotkeyUpdateRequest, orchestrator: "OrchestratorServer" = Depends(get_orchestrator)):
     """Update existing hotkey."""
     if orchestrator.hotkey_manager.get_hotkey(hotkey_id):
         success = orchestrator.hotkey_manager.update_hotkey(hotkey_id, request.hotkey)
@@ -36,7 +38,7 @@ async def update_hotkey(hotkey_id: str, request: HotkeyUpdateRequest):
 
 
 @router.delete("/ui/hotkeys/{hotkey_id}")
-async def delete_hotkey(hotkey_id: str):
+async def delete_hotkey(hotkey_id: str, orchestrator: "OrchestratorServer" = Depends(get_orchestrator)):
     """Delete hotkey."""
     if hotkey_id == "toggle_listening":
         raise HTTPException(status_code=400, detail="Cannot delete core hotkey")

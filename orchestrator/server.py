@@ -166,38 +166,31 @@ def main():
     settings = get_settings()
     HOST = settings.orchestrator.host
     PORT = settings.orchestrator.port
-    
+
     # 1. Initialize Logic
     orch = OrchestratorServer()
-    
-    # 2. Inject into API router (Global variable hack for simplicity in refactor)
-    import orchestrator.api.ui
-    import orchestrator.api.hotkeys
-    import orchestrator.api.metrics
-    import orchestrator.api.tools
-    import orchestrator.api.config
-    orchestrator.api.ui.orchestrator = orch
-    orchestrator.api.hotkeys.orchestrator = orch
-    orchestrator.api.metrics.metrics_manager = orch.metrics_manager
-    orchestrator.api.tools.tool_registry = orch.tool_registry
-    orchestrator.api.config.orchestrator = orch
 
-    # 3. Create Server
+    # 2. Create Server
     app = create_app(
         title="Voice Agent Orchestrator",
         description="Event-driven Voice Agent",
         version="2.0.0",
         lifespan=lifespan_context(orch)
     )
-    
+
+    # 3. Store orchestrator in app state for dependency injection
+    app.state.orchestrator = orch
+    app.state.metrics_manager = orch.metrics_manager
+    app.state.tool_registry = orch.tool_registry
+
     app.include_router(orchestrator_router)
-    
+
     # Mount static files for UI
     from fastapi.staticfiles import StaticFiles
     static_dir = Path(__file__).parent / "static"
     if static_dir.exists():
         app.mount("/ui/assets", StaticFiles(directory=static_dir), name="static")
-    
+
     logger.info(f"Starting Orchestrator on {HOST}:{PORT}...")
     uvicorn.run(app, host=HOST, port=PORT)
 

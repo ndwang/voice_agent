@@ -1,12 +1,13 @@
-from fastapi import APIRouter
-from orchestrator.managers.metrics_manager import MetricsManager
-from typing import Optional
+from typing import TYPE_CHECKING
+from fastapi import APIRouter, Depends
+from orchestrator.api.dependencies import get_metrics_manager
+
+if TYPE_CHECKING:
+    from orchestrator.managers.metrics_manager import MetricsManager
 
 router = APIRouter()
 
-# Will be injected during server startup
-metrics_manager: Optional[MetricsManager] = None
 
 @router.get("/metrics")
-async def get_metrics():
+async def get_metrics(metrics_manager: "MetricsManager" = Depends(get_metrics_manager)):
     return metrics_manager.history.get_analysis()
