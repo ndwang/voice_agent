@@ -55,6 +55,9 @@ class QueueConsumer(BaseManager):
         self.cooldown_seconds = self.settings.orchestrator.queue_cooldown_seconds
         self._cooldown_task: Optional[asyncio.Task] = None
 
+        # Voice interrupt timeout configuration
+        self.interrupt_timeout_seconds = self.settings.orchestrator.interrupt_timeout_seconds
+
         # Track when voice interrupt is pending (between VOICE_INTERRUPT and voice processing)
         self._pending_voice_interrupt = False
         self._interrupt_timeout_task: Optional[asyncio.Task] = None
@@ -308,13 +311,19 @@ class QueueConsumer(BaseManager):
             raise
 
     async def _clear_interrupt_flag_after_timeout(self):
-        """Safety timeout: Clear interrupt flag if no voice input arrives within 10s."""
+        """
+        Safety timeout: Clear interrupt flag if no voice input arrives within configured timeout.
+
+        This prevents the interrupt flag from blocking the queue indefinitely if voice
+        detection triggers but no actual transcript is received (e.g., false positive VAD).
+        """
         try:
-            await asyncio.sleep(10.0)
+            await asyncio.sleep(self.interrupt_timeout_seconds)
             async with self._state_lock:
                 if self._pending_voice_interrupt:
                     self.logger.warning(
-                        "Voice interrupt timeout - no transcript received, clearing flag"
+                        f"Voice interrupt timeout ({self.interrupt_timeout_seconds}s) - "
+                        "no transcript received, clearing flag"
                     )
                     self._pending_voice_interrupt = False
             await self._try_process_next()
