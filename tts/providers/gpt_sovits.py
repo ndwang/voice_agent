@@ -328,11 +328,16 @@ class GPTSoVITSProvider(TTSProvider):
         else:
             return 500, f"GPT-SoVITS synthesis error: {str(exception)}"
     
+    async def close(self):
+        """Explicitly close HTTP session."""
+        if self._session and not self._session.closed:
+            await self._session.close()
+            logger.debug("GPT-SoVITS session closed")
+
     async def __aenter__(self):
         """Async context manager entry."""
         return self
-    
+
     async def __aexit__(self, exc_type, exc_val, exc_tb):
         """Async context manager exit - cleanup session."""
-        if self._session and not self._session.closed:
-            await self._session.close()
+        await self.close()

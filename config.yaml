@@ -10,7 +10,7 @@ orchestrator:
     toggle_listening: ctrl+shift+l
     cancel_speech: ctrl+shift+c
 llm:
-  provider: ollama
+  provider: gemini
   providers:
     gemini:
       model: gemini-2.5-flash
@@ -138,7 +138,7 @@ obs:
   clear_filter_name: MoveOutRight
 bilibili:
   enabled: true
-  room_id: 31232063
+  room_id: 21379697 #31232063
   sessdata: d10a8829%2C1782692006%2C9540c%2Ac2CjCRf7tmL8kcxPkhHcVlsM3Jgj_zSL2-ZxOx5tj8CFHG3FceyugoVJta1N3bnnHnEwUSVnhVRmsxbmJHQlZabnN0OUx4TnZNVkMydUFUM0R5NDgzSlpRLU1TVjN4OThnbHFucG1ydFNqQk9qRURPX1ZXUGVxMl8yV3J6aXE2eWVyd2ZFa0RwdzhBIIEC
   danmaku_ttl_seconds: 60
 services:
