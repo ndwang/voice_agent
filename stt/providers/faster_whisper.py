@@ -3,7 +3,6 @@ Faster-Whisper STT Provider
 
 Faster-whisper provider implementation.
 """
-import logging
 import sys
 from pathlib import Path
 from typing import Tuple, List, Dict, Any
@@ -12,8 +11,9 @@ import torch
 from faster_whisper import WhisperModel
 
 from stt.base import STTProvider, Segment
+from core.logging import get_logger
 
-logger = logging.getLogger(__name__)
+logger = get_logger(__name__)
 
 
 class FasterWhisperProvider(STTProvider):

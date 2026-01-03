@@ -5,7 +5,6 @@ GPT-SoVITS provider implementation with reference audio support.
 """
 import asyncio
 import io
-import logging
 import os
 import numpy as np
 from typing import AsyncIterator, Optional, Dict, Any
@@ -13,8 +12,9 @@ import aiohttp
 from pydub import AudioSegment
 
 from tts.base import TTSProvider
+from core.logging import get_logger
 
-logger = logging.getLogger(__name__)
+logger = get_logger(__name__)
 
 
 class GPTSoVITSProvider(TTSProvider):

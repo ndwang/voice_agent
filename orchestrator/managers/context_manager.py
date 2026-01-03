@@ -8,9 +8,10 @@ from datetime import datetime
 from pathlib import Path
 import os
 import asyncio
-import logging
 
-logger = logging.getLogger(__name__)
+from core.logging import get_logger
+
+logger = get_logger(__name__)
 
 
 class ContextManager:

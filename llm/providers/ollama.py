@@ -3,7 +3,6 @@ Ollama Provider
 
 Implementation of LLMProvider for Ollama using the ollama Python library.
 """
-import logging
 import re
 from typing import AsyncIterator, Optional, List, Dict, Tuple, Union, Any
 
@@ -13,8 +12,9 @@ except ImportError:
     AsyncClient = None
 
 from llm.base import LLMProvider
+from core.logging import get_logger
 
-logger = logging.getLogger(__name__)
+logger = get_logger(__name__)
 
 
 class OllamaProvider(LLMProvider):

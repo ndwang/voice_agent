@@ -4,7 +4,6 @@ FunASR STT Provider
 FunASR provider implementation using Fun-ASR-Nano model.
 Supports both batch and streaming modes.
 """
-import logging
 import sys
 from pathlib import Path
 from typing import Tuple, List, Dict, Any, Optional
@@ -13,8 +12,9 @@ import torch
 
 from stt.base import STTProvider, Segment
 from core.settings.stt import FunASRStreamingConfig, FunASRVADKwargs
+from core.logging import get_logger
 
-logger = logging.getLogger(__name__)
+logger = get_logger(__name__)
 
 
 class FunASRProvider(STTProvider):

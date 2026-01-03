@@ -8,8 +8,12 @@ import sys
 from pathlib import Path
 import numpy as np
 import asyncio
+import logging
 
 from tts.base import TTSProvider
+from core.logging import get_logger
+
+logger = get_logger(__name__)
 
 
 class ChatTTSProvider(TTSProvider):

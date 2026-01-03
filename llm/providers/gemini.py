@@ -4,15 +4,15 @@ Google Gemini API Provider
 Implementation of LLMProvider for Google Gemini API.
 """
 from typing import AsyncIterator, Optional, List, Dict, Tuple, Union, Any
-import logging
 from google import genai
 from google.genai import types
 
 from llm.base import LLMProvider
+from core.logging import get_logger
 
 # Access types through genai module
 
-logger = logging.getLogger(__name__)
+logger = get_logger(__name__)
 
 
 
