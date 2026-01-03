@@ -26,7 +26,6 @@ class EventType(Enum):
     LLM_REQUEST = "llm.request"
     LLM_TOKEN = "llm.token"
     LLM_RESPONSE_DONE = "llm.response_done"
-    LLM_CANCELLED = "llm.cancelled"  # DEPRECATED: Use VOICE_INTERRUPT or CRITICAL_INTERRUPT
 
     # Interrupts
     VOICE_INTERRUPT = "interrupt.voice"  # Voice detected during activity - cancel & expect voice input

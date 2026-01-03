@@ -159,8 +159,8 @@ class OrchestratorServer:
         await self.activity_state.set_bilibili_superchat(enabled)
 
     async def cancel_interaction(self):
-        # Fire cancel event
-        await self.event_bus.publish(Event(EventType.LLM_CANCELLED.value))
+        # Fire critical interrupt event (user-triggered cancellation)
+        await self.event_bus.publish(Event(EventType.CRITICAL_INTERRUPT.value))
 
 def main():
     settings = get_settings()

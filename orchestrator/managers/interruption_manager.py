@@ -33,8 +33,6 @@ class InterruptionManager:
         self.event_bus.subscribe(EventType.CRITICAL_INPUT.value, self.on_critical_input)
         self.event_bus.subscribe(EventType.VOICE_INTERRUPT.value, self.on_cancelled)
         self.event_bus.subscribe(EventType.CRITICAL_INTERRUPT.value, self.on_cancelled)
-        # Keep LLM_CANCELLED for backward compatibility during migration
-        self.event_bus.subscribe(EventType.LLM_CANCELLED.value, self.on_cancelled)
 
     async def on_speech_start(self, event: Event):
         """
@@ -63,7 +61,7 @@ class InterruptionManager:
         Handle interruption events - mark if we were interrupted during response generation.
 
         Args:
-            event: VOICE_INTERRUPT, CRITICAL_INTERRUPT, or LLM_CANCELLED event
+            event: VOICE_INTERRUPT or CRITICAL_INTERRUPT event
         """
         # Check if we were still generating a response when cancelled
         if self.activity_state.state.responding:

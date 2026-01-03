@@ -43,7 +43,11 @@ class ToolExecutionManager(BaseManager):
             self.on_tool_call_requested
         )
         self.event_bus.subscribe(
-            EventType.LLM_CANCELLED.value,
+            EventType.VOICE_INTERRUPT.value,
+            self.on_cancel
+        )
+        self.event_bus.subscribe(
+            EventType.CRITICAL_INTERRUPT.value,
             self.on_cancel
         )
 

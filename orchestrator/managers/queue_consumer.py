@@ -99,7 +99,7 @@ class QueueConsumer(BaseManager):
         Voice interruption - cancel cooldown, reset to IDLE, block P2+ items.
 
         This event signals both:
-        1. Cancel current activity (like old LLM_CANCELLED)
+        1. Cancel current activity
         2. Voice input is pending (block P2+ until voice processed)
         """
         async with self._state_lock:

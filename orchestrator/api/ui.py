@@ -83,7 +83,8 @@ async def ui_events(websocket: WebSocket):
         EventType.LLM_TOKEN.value,
         EventType.LLM_RESPONSE_DONE.value,
         EventType.SPEECH_START.value,
-        EventType.LLM_CANCELLED.value,
+        EventType.VOICE_INTERRUPT.value,
+        EventType.CRITICAL_INTERRUPT.value,
         EventType.BILIBILI_DANMAKU.value,
         EventType.BILIBILI_SUPERCHAT.value,
         UI_LISTENING_STATE_CHANGED,
@@ -129,7 +130,7 @@ async def ui_events(websocket: WebSocket):
             return {"event": "llm_token", "token": data.get("token", "")}
         elif event_name == EventType.LLM_RESPONSE_DONE.value:
             return {"event": "llm_done"}
-        elif event_name == EventType.LLM_CANCELLED.value:
+        elif event_name == EventType.VOICE_INTERRUPT.value or event_name == EventType.CRITICAL_INTERRUPT.value:
             return {"event": "llm_cancelled"}
         elif event_name == EventType.SPEECH_START.value:
             return {"event": "cancelled"}

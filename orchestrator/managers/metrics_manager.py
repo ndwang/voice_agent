@@ -42,8 +42,6 @@ class MetricsManager:
         # Interruption Events
         self.event_bus.subscribe(EventType.VOICE_INTERRUPT.value, self.on_cancel)
         self.event_bus.subscribe(EventType.CRITICAL_INTERRUPT.value, self.on_cancel)
-        # Keep LLM_CANCELLED for backward compatibility during migration
-        self.event_bus.subscribe(EventType.LLM_CANCELLED.value, self.on_cancel)
 
     async def on_transcript_final(self, event: Event):
         """Store timestamp when voice transcript is finalized (before queuing)"""
