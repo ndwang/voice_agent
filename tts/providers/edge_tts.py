@@ -69,58 +69,48 @@ class EdgeTTSProvider(TTSProvider):
             pitch=pitch
         )
         
-        # Collect all audio chunks (following async_audio_streaming example)
-        audio_chunks = []
+        # Stream and convert audio chunks immediately to reduce latency
+        has_audio = False
         async for chunk in communicate.stream():
             if chunk["type"] == "audio":
-                # chunk["data"] contains the MP3 audio bytes
-                audio_chunks.append(chunk["data"])
+                # chunk["data"] contains MP3 audio bytes
+                mp3_data = chunk["data"]
+                if not mp3_data:
+                    continue
+
+                has_audio = True
+
+                # Convert this MP3 chunk to PCM immediately
+                try:
+                    # Load MP3 audio from bytes
+                    audio = AudioSegment.from_mp3(io.BytesIO(mp3_data))
+                except Exception as e:
+                    # Skip invalid chunks but continue processing
+                    continue
+
+                # Skip empty audio
+                if len(audio) == 0:
+                    continue
+
+                # Convert to mono if needed
+                if audio.channels > 1:
+                    audio = audio.set_channels(1)
+
+                # Convert to float32 PCM (normalized to [-1, 1])
+                samples = np.array(audio.get_array_of_samples(), dtype=np.float32)
+                # Normalize to [-1, 1] range (int16 range is [-32768, 32767])
+                audio_float = samples / 32768.0
+                audio_bytes = audio_float.tobytes()
+
+                # Yield chunk immediately
+                if len(audio_bytes) >= 4:  # At least one float32 sample
+                    yield audio_bytes
             # Note: We ignore WordBoundary and SentenceBoundary chunks
-            # as we only need the audio data
-        
-        # Validate we have audio data
-        if not audio_chunks:
+            # Could be used for word-level subtitle timing in the future
+
+        # Validate we received at least some audio
+        if not has_audio:
             raise ValueError("No audio data received from Edge TTS")
-        
-        # Combine all MP3 chunks
-        mp3_data = b"".join(audio_chunks)
-        
-        if len(mp3_data) == 0:
-            raise ValueError("Empty audio data received from Edge TTS")
-        
-        # Convert MP3 audio to int16 PCM using pydub
-        try:
-            # Load MP3 audio from bytes
-            audio = AudioSegment.from_mp3(io.BytesIO(mp3_data))
-        except Exception as e:
-            raise ValueError(f"Failed to decode MP3 audio: {e}")
-        
-        # Validate audio was loaded
-        if len(audio) == 0:
-            raise ValueError("Decoded audio is empty")
-        
-        # Convert to mono if needed
-        if audio.channels > 1:
-            audio = audio.set_channels(1)
-        
-        # Convert to float32 PCM (normalized to [-1, 1])
-        # Get samples as numpy array and normalize
-        samples = np.array(audio.get_array_of_samples(), dtype=np.float32)
-        # Normalize to [-1, 1] range (int16 range is [-32768, 32767])
-        audio_float = samples / 32768.0
-        # Convert to bytes
-        audio_bytes = audio_float.tobytes()
-        
-        # Validate output audio
-        if len(audio_bytes) == 0:
-            raise ValueError("Converted PCM audio is empty")
-        
-        # Ensure we have at least 4 bytes (one float32 sample)
-        if len(audio_bytes) < 4:
-            raise ValueError(f"Audio too short: {len(audio_bytes)} bytes (need at least 4)")
-        
-        # Yield as a single chunk (could be split into smaller chunks if needed)
-        yield audio_bytes
     
     async def list_voices(self) -> list:
         """
