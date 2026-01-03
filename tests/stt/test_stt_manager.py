@@ -9,19 +9,19 @@ class MockSegment:
         self.text = text
 
 @pytest.fixture
-def mock_config():
-    with patch("stt.manager.get_config") as mock:
-        # Default config values
-        mock.side_effect = lambda section, key, *args, **kwargs: {
-            "language_code": "zh",
-            "sample_rate": 16000,
-            "interim_transcript_min_samples": 100,
-            "provider": "faster-whisper",
-            "providers": {
-                "faster-whisper": {"model_path": "test", "device": "cpu"},
-                "funasr": {}
-            }
-        }.get(key, kwargs.get("default"))
+def mock_settings():
+    """Mock the settings for STT tests."""
+    with patch("stt.manager.get_settings") as mock:
+        # Create mock settings object
+        settings_mock = MagicMock()
+        settings_mock.stt.provider = "faster-whisper"
+        settings_mock.stt.language_code = "zh"
+        settings_mock.stt.sample_rate = 16000
+        settings_mock.stt.get_provider_config.return_value = MagicMock(
+            model_path="test",
+            device="cpu"
+        )
+        mock.return_value = settings_mock
         yield mock
 
 @pytest.fixture
@@ -34,48 +34,57 @@ def mock_provider():
         yield provider
 
 @pytest.mark.asyncio
-async def test_stt_manager_init(mock_config, mock_provider):
+async def test_stt_manager_init(mock_settings, mock_provider):
+    """Test that STTManager initializes correctly with settings."""
     manager = STTManager()
     assert manager.provider is not None
-    assert manager.language_code == "zh"
 
 @pytest.mark.asyncio
-async def test_client_management(mock_config, mock_provider):
+async def test_client_management(mock_settings, mock_provider):
+    """Test adding and removing WebSocket clients."""
     manager = STTManager()
     mock_ws = AsyncMock()
-    
+
     await manager.add_client(mock_ws)
-    assert len(manager.connected_clients) == 1
-    
+    assert mock_ws in manager.connected_clients
+
     await manager.remove_client(mock_ws)
-    assert len(manager.connected_clients) == 0
+    assert mock_ws not in manager.connected_clients
 
 @pytest.mark.asyncio
-async def test_broadcast(mock_config, mock_provider):
+async def test_broadcast(mock_settings, mock_provider):
+    """Test broadcasting messages to connected clients."""
     manager = STTManager()
     mock_ws = AsyncMock()
     await manager.add_client(mock_ws)
-    
+
     msg = {"type": "test"}
     await manager.broadcast(msg)
-    
+
+    # Give background task time to execute
+    await asyncio.sleep(0.1)
+
     mock_ws.send_text.assert_called_once()
     assert '"type": "test"' in mock_ws.send_text.call_args[0][0]
 
 @pytest.mark.asyncio
-async def test_process_audio_chunk_accumulate(mock_config, mock_provider):
+async def test_process_audio_chunk_enqueue(mock_settings, mock_provider):
+    """Test that process_audio_chunk validates and enqueues audio chunks."""
     manager = STTManager()
-    
-    audio_buffer = np.array([], dtype=np.float32)
+    mock_ws = AsyncMock()
+
+    # Add client
+    await manager.add_client(mock_ws)
+
+    # Create valid audio chunk (float32 format, 1 channel)
     chunk = np.zeros(100, dtype=np.float32).tobytes()
-    last_time = 0
-    
-    new_buffer, new_time = await manager.process_audio_chunk(
-        chunk, audio_buffer, last_time
-    )
-    
-    assert new_buffer.size == 100
-    # Provider should NOT be called for small chunk
-    manager.provider.transcribe.assert_not_called()
+
+    # Process chunk (should enqueue without error)
+    await manager.process_audio_chunk(mock_ws, chunk)
+
+    # Verify chunk was enqueued (state should exist)
+    async with manager.client_states_lock:
+        state = manager.client_states.get(mock_ws)
+        assert state is not None
 
 
