@@ -33,9 +33,9 @@ class CommentaryAnalyzer:
 - 作为一个投入的观察者来反应，而不是旁白
 
 节奏指导：
-- 避免连续反应，除非有重大发展
-- 如果超过8行没有反应，考虑做出反应以保持参与感
-- 关键在于平衡：不要过度反应，也不要保持沉默太久
+- 保持自然的反应节奏，在重要时刻做出评论
+- 避免对每一行都评论，也不要长时间保持沉默
+- 关键在于平衡：根据内容的重要性和情感强度来判断
 
 你将收到：
 1. 目前为止的章节上下文（从章节开始到当前行的所有对话）
@@ -139,12 +139,8 @@ class CommentaryAnalyzer:
         current_line = dialogue.format_for_llm()
         lines_since_reaction = self._calculate_lines_since_last_reaction()
 
-        # Build pacing info
+        # Build pacing info (just the number, let LLM decide)
         pacing_info = f"距离上次反应的行数：{lines_since_reaction}"
-        if lines_since_reaction == 0:
-            pacing_info += "（刚刚反应过 - 避免连续反应，除非至关重要）"
-        elif lines_since_reaction >= 8:
-            pacing_info += "（考虑做出反应以保持参与感）"
 
         user_prompt = f"""{chapter_context}
 
