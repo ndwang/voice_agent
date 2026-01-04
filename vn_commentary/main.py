@@ -133,12 +133,13 @@ class VNCommentaryDriver:
         reader = DialogueReader(dialogue_file)
         logger.info(f"Loaded {len(reader)} dialogues from {dialogue_file}")
 
-        # Create analyzer
-        self.analyzer = self._create_analyzer()
+        # Create analyzer if not already created (reuse across chapters)
+        if self.analyzer is None:
+            self.analyzer = self._create_analyzer()
 
-        # Set full chapter context for better LLM understanding
+        # Set chapter context (LLM will see lines progressively as we process)
         self.analyzer.set_chapter(reader.dialogues)
-        logger.info("Chapter context loaded into analyzer")
+        logger.info("Chapter loaded into analyzer")
 
         # Process each dialogue
         delay = self.config.get("processing", {}).get("delay_between_dialogues", 0.0)
@@ -164,12 +165,9 @@ class VNCommentaryDriver:
         # Signal end of chapter
         self.analyzer.end_chapter()
 
-        # Save results if configured
+        # Save results if configured (append mode for multi-chapter)
         if self.config.get("output", {}).get("save_results", True):
             self._save_results()
-
-        # Print summary
-        self._print_summary()
 
     def _save_results(self):
         """Save analysis results to JSON file."""
@@ -214,8 +212,9 @@ async def main():
         description="Visual Novel Commentary System - Analyze VN dialogues with LLM"
     )
     parser.add_argument(
-        "dialogue_file",
-        help="Path to JSON file containing visual novel dialogues"
+        "dialogue_files",
+        nargs="+",
+        help="Path(s) to JSON file(s) containing visual novel dialogues (one file per chapter)"
     )
     parser.add_argument(
         "--config",
@@ -225,9 +224,19 @@ async def main():
 
     args = parser.parse_args()
 
-    # Create and run driver
+    # Create driver
     driver = VNCommentaryDriver(config_path=args.config)
-    await driver.process_dialogues(args.dialogue_file)
+
+    # Process each chapter file
+    for chapter_num, dialogue_file in enumerate(args.dialogue_files, 1):
+        print(f"\n{'='*60}")
+        print(f"PROCESSING CHAPTER {chapter_num}: {dialogue_file}")
+        print(f"{'='*60}\n")
+        await driver.process_dialogues(dialogue_file)
+
+    # Final summary across all chapters
+    if len(args.dialogue_files) > 1:
+        driver._print_summary()
 
 
 if __name__ == "__main__":

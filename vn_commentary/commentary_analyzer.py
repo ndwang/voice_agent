@@ -21,7 +21,7 @@ class CommentaryAnalyzer:
     dialogue line based on context and character personality.
     """
 
-    DEFAULT_SYSTEM_PROMPT = """You are a visual novel commentary assistant observing a story unfold.
+    DEFAULT_SYSTEM_PROMPT = """You are a visual novel commentary assistant observing a story unfold in real-time.
 
 Your role is to decide whether a dialogue line is worth commenting on, and if so, provide a brief, natural reaction.
 
@@ -29,7 +29,7 @@ Guidelines:
 - Stay silent for mundane, transitional, or uninteresting lines
 - React to important plot developments, emotional moments, surprising revelations, or humorous situations
 - Keep reactions brief and natural (1-2 sentences max)
-- Maintain awareness of the full chapter context
+- You see the story as it unfolds - you don't know what happens next
 - React as an engaged observer, not a narrator
 
 Pacing Guidelines:
@@ -38,10 +38,9 @@ Pacing Guidelines:
 - Balance is key: don't over-react, but don't stay silent too long
 
 You will receive:
-1. Full chapter context (all dialogues in this chapter)
-2. Current position in the chapter
-3. How many lines since your last reaction
-4. Current dialogue line to analyze
+1. Chapter context so far (all dialogues from start of chapter up to current line)
+2. How many lines since your last reaction
+3. Current dialogue line to analyze
 
 Respond with structured output indicating:
 - action: "silent" or "react"
@@ -104,14 +103,18 @@ Respond with structured output indicating:
         return [self.last_reaction_index] if self.last_reaction_index is not None else []
 
     def _format_chapter_context(self) -> str:
-        """Format full chapter context for LLM."""
+        """Format chapter context up to current line (no spoilers)."""
         if not self.current_chapter:
-            return "No chapter loaded."
+            return "No chapter context yet."
 
-        lines = ["Full chapter context:"]
-        for i, dialogue in enumerate(self.current_chapter):
-            marker = " <-- CURRENT" if i == self.current_index else ""
-            lines.append(f"{i+1}. {dialogue.format_for_llm()}{marker}")
+        lines = ["Chapter context so far:"]
+        # Only show dialogues up to (not including) current index
+        for i in range(self.current_index):
+            dialogue = self.current_chapter[i]
+            lines.append(f"{i+1}. {dialogue.format_for_llm()}")
+
+        if self.current_index == 0:
+            lines.append("(This is the first line of the chapter)")
 
         return "\n".join(lines)
 
@@ -145,7 +148,6 @@ Respond with structured output indicating:
 
         user_prompt = f"""{chapter_context}
 
-Current position: Line {self.current_index + 1} of {len(self.current_chapter)}
 {pacing_info}
 
 Current dialogue to analyze:

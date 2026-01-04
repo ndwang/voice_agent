@@ -82,17 +82,24 @@ Or wrapped in an object:
 
 ## Usage
 
-### Basic Usage
+### Single Chapter
 
 ```bash
 # From the project root directory
 uv run python -m vn_commentary.main vn_commentary/example_dialogue.json
 ```
 
+### Multiple Chapters
+
+```bash
+# Process multiple chapter files in sequence
+uv run python -m vn_commentary.main chapter01.json chapter02.json chapter03.json
+```
+
 ### With Custom Config
 
 ```bash
-uv run python -m vn_commentary.main path/to/dialogues.json --config path/to/config.yaml
+uv run python -m vn_commentary.main dialogues.json --config path/to/config.yaml
 ```
 
 ### Setting API Key
@@ -111,13 +118,22 @@ llm:
 
 ## How It Works
 
-### Full Chapter Context
+### Progressive Chapter Context (No Spoilers!)
 
-The analyzer receives **all dialogues in the chapter** before processing begins. This allows the LLM to:
-- Understand the overall plot arc
-- Anticipate important moments
-- Make better decisions about when to react
-- Reference future events in its reasoning
+The analyzer loads the chapter file but only shows the LLM dialogues **up to the current position**. This means:
+- The LLM experiences the story in real-time, just like a reader
+- No spoilers - the LLM doesn't know what happens next
+- Can reference all previous context from the chapter
+- Reactions are natural and unspoiled
+
+### Multi-Chapter Support
+
+Process multiple chapters by providing multiple files:
+```bash
+uv run python -m vn_commentary.main chapter1.json chapter2.json chapter3.json
+```
+
+The analyzer maintains state across chapters, allowing continuous commentary throughout the story.
 
 ### Smart Pacing System
 
@@ -133,16 +149,18 @@ This prevents over-commenting on every line while ensuring the system doesn't st
 
 ### Example Reasoning
 
-With full context and pacing, the LLM provides sophisticated reasoning:
+With progressive context (no spoilers) and pacing awareness, the LLM provides natural, unspoiled reactions:
 
+**Line 7 - Doesn't know what's coming:**
 ```json
 {
-  "reasoning": "The previous line (11) was a significant emotional development (Emma running out crying),
-  which I reacted to. This line is the protagonist's immediate internal reaction to that event.
-  Reacting consecutively would be over-commentary, as the core emotional beat has already been
-  established and commented on."
+  "reasoning": "This is a direct, natural follow-up question to the previous line about a 'special day.'
+  Reacting to consecutive lines for such a minor conversational beat would be over-commenting.
+  I'll wait for the answer to the protagonist's question, which will likely be more significant."
 }
 ```
+
+The LLM is genuinely curious about what the "special day" is - it doesn't know it's Emma's birthday yet!
 
 ## Output
 
