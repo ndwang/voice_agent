@@ -5,7 +5,9 @@ A standalone program that analyzes visual novel dialogues and generates contextu
 ## Features
 
 - **LLM-Powered Analysis**: Uses Gemini (or other LLM providers) with structured output to make intelligent commentary decisions
-- **Context-Aware**: Maintains a sliding window of recent dialogues for better contextual understanding
+- **Full Chapter Context**: LLM receives all dialogues in the chapter for better understanding of plot and character development
+- **Smart Pacing**: Tracks reaction history and provides pacing feedback to avoid over-commenting or staying silent too long
+- **Chapter-Aware Processing**: Supports chapter boundaries with proper state management
 - **Configurable**: YAML-based configuration for LLM settings, context size, and output options
 - **Reusable Components**: Leverages LLM providers and utilities from the main voice agent project
 - **Structured Output**: Returns JSON-formatted decisions with action (silent/react), reaction text, and reasoning
@@ -15,9 +17,12 @@ A standalone program that analyzes visual novel dialogues and generates contextu
 The system consists of several components:
 
 - **DialogueReader**: Loads and parses visual novel dialogues from JSON files
-- **ContextManager**: Maintains a sliding window of recent dialogues for context
-- **CommentaryAnalyzer**: Uses LLM to analyze dialogues and decide whether to react
-- **VNCommentaryDriver**: Main orchestrator that coordinates the pipeline
+- **ContextManager**: Maintains a sliding window of recent dialogues for context (legacy - chapter context now used)
+- **CommentaryAnalyzer**: Uses LLM to analyze dialogues with full chapter context and pacing awareness
+  - Tracks current position in chapter
+  - Monitors lines since last reaction
+  - Provides pacing guidance to LLM
+- **VNCommentaryDriver**: Main orchestrator that coordinates the pipeline and manages chapter boundaries
 
 ## Installation
 
@@ -104,6 +109,41 @@ llm:
   api_key: "your-api-key-here"
 ```
 
+## How It Works
+
+### Full Chapter Context
+
+The analyzer receives **all dialogues in the chapter** before processing begins. This allows the LLM to:
+- Understand the overall plot arc
+- Anticipate important moments
+- Make better decisions about when to react
+- Reference future events in its reasoning
+
+### Smart Pacing System
+
+The system tracks reaction history and provides pacing feedback to the LLM:
+
+- **Lines since last reaction**: Tells LLM how long it's been since the last comment
+- **Pacing hints**:
+  - Just reacted (0 lines): "avoid consecutive reactions unless crucial"
+  - Long silence (8+ lines): "consider reacting to maintain engagement"
+- **Context position**: Shows current position in chapter (e.g., "Line 7 of 12")
+
+This prevents over-commenting on every line while ensuring the system doesn't stay silent for too long.
+
+### Example Reasoning
+
+With full context and pacing, the LLM provides sophisticated reasoning:
+
+```json
+{
+  "reasoning": "The previous line (11) was a significant emotional development (Emma running out crying),
+  which I reacted to. This line is the protagonist's immediate internal reaction to that event.
+  Reacting consecutively would be over-commentary, as the core emotional beat has already been
+  established and commented on."
+}
+```
+
 ## Output
 
 The program outputs:
@@ -112,7 +152,7 @@ The program outputs:
    ```
    [0101Adv01_Ema008] 艾玛
      Line: 诶...哥哥,你该不会忘了吧?今天是...今天是我的生日啊!
-     REACTION: 哦不,主人公忘记了妹妹的生日!这下麻烦大了...
+     REACTION: Oh no! He really forgot her birthday! That's a huge oversight, poor Emma.
    ```
 
 2. **Results File**: JSON file with all analysis results (if `save_results: true`)
@@ -124,8 +164,8 @@ The program outputs:
        "chinese_text": "诶...哥哥,你该不会忘了吧?今天是...今天是我的生日啊!",
        "japanese_text": "えっ...お兄ちゃん、まさか忘れたの?今日は...今日は私の誕生日だよ!",
        "action": "react",
-       "reaction": "哦不,主人公忘记了妹妹的生日!这下麻烦大了...",
-       "reasoning": "Important plot point - protagonist forgot sister's birthday, emotional moment"
+       "reaction": "Oh no! He really forgot her birthday! That's a huge oversight, poor Emma.",
+       "reasoning": "This is a major plot point and an emotional beat. The protagonist has forgotten Emma's birthday..."
      }
    ]
    ```

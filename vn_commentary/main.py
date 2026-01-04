@@ -124,7 +124,7 @@ class VNCommentaryDriver:
 
     async def process_dialogues(self, dialogue_file: str):
         """
-        Process all dialogues from a file.
+        Process all dialogues from a file as a single chapter.
 
         Args:
             dialogue_file: Path to JSON file with dialogues
@@ -135,6 +135,10 @@ class VNCommentaryDriver:
 
         # Create analyzer
         self.analyzer = self._create_analyzer()
+
+        # Set full chapter context for better LLM understanding
+        self.analyzer.set_chapter(reader.dialogues)
+        logger.info("Chapter context loaded into analyzer")
 
         # Process each dialogue
         delay = self.config.get("processing", {}).get("delay_between_dialogues", 0.0)
@@ -156,6 +160,9 @@ class VNCommentaryDriver:
             # Optional delay for rate limiting
             if delay > 0 and i < len(reader):
                 await asyncio.sleep(delay)
+
+        # Signal end of chapter
+        self.analyzer.end_chapter()
 
         # Save results if configured
         if self.config.get("output", {}).get("save_results", True):

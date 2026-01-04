@@ -1,7 +1,7 @@
 """
 Commentary analyzer using LLM to decide whether to react to dialogues.
 """
-from typing import Optional
+from typing import Optional, List
 import json
 
 from core.logging import get_logger
@@ -29,12 +29,19 @@ Guidelines:
 - Stay silent for mundane, transitional, or uninteresting lines
 - React to important plot developments, emotional moments, surprising revelations, or humorous situations
 - Keep reactions brief and natural (1-2 sentences max)
-- Maintain awareness of the story context from previous dialogues
+- Maintain awareness of the full chapter context
 - React as an engaged observer, not a narrator
 
+Pacing Guidelines:
+- Avoid reacting to consecutive lines unless there's a major development
+- If you haven't reacted in 8+ lines, consider reacting to keep engagement
+- Balance is key: don't over-react, but don't stay silent too long
+
 You will receive:
-1. Recent dialogue context (previous lines)
-2. Current dialogue line to analyze
+1. Full chapter context (all dialogues in this chapter)
+2. Current position in the chapter
+3. How many lines since your last reaction
+4. Current dialogue line to analyze
 
 Respond with structured output indicating:
 - action: "silent" or "react"
@@ -64,7 +71,55 @@ Respond with structured output indicating:
         self.context_manager = context_manager or ContextManager()
         self.system_prompt = system_prompt or self.DEFAULT_SYSTEM_PROMPT
 
+        # Chapter state
+        self.current_chapter: List[Dialogue] = []
+        self.current_index: int = 0
+        self.last_reaction_index: Optional[int] = None
+
         logger.info(f"Initialized CommentaryAnalyzer with model: {model}")
+
+    def set_chapter(self, dialogues: List[Dialogue]):
+        """
+        Set the current chapter dialogues for full context.
+
+        Args:
+            dialogues: List of all dialogues in this chapter
+        """
+        self.current_chapter = dialogues
+        self.current_index = 0
+        self.last_reaction_index = None
+        logger.info(f"Loaded chapter with {len(dialogues)} dialogues")
+
+    def end_chapter(self):
+        """Signal end of current chapter and reset state."""
+        logger.info(f"Chapter ended. Processed {self.current_index} dialogues, "
+                   f"reactions at indices: {self._get_reaction_indices()}")
+        self.current_chapter = []
+        self.current_index = 0
+        self.last_reaction_index = None
+
+    def _get_reaction_indices(self) -> List[int]:
+        """Get all indices where reactions occurred (for debugging)."""
+        # This would require tracking all reactions, simplified for now
+        return [self.last_reaction_index] if self.last_reaction_index is not None else []
+
+    def _format_chapter_context(self) -> str:
+        """Format full chapter context for LLM."""
+        if not self.current_chapter:
+            return "No chapter loaded."
+
+        lines = ["Full chapter context:"]
+        for i, dialogue in enumerate(self.current_chapter):
+            marker = " <-- CURRENT" if i == self.current_index else ""
+            lines.append(f"{i+1}. {dialogue.format_for_llm()}{marker}")
+
+        return "\n".join(lines)
+
+    def _calculate_lines_since_last_reaction(self) -> int:
+        """Calculate number of lines since last reaction."""
+        if self.last_reaction_index is None:
+            return self.current_index
+        return self.current_index - self.last_reaction_index
 
     async def analyze_dialogue(self, dialogue: Dialogue) -> CommentaryResult:
         """
@@ -76,13 +131,24 @@ Respond with structured output indicating:
         Returns:
             CommentaryResult with decision and optional reaction
         """
-        # Build prompt with context
-        context_str = self.context_manager.format_context_for_llm()
+        # Build prompt with full chapter context
+        chapter_context = self._format_chapter_context()
         current_line = dialogue.format_for_llm()
+        lines_since_reaction = self._calculate_lines_since_last_reaction()
 
-        user_prompt = f"""{context_str}
+        # Build pacing info
+        pacing_info = f"Lines since last reaction: {lines_since_reaction}"
+        if lines_since_reaction == 0:
+            pacing_info += " (just reacted - avoid consecutive reactions unless crucial)"
+        elif lines_since_reaction >= 8:
+            pacing_info += " (consider reacting to maintain engagement)"
 
-Current dialogue:
+        user_prompt = f"""{chapter_context}
+
+Current position: Line {self.current_index + 1} of {len(self.current_chapter)}
+{pacing_info}
+
+Current dialogue to analyze:
 {current_line}
 
 Analyze this dialogue line and decide whether to react. Provide your response as JSON with this structure:
@@ -108,20 +174,21 @@ Analyze this dialogue line and decide whether to react. Provide your response as
             # Parse JSON response
             decision = self._parse_llm_response(response)
 
-            # Add dialogue to context for future analysis
-            self.context_manager.add_dialogue(dialogue)
-
-            result = CommentaryResult(dialogue=dialogue, decision=decision)
-
+            # Update state
             if decision.action == "react":
+                self.last_reaction_index = self.current_index
                 logger.info(f"[{dialogue.dialogue_id}] REACT: {decision.reaction}")
             else:
                 logger.debug(f"[{dialogue.dialogue_id}] SILENT: {decision.reasoning}")
 
+            self.current_index += 1
+
+            result = CommentaryResult(dialogue=dialogue, decision=decision)
             return result
 
         except Exception as e:
             logger.error(f"Failed to analyze dialogue {dialogue.dialogue_id}: {e}")
+            self.current_index += 1
             # Return silent decision on error
             return CommentaryResult(
                 dialogue=dialogue,
@@ -177,6 +244,7 @@ Analyze this dialogue line and decide whether to react. Provide your response as
                 )
 
     def reset_context(self):
-        """Reset context (e.g., when starting a new chapter)."""
+        """Reset context (deprecated - use end_chapter instead)."""
+        self.end_chapter()
         self.context_manager.clear()
         logger.info("Commentary analyzer context reset")
