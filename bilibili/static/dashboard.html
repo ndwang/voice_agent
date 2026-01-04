@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bilibili Live Chat Service - Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #1a1a2e;
+            color: #eee;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+            color: #00d9ff;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: #16213e;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .card h2 {
+            margin-bottom: 15px;
+            color: #00d9ff;
+            font-size: 1.2em;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .status-indicator.connected {
+            background: #4caf50;
+        }
+
+        .status-indicator.disconnected {
+            background: #f44336;
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #2a2a4a;
+        }
+
+        .stat-row:last-child {
+            border-bottom: none;
+        }
+
+        .stat-value {
+            font-weight: bold;
+            color: #00d9ff;
+        }
+
+        button {
+            background: #00d9ff;
+            color: #1a1a2e;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            margin: 5px;
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            background: #00b8d4;
+            transform: translateY(-2px);
+        }
+
+        button:disabled {
+            background: #555;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .toggle-btn {
+            background: #555;
+        }
+
+        .toggle-btn.active {
+            background: #4caf50;
+        }
+
+        #chat-viewer {
+            background: #16213e;
+            border-radius: 12px;
+            padding: 20px;
+            height: 500px;
+            overflow-y: auto;
+        }
+
+        .chat-message {
+            padding: 10px;
+            margin-bottom: 10px;
+            background: #1a1a2e;
+            border-radius: 8px;
+            border-left: 3px solid #00d9ff;
+        }
+
+        .chat-message.superchat {
+            background: linear-gradient(135deg, #ff9800, #ff5722);
+            border-left-color: #ffeb3b;
+        }
+
+        .chat-user {
+            font-weight: bold;
+            margin-right: 8px;
+            color: #00d9ff;
+        }
+
+        .chat-content {
+            color: #eee;
+        }
+
+        .chat-amount {
+            color: #ffeb3b;
+            font-weight: bold;
+            margin-left: 8px;
+        }
+
+        .chat-time {
+            font-size: 0.8em;
+            color: #888;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔴 Bilibili Live Chat Service</h1>
+
+        <div class="grid">
+            <!-- Status Card -->
+            <div class="card">
+                <h2>Service Status</h2>
+                <div class="stat-row">
+                    <span>Connection:</span>
+                    <span>
+                        <span class="status-indicator" id="status-indicator"></span>
+                        <span id="connection-status">Loading...</span>
+                    </span>
+                </div>
+                <div class="stat-row">
+                    <span>Room ID:</span>
+                    <span class="stat-value" id="room-id">-</span>
+                </div>
+                <div style="margin-top: 15px;">
+                    <button id="connect-btn" onclick="connect()">Connect</button>
+                    <button id="disconnect-btn" onclick="disconnect()">Disconnect</button>
+                </div>
+            </div>
+
+            <!-- Statistics Card -->
+            <div class="card">
+                <h2>Statistics</h2>
+                <div class="stat-row">
+                    <span>Danmaku Count:</span>
+                    <span class="stat-value" id="danmaku-count">0</span>
+                </div>
+                <div class="stat-row">
+                    <span>Superchat Count:</span>
+                    <span class="stat-value" id="superchat-count">0</span>
+                </div>
+                <div class="stat-row">
+                    <span>Total Received:</span>
+                    <span class="stat-value" id="total-received">0</span>
+                </div>
+                <div class="stat-row">
+                    <span>Uptime:</span>
+                    <span class="stat-value" id="uptime">0s</span>
+                </div>
+            </div>
+
+            <!-- Controls Card -->
+            <div class="card">
+                <h2>Controls</h2>
+                <div class="stat-row">
+                    <span>Danmaku Processing:</span>
+                    <button class="toggle-btn" id="danmaku-toggle" onclick="toggleDanmaku()">OFF</button>
+                </div>
+                <div class="stat-row">
+                    <span>Superchat Processing:</span>
+                    <button class="toggle-btn" id="superchat-toggle" onclick="toggleSuperchat()">OFF</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chat Viewer -->
+        <div class="card">
+            <h2>Live Chat</h2>
+            <div id="chat-viewer"></div>
+        </div>
+    </div>
+
+    <script>
+        let ws = null;
+        let reconnectDelay = 1000;
+        const maxReconnectDelay = 30000;
+
+        // Initialize
+        async function init() {
+            await updateState();
+            await updateStats();
+            connectWebSocket();
+
+            // Poll stats every 5 seconds
+            setInterval(updateStats, 5000);
+        }
+
+        async function updateState() {
+            try {
+                const res = await fetch('/state');
+                const state = await res.json();
+
+                document.getElementById('connection-status').textContent = state.connected ? 'Connected' : 'Disconnected';
+                document.getElementById('status-indicator').className = 'status-indicator ' + (state.connected ? 'connected' : 'disconnected');
+                document.getElementById('room-id').textContent = state.room_id;
+
+                const danmakuBtn = document.getElementById('danmaku-toggle');
+                danmakuBtn.textContent = state.danmaku_enabled ? 'ON' : 'OFF';
+                danmakuBtn.className = 'toggle-btn' + (state.danmaku_enabled ? ' active' : '');
+
+                const superchatBtn = document.getElementById('superchat-toggle');
+                superchatBtn.textContent = state.superchat_enabled ? 'ON' : 'OFF';
+                superchatBtn.className = 'toggle-btn' + (state.superchat_enabled ? ' active' : '');
+            } catch (e) {
+                console.error('Failed to update state:', e);
+            }
+        }
+
+        async function updateStats() {
+            try {
+                const res = await fetch('/stats');
+                const stats = await res.json();
+
+                document.getElementById('danmaku-count').textContent = stats.danmaku_count;
+                document.getElementById('superchat-count').textContent = stats.superchat_count;
+                document.getElementById('total-received').textContent = stats.total_danmaku_received + stats.total_superchat_received;
+                document.getElementById('uptime').textContent = formatUptime(stats.uptime_seconds);
+            } catch (e) {
+                console.error('Failed to update stats:', e);
+            }
+        }
+
+        function formatUptime(seconds) {
+            const h = Math.floor(seconds / 3600);
+            const m = Math.floor((seconds % 3600) / 60);
+            const s = Math.floor(seconds % 60);
+            return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+        }
+
+        async function connect() {
+            try {
+                await fetch('/connect', { method: 'POST' });
+                await updateState();
+            } catch (e) {
+                console.error('Failed to connect:', e);
+            }
+        }
+
+        async function disconnect() {
+            try {
+                await fetch('/disconnect', { method: 'POST' });
+                await updateState();
+            } catch (e) {
+                console.error('Failed to disconnect:', e);
+            }
+        }
+
+        async function toggleDanmaku() {
+            try {
+                const btn = document.getElementById('danmaku-toggle');
+                const isEnabled = btn.classList.contains('active');
+                const action = isEnabled ? 'disable' : 'enable';
+                await fetch(`/state/danmaku/${action}`, { method: 'POST' });
+                await updateState();
+            } catch (e) {
+                console.error('Failed to toggle danmaku:', e);
+            }
+        }
+
+        async function toggleSuperchat() {
+            try {
+                const btn = document.getElementById('superchat-toggle');
+                const isEnabled = btn.classList.contains('active');
+                const action = isEnabled ? 'disable' : 'enable';
+                await fetch(`/state/superchat/${action}`, { method: 'POST' });
+                await updateState();
+            } catch (e) {
+                console.error('Failed to toggle superchat:', e);
+            }
+        }
+
+        function connectWebSocket() {
+            const wsUrl = `ws://${window.location.host}/ws/stream`;
+            ws = new WebSocket(wsUrl);
+
+            ws.onopen = () => {
+                console.log('WebSocket connected');
+                reconnectDelay = 1000;
+                ws.send(JSON.stringify({
+                    type: 'subscribe',
+                    channels: ['danmaku', 'superchat']
+                }));
+            };
+
+            ws.onmessage = (event) => {
+                const data = JSON.parse(event.data);
+
+                if (data.type === 'danmaku') {
+                    addChatMessage(data.data, false);
+                } else if (data.type === 'superchat') {
+                    addChatMessage(data.data, true);
+                } else if (data.type === 'state_changed') {
+                    updateState();
+                }
+            };
+
+            ws.onclose = () => {
+                console.log('WebSocket disconnected, reconnecting...');
+                setTimeout(connectWebSocket, reconnectDelay);
+                reconnectDelay = Math.min(reconnectDelay * 2, maxReconnectDelay);
+            };
+        }
+
+        function addChatMessage(message, isSuperchat) {
+            const chatViewer = document.getElementById('chat-viewer');
+            const div = document.createElement('div');
+            div.className = 'chat-message' + (isSuperchat ? ' superchat' : '');
+
+            const time = new Date(message.timestamp * 1000).toLocaleTimeString();
+
+            div.innerHTML = `
+                <span class="chat-user">${escapeHtml(message.user)}:</span>
+                <span class="chat-content">${escapeHtml(message.content)}</span>
+                ${isSuperchat ? `<span class="chat-amount">¥${message.amount}</span>` : ''}
+                <span class="chat-time">${time}</span>
+            `;
+
+            chatViewer.appendChild(div);
+            chatViewer.scrollTop = chatViewer.scrollHeight;
+
+            // Limit to 100 messages
+            while (chatViewer.children.length > 100) {
+                chatViewer.removeChild(chatViewer.firstChild);
+            }
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Initialize on load
+        init();
+    </script>
+</body>
+</html>

@@ -6,6 +6,9 @@ class SystemState:
     """
     Struct-like representation of the system's current activity state.
     Provides type-safety and autocompletion for state tracking.
+
+    Note: Bilibili state (danmaku/superchat enabled) is now managed by the
+    standalone Bilibili service, not here.
     """
     transcribing: bool = False
     responding: bool = False
@@ -13,8 +16,6 @@ class SystemState:
     playing: bool = False
     listening: bool = True
     executing_tools: bool = False
-    bilibili_danmaku_enabled: bool = True
-    bilibili_superchat_enabled: bool = True
 
     def update(self, changes: Dict[str, Any]):
         """Update fields from a dictionary, ignoring unknown keys."""
@@ -30,8 +31,6 @@ class SystemState:
             "synthesizing": self.synthesizing,
             "playing": self.playing,
             "listening": self.listening,
-            "executing_tools": self.executing_tools,
-            "bilibili_danmaku_enabled": self.bilibili_danmaku_enabled,
-            "bilibili_superchat_enabled": self.bilibili_superchat_enabled
+            "executing_tools": self.executing_tools
         }
 

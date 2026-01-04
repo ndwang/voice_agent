@@ -37,6 +37,12 @@ SERVICES = [
         "endpoint": "/health"
     },
     {
+        "name": "Bilibili Service",
+        "port": 8002,
+        "url": "http://localhost:8002/health",
+        "endpoint": "/health"
+    },
+    {
         "name": "TTS Service",
         "port": 8003,
         "url": "http://localhost:8003/health",

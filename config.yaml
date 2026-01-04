@@ -136,11 +136,6 @@ obs:
   visibility_source: AI
   appear_filter_name: MoveInRight
   clear_filter_name: MoveOutRight
-bilibili:
-  enabled: true
-  room_id: 21379697 #31232063
-  sessdata: d10a8829%2C1782692006%2C9540c%2Ac2CjCRf7tmL8kcxPkhHcVlsM3Jgj_zSL2-ZxOx5tj8CFHG3FceyugoVJta1N3bnnHnEwUSVnhVRmsxbmJHQlZabnN0OUx4TnZNVkMydUFUM0R5NDgzSlpRLU1TVjN4OThnbHFucG1ydFNqQk9qRURPX1ZXUGVxMl8yV3J6aXE2eWVyd2ZFa0RwdzhBIIEC
-  danmaku_ttl_seconds: 60
 services:
   orchestrator_base_url: http://localhost:8000
   stt_websocket_url: ws://localhost:8001/ws/transcribe
@@ -149,3 +144,5 @@ services:
   tts_websocket_url: ws://localhost:8003/synthesize/stream
   ocr_websocket_url: ws://localhost:8004/monitor/stream
   ocr_base_url: http://localhost:8004
+  bilibili_enabled: true
+  bilibili_base_url: http://localhost:8002

@@ -2,9 +2,9 @@ from pydantic import BaseModel
 
 
 class BilibiliSettings(BaseModel):
-    """Bilibili livestream integration configuration"""
+    """Bilibili livestream integration configuration (DEPRECATED - moved to bilibili/config.yaml)"""
     enabled: bool = False
-    room_id: int
+    room_id: int = 0  # Default to 0 (service uses its own config now)
     sessdata: str = ""
     danmaku_ttl_seconds: int = 60
 

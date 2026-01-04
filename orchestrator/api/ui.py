@@ -1,6 +1,7 @@
 """UI and interaction endpoints."""
 import asyncio
 import json
+import aiohttp
 from typing import TYPE_CHECKING
 from fastapi import APIRouter, WebSocket, WebSocketDisconnect, HTTPException, Depends
 from fastapi.responses import FileResponse
@@ -57,16 +58,31 @@ async def clear_history(orchestrator: "OrchestratorServer" = Depends(get_orchest
 
 
 @router.get("/ui/bilibili/chat")
-async def get_bilibili_chat(orchestrator: "OrchestratorServer" = Depends(get_orchestrator)):
-    """Get Bilibili chat snapshot."""
-    if not orchestrator.bilibili_source.running:
+async def get_bilibili_chat():
+    """Proxy to Bilibili service for chat snapshot."""
+    settings = get_settings()
+
+    if not settings.services.bilibili_enabled:
         return {"enabled": False, "danmaku": [], "superchats": []}
 
-    return {
-        "enabled": True,
-        "danmaku": orchestrator.bilibili_source.get_danmaku_snapshot(),
-        "superchats": orchestrator.bilibili_source.get_superchat_snapshot()
-    }
+    url = f"{settings.services.bilibili_base_url}/chat"
+
+    try:
+        async with aiohttp.ClientSession() as session:
+            async with session.get(url, timeout=aiohttp.ClientTimeout(total=5)) as resp:
+                if resp.status == 200:
+                    data = await resp.json()
+                    return {
+                        "enabled": True,
+                        "danmaku": data.get("danmaku", []),
+                        "superchats": data.get("superchat", [])
+                    }
+                else:
+                    logger.warning(f"Bilibili service returned status {resp.status}")
+                    return {"enabled": False, "danmaku": [], "superchats": []}
+    except Exception as e:
+        logger.error(f"Failed to fetch chat from Bilibili service: {e}")
+        return {"enabled": False, "danmaku": [], "superchats": []}
 
 
 @router.websocket("/ui/events")
@@ -109,17 +125,31 @@ async def ui_events(websocket: WebSocket):
         "enabled": activity_state.state.listening
     })
     await websocket.send_json({
-        "event": "bilibili_danmaku_state_changed",
-        "enabled": activity_state.state.bilibili_danmaku_enabled
-    })
-    await websocket.send_json({
-        "event": "bilibili_superchat_state_changed",
-        "enabled": activity_state.state.bilibili_superchat_enabled
-    })
-    await websocket.send_json({
         "event": "activity",
         "state": activity_state.state.to_dict()
     })
+
+    # Send initial Bilibili state (proxy to service)
+    settings = get_settings()
+    if settings.services.bilibili_enabled:
+        try:
+            async with aiohttp.ClientSession() as session:
+                async with session.get(
+                    f"{settings.services.bilibili_base_url}/state",
+                    timeout=aiohttp.ClientTimeout(total=2)
+                ) as resp:
+                    if resp.status == 200:
+                        bilibili_state = await resp.json()
+                        await websocket.send_json({
+                            "event": "bilibili_danmaku_state_changed",
+                            "enabled": bilibili_state.get("danmaku_enabled", False)
+                        })
+                        await websocket.send_json({
+                            "event": "bilibili_superchat_state_changed",
+                            "enabled": bilibili_state.get("superchat_enabled", False)
+                        })
+        except Exception as e:
+            logger.warning(f"Failed to get initial Bilibili state: {e}")
     
     # Map internal event names to UI event names
     def transform_event(event):
@@ -217,46 +247,160 @@ async def set_listening(request: ListeningSetRequest, orchestrator: "Orchestrato
 
 @router.get("/ui/bilibili/danmaku/status")
 async def get_bilibili_danmaku_status():
-    """Get bilibili danmaku enabled state."""
-    return {"enabled": get_activity_state().state.bilibili_danmaku_enabled}
+    """Proxy to Bilibili service for danmaku state."""
+    settings = get_settings()
+
+    if not settings.services.bilibili_enabled:
+        return {"enabled": False}
+
+    url = f"{settings.services.bilibili_base_url}/state"
+
+    try:
+        async with aiohttp.ClientSession() as session:
+            async with session.get(url, timeout=aiohttp.ClientTimeout(total=5)) as resp:
+                if resp.status == 200:
+                    data = await resp.json()
+                    return {"enabled": data.get("danmaku_enabled", False)}
+                else:
+                    return {"enabled": False}
+    except Exception as e:
+        logger.error(f"Failed to get danmaku status from Bilibili service: {e}")
+        return {"enabled": False}
 
 
 @router.post("/ui/bilibili/danmaku/toggle")
-async def toggle_bilibili_danmaku(orchestrator: "OrchestratorServer" = Depends(get_orchestrator)):
-    """Toggle bilibili danmaku state."""
-    current = get_activity_state().state.bilibili_danmaku_enabled
-    new_state = not current
-    await orchestrator.set_bilibili_danmaku(new_state)
-    return {"status": "success", "enabled": new_state}
+async def toggle_bilibili_danmaku():
+    """Proxy to Bilibili service to toggle danmaku."""
+    settings = get_settings()
+
+    if not settings.services.bilibili_enabled:
+        raise HTTPException(status_code=400, detail="Bilibili service not enabled")
+
+    # Get current state
+    state_url = f"{settings.services.bilibili_base_url}/state"
+
+    try:
+        async with aiohttp.ClientSession() as session:
+            async with session.get(state_url, timeout=aiohttp.ClientTimeout(total=5)) as resp:
+                if resp.status != 200:
+                    raise HTTPException(status_code=500, detail="Failed to get current state")
+                state = await resp.json()
+
+            # Toggle
+            enabled = not state.get("danmaku_enabled", False)
+            action = "enable" if enabled else "disable"
+            toggle_url = f"{settings.services.bilibili_base_url}/state/danmaku/{action}"
+
+            async with session.post(toggle_url, timeout=aiohttp.ClientTimeout(total=5)) as resp:
+                if resp.status == 200:
+                    return {"status": "success", "enabled": enabled}
+                else:
+                    raise HTTPException(status_code=500, detail="Failed to toggle danmaku")
+    except aiohttp.ClientError as e:
+        logger.error(f"Failed to toggle danmaku: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to communicate with Bilibili service: {e}")
 
 
 @router.post("/ui/bilibili/danmaku/set")
-async def set_bilibili_danmaku(request: BilibiliDanmakuSetRequest, orchestrator: "OrchestratorServer" = Depends(get_orchestrator)):
-    """Set bilibili danmaku state."""
-    await orchestrator.set_bilibili_danmaku(request.enabled)
-    return {"status": "success", "enabled": request.enabled}
+async def set_bilibili_danmaku(request: BilibiliDanmakuSetRequest):
+    """Proxy to Bilibili service to set danmaku state."""
+    settings = get_settings()
+
+    if not settings.services.bilibili_enabled:
+        raise HTTPException(status_code=400, detail="Bilibili service not enabled")
+
+    action = "enable" if request.enabled else "disable"
+    url = f"{settings.services.bilibili_base_url}/state/danmaku/{action}"
+
+    try:
+        async with aiohttp.ClientSession() as session:
+            async with session.post(url, timeout=aiohttp.ClientTimeout(total=5)) as resp:
+                if resp.status == 200:
+                    return {"status": "success", "enabled": request.enabled}
+                else:
+                    raise HTTPException(status_code=500, detail="Failed to set danmaku state")
+    except aiohttp.ClientError as e:
+        logger.error(f"Failed to set danmaku state: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to communicate with Bilibili service: {e}")
 
 
 @router.get("/ui/bilibili/superchat/status")
 async def get_bilibili_superchat_status():
-    """Get bilibili superchat enabled state."""
-    return {"enabled": get_activity_state().state.bilibili_superchat_enabled}
+    """Proxy to Bilibili service for superchat state."""
+    settings = get_settings()
+
+    if not settings.services.bilibili_enabled:
+        return {"enabled": False}
+
+    url = f"{settings.services.bilibili_base_url}/state"
+
+    try:
+        async with aiohttp.ClientSession() as session:
+            async with session.get(url, timeout=aiohttp.ClientTimeout(total=5)) as resp:
+                if resp.status == 200:
+                    data = await resp.json()
+                    return {"enabled": data.get("superchat_enabled", False)}
+                else:
+                    return {"enabled": False}
+    except Exception as e:
+        logger.error(f"Failed to get superchat status from Bilibili service: {e}")
+        return {"enabled": False}
 
 
 @router.post("/ui/bilibili/superchat/toggle")
-async def toggle_bilibili_superchat(orchestrator: "OrchestratorServer" = Depends(get_orchestrator)):
-    """Toggle bilibili superchat state."""
-    current = get_activity_state().state.bilibili_superchat_enabled
-    new_state = not current
-    await orchestrator.set_bilibili_superchat(new_state)
-    return {"status": "success", "enabled": new_state}
+async def toggle_bilibili_superchat():
+    """Proxy to Bilibili service to toggle superchat."""
+    settings = get_settings()
+
+    if not settings.services.bilibili_enabled:
+        raise HTTPException(status_code=400, detail="Bilibili service not enabled")
+
+    # Get current state
+    state_url = f"{settings.services.bilibili_base_url}/state"
+
+    try:
+        async with aiohttp.ClientSession() as session:
+            async with session.get(state_url, timeout=aiohttp.ClientTimeout(total=5)) as resp:
+                if resp.status != 200:
+                    raise HTTPException(status_code=500, detail="Failed to get current state")
+                state = await resp.json()
+
+            # Toggle
+            enabled = not state.get("superchat_enabled", False)
+            action = "enable" if enabled else "disable"
+            toggle_url = f"{settings.services.bilibili_base_url}/state/superchat/{action}"
+
+            async with session.post(toggle_url, timeout=aiohttp.ClientTimeout(total=5)) as resp:
+                if resp.status == 200:
+                    return {"status": "success", "enabled": enabled}
+                else:
+                    raise HTTPException(status_code=500, detail="Failed to toggle superchat")
+    except aiohttp.ClientError as e:
+        logger.error(f"Failed to toggle superchat: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to communicate with Bilibili service: {e}")
 
 
 @router.post("/ui/bilibili/superchat/set")
-async def set_bilibili_superchat(request: BilibiliSuperChatSetRequest, orchestrator: "OrchestratorServer" = Depends(get_orchestrator)):
-    """Set bilibili superchat state."""
-    await orchestrator.set_bilibili_superchat(request.enabled)
-    return {"status": "success", "enabled": request.enabled}
+async def set_bilibili_superchat(request: BilibiliSuperChatSetRequest):
+    """Proxy to Bilibili service to set superchat state."""
+    settings = get_settings()
+
+    if not settings.services.bilibili_enabled:
+        raise HTTPException(status_code=400, detail="Bilibili service not enabled")
+
+    action = "enable" if request.enabled else "disable"
+    url = f"{settings.services.bilibili_base_url}/state/superchat/{action}"
+
+    try:
+        async with aiohttp.ClientSession() as session:
+            async with session.post(url, timeout=aiohttp.ClientTimeout(total=5)) as resp:
+                if resp.status == 200:
+                    return {"status": "success", "enabled": request.enabled}
+                else:
+                    raise HTTPException(status_code=500, detail="Failed to set superchat state")
+    except aiohttp.ClientError as e:
+        logger.error(f"Failed to set superchat state: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to communicate with Bilibili service: {e}")
 
 
 @router.get("/ui/config")

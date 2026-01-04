@@ -27,7 +27,7 @@ from orchestrator.managers.tts_manager import TTSManager
 from orchestrator.managers.queue_manager import QueueManager
 from orchestrator.managers.queue_consumer import QueueConsumer
 from orchestrator.sources.stt_source import STTSource
-from orchestrator.sources.bilibili_source import BilibiliSource
+from orchestrator.sources.bilibili_websocket_source import BilibiliWebSocketSource
 from orchestrator.tools.registry import ToolRegistry, get_registered_tools, discover_and_load_tools
 from orchestrator.hotkey_manager import HotkeyManager
 from orchestrator.ocr_client import OCRClient
@@ -57,7 +57,7 @@ class OrchestratorServer:
 
         # Sources
         self.stt_source = STTSource(self.event_bus)
-        self.bilibili_source = BilibiliSource(self.event_bus)
+        self.bilibili_source = BilibiliWebSocketSource(self.event_bus)
 
         # Audio driver (captures microphone and streams to STT)
         self.audio_driver = AudioDriver(event_bus=self.event_bus)
@@ -86,9 +86,8 @@ class OrchestratorServer:
 
         # Start sources
         await self.stt_source.start()
-        settings = get_settings()
-        if settings.bilibili.enabled:
-            await self.bilibili_source.start()
+        # Bilibili WebSocket source checks settings internally
+        await self.bilibili_source.start()
 
         # Start audio driver
         await self.audio_driver.start()
@@ -147,16 +146,6 @@ class OrchestratorServer:
 
         # Update centralized activity state
         await self.activity_state.set_listening(enabled)
-
-    async def set_bilibili_danmaku(self, enabled: bool):
-        """Set bilibili danmaku enabled state."""
-        logger.info(f"Bilibili danmaku set to: {enabled}")
-        await self.activity_state.set_bilibili_danmaku(enabled)
-
-    async def set_bilibili_superchat(self, enabled: bool):
-        """Set bilibili superchat enabled state."""
-        logger.info(f"Bilibili superchat set to: {enabled}")
-        await self.activity_state.set_bilibili_superchat(enabled)
 
     async def cancel_interaction(self):
         # Fire critical interrupt event (user-triggered cancellation)

@@ -16,11 +16,11 @@ class EventType(Enum):
     INPUT_RECEIVED = "input.received"  # From queue consumer to interaction manager
     CRITICAL_INPUT = "input.critical"  # P0 message that should trigger interruption
 
-    # Bilibili
+    # Bilibili (messages from service via WebSocket)
     BILIBILI_DANMAKU = "bilibili.danmaku"
     BILIBILI_SUPERCHAT = "bilibili.superchat"
-    BILIBILI_DANMAKU_STATE_CHANGED = "bilibili.danmaku_state_changed"
-    BILIBILI_SUPERCHAT_STATE_CHANGED = "bilibili.superchat_state_changed"
+    # Note: Bilibili state (danmaku/superchat enabled) is now managed by the
+    # standalone Bilibili service, not by orchestrator events
 
     # LLM
     LLM_REQUEST = "llm.request"

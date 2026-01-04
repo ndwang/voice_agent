@@ -32,6 +32,12 @@ SERVICES = [
         "description": "STT Service (Port 8001) - Speech-to-Text"
     },
     {
+        "name": "Bilibili Service",
+        "module": "bilibili.server",
+        "port": 8002,
+        "description": "Bilibili Service (Port 8002) - Live Chat Integration"
+    },
+    {
         "name": "TTS Service",
         "module": "tts.server",
         "port": 8003,
