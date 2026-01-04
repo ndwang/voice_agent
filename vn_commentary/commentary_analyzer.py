@@ -21,31 +21,31 @@ class CommentaryAnalyzer:
     dialogue line based on context and character personality.
     """
 
-    DEFAULT_SYSTEM_PROMPT = """You are a visual novel commentary assistant observing a story unfold in real-time.
+    DEFAULT_SYSTEM_PROMPT = """你是一个视觉小说解说助手，实时观察故事展开。
 
-Your role is to decide whether a dialogue line is worth commenting on, and if so, provide a brief, natural reaction.
+你的任务是判断某一行对话是否值得评论，如果值得，提供简短自然的反应。
 
-Guidelines:
-- Stay silent for mundane, transitional, or uninteresting lines
-- React to important plot developments, emotional moments, surprising revelations, or humorous situations
-- Keep reactions brief and natural (1-2 sentences max)
-- You see the story as it unfolds - you don't know what happens next
-- React as an engaged observer, not a narrator
+指导原则：
+- 对于平淡、过渡性或无趣的台词保持沉默
+- 对重要的剧情发展、情感时刻、意外揭示或幽默情况做出反应
+- 反应要简短自然（最多1-2句话）
+- 你是实时看到故事的——你不知道接下来会发生什么
+- 作为一个投入的观察者来反应，而不是旁白
 
-Pacing Guidelines:
-- Avoid reacting to consecutive lines unless there's a major development
-- If you haven't reacted in 8+ lines, consider reacting to keep engagement
-- Balance is key: don't over-react, but don't stay silent too long
+节奏指导：
+- 避免连续反应，除非有重大发展
+- 如果超过8行没有反应，考虑做出反应以保持参与感
+- 关键在于平衡：不要过度反应，也不要保持沉默太久
 
-You will receive:
-1. Chapter context so far (all dialogues from start of chapter up to current line)
-2. How many lines since your last reaction
-3. Current dialogue line to analyze
+你将收到：
+1. 目前为止的章节上下文（从章节开始到当前行的所有对话）
+2. 距离上次反应有多少行
+3. 当前需要分析的对话行
 
-Respond with structured output indicating:
-- action: "silent" or "react"
-- reaction: Your commentary text (only if reacting)
-- reasoning: Brief explanation of your decision (for debugging)
+以结构化输出回应：
+- action: "silent" 或 "react"
+- reaction: 你的评论文本（仅在反应时提供）
+- reasoning: 简要解释你的决定（用于调试）
 """
 
     def __init__(
@@ -105,16 +105,16 @@ Respond with structured output indicating:
     def _format_chapter_context(self) -> str:
         """Format chapter context up to current line (no spoilers)."""
         if not self.current_chapter:
-            return "No chapter context yet."
+            return "暂无章节上下文。"
 
-        lines = ["Chapter context so far:"]
+        lines = ["目前为止的章节上下文："]
         # Only show dialogues up to (not including) current index
         for i in range(self.current_index):
             dialogue = self.current_chapter[i]
             lines.append(f"{i+1}. {dialogue.format_for_llm()}")
 
         if self.current_index == 0:
-            lines.append("(This is the first line of the chapter)")
+            lines.append("（这是本章的第一行）")
 
         return "\n".join(lines)
 
@@ -140,24 +140,24 @@ Respond with structured output indicating:
         lines_since_reaction = self._calculate_lines_since_last_reaction()
 
         # Build pacing info
-        pacing_info = f"Lines since last reaction: {lines_since_reaction}"
+        pacing_info = f"距离上次反应的行数：{lines_since_reaction}"
         if lines_since_reaction == 0:
-            pacing_info += " (just reacted - avoid consecutive reactions unless crucial)"
+            pacing_info += "（刚刚反应过 - 避免连续反应，除非至关重要）"
         elif lines_since_reaction >= 8:
-            pacing_info += " (consider reacting to maintain engagement)"
+            pacing_info += "（考虑做出反应以保持参与感）"
 
         user_prompt = f"""{chapter_context}
 
 {pacing_info}
 
-Current dialogue to analyze:
+当前需要分析的对话：
 {current_line}
 
-Analyze this dialogue line and decide whether to react. Provide your response as JSON with this structure:
+分析这行对话并决定是否反应。用以下JSON结构回应：
 {{
-    "action": "silent" or "react",
-    "reaction": "your commentary here (only if reacting, null if silent)",
-    "reasoning": "brief explanation of your decision"
+    "action": "silent" 或 "react",
+    "reaction": "你的评论（仅在反应时提供，沉默时为null）",
+    "reasoning": "简要解释你的决定"
 }}"""
 
         # Call LLM with structured output request

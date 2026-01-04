@@ -9,12 +9,12 @@ class Dialogue(BaseModel):
     """Represents a single dialogue line from a visual novel."""
     dialogue_id: str
     speaker: str
-    japanese_text: str
     chinese_text: str
+    japanese_text: Optional[str] = None
 
     def format_for_llm(self) -> str:
-        """Format dialogue for LLM consumption."""
-        return f"{self.speaker}: {self.chinese_text} ({self.japanese_text})"
+        """Format dialogue for LLM consumption (Chinese only)."""
+        return f"{self.speaker}: {self.chinese_text}"
 
 
 class CommentaryDecision(BaseModel):
