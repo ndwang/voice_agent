@@ -8,7 +8,7 @@ llm:
   temperature: 0.7
 
 # System prompt (optional - overrides default if specified)
-system_prompt_file: null  # Path to custom system prompt file
+system_prompt_file: vn_commentary/gatekeep_system_prompt.txt # Path to custom system prompt file
 
 # Output settings
 output:

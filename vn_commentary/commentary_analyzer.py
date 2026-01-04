@@ -103,7 +103,7 @@ class CommentaryAnalyzer:
         if not self.current_chapter:
             return "暂无章节上下文。"
 
-        lines = ["目前为止的章节上下文："]
+        lines = ["目前为止的章节内容："]
         # Only show dialogues up to (not including) current index
         for i in range(self.current_index):
             dialogue = self.current_chapter[i]
@@ -136,7 +136,7 @@ class CommentaryAnalyzer:
         lines_since_reaction = self._calculate_lines_since_last_reaction()
 
         # Build pacing info (just the number, let LLM decide)
-        pacing_info = f"距离上次反应的行数：{lines_since_reaction}"
+        pacing_info = f"距离上次发言过去了{lines_since_reaction}行台词。"
 
         user_prompt = f"""{chapter_context}
 
@@ -145,11 +145,15 @@ class CommentaryAnalyzer:
 当前需要分析的对话：
 {current_line}
 
-分析这行对话并决定是否反应。用以下JSON结构回应：
+艾玛，现在的气氛适合你开口吗？考虑到直播间的观感和你对这段剧情的感触，以及回复的频率。
+请输出 JSON：
 {{
+    "reasoning": "限20字内。分析该行是否触动了艾玛的怕寂寞性格、推理直觉或直播效果。",
     "action": "silent" 或 "react",
-    "reaction": "你的评论（仅在反应时提供，沉默时为null）",
-    "reasoning": "简要解释你的决定"
+    "mode": "inner_monologue" | "spoken" | "streamer_aside" (silent时为null),
+    "emotion": "情绪关键词" (silent时为null),
+    "intensity": 0.0-1.0 (情绪波动强度),
+    "instruction": "给下游模型的具体演说指导。说明侧重点、潜台词或互动方向(silent时为null)"
 }}"""
 
         # Call LLM with structured output request
@@ -158,6 +162,8 @@ class CommentaryAnalyzer:
         ]
 
         try:
+            logger.debug(f"Analyzing dialogue {dialogue.dialogue_id}")
+            logger.debug(f"Pacing info: {pacing_info}")
             # Use generate (non-streaming) for structured output
             response = await self.llm_provider.generate(
                 messages=messages,
@@ -171,9 +177,9 @@ class CommentaryAnalyzer:
             # Update state
             if decision.action == "react":
                 self.last_reaction_index = self.current_index
-                logger.info(f"[{dialogue.dialogue_id}] REACT: {decision.reaction}")
+                logger.info(f"[{dialogue.dialogue_id}] REACT: {decision.reasoning}")
             else:
-                logger.debug(f"[{dialogue.dialogue_id}] SILENT: {decision.reasoning}")
+                logger.info(f"[{dialogue.dialogue_id}] SILENT: {decision.reasoning}")
 
             self.current_index += 1
 

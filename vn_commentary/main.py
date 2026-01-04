@@ -219,10 +219,11 @@ class VNCommentaryDriver:
             print(f"{Colors.SPEAKER}{dialogue.speaker}:{Colors.RESET} {Colors.TEXT}{dialogue.chinese_text}{Colors.RESET}")
 
         # Print reaction if present
-        if result.decision.action == "react" and result.decision.reaction:
-            reaction_lines = result.decision.reaction.strip().split('\n')
+        if result.decision.action == "react" and result.decision.instruction:
+            reaction_lines = result.decision.instruction.strip().split('\n')
             for line in reaction_lines:
                 print(f"  {Colors.REACTION_PREFIX}💭{Colors.RESET} {Colors.REACTION_TEXT}{line}{Colors.RESET}")
+            print(f"  {Colors.REACTION_PREFIX}💭{Colors.RESET} {Colors.REACTION_TEXT}{result.decision.mode} | {result.decision.emotion} | {result.decision.intensity}{Colors.RESET}")
 
         # Add spacing
         print()

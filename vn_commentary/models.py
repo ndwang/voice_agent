@@ -22,13 +22,27 @@ class CommentaryDecision(BaseModel):
     action: Literal["silent", "react"] = Field(
         description="Whether to stay silent or react to this dialogue"
     )
-    reaction: Optional[str] = Field(
+    mode: Optional[Literal["inner_monologue", "spoken", "streamer_aside"]] = Field(
         default=None,
-        description="The commentary/reaction text if action is 'react', None if silent"
+        description="How the reaction should be delivered."
+    )
+    emotion: Optional[str] = Field(
+        default=None,
+        description="Core emotion driving the reaction (e.g. shock, confusion, fear)."
+    )
+    intensity: Optional[float] = Field(
+        default=None,
+        ge=0.0,
+        le=1.0,
+        description="Emotional intensity of the reaction, from 0.0 (very mild) to 1.0 (emotional spike)."
+    )
+    instruction: Optional[str] = Field(
+        default=None,
+        description="Instruction for the speaker model (silent时为null)."
     )
     reasoning: Optional[str] = Field(
         default=None,
-        description="Brief reasoning for the decision (for debugging/logging)"
+        description="Brief reasoning for the decision (for debugging/logging)."
     )
 
 
