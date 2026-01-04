@@ -35,6 +35,36 @@ from llm.providers.gemini import GeminiProvider
 logger = get_logger(__name__)
 
 
+class Colors:
+    """ANSI color codes for terminal output."""
+    RESET = '\033[0m'
+    BOLD = '\033[1m'
+    DIM = '\033[2m'
+
+    # Dialogue colors
+    SPEAKER = '\033[36m'  # Cyan
+    TEXT = '\033[97m'     # Bright white
+    NARRATOR = '\033[35m' # Magenta
+
+    # Reaction colors
+    REACTION_PREFIX = '\033[33m'  # Yellow
+    REACTION_TEXT = '\033[93m'    # Bright yellow
+
+    # UI elements
+    HEADER = '\033[94m'   # Blue
+    SEPARATOR = '\033[90m'  # Gray
+
+    @staticmethod
+    def strip_if_no_color():
+        """Check if colors should be disabled (for file redirection)."""
+        import sys
+        if not sys.stdout.isatty():
+            # Disable colors when output is redirected
+            for attr in dir(Colors):
+                if not attr.startswith('_') and attr != 'strip_if_no_color':
+                    setattr(Colors, attr, '')
+
+
 class VNCommentaryDriver:
     """Main driver for visual novel commentary system."""
 
@@ -49,6 +79,9 @@ class VNCommentaryDriver:
         self._setup_logging()
         self.analyzer: Optional[CommentaryAnalyzer] = None
         self.results: List[CommentaryResult] = []
+
+        # Initialize colors (disable if output is redirected)
+        Colors.strip_if_no_color()
 
     def _load_config(self, config_path: str) -> dict:
         """Load configuration from YAML file."""
@@ -149,12 +182,8 @@ class VNCommentaryDriver:
             result = await self.analyzer.analyze_dialogue(dialogue)
             self.results.append(result)
 
-            # Print result (user-facing output, not logging)
-            if result.decision.action == "react":
-                print(f"\n[{dialogue.dialogue_id}] {dialogue.speaker}")
-                print(f"  Line: {dialogue.chinese_text}")
-                print(f"  REACTION: {result.decision.reaction}")
-                print()
+            # Print dialogue line (user-facing output, not logging)
+            self._print_dialogue(dialogue, result)
 
             # Optional delay for rate limiting
             if delay > 0 and i < len(reader):
@@ -166,6 +195,37 @@ class VNCommentaryDriver:
         # Save results if configured (append mode for multi-chapter)
         if self.config.get("output", {}).get("save_results", True):
             self._save_results()
+
+    def _print_dialogue(self, dialogue, result: CommentaryResult):
+        """
+        Print dialogue line with optional reaction in a nicely formatted, colored way.
+
+        Args:
+            dialogue: The dialogue to print
+            result: Analysis result containing optional reaction
+        """
+        from vn_commentary.models import Dialogue
+
+        # Determine if this is a narrator line
+        is_narrator = dialogue.speaker in ["[Narrative]", "[旁白]"]
+
+        # Print speaker and dialogue
+        if is_narrator:
+            # Narrator lines in magenta
+            print(f"{Colors.NARRATOR}{dialogue.speaker}{Colors.RESET}")
+            print(f"  {Colors.DIM}{dialogue.chinese_text}{Colors.RESET}")
+        else:
+            # Character dialogue
+            print(f"{Colors.SPEAKER}{dialogue.speaker}:{Colors.RESET} {Colors.TEXT}{dialogue.chinese_text}{Colors.RESET}")
+
+        # Print reaction if present
+        if result.decision.action == "react" and result.decision.reaction:
+            reaction_lines = result.decision.reaction.strip().split('\n')
+            for line in reaction_lines:
+                print(f"  {Colors.REACTION_PREFIX}💭{Colors.RESET} {Colors.REACTION_TEXT}{line}{Colors.RESET}")
+
+        # Add spacing
+        print()
 
     def _save_results(self):
         """Save analysis results to JSON file."""
@@ -195,13 +255,13 @@ class VNCommentaryDriver:
         reactions = sum(1 for r in self.results if r.decision.action == "react")
         silent = total - reactions
 
-        print("\n" + "=" * 60)
-        print("COMMENTARY ANALYSIS SUMMARY")
-        print("=" * 60)
-        print(f"Total dialogues: {total}")
-        print(f"Reactions: {reactions} ({reactions/total*100:.1f}%)")
-        print(f"Silent: {silent} ({silent/total*100:.1f}%)")
-        print("=" * 60 + "\n")
+        print(f"\n{Colors.SEPARATOR}{'=' * 60}{Colors.RESET}")
+        print(f"{Colors.HEADER}{Colors.BOLD}COMMENTARY ANALYSIS SUMMARY{Colors.RESET}")
+        print(f"{Colors.SEPARATOR}{'=' * 60}{Colors.RESET}")
+        print(f"{Colors.TEXT}Total dialogues: {Colors.BOLD}{total}{Colors.RESET}")
+        print(f"{Colors.REACTION_TEXT}Reactions: {Colors.BOLD}{reactions}{Colors.RESET} {Colors.DIM}({reactions/total*100:.1f}%){Colors.RESET}")
+        print(f"{Colors.DIM}Silent: {silent} ({silent/total*100:.1f}%){Colors.RESET}")
+        print(f"{Colors.SEPARATOR}{'=' * 60}{Colors.RESET}\n")
 
 
 async def main():
@@ -228,9 +288,9 @@ async def main():
     # Process each chapter file
     for chapter_num, dialogue_file in enumerate(args.dialogue_files, 1):
         # Print chapter header (user-facing output)
-        print(f"\n{'='*60}")
-        print(f"PROCESSING CHAPTER {chapter_num}: {dialogue_file}")
-        print(f"{'='*60}\n")
+        print(f"\n{Colors.SEPARATOR}{'='*60}{Colors.RESET}")
+        print(f"{Colors.HEADER}{Colors.BOLD}PROCESSING CHAPTER {chapter_num}:{Colors.RESET} {Colors.TEXT}{dialogue_file}{Colors.RESET}")
+        print(f"{Colors.SEPARATOR}{'='*60}{Colors.RESET}\n")
         await driver.process_dialogues(dialogue_file)
 
     # Final summary across all chapters
