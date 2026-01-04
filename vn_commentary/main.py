@@ -4,10 +4,16 @@ Main driver program for visual novel commentary system.
 Usage:
     python -m vn_commentary.main <dialogue_file.json>
     python -m vn_commentary.main <dialogue_file.json> --config vn_commentary/config.yaml
+
+Output Policy:
+    - print(): User-facing output (reactions, summaries, chapter headers)
+    - logger.info(): Important events (file loading, saving results)
+    - logger.debug(): Verbose diagnostics (processing progress, internal state)
 """
 import asyncio
 import argparse
 import json
+import logging
 from pathlib import Path
 from typing import List, Optional
 import yaml
@@ -81,6 +87,9 @@ class VNCommentaryDriver:
         log_level = self.config.get("output", {}).get("log_level", "INFO")
         setup_logging(level=log_level)
 
+        # Suppress noisy LLM provider logging
+        logging.getLogger("google_genai.models").setLevel(logging.WARNING)
+
     def _create_analyzer(self) -> CommentaryAnalyzer:
         """Create and configure commentary analyzer."""
         llm_config = self.config.get("llm", {})
@@ -128,19 +137,19 @@ class VNCommentaryDriver:
 
         # Set chapter context (LLM will see lines progressively as we process)
         self.analyzer.set_chapter(reader.dialogues)
-        logger.info("Chapter loaded into analyzer")
+        logger.debug("Chapter loaded into analyzer")
 
         # Process each dialogue
         delay = self.config.get("processing", {}).get("delay_between_dialogues", 0.0)
 
         for i, dialogue in enumerate(reader, 1):
-            logger.info(f"Processing dialogue {i}/{len(reader)}: {dialogue.dialogue_id}")
+            logger.debug(f"Processing dialogue {i}/{len(reader)}: {dialogue.dialogue_id}")
 
             # Analyze dialogue
             result = await self.analyzer.analyze_dialogue(dialogue)
             self.results.append(result)
 
-            # Print result
+            # Print result (user-facing output, not logging)
             if result.decision.action == "react":
                 print(f"\n[{dialogue.dialogue_id}] {dialogue.speaker}")
                 print(f"  Line: {dialogue.chinese_text}")
@@ -218,6 +227,7 @@ async def main():
 
     # Process each chapter file
     for chapter_num, dialogue_file in enumerate(args.dialogue_files, 1):
+        # Print chapter header (user-facing output)
         print(f"\n{'='*60}")
         print(f"PROCESSING CHAPTER {chapter_num}: {dialogue_file}")
         print(f"{'='*60}\n")
