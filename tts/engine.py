@@ -23,6 +23,15 @@ class TTSEngine:
         self.provider_config = settings.tts.get_provider_config()
         self.provider: TTSProvider = self._load_provider()
 
+    async def shutdown(self):
+        """Clean up provider resources."""
+        if hasattr(self.provider, 'close'):
+            try:
+                await self.provider.close()
+                logger.info(f"TTS provider {self.provider_name} resources cleaned up")
+            except Exception as e:
+                logger.warning(f"Error cleaning up provider: {e}")
+
     def _load_provider(self) -> TTSProvider:
         logger.info(f"Initializing TTS provider: {self.provider_name}...")
 

@@ -24,7 +24,6 @@ class STTSource(BaseSource):
         self.websocket = None
         self._reconnect_delay = 1.0
         self._connect_task = None
-        self.accumulated_transcript = ""  # Accumulate interim transcripts
         self.activity_state = get_activity_state()  # Access centralized activity state
 
     async def start(self):
@@ -80,37 +79,19 @@ class STTSource(BaseSource):
             
             if msg_type == "final":
                 text = data.get("text", "")
-                # Use provided final text, or fall back to accumulated transcript
-                # STT manager should send the full accumulated transcript, but we keep accumulated as backup
-                final_text = text if text.strip() else self.accumulated_transcript
-                
-                if final_text.strip():
+                if text.strip():
                     # Update activity: transcribing done
                     await self.activity_state.update({"transcribing": False})
-                    await self.publish(EventType.TRANSCRIPT_FINAL, {"text": final_text})
-                    # Reset accumulated transcript after final
-                    self.accumulated_transcript = ""
+                    await self.publish(EventType.TRANSCRIPT_FINAL, {"text": text})
             
             elif msg_type == "interim":
                 text = data.get("text", "")
                 if text.strip():
-                    # STT manager should send accumulated transcripts, but we also accumulate here as backup
-                    # Update accumulated transcript (use the longer one, as STT manager sends accumulated)
-                    if len(text) >= len(self.accumulated_transcript):
-                        self.accumulated_transcript = text
-                    else:
-                        # If new text is shorter, it might be a partial update - append if not already included
-                        if text not in self.accumulated_transcript:
-                            self.accumulated_transcript += text
-
-                    # Update activity: transcribing active
+                    # STT service sends pre-accumulated transcripts, forward as-is
                     await self.activity_state.update({"transcribing": True})
-                    # Send the accumulated transcript (STT manager should already send accumulated, but use ours as fallback)
-                    await self.publish(EventType.TRANSCRIPT_INTERIM, {"text": self.accumulated_transcript})
+                    await self.publish(EventType.TRANSCRIPT_INTERIM, {"text": text})
             
             elif msg_type == "speech_start":
-                # Reset accumulated transcript on speech start
-                self.accumulated_transcript = ""
                 await self.publish(EventType.SPEECH_START, {})
                 
         except json.JSONDecodeError:

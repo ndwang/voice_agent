@@ -27,7 +27,6 @@ class AudioPlayer:
 
     def __init__(
         self,
-        sample_rate: int = None,
         channels: int = None,
         output_sample_rate: Optional[int] = None,
         output_device: Optional[str] = None,
@@ -37,11 +36,12 @@ class AudioPlayer:
         Initialize audio player.
 
         Args:
-            sample_rate: Audio sample rate (default: from config)
             channels: Number of audio channels (default: from config)
+            output_sample_rate: Playback sample rate (default: from config)
+            output_device: Output device name (default: from config)
+            on_play_state: Async callback when play state changes
         """
         settings = get_settings()
-        self.sample_rate = sample_rate or settings.audio.output.sample_rate
         self.channels = channels or settings.audio.output.channels
         self.playback_sample_rate = (
             output_sample_rate or settings.audio.output.sample_rate
@@ -207,12 +207,9 @@ class AudioPlayer:
 
                 # Process new item
                 try:
-                    if isinstance(item, tuple):
-                        audio_bytes, source_rate = item
-                    else:
-                        audio_bytes = item
-                        source_rate = self.sample_rate
-                    
+                    # Item is always a tuple of (audio_bytes, source_sample_rate)
+                    audio_bytes, source_rate = item
+
                     if not self.playing:
                         break
                     

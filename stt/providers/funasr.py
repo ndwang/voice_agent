@@ -4,20 +4,17 @@ FunASR STT Provider
 FunASR provider implementation using Fun-ASR-Nano model.
 Supports both batch and streaming modes.
 """
-import logging
 import sys
-import tempfile
-import os
 from pathlib import Path
 from typing import Tuple, List, Dict, Any, Optional
 import numpy as np
-import scipy.io.wavfile as wavfile
 import torch
 
 from stt.base import STTProvider, Segment
 from core.settings.stt import FunASRStreamingConfig, FunASRVADKwargs
+from core.logging import get_logger
 
-logger = logging.getLogger(__name__)
+logger = get_logger(__name__)
 
 
 class FunASRProvider(STTProvider):
@@ -124,23 +121,27 @@ class FunASRProvider(STTProvider):
             logger.error(f"Error loading FunASR model: {e}", exc_info=True)
             raise
     
-    def _save_audio_to_temp_file(self, audio: np.ndarray, sample_rate: int = 16000) -> str:
+    def transcribe(
+        self,
+        audio: np.ndarray,
+        language: str = "zh",
+        vad_filter: bool = False
+    ) -> Tuple[List[Segment], Dict[str, Any]]:
         """
-        Save numpy array audio to temporary WAV file.
-        
+        Transcribe audio using FunASR.
+
         Args:
-            audio: Audio data as numpy array (float32)
-            sample_rate: Sample rate in Hz (default: 16000)
-            
+            audio: Audio data as numpy array (float32, 16kHz mono)
+            language: Language code (e.g., "zh", "en") - Note: FunASR may auto-detect
+            vad_filter: Whether to apply VAD filtering - Note: FunASR uses VAD model by default
+
         Returns:
-            Path to temporary WAV file
+            Tuple of (segments, info):
+            - segments: List of Segment objects with .text attribute
+            - info: Dictionary with transcription metadata
         """
-        # Create temporary file
-        temp_fd, temp_path = tempfile.mkstemp(suffix='.wav', prefix='funasr_')
-        # Close the file descriptor immediately - wavfile.write will open the file by path
-        os.close(temp_fd)
-        
         try:
+            # FunASR accepts numpy arrays directly - no need for temp files
             # Convert float32 to int16 if needed
             if audio.dtype == np.float32:
                 # Normalize to [-1, 1] range and convert to int16
@@ -154,45 +155,10 @@ class FunASRProvider(STTProvider):
                     # Normalize if needed
                     audio_float32 = audio_float32 / max(abs(audio_float32.max()), abs(audio_float32.min()))
                 audio_int16 = (audio_float32 * 32767.0).astype(np.int16)
-            
-            # Write WAV file
-            wavfile.write(temp_path, sample_rate, audio_int16)
-            return temp_path
-        except Exception as e:
-            # Clean up temp file on error
-            try:
-                os.unlink(temp_path)
-            except:
-                pass
-            raise RuntimeError(f"Failed to save audio to temp file: {e}") from e
-    
-    def transcribe(
-        self, 
-        audio: np.ndarray, 
-        language: str = "zh", 
-        vad_filter: bool = False
-    ) -> Tuple[List[Segment], Dict[str, Any]]:
-        """
-        Transcribe audio using FunASR.
-        
-        Args:
-            audio: Audio data as numpy array (float32, 16kHz mono)
-            language: Language code (e.g., "zh", "en") - Note: FunASR may auto-detect
-            vad_filter: Whether to apply VAD filtering - Note: FunASR uses VAD model by default
-            
-        Returns:
-            Tuple of (segments, info):
-            - segments: List of Segment objects with .text attribute
-            - info: Dictionary with transcription metadata
-        """
-        # Save audio to temporary WAV file
-        temp_path = None
-        try:
-            temp_path = self._save_audio_to_temp_file(audio, sample_rate=16000)
-            
-            # Run transcription
+
+            # Run transcription with numpy array directly
             res = self.model.generate(
-                input=[temp_path],
+                input=audio_int16,
                 cache={},
                 batch_size_s=self.batch_size_s,
                 disable_pbar=True
@@ -215,17 +181,11 @@ class FunASRProvider(STTProvider):
             }
             
             return segments, info
-            
+
         except Exception as e:
             logger.error(f"Error during FunASR transcription: {e}", exc_info=True)
-            raise
-        finally:
-            # Clean up temporary file
-            if temp_path and os.path.exists(temp_path):
-                try:
-                    os.unlink(temp_path)
-                except Exception as e:
-                    logger.warning(f"Failed to delete temp file {temp_path}: {e}")
+            # Return empty result on error
+            return [], {"language": language, "language_probability": 0.0}
     
     def initialize_streaming(self) -> Dict[str, Any]:
         """

@@ -48,3 +48,27 @@ export async function handleToggleListening() {
   }
 }
 
+export async function handleToggleBilibiliDanmaku() {
+  elements.toggleBilibiliDanmakuBtn.disabled = true;
+  try {
+    await apiCall('/ui/bilibili/danmaku/toggle', { method: 'POST' });
+  } catch (e) {
+    console.error('Error toggling bilibili danmaku:', e);
+    setStatus('Error toggling bilibili danmaku');
+  } finally {
+    elements.toggleBilibiliDanmakuBtn.disabled = false;
+  }
+}
+
+export async function handleToggleBilibiliSuperChat() {
+  elements.toggleBilibiliSuperChatBtn.disabled = true;
+  try {
+    await apiCall('/ui/bilibili/superchat/toggle', { method: 'POST' });
+  } catch (e) {
+    console.error('Error toggling bilibili superchat:', e);
+    setStatus('Error toggling bilibili superchat');
+  } finally {
+    elements.toggleBilibiliSuperChatBtn.disabled = false;
+  }
+}
+

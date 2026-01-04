@@ -5,7 +5,6 @@ GPT-SoVITS provider implementation with reference audio support.
 """
 import asyncio
 import io
-import logging
 import os
 import numpy as np
 from typing import AsyncIterator, Optional, Dict, Any
@@ -13,8 +12,9 @@ import aiohttp
 from pydub import AudioSegment
 
 from tts.base import TTSProvider
+from core.logging import get_logger
 
-logger = logging.getLogger(__name__)
+logger = get_logger(__name__)
 
 
 class GPTSoVITSProvider(TTSProvider):
@@ -328,11 +328,16 @@ class GPTSoVITSProvider(TTSProvider):
         else:
             return 500, f"GPT-SoVITS synthesis error: {str(exception)}"
     
+    async def close(self):
+        """Explicitly close HTTP session."""
+        if self._session and not self._session.closed:
+            await self._session.close()
+            logger.debug("GPT-SoVITS session closed")
+
     async def __aenter__(self):
         """Async context manager entry."""
         return self
-    
+
     async def __aexit__(self, exc_type, exc_val, exc_tb):
         """Async context manager exit - cleanup session."""
-        if self._session and not self._session.closed:
-            await self._session.close()
+        await self.close()

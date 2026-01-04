@@ -1,22 +1,36 @@
 """UI and interaction endpoints."""
 import asyncio
 import json
-from fastapi import APIRouter, WebSocket, WebSocketDisconnect, HTTPException
+from typing import TYPE_CHECKING
+from fastapi import APIRouter, WebSocket, WebSocketDisconnect, HTTPException, Depends
 from fastapi.responses import FileResponse
 from pathlib import Path
 from core.logging import get_logger
 from core.settings import get_settings, update_settings
 from orchestrator.events import EventType
-from orchestrator.core.constants import UI_ACTIVITY, UI_HISTORY_UPDATED, UI_LISTENING_STATE_CHANGED
+from orchestrator.core.constants import (
+    UI_ACTIVITY,
+    UI_HISTORY_UPDATED,
+    UI_LISTENING_STATE_CHANGED,
+    UI_BILIBILI_DANMAKU_STATE_CHANGED,
+    UI_BILIBILI_SUPERCHAT_STATE_CHANGED
+)
 from orchestrator.core.activity_state import get_activity_state
-from orchestrator.api.models import SystemPromptUpdate, ListeningSetRequest, ConfigUpdate
+from orchestrator.api.models import (
+    SystemPromptUpdate,
+    ListeningSetRequest,
+    ConfigUpdate,
+    BilibiliDanmakuSetRequest,
+    BilibiliSuperChatSetRequest
+)
+from orchestrator.api.dependencies import get_orchestrator
 from orchestrator.utils.event_helpers import publish_history_updated
+
+if TYPE_CHECKING:
+    from orchestrator.server import OrchestratorServer
 
 logger = get_logger(__name__)
 router = APIRouter()
-
-# Global reference (will be injected by server.py)
-orchestrator = None
 
 
 @router.get("/ui")
@@ -29,13 +43,13 @@ async def ui_page():
 
 
 @router.get("/ui/history")
-async def get_history():
+async def get_history(orchestrator: "OrchestratorServer" = Depends(get_orchestrator)):
     """Get conversation history."""
     return {"history": orchestrator.interaction_manager.context_manager.conversation_history}
 
 
 @router.post("/ui/history/clear")
-async def clear_history():
+async def clear_history(orchestrator: "OrchestratorServer" = Depends(get_orchestrator)):
     """Clear conversation history."""
     orchestrator.interaction_manager.context_manager.clear_history()
     await publish_history_updated(orchestrator.event_bus)
@@ -43,7 +57,7 @@ async def clear_history():
 
 
 @router.get("/ui/bilibili/chat")
-async def get_bilibili_chat():
+async def get_bilibili_chat(orchestrator: "OrchestratorServer" = Depends(get_orchestrator)):
     """Get Bilibili chat snapshot."""
     if not orchestrator.bilibili_source.running:
         return {"enabled": False, "danmaku": [], "superchats": []}
@@ -58,12 +72,15 @@ async def get_bilibili_chat():
 @router.websocket("/ui/events")
 async def ui_events(websocket: WebSocket):
     """Stream internal events to the browser UI."""
+    # For WebSocket, we get orchestrator from app.state directly
+    orchestrator = websocket.app.state.orchestrator
+
     await websocket.accept()
     queue = asyncio.Queue()
-    
+
     async def forward_event(event):
         await queue.put(event)
-    
+
     bus = orchestrator.event_bus
     topics = [
         EventType.TRANSCRIPT_FINAL.value,
@@ -71,10 +88,13 @@ async def ui_events(websocket: WebSocket):
         EventType.LLM_TOKEN.value,
         EventType.LLM_RESPONSE_DONE.value,
         EventType.SPEECH_START.value,
-        EventType.LLM_CANCELLED.value,
+        EventType.VOICE_INTERRUPT.value,
+        EventType.CRITICAL_INTERRUPT.value,
         EventType.BILIBILI_DANMAKU.value,
         EventType.BILIBILI_SUPERCHAT.value,
         UI_LISTENING_STATE_CHANGED,
+        UI_BILIBILI_DANMAKU_STATE_CHANGED,
+        UI_BILIBILI_SUPERCHAT_STATE_CHANGED,
         UI_ACTIVITY,
         UI_HISTORY_UPDATED
     ]
@@ -87,6 +107,14 @@ async def ui_events(websocket: WebSocket):
     await websocket.send_json({
         "event": "listening_state_changed",
         "enabled": activity_state.state.listening
+    })
+    await websocket.send_json({
+        "event": "bilibili_danmaku_state_changed",
+        "enabled": activity_state.state.bilibili_danmaku_enabled
+    })
+    await websocket.send_json({
+        "event": "bilibili_superchat_state_changed",
+        "enabled": activity_state.state.bilibili_superchat_enabled
     })
     await websocket.send_json({
         "event": "activity",
@@ -107,7 +135,7 @@ async def ui_events(websocket: WebSocket):
             return {"event": "llm_token", "token": data.get("token", "")}
         elif event_name == EventType.LLM_RESPONSE_DONE.value:
             return {"event": "llm_done"}
-        elif event_name == EventType.LLM_CANCELLED.value:
+        elif event_name == EventType.VOICE_INTERRUPT.value or event_name == EventType.CRITICAL_INTERRUPT.value:
             return {"event": "llm_cancelled"}
         elif event_name == EventType.SPEECH_START.value:
             return {"event": "cancelled"}
@@ -121,6 +149,10 @@ async def ui_events(websocket: WebSocket):
             return {"event": "bilibili_danmaku", "message": data}
         elif event_name == EventType.BILIBILI_SUPERCHAT.value:
             return {"event": "bilibili_superchat", "message": data}
+        elif event_name == UI_BILIBILI_DANMAKU_STATE_CHANGED:
+            return {"event": "bilibili_danmaku_state_changed", "enabled": data.get("enabled", True)}
+        elif event_name == UI_BILIBILI_SUPERCHAT_STATE_CHANGED:
+            return {"event": "bilibili_superchat_state_changed", "enabled": data.get("enabled", True)}
         else:
             # For other events, pass through with original name
             return {"event": event_name, "data": data}
@@ -138,14 +170,14 @@ async def ui_events(websocket: WebSocket):
 
 
 @router.post("/ui/cancel")
-async def cancel_interaction():
+async def cancel_interaction(orchestrator: "OrchestratorServer" = Depends(get_orchestrator)):
     """Cancel current interaction."""
     await orchestrator.cancel_interaction()
     return {"status": "cancelled"}
 
 
 @router.get("/ui/system-prompt")
-async def get_system_prompt():
+async def get_system_prompt(orchestrator: "OrchestratorServer" = Depends(get_orchestrator)):
     """Get current system prompt."""
     cm = orchestrator.interaction_manager.context_manager
     return {
@@ -155,7 +187,7 @@ async def get_system_prompt():
 
 
 @router.post("/ui/system-prompt")
-async def update_system_prompt(request: SystemPromptUpdate):
+async def update_system_prompt(request: SystemPromptUpdate, orchestrator: "OrchestratorServer" = Depends(get_orchestrator)):
     """Update system prompt."""
     success = orchestrator.interaction_manager.context_manager.set_system_prompt(request.prompt)
     if success:
@@ -170,16 +202,60 @@ async def get_listening_status():
 
 
 @router.post("/ui/listening/toggle")
-async def toggle_listening():
+async def toggle_listening(orchestrator: "OrchestratorServer" = Depends(get_orchestrator)):
     """Toggle listening state."""
     enabled = await orchestrator.toggle_listening()
     return {"status": "success", "enabled": enabled}
 
 
 @router.post("/ui/listening/set")
-async def set_listening(request: ListeningSetRequest):
+async def set_listening(request: ListeningSetRequest, orchestrator: "OrchestratorServer" = Depends(get_orchestrator)):
     """Set listening state."""
     await orchestrator.set_listening(request.enabled)
+    return {"status": "success", "enabled": request.enabled}
+
+
+@router.get("/ui/bilibili/danmaku/status")
+async def get_bilibili_danmaku_status():
+    """Get bilibili danmaku enabled state."""
+    return {"enabled": get_activity_state().state.bilibili_danmaku_enabled}
+
+
+@router.post("/ui/bilibili/danmaku/toggle")
+async def toggle_bilibili_danmaku(orchestrator: "OrchestratorServer" = Depends(get_orchestrator)):
+    """Toggle bilibili danmaku state."""
+    current = get_activity_state().state.bilibili_danmaku_enabled
+    new_state = not current
+    await orchestrator.set_bilibili_danmaku(new_state)
+    return {"status": "success", "enabled": new_state}
+
+
+@router.post("/ui/bilibili/danmaku/set")
+async def set_bilibili_danmaku(request: BilibiliDanmakuSetRequest, orchestrator: "OrchestratorServer" = Depends(get_orchestrator)):
+    """Set bilibili danmaku state."""
+    await orchestrator.set_bilibili_danmaku(request.enabled)
+    return {"status": "success", "enabled": request.enabled}
+
+
+@router.get("/ui/bilibili/superchat/status")
+async def get_bilibili_superchat_status():
+    """Get bilibili superchat enabled state."""
+    return {"enabled": get_activity_state().state.bilibili_superchat_enabled}
+
+
+@router.post("/ui/bilibili/superchat/toggle")
+async def toggle_bilibili_superchat(orchestrator: "OrchestratorServer" = Depends(get_orchestrator)):
+    """Toggle bilibili superchat state."""
+    current = get_activity_state().state.bilibili_superchat_enabled
+    new_state = not current
+    await orchestrator.set_bilibili_superchat(new_state)
+    return {"status": "success", "enabled": new_state}
+
+
+@router.post("/ui/bilibili/superchat/set")
+async def set_bilibili_superchat(request: BilibiliSuperChatSetRequest, orchestrator: "OrchestratorServer" = Depends(get_orchestrator)):
+    """Set bilibili superchat state."""
+    await orchestrator.set_bilibili_superchat(request.enabled)
     return {"status": "success", "enabled": request.enabled}
 
 
@@ -191,13 +267,11 @@ async def get_ui_config():
 
 
 @router.post("/ui/config")
-async def update_ui_config(request: ConfigUpdate):
+async def update_ui_config(request: ConfigUpdate, orchestrator: "OrchestratorServer" = Depends(get_orchestrator)):
     """Update full configuration with hot-reload support."""
     try:
-        # Get reload coordinator from orchestrator if available
-        reload_coordinator = None
-        if orchestrator and hasattr(orchestrator, 'reload_coordinator'):
-            reload_coordinator = orchestrator.reload_coordinator
+        # Get reload coordinator from orchestrator
+        reload_coordinator = orchestrator.reload_coordinator
 
         # Update settings with reload coordination
         new_settings, reload_results = update_settings(

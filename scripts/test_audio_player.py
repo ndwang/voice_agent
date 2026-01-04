@@ -31,19 +31,19 @@ async def test_basic_playback():
     frequency = 440.0
     t = np.linspace(0, duration, int(sample_rate * duration))
     audio = np.sin(2 * np.pi * frequency * t)
-    
-    # Convert to int16 bytes
-    audio_int16 = (audio * 32767).astype(np.int16)
-    audio_bytes = audio_int16.tobytes()
-    
+
+    # Convert to float32 bytes (AudioPlayer expects float32 in [-1, 1])
+    audio_float32 = audio.astype(np.float32)
+    audio_bytes = audio_float32.tobytes()
+
     print(f"Generated {len(audio_bytes)} bytes of audio")
     print(f"Sample rate: {sample_rate} Hz")
     print(f"Duration: {duration} seconds")
     print(f"Frequency: {frequency} Hz")
     print()
     print("Playing test tone (440 Hz, 1 second)...")
-    
-    await player.play_audio_chunk(audio_bytes)
+
+    await player.play_audio_chunk(audio_bytes, sample_rate)
     
     # Wait for playback to complete
     await asyncio.sleep(2)
@@ -77,10 +77,10 @@ async def test_streaming_chunks():
             int(sample_rate * chunk_duration)
         )
         audio = np.sin(2 * np.pi * frequency * t)
-        audio_int16 = (audio * 32767).astype(np.int16)
-        audio_bytes = audio_int16.tobytes()
-        
-        await player.play_audio_chunk(audio_bytes)
+        audio_float32 = audio.astype(np.float32)
+        audio_bytes = audio_float32.tobytes()
+
+        await player.play_audio_chunk(audio_bytes, sample_rate)
         print(f"  Chunk {i+1}/{num_chunks} sent")
         await asyncio.sleep(0.05)  # Small delay between chunks
     
@@ -106,11 +106,11 @@ async def test_stop_functionality():
     frequency = 440.0
     t = np.linspace(0, duration, int(sample_rate * duration))
     audio = np.sin(2 * np.pi * frequency * t)
-    audio_int16 = (audio * 32767).astype(np.int16)
-    audio_bytes = audio_int16.tobytes()
-    
+    audio_float32 = audio.astype(np.float32)
+    audio_bytes = audio_float32.tobytes()
+
     print("Starting 3-second playback...")
-    await player.play_audio_chunk(audio_bytes)
+    await player.play_audio_chunk(audio_bytes, sample_rate)
     
     # Wait a bit, then stop
     await asyncio.sleep(0.5)
@@ -130,20 +130,22 @@ async def test_invalid_data():
     
     player = AudioPlayer()
     
+    sample_rate = 16000
+
     # Test empty bytes
     print("Testing empty bytes...")
     try:
-        await player.play_audio_chunk(b"")
+        await player.play_audio_chunk(b"", sample_rate)
         await asyncio.sleep(0.5)
         print("  ✓ Empty bytes handled gracefully")
     except Exception as e:
         print(f"  ✗ Error with empty bytes: {e}")
-    
+
     # Test very small chunk
     print("Testing very small chunk...")
     try:
-        small_audio = np.array([1000, -1000], dtype=np.int16)
-        await player.play_audio_chunk(small_audio.tobytes())
+        small_audio = np.array([0.03, -0.03], dtype=np.float32)
+        await player.play_audio_chunk(small_audio.tobytes(), sample_rate)
         await asyncio.sleep(0.5)
         print("  ✓ Small chunk handled gracefully")
     except Exception as e:
@@ -171,10 +173,10 @@ async def test_multiple_tones():
     for i, freq in enumerate(frequencies):
         t = np.linspace(0, duration, int(sample_rate * duration))
         audio = np.sin(2 * np.pi * freq * t)
-        audio_int16 = (audio * 32767).astype(np.int16)
-        audio_bytes = audio_int16.tobytes()
-        
-        await player.play_audio_chunk(audio_bytes)
+        audio_float32 = audio.astype(np.float32)
+        audio_bytes = audio_float32.tobytes()
+
+        await player.play_audio_chunk(audio_bytes, sample_rate)
         print(f"  Tone {i+1}: {freq} Hz")
         await asyncio.sleep(0.6)  # Wait for playback + small gap
     

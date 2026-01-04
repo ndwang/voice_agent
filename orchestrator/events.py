@@ -19,12 +19,13 @@ class EventType(Enum):
     # Bilibili
     BILIBILI_DANMAKU = "bilibili.danmaku"
     BILIBILI_SUPERCHAT = "bilibili.superchat"
+    BILIBILI_DANMAKU_STATE_CHANGED = "bilibili.danmaku_state_changed"
+    BILIBILI_SUPERCHAT_STATE_CHANGED = "bilibili.superchat_state_changed"
 
     # LLM
     LLM_REQUEST = "llm.request"
     LLM_TOKEN = "llm.token"
     LLM_RESPONSE_DONE = "llm.response_done"
-    LLM_CANCELLED = "llm.cancelled"  # DEPRECATED: Use VOICE_INTERRUPT or CRITICAL_INTERRUPT
 
     # Interrupts
     VOICE_INTERRUPT = "interrupt.voice"  # Voice detected during activity - cancel & expect voice input

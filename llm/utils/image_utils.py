@@ -3,12 +3,13 @@ Image Utilities
 
 Utilities for validating, reading, and processing image files for LLM providers.
 """
-import logging
 import mimetypes
 from pathlib import Path
 from typing import List, Optional
 
-logger = logging.getLogger(__name__)
+from core.logging import get_logger
+
+logger = get_logger(__name__)
 
 # Supported image formats
 SUPPORTED_FORMATS = {'.jpg', '.jpeg', '.png', '.gif', '.webp', '.bmp'}

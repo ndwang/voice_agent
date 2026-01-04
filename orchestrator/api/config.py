@@ -1,12 +1,13 @@
-from fastapi import APIRouter, HTTPException
+from typing import Any, List, Dict, TYPE_CHECKING
+from fastapi import APIRouter, HTTPException, Depends
 from pydantic import BaseModel
-from typing import Any, List, Dict
 from core.settings import get_settings, update_settings, reload_settings
+from orchestrator.api.dependencies import get_orchestrator
+
+if TYPE_CHECKING:
+    from orchestrator.server import OrchestratorServer
 
 router = APIRouter(prefix="/api/config", tags=["configuration"])
-
-# Global reference to orchestrator (injected in main)
-orchestrator = None
 
 
 class ConfigUpdateRequest(BaseModel):
@@ -27,7 +28,7 @@ async def get_config():
 
 
 @router.patch("/")
-async def update_config(request: ConfigUpdateRequest):
+async def update_config(request: ConfigUpdateRequest, orchestrator: "OrchestratorServer" = Depends(get_orchestrator)):
     """
     Update configuration values with hot-reload support.
 
@@ -47,10 +48,8 @@ async def update_config(request: ConfigUpdateRequest):
         Updated configuration with reload results
     """
     try:
-        # Get reload coordinator from orchestrator if available
-        reload_coordinator = None
-        if orchestrator and hasattr(orchestrator, 'reload_coordinator'):
-            reload_coordinator = orchestrator.reload_coordinator
+        # Get reload coordinator from orchestrator
+        reload_coordinator = orchestrator.reload_coordinator
 
         # Update settings with reload coordination
         new_settings, reload_results = update_settings(
@@ -126,15 +125,11 @@ async def get_config_schema():
 
 
 @router.get("/capabilities")
-async def get_config_capabilities():
+async def get_config_capabilities(orchestrator: "OrchestratorServer" = Depends(get_orchestrator)):
     """
     Get hot-reload capabilities for all config paths.
 
     Returns:
         Dict mapping config paths to hot-reload capability
     """
-    if orchestrator and hasattr(orchestrator, 'reload_coordinator'):
-        return orchestrator.reload_coordinator.get_capabilities()
-    else:
-        # Fallback: return empty capabilities if orchestrator not initialized
-        return {}
+    return orchestrator.reload_coordinator.get_capabilities()

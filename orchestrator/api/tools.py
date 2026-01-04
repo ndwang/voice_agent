@@ -1,13 +1,15 @@
 """Tool management endpoints."""
-from fastapi import APIRouter, HTTPException
+from typing import TYPE_CHECKING
+from fastapi import APIRouter, HTTPException, Depends
 from pydantic import BaseModel
 from core.logging import get_logger
+from orchestrator.api.dependencies import get_tool_registry
+
+if TYPE_CHECKING:
+    from orchestrator.tools.registry import ToolRegistry
 
 logger = get_logger(__name__)
 router = APIRouter()
-
-# Global reference (injected by server.py)
-tool_registry = None
 
 
 class ToolToggleRequest(BaseModel):
@@ -17,13 +19,13 @@ class ToolToggleRequest(BaseModel):
 
 
 @router.get("/ui/tools")
-async def get_tools():
+async def get_tools(tool_registry: "ToolRegistry" = Depends(get_tool_registry)):
     """Get all tools with their current states."""
     return {"tools": tool_registry.get_all_tools_info()}
 
 
 @router.post("/ui/tools/toggle")
-async def toggle_tool(request: ToolToggleRequest):
+async def toggle_tool(request: ToolToggleRequest, tool_registry: "ToolRegistry" = Depends(get_tool_registry)):
     """Enable or disable a specific tool."""
     if request.enabled:
         success = tool_registry.enable_tool(request.name)

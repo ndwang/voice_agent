@@ -29,6 +29,8 @@ class TTSManager(BaseManager):
         self._synthesizing = False
         self._connecting = False  # Track connection state to avoid duplicate connections
         self._current_sample_rate = 16000  # Default, will be updated by audio_config
+        self._reconnect_delay = 1.0  # Initial reconnect delay in seconds
+        self._should_reconnect = True  # Flag to control reconnection behavior
         self.activity_state = get_activity_state()  # Access centralized activity state
         super().__init__(event_bus)
         
@@ -97,8 +99,6 @@ class TTSManager(BaseManager):
         self.event_bus.subscribe(EventType.LLM_REQUEST.value, self.on_llm_request)  # Pre-connect on LLM request
         self.event_bus.subscribe(EventType.VOICE_INTERRUPT.value, self.on_cancel)
         self.event_bus.subscribe(EventType.CRITICAL_INTERRUPT.value, self.on_cancel)
-        # Keep LLM_CANCELLED for backward compatibility during migration
-        self.event_bus.subscribe(EventType.LLM_CANCELLED.value, self.on_cancel)
         self.event_bus.subscribe(EventType.LLM_RESPONSE_DONE.value, self.on_llm_done)
         
     async def _on_play_state_changed(self, is_playing: bool):
@@ -211,13 +211,16 @@ class TTSManager(BaseManager):
         """Establish WebSocket connection to TTS service."""
         if self._connecting:
             return  # Already connecting
-        
+
         self._connecting = True
         try:
             self.logger.debug("Connecting to TTS service...")
             self.websocket = await websockets.connect(self.url)
-            # Start receiver task and track it
-            self._receiver_task = asyncio.create_task(self._receiver_loop())
+            # Enable reconnection (in case it was disabled by cancellation)
+            self._should_reconnect = True
+            # Start receiver task and track it (only if not already running)
+            if not self._receiver_task or self._receiver_task.done():
+                self._receiver_task = asyncio.create_task(self._receiver_loop())
             self.logger.debug("Connected to TTS service")
         except Exception as e:
             self.logger.error(f"Could not connect to TTS service: {e}")
@@ -226,63 +229,84 @@ class TTSManager(BaseManager):
             self._connecting = False
 
     async def _receiver_loop(self):
-        try:
-            async for message in self.websocket:
-                try:
-                    if isinstance(message, bytes):
-                        # Play audio                        
-                        await self.audio_player.play_audio_chunk(message, source_sample_rate=self._current_sample_rate)
-                        await self.event_bus.publish(Event(EventType.TTS_AUDIO_CHUNK.value, {"size": len(message)}))
-                    elif isinstance(message, str):
-                        # Handle text messages (e.g., "done", "error", "audio_config")
-                        try:
-                            data = json.loads(message) if message else {}
-                            msg_type = data.get("type")
-                            
-                            if msg_type == "audio_config":
-                                self._current_sample_rate = data.get("sample_rate", 16000)
-                                self.logger.info(f"Received audio config: sample_rate={self._current_sample_rate}")
-                            elif msg_type == "done":
-                                # TTS synthesis complete for one sentence
-                                self.logger.debug("Received 'done' message from TTS service")
-                                if self._synthesizing:
-                                    self._synthesizing = False
-                                    await self.activity_state.update({"synthesizing": False})
-                            elif msg_type == "error":
-                                # TTS service reported an error
-                                error_msg = data.get("message", "Unknown error")
-                                self.logger.warning(f"TTS service error: {error_msg}")
-                                # Don't close connection, allow other sentences to be processed
-                        except json.JSONDecodeError:
-                            self.logger.warning(f"Failed to parse message from TTS service: {message[:100]}")
-                except Exception as e:
-                    # Log error but continue processing - don't let one bad message close the connection
-                    self.logger.error(f"Error processing message from TTS service: {e}", exc_info=True)
-                    continue
-        except asyncio.CancelledError:
-            self.logger.info("TTS receiver loop cancelled")
-            raise
-        except websockets.exceptions.ConnectionClosed as e:
-            # Log connection close with details
-            was_synthesizing = self._synthesizing
-            self.logger.warning(
-                f"TTS WebSocket connection closed unexpectedly "
-                f"(code: {e.code}, reason: {e.reason}, was_synthesizing: {was_synthesizing})"
-            )
-            self.websocket = None
-            self._receiver_task = None
-            self._connecting = False
-            # Reset synthesizing state when connection closes
-            if self._synthesizing:
-                self._synthesizing = False
-                await self.activity_state.update({"synthesizing": False})
-        except Exception as e:
-            self.logger.error(f"TTS Receiver error: {e}", exc_info=True)
-            self.websocket = None
-            self._receiver_task = None
-            self._connecting = False
-            # Reset activity states on error
-            if self._synthesizing:
-                self._synthesizing = False
-                await self.activity_state.update({"synthesizing": False, "playing": False})
+        """Main receiver loop with auto-reconnect."""
+        while self._should_reconnect:
+            try:
+                # Ensure connected before entering message loop
+                if not self.websocket:
+                    await self._connect()
+                    if not self.websocket:
+                        # Connection failed, wait before retry
+                        await asyncio.sleep(self._reconnect_delay)
+                        self._reconnect_delay = min(self._reconnect_delay * 2, 30.0)
+                        continue
+
+                # Reset reconnect delay on successful connection
+                self._reconnect_delay = 1.0
+
+                # Process messages
+                async for message in self.websocket:
+                    try:
+                        if isinstance(message, bytes):
+                            # Play audio
+                            await self.audio_player.play_audio_chunk(message, source_sample_rate=self._current_sample_rate)
+                            await self.event_bus.publish(Event(EventType.TTS_AUDIO_CHUNK.value, {"size": len(message)}))
+                        elif isinstance(message, str):
+                            # Handle text messages (e.g., "done", "error", "audio_config")
+                            try:
+                                data = json.loads(message) if message else {}
+                                msg_type = data.get("type")
+
+                                if msg_type == "audio_config":
+                                    self._current_sample_rate = data.get("sample_rate", 16000)
+                                    self.logger.info(f"Received audio config: sample_rate={self._current_sample_rate}")
+                                elif msg_type == "done":
+                                    # TTS synthesis complete for one sentence
+                                    self.logger.debug("Received 'done' message from TTS service")
+                                    if self._synthesizing:
+                                        self._synthesizing = False
+                                        await self.activity_state.update({"synthesizing": False})
+                                elif msg_type == "error":
+                                    # TTS service reported an error
+                                    error_msg = data.get("message", "Unknown error")
+                                    self.logger.warning(f"TTS service error: {error_msg}")
+                                    # Don't close connection, allow other sentences to be processed
+                            except json.JSONDecodeError:
+                                self.logger.warning(f"Failed to parse message from TTS service: {message[:100]}")
+                    except Exception as e:
+                        # Log error but continue processing - don't let one bad message close the connection
+                        self.logger.error(f"Error processing message from TTS service: {e}", exc_info=True)
+                        continue
+
+            except asyncio.CancelledError:
+                self.logger.info("TTS receiver loop cancelled")
+                self._should_reconnect = False
+                raise
+            except websockets.exceptions.ConnectionClosed as e:
+                # Log connection close and prepare for reconnect
+                was_synthesizing = self._synthesizing
+                self.logger.warning(
+                    f"TTS WebSocket connection closed (code: {e.code}, reason: {e.reason}, "
+                    f"was_synthesizing: {was_synthesizing}). Reconnecting in {self._reconnect_delay}s..."
+                )
+                self.websocket = None
+                self._connecting = False
+                # Reset synthesizing state when connection closes
+                if self._synthesizing:
+                    self._synthesizing = False
+                    await self.activity_state.update({"synthesizing": False})
+                # Wait before reconnect
+                await asyncio.sleep(self._reconnect_delay)
+                self._reconnect_delay = min(self._reconnect_delay * 2, 30.0)
+            except Exception as e:
+                self.logger.error(f"TTS Receiver error: {e}. Reconnecting in {self._reconnect_delay}s...", exc_info=True)
+                self.websocket = None
+                self._connecting = False
+                # Reset activity states on error
+                if self._synthesizing:
+                    self._synthesizing = False
+                    await self.activity_state.update({"synthesizing": False, "playing": False})
+                # Wait before reconnect
+                await asyncio.sleep(self._reconnect_delay)
+                self._reconnect_delay = min(self._reconnect_delay * 2, 30.0)
 

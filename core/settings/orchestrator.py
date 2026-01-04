@@ -11,6 +11,7 @@ class OrchestratorSettings(BaseModel):
     log_file: Optional[str] = None
     system_prompt_file: Optional[str] = None
     queue_cooldown_seconds: float = 3.0  # Cooldown after TURN_ENDED before processing non-voice queue items
+    interrupt_timeout_seconds: float = 10.0  # Timeout to clear pending voice interrupt if no transcript arrives
     hotkeys: dict = Field(default_factory=lambda: {
         "toggle_listening": "ctrl+shift+l",
         "cancel_speech": "ctrl+shift+c"

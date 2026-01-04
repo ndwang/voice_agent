@@ -1,13 +1,13 @@
 """
 GenieTTS Provider implementation.
 """
-import logging
 import numpy as np
 from typing import AsyncIterator, Optional
 
 from tts.base import TTSProvider
+from core.logging import get_logger
 
-logger = logging.getLogger(__name__)
+logger = get_logger(__name__)
 
 class GenieTTSProvider(TTSProvider):
     """GenieTTS provider implementation."""

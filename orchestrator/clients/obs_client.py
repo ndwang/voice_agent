@@ -6,6 +6,7 @@ Client for connecting to OBS Studio via WebSocket API.
 import asyncio
 import time
 from concurrent.futures import ThreadPoolExecutor
+from typing import Optional, Dict, Any
 from obswebsocket import obsws, requests  # noqa: E402
 from core.settings import get_settings
 from core.logging import get_logger
@@ -17,8 +18,8 @@ logger = get_logger(__name__)
 CONNECTION_TIMEOUT = 2.0
 # Operation timeout for OBS calls
 OPERATION_TIMEOUT = 1.0
-# Time to wait before retrying connection after failure (seconds)
-RETRY_DELAY = 30.0
+# Constant retry delay - will keep trying at this interval indefinitely
+RETRY_DELAY = 5.0
 
 
 class OBSClient(BaseClient):
@@ -30,6 +31,10 @@ class OBSClient(BaseClient):
         self.ws = None
         self._connection_failed = False  # Track if connection has failed to avoid repeated attempts
         self._connection_failed_time = None  # Timestamp of last connection failure
+        self._last_successful_connection = None  # Timestamp of last successful connection
+        self._failed_operations = []  # Track operations that failed due to connection issues
+        self._is_connected = False  # Track connection state
+        self._last_reconnect_log_time = None  # Track when we last logged reconnection attempt
         self._executor = ThreadPoolExecutor(max_workers=1, thread_name_prefix="obs_client")
 
         # Load configuration
@@ -45,24 +50,37 @@ class OBSClient(BaseClient):
         self.host = host
         self.port = port
         self.password = password
-    
+
+        logger.info(f"OBS client initialized - target: {host}:{port}")
+
     async def connect(self):
         """Connect to OBS WebSocket with timeout to avoid blocking."""
-        if self.ws is not None:
+        if self.ws is not None and self._is_connected:
             return
-        
+
         # If we've already failed to connect, check if enough time has passed to retry
         if self._connection_failed:
             if self._connection_failed_time is not None:
                 time_since_failure = time.time() - self._connection_failed_time
                 if time_since_failure < RETRY_DELAY:
                     return  # Too soon to retry
-                # Enough time has passed, reset failure flag and try again
+
+                # Log reconnection attempt (but not every time to avoid spam)
+                # Only log every 30 seconds
+                current_time = time.time()
+                should_log = (
+                    self._last_reconnect_log_time is None or
+                    current_time - self._last_reconnect_log_time >= 30.0
+                )
+                if should_log:
+                    logger.info("Attempting to reconnect to OBS WebSocket...")
+                    self._last_reconnect_log_time = current_time
+
                 self._connection_failed = False
                 self._connection_failed_time = None
             else:
                 return  # Failed but no timestamp (shouldn't happen, but be safe)
-        
+
         self.ws = obsws(self.host, self.port, self.password)
         try:
             # Run blocking connect in thread pool with timeout
@@ -71,44 +89,97 @@ class OBSClient(BaseClient):
                 loop.run_in_executor(self._executor, self.ws.connect),
                 timeout=CONNECTION_TIMEOUT
             )
-            logger.info("Connected to OBS WebSocket")
+
+            # Connection successful
+            was_reconnect = self._last_successful_connection is not None and not self._is_connected
+            self._is_connected = True
             self._connection_failed = False
+            self._last_successful_connection = time.time()
+
+            if was_reconnect:
+                logger.info("Successfully reconnected to OBS WebSocket")
+                self._failed_operations.clear()
+            else:
+                logger.info(f"Connected to OBS WebSocket at {self.host}:{self.port}")
+
         except asyncio.TimeoutError:
-            logger.debug(f"OBS connection timeout after {CONNECTION_TIMEOUT}s - OBS may not be available")
+            self._is_connected = False
             self.ws = None
             self._connection_failed = True
             self._connection_failed_time = time.time()
+
+            # Only log the first timeout warning, subsequent ones will be logged every 30s
+            if self._last_successful_connection is None:
+                logger.warning(
+                    f"OBS connection timeout after {CONNECTION_TIMEOUT}s - "
+                    f"OBS may not be running at {self.host}:{self.port}. Will retry every {RETRY_DELAY}s"
+                )
+
         except Exception as e:
-            logger.debug(f"Could not connect to OBS: {e}")
+            self._is_connected = False
             self.ws = None
             self._connection_failed = True
             self._connection_failed_time = time.time()
+
+            # Only log the first connection error, subsequent ones will be logged every 30s
+            if self._last_successful_connection is None:
+                logger.warning(
+                    f"Could not connect to OBS at {self.host}:{self.port}: {e}. "
+                    f"Will retry every {RETRY_DELAY}s"
+                )
     
-    async def _safe_call(self, request, timeout=OPERATION_TIMEOUT):
-        """Safely call OBS WebSocket API with timeout."""
-        if not self.ws:
+    def _track_failed_operation(self, operation_name: str):
+        """Track a failed operation for logging."""
+        # Keep only last 50 failed operations to avoid memory growth
+        if len(self._failed_operations) >= 50:
+            self._failed_operations = self._failed_operations[-25:]
+        self._failed_operations.append(operation_name)
+
+    async def _safe_call(self, request, timeout=OPERATION_TIMEOUT, operation_name: Optional[str] = None):
+        """Safely call OBS WebSocket API with timeout and auto-reconnect."""
+        # Try to connect if not connected
+        if not self.ws or not self._is_connected:
+            await self.connect()
+
+        # If still not connected, log and return
+        if not self.ws or not self._is_connected:
+            if operation_name:
+                self._track_failed_operation(operation_name)
             return None
-        
+
         try:
             loop = asyncio.get_event_loop()
             # Run blocking call in thread pool with timeout
-            return await asyncio.wait_for(
+            result = await asyncio.wait_for(
                 loop.run_in_executor(self._executor, self.ws.call, request),
                 timeout=timeout
             )
+            return result
+
         except asyncio.TimeoutError:
-            logger.debug(f"OBS call timeout after {timeout}s")
-            # Mark connection as failed so we don't keep trying
+            # Operation timed out - likely connection issue
+            self._is_connected = False
             self._connection_failed = True
             self._connection_failed_time = time.time()
             self.ws = None
+
+            if operation_name:
+                self._track_failed_operation(operation_name)
+
+            # Trigger immediate reconnection attempt on next call
             return None
+
         except Exception as e:
-            logger.debug(f"OBS call failed: {e}")
-            # Mark connection as failed so we don't keep trying
+            # Operation failed - likely connection issue
+            self._is_connected = False
             self._connection_failed = True
             self._connection_failed_time = time.time()
             self.ws = None
+
+            if operation_name:
+                self._track_failed_operation(operation_name)
+
+            # Trigger immediate reconnection attempt on next call
             return None
     
     async def disconnect(self):
@@ -119,78 +190,92 @@ class OBSClient(BaseClient):
                 await loop.run_in_executor(self._executor, self.ws.disconnect)
                 logger.info("Disconnected from OBS WebSocket")
             except Exception as e:
-                logger.debug(f"Error disconnecting from OBS: {e}")
+                logger.warning(f"Error disconnecting from OBS: {e}")
             finally:
                 self.ws = None
+                self._is_connected = False
                 self._connection_failed = False
                 self._connection_failed_time = None
     
     async def get_current_scene(self) -> str:
         """Get the current program scene name."""
-        if not self.ws:
-            return ""
-        response = await self._safe_call(requests.GetCurrentProgramScene())
+        response = await self._safe_call(
+            requests.GetCurrentProgramScene(),
+            operation_name="get_current_scene"
+        )
         if not response:
             return ""
         return response.datain.get("currentProgramSceneName", "")
-    
+
     async def set_scene(self, new_scene: str):
         """Set the current scene."""
-        if not self.ws:
-            return
-        await self._safe_call(requests.SetCurrentProgramScene(sceneName=new_scene))
+        await self._safe_call(
+            requests.SetCurrentProgramScene(sceneName=new_scene),
+            operation_name=f"set_scene({new_scene})"
+        )
     
     async def set_filter_visibility(self, source_name: str, filter_name: str, filter_enabled: bool = True):
         """Set the visibility of any source's filters."""
-        if not self.ws:
-            return
-        await self._safe_call(requests.SetSourceFilterEnabled(
-            sourceName=source_name, 
-            filterName=filter_name, 
-            filterEnabled=filter_enabled
-        ))
-    
+        await self._safe_call(
+            requests.SetSourceFilterEnabled(
+                sourceName=source_name,
+                filterName=filter_name,
+                filterEnabled=filter_enabled
+            ),
+            operation_name=f"set_filter_visibility({source_name}/{filter_name}={filter_enabled})"
+        )
+
     async def set_source_visibility(self, scene_name: str, source_name: str, source_visible: bool = True):
         """Set the visibility of any source."""
-        if not self.ws:
-            return
-        response = await self._safe_call(requests.GetSceneItemId(sceneName=scene_name, sourceName=source_name))
+        response = await self._safe_call(
+            requests.GetSceneItemId(sceneName=scene_name, sourceName=source_name),
+            operation_name=f"get_scene_item_id({scene_name}/{source_name})"
+        )
         if not response:
             return
         myItemID = response.datain['sceneItemId']
-        await self._safe_call(requests.SetSceneItemEnabled(
-            sceneName=scene_name, 
-            sceneItemId=myItemID, 
-            sceneItemEnabled=source_visible
-        ))
+        await self._safe_call(
+            requests.SetSceneItemEnabled(
+                sceneName=scene_name,
+                sceneItemId=myItemID,
+                sceneItemEnabled=source_visible
+            ),
+            operation_name=f"set_source_visibility({scene_name}/{source_name}={source_visible})"
+        )
     
     async def get_text(self, source_name: str) -> str:
         """Returns the current text of a text source."""
-        if not self.ws:
-            return ""
-        response = await self._safe_call(requests.GetInputSettings(inputName=source_name))
+        response = await self._safe_call(
+            requests.GetInputSettings(inputName=source_name),
+            operation_name=f"get_text({source_name})"
+        )
         if not response:
             return ""
         return response.datain.get("inputSettings", {}).get("text", "")
-    
+
     async def set_text(self, source_name: str, new_text: str):
         """Set the text of a text source."""
-        if not self.ws:
-            return
-        await self._safe_call(requests.SetInputSettings(
-            inputName=source_name, 
-            inputSettings={'text': new_text}
-        ))
+        await self._safe_call(
+            requests.SetInputSettings(
+                inputName=source_name,
+                inputSettings={'text': new_text}
+            ),
+            operation_name=f"set_text({source_name})"
+        )
     
     async def get_source_transform(self, scene_name: str, source_name: str) -> dict:
         """Get source transform information."""
-        if not self.ws:
-            return {}
-        response = await self._safe_call(requests.GetSceneItemId(sceneName=scene_name, sourceName=source_name))
+        response = await self._safe_call(
+            requests.GetSceneItemId(sceneName=scene_name, sourceName=source_name),
+            operation_name=f"get_scene_item_id({scene_name}/{source_name})"
+        )
         if not response:
             return {}
         myItemID = response.datain['sceneItemId']
-        response = await self._safe_call(requests.GetSceneItemTransform(sceneName=scene_name, sceneItemId=myItemID))
+        response = await self._safe_call(
+            requests.GetSceneItemTransform(sceneName=scene_name, sceneItemId=myItemID),
+            operation_name=f"get_source_transform({scene_name}/{source_name})"
+        )
         if not response:
             return {}
         transform = {}
@@ -209,42 +294,79 @@ class OBSClient(BaseClient):
         transform["cropTop"] = transform_data.get("cropTop", 0)
         transform["cropBottom"] = transform_data.get("cropBottom", 0)
         return transform
-    
+
     async def set_source_transform(self, scene_name: str, source_name: str, new_transform: dict):
         """
         Set source transform.
-        
+
         The transform should be a dictionary containing any of the following keys:
-        positionX, positionY, scaleX, scaleY, rotation, width, height, sourceWidth, 
+        positionX, positionY, scaleX, scaleY, rotation, width, height, sourceWidth,
         sourceHeight, cropTop, cropBottom, cropLeft, cropRight
         """
-        if not self.ws:
-            return
-        response = await self._safe_call(requests.GetSceneItemId(sceneName=scene_name, sourceName=source_name))
+        response = await self._safe_call(
+            requests.GetSceneItemId(sceneName=scene_name, sourceName=source_name),
+            operation_name=f"get_scene_item_id({scene_name}/{source_name})"
+        )
         if not response:
             return
         myItemID = response.datain['sceneItemId']
-        await self._safe_call(requests.SetSceneItemTransform(
-            sceneName=scene_name, 
-            sceneItemId=myItemID, 
-            sceneItemTransform=new_transform
-        ))
+        await self._safe_call(
+            requests.SetSceneItemTransform(
+                sceneName=scene_name,
+                sceneItemId=myItemID,
+                sceneItemTransform=new_transform
+            ),
+            operation_name=f"set_source_transform({scene_name}/{source_name})"
+        )
     
     async def get_input_settings(self, input_name: str):
         """Get input-specific settings (e.g., font, color for text sources)."""
-        if not self.ws:
-            return None
-        return await self._safe_call(requests.GetInputSettings(inputName=input_name))
-    
+        return await self._safe_call(
+            requests.GetInputSettings(inputName=input_name),
+            operation_name=f"get_input_settings({input_name})"
+        )
+
     async def get_input_kind_list(self):
         """Get list of all the input types."""
-        if not self.ws:
-            return None
-        return await self._safe_call(requests.GetInputKindList())
-    
+        return await self._safe_call(
+            requests.GetInputKindList(),
+            operation_name="get_input_kind_list"
+        )
+
     async def get_scene_items(self, scene_name: str):
         """Get list of all items in a certain scene."""
-        if not self.ws:
-            return None
-        return await self._safe_call(requests.GetSceneItemList(sceneName=scene_name))
+        return await self._safe_call(
+            requests.GetSceneItemList(sceneName=scene_name),
+            operation_name=f"get_scene_items({scene_name})"
+        )
+
+    def is_connected(self) -> bool:
+        """Check if currently connected to OBS."""
+        return self._is_connected and self.ws is not None
+
+    def get_connection_status(self) -> Dict[str, Any]:
+        """Get detailed connection status information."""
+        status = {
+            "connected": self.is_connected(),
+            "host": self.host,
+            "port": self.port,
+            "failed_operations_count": len(self._failed_operations),
+        }
+
+        if self._last_successful_connection:
+            status["last_connected"] = time.time() - self._last_successful_connection
+        else:
+            status["last_connected"] = None
+
+        if self._connection_failed and self._connection_failed_time:
+            status["time_since_failure"] = time.time() - self._connection_failed_time
+            status["next_retry_in"] = max(0, RETRY_DELAY - status["time_since_failure"])
+        else:
+            status["time_since_failure"] = None
+            status["next_retry_in"] = None
+
+        if self._failed_operations:
+            status["recent_failed_operations"] = self._failed_operations[-5:]
+
+        return status
 
