@@ -8,7 +8,6 @@ from core.logging import get_logger
 from llm.base import LLMProvider
 from llm.providers.gemini import GeminiProvider
 from vn_commentary.models import Dialogue, CommentaryDecision, CommentaryResult
-from vn_commentary.context_manager import ContextManager
 
 logger = get_logger(__name__)
 
@@ -51,7 +50,6 @@ class CommentaryAnalyzer:
     def __init__(
         self,
         llm_provider: Optional[LLMProvider] = None,
-        context_manager: Optional[ContextManager] = None,
         system_prompt: Optional[str] = None,
         model: str = "gemini-2.5-flash",
         api_key: Optional[str] = None
@@ -61,13 +59,11 @@ class CommentaryAnalyzer:
 
         Args:
             llm_provider: LLM provider instance (if None, creates GeminiProvider)
-            context_manager: Context manager instance (if None, creates default)
             system_prompt: Custom system prompt (if None, uses default)
             model: Model name for default Gemini provider
             api_key: API key for default Gemini provider
         """
         self.llm_provider = llm_provider or GeminiProvider(model=model, api_key=api_key)
-        self.context_manager = context_manager or ContextManager()
         self.system_prompt = system_prompt or self.DEFAULT_SYSTEM_PROMPT
 
         # Chapter state
@@ -241,8 +237,3 @@ class CommentaryAnalyzer:
                     reasoning="Could not parse LLM response"
                 )
 
-    def reset_context(self):
-        """Reset context (deprecated - use end_chapter instead)."""
-        self.end_chapter()
-        self.context_manager.clear()
-        logger.info("Commentary analyzer context reset")

@@ -1,0 +1,446 @@
+[
+  {
+    "dialogue_id": "0101Bad07_Narrative001",
+    "speaker": "[Narrative]",
+    "japanese_text": "冗談まじりにシェリーをけしかけた。",
+    "chinese_text": "艾玛半开玩笑地喊雪莉动手了。"
+  },
+  {
+    "dialogue_id": "0101Bad07_Ema001",
+    "speaker": "Ema",
+    "japanese_text": "うん、やっちゃってシェリーちゃん！なんて、もちろん冗談だけど……。",
+    "chinese_text": "嗯，动手吧雪莉！\n开玩笑的啦……"
+  },
+  {
+    "dialogue_id": "0101Bad07_Sherry001",
+    "speaker": "Sherry",
+    "japanese_text": "了解でーす！",
+    "chinese_text": "收到！"
+  },
+  {
+    "dialogue_id": "0101Bad07_Ema002",
+    "speaker": "Ema",
+    "japanese_text": "え、ちょっと待ってシェリーちゃん！？冗談なんだってば！",
+    "chinese_text": "欸，等一下雪莉！？\n我开玩笑的！"
+  },
+  {
+    "dialogue_id": "0101Bad07_Narrative002",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマの制止が聞こえていないのか、シェリーはアリサとナノカに向かっていく。",
+    "chinese_text": "雪莉没有听到艾玛的制止，\n来到亚里沙和奈叶香跟前。"
+  },
+  {
+    "dialogue_id": "0101Bad07_Sherry002",
+    "speaker": "Sherry",
+    "japanese_text": "あなたたち、喧嘩はいけませんよー。",
+    "chinese_text": "你们两个，不可以吵架哦——"
+  },
+  {
+    "dialogue_id": "0101Bad07_Narrative003",
+    "speaker": "[Narrative]",
+    "japanese_text": "笑顔でそう口にしながらシェリーは、アリサとナノカに拳を振り下ろした。",
+    "chinese_text": "雪莉笑容满面地说着，\n然后朝亚里沙和奈叶香挥下拳头。"
+  },
+  {
+    "dialogue_id": "0101Bad07_Narrative004",
+    "speaker": "[Narrative]",
+    "japanese_text": "アリサとナノカが咄嗟に飛びのき、シェリーの拳が娯楽室の床に叩きつけられる。",
+    "chinese_text": "她们两个瞬间躲开，\n雪莉的拳头挥空，砸向了娱乐室的地板。"
+  },
+  {
+    "dialogue_id": "0101Bad07_Nanoka001",
+    "speaker": "Nanoka",
+    "japanese_text": "！！",
+    "chinese_text": "！！"
+  },
+  {
+    "dialogue_id": "0101Bad07_Alisa001",
+    "speaker": "Alisa",
+    "japanese_text": "てめえ……いきなり何しやがる！？",
+    "chinese_text": "你这家伙……突然之间干什么！？"
+  },
+  {
+    "dialogue_id": "0101Bad07_Sherry003",
+    "speaker": "Sherry",
+    "japanese_text": "喧嘩を止めようと思いまして。とりあえず、お２人に気絶してもらったら早いかなーと。",
+    "chinese_text": "只是想阻止争吵啦，\n感觉先把你们两个打晕是最快的～"
+  },
+  {
+    "dialogue_id": "0101Bad07_Nanoka002",
+    "speaker": "Nanoka",
+    "japanese_text": "……ふざけないで。",
+    "chinese_text": "……开什么玩笑。"
+  },
+  {
+    "dialogue_id": "0101Bad07_Alisa002",
+    "speaker": "Alisa",
+    "japanese_text": "むしろ喧嘩売ってるだろうが。",
+    "chinese_text": "这下挑事的是你才对。"
+  },
+  {
+    "dialogue_id": "0101Bad07_Narrative005",
+    "speaker": "[Narrative]",
+    "japanese_text": "当然だがアリサもナノカも、大人しく殴られるつもりはない様子だ。３人の間に、一触即発の空気が流れる。",
+    "chinese_text": "当然，亚里沙和奈叶香\n并不打算老实被打。\n三人之间的战斗一触即发。"
+  },
+  {
+    "dialogue_id": "0101Bad07_Narrative006",
+    "speaker": "[Narrative]",
+    "japanese_text": "最初に動いたのはシェリーだった。再びアリサとナノカに殴りかかっていく。",
+    "chinese_text": "最初行动的是雪莉，\n她再次向亚里沙和奈叶香发起攻击。"
+  },
+  {
+    "dialogue_id": "0101Bad07_Narrative007",
+    "speaker": "[Narrative]",
+    "japanese_text": "今度はアリサもナノカも、応戦の構えを見せる。だが、シェリーの動きは２人の反応よりも早かった。",
+    "chinese_text": "这回亚里沙和奈叶香都做好了迎战的姿势。\n可是，雪莉的动作比两人的反应更快。"
+  },
+  {
+    "dialogue_id": "0101Bad07_Narrative008",
+    "speaker": "[Narrative]",
+    "japanese_text": "シェリーがナノカ、アリサを殴り倒す。",
+    "chinese_text": "雪莉将奈叶香和亚里沙都打趴下了。"
+  },
+  {
+    "dialogue_id": "0101Bad07_Sherry004",
+    "speaker": "Sherry",
+    "japanese_text": "えっへん！ これで揉め事は丸く収まりましたね！",
+    "chinese_text": "嗯哼！这下吵架就完全结束了！"
+  },
+  {
+    "dialogue_id": "0101Bad07_Hanna001",
+    "speaker": "Hanna",
+    "japanese_text": "どこがですの！？むしろ暴力沙汰を起こしてますけれど！？",
+    "chinese_text": "哪里结束了！？\n现在是你挑起了暴力事件好吗！？"
+  },
+  {
+    "dialogue_id": "0101Bad07_Narrative009",
+    "speaker": "[Narrative]",
+    "japanese_text": "看守が姿を現して、シェリー、アリサ、ナノカを拘束する。３人は、そのまま連行されていった。",
+    "chinese_text": "看守现身了，把雪莉、亚里沙、奈叶香三人\n都抓住了。\n三人都被带走了。"
+  },
+  {
+    "dialogue_id": "0101Bad07_Margo001",
+    "speaker": "Margo",
+    "japanese_text": "あら大変……あの３人、懲罰房にでも入れられるのかしら。",
+    "chinese_text": "呀，真不得了……那三人要被送到惩罚室了呢。"
+  },
+  {
+    "dialogue_id": "0101Bad07_Hanna002",
+    "speaker": "Hanna",
+    "japanese_text": "ちょ、ちょっとエマさん！あなたのせいで余計まずい状況になっちゃいましたわよ！？",
+    "chinese_text": "我、我说艾玛！\n都怪你，现在情况变得更糟糕了欸！？"
+  },
+  {
+    "dialogue_id": "0101Bad07_Ema003",
+    "speaker": "Ema",
+    "japanese_text": "そ、そんな……ボクはただ冗談のつもりで。",
+    "chinese_text": "怎、怎会这样……我只是想开个玩笑而已……"
+  },
+  {
+    "dialogue_id": "0101Bad07_Meruru001",
+    "speaker": "Meruru",
+    "japanese_text": "…………。",
+    "chinese_text": "…………"
+  },
+  {
+    "dialogue_id": "0101Bad07_Narrative010",
+    "speaker": "[Narrative]",
+    "japanese_text": "２日後。エマはシェリーたちが懲罰房から解放されるのを待っている。",
+    "chinese_text": "时间来到两天后。\n艾玛正等待雪莉三人从惩罚室中释放。"
+  },
+  {
+    "dialogue_id": "0101Bad07_Ema004",
+    "speaker": "Ema",
+    "japanese_text": "もうそろそろ戻ってくるかな。",
+    "chinese_text": "她们应该快到时间放出来了……"
+  },
+  {
+    "dialogue_id": "0101Bad07_Hanna003",
+    "speaker": "Hanna",
+    "japanese_text": "さあ、そんなのわかりませんわ……。",
+    "chinese_text": "呵，谁知道呢……"
+  },
+  {
+    "dialogue_id": "0101Bad07_Ema005",
+    "speaker": "Ema",
+    "japanese_text": "（ハンナちゃん、なんだか冷たい気がする……　他のみんなも、ボクを軽蔑してるような……）",
+    "chinese_text": "（总感觉汉娜的态度有些冷淡……\n其他人好像也都没正眼看我……）"
+  },
+  {
+    "dialogue_id": "0101Bad07_Ema006",
+    "speaker": "Ema",
+    "japanese_text": "（やっぱり、みんな怒ってるのかな……？　ボクが、あんなこと言ったから……）",
+    "chinese_text": "（我真的惹大家生气了……？\n只因为我说了那些话……）"
+  },
+  {
+    "dialogue_id": "0101Bad07_Narrative011",
+    "speaker": "[Narrative]",
+    "japanese_text": "冗談のつもりで口にした言葉が、結果的にシェリーを扇動。事態を悪化させてしまった。そんなエマに、不信感を抱いているのかもしれない。",
+    "chinese_text": "本来只是想着开玩笑，结果却煽动了雪莉，\n令事态进一步恶化。\n大家或许是因此对艾玛感到不信任。"
+  },
+  {
+    "dialogue_id": "0101Bad07_Meruru002",
+    "speaker": "Meruru",
+    "japanese_text": "エマさん、どうか落ち込まないでください……。",
+    "chinese_text": "艾玛小姐，请你不要灰心……"
+  },
+  {
+    "dialogue_id": "0101Bad07_Narrative012",
+    "speaker": "[Narrative]",
+    "japanese_text": "暗い顔をするエマに、メルルは心配げに声をかける。彼女だけは唯一、エマと距離を置こうとしない。",
+    "chinese_text": "梅露露向表情昏暗的艾玛送去了关心。\n所有少女中，只有她没有和艾玛拉开距离。"
+  },
+  {
+    "dialogue_id": "0101Bad07_Ema007",
+    "speaker": "Ema",
+    "japanese_text": "メルルちゃん……ありがとう。",
+    "chinese_text": "梅露露……谢谢你。"
+  },
+  {
+    "dialogue_id": "0101Bad07_Narrative013",
+    "speaker": "[Narrative]",
+    "japanese_text": "しばらくすると、アリサとナノカの２人が姿を現した。",
+    "chinese_text": "过了一会，亚里沙和奈叶香两人出现了。"
+  },
+  {
+    "dialogue_id": "0101Bad07_Narrative014",
+    "speaker": "[Narrative]",
+    "japanese_text": "どちらも疲弊しているように見える。懲罰房で酷い仕打ちを受けたのかもしれない。",
+    "chinese_text": "也许是因为在惩罚室遭受了残酷的责罚，\n她们两个看上去十分疲累。"
+  },
+  {
+    "dialogue_id": "0101Bad07_Hanna004",
+    "speaker": "Hanna",
+    "japanese_text": "……シェリーさんはどうしたんですの？",
+    "chinese_text": "……雪莉她情况怎么了？"
+  },
+  {
+    "dialogue_id": "0101Bad07_Alisa003",
+    "speaker": "Alisa",
+    "japanese_text": "あいつは……たぶん、殺されちまった。",
+    "chinese_text": "那家伙……说不定已经被杀了。"
+  },
+  {
+    "dialogue_id": "0101Bad07_Ema008",
+    "speaker": "Ema",
+    "japanese_text": "こ、殺された！？ どうして！？",
+    "chinese_text": "被、被杀了！？为什么！？"
+  },
+  {
+    "dialogue_id": "0101Bad07_Alisa004",
+    "speaker": "Alisa",
+    "japanese_text": "知るかよ！ ただゴクチョーの声が聞こえたんだ……。",
+    "chinese_text": "谁知道啊！我只听见典狱长\n它这么说过……"
+  },
+  {
+    "dialogue_id": "0101Bad07_Alisa005",
+    "speaker": "Alisa",
+    "japanese_text": "もう駄目そうですね、処分しましょう……ってな。",
+    "chinese_text": "说……已经没救了，把她处理掉吧……"
+  },
+  {
+    "dialogue_id": "0101Bad07_Ema009",
+    "speaker": "Ema",
+    "japanese_text": "そ、そんな……そんなのって、ひどい……。",
+    "chinese_text": "怎么、怎会这样……这也，太过分……"
+  },
+  {
+    "dialogue_id": "0101Bad07_Alisa006",
+    "speaker": "Alisa",
+    "japanese_text": "何が酷いだよ……てめえがあいつを煽ったせいだろうが！",
+    "chinese_text": "你也好意思说……\n不都怪你煽动那家伙！"
+  },
+  {
+    "dialogue_id": "0101Bad07_Margo002",
+    "speaker": "Margo",
+    "japanese_text": "あら……元はといえば、言い争いをはじめたのは誰だったかしら？",
+    "chinese_text": "哎呀……说到底，\n最开始吵架的是谁呀？"
+  },
+  {
+    "dialogue_id": "0101Bad07_Alisa007",
+    "speaker": "Alisa",
+    "japanese_text": "最初に言いがかりをつけてきたのはこいつだろ！",
+    "chinese_text": "一开始挑事的是这家伙才对！"
+  },
+  {
+    "dialogue_id": "0101Bad07_Nanoka003",
+    "speaker": "Nanoka",
+    "japanese_text": "…………。",
+    "chinese_text": "…………"
+  },
+  {
+    "dialogue_id": "0101Bad07_Meruru003",
+    "speaker": "Meruru",
+    "japanese_text": "あ、あの、みなさん、どうか落ち着いて……。",
+    "chinese_text": "那、那个，大家，请冷静一下……"
+  },
+  {
+    "dialogue_id": "0101Bad07_Hanna005",
+    "speaker": "Hanna",
+    "japanese_text": "どいつもこいつも、いい加減にしやがれですわ！あなたたち全員の責任でしょう！！",
+    "chinese_text": "你们这帮人，说够了没！\n你们所有人都有责任吧！！"
+  },
+  {
+    "dialogue_id": "0101Bad07_Narrative015",
+    "speaker": "[Narrative]",
+    "japanese_text": "ハンナが声を荒げ、テーブルを叩いた。そのまま激昂した様子で部屋を出ていこうとする。",
+    "chinese_text": "汉娜怒吼道，并砸了一下桌子。\n之后，她神情激愤地准备离开房间。"
+  },
+  {
+    "dialogue_id": "0101Bad07_Ema010",
+    "speaker": "Ema",
+    "japanese_text": "ハンナちゃん、待って！その……。",
+    "chinese_text": "汉娜，等一下！\n我说……"
+  },
+  {
+    "dialogue_id": "0101Bad07_Hanna006",
+    "speaker": "Hanna",
+    "japanese_text": "今は話しかけないでくださいまし……。",
+    "chinese_text": "现在请不要和我说话……"
+  },
+  {
+    "dialogue_id": "0101Bad07_Ema011",
+    "speaker": "Ema",
+    "japanese_text": "……！",
+    "chinese_text": "……！"
+  },
+  {
+    "dialogue_id": "0101Bad07_Narrative016",
+    "speaker": "[Narrative]",
+    "japanese_text": "ハンナはそう言い残して、今度こそ出ていく。エマはただ立ち尽くすだけだった。",
+    "chinese_text": "汉娜留下这句话后，转身离开了。\n只留艾玛呆站在原地一动不动。"
+  },
+  {
+    "dialogue_id": "0101Bad07_Narrative017",
+    "speaker": "[Narrative]",
+    "japanese_text": "その後。罪悪感に苛まれたエマは、他の少女たちと距離を置くようになっていた。",
+    "chinese_text": "在那之后，\n饱受负罪感折磨的艾玛\n主动和其他少女们拉开了距离。"
+  },
+  {
+    "dialogue_id": "0101Bad07_Ema012",
+    "speaker": "Ema",
+    "japanese_text": "（シェリーちゃんが殺されちゃったのは、　ボクのせいだから……　なんで、あんなこと言ったんだろう……）",
+    "chinese_text": "（雪莉被杀\n都是我的错……\n为什么我会说出那些话呢……）"
+  },
+  {
+    "dialogue_id": "0101Bad07_Narrative018",
+    "speaker": "[Narrative]",
+    "japanese_text": "気まずさからか、エマはハンナや他の誰かに話しかけられずにいる。",
+    "chinese_text": "由于尴尬，\n其他人都没有再和艾玛说话。"
+  },
+  {
+    "dialogue_id": "0101Bad07_Narrative019",
+    "speaker": "[Narrative]",
+    "japanese_text": "そうやって過ごすうちに、エマはどんどん心が疲弊していくようだった。",
+    "chinese_text": "日子一天天过去，\n艾玛的内心愈发疲敝。"
+  },
+  {
+    "dialogue_id": "0101Bad07_Ema013",
+    "speaker": "Ema",
+    "japanese_text": "（みんなもきっと、ボクを責めてるんだろうな……　さっきも……）",
+    "chinese_text": "（大家肯定都还在责怪我……\n刚刚也是……）"
+  },
+  {
+    "dialogue_id": "0101Bad07_Narrative020",
+    "speaker": "[Narrative]",
+    "japanese_text": "ラウンジで談笑していた少女たち。しかしエマが姿を現すと、全員が声をひそめる。",
+    "chinese_text": "少女们待在会客厅中，正有说有笑地交流着。\n可艾玛一现身，所有人都压低了音量。"
+  },
+  {
+    "dialogue_id": "0101Bad07_Narrative021",
+    "speaker": "[Narrative]",
+    "japanese_text": "ささやき合う、少女たちの声と向けられた視線。エマは自分の悪口を言われ、蔑まれているような気分だった。",
+    "chinese_text": "少女们低声私语着，向艾玛投去视线。\n艾玛感觉自己正在被人讲坏话。"
+  },
+  {
+    "dialogue_id": "0101Bad07_Meruru004",
+    "speaker": "Meruru",
+    "japanese_text": "あの、エマさん……食事を持ってきました。ここに置いておきますから、食べてください……。",
+    "chinese_text": "啊，艾玛小姐……我把饭菜带过来了。\n我就放在这里，请快吃吧……"
+  },
+  {
+    "dialogue_id": "0101Bad07_Meruru005",
+    "speaker": "Meruru",
+    "japanese_text": "あの……どうか元気を出してくださいね。",
+    "chinese_text": "呃……你一定要打起精神来哦。"
+  },
+  {
+    "dialogue_id": "0101Bad07_Narrative022",
+    "speaker": "[Narrative]",
+    "japanese_text": "優しく接してくれているように思えるメルルの言葉すら、エマには後ろ向きに聞こえてしまう。",
+    "chinese_text": "就连温柔以待的梅露露的话语，\n艾玛也会不自觉地反向解读。"
+  },
+  {
+    "dialogue_id": "0101Bad07_Ema014",
+    "speaker": "Ema",
+    "japanese_text": "（いつまでも被害者面するなってことかな……）",
+    "chinese_text": "（是喊我不要再继续摆一副受害者的态度吗……）"
+  },
+  {
+    "dialogue_id": "0101Bad07_Narrative023",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマはメルルに返事をせず、膝を抱える。",
+    "chinese_text": "艾玛双手抱膝，没有回应梅露露。"
+  },
+  {
+    "dialogue_id": "0101Bad07_Meruru006",
+    "speaker": "Meruru",
+    "japanese_text": "…………。",
+    "chinese_text": "…………"
+  },
+  {
+    "dialogue_id": "0101Bad07_Narrative024",
+    "speaker": "[Narrative]",
+    "japanese_text": "メルルは悲しそうな表情で、房の前から立ち去った。",
+    "chinese_text": "梅露露露出悲伤的表情，离开了房门前。"
+  },
+  {
+    "dialogue_id": "0101Bad07_Ema015",
+    "speaker": "Ema",
+    "japanese_text": "辛いな……何もかも。",
+    "chinese_text": "好难受……一切都好难受……"
+  },
+  {
+    "dialogue_id": "0101Bad07_Narrative025",
+    "speaker": "[Narrative]",
+    "japanese_text": "こんな場所にいること。",
+    "chinese_text": "待在这个地方，令她很难受。"
+  },
+  {
+    "dialogue_id": "0101Bad07_Narrative026",
+    "speaker": "[Narrative]",
+    "japanese_text": "空気の読めない冗談のせいで、シェリーを死に追いやってしまったこと。",
+    "chinese_text": "因为不识气氛，\n害死雪莉一事，令她很难受。"
+  },
+  {
+    "dialogue_id": "0101Bad07_Narrative027",
+    "speaker": "[Narrative]",
+    "japanese_text": "みんなから、蔑まれること。",
+    "chinese_text": "被大家看不起，令她很难受。"
+  },
+  {
+    "dialogue_id": "0101Bad07_Ema016",
+    "speaker": "Ema",
+    "japanese_text": "なんかもういいや……疲れちゃった。",
+    "chinese_text": "感觉一切都无所谓了……好累啊。"
+  },
+  {
+    "dialogue_id": "0101Bad07_Narrative028",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマは食堂から持ち出したテーブルナイフを手にして、喉元に押し当てた。",
+    "chinese_text": "艾玛拿起从食堂带出的餐刀，\n抵在自己的喉咙上。"
+  },
+  {
+    "dialogue_id": "0101Bad07_Ema017",
+    "speaker": "Ema",
+    "japanese_text": "ボクが死んだら、誰か少しは悲しんだりしてくれるのかな……。",
+    "chinese_text": "要是我死了，\n会不会有人稍微为我感到悲伤呢……"
+  },
+  {
+    "dialogue_id": "0101Bad07_Narrative029",
+    "speaker": "[Narrative]",
+    "japanese_text": "監房の中。赤い蝶が、エマの周りをひらひらと舞っていた――",
+    "chinese_text": "在牢房中，\n赤红色的蝴蝶在艾玛的身旁翩翩起舞起来——"
+  }
+]

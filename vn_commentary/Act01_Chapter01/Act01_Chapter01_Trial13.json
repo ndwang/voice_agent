@@ -1,0 +1,1244 @@
+[
+  {
+    "dialogue_id": "0101Trial13_Nanoka001",
+    "speaker": "Nanoka",
+    "japanese_text": "事件の流れについておさらいしましょうか。",
+    "chinese_text": "我们来从头到尾\n整理一遍案件的经过吧。"
+  },
+  {
+    "dialogue_id": "0101Trial13_Nanoka002",
+    "speaker": "Nanoka",
+    "japanese_text": "犯行は２０時から２１時の間に行われた。そしてその間にアリバイがないのは……。",
+    "chinese_text": "凶手是在晚上8点\n到9点之间作案的。\n而在这段时间内\n没有不在场证明的人是……"
+  },
+  {
+    "dialogue_id": "0101Trial13_Leia001",
+    "speaker": "Leia",
+    "japanese_text": "私だけ……ということだったね。",
+    "chinese_text": "只有我……\n对吧。"
+  },
+  {
+    "dialogue_id": "0101Trial13_Leia002",
+    "speaker": "Leia",
+    "japanese_text": "……でも私としては、それは何かの行き違いや見落としがあった結果だと思っているけどね。",
+    "chinese_text": "……可是在我看来，\n这只是讨论过程有错误\n或者遗漏，\n才得出了这个结果而已。"
+  },
+  {
+    "dialogue_id": "0101Trial13_Alisa001",
+    "speaker": "Alisa",
+    "japanese_text": "お前が犯人だったら、そういうしかねぇだろ。",
+    "chinese_text": "你是凶手的话，\n也只能这么狡辩了吧。"
+  },
+  {
+    "dialogue_id": "0101Trial13_Leia003",
+    "speaker": "Leia",
+    "japanese_text": "でも私がやったというような確たる証拠はないよね？それで疑うのはどうかと思うよ。",
+    "chinese_text": "可是你们没有我下手的\n确切证据吧？\n可你们还是怀疑我，\n实在太没道理了。"
+  },
+  {
+    "dialogue_id": "0101Trial13_Coco001",
+    "speaker": "Coco",
+    "japanese_text": "証拠ね～？でも今までもう散々出尽くしたっしょ～！こんな話し合い、続ける意味ある～？",
+    "chinese_text": "证据啊～？\n可是至今为止\n我们该拿的都拿了，不是吗～！\n这种讨论还有必要\n持续下去吗～？"
+  },
+  {
+    "dialogue_id": "0101Trial13_Miria001",
+    "speaker": "Miria",
+    "japanese_text": "で、でももしかすると、まだちゃんと検討してない物があるかもしれないし……。",
+    "chinese_text": "可、\n可是说不定，\n还有尚未充分讨论过的\n证物呢……"
+  },
+  {
+    "dialogue_id": "0101Trial13_Sherry001",
+    "speaker": "Sherry",
+    "japanese_text": "では物理的に残っていた証拠をもう一度検討してみましょうか！",
+    "chinese_text": "那么我们就\n重新讨论一下\n留存下来了的\n实体证据吧！"
+  },
+  {
+    "dialogue_id": "0101Trial13_Sherry002",
+    "speaker": "Sherry",
+    "japanese_text": "たとえば……ナノカさんのリボンとかはどうでしょうね？これは確実に犯人さんが使用した物、ですよね！",
+    "chinese_text": "比如说……\n奈叶香的发带，\n怎么样？\n这个的确是\n凶手用过的东西，\n没错吧！"
+  },
+  {
+    "dialogue_id": "0101Trial13_Margo001",
+    "speaker": "Margo",
+    "japanese_text": "そのリボン、血がついてたのよね？誰のものなのかしら？",
+    "chinese_text": "那条发带\n不是沾了血吗？\n究竟是谁的血呢？"
+  },
+  {
+    "dialogue_id": "0101Trial13_Hanna001",
+    "speaker": "Hanna",
+    "japanese_text": "そ、その血が実は犯人のものだったりするんじゃねーんですわ！？ありがちな展開ですわー！",
+    "chinese_text": "有、有没可能\n上面的血其实是\n凶手的血！？\n感觉是很常见的剧情欸～！"
+  },
+  {
+    "dialogue_id": "0101Trial13_Meruru001",
+    "speaker": "Meruru",
+    "japanese_text": "もしそうだったとしても私たちにそれを調べる方法はありませんし、証拠にはならなそうです……。",
+    "chinese_text": "就算真是这样，\n我们也没\n查证的办法，\n不太可能\n成为证据……"
+  },
+  {
+    "dialogue_id": "0101Trial13_Miria002",
+    "speaker": "Miria",
+    "japanese_text": "他には……部屋に塗られた塗料には怪しい所はなかったかな？",
+    "chinese_text": "其他的话……\n涂在房间里的颜料\n有没有奇怪的地方呢？"
+  },
+  {
+    "dialogue_id": "0101Trial13_Miria003",
+    "speaker": "Miria",
+    "japanese_text": "あんなに大量に塗られてたのにも意味があるかもだし……。",
+    "chinese_text": "也许\n涂抹大量颜料的行为\n其实是有意义的……"
+  },
+  {
+    "dialogue_id": "0101Trial13_Sherry003",
+    "speaker": "Sherry",
+    "japanese_text": "そういえば現場には蝶の絵もありましたよね。",
+    "chinese_text": "说起来，现场不是\n有出现蝴蝶的绘画吗。"
+  },
+  {
+    "dialogue_id": "0101Trial13_AnAn001",
+    "speaker": "AnAn",
+    "japanese_text": "『あれが犯人に繋がる物じゃないことはわがはいが保証する』",
+    "chinese_text": "『吾辈可以担保\n那和凶手无关』"
+  },
+  {
+    "dialogue_id": "0101Trial13_Margo002",
+    "speaker": "Margo",
+    "japanese_text": "じゃああのホウキはどうかしら？現場の近くに残されていたのよね？何か痕跡が残ってたりしないかしら？",
+    "chinese_text": "那么，\n那把扫帚呢？\n不是遗留在\n现场附近了吗？\n会不会\n留有某些痕迹呢？"
+  },
+  {
+    "dialogue_id": "0101Trial13_Sherry004",
+    "speaker": "Sherry",
+    "japanese_text": "実は何の変哲もないホウキに見えて、魔法のホウキだったりするんでしょうか！？",
+    "chinese_text": "看起来\n平平无奇的扫帚\n会不会其实是\n一把魔法扫帚！？"
+  },
+  {
+    "dialogue_id": "0101Trial13_Coco002",
+    "speaker": "Coco",
+    "japanese_text": "そうそう魔女だけに――。",
+    "chinese_text": "对对简直就是魔女——"
+  },
+  {
+    "dialogue_id": "0101Trial13_Coco003",
+    "speaker": "Coco",
+    "japanese_text": "――ってうるせー！んな都合のいいことあるかー！",
+    "chinese_text": "——才怪啦！\n哪有那么巧的事！"
+  },
+  {
+    "dialogue_id": "0101Trial13_AnAn002",
+    "speaker": "AnAn",
+    "japanese_text": "……はぁ。",
+    "chinese_text": "……唉。"
+  },
+  {
+    "dialogue_id": "0101Trial13_Alisa002",
+    "speaker": "Alisa",
+    "japanese_text": "……ていうか、本当にこんな話して意味あんのかよ。もう十分話しただろ……！",
+    "chinese_text": "……我说，\n这讨论真的\n有意义吗。\n已经讨论够了吧……！"
+  },
+  {
+    "dialogue_id": "0101Trial13_Meruru002",
+    "speaker": "Meruru",
+    "japanese_text": "意味は……あると思います。投票したあとで【間違っていたら】なんて……後悔したくありませんから。",
+    "chinese_text": "我想……\n有意义的。\n我不想等投完票\n才去后悔……\n后悔我们\n【其实犯了错】。"
+  },
+  {
+    "dialogue_id": "0101Trial13_Alisa003",
+    "speaker": "Alisa",
+    "japanese_text": "……チッ……。わかった、続けるよ……。",
+    "chinese_text": "……啧……\n好啦，\n继续就继续……"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema001",
+    "speaker": "Ema",
+    "japanese_text": "（……でも、現場には決定的な証拠なんてなかった。　それはもう議論しつくしたような……）",
+    "chinese_text": "（……可是，现场没有决定性的证据。\n这个议题似乎已经讨论到头了……）"
+  },
+  {
+    "dialogue_id": "0101Trial13_Meruru003",
+    "speaker": "Meruru",
+    "japanese_text": "……エマさん。証拠が存在しないなら……。",
+    "chinese_text": "……艾玛小姐。\n如果不存在证据的话……"
+  },
+  {
+    "dialogue_id": "0101Trial13_Meruru004",
+    "speaker": "Meruru",
+    "japanese_text": "【なぜそれが存在しないのか】を考えてみると良いのかもしれません。",
+    "chinese_text": "也许思考一下\n【为什么不存在证据】的理由会比较好。"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema002",
+    "speaker": "Ema",
+    "japanese_text": "【証拠が存在しない理由】……？それは……。",
+    "chinese_text": "【不存在证据的原因】……？\n这……"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema003",
+    "speaker": "Ema",
+    "japanese_text": "（【犯人が隠した】……！？　そんな証拠の可能性、指摘できるのかな……？）",
+    "chinese_text": "（是【凶手藏起来了】……！？\n我有办法指出存在这种证据的可能性吗……？）"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema004",
+    "speaker": "Ema",
+    "japanese_text": "あのリボン、ノアちゃんが落とした可能性ってないかな？ノアちゃんが拾って持っていたとしたら……。",
+    "chinese_text": "那条发带，会不会是诺亚掉在地上的呢？\n如果之前是诺亚捡到了的话……"
+  },
+  {
+    "dialogue_id": "0101Trial13_Nanoka003",
+    "speaker": "Nanoka",
+    "japanese_text": "……たしかにその場合、これまでの前提は崩れるけれど……。",
+    "chinese_text": "……如果是这样的话，\n至今讨论的前提确实会推翻……"
+  },
+  {
+    "dialogue_id": "0101Trial13_Sherry005",
+    "speaker": "Sherry",
+    "japanese_text": "でも犯人が持ち去ったことには変わりないですよね？現場から消えてるんですし。",
+    "chinese_text": "可是凶手把发带拿走这件事没变吧？\n毕竟都从现场消失了。"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema005",
+    "speaker": "Ema",
+    "japanese_text": "そ、それはたしかにそうかも……！",
+    "chinese_text": "也、也许是这样没错……！"
+  },
+  {
+    "dialogue_id": "0101Trial13_Margo003",
+    "speaker": "Margo",
+    "japanese_text": "べつに誰が拾ったかは関係ないんじゃないかしら？だって何にせよ、現場にはあったのだしね。",
+    "chinese_text": "其实是谁捡到的都没关系吧？\n发带曾经在现场出现过，可以说是板上钉钉的事。"
+  },
+  {
+    "dialogue_id": "0101Trial13_Sherry006",
+    "speaker": "Sherry",
+    "japanese_text": "つまり、無駄な議論って事ですね！",
+    "chinese_text": "也就是说，讨论这个没有意义呢！"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema006",
+    "speaker": "Ema",
+    "japanese_text": "（みんなから否定されちゃった……！）",
+    "chinese_text": "（被大家否定了……！）"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema007",
+    "speaker": "Ema",
+    "japanese_text": "（でもたしかに、あのリボンは証拠にはならないかも……）",
+    "chinese_text": "（不过，我也觉得那条发带当不了证据……）"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema008",
+    "speaker": "Ema",
+    "japanese_text": "（他に何か、犯人に繋がるような手がかりはないかな……？）",
+    "chinese_text": "（有没有其他跟凶手有关联的证据呢……？）"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema009",
+    "speaker": "Ema",
+    "japanese_text": "ねぇ……やっぱりあのリボン、実は事件に関わってない物なんじゃないかな……？",
+    "chinese_text": "我说……那条发带会不会\n其实和案件根本没有关系呢……？"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema010",
+    "speaker": "Ema",
+    "japanese_text": "湖で見つかったんだし、この事件とはまったく関係ない物なのかも……。",
+    "chinese_text": "毕竟是在湖边找到的，\n也许跟这起案件完全无关……"
+  },
+  {
+    "dialogue_id": "0101Trial13_Nanoka004",
+    "speaker": "Nanoka",
+    "japanese_text": "……ちなみにそれは間違いなく私のリボンよ。",
+    "chinese_text": "……我补充一下，这毫无疑问就是我的发带。"
+  },
+  {
+    "dialogue_id": "0101Trial13_Sherry007",
+    "speaker": "Sherry",
+    "japanese_text": "つまり昔から湖にあったとかではなく、最近湖に投棄された物というわけですね～！",
+    "chinese_text": "也就是说，发带不是以前就掉在湖边的，\n而是最近才被丢到湖边的～！"
+  },
+  {
+    "dialogue_id": "0101Trial13_Hanna002",
+    "speaker": "Hanna",
+    "japanese_text": "事件の直前になくなった上に、塗料も血もついているんですのよ！？逆になんで関係ないと思うんですの！？",
+    "chinese_text": "不单是事发不久前就不见了，\n而且还沾了颜料和血欸！？\n我倒想问你为什么会觉得没关系啊！？"
+  },
+  {
+    "dialogue_id": "0101Trial13_Coco004",
+    "speaker": "Coco",
+    "japanese_text": "なんかエマっち……怪しくね～？なんか隠そうとしてる～？",
+    "chinese_text": "总感觉艾玛亲……有点可疑啊～？\n是不是隐瞒了什么～？"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema011",
+    "speaker": "Ema",
+    "japanese_text": "（しまった……！　みんなの考えとは正反対の発言をして　怪しまれちゃったみたい……！）",
+    "chinese_text": "（完了……！\n好像说了和大家的意见完全相反的话，\n惹大家怀疑了……！）"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema012",
+    "speaker": "Ema",
+    "japanese_text": "（でもたしかに、あのリボンが現場で使われた可能性は高いよね。　となると、これまでの推理は間違ってないはず……）",
+    "chinese_text": "（不过，那条发带确实很有可能在现场使用过。\n这么一来，至今为止的推理应该没搞错才对……）"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema013",
+    "speaker": "Ema",
+    "japanese_text": "（他に何か、犯人に繋がるような手がかりはないかな……？）",
+    "chinese_text": "（有没有其他跟凶手有关联的证据呢……？）"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema014",
+    "speaker": "Ema",
+    "japanese_text": "待って……！ここの医務室なら、それに付いてる血が誰の血なのか調べる方法があるんじゃないかな……！",
+    "chinese_text": "等一下……！\n这边的医务室会不会\n就有能调查血迹主人的手段呢……！"
+  },
+  {
+    "dialogue_id": "0101Trial13_Meruru005",
+    "speaker": "Meruru",
+    "japanese_text": "えっと……それは難しいかもしれません……。",
+    "chinese_text": "呃……这不太可能……"
+  },
+  {
+    "dialogue_id": "0101Trial13_Nanoka005",
+    "speaker": "Nanoka",
+    "japanese_text": "無理よ。血液型を調べるのでさえ試薬が必要なの。ここの設備では血液鑑定は不可能だわ。",
+    "chinese_text": "不行。连调查血型都需要试剂，\n只靠这里的设备是不可能做血液鉴定的。"
+  },
+  {
+    "dialogue_id": "0101Trial13_Nanoka006",
+    "speaker": "Nanoka",
+    "japanese_text": "知らない事を適当に言わないで。",
+    "chinese_text": "自己不知道的事不要随口乱讲。"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema015",
+    "speaker": "Ema",
+    "japanese_text": "（普通に怒られちゃった……！）",
+    "chinese_text": "（很纯粹地惹人生气了……！）"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema016",
+    "speaker": "Ema",
+    "japanese_text": "（でもたしかに、あのリボンは証拠にはならないかも……）",
+    "chinese_text": "（不过，我也觉得那条发带当不了证据……）"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema017",
+    "speaker": "Ema",
+    "japanese_text": "（他に何か、犯人に繋がるような手がかりはないかな……？）",
+    "chinese_text": "（有没有其他跟凶手有关联的证据呢……？）"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema018",
+    "speaker": "Ema",
+    "japanese_text": "そうだよ、リボンには血が付いてた……！なら犯人は傷を負ってるんじゃないかな！",
+    "chinese_text": "对哦，发带上面沾了血……！\n那凶手会不会受伤了呢！"
+  },
+  {
+    "dialogue_id": "0101Trial13_Margo004",
+    "speaker": "Margo",
+    "japanese_text": "……そうかしら？あの血はノアちゃんの血である可能性が高いと思うけれど……。",
+    "chinese_text": "……会吗？\n我倒是觉得\n血迹的主人很有可能就是诺亚……"
+  },
+  {
+    "dialogue_id": "0101Trial13_Margo005",
+    "speaker": "Margo",
+    "japanese_text": "それに仮に犯人が怪我をしているとして、どうやって確認するのかしら？……服でも脱がしてみる？",
+    "chinese_text": "那假设凶手真的受伤了，\n你要怎么确认呢？\n……要脱衣服看吗？"
+  },
+  {
+    "dialogue_id": "0101Trial13_Hanna003",
+    "speaker": "Hanna",
+    "japanese_text": "破廉恥ですわー！！ 変態！",
+    "chinese_text": "太不知羞耻了！！变态！"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema019",
+    "speaker": "Ema",
+    "japanese_text": "（変態扱いされちゃった……！）",
+    "chinese_text": "（被人当变态了……！）"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema020",
+    "speaker": "Ema",
+    "japanese_text": "（でもたしかに、外見で怪我をしているような人はいない……。　仮に怪我をしていたとしても、見つける方法はないかも……）",
+    "chinese_text": "（不过确实，从外表看好像没人受过伤……\n就算有，也大概没有办法准确找到……）"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema021",
+    "speaker": "Ema",
+    "japanese_text": "（他に何か、犯人に繋がるような手がかりはないかな……？）",
+    "chinese_text": "（有没有其他跟凶手有关联的证据呢……？）"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema022",
+    "speaker": "Ema",
+    "japanese_text": "……そうだ。やっぱり犯人が塗料を使ったんじゃないかな？",
+    "chinese_text": "……我想到了。\n凶手会不会其实使用过颜料？"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema023",
+    "speaker": "Ema",
+    "japanese_text": "塗料を使えば足跡だって消せるし……そうなるとこれまでの見方も変わってくるはずだよ！",
+    "chinese_text": "使用颜料就能消灭足迹……\n这么一来，至今为止的见解都会随之改变了！"
+  },
+  {
+    "dialogue_id": "0101Trial13_Hanna004",
+    "speaker": "Hanna",
+    "japanese_text": "ちょ、ちょっと待ちやがれですわ！これまでの推理では現場で槍みたいな物が作られたって話でしたでしょう！？",
+    "chinese_text": "且、且慢！\n我们不是一直以来推理说\n现场制作了长枪吗！？"
+  },
+  {
+    "dialogue_id": "0101Trial13_AnAn003",
+    "speaker": "AnAn",
+    "japanese_text": "『その状況証拠が揃っているという前提で議論が進んでいたと思うが？』",
+    "chinese_text": "『你要推翻\n间接证据齐全的讨论前提吗？』"
+  },
+  {
+    "dialogue_id": "0101Trial13_Margo006",
+    "speaker": "Margo",
+    "japanese_text": "それにもし塗料を使って足跡を消したというなら、なぜ【床の傷】が残ったのか説明できないんじゃないかしら？",
+    "chinese_text": "而且，假设用了颜料消灭了足迹，\n那就没办法解释\n为什么会遗留【地板划痕】了吧？"
+  },
+  {
+    "dialogue_id": "0101Trial13_Coco005",
+    "speaker": "Coco",
+    "japanese_text": "エマっちさ～……【空気】って、漢字で書ける？",
+    "chinese_text": "我说艾玛亲～……\n你知道怎么写【气氛】两个字吗？"
+  },
+  {
+    "dialogue_id": "0101Trial13_Coco006",
+    "speaker": "Coco",
+    "japanese_text": "……あっ、そもそも読めないなら無理かな～！？",
+    "chinese_text": "……啊，你根本就不懂，又怎么会写啊～！？"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema024",
+    "speaker": "Ema",
+    "japanese_text": "（バカにされちゃった……！）",
+    "chinese_text": "（被人当笨蛋了……！）"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema025",
+    "speaker": "Ema",
+    "japanese_text": "（でも確かに、【床の傷】は犯人が証拠隠滅に塗料を　使ってないことを示しているかもしれない……）",
+    "chinese_text": "（不过确实，【地板的划痕】应该说明了\n凶手没有使用颜料来毁灭证据……）"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema026",
+    "speaker": "Ema",
+    "japanese_text": "（他に何か、犯人に繋がるような手がかりはないかな……？）",
+    "chinese_text": "（有没有其他跟凶手有关联的证据呢……？）"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema027",
+    "speaker": "Ema",
+    "japanese_text": "待って！ホウキは犯行に使われたはず……なら、ホウキに何か痕跡が残っているはずだよ！",
+    "chinese_text": "等一下！\n凶手应该用了扫帚作案才对……\n那扫帚上一定会留下某些痕迹！"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema028",
+    "speaker": "Ema",
+    "japanese_text": "もう一度調べ直してみない？もしかしたら証拠が見つかるかも……！",
+    "chinese_text": "重新调查一下怎么样？\n说不定能找到证据……！"
+  },
+  {
+    "dialogue_id": "0101Trial13_Nanoka007",
+    "speaker": "Nanoka",
+    "japanese_text": "……入念に調べたわ。けれど、分解されていること以外に不審な点は何もなかった。",
+    "chinese_text": "……已经很用心调查过了。\n可是，除了被拆解过之外，没有其他可疑的地方。"
+  },
+  {
+    "dialogue_id": "0101Trial13_Sherry008",
+    "speaker": "Sherry",
+    "japanese_text": "ですね～！ホウキにおかしなところはありませんでした！",
+    "chinese_text": "就是啊～！\n扫帚根本没什么好奇怪啦！"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema029",
+    "speaker": "Ema",
+    "japanese_text": "そっか……ボクの見当違いか……。",
+    "chinese_text": "是吗……我搞错了吗……"
+  },
+  {
+    "dialogue_id": "0101Trial13_Meruru006",
+    "speaker": "Meruru",
+    "japanese_text": "……そうでしょうか？",
+    "chinese_text": "……真的是这样吗？"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema030",
+    "speaker": "Ema",
+    "japanese_text": "え？",
+    "chinese_text": "欸？"
+  },
+  {
+    "dialogue_id": "0101Trial13_Meruru007",
+    "speaker": "Meruru",
+    "japanese_text": "……いえ、なんでもないんです。でも少しだけ、何か不自然な所があるような……。",
+    "chinese_text": "……不，没什么。\n只是稍微感觉，好像有不太自然的地方……"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema031",
+    "speaker": "Ema",
+    "japanese_text": "（メルルちゃん、何か考えてる……。　もしかして何か問題があるのかな……？）",
+    "chinese_text": "（梅露露好像有什么想法……\n难道真的有问题……？）"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema032",
+    "speaker": "Ema",
+    "japanese_text": "（ホウキを調べても何も出てこなかったということは、　【ホウキに証拠が残っていない】ということだ……）",
+    "chinese_text": "（调查扫帚也没发现，\n意味着【扫帚上没留下证据】……）"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema033",
+    "speaker": "Ema",
+    "japanese_text": "（これって現場に残された他の証拠と一致しているんだっけ……？　もし違うなら、そこに何か見落としがあるのかも……）",
+    "chinese_text": "（这跟遗留在现场的其他证据一致吗……？\n如果不对的话，说不定其中有遗漏的地方……）"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema034",
+    "speaker": "Ema",
+    "japanese_text": "（……もう一度考えてみよう！　他に犯人に繋がる証拠がないのかを……！）",
+    "chinese_text": "（……重新再思考一下吧！\n想想还有没有和凶手有关联的证据……！）"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema035",
+    "speaker": "Ema",
+    "japanese_text": "……それだよ！ホウキに仕掛けがあったんだ！",
+    "chinese_text": "……就是这个！\n扫帚上其实有机关！"
+  },
+  {
+    "dialogue_id": "0101Trial13_Sherry009",
+    "speaker": "Sherry",
+    "japanese_text": "魔法のホウキだったってことですね！",
+    "chinese_text": "你说这是魔法扫帚对吗！"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema036",
+    "speaker": "Ema",
+    "japanese_text": "そうそう！何かすごい仕掛けがあったのかも……！",
+    "chinese_text": "嗯嗯！\n说不定有很厉害的机关……！"
+  },
+  {
+    "dialogue_id": "0101Trial13_Nanoka008",
+    "speaker": "Nanoka",
+    "japanese_text": "……具体的にどんな仕掛けで、それがどうして犯人に繋がる証拠になりうるのかしら？",
+    "chinese_text": "……具体是怎样的机关，\n又怎样证明机关和凶手有关系呢？"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema037",
+    "speaker": "Ema",
+    "japanese_text": "えっとそれは……調べてみればわかる……かも……。",
+    "chinese_text": "呃这个……\n调查一下说不定……就知道了……"
+  },
+  {
+    "dialogue_id": "0101Trial13_Miria004",
+    "speaker": "Miria",
+    "japanese_text": "でもたしか散々調べたんだよね……？",
+    "chinese_text": "可是我们调查得够仔细了欸……？"
+  },
+  {
+    "dialogue_id": "0101Trial13_Meruru008",
+    "speaker": "Meruru",
+    "japanese_text": "特に何も不自然な所はなかったと思います……。",
+    "chinese_text": "我觉得确实没有什么不自然的地方……"
+  },
+  {
+    "dialogue_id": "0101Trial13_Coco007",
+    "speaker": "Coco",
+    "japanese_text": "不自然なのはエマっちの発想だけだよね～！",
+    "chinese_text": "不自然的只有艾玛亲的奇思妙想啦～！"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema038",
+    "speaker": "Ema",
+    "japanese_text": "（バカにされちゃった……！）",
+    "chinese_text": "（被人当笨蛋了……！）"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema039",
+    "speaker": "Ema",
+    "japanese_text": "（でも確かに、そんな仕掛けがあったら　みんながとっくに気付いてるよね……）",
+    "chinese_text": "（不过确实，如果有那种机关的话，\n大家早该发现了才对……）"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema040",
+    "speaker": "Ema",
+    "japanese_text": "（他に何か、犯人に繋がるような手がかりはないかな……？）",
+    "chinese_text": "（有没有其他跟凶手有关联的证据呢……？）"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema041",
+    "speaker": "Ema",
+    "japanese_text": "……それだよ！犯人は……塗料を持ち去ったんだ！",
+    "chinese_text": "……就是这个！\n凶手……把颜料带走了！"
+  },
+  {
+    "dialogue_id": "0101Trial13_Miria005",
+    "speaker": "Miria",
+    "japanese_text": "ええ！？ 犯人が！？なんで塗料なんか持って帰ったの……！？",
+    "chinese_text": "欸！？凶手拿走了！？\n为什么要带走颜料……！？"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema042",
+    "speaker": "Ema",
+    "japanese_text": "犯人は塗料を……！",
+    "chinese_text": "凶手其实……！"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema043",
+    "speaker": "Ema",
+    "japanese_text": "犯人はその塗料を使う目的があったんだ！だから持ち帰ったんだよ……！",
+    "chinese_text": "凶手有使用颜料的目的！\n所以才带走了……！"
+  },
+  {
+    "dialogue_id": "0101Trial13_Miria006",
+    "speaker": "Miria",
+    "japanese_text": "えっと……それってどうして……？",
+    "chinese_text": "呃……具体是为什么呢……？"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema044",
+    "speaker": "Ema",
+    "japanese_text": "それは……これから考える所だけど……。",
+    "chinese_text": "这个……我正要思考这个问题……"
+  },
+  {
+    "dialogue_id": "0101Trial13_Nanoka009",
+    "speaker": "Nanoka",
+    "japanese_text": "……城ケ崎ノアの部屋以外では白い塗料が使われた形跡はないわ。",
+    "chinese_text": "……除了城崎诺亚的房间外，\n没有其他用过白色颜料的迹象。"
+  },
+  {
+    "dialogue_id": "0101Trial13_Alisa004",
+    "speaker": "Alisa",
+    "japanese_text": "……なあ桜羽。もうちょっと考えて喋ったらどうだ？",
+    "chinese_text": "……喂，樱羽。\n多思考再说话，好不好？"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema045",
+    "speaker": "Ema",
+    "japanese_text": "（アリサちゃんに心配されちゃった……！）",
+    "chinese_text": "（连亚里沙都关心我了……！）"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema046",
+    "speaker": "Ema",
+    "japanese_text": "（もう一度考えよう……！　あの証拠を考えると、　犯人は塗料を持ち去った可能性が高い……！）",
+    "chinese_text": "（重新再想想吧……！\n根据那件证据，\n凶手很有可能带走了颜料……！）"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema047",
+    "speaker": "Ema",
+    "japanese_text": "（でも塗料を持ち去った状況を考えると、　考えられる可能性は多くないはずだ……！）",
+    "chinese_text": "（不过按带走颜料的情况考虑，\n想得到的可能性应该不多……！）"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema048",
+    "speaker": "Ema",
+    "japanese_text": "きっと、犯人に塗料が付いちゃったんだよ！でも犯人はそれを拭き取ることができなかったんだ……！",
+    "chinese_text": "凶手肯定是不小心沾上了颜料！\n但是凶手最终没办法擦掉……！"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema049",
+    "speaker": "Ema",
+    "japanese_text": "だから犯人は塗料を持ち去ったんだよ……！",
+    "chinese_text": "所以凶手才带走了颜料……！"
+  },
+  {
+    "dialogue_id": "0101Trial13_Margo007",
+    "speaker": "Margo",
+    "japanese_text": "でもそれなら、その【付着した物】を処分すればいいんじゃないかしら？",
+    "chinese_text": "可是这样的话，只要把【沾到的东西】\n处理掉不就好了？"
+  },
+  {
+    "dialogue_id": "0101Trial13_Hanna005",
+    "speaker": "Hanna",
+    "japanese_text": "……見る限り、いつもと違う格好をした人はいないように見えますわね。",
+    "chinese_text": "……目前看来，好像没有人身上穿的\n和平时不一样呢。"
+  },
+  {
+    "dialogue_id": "0101Trial13_AnAn004",
+    "speaker": "AnAn",
+    "japanese_text": "『ならばそれは犯人を追い詰める証拠にならないのではないか？』",
+    "chinese_text": "『那，\n这就没办法成为\n锁定凶手的关键证据吧？』"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema050",
+    "speaker": "Ema",
+    "japanese_text": "そ、そう……かも……？",
+    "chinese_text": "是、是吧……也许……？"
+  },
+  {
+    "dialogue_id": "0101Trial13_Meruru009",
+    "speaker": "Meruru",
+    "japanese_text": "エマさん！落ち着いて考えましょう……！",
+    "chinese_text": "艾玛小姐！\n冷静下来再思考吧……！"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema051",
+    "speaker": "Ema",
+    "japanese_text": "う、うん……！",
+    "chinese_text": "嗯、嗯……"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema052",
+    "speaker": "Ema",
+    "japanese_text": "犯人は……持ち去ろうと思って持ち去ったんじゃない。",
+    "chinese_text": "凶手其实……不是想着要带走才带走了颜料。"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema053",
+    "speaker": "Ema",
+    "japanese_text": "塗料が付着していたことに【気付かずに】持ち帰ってしまったんだ！",
+    "chinese_text": "而是【没有察觉到】沾上了颜料，\n就带走了！"
+  },
+  {
+    "dialogue_id": "0101Trial13_Leia004",
+    "speaker": "Leia",
+    "japanese_text": "……う、ぐっ……！？",
+    "chinese_text": "……呜，咕……！？"
+  },
+  {
+    "dialogue_id": "0101Trial13_Hanna006",
+    "speaker": "Hanna",
+    "japanese_text": "ど、どういうことですの！",
+    "chinese_text": "究、究竟是怎么一回事！"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema054",
+    "speaker": "Ema",
+    "japanese_text": "……ノアちゃんの部屋には、一部だけ塗料が剥げていた場所があったよね。",
+    "chinese_text": "……诺亚的房间内\n不是有一处只有部分颜料\n脱落了的地方吗。"
+  },
+  {
+    "dialogue_id": "0101Trial13_Hanna007",
+    "speaker": "Hanna",
+    "japanese_text": "ありましたわねぇそんなの。それがどうかしました？",
+    "chinese_text": "是啊。\n那怎么了？"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema055",
+    "speaker": "Ema",
+    "japanese_text": "そこで剥げた分の塗料って……どこにいったのかな。",
+    "chinese_text": "那脱落的颜料……\n究竟去了哪里呢。"
+  },
+  {
+    "dialogue_id": "0101Trial13_Coco008",
+    "speaker": "Coco",
+    "japanese_text": "ホウキで長い棒を作ってたんっしょ？だったらその先端にでもついたんじゃねーの。",
+    "chinese_text": "不是用扫帚制作了长棒吗？\n那应该沾到扫帚顶端了吧。"
+  },
+  {
+    "dialogue_id": "0101Trial13_Sherry010",
+    "speaker": "Sherry",
+    "japanese_text": "でもでも、ホウキは隅々まで調べましたけど何もついてませんでしたよ？",
+    "chinese_text": "可是可是，我们从头到尾仔细调查了扫帚，\n上面什么东西都没沾上耶？"
+  },
+  {
+    "dialogue_id": "0101Trial13_Alisa005",
+    "speaker": "Alisa",
+    "japanese_text": "現場にはリボンもあったんだろ？リボン越しに触れたんじゃねーか？",
+    "chinese_text": "现场不是有发带吗？\n说不定是包着发带擦到的吧？"
+  },
+  {
+    "dialogue_id": "0101Trial13_Nanoka010",
+    "speaker": "Nanoka",
+    "japanese_text": "……いえ。リボンが間に入ったなら、あの床の傷の形にはならないと思うわ。",
+    "chinese_text": "……不。\n我觉得如果隔着发带的话，\n地板上就不会留下这种形状的划痕。"
+  },
+  {
+    "dialogue_id": "0101Trial13_Miria007",
+    "speaker": "Miria",
+    "japanese_text": "たしかにアレは、何か硬い物が直接叩きつけられてできたような……そんな傷だったと思うよ。",
+    "chinese_text": "我觉得那个划痕……\n更像用某些硬物\n直接接触地面才能划得出来的。"
+  },
+  {
+    "dialogue_id": "0101Trial13_Coco009",
+    "speaker": "Coco",
+    "japanese_text": "じゃあ……ホウキに塗料が付いたあとで、あとから犯人が拭き取ったんじゃねーの？",
+    "chinese_text": "那……说不定颜料是在沾上扫帚后，\n凶手才擦掉的呢？"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema056",
+    "speaker": "Ema",
+    "japanese_text": "ううん、それはありえないと思う……。",
+    "chinese_text": "不，我想这不可能……"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema057",
+    "speaker": "Ema",
+    "japanese_text": "だってこの証拠品が、犯人がホウキに塗料がつかなかったことを証明してるんだ！",
+    "chinese_text": "因为，这件证物\n可以证明\n凶手没有让扫帚沾上颜料！"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema058",
+    "speaker": "Ema",
+    "japanese_text": "それは……これだよ！",
+    "chinese_text": "那件东西就是……这个！"
+  },
+  {
+    "dialogue_id": "0101Trial13_Coco010",
+    "speaker": "Coco",
+    "japanese_text": "……なんで？",
+    "chinese_text": "……为什么？"
+  },
+  {
+    "dialogue_id": "0101Trial13_Hanna008",
+    "speaker": "Hanna",
+    "japanese_text": "それが【塗料を拭き取っていない】証拠になる意味がわかりませんわー？",
+    "chinese_text": "我理解不了这个\n怎么证明【没有沾上颜料】欸？"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema059",
+    "speaker": "Ema",
+    "japanese_text": "（どうやら証拠品を間違えたみたいだ……！）",
+    "chinese_text": "（看来搞错证物了……！）"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema060",
+    "speaker": "Ema",
+    "japanese_text": "（ホウキに付いた塗料を拭き取った可能性だけはありえない……　それを示す証拠品があったはずだ……！）",
+    "chinese_text": "（绝不可能把扫帚沾上的颜料擦掉……\n应该有说明这个情况的证物才对……！）"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema061",
+    "speaker": "Ema",
+    "japanese_text": "（もう一度証拠品を確認してみよう……！）",
+    "chinese_text": "（重新确认一次证物吧……！）"
+  },
+  {
+    "dialogue_id": "0101Trial13_Meruru010",
+    "speaker": "Meruru",
+    "japanese_text": "それは……【塗料のスプレー缶】……ですか……？",
+    "chinese_text": "这是……【颜料喷罐】……？"
+  },
+  {
+    "dialogue_id": "0101Trial13_Alisa006",
+    "speaker": "Alisa",
+    "japanese_text": "……なるほど、そういうことか。",
+    "chinese_text": "……原来如此，是这么一回事啊。"
+  },
+  {
+    "dialogue_id": "0101Trial13_Miria008",
+    "speaker": "Miria",
+    "japanese_text": "た、たしかにスプレー缶に書いてあるよ！",
+    "chinese_text": "确、确实喷罐上面有写！"
+  },
+  {
+    "dialogue_id": "0101Trial13_Miria009",
+    "speaker": "Miria",
+    "japanese_text": "……使用上の注意の欄！木製のものについちゃうと……【取れなくなる】みたいだ。",
+    "chinese_text": "……是使用注意事项那一栏！\n说附着在木制品上……\n就【无法分离】了。"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema062",
+    "speaker": "Ema",
+    "japanese_text": "そうなんだ。もしこのホウキに塗料がついてたとしたら、今もそこに付着した痕跡が残っているはずだよ。",
+    "chinese_text": "是的。\n如果颜料沾在扫帚上，\n那痕迹现在应该还留在上面才对。"
+  },
+  {
+    "dialogue_id": "0101Trial13_Alisa007",
+    "speaker": "Alisa",
+    "japanese_text": "あの床の傷をつけたのは、このホウキじゃねーって事だな。",
+    "chinese_text": "就是说，划伤地板的不是这把扫帚咯。"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema063",
+    "speaker": "Ema",
+    "japanese_text": "……うん。だからきっと、おそらく凶器の槍はこんな風に作られたんじゃないかな……？",
+    "chinese_text": "……嗯。\n那么我猜，凶器一定是\n这样子制作的才对吧……？"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema064",
+    "speaker": "Ema",
+    "japanese_text": "手元にホウキの棒の部分を持って……。",
+    "chinese_text": "手上拿着扫帚的棍子部分……"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema065",
+    "speaker": "Ema",
+    "japanese_text": "その先にもう１つか２つ、長い棒をつなげる。",
+    "chinese_text": "然后在顶端再衔接1到2根长棒物。"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema066",
+    "speaker": "Ema",
+    "japanese_text": "そしてさらに、矢がその先端にくくりつけられていた……。",
+    "chinese_text": "然后再在顶端处绑紧那支箭……"
+  },
+  {
+    "dialogue_id": "0101Trial13_Miria010",
+    "speaker": "Miria",
+    "japanese_text": "……三節棍みたい。短い棒の端を繋げて、一本の長い槍を作ったってことだよね。",
+    "chinese_text": "……好像三节棍欸。\n总的来说就是短棒连着短棒，形成一支长枪，对吧。"
+  },
+  {
+    "dialogue_id": "0101Trial13_Margo008",
+    "speaker": "Margo",
+    "japanese_text": "でも、随分と強度が低そうに見えるわ？そんな即席の槍で、殺人の衝撃に耐えられるのかしら？",
+    "chinese_text": "可是，长枪的强度好像并不高的样子？\n这样的临时长枪，有办法承受住杀人时的冲击力吗？"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema067",
+    "speaker": "Ema",
+    "japanese_text": "……いや。実際にそれは、耐えられなかったんだよ。",
+    "chinese_text": "……不。\n实际上也没承受住。"
+  },
+  {
+    "dialogue_id": "0101Trial13_Miria011",
+    "speaker": "Miria",
+    "japanese_text": "耐えられなかった……？……ってことはもしかして。",
+    "chinese_text": "没承受住……？\n……难道说……"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema068",
+    "speaker": "Ema",
+    "japanese_text": "そう……犯行のとき、犯人の想定していなかったことが起きたんだ。",
+    "chinese_text": "嗯……作案的时候，发生了\n凶手意料之外的状况。"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema069",
+    "speaker": "Ema",
+    "japanese_text": "途中でリボンが解けて、槍が分解されたんだよ。",
+    "chinese_text": "那就是中途发带松开，长枪解体了。"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema070",
+    "speaker": "Ema",
+    "japanese_text": "そうして空中で槍が分解されたとき、床を【ホウキじゃない方】の棒の先端が擦ったんだ。",
+    "chinese_text": "所以长枪在半空中解体时，\n【不是扫帚】的棒状物顶端擦到地板上了。"
+  },
+  {
+    "dialogue_id": "0101Trial13_Nanoka011",
+    "speaker": "Nanoka",
+    "japanese_text": "槍を作っている部品は、【ホウキ】と【矢】と【何か】……。もしも蓮見レイアがそれを作ったのだとしたら……。",
+    "chinese_text": "制作长枪的零件是【扫帚】、【箭矢】和【某样东西】……\n如果是莲见蕾雅制作的话……"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema071",
+    "speaker": "Ema",
+    "japanese_text": "そこにはもう１つの素材が使われた。レイアちゃんの持っている、剣だ。",
+    "chinese_text": "那就用了另外1种材料。\n那就是蕾雅身上的剑。"
+  },
+  {
+    "dialogue_id": "0101Trial13_Leia005",
+    "speaker": "Leia",
+    "japanese_text": "く……！",
+    "chinese_text": "呜……！"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema072",
+    "speaker": "Ema",
+    "japanese_text": "……もしも現場で作ったその即席の槍が壊れて、構成するパーツの一部が床を傷つけたのだとしたら……！",
+    "chinese_text": "……假设现场制作的临时长枪坏掉了，\n组成长枪的一部分零件\n划伤了地板……！"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema073",
+    "speaker": "Ema",
+    "japanese_text": "レイアちゃんの持つその【剣】の先端に、白い塗料がついているはずだよ！",
+    "chinese_text": "那蕾雅持有的【剑】的尖头上，\n就会沾着白色颜料才对！"
+  },
+  {
+    "dialogue_id": "0101Trial13_Leia006",
+    "speaker": "Leia",
+    "japanese_text": "…………。",
+    "chinese_text": "…………"
+  },
+  {
+    "dialogue_id": "0101Trial13_Leia007",
+    "speaker": "Leia",
+    "japanese_text": "……ふ。",
+    "chinese_text": "……呵。"
+  },
+  {
+    "dialogue_id": "0101Trial13_Leia008",
+    "speaker": "Leia",
+    "japanese_text": "ふふ……はははは……！",
+    "chinese_text": "呵呵……哈哈哈哈……！"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema074",
+    "speaker": "Ema",
+    "japanese_text": "レイアちゃん……！？",
+    "chinese_text": "蕾雅……！？"
+  },
+  {
+    "dialogue_id": "0101Trial13_Leia009",
+    "speaker": "Leia",
+    "japanese_text": "……いやいや、すまない。",
+    "chinese_text": "……哎呀，不好意思。"
+  },
+  {
+    "dialogue_id": "0101Trial13_Leia010",
+    "speaker": "Leia",
+    "japanese_text": "……ごめんね笑ってしまって。",
+    "chinese_text": "……笑出声了真抱歉啊。"
+  },
+  {
+    "dialogue_id": "0101Trial13_Leia011",
+    "speaker": "Leia",
+    "japanese_text": "……そうだな。エマくんの推理を検証するなら……剣を抜いて、先端を見せてあげたら満足かな？",
+    "chinese_text": "……好吧。\n为了查证艾玛的推理……\n我拔出剑让你看一看尖头，你就满意了吧？"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema075",
+    "speaker": "Ema",
+    "japanese_text": "……え？",
+    "chinese_text": "……欸？"
+  },
+  {
+    "dialogue_id": "0101Trial13_Leia012",
+    "speaker": "Leia",
+    "japanese_text": "どうぞ、ご覧あれ。",
+    "chinese_text": "请看吧。"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema076",
+    "speaker": "Ema",
+    "japanese_text": "先端が……汚れてない……！",
+    "chinese_text": "尖头……没有污渍……！"
+  },
+  {
+    "dialogue_id": "0101Trial13_Leia013",
+    "speaker": "Leia",
+    "japanese_text": "……ああ、当然だとも。私はそんなことにこの剣を使っていないのだから……。",
+    "chinese_text": "……嗯，当然了。\n因为我根本没有\n将剑用在这种勾当上……"
+  },
+  {
+    "dialogue_id": "0101Trial13_Leia014",
+    "speaker": "Leia",
+    "japanese_text": "どうだい？これで私の潔白を信じてくれたかな？",
+    "chinese_text": "怎样？\n这下你愿意相信我的清白了吗？"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema077",
+    "speaker": "Ema",
+    "japanese_text": "（そんな……！　ボクの推理は間違ってた……！？）",
+    "chinese_text": "（怎么会……！\n我的推理出错了……！？）"
+  },
+  {
+    "dialogue_id": "0101Trial13_Alisa008",
+    "speaker": "Alisa",
+    "japanese_text": "……けどよ、あの塗料が落ちないのは木製のモンだけだろ。金属だったら拭いて落とせるんじゃねーか？",
+    "chinese_text": "……可是啊，那颜料只在木质材料上没法分离吧。\n如果是金属材料的话，还是能擦掉的吧？"
+  },
+  {
+    "dialogue_id": "0101Trial13_Nanoka012",
+    "speaker": "Nanoka",
+    "japanese_text": "だとしたら、あなたが証拠を拭き取った可能性はあるんじゃないかしら？……蓮見レイア。",
+    "chinese_text": "那么，你把证据擦掉的可能性\n还是存在的吧？\n……莲见蕾雅。"
+  },
+  {
+    "dialogue_id": "0101Trial13_Leia015",
+    "speaker": "Leia",
+    "japanese_text": "そんな身に覚えのない事を言われても困るよ。実際に調べて証拠がなかったんだから。",
+    "chinese_text": "你硬说我做了没做过的事，那我能怎么办呢。\n现在实际调查过后又没找到证据。"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema078",
+    "speaker": "Ema",
+    "japanese_text": "（レイアちゃんが犯人だとしても、　証拠は隠滅されたんだ……　だからもう、証拠は出てこない……！）",
+    "chinese_text": "（就算蕾雅确实是凶手，\n但证据已经被毁灭了……\n所以我们已经拿不出证据了……！）"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema079",
+    "speaker": "Ema",
+    "japanese_text": "（いくらレイアちゃんを怪しんだとしても……　決定的な証拠はないんだ……！）",
+    "chinese_text": "（不管蕾雅再怎么可疑……\n都没有决定性的证据……！）"
+  },
+  {
+    "dialogue_id": "0101Trial13_Leia016",
+    "speaker": "Leia",
+    "japanese_text": "……わかってくれたかな？この話題はこれぐらいにして、もっと建設的な話を――。",
+    "chinese_text": "……能理解我说的了吗？\n这个话题就到此为止，\n我们应该讨论更有建设性的——"
+  },
+  {
+    "dialogue_id": "0101Trial13_Nanoka013",
+    "speaker": "Nanoka",
+    "japanese_text": "……残念だけど、私は疑り深いの。",
+    "chinese_text": "……不好意思，我的疑心很重。"
+  },
+  {
+    "dialogue_id": "0101Trial13_Nanoka014",
+    "speaker": "Nanoka",
+    "japanese_text": "私のあなたへの容疑はまだ晴れていないわ。蓮見レイア。",
+    "chinese_text": "莲见蕾雅，\n我对你的怀疑还没有完全打消。"
+  },
+  {
+    "dialogue_id": "0101Trial13_Leia017",
+    "speaker": "Leia",
+    "japanese_text": "……まだ私を疑うというのかい？そんなに信用できないのかな、私のこと。",
+    "chinese_text": "……你还要怀疑我吗？\n你就这么不相信我吗？"
+  },
+  {
+    "dialogue_id": "0101Trial13_Nanoka015",
+    "speaker": "Nanoka",
+    "japanese_text": "信頼することと疑うことは、裏表の関係じゃないわ。",
+    "chinese_text": "信任和怀疑并不是彼此对立的。"
+  },
+  {
+    "dialogue_id": "0101Trial13_Nanoka016",
+    "speaker": "Nanoka",
+    "japanese_text": "疑心暗鬼になるのはいけないこと。……でも、だからと言って盲目的に信じることもまた間違いよ。",
+    "chinese_text": "我们不应该疑心生暗鬼。\n……可虽说如此，\n盲目去信任也是不对的。"
+  },
+  {
+    "dialogue_id": "0101Trial13_Nanoka017",
+    "speaker": "Nanoka",
+    "japanese_text": "私は信じるために、疑うの。",
+    "chinese_text": "我会为了最终能相信，而首先去怀疑。"
+  },
+  {
+    "dialogue_id": "0101Trial13_Nanoka018",
+    "speaker": "Nanoka",
+    "japanese_text": "あなたの議論をうやむやにして感情に訴えかける論法は……私には通じない。",
+    "chinese_text": "你这种搅浑讨论，宣泄情感的论法……\n对我无效。"
+  },
+  {
+    "dialogue_id": "0101Trial13_Leia018",
+    "speaker": "Leia",
+    "japanese_text": "……それもまた、言いがかりだよ。私にそんなつもりはないんだからね。",
+    "chinese_text": "……这么说就是你的不对了。\n我从没这么想过。"
+  },
+  {
+    "dialogue_id": "0101Trial13_Leia019",
+    "speaker": "Leia",
+    "japanese_text": "キミたちが感情で私を責めるから、私もまた感情に訴えかけるしかないだけさ。結局、証拠は出てこなかったんだしね。",
+    "chinese_text": "是你们情感用事来指责我，\n所以我才反过来宣泄情感而已。\n毕竟说到底，你们拿不出来证据。"
+  },
+  {
+    "dialogue_id": "0101Trial13_Nanoka019",
+    "speaker": "Nanoka",
+    "japanese_text": "……なら、証拠があれば感情ではなく論理で話をするということね。",
+    "chinese_text": "……那么只要有证据的话，\n你就会讲逻辑，对吗。"
+  },
+  {
+    "dialogue_id": "0101Trial13_Leia020",
+    "speaker": "Leia",
+    "japanese_text": "……ああ、もちろんさ。",
+    "chinese_text": "……嗯，当然了。"
+  },
+  {
+    "dialogue_id": "0101Trial13_Leia021",
+    "speaker": "Leia",
+    "japanese_text": "でもいったい、これ以上何を話し合うっていうんだい？もうすべて話しつくしたろう？",
+    "chinese_text": "可到底我们还要聊什么？\n不是全部都讨论得差不多了吗？"
+  },
+  {
+    "dialogue_id": "0101Trial13_Hanna009",
+    "speaker": "Hanna",
+    "japanese_text": "それは……たしかにそうかもしれませんわ……。",
+    "chinese_text": "这个……也许是这样没错……"
+  },
+  {
+    "dialogue_id": "0101Trial13_Leia022",
+    "speaker": "Leia",
+    "japanese_text": "見つかった証拠品についても話した、死体についても話した……。他に何を話していないっていうのかな？",
+    "chinese_text": "找到的证物也讨论了，\n尸体情况也讨论了……\n还有其他没讨论的吗？"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema080",
+    "speaker": "Ema",
+    "japanese_text": "……そ、それは……。",
+    "chinese_text": "……这……"
+  },
+  {
+    "dialogue_id": "0101Trial13_Meruru011",
+    "speaker": "Meruru",
+    "japanese_text": "……私たち、あなたのことを詳しく聞いていないと思うんです。",
+    "chinese_text": "……我想，我们还没有详细听你讲过你的情况。"
+  },
+  {
+    "dialogue_id": "0101Trial13_Leia023",
+    "speaker": "Leia",
+    "japanese_text": "……私のこと？",
+    "chinese_text": "……我的情况？"
+  },
+  {
+    "dialogue_id": "0101Trial13_Meruru012",
+    "speaker": "Meruru",
+    "japanese_text": "はい。……あなたがひとりの時間、何をしていたのか……あなたのことを、私は知りたいです。",
+    "chinese_text": "是的。\n……你在独处的时候，都做了什么事……\n我想知道更多关于你的情况。"
+  },
+  {
+    "dialogue_id": "0101Trial13_Meruru013",
+    "speaker": "Meruru",
+    "japanese_text": "もしあなた以外に犯人がいるなら、それはあなたにとっても有益な情報になるはずですし。問題……ないですよね……？",
+    "chinese_text": "如果凶手除你以外别有他人，\n那这对你来说也应该是有益的情报。\n应该……没问题吧……？"
+  },
+  {
+    "dialogue_id": "0101Trial13_Leia024",
+    "speaker": "Leia",
+    "japanese_text": "……アリバイの事かい？先ほども言ったけど、私はひとりでいた時は適当にブラついていたからあまり詳しく覚えては……。",
+    "chinese_text": "……要问不在场证明吗？\n我刚刚也应该说过，\n我一个人随便到处转了转，具体不太记得……"
+  },
+  {
+    "dialogue_id": "0101Trial13_Nanoka020",
+    "speaker": "Nanoka",
+    "japanese_text": "なら、その後のことでも構わないわ。",
+    "chinese_text": "那，你讲之后的事也没关系。"
+  },
+  {
+    "dialogue_id": "0101Trial13_Leia025",
+    "speaker": "Leia",
+    "japanese_text": "その後……？今まで言ったことの繰り返しになるとは思うけど……それでもいいのかい？",
+    "chinese_text": "之后……？\n我觉得这只会重复我之前说过的话……\n没关系吗？"
+  },
+  {
+    "dialogue_id": "0101Trial13_Nanoka021",
+    "speaker": "Nanoka",
+    "japanese_text": "できるだけ詳細に話して。",
+    "chinese_text": "那你就尽可能详细地说明。"
+  },
+  {
+    "dialogue_id": "0101Trial13_Leia026",
+    "speaker": "Leia",
+    "japanese_text": "……ああ、もちろんだとも。",
+    "chinese_text": "……嗯，可以啊。"
+  },
+  {
+    "dialogue_id": "0101Trial13_Leia027",
+    "speaker": "Leia",
+    "japanese_text": "ただし、それで何も出てこなかったらこれ以上無駄に私に疑いを向けないでくれるかい？冤罪だというのに、私ばかり問い詰められるのは悲しいよ。",
+    "chinese_text": "不过，如果最后还是没得出任何结论的话，\n能不能不要再浪费心情怀疑我呢？\n明知是冤罪，还要继续纠缠我，我会很伤心的。"
+  },
+  {
+    "dialogue_id": "0101Trial13_Nanoka022",
+    "speaker": "Nanoka",
+    "japanese_text": "ええ、わかったわ。……私が疑うのはこれで最後にするわ。",
+    "chinese_text": "好，我同意。\n……这是我最后一次怀疑你。"
+  },
+  {
+    "dialogue_id": "0101Trial13_Nanoka023",
+    "speaker": "Nanoka",
+    "japanese_text": "……あなたもそれでいいわね？桜羽エマ。",
+    "chinese_text": "……你也同意这么做吧？\n樱羽艾玛。"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema081",
+    "speaker": "Ema",
+    "japanese_text": "……うん、わかった。",
+    "chinese_text": "……嗯，我知道了。"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema082",
+    "speaker": "Ema",
+    "japanese_text": "（……ナノカちゃんは言った。【信じるために疑う】って）",
+    "chinese_text": "（……奈叶香她说，【要为了相信而去怀疑】）"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema083",
+    "speaker": "Ema",
+    "japanese_text": "（そうだ……ボクも同じ気持ちだ）",
+    "chinese_text": "（没错……我和她的想法是一样的）"
+  },
+  {
+    "dialogue_id": "0101Trial13_Ema084",
+    "speaker": "Ema",
+    "japanese_text": "（レイアちゃんを信じるためにも……　彼女が嘘をついていないか疑ってみるんだ！）",
+    "chinese_text": "（为了能够相信蕾雅……\n我要去怀疑她究竟有没有说谎！）"
+  }
+]

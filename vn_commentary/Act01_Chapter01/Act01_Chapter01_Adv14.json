@@ -1,0 +1,374 @@
+[
+  {
+    "dialogue_id": "0101Adv14_Narrative001",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマとシェリーはマップを頼りに、１階にある医務室へと向かった。",
+    "chinese_text": "艾玛和雪莉跟着地图，\n前往一楼的医务室。"
+  },
+  {
+    "dialogue_id": "0101Adv14_Narrative002",
+    "speaker": "[Narrative]",
+    "japanese_text": "医務室に入ると薬品のにおいはなく、代わりに優しい香りが漂う。",
+    "chinese_text": "走进医务室，迎面飘来的不是药品的气味，\n而是一股沁人的香气。"
+  },
+  {
+    "dialogue_id": "0101Adv14_Narrative003",
+    "speaker": "[Narrative]",
+    "japanese_text": "室内には陽ざしがたっぷりと差し込み、得がたい安らぎをもたらしていた。",
+    "chinese_text": "室内洒满了阳光，\n让人感受到难得的心神安宁。"
+  },
+  {
+    "dialogue_id": "0101Adv14_Ema001",
+    "speaker": "Ema",
+    "japanese_text": "（こういう場所もあるんだ……　良かった、全部がひどい場所じゃなくて）",
+    "chinese_text": "（还有这样的好地方……\n不是所有地方都那么糟糕，真是太好了）"
+  },
+  {
+    "dialogue_id": "0101Adv14_Narrative004",
+    "speaker": "[Narrative]",
+    "japanese_text": "アンアンがベッドで眠っていた。メルルと、レイアもいる。",
+    "chinese_text": "安安躺在床上睡着了。\n梅露露和蕾雅也在。"
+  },
+  {
+    "dialogue_id": "0101Adv14_Meruru001",
+    "speaker": "Meruru",
+    "japanese_text": "あ、エマさん、シェリーさん……！",
+    "chinese_text": "啊，艾玛小姐，雪莉小姐……！"
+  },
+  {
+    "dialogue_id": "0101Adv14_Sherry001",
+    "speaker": "Sherry",
+    "japanese_text": "メルルさん、見かけないと思ったらこんなところにいたんですね。",
+    "chinese_text": "还想着怎么不见梅露露你，\n原来你在这里啊。"
+  },
+  {
+    "dialogue_id": "0101Adv14_Meruru002",
+    "speaker": "Meruru",
+    "japanese_text": "は、はい……。アンアンさんの具合が悪いって聞いて、放っておけなくて……ごめんなさい。",
+    "chinese_text": "嗯……听说安安小姐情况不太好，\n我安不下心来，就……对不起。"
+  },
+  {
+    "dialogue_id": "0101Adv14_Narrative005",
+    "speaker": "[Narrative]",
+    "japanese_text": "メルルはか細い声で言って、頭を下げる。",
+    "chinese_text": "梅露露小声说道，把头低了下来。"
+  },
+  {
+    "dialogue_id": "0101Adv14_Sherry002",
+    "speaker": "Sherry",
+    "japanese_text": "謝らなくてもいいですよぉ！えらいです、メルルさん！",
+    "chinese_text": "你不用道歉啦！\n梅露露你很棒哦！"
+  },
+  {
+    "dialogue_id": "0101Adv14_Meruru003",
+    "speaker": "Meruru",
+    "japanese_text": "そ、そんなそんなそんな……。",
+    "chinese_text": "讲、讲讲讲讲太过了……"
+  },
+  {
+    "dialogue_id": "0101Adv14_Ema002",
+    "speaker": "Ema",
+    "japanese_text": "アンアンちゃん、ずっとここにいたんだ？具合はどうなんだろう。",
+    "chinese_text": "安安她一直都待在这里吗？\n情况怎么样了。"
+  },
+  {
+    "dialogue_id": "0101Adv14_Meruru004",
+    "speaker": "Meruru",
+    "japanese_text": "高熱が出ていて……ゴクチョーさんをお見かけしたので聞いてみたら、さすがに、自室じゃなくて医務室で過ごしても良いとのことでした。",
+    "chinese_text": "她发了高烧……我们遇到典狱长大人，\n它听了我们的情况就说，与其留她在自己房间，\n不如带来医务室这边休息还比较好。"
+  },
+  {
+    "dialogue_id": "0101Adv14_Ema003",
+    "speaker": "Ema",
+    "japanese_text": "そうなんだ……わりと緩いんだね。",
+    "chinese_text": "这样啊……它还蛮心善的。"
+  },
+  {
+    "dialogue_id": "0101Adv14_Narrative006",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマとシェリーは、アンアンのベッドに近付いていった。",
+    "chinese_text": "艾玛和雪莉走到了\n安安的床边。"
+  },
+  {
+    "dialogue_id": "0101Adv14_Leia001",
+    "speaker": "Leia",
+    "japanese_text": "キミたちか。",
+    "chinese_text": "是你们啊。"
+  },
+  {
+    "dialogue_id": "0101Adv14_Ema004",
+    "speaker": "Ema",
+    "japanese_text": "あの、アンアンちゃん、大丈夫？",
+    "chinese_text": "请问，安安她没事吧？"
+  },
+  {
+    "dialogue_id": "0101Adv14_Leia002",
+    "speaker": "Leia",
+    "japanese_text": "あまり良い状態とは言えないな……。ああ、でもメルルくんにずいぶん助けられたよ。",
+    "chinese_text": "说不上情况很好……\n不过，梅露露她真的出了很多力。"
+  },
+  {
+    "dialogue_id": "0101Adv14_Leia003",
+    "speaker": "Leia",
+    "japanese_text": "中庭に植物がたくさん茂っているんだが、ハーブを摘んで、お茶を淹れてくれたんだ。ずいぶん気持ちが落ち着いたんじゃないかな。",
+    "chinese_text": "中庭那边植物长得很茂盛，\n她就跑去那边摘香草，给我们泡茶。\n多亏有她，现在大家感觉很安心。"
+  },
+  {
+    "dialogue_id": "0101Adv14_Sherry003",
+    "speaker": "Sherry",
+    "japanese_text": "へええ、メルルさんすごいですね！",
+    "chinese_text": "欸，梅露露好厉害耶！"
+  },
+  {
+    "dialogue_id": "0101Adv14_Ema005",
+    "speaker": "Ema",
+    "japanese_text": "（それでこの空間は、　すごく優しいにおいがするんだ）",
+    "chinese_text": "（所以这里才飘着一股\n柔和的香气啊）"
+  },
+  {
+    "dialogue_id": "0101Adv14_Sherry004",
+    "speaker": "Sherry",
+    "japanese_text": "中庭……そういえば通路の途中に出られるところありましたね。",
+    "chinese_text": "中庭……说来，我记得过道中间\n有一个地方是可以走出去的。"
+  },
+  {
+    "dialogue_id": "0101Adv14_Leia004",
+    "speaker": "Leia",
+    "japanese_text": "ああ、とても雰囲気が良いところでね。よければ案内するよ。",
+    "chinese_text": "嗯，那里是个气氛很好的地方。\n想去的话我可以带路。"
+  },
+  {
+    "dialogue_id": "0101Adv14_Narrative007",
+    "speaker": "[Narrative]",
+    "japanese_text": "レイアに案内され、エマとシェリーは中庭にやってきた。",
+    "chinese_text": "艾玛和雪莉跟着蕾雅\n来到了中庭。"
+  },
+  {
+    "dialogue_id": "0101Adv14_Narrative008",
+    "speaker": "[Narrative]",
+    "japanese_text": "四方を壁に囲まれているが、吹き抜けになっていて空が見える。",
+    "chinese_text": "虽然四周被墙壁包围，\n但是没有天花板的遮挡，可以看得见天空。"
+  },
+  {
+    "dialogue_id": "0101Adv14_Narrative009",
+    "speaker": "[Narrative]",
+    "japanese_text": "換気のためか、２階の各所からベランダが張り出しているのも見えた。",
+    "chinese_text": "也能看到这里的二楼各处都设置了阳台，\n便于呼吸新鲜空气。"
+  },
+  {
+    "dialogue_id": "0101Adv14_Ema006",
+    "speaker": "Ema",
+    "japanese_text": "（外の空気……！）",
+    "chinese_text": "（是外面的空气……！）"
+  },
+  {
+    "dialogue_id": "0101Adv14_Narrative010",
+    "speaker": "[Narrative]",
+    "japanese_text": "ずっと閉鎖的な場所にいたエマは、緑豊かな庭園の空気を胸いっぱいに吸い込んだ。",
+    "chinese_text": "见到这座绿意满盈的庭院，\n一直待在密闭空间里的艾玛，不禁深深吸了一口这里的空气。"
+  },
+  {
+    "dialogue_id": "0101Adv14_Leia005",
+    "speaker": "Leia",
+    "japanese_text": "ここは囲まれているけれど、正面玄関から外に出てみると良いよ。",
+    "chinese_text": "虽然这边是封闭空间，\n但是也可以走正门去到外面。"
+  },
+  {
+    "dialogue_id": "0101Adv14_Leia006",
+    "speaker": "Leia",
+    "japanese_text": "自然が溢れていて、良い景観なんだ。もっと解放的になれると思う。",
+    "chinese_text": "那是个充满自然气息的美景。\n我觉得那边的开放感会更好哦。"
+  },
+  {
+    "dialogue_id": "0101Adv14_Narrative011",
+    "speaker": "[Narrative]",
+    "japanese_text": "にこにこと提案してきたレイアに、エマとシェリーは、顔を見合わせる。",
+    "chinese_text": "面对蕾雅笑容满面给出的建议，\n艾玛和雪莉对视了一眼。"
+  },
+  {
+    "dialogue_id": "0101Adv14_Ema007",
+    "speaker": "Ema",
+    "japanese_text": "ボクら、てっきり正面玄関は鍵がかけられているのかと思ってた。",
+    "chinese_text": "我们还以为\n正门肯定是锁着的呢。"
+  },
+  {
+    "dialogue_id": "0101Adv14_Leia007",
+    "speaker": "Leia",
+    "japanese_text": "自由時間は、本当に自由に歩き回らせてくれるみたいなんだ。",
+    "chinese_text": "好像在放风时间里\n是真的允许我们自由地四处转转的。"
+  },
+  {
+    "dialogue_id": "0101Adv14_Leia008",
+    "speaker": "Leia",
+    "japanese_text": "ただ、さすがに外出禁止時間は鍵がかけられるみたいだけどね。",
+    "chinese_text": "只不过，在禁止外出时间内\n玄关还是会上锁的。"
+  },
+  {
+    "dialogue_id": "0101Adv14_Narrative012",
+    "speaker": "[Narrative]",
+    "japanese_text": "話し込んでいたら、上空から羽音が聞こえてエマたちは顔を上げる。予感はあったが、ゴクチョーだった。",
+    "chinese_text": "在她们聊得正火热时，上空传来了翅膀拍动的声音。\n于是艾玛她们抬头往上看。\n和心里想的一样，是典狱长来了。"
+  },
+  {
+    "dialogue_id": "0101Adv14_Warden001",
+    "speaker": "Warden",
+    "japanese_text": "おや、桜羽エマさん、橘シェリーさん、蓮見レイアさんじゃないですか。",
+    "chinese_text": "哎呀，这不是樱羽艾玛小姐，\n橘雪莉小姐，还有莲见蕾雅小姐吗。"
+  },
+  {
+    "dialogue_id": "0101Adv14_Ema008",
+    "speaker": "Ema",
+    "japanese_text": "ゴクチョー……。",
+    "chinese_text": "典狱长……"
+  },
+  {
+    "dialogue_id": "0101Adv14_Narrative013",
+    "speaker": "[Narrative]",
+    "japanese_text": "レイアはゴクチョーの出現に警戒し、険しい顔になってエマとシェリーを守るように前に立つ。",
+    "chinese_text": "看到典狱长出现，蕾雅警戒起来，\n露出恶狠狠的表情站在二人面前，摆出要保护她们两个的样子。"
+  },
+  {
+    "dialogue_id": "0101Adv14_Leia009",
+    "speaker": "Leia",
+    "japanese_text": "私たちは規則に従って生活をしている。何も悪いことはしていないよ。",
+    "chinese_text": "我们有老实遵守规定生活。\n没有做任何坏事。"
+  },
+  {
+    "dialogue_id": "0101Adv14_Warden002",
+    "speaker": "Warden",
+    "japanese_text": "ええ、その調子で頑張ってください。ここはとてもいいところですから、楽しんで暮らしていただけますと。",
+    "chinese_text": "嗯，希望你们继续保持下去。\n这里可是个好地方，\n希望你们可以好好享受这里的生活。"
+  },
+  {
+    "dialogue_id": "0101Adv14_Narrative014",
+    "speaker": "[Narrative]",
+    "japanese_text": "唐突にゴクチョーが現れたことでエマとレイアは表情を強張らせていたが、シェリーだけは目を輝かせている。",
+    "chinese_text": "典狱长忽然出现，\n艾玛和蕾雅二人的表情都十分紧张，\n但雪莉此时却是两眼放光。"
+  },
+  {
+    "dialogue_id": "0101Adv14_Sherry005",
+    "speaker": "Sherry",
+    "japanese_text": "遭遇できるなんてラッキーです！ちょーっといいですか、ゴクチョーさん！",
+    "chinese_text": "遇到你真的好幸运耶！\n典狱长，我可以问你几个问题吗！"
+  },
+  {
+    "dialogue_id": "0101Adv14_Sherry006",
+    "speaker": "Sherry",
+    "japanese_text": "ここ、ずいぶん古い建物ですよね。ゴクチョーさんは長い間、何度も囚人を迎え入れているんでしょうか？",
+    "chinese_text": "这座建筑物相当古老呢。\n典狱长，时间这么久了，\n你应该见过好几批关进这里的囚犯吧？"
+  },
+  {
+    "dialogue_id": "0101Adv14_Sherry007",
+    "speaker": "Sherry",
+    "japanese_text": "過去に捕まった囚人はどうなったんでしょう！？",
+    "chinese_text": "曾经被关在这里的囚犯，最后都变成怎样了！？"
+  },
+  {
+    "dialogue_id": "0101Adv14_Sherry008",
+    "speaker": "Sherry",
+    "japanese_text": "この牢屋敷ってなんなんですか！？ぜひ教えてください～！",
+    "chinese_text": "这座监牢又是为了什么目的建成的！？\n请你告诉我～！"
+  },
+  {
+    "dialogue_id": "0101Adv14_Warden003",
+    "speaker": "Warden",
+    "japanese_text": "……やれやれ。まあ、わからないことばかりなのもかわいそうですよね。",
+    "chinese_text": "……哎呀呀。\n唉，看你们什么都不知道，也是蛮可怜的。"
+  },
+  {
+    "dialogue_id": "0101Adv14_Warden004",
+    "speaker": "Warden",
+    "japanese_text": "あまり時間は取れませんが……ほんの少しだけ教えてあげましょう。",
+    "chinese_text": "虽然我现在没什么时间……\n不过，我就告诉你们一点点吧。"
+  },
+  {
+    "dialogue_id": "0101Adv14_Warden005",
+    "speaker": "Warden",
+    "japanese_text": "この牢屋敷はですね、５００年前からあるんですよ。",
+    "chinese_text": "这座监牢呢，已经有500年的历史了。"
+  },
+  {
+    "dialogue_id": "0101Adv14_Sherry009",
+    "speaker": "Sherry",
+    "japanese_text": "５００年！？",
+    "chinese_text": "500年！？"
+  },
+  {
+    "dialogue_id": "0101Adv14_Leia010",
+    "speaker": "Leia",
+    "japanese_text": "どうりで老朽化が激しいわけだね……。",
+    "chinese_text": "怪不得破旧成这样……"
+  },
+  {
+    "dialogue_id": "0101Adv14_Warden006",
+    "speaker": "Warden",
+    "japanese_text": "その当時は魔女を捕らえる場所ではなく、魔女が普通に暮らしているお屋敷でした。",
+    "chinese_text": "当时这里还不是囚禁魔女的地方，\n而是魔女们正常生活的一间大宅子。"
+  },
+  {
+    "dialogue_id": "0101Adv14_Warden007",
+    "speaker": "Warden",
+    "japanese_text": "大魔女を中心に、たくさんの魔女が仲良く暮らす良いところだったんですよ。",
+    "chinese_text": "以大魔女为中心，\n许许多多的魔女曾经在这里幸福地生活着。"
+  },
+  {
+    "dialogue_id": "0101Adv14_Narrative015",
+    "speaker": "[Narrative]",
+    "japanese_text": "感情がまるでわからない存在ではあるが、穏やかに語るトーンから、昔を懐かしんでいる印象を受けた。",
+    "chinese_text": "虽然摸不透它究竟有没有情感，\n但从它平和的语气来看，它似乎也相当怀念过去的事情。"
+  },
+  {
+    "dialogue_id": "0101Adv14_Warden008",
+    "speaker": "Warden",
+    "japanese_text": "あるとき、魔女とは違う種族――人間がこの島にやってきた時も、この中庭でお茶会を催して、魔女たちは人間を歓迎したんです。",
+    "chinese_text": "某天，有一个和魔女不一样的种族——\n也就是人类，来到这座岛上时，魔女们也是\n在这个中庭里开展茶会，欢迎他们的到来。"
+  },
+  {
+    "dialogue_id": "0101Adv14_Sherry010",
+    "speaker": "Sherry",
+    "japanese_text": "それがなんで囚人を捕らえる牢獄なんかに？",
+    "chinese_text": "那为什么这里就变成了关押囚犯的监牢呢？"
+  },
+  {
+    "dialogue_id": "0101Adv14_Warden009",
+    "speaker": "Warden",
+    "japanese_text": "ええと、それは大魔女が――おっと、おしゃべりのしすぎは良くありませんね。私はこれで。",
+    "chinese_text": "呃，那是因为大魔女她——哎呀，\n说太多了也不好呢。我就告辞了。"
+  },
+  {
+    "dialogue_id": "0101Adv14_Narrative016",
+    "speaker": "[Narrative]",
+    "japanese_text": "ゴクチョーは逃げるように、さっさと飛び去っていった。",
+    "chinese_text": "典狱长逃也似的飞走了。"
+  },
+  {
+    "dialogue_id": "0101Adv14_Ema009",
+    "speaker": "Ema",
+    "japanese_text": "（牢屋敷……大魔女……大切な情報な気がする。　【魔女図鑑】にメモしておこう）",
+    "chinese_text": "（监牢……大魔女……总觉得是很重要的情报。\n把它记到【魔女图鉴】里面吧）"
+  },
+  {
+    "dialogue_id": "Toast_001",
+    "speaker": "[Narrative]",
+    "japanese_text": "魔女図鑑 更新…",
+    "chinese_text": "魔女图鉴 更新…"
+  },
+  {
+    "dialogue_id": "0101Adv14_Sherry011",
+    "speaker": "Sherry",
+    "japanese_text": "もっとゴクチョーさんのお話聞きたかったですね！でも大収穫だった気がします！",
+    "chinese_text": "好想听典狱长说更多的事耶！\n不过我感觉已经大丰收了！"
+  },
+  {
+    "dialogue_id": "0101Adv14_Ema010",
+    "speaker": "Ema",
+    "japanese_text": "う、うん。",
+    "chinese_text": "嗯、嗯。"
+  },
+  {
+    "dialogue_id": "0101Adv14_Ema011",
+    "speaker": "Ema",
+    "japanese_text": "（シェリーちゃんみたいに素直には喜べないけど……）",
+    "chinese_text": "（我没法像雪莉那样子，随便就高兴得起来啦……）"
+  }
+]

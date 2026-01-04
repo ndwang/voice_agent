@@ -1,0 +1,314 @@
+[
+  {
+    "dialogue_id": "0101Adv31_Narrative001",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマたちは食堂の調査にやってきた。",
+    "chinese_text": "艾玛她们为了调查，来到了食堂。"
+  },
+  {
+    "dialogue_id": "0101Adv31_Hanna001",
+    "speaker": "Hanna",
+    "japanese_text": "さすがに食欲はないですわ。",
+    "chinese_text": "发生了这种事，实在是没食欲。"
+  },
+  {
+    "dialogue_id": "0101Adv31_Sherry001",
+    "speaker": "Sherry",
+    "japanese_text": "この料理ってずっと置きっぱなしなんですかね？",
+    "chinese_text": "这些饭菜是不是一直都没换过新的啊？"
+  },
+  {
+    "dialogue_id": "0101Adv31_Ema001",
+    "speaker": "Ema",
+    "japanese_text": "さすがに定期的に入れ替えてるんじゃないかな。",
+    "chinese_text": "再怎么样，至少还是会定期换饭菜的吧……？"
+  },
+  {
+    "dialogue_id": "0101Adv31_Narrative002",
+    "speaker": "[Narrative]",
+    "japanese_text": "ビュッフェカウンターに並ぶ料理の数々を前に、それぞれが言う。",
+    "chinese_text": "面对放在取餐处的饭菜，\n三人各自说道。"
+  },
+  {
+    "dialogue_id": "0101Adv31_Sherry002",
+    "speaker": "Sherry",
+    "japanese_text": "あの看守が入れ替えてるんですかね。私たちは厨房に入れないですが、やっぱり料理も看守が？",
+    "chinese_text": "是那个看守换的饭菜吧。\n我们进不了厨房，所以煮饭也是看守负责的咯？"
+  },
+  {
+    "dialogue_id": "0101Adv31_Hanna002",
+    "speaker": "Hanna",
+    "japanese_text": "あの、あまり想像させないでくれませんこと？これから何も喉を通らなくなりそう。",
+    "chinese_text": "我说，可不可以不要勾起别人的想像？\n你害我以后都吃不下饭了欸。"
+  },
+  {
+    "dialogue_id": "0101Adv31_Narrative003",
+    "speaker": "[Narrative]",
+    "japanese_text": "３人は散り散りになって、食堂をひととおり見てまわることにする。",
+    "chinese_text": "三人原地散开，\n开始大致搜索一遍食堂。"
+  },
+  {
+    "dialogue_id": "0101Adv31_Sherry003",
+    "speaker": "Sherry",
+    "japanese_text": "犯人は何故、ノアさんを殺そうって思ったのでしょうか。",
+    "chinese_text": "凶手为什么会想要\n杀死诺亚呢。"
+  },
+  {
+    "dialogue_id": "0101Adv31_Narrative004",
+    "speaker": "[Narrative]",
+    "japanese_text": "テーブルの下を調査中に、ふとシェリーが投げかけてきた。",
+    "chinese_text": "在调查餐桌下时，\n雪莉忽然抛来了问题。"
+  },
+  {
+    "dialogue_id": "0101Adv31_Sherry004",
+    "speaker": "Sherry",
+    "japanese_text": "ノアさんは、一体どういう人物だったのでしょうね？",
+    "chinese_text": "诺亚她\n究竟是个怎样的人呢？"
+  },
+  {
+    "dialogue_id": "0101Adv31_Ema002",
+    "speaker": "Ema",
+    "japanese_text": "関わった時間が短すぎて……いい子だったとは思うけど、ほかにはお絵描きが好きだった、ってことくらいしか。",
+    "chinese_text": "我和她交流的时间太短了……不过我觉得\n她是个好孩子，还有就是喜欢画画，只想到这些。"
+  },
+  {
+    "dialogue_id": "0101Adv31_Ema003",
+    "speaker": "Ema",
+    "japanese_text": "（ボクが接したノアちゃんは、　無邪気で素直ないい子って、印象だった）",
+    "chinese_text": "（在我印象中，我所接触的诺亚，\n是个天真直率的好孩子）"
+  },
+  {
+    "dialogue_id": "0101Adv31_Ema004",
+    "speaker": "Ema",
+    "japanese_text": "（でもたった数回会話を交わしただけだし、　本当のところはわからない……）",
+    "chinese_text": "（可我只和她讲过几次话，\n实际是怎样我也不清楚……）"
+  },
+  {
+    "dialogue_id": "0101Adv31_Ema005",
+    "speaker": "Ema",
+    "japanese_text": "ただ、殺される理由があるような子には思えないよ。",
+    "chinese_text": "只不过，我不觉得她身上有什么会遭杀害的理由。"
+  },
+  {
+    "dialogue_id": "0101Adv31_Sherry005",
+    "speaker": "Sherry",
+    "japanese_text": "有名なストリートアーティストでもありますね。それも何か関係があるのか……。",
+    "chinese_text": "她还是有名的街头艺术家。\n和这件事又有什么关系呢……"
+  },
+  {
+    "dialogue_id": "0101Adv31_Hanna003",
+    "speaker": "Hanna",
+    "japanese_text": "【バルーン】に恨みを抱いていた人物…？ありえますわね。有名人はどこで恨みを買うかわからないもの。",
+    "chinese_text": "难道是对【气球】有怨恨的人物……？\n有可能欸。\n毕竟是名人，在什么地方招惹了别人也说不定。"
+  },
+  {
+    "dialogue_id": "0101Adv31_Ema006",
+    "speaker": "Ema",
+    "japanese_text": "（どんな理由があるにせよ、殺人は許せない。　でも、誰かが殺したんだ。誰がそんなことを……）",
+    "chinese_text": "（不管有怎样的理由，杀人都是不可饶恕的。\n可是，这个人却还是动手了。究竟动手的是谁……）"
+  },
+  {
+    "dialogue_id": "0101Adv31_Sherry006",
+    "speaker": "Sherry",
+    "japanese_text": "ひとつ不思議なのは、おそらく外出禁止時間に殺害が行われたと思われることですね。",
+    "chinese_text": "有一件事我想不通，\n就是按照现有的信息，谋杀是在禁止外出时间进行的。"
+  },
+  {
+    "dialogue_id": "0101Adv31_Ema007",
+    "speaker": "Ema",
+    "japanese_text": "ボクもそれは思った。外出禁止時間に殺害が起こったんなら、囚人は全員アリバイがある。",
+    "chinese_text": "我也在想这个问题。如果是在禁止外出时间杀人，\n那所有囚犯都有不在场证明。"
+  },
+  {
+    "dialogue_id": "0101Adv31_Sherry007",
+    "speaker": "Sherry",
+    "japanese_text": "ほぼ全員、ですかね。アンアンさんは医務室にいましたから。",
+    "chinese_text": "应该说，几乎所有人。\n因为安安在医务室那边。"
+  },
+  {
+    "dialogue_id": "0101Adv31_Ema008",
+    "speaker": "Ema",
+    "japanese_text": "（あ、そうか……医務室は施錠されるわけじゃない）",
+    "chinese_text": "（啊，是哦……医务室是没有上锁的）"
+  },
+  {
+    "dialogue_id": "0101Adv31_Narrative005",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマは思い当たることがあったのか、ハッと表情を強張らせる。",
+    "chinese_text": "这时艾玛想到一件事，\n她的脸一下子僵住了。"
+  },
+  {
+    "dialogue_id": "0101Adv31_Ema009",
+    "speaker": "Ema",
+    "japanese_text": "（ボクもひとりで寝てたから、　自室にいたって証明してくれる人がいない……）",
+    "chinese_text": "（我也是自己一个人睡的，\n所以没有人可以证明我在自己的房间里……）"
+  },
+  {
+    "dialogue_id": "0101Adv31_Ema010",
+    "speaker": "Ema",
+    "japanese_text": "（もしかして夜間のアリバイ証明ができないのって　ボクとアンアンちゃんだけ…？）",
+    "chinese_text": "（难道，夜间不在场证明无法成立的，\n只有我和安安两个？）"
+  },
+  {
+    "dialogue_id": "0101Adv31_Ema011",
+    "speaker": "Ema",
+    "japanese_text": "（で、でもノアちゃんがいつ殺害されたのかは、　明確になってない。就寝前と早朝にアンアンちゃんとボクは　顔を合わせてる）",
+    "chinese_text": "（可、可是诺亚是什么时候被杀的，\n目前还没有明确的答案。在睡觉前和今天早上，\n我和安安是碰了面的）"
+  },
+  {
+    "dialogue_id": "0101Adv31_Ema012",
+    "speaker": "Ema",
+    "japanese_text": "（殺害時間によっては、お互いのアリバイ証明はできる、よね。　アンアンちゃんがボクに協力的だったら、だけど……）",
+    "chinese_text": "（根据实际的杀害时间，也许可以证明我们两个不在场吧。\n前提是安安愿意配合我的话……）"
+  },
+  {
+    "dialogue_id": "0101Adv31_Narrative006",
+    "speaker": "[Narrative]",
+    "japanese_text": "胸にもやもやと不安が満ちていったのか、エマはますます蒼白になっていく。",
+    "chinese_text": "艾玛的心中充满了混乱和不安，\n脸色变得越来越苍白。"
+  },
+  {
+    "dialogue_id": "0101Adv31_Ema013",
+    "speaker": "Ema",
+    "japanese_text": "（もしかして、ボクも犯人だって　投票される可能性が高い……？）",
+    "chinese_text": "（难不成，我被人选为凶手的可能性\n非常大……？）"
+  },
+  {
+    "dialogue_id": "0101Adv31_Narrative007",
+    "speaker": "[Narrative]",
+    "japanese_text": "そこまで考えて、頭を振った。",
+    "chinese_text": "想到这，她摇了摇头。"
+  },
+  {
+    "dialogue_id": "0101Adv31_Ema014",
+    "speaker": "Ema",
+    "japanese_text": "で、でも、朝になったら鍵は開錠されてる。朝のうちにノアちゃんの部屋に行けば、誰でも可能だよ。",
+    "chinese_text": "可、可是，电子锁到了早上就会打开。\n只要趁一大早去诺亚的房间里，\n谁都有可能犯案。"
+  },
+  {
+    "dialogue_id": "0101Adv31_Sherry008",
+    "speaker": "Sherry",
+    "japanese_text": "宙に浮けたら更に簡単ですね。",
+    "chinese_text": "只要能飞在半空中就更简单了呢。"
+  },
+  {
+    "dialogue_id": "0101Adv31_Hanna004",
+    "speaker": "Hanna",
+    "japanese_text": "うぅ……。",
+    "chinese_text": "呜……"
+  },
+  {
+    "dialogue_id": "0101Adv31_Narrative008",
+    "speaker": "[Narrative]",
+    "japanese_text": "ハンナはしばらく項垂れていたが、やがて意を決したように、顔をあげた。",
+    "chinese_text": "汉娜垂头丧气了好一会，\n最终下定了决心，抬起头来。"
+  },
+  {
+    "dialogue_id": "0101Adv31_Hanna005",
+    "speaker": "Hanna",
+    "japanese_text": "わたくし、実は浮ける時間は１分程度ですの。",
+    "chinese_text": "我想说，我可以飘在半空中的时间，\n其实只有1分钟左右。"
+  },
+  {
+    "dialogue_id": "0101Adv31_Narrative009",
+    "speaker": "[Narrative]",
+    "japanese_text": "自分の魔法を誇り高く思っているのだろう、ハンナは悔しそうに呻いた。",
+    "chinese_text": "汉娜不甘心地小声说道。\n看来她是真的对她的魔法感到很自豪。"
+  },
+  {
+    "dialogue_id": "0101Adv31_Sherry009",
+    "speaker": "Sherry",
+    "japanese_text": "ああそれは、良い情報ですね！",
+    "chinese_text": "哦哦，真是有益的情报！"
+  },
+  {
+    "dialogue_id": "0101Adv31_Sherry010",
+    "speaker": "Sherry",
+    "japanese_text": "短時間しか浮けないのなら、足跡残さず殺すのは無理だって言えるかも！",
+    "chinese_text": "如果只能悬空很短的时间，\n应该可以主张自己无法不留足迹杀人哦！"
+  },
+  {
+    "dialogue_id": "0101Adv31_Hanna006",
+    "speaker": "Hanna",
+    "japanese_text": "ぜんぜん良い情報じゃねーですわ……で、できれば言いたくねーですわ。",
+    "chinese_text": "完全说不上有益好吗……\n本、本来我就很不愿意说这件事。"
+  },
+  {
+    "dialogue_id": "0101Adv31_Narrative010",
+    "speaker": "[Narrative]",
+    "japanese_text": "地団太を踏みそうな表情のハンナだが、シェリーはキャッキャと嬉しそうだ。",
+    "chinese_text": "汉娜几乎难受得要跺脚，\n可雪莉却是一副乐开花的表情。"
+  },
+  {
+    "dialogue_id": "0101Adv31_Sherry011",
+    "speaker": "Sherry",
+    "japanese_text": "いえいえ、積極的に言いましょうよ！ハンナさんの魔法は大したことないって！",
+    "chinese_text": "不不不，我觉得还是要主动一点说才对！\n汉娜的魔法也没什么大不了的！"
+  },
+  {
+    "dialogue_id": "0101Adv31_Hanna007",
+    "speaker": "Hanna",
+    "japanese_text": "あなたわざと言っているでしょう！？",
+    "chinese_text": "你是故意说来气我的对吧！？"
+  },
+  {
+    "dialogue_id": "0101Adv31_Ema015",
+    "speaker": "Ema",
+    "japanese_text": "と、とにかく今は調査を続けようよ！",
+    "chinese_text": "总、总之我们继续调查吧！"
+  },
+  {
+    "dialogue_id": "0101Adv31_Narrative011",
+    "speaker": "[Narrative]",
+    "japanese_text": "その後も広い食堂内を歩き回ってみたが、結局何も手がかりは得られそうになかった。",
+    "chinese_text": "那之后，她们在宽阔的食堂内到处转了一圈，\n最后还是没得到什么线索。"
+  },
+  {
+    "dialogue_id": "0101Adv31_Narrative012",
+    "speaker": "[Narrative]",
+    "japanese_text": "ふと、エマの目にビュッフェカウンターにある、フルーツ盛りが留まった。",
+    "chinese_text": "不经意间，艾玛的视线\n停留在取餐处的水果盘上面。"
+  },
+  {
+    "dialogue_id": "0101Adv31_Ema016",
+    "speaker": "Ema",
+    "japanese_text": "ここに置いてある料理、少なくとも毎日は入れ替えてはないのかもしれないね。",
+    "chinese_text": "我猜，放在这边的食物，\n至少不是每天都有换。"
+  },
+  {
+    "dialogue_id": "0101Adv31_Sherry012",
+    "speaker": "Sherry",
+    "japanese_text": "どうしてです？",
+    "chinese_text": "为什么？"
+  },
+  {
+    "dialogue_id": "0101Adv31_Ema017",
+    "speaker": "Ema",
+    "japanese_text": "下の方のリンゴが腐ってる。",
+    "chinese_text": "下面的那颗苹果已经腐烂了。"
+  },
+  {
+    "dialogue_id": "0101Adv31_Hanna008",
+    "speaker": "Hanna",
+    "japanese_text": "げっ",
+    "chinese_text": "呃。"
+  },
+  {
+    "dialogue_id": "0101Adv31_Narrative013",
+    "speaker": "[Narrative]",
+    "japanese_text": "ハンナが青ざめて後ずさる。",
+    "chinese_text": "汉娜脸色铁青地往后退了一步。"
+  },
+  {
+    "dialogue_id": "0101Adv31_Hanna009",
+    "speaker": "Hanna",
+    "japanese_text": "ううううぅ……もう断食するしかありませんわ……でも飢え死には嫌ですわぁぁ～。",
+    "chinese_text": "呜呜呜呜呜……看来我只能绝食了……\n可是我也不想当饿死鬼哇啊啊～"
+  },
+  {
+    "dialogue_id": "0101Adv31_Narrative014",
+    "speaker": "[Narrative]",
+    "japanese_text": "べそをかくハンナを連れて、エマたちは食堂を出た。",
+    "chinese_text": "艾玛和雪莉\n领着哭哭啼啼的汉娜走出食堂。"
+  }
+]

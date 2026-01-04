@@ -1,0 +1,254 @@
+[
+  {
+    "dialogue_id": "0101Adv15_Narrative001",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマたちが地下を歩き回っていると、気になる場所にたどりついた。",
+    "chinese_text": "艾玛她们在地下四处走动时，\n来到了一个令人在意的地方。"
+  },
+  {
+    "dialogue_id": "0101Adv15_Narrative002",
+    "speaker": "[Narrative]",
+    "japanese_text": "奥まった通路に重厚な扉がずらりと並び、囚人の房より厳戒な南京錠で閉ざされている。",
+    "chinese_text": "过道深处整齐排列着几扇厚实的门，\n上面还挂着比囚犯的房间更严实的挂锁。"
+  },
+  {
+    "dialogue_id": "0101Adv15_Sherry001",
+    "speaker": "Sherry",
+    "japanese_text": "ここってなんですかね？中には入れないようですが……。",
+    "chinese_text": "这里是什么地方呢？\n虽然应该进不去里面……"
+  },
+  {
+    "dialogue_id": "0101Adv15_Ema001",
+    "speaker": "Ema",
+    "japanese_text": "覗き窓があるから、見てみようか。",
+    "chinese_text": "门上面有个小窗，我们看一下里面吧。"
+  },
+  {
+    "dialogue_id": "0101Adv15_Narrative003",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマはおそるおそるといった風に、覗き窓から室内を覗いた。",
+    "chinese_text": "艾玛战战兢兢地从小窗\n看向了室内。"
+  },
+  {
+    "dialogue_id": "0101Adv15_Ema002",
+    "speaker": "Ema",
+    "japanese_text": "うわぁっ！",
+    "chinese_text": "哇！"
+  },
+  {
+    "dialogue_id": "0101Adv15_Narrative004",
+    "speaker": "[Narrative]",
+    "japanese_text": "――垣間見えた禍々しい道具類に、蒼白になったエマは後ずさり、尻もちをつく。",
+    "chinese_text": "——看到室内充满邪气的物品，\n艾玛瞬时脸色煞白，往后退了几步，然后跌坐在地上。"
+  },
+  {
+    "dialogue_id": "0101Adv15_Sherry002",
+    "speaker": "Sherry",
+    "japanese_text": "大丈夫ですか、エマさん。一体何をそんなに驚いて――。",
+    "chinese_text": "你没事吧，艾玛。\n究竟有什么这么可怕的——"
+  },
+  {
+    "dialogue_id": "0101Adv15_Narrative005",
+    "speaker": "[Narrative]",
+    "japanese_text": "シェリーも続いて中を覗き込み、しばし固まっている。",
+    "chinese_text": "雪莉紧接着往里面探望，\n神色也变得有些凝重。"
+  },
+  {
+    "dialogue_id": "0101Adv15_Sherry003",
+    "speaker": "Sherry",
+    "japanese_text": "これは……またまた……えぐいですねぇ。",
+    "chinese_text": "这些是……确实……蛮吓人的哦。"
+  },
+  {
+    "dialogue_id": "0101Adv15_Ema003",
+    "speaker": "Ema",
+    "japanese_text": "（よく見えなかったけど、拷問器具みたいだった。　逆らったら拷問されるってこと……？）",
+    "chinese_text": "（虽然看不太清楚，那些应该是拷问工具。\n如果反抗的话，就会被严刑拷打吗……？）"
+  },
+  {
+    "dialogue_id": "0101Adv15_Sherry004",
+    "speaker": "Sherry",
+    "japanese_text": "ここがゴクチョーさんの言ってた懲罰房でしょうね。規則を破った囚人はここに入れられる、と。",
+    "chinese_text": "这里应该是典狱长说的惩罚室了。\n说是，违反规定的囚犯会被关进里面。"
+  },
+  {
+    "dialogue_id": "0101Adv15_Narrative006",
+    "speaker": "[Narrative]",
+    "japanese_text": "――その時だった。",
+    "chinese_text": "——就在这时。"
+  },
+  {
+    "dialogue_id": "0101Adv15_Alisa001",
+    "speaker": "Alisa",
+    "japanese_text": "ぐぅ……クッソ、ざけんな……。",
+    "chinese_text": "呜……该死的，开什么玩笑……"
+  },
+  {
+    "dialogue_id": "0101Adv15_Alisa002",
+    "speaker": "Alisa",
+    "japanese_text": "出せよぉぉ！！ おああああ！！",
+    "chinese_text": "放我出去！！呜啊啊啊啊！！"
+  },
+  {
+    "dialogue_id": "0101Adv15_Narrative007",
+    "speaker": "[Narrative]",
+    "japanese_text": "並ぶ懲罰房のどこかから、獣のようなアリサの呻き声が、エマたちの耳に届いた。",
+    "chinese_text": "艾玛她们听见，在几间惩罚室的某处，\n传来了亚里沙困兽般的呻吟声。"
+  },
+  {
+    "dialogue_id": "0101Adv15_Ema004",
+    "speaker": "Ema",
+    "japanese_text": "！",
+    "chinese_text": "！"
+  },
+  {
+    "dialogue_id": "0101Adv15_Sherry005",
+    "speaker": "Sherry",
+    "japanese_text": "やっぱりアリサさんは懲罰房行きになったんですね。",
+    "chinese_text": "果然亚里沙是被关进了惩罚室里。"
+  },
+  {
+    "dialogue_id": "0101Adv15_Ema005",
+    "speaker": "Ema",
+    "japanese_text": "探そう！",
+    "chinese_text": "找一下她在哪里吧！"
+  },
+  {
+    "dialogue_id": "0101Adv15_Narrative008",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマとシェリーは片端から覗き窓を確認していく。",
+    "chinese_text": "艾玛和雪莉轮番\n往小窗里望去。"
+  },
+  {
+    "dialogue_id": "0101Adv15_Narrative009",
+    "speaker": "[Narrative]",
+    "japanese_text": "すると、その中のひとつにアリサが捕まっている姿を発見した。",
+    "chinese_text": "不久后，她们找到了亚里沙。\n她被囚禁在其中一间里面。"
+  },
+  {
+    "dialogue_id": "0101Adv15_Ema006",
+    "speaker": "Ema",
+    "japanese_text": "アリサちゃん！",
+    "chinese_text": "亚里沙！"
+  },
+  {
+    "dialogue_id": "0101Adv15_Alisa003",
+    "speaker": "Alisa",
+    "japanese_text": "あ……？ 誰だてめえら……。",
+    "chinese_text": "啊……？你们谁啊……"
+  },
+  {
+    "dialogue_id": "0101Adv15_Narrative010",
+    "speaker": "[Narrative]",
+    "japanese_text": "アリサは磔刑台に拘束されており、ずいぶん消耗している様子だった。",
+    "chinese_text": "亚里沙被绑在了十字架上，\n看起来消耗了不少心神和体力。"
+  },
+  {
+    "dialogue_id": "0101Adv15_Narrative011",
+    "speaker": "[Narrative]",
+    "japanese_text": "あまりに痛々しい光景に、エマは息を呑む。",
+    "chinese_text": "此情此景实在令人心痛，艾玛感觉有些窒息。"
+  },
+  {
+    "dialogue_id": "0101Adv15_Sherry006",
+    "speaker": "Sherry",
+    "japanese_text": "大丈夫ですか？ひどいことをされたのでしょうか？",
+    "chinese_text": "你没事吧？\n你遭了很过分的刑罚吗？"
+  },
+  {
+    "dialogue_id": "0101Adv15_Narrative012",
+    "speaker": "[Narrative]",
+    "japanese_text": "アリサのぎらぎらした瞳が、エマとシェリーを強く睨む。",
+    "chinese_text": "亚里沙用尖锐的眼神\n狠狠盯着她们两个。"
+  },
+  {
+    "dialogue_id": "0101Adv15_Alisa004",
+    "speaker": "Alisa",
+    "japanese_text": "てめえらに関係ねーだろ……。",
+    "chinese_text": "跟你们没关系吧……"
+  },
+  {
+    "dialogue_id": "0101Adv15_Alisa005",
+    "speaker": "Alisa",
+    "japanese_text": "……ああでも、ひとつ忠告しといてやる。屋敷から遠くまで逃げると、監視のバケモンフクロウが大量に飛んでやがったよ。",
+    "chinese_text": "……啊，不过我要给你们一个忠告。\n之前我往远离宅邸的方向逃跑，\n看到那边有一大堆怪物猫头鹰在监视。"
+  },
+  {
+    "dialogue_id": "0101Adv15_Alisa006",
+    "speaker": "Alisa",
+    "japanese_text": "そいつらに見つかった途端、看守が飛んできた。脱獄は難しいってことだ。",
+    "chinese_text": "它们一发现我，\n马上就有看守赶过来了。越狱太难了。"
+  },
+  {
+    "dialogue_id": "0101Adv15_Alisa007",
+    "speaker": "Alisa",
+    "japanese_text": "高い塀があったから燃やそうとしたんだが、それも無理だった。不思議な力で炎がかき消えちまって……どうなってんだよ、クソッ。",
+    "chinese_text": "有一道很高的围墙，我想把它烧掉，\n但也做不到。有股神奇力量把我的火焰消除掉了……\n到底是怎样，该死。"
+  },
+  {
+    "dialogue_id": "0101Adv15_Ema007",
+    "speaker": "Ema",
+    "japanese_text": "（へ、塀を燃やそうとした……？ 過激なことするなぁ……）",
+    "chinese_text": "（欸，要把围墙烧掉……？也太过于激进了……）"
+  },
+  {
+    "dialogue_id": "0101Adv15_Sherry007",
+    "speaker": "Sherry",
+    "japanese_text": "ふむ……私たちは囚人として捕まっているので、この監獄もやすやすと私たちを逃がすわけありません。難しくて当然なのでは。",
+    "chinese_text": "唔……我们是以囚犯身份被关押在这里的，\n这座监狱肯定不会轻易让我们逃跑。\n越狱难是理所当然的。"
+  },
+  {
+    "dialogue_id": "0101Adv15_Alisa008",
+    "speaker": "Alisa",
+    "japanese_text": "っ……笑いに来やがったのかてめえ！あっち行けよ！ 消えろ！！",
+    "chinese_text": "啧……你是过来取笑我的对吧！\n滚一边去！滚蛋！！"
+  },
+  {
+    "dialogue_id": "0101Adv15_Narrative013",
+    "speaker": "[Narrative]",
+    "japanese_text": "感情的に喚きだしたアリサに、エマとシェリーは仕方なく引き下がる。",
+    "chinese_text": "亚里沙开始激动地喊叫，\n艾玛和雪莉只好离开了现场。"
+  },
+  {
+    "dialogue_id": "0101Adv15_Sherry008",
+    "speaker": "Sherry",
+    "japanese_text": "どうやら元気そうですね。",
+    "chinese_text": "看来她蛮精神的耶。"
+  },
+  {
+    "dialogue_id": "0101Adv15_Sherry009",
+    "speaker": "Sherry",
+    "japanese_text": "規則によれば明日には出られるでしょうし、とりあえず無事が確認できて良かったです。",
+    "chinese_text": "根据规定，她明天就会被放出来了。\n总之，知道她没事就是好事。"
+  },
+  {
+    "dialogue_id": "0101Adv15_Ema008",
+    "speaker": "Ema",
+    "japanese_text": "うん、そうだね……。",
+    "chinese_text": "嗯，说得对……"
+  },
+  {
+    "dialogue_id": "0101Adv15_Sherry010",
+    "speaker": "Sherry",
+    "japanese_text": "足枷までつけられてかわいそうに……。",
+    "chinese_text": "连脚镣都戴上了，好可怜……"
+  },
+  {
+    "dialogue_id": "0101Adv15_Ema009",
+    "speaker": "Ema",
+    "japanese_text": "ん？ アリサちゃんって、最初から足枷をつけられていたような。",
+    "chinese_text": "嗯？记得亚里沙她\n好像一开始就已经戴着脚镣了。"
+  },
+  {
+    "dialogue_id": "0101Adv15_Sherry011",
+    "speaker": "Sherry",
+    "japanese_text": "ああそうでしたっけ！いきなりハードモード囚人だったんですね。要注意人物だと思われてたんでしょうか。",
+    "chinese_text": "哎呀，是这样吗！\n那她一下子就进入高难模式了呢。\n她应该是被当成需要重点留意的对象了吧。"
+  },
+  {
+    "dialogue_id": "0101Adv15_Ema010",
+    "speaker": "Ema",
+    "japanese_text": "そうかも……。",
+    "chinese_text": "可能是吧……"
+  }
+]

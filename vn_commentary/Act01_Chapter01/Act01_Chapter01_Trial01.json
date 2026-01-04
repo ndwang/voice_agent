@@ -1,0 +1,410 @@
+[
+  {
+    "dialogue_id": "0101Trial01_Sherry001",
+    "speaker": "Sherry",
+    "japanese_text": "私が見つけた証拠……それはズバリ、ダイイングメッセージです！",
+    "chinese_text": "我找到的证据……\n那就是\n死亡讯息！"
+  },
+  {
+    "dialogue_id": "0101Trial01_Margo001",
+    "speaker": "Margo",
+    "japanese_text": "ダイイングメッセージ……。【死者が死に際に残す言葉】……であってるかしら？",
+    "chinese_text": "死亡讯息……\n就是所谓的\n【死者在死前留下的话语】？"
+  },
+  {
+    "dialogue_id": "0101Trial01_Alisa001",
+    "speaker": "Alisa",
+    "japanese_text": "……そんなの死体の周りにあったかぁ？",
+    "chinese_text": "……你说\n尸体旁边留下了\n死亡讯息？"
+  },
+  {
+    "dialogue_id": "0101Trial01_Sherry002",
+    "speaker": "Sherry",
+    "japanese_text": "ええ、死体をよく見てください……。",
+    "chinese_text": "对。\n请大家\n仔细观察尸体……"
+  },
+  {
+    "dialogue_id": "0101Trial01_Sherry003",
+    "speaker": "Sherry",
+    "japanese_text": "死体の後ろ、そして周囲……そこに血で描かれた蝶の絵が描かれているんです！",
+    "chinese_text": "看尸体的下面，\n还有旁边……\n在这些地方都有用血画下\n的蝴蝶绘画！"
+  },
+  {
+    "dialogue_id": "0101Trial01_Sherry004",
+    "speaker": "Sherry",
+    "japanese_text": "あれはおそらく被害者が最期まで持っていた筆を使って描かれた死者からの伝言……。",
+    "chinese_text": "恐怕那些是\n被害人在临死前\n用手上的笔画下的\n死者寄语……"
+  },
+  {
+    "dialogue_id": "0101Trial01_Sherry005",
+    "speaker": "Sherry",
+    "japanese_text": "つまりノアさんのダイイングメッセージなんですよ！",
+    "chinese_text": "也就是说，\n这是诺亚的\n死亡讯息！"
+  },
+  {
+    "dialogue_id": "0101Trial01_Ema001",
+    "speaker": "Ema",
+    "japanese_text": "（今のシェリーちゃんの言葉……　少し気になるところがあったかも……）",
+    "chinese_text": "（刚刚雪莉的发言里……\n好像出现了令人在意的地方……）"
+  },
+  {
+    "dialogue_id": "0101Trial01_Meruru001",
+    "speaker": "Meruru",
+    "japanese_text": "エ、エマさん……！気になったところがあったら、指摘をしてみましょう……！",
+    "chinese_text": "艾、艾玛小姐……！\n如果有在意的地方，\n请你指出它吧……！"
+  },
+  {
+    "dialogue_id": "0101Trial01_Ema002",
+    "speaker": "Ema",
+    "japanese_text": "……うん！ わかった！やってみるね……！",
+    "chinese_text": "……嗯！我明白了！\n我会试试看……！"
+  },
+  {
+    "dialogue_id": "0101Trial01_Ema003",
+    "speaker": "Ema",
+    "japanese_text": "ちょっと待って……！本当にそれは血が使われてるのかな。",
+    "chinese_text": "等一下……！\n那真的是用血画的吗？"
+  },
+  {
+    "dialogue_id": "0101Trial01_Ema004",
+    "speaker": "Ema",
+    "japanese_text": "もしかして……ペンキとかの画材だったんじゃない？",
+    "chinese_text": "说不定……那其实是油漆，或者是什么别的画具呢？"
+  },
+  {
+    "dialogue_id": "0101Trial01_Sherry006",
+    "speaker": "Sherry",
+    "japanese_text": "いえ、血でしたよ！",
+    "chinese_text": "不，那就是血！"
+  },
+  {
+    "dialogue_id": "0101Trial01_Meruru002",
+    "speaker": "Meruru",
+    "japanese_text": "……おそらくあの固まり方と匂いは、血液で間違いないかと……。",
+    "chinese_text": "……看凝固的特征和气味，\n应该就是血液没错……"
+  },
+  {
+    "dialogue_id": "0101Trial01_Hanna001",
+    "speaker": "Hanna",
+    "japanese_text": "現場にあった赤い塗料には、使われた形跡がありませんでしたわ？",
+    "chinese_text": "放在现场的红色颜料\n也没有使用过的痕迹哦？"
+  },
+  {
+    "dialogue_id": "0101Trial01_Margo002",
+    "speaker": "Margo",
+    "japanese_text": "あれがノアちゃんの血で描かれたという事は間違いなさそうね。",
+    "chinese_text": "看来，画画用的应该就是诺亚的血没错。"
+  },
+  {
+    "dialogue_id": "0101Trial01_Alisa002",
+    "speaker": "Alisa",
+    "japanese_text": "……お前、血も見た事ねーのか？とんだ世間知らずだな……。",
+    "chinese_text": "……我说，你连血都没见过吗？\n真是无知兼白痴……"
+  },
+  {
+    "dialogue_id": "0101Trial01_Ema005",
+    "speaker": "Ema",
+    "japanese_text": "（そ、そんなことないと思うけど……！？）",
+    "chinese_text": "（不、不至于吧……！？）"
+  },
+  {
+    "dialogue_id": "0101Trial01_Ema006",
+    "speaker": "Ema",
+    "japanese_text": "（どうやら指摘を間違えて　みんなの印象が悪くなったみたい……！　もう一度考え直してみよう……！）",
+    "chinese_text": "（好像因为指出的地方不对，\n大家对我的印象都变差了……！\n重新再想一遍吧……！）"
+  },
+  {
+    "dialogue_id": "0101Trial01_Ema007",
+    "speaker": "Ema",
+    "japanese_text": "【筆で描かれた】って言ったけど……本当にそうかな？",
+    "chinese_text": "你说是【用笔画的】……真的是这样吗？"
+  },
+  {
+    "dialogue_id": "0101Trial01_Sherry007",
+    "speaker": "Sherry",
+    "japanese_text": "それは……たしかに、筆じゃなくても良いかもしれませんけど。",
+    "chinese_text": "这个……确实，就算不是笔也应该可以做到。"
+  },
+  {
+    "dialogue_id": "0101Trial01_Margo003",
+    "speaker": "Margo",
+    "japanese_text": "たしかにノアちゃんはスプレーアートをメインにしたアーティストだったけど……そういう事じゃないのよね？",
+    "chinese_text": "我记得诺亚是擅长喷漆画的艺术家……\n不过你要指出的应该不是这一点吧？"
+  },
+  {
+    "dialogue_id": "0101Trial01_Ema008",
+    "speaker": "Ema",
+    "japanese_text": "（ノアちゃんが死に際に絵を描く時に使った方法……　それは……！）",
+    "chinese_text": "（诺亚在临死前作画的方法……\n那就是……！）"
+  },
+  {
+    "dialogue_id": "0101Trial01_Ema009",
+    "speaker": "Ema",
+    "japanese_text": "ノアちゃんは指を使って絵を描いたんじゃないかな……。",
+    "chinese_text": "诺亚她会不会是\n用手指画画的呢……"
+  },
+  {
+    "dialogue_id": "0101Trial01_Coco001",
+    "speaker": "Coco",
+    "japanese_text": "……なんで？そんな結論になる要素あった？",
+    "chinese_text": "……为什么？\n你这个结论从哪来的？"
+  },
+  {
+    "dialogue_id": "0101Trial01_Alisa003",
+    "speaker": "Alisa",
+    "japanese_text": "他の手段があるのになんで指で描く必要があるんだ……？",
+    "chinese_text": "明明有其他方法，\n有必要一定要用手指画吗……？"
+  },
+  {
+    "dialogue_id": "0101Trial01_Meruru003",
+    "speaker": "Meruru",
+    "japanese_text": "……ゆ、指先には血はついていませんでしたけど……。",
+    "chinese_text": "……可、可是她的手指头上面没有沾上血……"
+  },
+  {
+    "dialogue_id": "0101Trial01_Ema010",
+    "speaker": "Ema",
+    "japanese_text": "……うん、それを確認しておきたかったっていうか……。",
+    "chinese_text": "……嗯，我也很想确认看看这件事……"
+  },
+  {
+    "dialogue_id": "0101Trial01_Coco002",
+    "speaker": "Coco",
+    "japanese_text": "は？",
+    "chinese_text": "哈？"
+  },
+  {
+    "dialogue_id": "0101Trial01_Ema011",
+    "speaker": "Ema",
+    "japanese_text": "ご、ごめんなさい……。なんでもないです……。",
+    "chinese_text": "对、对不起……\n没什么……"
+  },
+  {
+    "dialogue_id": "0101Trial01_Ema012",
+    "speaker": "Ema",
+    "japanese_text": "（……みんなの視線が痛い……。　変な事を言わないようにしないと……）",
+    "chinese_text": "（……大家的眼神好冰冷……\n我得注意不要说奇怪的话……）"
+  },
+  {
+    "dialogue_id": "0101Trial01_Ema013",
+    "speaker": "Ema",
+    "japanese_text": "……みんな【ドリッピング】って知ってる？",
+    "chinese_text": "……大家有听说过【滴画法】吗？"
+  },
+  {
+    "dialogue_id": "0101Trial01_Ema014",
+    "speaker": "Ema",
+    "japanese_text": "絵の具に息を吹きかけて、イラストを制作する手法だよ。",
+    "chinese_text": "这是一种往颜料上吹气来制作绘画的技巧。"
+  },
+  {
+    "dialogue_id": "0101Trial01_Miria001",
+    "speaker": "Miria",
+    "japanese_text": "……そ、それって今の話に関係ある……？",
+    "chinese_text": "……那个技巧和现在的情况有什么关系吗……？"
+  },
+  {
+    "dialogue_id": "0101Trial01_Hanna002",
+    "speaker": "Hanna",
+    "japanese_text": "あの量でやったら酸欠で死んじまいますわー！？",
+    "chinese_text": "要画这么大一幅画，岂不是要吹到缺氧憋死！？"
+  },
+  {
+    "dialogue_id": "0101Trial01_Margo004",
+    "speaker": "Margo",
+    "japanese_text": "まあ実際にノアちゃんは死んでるんだけどね？",
+    "chinese_text": "实际上诺亚还真是死掉了哦？"
+  },
+  {
+    "dialogue_id": "0101Trial01_Alisa004",
+    "speaker": "Alisa",
+    "japanese_text": "冗談言ってる場合じゃねえだろ。",
+    "chinese_text": "这不是开玩笑的时候吧。"
+  },
+  {
+    "dialogue_id": "0101Trial01_AnAn001",
+    "speaker": "AnAn",
+    "japanese_text": "『要反省』",
+    "chinese_text": "『请你反省』"
+  },
+  {
+    "dialogue_id": "0101Trial01_Ema015",
+    "speaker": "Ema",
+    "japanese_text": "……はい。",
+    "chinese_text": "……对不起。"
+  },
+  {
+    "dialogue_id": "0101Trial01_Ema016",
+    "speaker": "Ema",
+    "japanese_text": "（詳しく説明する前に怒られちゃった……）",
+    "chinese_text": "（还没详细说明，就惹大家生气了……）"
+  },
+  {
+    "dialogue_id": "0101Trial01_Ema017",
+    "speaker": "Ema",
+    "japanese_text": "（もっとちゃんと考えて発言しないと……！）",
+    "chinese_text": "（我得认真思考以后再发言……！）"
+  },
+  {
+    "dialogue_id": "0101Trial01_Ema018",
+    "speaker": "Ema",
+    "japanese_text": "……みんなノアちゃんの魔法って知ってる？",
+    "chinese_text": "……大家知道诺亚的魔法是什么吗？"
+  },
+  {
+    "dialogue_id": "0101Trial01_Ema019",
+    "speaker": "Ema",
+    "japanese_text": "ボクは本人から聞いたけど……彼女の魔法は【液体を操作する魔法】……そうやって絵を描くんだ。",
+    "chinese_text": "我亲耳听她讲……\n她的魔法是【操作液体的魔法】……\n她就是靠这个来画画的。"
+  },
+  {
+    "dialogue_id": "0101Trial01_Sherry008",
+    "speaker": "Sherry",
+    "japanese_text": "あっ……！",
+    "chinese_text": "啊……！"
+  },
+  {
+    "dialogue_id": "0101Trial01_Ema020",
+    "speaker": "Ema",
+    "japanese_text": "だからあの絵は、ノアちゃんが魔法で描いた絵だと思うんだ。",
+    "chinese_text": "所以我想，蝴蝶绘画\n是用诺亚的魔法\n画出来的。"
+  },
+  {
+    "dialogue_id": "0101Trial01_Margo005",
+    "speaker": "Margo",
+    "japanese_text": "……そもそも、ノアちゃんの出血量で筆を使って絵を描くのは物理的に難しいと思うわ。",
+    "chinese_text": "……我也觉得，以诺亚的出血量，\n用笔画这么大的画\n并不现实。"
+  },
+  {
+    "dialogue_id": "0101Trial01_Leia001",
+    "speaker": "Leia",
+    "japanese_text": "……自分の血であんな大きな絵を描くなんて、普通なら不可能だろうね。",
+    "chinese_text": "……一般情况下，用自己的血\n画这么大的画，恐怕是不可能的。"
+  },
+  {
+    "dialogue_id": "0101Trial01_Leia002",
+    "speaker": "Leia",
+    "japanese_text": "ノアくんが死んだ後に他人によって描かれたと考えるのが自然だ。……しかし。",
+    "chinese_text": "这幅画是诺亚死后经其他人之手\n画下的，这样想才更自然。\n……只不过。"
+  },
+  {
+    "dialogue_id": "0101Trial01_Leia003",
+    "speaker": "Leia",
+    "japanese_text": "この牢屋敷においては物理法則に次ぐ第二の法則……【魔法】という選択肢が入ってくるというわけだね。",
+    "chinese_text": "在这座监牢里面，还有另一种可能性……\n那就是排在物理法则之后的\n叫做【魔法】的第二法则。"
+  },
+  {
+    "dialogue_id": "0101Trial01_Sherry009",
+    "speaker": "Sherry",
+    "japanese_text": "ノアさんは死に際、魔法を使って一瞬で絵を完成させた……たしかにそう考えると辻褄は合う気がします！",
+    "chinese_text": "诺亚在临死前，使用了魔法，\n瞬间就画了这幅画……\n这样想确实说得通！"
+  },
+  {
+    "dialogue_id": "0101Trial01_Ema021",
+    "speaker": "Ema",
+    "japanese_text": "（良かった……！　シェリーちゃん、納得してくれたみたい……！）",
+    "chinese_text": "（太好了……！\n成功说服雪莉了……！）"
+  },
+  {
+    "dialogue_id": "0101Trial01_Sherry010",
+    "speaker": "Sherry",
+    "japanese_text": "……しかし、そうなるとやはり結論は１つです。",
+    "chinese_text": "……可是这样一来，结论就只有一个了。"
+  },
+  {
+    "dialogue_id": "0101Trial01_Ema022",
+    "speaker": "Ema",
+    "japanese_text": "（……え？）",
+    "chinese_text": "（……欸？）"
+  },
+  {
+    "dialogue_id": "0101Trial01_Sherry011",
+    "speaker": "Sherry",
+    "japanese_text": "あの絵が、ノアさんのダイイングメッセージだったんですよ！絵を通して私たちにメッセージを伝えたんです！",
+    "chinese_text": "那幅画就是\n诺亚的死亡讯息！\n她想通过这幅画，告诉我们一些事实！"
+  },
+  {
+    "dialogue_id": "0101Trial01_Ema023",
+    "speaker": "Ema",
+    "japanese_text": "（ええ……！？ そうなっちゃう！？）",
+    "chinese_text": "（欸……！？是这样吗！？）"
+  },
+  {
+    "dialogue_id": "0101Trial01_Coco003",
+    "speaker": "Coco",
+    "japanese_text": "……で？ あの絵がダイイングメッセージだからって、犯人は誰なんだよ。",
+    "chinese_text": "……所以呢？如果说那幅画是死亡讯息，\n那凶手究竟是谁？"
+  },
+  {
+    "dialogue_id": "0101Trial01_Sherry012",
+    "speaker": "Sherry",
+    "japanese_text": "それはもちろん……。",
+    "chinese_text": "凶手……"
+  },
+  {
+    "dialogue_id": "0101Trial01_Sherry013",
+    "speaker": "Sherry",
+    "japanese_text": "犯人は、マーゴさんです！",
+    "chinese_text": "那当然就是，玛格你！"
+  },
+  {
+    "dialogue_id": "0101Trial01_Margo006",
+    "speaker": "Margo",
+    "japanese_text": "あらあら……私？面白い推理ね♪",
+    "chinese_text": "哎呀呀……我？\n真是有趣的推理♪"
+  },
+  {
+    "dialogue_id": "0101Trial01_Margo007",
+    "speaker": "Margo",
+    "japanese_text": "……詳しく聞かせてくれるかしら？",
+    "chinese_text": "……能告诉我具体是为什么吗？"
+  },
+  {
+    "dialogue_id": "0101Trial01_Ema024",
+    "speaker": "Ema",
+    "japanese_text": "（シェリーちゃん、自信満々だ……！　でも、本当にそうなのかな……？）",
+    "chinese_text": "（雪莉她充满了自信……！\n可是，真的是这样吗……？）"
+  },
+  {
+    "dialogue_id": "0101Trial01_Ema025",
+    "speaker": "Ema",
+    "japanese_text": "（たしかあの絵って……）",
+    "chinese_text": "（那幅画我好像记得是……）"
+  },
+  {
+    "dialogue_id": "0101Trial01_Ema026",
+    "speaker": "Ema",
+    "japanese_text": "（……あれ？ なんだっけ？　どこかで見たような……？）",
+    "chinese_text": "（……嗯？怎么回事？\n我好像在哪里见过它……？）"
+  },
+  {
+    "dialogue_id": "0101Trial01_Meruru004",
+    "speaker": "Meruru",
+    "japanese_text": "……エマさん。何か確認したいことがあるなら、【魔女図鑑】を見てみてください。",
+    "chinese_text": "……艾玛小姐。\n如果你有什么想确认的，\n请你打开【魔女图鉴】看一下。"
+  },
+  {
+    "dialogue_id": "0101Trial01_Ema027",
+    "speaker": "Ema",
+    "japanese_text": "【魔女図鑑】……スマホに入ってたアプリだよね。",
+    "chinese_text": "【魔女图鉴】……\n是手机里面的那个APP吗？"
+  },
+  {
+    "dialogue_id": "0101Trial01_Meruru005",
+    "speaker": "Meruru",
+    "japanese_text": "はい……！事件のデータや、皆さんの情報、このお屋敷の見取り図なんかが見られます……！",
+    "chinese_text": "是的……！\n里面可以看到各种信息，比如案件的资料，\n每个人的资料，还有这个大宅的平面图……！"
+  },
+  {
+    "dialogue_id": "0101Trial01_Ema028",
+    "speaker": "Ema",
+    "japanese_text": "ありがとう、メルルちゃん……！あとで確認してみるよ！",
+    "chinese_text": "谢谢你，梅露露……！\n我等下会看的！"
+  },
+  {
+    "dialogue_id": "0101Trial01_Ema029",
+    "speaker": "Ema",
+    "japanese_text": "（シェリーちゃんの言った事……　ボクの調べた情報や資料と合っているか、　見比べてみよう……！）",
+    "chinese_text": "（雪莉的发言……\n和我调查到的情报和资料是否一致呢？\n现在来比对一下吧……！）"
+  }
+]

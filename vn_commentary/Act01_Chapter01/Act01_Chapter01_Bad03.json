@@ -1,0 +1,338 @@
+[
+  {
+    "dialogue_id": "0101Bad03_Narrative001",
+    "speaker": "[Narrative]",
+    "japanese_text": "賛成した。",
+    "chinese_text": "表示了同意。"
+  },
+  {
+    "dialogue_id": "0101Bad03_Ema001",
+    "speaker": "Ema",
+    "japanese_text": "そうだね。何か脱獄に役立つヒントが見つかるかもしれないし。",
+    "chinese_text": "嗯，说不定能发现一些\n有助于越狱的提示。"
+  },
+  {
+    "dialogue_id": "0101Bad03_Narrative002",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマとシェリーは端の棚から順に本を調べていった。",
+    "chinese_text": "艾玛和雪莉从最边上的书架开始，按顺序调查书本。"
+  },
+  {
+    "dialogue_id": "0101Bad03_Ema002",
+    "speaker": "Ema",
+    "japanese_text": "読めない本ばっかりだね。特にメッセージとかもないみたいだし……。",
+    "chinese_text": "很多书都没办法阅读啊。\n似乎也没有明显的信息……"
+  },
+  {
+    "dialogue_id": "0101Bad03_Narrative003",
+    "speaker": "[Narrative]",
+    "japanese_text": "なんの収穫もないまま、時間だけが過ぎていく。そうして、エマは何冊目かの本を開いた。",
+    "chinese_text": "时间不断前进，但她们仍毫无收获。\n此时，艾玛打开了不知是第几册的书本。"
+  },
+  {
+    "dialogue_id": "0101Bad03_Narrative004",
+    "speaker": "[Narrative]",
+    "japanese_text": "【にくい】",
+    "chinese_text": "【好恨】"
+  },
+  {
+    "dialogue_id": "0101Bad03_Ema003",
+    "speaker": "Ema",
+    "japanese_text": "ひっ……！？",
+    "chinese_text": "噫……！？"
+  },
+  {
+    "dialogue_id": "0101Bad03_Sherry001",
+    "speaker": "Sherry",
+    "japanese_text": "エマさん？ どうしました？",
+    "chinese_text": "艾玛？你怎么啦？"
+  },
+  {
+    "dialogue_id": "0101Bad03_Ema004",
+    "speaker": "Ema",
+    "japanese_text": "こっ、これ……！またさっきみたいな文字が！",
+    "chinese_text": "这、这本书……！\n又出现了像刚刚一样的文字！"
+  },
+  {
+    "dialogue_id": "0101Bad03_Sherry002",
+    "speaker": "Sherry",
+    "japanese_text": "おお、ワクワクしてきましたね！",
+    "chinese_text": "噢噢，真叫人兴奋耶！"
+  },
+  {
+    "dialogue_id": "0101Bad03_Narrative005",
+    "speaker": "[Narrative]",
+    "japanese_text": "シェリーは目を輝かせながら、エマが持つ本を覗き込む。",
+    "chinese_text": "雪莉的眼睛闪烁着光，转头看向艾玛手上的书本。"
+  },
+  {
+    "dialogue_id": "0101Bad03_Sherry003",
+    "speaker": "Sherry",
+    "japanese_text": "おや、こっちにも何か書かれてますよ。",
+    "chinese_text": "哎呀，好像这里也写了些什么耶。"
+  },
+  {
+    "dialogue_id": "0101Bad03_Narrative006",
+    "speaker": "[Narrative]",
+    "japanese_text": "ページの端に、同じく血のような文字で【←】と記されていた。",
+    "chinese_text": "在页面边缘处，同样留下了疑似血字的\n【←】标记。"
+  },
+  {
+    "dialogue_id": "0101Bad03_Ema005",
+    "speaker": "Ema",
+    "japanese_text": "なんの矢印だろう？",
+    "chinese_text": "这个箭头是什么？"
+  },
+  {
+    "dialogue_id": "0101Bad03_Sherry004",
+    "speaker": "Sherry",
+    "japanese_text": "うーん……次のページを見ろってことでしょうか。",
+    "chinese_text": "唔……会不会是指示我们翻开下一页呢。"
+  },
+  {
+    "dialogue_id": "0101Bad03_Narrative007",
+    "speaker": "[Narrative]",
+    "japanese_text": "なるほど、とエマは指でページを捲る。",
+    "chinese_text": "原来如此，艾玛恍然大悟般翻开了下一页。"
+  },
+  {
+    "dialogue_id": "0101Bad03_Ema006",
+    "speaker": "Ema",
+    "japanese_text": "！！",
+    "chinese_text": "！！"
+  },
+  {
+    "dialogue_id": "0101Bad03_Narrative008",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマの顔から血の気が引く。そこにはこれまであった短い一言ではなく、びっしりと文章が綴られていた。",
+    "chinese_text": "艾玛顿时变得脸色煞白。\n书本上出现的不再是像之前一样的短短一行字，\n而是一篇密密麻麻的文章。"
+  },
+  {
+    "dialogue_id": "0101Bad03_Ema007",
+    "speaker": "Ema",
+    "japanese_text": "な、何これ……。",
+    "chinese_text": "这、这是什么……"
+  },
+  {
+    "dialogue_id": "0101Bad03_Sherry005",
+    "speaker": "Sherry",
+    "japanese_text": "やっぱり前に捕まってた子が残したものみたいですよ、ほら。",
+    "chinese_text": "看来真的是之前被抓来这里的人\n留下的文字。你看。"
+  },
+  {
+    "dialogue_id": "0101Bad03_Narrative009",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマはシェリーが指さした部分に目を向ける。",
+    "chinese_text": "艾玛的视线转到雪莉指向的部分。"
+  },
+  {
+    "dialogue_id": "0101Bad03_Narrative010",
+    "speaker": "[Narrative]",
+    "japanese_text": "目が覚めると、牢屋にいた――",
+    "chinese_text": "一醒来，发现自己在牢房之中——"
+  },
+  {
+    "dialogue_id": "0101Bad03_Narrative011",
+    "speaker": "[Narrative]",
+    "japanese_text": "同じ年頃の子たちが集められていて――",
+    "chinese_text": "年纪相近的女孩子被关在一起——"
+  },
+  {
+    "dialogue_id": "0101Bad03_Ema008",
+    "speaker": "Ema",
+    "japanese_text": "囚人、魔女、殺人事件……。",
+    "chinese_text": "囚犯、魔女、凶杀案……"
+  },
+  {
+    "dialogue_id": "0101Bad03_Sherry006",
+    "speaker": "Sherry",
+    "japanese_text": "私たちの状況や、ゴクチョーさんの説明と一致してますね。",
+    "chinese_text": "跟我们目前的状况，\n还有典狱长的说明都是一致的呢。"
+  },
+  {
+    "dialogue_id": "0101Bad03_Narrative012",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマとシェリーは先を読み進める。",
+    "chinese_text": "艾玛和雪莉继续往下阅读。"
+  },
+  {
+    "dialogue_id": "0101Bad03_Narrative013",
+    "speaker": "[Narrative]",
+    "japanese_text": "しかし、文字が擦れたり滲んだりしていて、ところどころしか読み取れない。",
+    "chinese_text": "只不过，多处字迹都出现了墨水化开或消失的现象，\n只能断断续续地看下去。"
+  },
+  {
+    "dialogue_id": "0101Bad03_Narrative014",
+    "speaker": "[Narrative]",
+    "japanese_text": "最初は出来事を淡々と記しているように見えた文章に、だんだん呪詛が混じるようになっていく。",
+    "chinese_text": "文章一开头也只是平淡地记录着发生的事情，\n但越往后，文章内就混有越多的诅咒。"
+  },
+  {
+    "dialogue_id": "0101Bad03_Narrative015",
+    "speaker": "[Narrative]",
+    "japanese_text": "憎い、許せない、もう誰も信じられない――",
+    "chinese_text": "憎恨，不可原谅，再也不信任任何人——"
+  },
+  {
+    "dialogue_id": "0101Bad03_Narrative016",
+    "speaker": "[Narrative]",
+    "japanese_text": "次は自分が殺される番かもしれないという恐怖。他の少女たちに対する疑念や恨み言が、延々と続く。",
+    "chinese_text": "对下一个人被杀的或许就是自己的恐惧。\n对其他少女的怀疑和怨恨话语——这些元素不断在文章中重复。"
+  },
+  {
+    "dialogue_id": "0101Bad03_Narrative017",
+    "speaker": "[Narrative]",
+    "japanese_text": "とうとう、残り３人になった。今度こそ、わたしが死ぬ番かもしれない。",
+    "chinese_text": "终于，只剩下3个人了。\n这下，也许总归轮到我死了。"
+  },
+  {
+    "dialogue_id": "0101Bad03_Narrative018",
+    "speaker": "[Narrative]",
+    "japanese_text": "たすけて。",
+    "chinese_text": "救命。"
+  },
+  {
+    "dialogue_id": "0101Bad03_Narrative019",
+    "speaker": "[Narrative]",
+    "japanese_text": "家に帰りたい。お母さん、お父さん、会いたい。",
+    "chinese_text": "我想回家。\n爸爸、妈妈，我想见你们。"
+  },
+  {
+    "dialogue_id": "0101Bad03_Narrative020",
+    "speaker": "[Narrative]",
+    "japanese_text": "どうしてこんな目にあわなきゃいけないの？",
+    "chinese_text": "为什么我非得遇到这些事不可？"
+  },
+  {
+    "dialogue_id": "0101Bad03_Narrative021",
+    "speaker": "[Narrative]",
+    "japanese_text": "わたしは悪くない。わたしは悪くない。",
+    "chinese_text": "我没有错。\n我没有错。"
+  },
+  {
+    "dialogue_id": "0101Bad03_Narrative022",
+    "speaker": "[Narrative]",
+    "japanese_text": "何も悪くないのに、どうして？",
+    "chinese_text": "明明我没有错，为什么是我？"
+  },
+  {
+    "dialogue_id": "0101Bad03_Narrative023",
+    "speaker": "[Narrative]",
+    "japanese_text": "憎い。許せない。",
+    "chinese_text": "好恨。\n不可原谅。"
+  },
+  {
+    "dialogue_id": "0101Bad03_Narrative024",
+    "speaker": "[Narrative]",
+    "japanese_text": "このままじゃ、殺されるだけ。",
+    "chinese_text": "再这么下去，只会被杀。"
+  },
+  {
+    "dialogue_id": "0101Bad03_Narrative025",
+    "speaker": "[Narrative]",
+    "japanese_text": "そうだ。",
+    "chinese_text": "对了。"
+  },
+  {
+    "dialogue_id": "0101Bad03_Narrative026",
+    "speaker": "[Narrative]",
+    "japanese_text": "いいこと思いついた。どうして今まで気がつかなかったんだろう。",
+    "chinese_text": "我想到办法了。\n为什么我一直以来都没察觉到呢。"
+  },
+  {
+    "dialogue_id": "0101Bad03_Narrative027",
+    "speaker": "[Narrative]",
+    "japanese_text": "殺される前に、わたしが殺せばいいんだ。",
+    "chinese_text": "只要在被杀之前，我去杀死其他人就好了。"
+  },
+  {
+    "dialogue_id": "0101Bad03_Narrative028",
+    "speaker": "[Narrative]",
+    "japanese_text": "でもきっと、あいつらもそう考えてる。",
+    "chinese_text": "不过，她们肯定也在想同一回事。"
+  },
+  {
+    "dialogue_id": "0101Bad03_Narrative029",
+    "speaker": "[Narrative]",
+    "japanese_text": "許せない。許せない。許せない。呪ってやる。苦しめばいい。みんな、苦しめ。",
+    "chinese_text": "不可原谅。不可原谅。不可原谅。\n我要诅咒。承受痛苦吧。\n该承受痛苦的，是你们才对。"
+  },
+  {
+    "dialogue_id": "0101Bad03_Narrative030",
+    "speaker": "[Narrative]",
+    "japanese_text": "苦しんで、死ねばいいんだ。",
+    "chinese_text": "在痛苦之中，去死就好了。"
+  },
+  {
+    "dialogue_id": "0101Bad03_Narrative031",
+    "speaker": "[Narrative]",
+    "japanese_text": "次の一文を読んだエマが短い悲鳴を上げて、本から手を離す。",
+    "chinese_text": "读到下一行字后，艾玛发出短暂的惊叫声，\n把手从书本上抽开。"
+  },
+  {
+    "dialogue_id": "0101Bad03_Narrative032",
+    "speaker": "[Narrative]",
+    "japanese_text": "【今これを読んでいるお前も死ねばいい】",
+    "chinese_text": "【现在正看到这行字的你也去死吧】"
+  },
+  {
+    "dialogue_id": "0101Bad03_Sherry007",
+    "speaker": "Sherry",
+    "japanese_text": "エマさん、まだ続いてるみたいですよ。",
+    "chinese_text": "艾玛，好像后面还写了东西耶。"
+  },
+  {
+    "dialogue_id": "0101Bad03_Narrative033",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマに代わってシェリーが本を手に取り、ページを捲ると――",
+    "chinese_text": "这次换雪莉拿起书本，\n往后又翻了一页——"
+  },
+  {
+    "dialogue_id": "0101Bad03_Ema009",
+    "speaker": "Ema",
+    "japanese_text": "（え？）",
+    "chinese_text": "（欸？）"
+  },
+  {
+    "dialogue_id": "0101Bad03_Narrative034",
+    "speaker": "[Narrative]",
+    "japanese_text": "肥大化した本が、シェリーの頭部を包み込んでいた。",
+    "chinese_text": "书本膨胀变大，把雪莉的头包裹了进去。"
+  },
+  {
+    "dialogue_id": "0101Bad03_Narrative035",
+    "speaker": "[Narrative]",
+    "japanese_text": "肉を咀嚼するような音を響かせながら、本はどんどんシェリーの全身を飲み込んでいく。",
+    "chinese_text": "书本发出如同嚼肉般的声音，\n渐渐将雪莉的全身吞没。"
+  },
+  {
+    "dialogue_id": "0101Bad03_Ema010",
+    "speaker": "Ema",
+    "japanese_text": "あ……ああ……。",
+    "chinese_text": "啊……啊啊……"
+  },
+  {
+    "dialogue_id": "0101Bad03_Narrative036",
+    "speaker": "[Narrative]",
+    "japanese_text": "シェリーの体は、あっという間に跡形もなく消えてしまった。",
+    "chinese_text": "没过多久，雪莉的身体便不留痕迹地消失了。"
+  },
+  {
+    "dialogue_id": "0101Bad03_Narrative037",
+    "speaker": "[Narrative]",
+    "japanese_text": "本がひとりでに浮き、まるでエマに見せるようにページが開かれる。",
+    "chinese_text": "随后书本飘浮在半空中，好像要给艾玛展示什么似的，\n翻开了书本上的某页。"
+  },
+  {
+    "dialogue_id": "0101Bad03_Narrative038",
+    "speaker": "[Narrative]",
+    "japanese_text": "そこには何も書かれておらず、ただ黒く塗りつぶしたような闇が広がっているだけだ。",
+    "chinese_text": "上面什么都没写，\n只展露出了如同涂黑页面般的黑暗。"
+  },
+  {
+    "dialogue_id": "0101Bad03_Narrative039",
+    "speaker": "[Narrative]",
+    "japanese_text": "理解の追いつかない状況に、エマは呆然としたまま動けなかった――",
+    "chinese_text": "面对超过理解速度的事态发展，\n艾玛只能呆站在原地，一动不动——"
+  }
+]

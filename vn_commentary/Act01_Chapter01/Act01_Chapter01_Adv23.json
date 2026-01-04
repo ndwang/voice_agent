@@ -1,0 +1,248 @@
+[
+  {
+    "dialogue_id": "0101Adv23_Narrative001",
+    "speaker": "[Narrative]",
+    "japanese_text": "――早朝。エマは昨晩深く眠ったためか、早くに目が覚めていた。",
+    "chinese_text": "——第二天早晨。\n或许因为昨晚睡得很香，艾玛早早便醒来了。"
+  },
+  {
+    "dialogue_id": "0101Adv23_Narrative002",
+    "speaker": "[Narrative]",
+    "japanese_text": "朝の開錠時間と共に、エマは伸びをしながら通路の方へと出る。",
+    "chinese_text": "一到早上的开锁时间，\n艾玛就伸着懒腰走出了房门。"
+  },
+  {
+    "dialogue_id": "0101Adv23_Narrative003",
+    "speaker": "[Narrative]",
+    "japanese_text": "おそらくまだ他の少女たちは眠っているのだろう。地下はしんと、静寂に包まれていた。",
+    "chinese_text": "其他少女大概还没睡醒。\n地下包裹在一片寂静之中。"
+  },
+  {
+    "dialogue_id": "0101Adv23_Ema001",
+    "speaker": "Ema",
+    "japanese_text": "（朝散歩でもしようかな）",
+    "chinese_text": "（大早上要不要散散步呢）"
+  },
+  {
+    "dialogue_id": "0101Adv23_Narrative004",
+    "speaker": "[Narrative]",
+    "japanese_text": "すると、通路の先から歩いてきている少女の姿があった。",
+    "chinese_text": "这时，过道远处\n出现了一位正在走动的少女身影。"
+  },
+  {
+    "dialogue_id": "0101Adv23_Narrative005",
+    "speaker": "[Narrative]",
+    "japanese_text": "忍び足でエマの方へ向かってくるのは、アンアンだった。",
+    "chinese_text": "是安安。她正向艾玛这边走来，\n几乎不带声响。"
+  },
+  {
+    "dialogue_id": "0101Adv23_Ema002",
+    "speaker": "Ema",
+    "japanese_text": "アンアンちゃん、おはよう。早いね！ 具合はもういいの？",
+    "chinese_text": "早上好安安。\n你起得好早！身体怎么样了？"
+  },
+  {
+    "dialogue_id": "0101Adv23_Narrative006",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマの姿を見て、アンアンは嫌そうに眉をひそめる。",
+    "chinese_text": "看到艾玛后，\n安安皱起眉头，看着相当不开心。"
+  },
+  {
+    "dialogue_id": "0101Adv23_AnAn001",
+    "speaker": "AnAn",
+    "japanese_text": "…………。",
+    "chinese_text": "…………"
+  },
+  {
+    "dialogue_id": "0101Adv23_Narrative007",
+    "speaker": "[Narrative]",
+    "japanese_text": "無視を決め込んだのか、エマの横を素通りして自分の房へと向かっていく。",
+    "chinese_text": "她决意要无视艾玛，\n从艾玛身边走过，准备回自己的房间。"
+  },
+  {
+    "dialogue_id": "0101Adv23_Ema003",
+    "speaker": "Ema",
+    "japanese_text": "（少しは親しくなれたと思ったんだけど……　そんな簡単にはいかないか）",
+    "chinese_text": "（还以为稍微有和她更亲近一点……\n看来和她相处不会太顺利呢）"
+  },
+  {
+    "dialogue_id": "0101Adv23_Narrative008",
+    "speaker": "[Narrative]",
+    "japanese_text": "アンアンは俯き加減に歩いていた。自分の房の前までやってきてから、顔を上げ、そして――",
+    "chinese_text": "安安低着头继续走路，\n走到自己房门前才抬起头来。这时——"
+  },
+  {
+    "dialogue_id": "0101Adv23_AnAn002",
+    "speaker": "AnAn",
+    "japanese_text": "あ、あ、あ……！",
+    "chinese_text": "啊、啊、啊……！"
+  },
+  {
+    "dialogue_id": "0101Adv23_Ema004",
+    "speaker": "Ema",
+    "japanese_text": "え？",
+    "chinese_text": "欸？"
+  },
+  {
+    "dialogue_id": "0101Adv23_AnAn003",
+    "speaker": "AnAn",
+    "japanese_text": "あああああああああぁーっ！！",
+    "chinese_text": "啊啊啊啊啊啊啊啊啊啊——！！"
+  },
+  {
+    "dialogue_id": "0101Adv23_Narrative009",
+    "speaker": "[Narrative]",
+    "japanese_text": "驚愕で目を見開くアンアンが、初めて声を発したことに気を取られてしまい。",
+    "chinese_text": "安安震惊地瞪大了眼睛，\n第一次喊出声来。"
+  },
+  {
+    "dialogue_id": "0101Adv23_Narrative010",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマは、少し遅れて隣の房を覗いた。そして、それを見た。",
+    "chinese_text": "对安安的反应感到好奇，艾玛也跟着望向隔壁的房间。\n然后，她也看到了。"
+  },
+  {
+    "dialogue_id": "0101Adv23_Ema005",
+    "speaker": "Ema",
+    "japanese_text": "ノア、ちゃん……？",
+    "chinese_text": "诺亚……？"
+  },
+  {
+    "dialogue_id": "0101Adv23_Narrative011",
+    "speaker": "[Narrative]",
+    "japanese_text": "お絵描きが大好きだった少女、城ケ崎ノアは、死んでいた。",
+    "chinese_text": "最喜欢画画的少女，\n城崎诺亚，死了。"
+  },
+  {
+    "dialogue_id": "0101Adv23_Narrative012",
+    "speaker": "[Narrative]",
+    "japanese_text": "好奇心旺盛に世界を見る愛らしかった瞳は、眠るように閉じられている。もう二度と何かを映すことがない。",
+    "chinese_text": "那双充满好奇心的，用来观察世界的可爱眼睛，\n现在已经永远地闭上，再也不会看见任何色彩了。"
+  },
+  {
+    "dialogue_id": "0101Adv23_Narrative013",
+    "speaker": "[Narrative]",
+    "japanese_text": "体温や血液を奪われた体は陶器めいていた。それはまるで精巧に造られた人形のようにも見えた。",
+    "chinese_text": "失去了温度和血液的身体好像一件瓷器，\n又好像一只做工精美的洋娃娃，美丽，而又脆弱。"
+  },
+  {
+    "dialogue_id": "0101Adv23_Narrative014",
+    "speaker": "[Narrative]",
+    "japanese_text": "そして、カラースプレーによって真っ白に塗りつぶされたキャンバスには、絵が描かれていた。",
+    "chinese_text": "而用喷漆涂成的纯白色画布上，\n画有一幅画。"
+  },
+  {
+    "dialogue_id": "0101Adv23_Narrative015",
+    "speaker": "[Narrative]",
+    "japanese_text": "ノア自身から排出された、大量の血によって。",
+    "chinese_text": "——那是由诺亚自身流出的大量鲜血\n画成的一幅画。"
+  },
+  {
+    "dialogue_id": "0101Adv23_Ema006",
+    "speaker": "Ema",
+    "japanese_text": "ちょう……ちょ……？",
+    "chinese_text": "蝴……蝶……？"
+  },
+  {
+    "dialogue_id": "0101Adv23_Narrative016",
+    "speaker": "[Narrative]",
+    "japanese_text": "たくさんの、赤い蝶がノアの周囲を舞っている。",
+    "chinese_text": "许许多多红色的蝴蝶，在诺亚的身边轻盈飞舞着。"
+  },
+  {
+    "dialogue_id": "0101Adv23_Narrative017",
+    "speaker": "[Narrative]",
+    "japanese_text": "城ケ崎ノアが描いた最後の絵。それはあまりに残酷で、美しく、ありえない光景。",
+    "chinese_text": "这就是城崎诺亚画的最后一幅画。\n多么残酷，多么美丽，多么荒诞无稽。"
+  },
+  {
+    "dialogue_id": "0101Adv23_Narrative018",
+    "speaker": "[Narrative]",
+    "japanese_text": "騒ぎに駆けつけてきた少女たちは壮絶な光景に息を呑み、泣き喚き、震え、叫び、パニックに陥った。",
+    "chinese_text": "听见骚动赶来的少女们看见这副惨烈的景象，\n不禁倒吸一口凉气，哭喊着，颤抖着，尖叫着，陷入了恐慌。"
+  },
+  {
+    "dialogue_id": "0101Adv23_Ema007",
+    "speaker": "Ema",
+    "japanese_text": "なんで、なんでなんでなんでぇ……っ",
+    "chinese_text": "为什么、为什么为什么为什么……"
+  },
+  {
+    "dialogue_id": "0101Adv23_Leia001",
+    "speaker": "Leia",
+    "japanese_text": "みんな落ち着くんだ！",
+    "chinese_text": "大家冷静下来！"
+  },
+  {
+    "dialogue_id": "0101Adv23_Narrative019",
+    "speaker": "[Narrative]",
+    "japanese_text": "口にするレイアも、さすがに青ざめている。",
+    "chinese_text": "和嘴里说的话相反，蕾雅满脸写着震惊。"
+  },
+  {
+    "dialogue_id": "0101Adv23_Narrative020",
+    "speaker": "[Narrative]",
+    "japanese_text": "ノアの房の扉を開き、中を覗いて痛ましそうに首を振る。",
+    "chinese_text": "她打开诺亚的房门，\n往里看了一眼，十分沉痛地摇了摇头。"
+  },
+  {
+    "dialogue_id": "0101Adv23_Leia002",
+    "speaker": "Leia",
+    "japanese_text": "ダメだ……死んでる……どうして！！",
+    "chinese_text": "没救了……已经死了……为什么！！"
+  },
+  {
+    "dialogue_id": "0101Adv23_Narrative021",
+    "speaker": "[Narrative]",
+    "japanese_text": "タイミングを見計らったように、スマホの通知音が地下通路に鳴り響く。",
+    "chinese_text": "就好像是挑准了时间一样，\n手机的提示音回荡在过道之中。"
+  },
+  {
+    "dialogue_id": "0101Adv23_Narrative022",
+    "speaker": "[Narrative]",
+    "japanese_text": "『はぁ……報せが入りました。　痛ましい殺人事件が発生したようですね』",
+    "chinese_text": "『唉……收到一份报告。\n据说发生了一起令人痛心的凶杀案啊』"
+  },
+  {
+    "dialogue_id": "0101Adv23_Narrative023",
+    "speaker": "[Narrative]",
+    "japanese_text": "『あの、皆さん、今すぐラウンジに集合してください。　従わなければ看守が連行しちゃうので……』",
+    "chinese_text": "『大家注意，请大家立即前往会客厅集合。\n不遵守者将被看守带走……』"
+  },
+  {
+    "dialogue_id": "0101Adv23_Narrative024",
+    "speaker": "[Narrative]",
+    "japanese_text": "ゴクチョーのメッセージどおり、看守が通路に現れている。",
+    "chinese_text": "正如典狱长所说，\n看守已经抵达过道。"
+  },
+  {
+    "dialogue_id": "0101Adv23_Narrative025",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマは思考がまとまらず、胸が詰まり、息さえもうまくできないでいた。",
+    "chinese_text": "艾玛的脑袋乱作一团，\n身体里好像有什么东西堵住似的，连呼吸都变得不太顺畅。"
+  },
+  {
+    "dialogue_id": "0101Adv23_Narrative026",
+    "speaker": "[Narrative]",
+    "japanese_text": "しかし看守の出現で、少女たちはのそのそと動き出した。",
+    "chinese_text": "但因为看守在场的关系，\n少女们只好动身前往指定地点。"
+  },
+  {
+    "dialogue_id": "0101Adv23_Narrative027",
+    "speaker": "[Narrative]",
+    "japanese_text": "誰も何も言わない。誰の顔にも表情がない。",
+    "chinese_text": "没有任何人说话。\n大家的脸上都没有任何表情。"
+  },
+  {
+    "dialogue_id": "0101Adv23_Narrative028",
+    "speaker": "[Narrative]",
+    "japanese_text": "この出来事が、少女たちの全てを変えてしまったようだった。",
+    "chinese_text": "这件事，\n似乎改变了少女们的一切。"
+  },
+  {
+    "dialogue_id": "Toast_001",
+    "speaker": "[Narrative]",
+    "japanese_text": "魔女図鑑 更新…",
+    "chinese_text": "魔女图鉴 更新…"
+  }
+]

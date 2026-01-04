@@ -1,0 +1,542 @@
+[
+  {
+    "dialogue_id": "0101Trial08_Leia001",
+    "speaker": "Leia",
+    "japanese_text": "ああそうそう、思い出したよ。小腹が空いて食堂にでも行った気がするな。いや、どうだったかな？勘違いかも。",
+    "chinese_text": "啊对了，\n我想起来了。\n我好像肚子饿了，\n然后去了食堂。\n唔，是这样吗？\n或许是我记错了。"
+  },
+  {
+    "dialogue_id": "0101Trial08_Margo001",
+    "speaker": "Margo",
+    "japanese_text": "ふふ、お腹が空いたならしょうがないわよねぇ。",
+    "chinese_text": "呵呵，\n真是饿肚子的话\n就情有可原呢。"
+  },
+  {
+    "dialogue_id": "0101Trial08_Alisa001",
+    "speaker": "Alisa",
+    "japanese_text": "そんな適当な話を信じろってのか？",
+    "chinese_text": "所以不管你怎么胡说八道，\n我们只要相信就好咯？"
+  },
+  {
+    "dialogue_id": "0101Trial08_Leia002",
+    "speaker": "Leia",
+    "japanese_text": "悪い悪い。バカにする気はないよ。……けど、こんなことを話して本当に意味があるのかな？",
+    "chinese_text": "抱歉了，我没有把大家\n当傻子看的意思。\n……可是，我们讨论这个\n真的有意义吗？"
+  },
+  {
+    "dialogue_id": "0101Trial08_Leia003",
+    "speaker": "Leia",
+    "japanese_text": "たしかに私にはアリバイがないのかもしれないね。けれどそれはとても些末なことだと思わないかい？",
+    "chinese_text": "我也许\n拿不出\n不在场证明。\n可是，你们不觉得\n这件事小到\n根本不值一提吗？"
+  },
+  {
+    "dialogue_id": "0101Trial08_Leia004",
+    "speaker": "Leia",
+    "japanese_text": "……なぜなら私は空を飛べないんだ。私には塗料を越え、入り口から３ｍほどは離れたノアくんに近付く方法がない。",
+    "chinese_text": "……毕竟，我\n不会飞。\n诺亚离门口足足有3米远，\n中间还有颜料挡着，\n我根本没办法接近她。"
+  },
+  {
+    "dialogue_id": "0101Trial08_Leia005",
+    "speaker": "Leia",
+    "japanese_text": "……だからね、この話題をいくら続けたって意味がないんだよ。もっと建設的な話をしようか。",
+    "chinese_text": "……所以我觉得，\n继续讨论这个话题根本没意义。\n不如来讨论其他\n更有建设意义的事，怎样？"
+  },
+  {
+    "dialogue_id": "0101Trial08_Nanoka001",
+    "speaker": "Nanoka",
+    "japanese_text": "……必要かどうかは、私たちが決めるわ。少なくともあなたが決める事じゃないでしょう。",
+    "chinese_text": "……有没有必要\n继续讨论，\n由我们来决定。\n这件事至少你\n没资格决定。"
+  },
+  {
+    "dialogue_id": "0101Trial08_Ema001",
+    "speaker": "Ema",
+    "japanese_text": "（レイアちゃんの意見は一見　筋が通っているような気がする……。　でも何か、引っかかるかも……）",
+    "chinese_text": "（乍一看蕾雅的主张\n好像逻辑上讲得通……\n可是我总感觉，有什么地方不太自然……）"
+  },
+  {
+    "dialogue_id": "0101Trial08_Ema002",
+    "speaker": "Ema",
+    "japanese_text": "（それに、あのときたしか　レイアちゃんとは地下で　会ってたような……）",
+    "chinese_text": "（而且，我记得那时\n我好像在地下\n和蕾雅碰过面……）"
+  },
+  {
+    "dialogue_id": "0101Trial08_Ema003",
+    "speaker": "Ema",
+    "japanese_text": "（可能性を検討してみよう。　レイアちゃんの言っていることで、　間違ってるかもしれないことはないかな……）",
+    "chinese_text": "（思考一下可能性吧。\n在蕾雅的发言当中，\n有没有什么地方是不对的呢……）"
+  },
+  {
+    "dialogue_id": "0101Trial08_Ema004",
+    "speaker": "Ema",
+    "japanese_text": "……待って！ おかしいよ！そのとき夕飯の直後だったはず……！すぐにお腹が空くなんてありえないよ……！",
+    "chinese_text": "……等一下！这很不对劲！\n那时是晚餐过后刚不久……！\n不可能马上就饿肚子……！"
+  },
+  {
+    "dialogue_id": "0101Trial08_Leia006",
+    "speaker": "Leia",
+    "japanese_text": "そうは言っても、お腹が空いたんだ。それとも私が空腹を感じていなかった証拠でもあるのかい？",
+    "chinese_text": "道理是这么说，可是我肚子饿不饿，又不是你说了算。\n还是说，你有证据证明\n我当时肚子并没有饿吗？"
+  },
+  {
+    "dialogue_id": "0101Trial08_Ema005",
+    "speaker": "Ema",
+    "japanese_text": "……それは。",
+    "chinese_text": "这……"
+  },
+  {
+    "dialogue_id": "0101Trial08_Leia007",
+    "speaker": "Leia",
+    "japanese_text": "私の個人的な感覚まで否定されるのは……とても悲しいな。ただでさえこんな所に閉じ込められているのにね。",
+    "chinese_text": "连我的个人感觉都要否定……\n真让我伤心。\n被关在这个地方我都没感到那么伤心。"
+  },
+  {
+    "dialogue_id": "0101Trial08_Ema006",
+    "speaker": "Ema",
+    "japanese_text": "（それとこれとは、別問題だと思うけど……！）",
+    "chinese_text": "（根本是两码事……！）"
+  },
+  {
+    "dialogue_id": "0101Trial08_Ema007",
+    "speaker": "Ema",
+    "japanese_text": "（レイアちゃん、有名人なだけあって堂々としてる……。　変な発言しちゃうと、逆に反撃されちゃうかも……）",
+    "chinese_text": "（蕾雅真不愧是有名人，摆出了一副坦荡的态度……\n如果我说了奇怪的话，搞不好会被她反击……）"
+  },
+  {
+    "dialogue_id": "0101Trial08_Meruru001",
+    "speaker": "Meruru",
+    "japanese_text": "エマさん……レイアさんが嘘をついてたとしても、暴くのは難しいかもしれません。",
+    "chinese_text": "艾玛小姐……就算蕾雅小姐她在说谎，\n我们好像也没办法轻易揭穿她。"
+  },
+  {
+    "dialogue_id": "0101Trial08_Ema008",
+    "speaker": "Ema",
+    "japanese_text": "そ、そうだよね……。じゃあ犯人の手がかりは……。",
+    "chinese_text": "是、是啊……\n那凶手的线索该怎么办……"
+  },
+  {
+    "dialogue_id": "0101Trial08_Meruru002",
+    "speaker": "Meruru",
+    "japanese_text": "逆に……【ハンナさん以外が犯人だとしたら】と考えてみてはどうでしょうか？",
+    "chinese_text": "那……我们反过来，以【如果凶手不是汉娜】\n为前提再思考看看，你觉得怎么样？"
+  },
+  {
+    "dialogue_id": "0101Trial08_Meruru003",
+    "speaker": "Meruru",
+    "japanese_text": "ありえない可能性を除けば……【ありえたかもしれない可能性】が残ります。もしかすると、それが真実かもしれません……。",
+    "chinese_text": "排除掉说不通的可能性……\n剩下的就是【说得通的可能性】。\n说不定，那就是真相……"
+  },
+  {
+    "dialogue_id": "0101Trial08_Ema009",
+    "speaker": "Ema",
+    "japanese_text": "（【ありえたかもしれない可能性】……。　議論を進める為に、いろいろな可能性を　考えてみよう……！）",
+    "chinese_text": "（【说得通的可能性】……\n为了推进讨论，我们来思考一下\n其他各种各样的可能性吧……！）"
+  },
+  {
+    "dialogue_id": "0101Trial08_Ema010",
+    "speaker": "Ema",
+    "japanese_text": "レイアちゃんが食堂に行った……？おかしいな、そんなことないはずだけど……。",
+    "chinese_text": "蕾雅去了食堂……？\n奇怪，不应该是这样……"
+  },
+  {
+    "dialogue_id": "0101Trial08_Leia008",
+    "speaker": "Leia",
+    "japanese_text": "へえ？それはどうしてだい？教えてごらん。",
+    "chinese_text": "哦？\n为什么呢？\n请你讲一下理由。"
+  },
+  {
+    "dialogue_id": "0101Trial08_Ema011",
+    "speaker": "Ema",
+    "japanese_text": "それは……きっと食堂に行ったなら、誰かが見ているはずじゃ……。",
+    "chinese_text": "呃……\n如果去了食堂，\n一定会有其他人看见才对……"
+  },
+  {
+    "dialogue_id": "0101Trial08_Leia009",
+    "speaker": "Leia",
+    "japanese_text": "誰かって、誰のことだい？誰か食堂にでもいたのかい？そんな発言はなかったと思うけど。",
+    "chinese_text": "这个人是谁？\n有谁会在食堂吗？\n我不记得有人说过这样的事。"
+  },
+  {
+    "dialogue_id": "0101Trial08_Ema012",
+    "speaker": "Ema",
+    "japanese_text": "そ、それは……。",
+    "chinese_text": "这、这个……"
+  },
+  {
+    "dialogue_id": "0101Trial08_Leia010",
+    "speaker": "Leia",
+    "japanese_text": "むしろそこに誰もいないことが、私がそこにいた証拠と言えるんじゃないかな。",
+    "chinese_text": "倒不如说，食堂没人这件事\n正好证明了我在食堂，你说对不对。"
+  },
+  {
+    "dialogue_id": "0101Trial08_Leia011",
+    "speaker": "Leia",
+    "japanese_text": "妄想で人を犯人扱いするなんて……酷いよ、エマくん……。",
+    "chinese_text": "竟然用臆想来断定别人是凶手……\n艾玛，你太过分了……"
+  },
+  {
+    "dialogue_id": "0101Trial08_Ema013",
+    "speaker": "Ema",
+    "japanese_text": "（ボ、ボクが悪者になっちゃった……！）",
+    "chinese_text": "（我、我成了坏人了……！）"
+  },
+  {
+    "dialogue_id": "0101Trial08_Ema014",
+    "speaker": "Ema",
+    "japanese_text": "（レイアちゃん、有名人なだけあって堂々としてる……。　変な発言しちゃうと、逆に反撃されちゃうかも……）",
+    "chinese_text": "（蕾雅真不愧是有名人，摆出了一副坦荡的态度……\n如果我说了奇怪的话，搞不好会被她反击……）"
+  },
+  {
+    "dialogue_id": "0101Trial08_Meruru004",
+    "speaker": "Meruru",
+    "japanese_text": "エマさん……レイアさんが嘘をついてたとしても、暴くのは難しいかもしれません。",
+    "chinese_text": "艾玛小姐……就算蕾雅小姐她在说谎，\n我们好像也没办法轻易揭穿她。"
+  },
+  {
+    "dialogue_id": "0101Trial08_Ema015",
+    "speaker": "Ema",
+    "japanese_text": "そ、そうだよね……。じゃあ犯人の手がかりは……。",
+    "chinese_text": "是、是啊……\n那凶手的线索该怎么办……"
+  },
+  {
+    "dialogue_id": "0101Trial08_Meruru005",
+    "speaker": "Meruru",
+    "japanese_text": "逆に……【ハンナさん以外が犯人だとしたら】と考えてみてはどうでしょうか？",
+    "chinese_text": "那……我们反过来，以【如果凶手不是汉娜】\n为前提再思考看看，你觉得怎么样？"
+  },
+  {
+    "dialogue_id": "0101Trial08_Meruru006",
+    "speaker": "Meruru",
+    "japanese_text": "ありえない可能性を除けば……【ありえたかもしれない可能性】が残ります。もしかすると、それが真実かもしれません……。",
+    "chinese_text": "排除掉说不通的可能性……\n剩下的就是【说得通的可能性】。\n说不定，那就是真相……"
+  },
+  {
+    "dialogue_id": "0101Trial08_Ema016",
+    "speaker": "Ema",
+    "japanese_text": "（【ありえたかもしれない可能性】……。　議論を進める為に、いろいろな可能性を　考えてみよう……！）",
+    "chinese_text": "（【说得通的可能性】……\n为了推进讨论，我们来思考一下\n其他各种各样的可能性吧……！）"
+  },
+  {
+    "dialogue_id": "0101Trial08_Ema017",
+    "speaker": "Ema",
+    "japanese_text": "記憶が曖昧なんておかしいよ……！こんな場所でこんな事件が起こったのに……！",
+    "chinese_text": "记忆不可能这么模糊……！\n明明是在这么不正常的地方出了这么不正常的事件……！"
+  },
+  {
+    "dialogue_id": "0101Trial08_Leia012",
+    "speaker": "Leia",
+    "japanese_text": "エマくん、事件が発覚したのは今日だ。昨日の時点で些細な事まで記憶しておくなんて……。",
+    "chinese_text": "艾玛，我们是今天才发现出事的。\n怎么会有人记得住昨天发生的琐碎事情呢……"
+  },
+  {
+    "dialogue_id": "0101Trial08_Leia013",
+    "speaker": "Leia",
+    "japanese_text": "それじゃあまるで事件が起こるとわかっていたようじゃないか。",
+    "chinese_text": "如果有人记得住，\n那这个人岂不是清楚知道出了事吗？"
+  },
+  {
+    "dialogue_id": "0101Trial08_Ema018",
+    "speaker": "Ema",
+    "japanese_text": "そ、それは……。",
+    "chinese_text": "这、这个……"
+  },
+  {
+    "dialogue_id": "0101Trial08_Leia014",
+    "speaker": "Leia",
+    "japanese_text": "むしろ記憶が曖昧な事こそ、私が犯人ではない証拠と言えるんじゃないかい？",
+    "chinese_text": "倒不如说，记忆模糊这件事\n正好证明了我不是凶手，你说对不对？"
+  },
+  {
+    "dialogue_id": "0101Trial08_Ema019",
+    "speaker": "Ema",
+    "japanese_text": "そう……なの、かな……？",
+    "chinese_text": "是……吗……？"
+  },
+  {
+    "dialogue_id": "0101Trial08_Leia015",
+    "speaker": "Leia",
+    "japanese_text": "ついでに言えば、昨日のことを覚えていて当然だというエマくんこそが怪しいんじゃないかな？犯人だから強く覚えていたんだよ……昨日の記憶をね！",
+    "chinese_text": "我多说一句，艾玛你才是不正常的那个人吧？\n你认为记得昨天的事是理所当然的，\n可是……只有凶手才会清楚记得昨天发生的事！"
+  },
+  {
+    "dialogue_id": "0101Trial08_Ema020",
+    "speaker": "Ema",
+    "japanese_text": "（ボ、ボクが犯人だったの……！？）",
+    "chinese_text": "（原、原来我才是凶手……！？）"
+  },
+  {
+    "dialogue_id": "0101Trial08_Ema021",
+    "speaker": "Ema",
+    "japanese_text": "（レイアちゃん、有名人なだけあって堂々としてる……。　変な発言しちゃうと、逆に反撃されちゃうかも……）",
+    "chinese_text": "（蕾雅真不愧是有名人，摆出了一副坦荡的态度……\n如果我说了奇怪的话，搞不好会被她反击……）"
+  },
+  {
+    "dialogue_id": "0101Trial08_Meruru007",
+    "speaker": "Meruru",
+    "japanese_text": "エマさん……レイアさんが嘘をついてたとしても、暴くのは難しいかもしれません。",
+    "chinese_text": "艾玛小姐……就算蕾雅小姐她在说谎，\n我们好像也没办法轻易揭穿她。"
+  },
+  {
+    "dialogue_id": "0101Trial08_Ema022",
+    "speaker": "Ema",
+    "japanese_text": "そ、そうだよね……。じゃあ犯人の手がかりは……。",
+    "chinese_text": "是、是啊……\n那凶手的线索该怎么办……"
+  },
+  {
+    "dialogue_id": "0101Trial08_Meruru008",
+    "speaker": "Meruru",
+    "japanese_text": "逆に……【ハンナさん以外が犯人だとしたら】と考えてみてはどうでしょうか？",
+    "chinese_text": "那……我们反过来，以【如果凶手不是汉娜】\n为前提再思考看看，你觉得怎么样？"
+  },
+  {
+    "dialogue_id": "0101Trial08_Meruru009",
+    "speaker": "Meruru",
+    "japanese_text": "ありえない可能性を除けば……【ありえたかもしれない可能性】が残ります。もしかすると、それが真実かもしれません……。",
+    "chinese_text": "排除掉说不通的可能性……\n剩下的就是【说得通的可能性】。\n说不定，那就是真相……"
+  },
+  {
+    "dialogue_id": "0101Trial08_Ema023",
+    "speaker": "Ema",
+    "japanese_text": "（【ありえたかもしれない可能性】……。　議論を進める為に、いろいろな可能性を　考えてみよう……！）",
+    "chinese_text": "（【说得通的可能性】……\n为了推进讨论，我们来思考一下\n其他各种各样的可能性吧……！）"
+  },
+  {
+    "dialogue_id": "0101Trial08_Ema024",
+    "speaker": "Ema",
+    "japanese_text": "ちょっと待って！ レイアちゃんなら空を飛べてもおかしくないよ！",
+    "chinese_text": "等一下！如果是蕾雅的话，\n能飞在半空中也不奇怪！"
+  },
+  {
+    "dialogue_id": "0101Trial08_Leia016",
+    "speaker": "Leia",
+    "japanese_text": "……どうしてだい？理解に苦しむけれど、一応理由は聞いておこうか。",
+    "chinese_text": "……为什么呢？\n虽然无法理解，但我愿意听一下你的看法。"
+  },
+  {
+    "dialogue_id": "0101Trial08_Ema025",
+    "speaker": "Ema",
+    "japanese_text": "だって……その……舞台とかで飛んだりするかもしれないし……。",
+    "chinese_text": "呃……因为……\n你或许以前\n在舞台剧里面飞过……"
+  },
+  {
+    "dialogue_id": "0101Trial08_Leia017",
+    "speaker": "Leia",
+    "japanese_text": "キミの夢を壊すようで悪いけれど……ああいうのは必ずステージに仕掛けがあるんだよ。",
+    "chinese_text": "破坏了你的梦真不好意思……\n我如果要飞，舞台上一定要有机关才行。"
+  },
+  {
+    "dialogue_id": "0101Trial08_Leia018",
+    "speaker": "Leia",
+    "japanese_text": "トリックもなしに飛ぶなんて、魔法でも使わない限り無理なんだ。",
+    "chinese_text": "要不靠机关飞行，\n除了魔法就再也没其他办法做得到。"
+  },
+  {
+    "dialogue_id": "0101Trial08_Leia019",
+    "speaker": "Leia",
+    "japanese_text": "そして私の魔法は魅了の魔法……キミの意見は絶対に不可能だと否定させてもらうよ！",
+    "chinese_text": "而我的魔法却是魅惑……\n我要提出反对，\n你的主张是绝对不可能的！"
+  },
+  {
+    "dialogue_id": "0101Trial08_Ema026",
+    "speaker": "Ema",
+    "japanese_text": "（うう……！　レイアちゃんの言う通りかも……！　レイアちゃんが空を飛んだ証拠なんてないし……）",
+    "chinese_text": "（呜……！\n或许她说得没错……！\n我也没有证据证明她飞过……）"
+  },
+  {
+    "dialogue_id": "0101Trial08_Ema027",
+    "speaker": "Ema",
+    "japanese_text": "（レイアちゃん、有名人なだけあって堂々としてる……。　変な発言しちゃうと、逆に反撃されちゃうかも……）",
+    "chinese_text": "（蕾雅真不愧是有名人，摆出了一副坦荡的态度……\n如果我说了奇怪的话，搞不好会被她反击……）"
+  },
+  {
+    "dialogue_id": "0101Trial08_Meruru010",
+    "speaker": "Meruru",
+    "japanese_text": "エマさん……レイアさんが嘘をついてたとしても、暴くのは難しいかもしれません。",
+    "chinese_text": "艾玛小姐……就算蕾雅小姐她在说谎，\n我们好像也没办法轻易揭穿她。"
+  },
+  {
+    "dialogue_id": "0101Trial08_Ema028",
+    "speaker": "Ema",
+    "japanese_text": "そ、そうだよね……。じゃあ犯人の手がかりは……。",
+    "chinese_text": "是、是啊……\n那凶手的线索该怎么办……"
+  },
+  {
+    "dialogue_id": "0101Trial08_Meruru011",
+    "speaker": "Meruru",
+    "japanese_text": "逆に……【ハンナさん以外が犯人だとしたら】と考えてみてはどうでしょうか？",
+    "chinese_text": "那……我们反过来，以【如果凶手不是汉娜】\n为前提再思考看看，你觉得怎么样？"
+  },
+  {
+    "dialogue_id": "0101Trial08_Meruru012",
+    "speaker": "Meruru",
+    "japanese_text": "ありえない可能性を除けば……【ありえたかもしれない可能性】が残ります。もしかすると、それが真実かもしれません……。",
+    "chinese_text": "排除掉说不通的可能性……\n剩下的就是【说得通的可能性】。\n说不定，那就是真相……"
+  },
+  {
+    "dialogue_id": "0101Trial08_Ema029",
+    "speaker": "Ema",
+    "japanese_text": "（【ありえたかもしれない可能性】……。　議論を進める為に、いろいろな可能性を　考えてみよう……！）",
+    "chinese_text": "（【说得通的可能性】……\n为了推进讨论，我们来思考一下\n其他各种各样的可能性吧……！）"
+  },
+  {
+    "dialogue_id": "0101Trial08_Ema030",
+    "speaker": "Ema",
+    "japanese_text": "ノアちゃんに近付く方法……他にもあったんじゃないかな？たとえば……【ノアちゃんが外に出てた】とかさ。",
+    "chinese_text": "应该……\n还有其他能靠近诺亚的方法吧？\n比如说……【诺亚走到了外面】之类的。"
+  },
+  {
+    "dialogue_id": "0101Trial08_Margo002",
+    "speaker": "Margo",
+    "japanese_text": "殺害後の死体移動トリック……ということかしら？",
+    "chinese_text": "你是说……存在杀人后移动尸体的手法？"
+  },
+  {
+    "dialogue_id": "0101Trial08_Leia020",
+    "speaker": "Leia",
+    "japanese_text": "しかし残念だけど現場には足跡もないし、あの血痕を見ればあそこでノアくんが殺されたのは明らかだ。",
+    "chinese_text": "不过很遗憾，现场没有留下足迹，\n而且血迹也明显指出\n诺亚是在那里遇害的。"
+  },
+  {
+    "dialogue_id": "0101Trial08_Leia021",
+    "speaker": "Leia",
+    "japanese_text": "むしろそれができないという証拠が山程あるはずだよ。どうしてキミはそんな浅はかな疑いを私に向けたんだい？",
+    "chinese_text": "证明做不到的证据反而要多少有多少。\n为什么你要把这么漏洞百出的怀疑\n安在我的头上？"
+  },
+  {
+    "dialogue_id": "0101Trial08_Ema031",
+    "speaker": "Ema",
+    "japanese_text": "そ、それは……。",
+    "chinese_text": "这、这个……"
+  },
+  {
+    "dialogue_id": "0101Trial08_Leia022",
+    "speaker": "Leia",
+    "japanese_text": "まるで根拠のない事を言って議論を煙に巻こうとしている犯人みたいじゃないか！……私には、そう見えるよ。",
+    "chinese_text": "在我看来，你就是在用一些无凭无据的主张\n搞乱这场讨论……\n简直就像是凶手才会做的事！"
+  },
+  {
+    "dialogue_id": "0101Trial08_Ema032",
+    "speaker": "Ema",
+    "japanese_text": "（やってないことまで自白させられちゃいそう……！）",
+    "chinese_text": "（我差点就承认自己没做过的事了……！）"
+  },
+  {
+    "dialogue_id": "0101Trial08_Ema033",
+    "speaker": "Ema",
+    "japanese_text": "（レイアちゃん、有名人なだけあって堂々としてる……。　変な発言しちゃうと、逆に反撃されちゃうかも……）",
+    "chinese_text": "（蕾雅真不愧是有名人，摆出了一副坦荡的态度……\n如果我说了奇怪的话，搞不好会被她反击……）"
+  },
+  {
+    "dialogue_id": "0101Trial08_Meruru013",
+    "speaker": "Meruru",
+    "japanese_text": "エマさん……レイアさんが嘘をついてたとしても、暴くのは難しいかもしれません。",
+    "chinese_text": "艾玛小姐……就算蕾雅小姐她在说谎，\n我们好像也没办法轻易揭穿她。"
+  },
+  {
+    "dialogue_id": "0101Trial08_Ema034",
+    "speaker": "Ema",
+    "japanese_text": "そ、そうだよね……。じゃあ犯人の手がかりは……。",
+    "chinese_text": "是、是啊……\n那凶手的线索该怎么办……"
+  },
+  {
+    "dialogue_id": "0101Trial08_Meruru014",
+    "speaker": "Meruru",
+    "japanese_text": "逆に……【ハンナさん以外が犯人だとしたら】と考えてみてはどうでしょうか？",
+    "chinese_text": "那……我们反过来，以【如果凶手不是汉娜】\n为前提再思考看看，你觉得怎么样？"
+  },
+  {
+    "dialogue_id": "0101Trial08_Meruru015",
+    "speaker": "Meruru",
+    "japanese_text": "ありえない可能性を除けば……【ありえたかもしれない可能性】が残ります。もしかすると、それが真実かもしれません……。",
+    "chinese_text": "排除掉说不通的可能性……\n剩下的就是【说得通的可能性】。\n说不定，那就是真相……"
+  },
+  {
+    "dialogue_id": "0101Trial08_Ema035",
+    "speaker": "Ema",
+    "japanese_text": "（【ありえたかもしれない可能性】……。　議論を進める為に、いろいろな可能性を　考えてみよう……！）",
+    "chinese_text": "（【说得通的可能性】……\n为了推进讨论，我们来思考一下\n其他各种各样的可能性吧……！）"
+  },
+  {
+    "dialogue_id": "0101Trial08_Ema036",
+    "speaker": "Ema",
+    "japanese_text": "……本当に塗料を越える必要ってあったのかな？",
+    "chinese_text": "……真的有必要绕过这摊颜料吗？"
+  },
+  {
+    "dialogue_id": "0101Trial08_Leia023",
+    "speaker": "Leia",
+    "japanese_text": "……それはどういうことだい？",
+    "chinese_text": "……什么意思？"
+  },
+  {
+    "dialogue_id": "0101Trial08_Ema037",
+    "speaker": "Ema",
+    "japanese_text": "たしかに外からこの部屋の中に足を踏み入れたら、足跡が残ってしまう……だから犯人は床を踏んでいないはず……。",
+    "chinese_text": "如果是从外面走进房间，\n那的确会留下足迹……\n所以凶手应该没有踩到地板才对……"
+  },
+  {
+    "dialogue_id": "0101Trial08_Ema038",
+    "speaker": "Ema",
+    "japanese_text": "……なら、部屋に入らずに外から殺したっていう可能性があるんじゃないかな？",
+    "chinese_text": "……那么，会不会有凶手不进房间\n就能杀人的可能性呢？"
+  },
+  {
+    "dialogue_id": "0101Trial08_Ema039",
+    "speaker": "Ema",
+    "japanese_text": "それなら宙に浮かなくったって犯行は可能だよ。",
+    "chinese_text": "这样一来，就算不会飞在半空中也能作案。"
+  },
+  {
+    "dialogue_id": "0101Trial08_Sherry001",
+    "speaker": "Sherry",
+    "japanese_text": "……でもでも、ボウガンは使えなかったんですよ～？矢を撃てないのに、どうやって外から突き刺すんですか？",
+    "chinese_text": "……可是可是，弩枪已经用不了了哦～？\n既然射不了箭，那要怎样从外面\n刺伤她呢？"
+  },
+  {
+    "dialogue_id": "0101Trial08_Leia024",
+    "speaker": "Leia",
+    "japanese_text": "……その通り。私にはノアくんに矢を刺すことなんてできやしないんだ。",
+    "chinese_text": "……是啊。\n我不可能用箭刺伤诺亚。"
+  },
+  {
+    "dialogue_id": "0101Trial08_Leia025",
+    "speaker": "Leia",
+    "japanese_text": "犯人はその手で、直接ノアくんの胸に矢を突き立てた。……空を飛んでね。そうとしか考えられないよ。",
+    "chinese_text": "凶手是亲手直接将箭捅进了诺亚的胸口。\n……当然了，凶手是飞在空中的。\n除此之外别无可能。"
+  },
+  {
+    "dialogue_id": "0101Trial08_Hanna001",
+    "speaker": "Hanna",
+    "japanese_text": "だから！ わたくしじゃねーですわ！",
+    "chinese_text": "我就说了！不是我杀的！"
+  },
+  {
+    "dialogue_id": "0101Trial08_Ema040",
+    "speaker": "Ema",
+    "japanese_text": "（……何かボクたち……　根本的な【勘違い】をしているような……）",
+    "chinese_text": "（……感觉……\n我们好像陷入了一个根本上的【误会】……）"
+  },
+  {
+    "dialogue_id": "0101Trial08_Meruru016",
+    "speaker": "Meruru",
+    "japanese_text": "……で、では……もう一度、詳しい状況を話して……整理してみるというのはどうでしょうか……？",
+    "chinese_text": "……那、那么……\n我们重新讨论详细的状况……\n重新作一次整理，怎么样……？"
+  },
+  {
+    "dialogue_id": "0101Trial08_Ema041",
+    "speaker": "Ema",
+    "japanese_text": "詳しい状況……？",
+    "chinese_text": "详细的状况……？"
+  },
+  {
+    "dialogue_id": "0101Trial08_Nanoka002",
+    "speaker": "Nanoka",
+    "japanese_text": "……私もその意見に賛成するわ。殺害の状況は事件の重要なポイント……納得できるまで、話し合うべきね。",
+    "chinese_text": "……我也同意。\n杀害状况是这次案件的重点……\n应该讨论到所有人都认可才对。"
+  },
+  {
+    "dialogue_id": "0101Trial08_Sherry002",
+    "speaker": "Sherry",
+    "japanese_text": "私も賛成です！では事件を再現するつもりで、状況を整理してみましょうか！",
+    "chinese_text": "我也赞成！\n那我们就试着重现整起案件，\n整理一下状况吧！"
+  }
+]

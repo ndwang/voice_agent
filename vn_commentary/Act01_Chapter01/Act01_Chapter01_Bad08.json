@@ -1,0 +1,434 @@
+[
+  {
+    "dialogue_id": "0101Bad08_Narrative001",
+    "speaker": "[Narrative]",
+    "japanese_text": "少し考える素振りを見せた。",
+    "chinese_text": "做出若有所思的表情。"
+  },
+  {
+    "dialogue_id": "0101Bad08_Ema001",
+    "speaker": "Ema",
+    "japanese_text": "うーん……どうしようかな。",
+    "chinese_text": "唔……怎么办呢……"
+  },
+  {
+    "dialogue_id": "0101Bad08_Sherry001",
+    "speaker": "Sherry",
+    "japanese_text": "おや、何か気になるんですか？",
+    "chinese_text": "哎呀，有什么在意的地方吗？"
+  },
+  {
+    "dialogue_id": "0101Bad08_Ema002",
+    "speaker": "Ema",
+    "japanese_text": "うん。でも別に手がかりじゃないと思う、というか……。そもそも、ボクの気のせいかもしれないし。",
+    "chinese_text": "嗯。不过我也觉得这里没什么线索了，只不过……\n这说不定，只是我的错觉……"
+  },
+  {
+    "dialogue_id": "0101Bad08_Narrative002",
+    "speaker": "[Narrative]",
+    "japanese_text": "歯切れの悪いエマの返答に、シェリーは首を傾げた。",
+    "chinese_text": "面对艾玛言辞闪烁的回答，雪莉不禁感到疑问。"
+  },
+  {
+    "dialogue_id": "0101Bad08_Sherry002",
+    "speaker": "Sherry",
+    "japanese_text": "どういうことです？",
+    "chinese_text": "怎么回事？"
+  },
+  {
+    "dialogue_id": "0101Bad08_Ema003",
+    "speaker": "Ema",
+    "japanese_text": "えっと、笑わないでね？実はここに入ってからずっと――。",
+    "chinese_text": "呃，我说了你别笑我哦？\n其实进来这里之后，我就一直觉得——"
+  },
+  {
+    "dialogue_id": "0101Bad08_Leia001",
+    "speaker": "Leia",
+    "japanese_text": "エマくん、シェリーくん。我々は他の場所を調べに行くよ。",
+    "chinese_text": "艾玛、雪莉，\n我们准备去其他地方调查了。"
+  },
+  {
+    "dialogue_id": "0101Bad08_Margo001",
+    "speaker": "Margo",
+    "japanese_text": "フフ、何か手がかりが見つけられるといいわね。",
+    "chinese_text": "呵呵，希望你们能找到线索哦。"
+  },
+  {
+    "dialogue_id": "0101Bad08_Ema004",
+    "speaker": "Ema",
+    "japanese_text": "あ、う、うん、そうだね……。",
+    "chinese_text": "啊，嗯，好……"
+  },
+  {
+    "dialogue_id": "0101Bad08_Narrative003",
+    "speaker": "[Narrative]",
+    "japanese_text": "レイア、マーゴ、ミリアの３人が、シャワールームを後にする。",
+    "chinese_text": "蕾雅、玛格、米莉亚三人\n离开了淋浴房。"
+  },
+  {
+    "dialogue_id": "0101Bad08_Narrative004",
+    "speaker": "[Narrative]",
+    "japanese_text": "それからすぐ入れ替わるように、ハンナが戻ってきた。",
+    "chinese_text": "她们前脚刚走，\n汉娜后脚就回来了。"
+  },
+  {
+    "dialogue_id": "0101Bad08_Ema005",
+    "speaker": "Ema",
+    "japanese_text": "ハンナちゃん、大丈夫……？",
+    "chinese_text": "汉娜，你没事吧！？"
+  },
+  {
+    "dialogue_id": "0101Bad08_Hanna001",
+    "speaker": "Hanna",
+    "japanese_text": "……べっつに？ ぜんぜん平気ですわよ。で、ここに何か手がかりはあったんですの？",
+    "chinese_text": "……没事哦？一点都没事。\n所以，你们有找到什么线索吗？"
+  },
+  {
+    "dialogue_id": "0101Bad08_Sherry003",
+    "speaker": "Sherry",
+    "japanese_text": "今のところは特に……。でも、エマさんが何か気になることがあるそうで。",
+    "chinese_text": "现在还没有……\n不过，艾玛说她有些在意的地方。"
+  },
+  {
+    "dialogue_id": "0101Bad08_Ema006",
+    "speaker": "Ema",
+    "japanese_text": "あ、うん……。だけど、ほんとに笑わないでね？ えっと……。",
+    "chinese_text": "啊，嗯……\n所以，你们听了真的别取笑我哦？我说……"
+  },
+  {
+    "dialogue_id": "0101Bad08_Narrative005",
+    "speaker": "[Narrative]",
+    "japanese_text": "シェリーとハンナに念を押してから、エマはおずおずと切り出した。",
+    "chinese_text": "向雪莉和汉娜再次强调后，\n艾玛怯怯说道。"
+  },
+  {
+    "dialogue_id": "0101Bad08_Ema007",
+    "speaker": "Ema",
+    "japanese_text": "ここに入ってからずっと、誰かに見られてるような気がしない……？",
+    "chinese_text": "你们不感觉，从进来这里之后\n就一直有人在盯着我们吗……？"
+  },
+  {
+    "dialogue_id": "0101Bad08_Narrative006",
+    "speaker": "[Narrative]",
+    "japanese_text": "ハンナとシェリーが、顔を見合わせる。それからエマに向き直り、同時に首を横に振った。",
+    "chinese_text": "汉娜和雪莉对视了一下，\n然后转头面向艾玛，同时摇了摇头。"
+  },
+  {
+    "dialogue_id": "0101Bad08_Sherry004",
+    "speaker": "Sherry",
+    "japanese_text": "うーん、私は感じませんね。",
+    "chinese_text": "唔，我没感觉呢。"
+  },
+  {
+    "dialogue_id": "0101Bad08_Hanna002",
+    "speaker": "Hanna",
+    "japanese_text": "わたくしも、まったく。",
+    "chinese_text": "我也是，完全没感觉。"
+  },
+  {
+    "dialogue_id": "0101Bad08_Ema008",
+    "speaker": "Ema",
+    "japanese_text": "そっか……。やっぱり気のせいなのかな……。",
+    "chinese_text": "是吗……\n到底是我的错觉吗……"
+  },
+  {
+    "dialogue_id": "0101Bad08_Narrative007",
+    "speaker": "[Narrative]",
+    "japanese_text": "３人は誰からともなく、シャワールームを見渡す。",
+    "chinese_text": "三人开始环视整个淋浴房。"
+  },
+  {
+    "dialogue_id": "0101Bad08_Sherry005",
+    "speaker": "Sherry",
+    "japanese_text": "もしや、どこかにカメラでも仕掛けられているとか……？",
+    "chinese_text": "难不成，有某处设置了\n摄像头……？"
+  },
+  {
+    "dialogue_id": "0101Bad08_Hanna003",
+    "speaker": "Hanna",
+    "japanese_text": "げっ！？ もしそうだとしたら最低ですわっ！",
+    "chinese_text": "呃！？如果是真的话，那也太差劲了！"
+  },
+  {
+    "dialogue_id": "0101Bad08_Narrative008",
+    "speaker": "[Narrative]",
+    "japanese_text": "シェリーとハンナが、あちこち念入りに探り始める。エマも同じように辺りを調べていると――",
+    "chinese_text": "雪莉和汉娜开始四处认真搜索，\n艾玛也开始认真调查周边——"
+  },
+  {
+    "dialogue_id": "0101Bad08_Narrative009",
+    "speaker": "[Narrative]",
+    "japanese_text": "少女の笑い声が響いた。",
+    "chinese_text": "此时，忽然响起少女的笑声。"
+  },
+  {
+    "dialogue_id": "0101Bad08_Ema009",
+    "speaker": "Ema",
+    "japanese_text": "え……！？ 何、今の声……。",
+    "chinese_text": "欸……！？刚刚的声音是怎么回事……"
+  },
+  {
+    "dialogue_id": "0101Bad08_Narrative010",
+    "speaker": "[Narrative]",
+    "japanese_text": "明らかに、シェリーとハンナではない。声は、シャワー内に備え付けられた鏡の方から聞こえたような気がした。",
+    "chinese_text": "那明显不是雪莉或汉娜的声音。\n声音似乎是从房内设置的\n镜子处发出的。"
+  },
+  {
+    "dialogue_id": "0101Bad08_Narrative011",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマはおそるおそる、割れた鏡を覗き込む。",
+    "chinese_text": "艾玛战战兢兢地望向碎掉的镜子。"
+  },
+  {
+    "dialogue_id": "0101Bad08_Narrative012",
+    "speaker": "[Narrative]",
+    "japanese_text": "ひび割れていた鏡に、さらに亀裂が走った。",
+    "chinese_text": "而碎裂的镜子上，裂痕竟开始了生长。"
+  },
+  {
+    "dialogue_id": "0101Bad08_Ema010",
+    "speaker": "Ema",
+    "japanese_text": "ひっ！？",
+    "chinese_text": "噫！？"
+  },
+  {
+    "dialogue_id": "0101Bad08_Narrative013",
+    "speaker": "[Narrative]",
+    "japanese_text": "鏡の中から、誰かの両腕がエマめがけて伸びてくる。",
+    "chinese_text": "从镜子中，有人朝艾玛伸出了双手。"
+  },
+  {
+    "dialogue_id": "0101Bad08_Ema011",
+    "speaker": "Ema",
+    "japanese_text": "（な、なに……！？）",
+    "chinese_text": "（怎、怎么回事……！？）"
+  },
+  {
+    "dialogue_id": "0101Bad08_Narrative014",
+    "speaker": "[Narrative]",
+    "japanese_text": "細く青白い腕が、エマの肩をがっちりと掴む。",
+    "chinese_text": "纤细而苍白的手，紧紧抓住艾玛的双肩。"
+  },
+  {
+    "dialogue_id": "0101Bad08_Narrative015",
+    "speaker": "[Narrative]",
+    "japanese_text": "――あなたなら波長が合うと思った。",
+    "chinese_text": "——我想你的能量频率应该和我一样。"
+  },
+  {
+    "dialogue_id": "0101Bad08_Narrative016",
+    "speaker": "[Narrative]",
+    "japanese_text": "綺麗な桜色の髪……",
+    "chinese_text": "漂亮的粉色头发……"
+  },
+  {
+    "dialogue_id": "0101Bad08_Narrative017",
+    "speaker": "[Narrative]",
+    "japanese_text": "――ねえ、わたしにちょうだい？",
+    "chinese_text": "——我说，你可以把它让给我吗？"
+  },
+  {
+    "dialogue_id": "0101Bad08_Ema012",
+    "speaker": "Ema",
+    "japanese_text": "！？",
+    "chinese_text": "！？"
+  },
+  {
+    "dialogue_id": "0101Bad08_Narrative018",
+    "speaker": "[Narrative]",
+    "japanese_text": "そのままエマは声を上げる間すらなく、鏡の中に引きずり込まれた――",
+    "chinese_text": "艾玛没来得及发出声音，\n便被拉进了镜子里面——"
+  },
+  {
+    "dialogue_id": "0101Bad08_Hanna004",
+    "speaker": "Hanna",
+    "japanese_text": "今の音、なんですの？",
+    "chinese_text": "刚刚的声音是什么？"
+  },
+  {
+    "dialogue_id": "0101Bad08_Sherry006",
+    "speaker": "Sherry",
+    "japanese_text": "エマさんが何か落としたんじゃないでしょうか？",
+    "chinese_text": "艾玛是不是掉了什么东西呀？"
+  },
+  {
+    "dialogue_id": "0101Bad08_Narrative019",
+    "speaker": "[Narrative]",
+    "japanese_text": "ハンナとシェリーが、音のした方へ向かう。",
+    "chinese_text": "汉娜和雪莉向发出声音的方向走去。"
+  },
+  {
+    "dialogue_id": "0101Bad08_Sherry007",
+    "speaker": "Sherry",
+    "japanese_text": "エマさん？……あれ、いませんね。",
+    "chinese_text": "艾玛？\n……哎呀，人不在。"
+  },
+  {
+    "dialogue_id": "0101Bad08_Hanna005",
+    "speaker": "Hanna",
+    "japanese_text": "そこ、スマホが落ちてますわ。",
+    "chinese_text": "那里好像掉了手机欸。"
+  },
+  {
+    "dialogue_id": "0101Bad08_Narrative020",
+    "speaker": "[Narrative]",
+    "japanese_text": "ハンナが指さした先、タイルの上にスマホが転がっていた。",
+    "chinese_text": "顺着汉娜手指方向看去，\n能看到一部手机掉在了地上。"
+  },
+  {
+    "dialogue_id": "0101Bad08_Sherry008",
+    "speaker": "Sherry",
+    "japanese_text": "ふむ……。さっきの物音は、これが落ちた時のものでしょうか？",
+    "chinese_text": "唔……刚刚的声音\n会不会是手机掉下来的声音呢？"
+  },
+  {
+    "dialogue_id": "0101Bad08_Narrative021",
+    "speaker": "[Narrative]",
+    "japanese_text": "口にしながら、シェリーがスマホを拾い上げる。",
+    "chinese_text": "说着，雪莉捡起了手机。"
+  },
+  {
+    "dialogue_id": "0101Bad08_Hanna006",
+    "speaker": "Hanna",
+    "japanese_text": "それ、エマさんのなんですの？",
+    "chinese_text": "那是艾玛的手机吗？"
+  },
+  {
+    "dialogue_id": "0101Bad08_Sherry009",
+    "speaker": "Sherry",
+    "japanese_text": "あれ？ 電源が入りませんね……。",
+    "chinese_text": "哎呀？开不了机呢……"
+  },
+  {
+    "dialogue_id": "0101Bad08_Narrative022",
+    "speaker": "[Narrative]",
+    "japanese_text": "落ちた時に、壊れてしまったのかもしれない。",
+    "chinese_text": "手机似乎是掉下来的时候摔坏了。"
+  },
+  {
+    "dialogue_id": "0101Bad08_Hanna007",
+    "speaker": "Hanna",
+    "japanese_text": "というか、エマさんはどこに消えたんですの！？",
+    "chinese_text": "说来，艾玛到底跑哪里去了啊！？"
+  },
+  {
+    "dialogue_id": "0101Bad08_Sherry010",
+    "speaker": "Sherry",
+    "japanese_text": "謎ですねえ。どこかに隠し扉があるとか……？",
+    "chinese_text": "不知道呢。会不会哪里有暗门……？"
+  },
+  {
+    "dialogue_id": "0101Bad08_Ema013",
+    "speaker": "Ema",
+    "japanese_text": "シェリーちゃん！ ハンナちゃん！ボクはここだよ！ お願い気付いて！！",
+    "chinese_text": "雪莉！汉娜！\n我在这里！求你们快注意到我！！"
+  },
+  {
+    "dialogue_id": "0101Bad08_Narrative023",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマは【鏡の向こう側】にいるシェリーとハンナに、大声で呼びかけた。だが、エマの叫びは２人に届かない。",
+    "chinese_text": "艾玛向【镜子另一侧】的\n雪莉和汉娜大声呼救。\n但是，她的声音传不到两人的耳中。"
+  },
+  {
+    "dialogue_id": "0101Bad08_Ema014",
+    "speaker": "Ema",
+    "japanese_text": "ど、どうなってるの……？ここって、もしかして鏡の中の世界とか……？",
+    "chinese_text": "怎、怎么一回事……？\n这里难道是镜子里面的世界……？"
+  },
+  {
+    "dialogue_id": "0101Bad08_Narrative024",
+    "speaker": "[Narrative]",
+    "japanese_text": "シェリーとハンナは鏡の向こうのシャワールームで、どこかに隠し扉はないかと探し回っている。",
+    "chinese_text": "雪莉和汉娜在镜子另一侧的淋浴房\n搜索着暗门。"
+  },
+  {
+    "dialogue_id": "0101Bad08_Narrative025",
+    "speaker": "[Narrative]",
+    "japanese_text": "彼女たちの背後に現れた人影を目にして、エマは戸惑いの声を上げた。",
+    "chinese_text": "而当艾玛看见在她们背后出现的人影时，\n不禁发出了疑惑的声音。"
+  },
+  {
+    "dialogue_id": "0101Bad08_Ema015",
+    "speaker": "Ema",
+    "japanese_text": "う、嘘……なんで！？",
+    "chinese_text": "假、假的吧……怎么会！？"
+  },
+  {
+    "dialogue_id": "0101Bad08_Hanna008",
+    "speaker": "Hanna",
+    "japanese_text": "あら、エマさん？もう、どこに消えてたんですの？",
+    "chinese_text": "哎呀，艾玛？\n真是的，你跑哪里去了？"
+  },
+  {
+    "dialogue_id": "0101Bad08_Sherry011",
+    "speaker": "Sherry",
+    "japanese_text": "突然いなくなるから、びっくりしちゃいましたよ！",
+    "chinese_text": "你突然不见，\n吓了我们一跳！"
+  },
+  {
+    "dialogue_id": "0101Bad08_EmaFake001",
+    "speaker": "EmaFake",
+    "japanese_text": "ごめんごめん。外で物音がした気がして、見に行ってたんだ。でも、ボクの気のせいだったみたい。",
+    "chinese_text": "抱歉抱歉。\n我听见外面有些动静，就去看了一下。\n不过，好像是我的错觉。"
+  },
+  {
+    "dialogue_id": "0101Bad08_Narrative026",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマの姿をした【なにか】が、シェリー、ハンナと会話している。",
+    "chinese_text": "有着艾玛外貌的【某物】\n正在跟雪莉和汉娜二人对话。"
+  },
+  {
+    "dialogue_id": "0101Bad08_Ema016",
+    "speaker": "Ema",
+    "japanese_text": "な、なんで……誰なの、あれ？ボクはここにいるのに……！？",
+    "chinese_text": "为、为什么……那是谁？\n明明我在这里……！？"
+  },
+  {
+    "dialogue_id": "0101Bad08_EmaFake002",
+    "speaker": "EmaFake",
+    "japanese_text": "そろそろ行こっか。",
+    "chinese_text": "我们该走啦。"
+  },
+  {
+    "dialogue_id": "0101Bad08_Hanna009",
+    "speaker": "Hanna",
+    "japanese_text": "そうですわね。ここにはもう、何もなさそうですし。",
+    "chinese_text": "嗯。\n这里也没什么值得调查的地方了。"
+  },
+  {
+    "dialogue_id": "0101Bad08_Sherry012",
+    "speaker": "Sherry",
+    "japanese_text": "あ、そうだ。スマホが落ちてたんですけど、これエマさんのじゃありませんか？",
+    "chinese_text": "啊，对了。这里掉了一部手机，\n是不是艾玛你的？"
+  },
+  {
+    "dialogue_id": "0101Bad08_Narrative027",
+    "speaker": "[Narrative]",
+    "japanese_text": "シェリーとハンナが、エマの姿をした【それ】と連れ立ってシャワールームを後にしようとする。",
+    "chinese_text": "雪莉和汉娜，准备和有着艾玛外貌的【那个东西】\n离开淋浴房。"
+  },
+  {
+    "dialogue_id": "0101Bad08_Ema017",
+    "speaker": "Ema",
+    "japanese_text": "２人とも待って！ それはボクじゃない！ボクはこっちだよ！",
+    "chinese_text": "你们两个等一下！那个不是我！\n我在这里！"
+  },
+  {
+    "dialogue_id": "0101Bad08_Narrative028",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマの訴えもむなしく、３人は鏡の前から去っていく。",
+    "chinese_text": "艾玛的诉说不过是徒劳，三人离开了镜子前。"
+  },
+  {
+    "dialogue_id": "0101Bad08_Narrative029",
+    "speaker": "[Narrative]",
+    "japanese_text": "去り際に一度だけ、エマの姿をした【なにか】は本物のエマがいる鏡を振り向いた。",
+    "chinese_text": "在离去前，有着艾玛外貌的【某物】\n短暂地回过头来看向真正的艾玛所在的镜子。"
+  },
+  {
+    "dialogue_id": "0101Bad08_EmaFake003",
+    "speaker": "EmaFake",
+    "japanese_text": "ふふふ……。",
+    "chinese_text": "呵呵呵……"
+  }
+]

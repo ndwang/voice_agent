@@ -1,0 +1,884 @@
+[
+  {
+    "dialogue_id": "0101Adv35_Narrative001",
+    "speaker": "[Narrative]",
+    "japanese_text": "蓮見レイアが城ケ崎ノアを殺した犯人だった――。",
+    "chinese_text": "莲见蕾雅是\n杀害了城崎诺亚的凶手——"
+  },
+  {
+    "dialogue_id": "0101Adv35_Narrative002",
+    "speaker": "[Narrative]",
+    "japanese_text": "その事実を突き止めた清々しさはなく、やるせない思いがエマの胸を衝く。",
+    "chinese_text": "艾玛没有感受到揭发事实的快意，\n一团苦闷翻滚在她的内心当中。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Narrative003",
+    "speaker": "[Narrative]",
+    "japanese_text": "当然、少女たちによる魔女を選出する投票は、全員一致でレイアとなった。",
+    "chinese_text": "毫无疑问，在选定魔女的投票中，\n少女们全体一致投给了蕾雅。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Ema001",
+    "speaker": "Ema",
+    "japanese_text": "なんで……？なんでノアちゃんを殺したの？",
+    "chinese_text": "为什么……？\n为什么你要杀了诺亚？"
+  },
+  {
+    "dialogue_id": "0101Adv35_Ema002",
+    "speaker": "Ema",
+    "japanese_text": "わかんないよ……ノアちゃんは何も悪いことなんてしていなかったじゃないか……！ なんで！？",
+    "chinese_text": "我不明白……\n诺亚她根本没做错什么吧……！为什么！？"
+  },
+  {
+    "dialogue_id": "0101Adv35_Narrative004",
+    "speaker": "[Narrative]",
+    "japanese_text": "悲痛な声でエマが問うと、レイアは微かに笑みを浮かべた。",
+    "chinese_text": "面对艾玛悲声发问，\n蕾雅露出了一丝笑容。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Leia001",
+    "speaker": "Leia",
+    "japanese_text": "ノアくんの同室であるアンアンくんが倒れただろう？それで私は、彼女を守らないとと思ってしまった。",
+    "chinese_text": "跟诺亚同一间房的安安不是晕倒了吗？\n所以我就想，我必须要保护安安。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Ema003",
+    "speaker": "Ema",
+    "japanese_text": "あ……。",
+    "chinese_text": "啊……"
+  },
+  {
+    "dialogue_id": "0101Adv35_Narrative005",
+    "speaker": "[Narrative]",
+    "japanese_text": "カラースプレーの刺激臭で、アンアンはずいぶん参ってしまっていた。",
+    "chinese_text": "对于喷漆的刺鼻气味，\n安安毫无办法。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Narrative006",
+    "speaker": "[Narrative]",
+    "japanese_text": "医務室で青ざめて眠るアンアンの姿は、エマも何度か見かけた。",
+    "chinese_text": "艾玛也多次看到过\n安安脸色惨白躺在医务室里的样子。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Leia002",
+    "speaker": "Leia",
+    "japanese_text": "私はか弱きものを守らなくてはという思いに、突き動かされてしまったようだ。",
+    "chinese_text": "看来，我想要守护弱小的感情，\n最终驱使我犯下了命案。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Ema004",
+    "speaker": "Ema",
+    "japanese_text": "（でも、ノアちゃんだって同じように　この牢屋敷に捕まった同士なのに……　なんだか、もやもやする……）",
+    "chinese_text": "（可是，诺亚她明明跟我们一样，\n都是抓进来这座监牢的……\n总感觉有些纠结……）"
+  },
+  {
+    "dialogue_id": "0101Adv35_Narrative007",
+    "speaker": "[Narrative]",
+    "japanese_text": "釈然としない思いから、エマは胸元をぎゅっと押さえる。",
+    "chinese_text": "心中苦闷无法消解，\n艾玛紧紧按住了胸口。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Narrative008",
+    "speaker": "[Narrative]",
+    "japanese_text": "レイアは犯人だと言い当てられて観念したのか、諦めたような微笑みは、清々しさすらあった。",
+    "chinese_text": "被指证为凶手的蕾雅似乎放弃了挣扎，\n露出了认命的微笑，甚至给人一种坦荡的感觉。"
+  },
+  {
+    "dialogue_id": "0101Adv35_AnAn001",
+    "speaker": "AnAn",
+    "japanese_text": "――……ちが……っ",
+    "chinese_text": "——……不对……"
+  },
+  {
+    "dialogue_id": "0101Adv35_Narrative009",
+    "speaker": "[Narrative]",
+    "japanese_text": "そこで声を上げたのは、アンアンだった。青ざめ、茫然とレイアを見ている。",
+    "chinese_text": "这时，安安说话了。\n她脸色惨白，茫然地望着蕾雅。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Ema005",
+    "speaker": "Ema",
+    "japanese_text": "アンアンちゃん……？一体何を……？",
+    "chinese_text": "安安……？\n她要做什么……？"
+  },
+  {
+    "dialogue_id": "0101Adv35_Leia003",
+    "speaker": "Leia",
+    "japanese_text": "――もういいよ。やめるんだ、アンアンくん。",
+    "chinese_text": "——没关系的。\n安安，不用再说了。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Narrative010",
+    "speaker": "[Narrative]",
+    "japanese_text": "レイアは静かに言い放った。",
+    "chinese_text": "蕾雅安静地说道。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Leia004",
+    "speaker": "Leia",
+    "japanese_text": "私のことを庇ってくれなくてもいいんだ。もう覚悟は決めたよ。",
+    "chinese_text": "你不用给我求情。\n我已经做好心理准备了。"
+  },
+  {
+    "dialogue_id": "0101Adv35_AnAn002",
+    "speaker": "AnAn",
+    "japanese_text": "……っ",
+    "chinese_text": "……"
+  },
+  {
+    "dialogue_id": "0101Adv35_Narrative011",
+    "speaker": "[Narrative]",
+    "japanese_text": "アンアンの片目から、ひとしずくの涙が頬を伝い落ちていく。",
+    "chinese_text": "一滴泪珠\n从安安的露出的单眼中滑落。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Leia005",
+    "speaker": "Leia",
+    "japanese_text": "でも、これだけはわかってほしいんだ。私はただ、アンアンくんを守りたい一心で……。",
+    "chinese_text": "不过，我至少希望你可以明白，\n我只是，纯粹想要保护你……"
+  },
+  {
+    "dialogue_id": "0101Adv35_Narrative012",
+    "speaker": "[Narrative]",
+    "japanese_text": "アンアンは首をふるふると横に振った。",
+    "chinese_text": "安安用力摇了摇头。"
+  },
+  {
+    "dialogue_id": "0101Adv35_AnAn003",
+    "speaker": "AnAn",
+    "japanese_text": "ちが……ちがう。レイア、貴様は間違っている。",
+    "chinese_text": "不对……不是这样的。蕾雅，你搞错了。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Leia006",
+    "speaker": "Leia",
+    "japanese_text": "え……？",
+    "chinese_text": "欸……？"
+  },
+  {
+    "dialogue_id": "0101Adv35_AnAn004",
+    "speaker": "AnAn",
+    "japanese_text": "わがはいは、弱くない……。ノアが、わがはいに絵をくれた……。",
+    "chinese_text": "吾辈，才不弱小……\n诺亚她，给了吾辈一幅画……"
+  },
+  {
+    "dialogue_id": "0101Adv35_AnAn005",
+    "speaker": "AnAn",
+    "japanese_text": "お守り、だと……。",
+    "chinese_text": "她说，是护身符……"
+  },
+  {
+    "dialogue_id": "0101Adv35_Ema006",
+    "speaker": "Ema",
+    "japanese_text": "（あ――）",
+    "chinese_text": "（啊——）"
+  },
+  {
+    "dialogue_id": "0101Adv35_Narrative013",
+    "speaker": "[Narrative]",
+    "japanese_text": "アンアンのスケッチブックには、蝶の絵が描いてあった。",
+    "chinese_text": "安安的素描本上，\n画有一张蝴蝶的绘画。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Narrative014",
+    "speaker": "[Narrative]",
+    "japanese_text": "それは、ノアが描いたものだ。エマの脳裏に、過去の出来事が呼び起こされる。",
+    "chinese_text": "那是诺亚画的。\n过去发生的事浮现在艾玛的脑海中。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Noah001",
+    "speaker": "Noah",
+    "japanese_text": "……びっくりさせちゃったのかな？",
+    "chinese_text": "……诺亚是不是吓到大家了？"
+  },
+  {
+    "dialogue_id": "0101Adv35_Ema007",
+    "speaker": "Ema",
+    "japanese_text": "う、うん。そうみたい。",
+    "chinese_text": "嗯……大概是的。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Noah002",
+    "speaker": "Noah",
+    "japanese_text": "じゃあ、今度はアンアンちゃんが喜んでくれる絵を描くね！",
+    "chinese_text": "那，下次诺亚要给安安\n画她会感到开心的画！"
+  },
+  {
+    "dialogue_id": "0101Adv35_Ema008",
+    "speaker": "Ema",
+    "japanese_text": "（何度か具合が悪くなっていたけど、　アンアンちゃんとノアちゃんが　同じ部屋で過ごした時間もあるはず）",
+    "chinese_text": "（安安之前虽然好几次身体变得不舒服，\n可是她和诺亚应该\n还是有一段时间在房间里交流过才对）"
+  },
+  {
+    "dialogue_id": "0101Adv35_Ema009",
+    "speaker": "Ema",
+    "japanese_text": "（きっとその時、ノアちゃんは　アンアンちゃんに喜んでもらおうと――）",
+    "chinese_text": "（那幅画肯定是当时，\n诺亚她——）"
+  },
+  {
+    "dialogue_id": "0101Adv35_Ema010",
+    "speaker": "Ema",
+    "japanese_text": "（スケッチブックに、絵を描いたんだ……）",
+    "chinese_text": "（为了哄安安开心，才画在素描本上的……）"
+  },
+  {
+    "dialogue_id": "0101Adv35_AnAn006",
+    "speaker": "AnAn",
+    "japanese_text": "ノアは、蝶の絵だけは魔法をコントロールさせて自由に描けると言っていた。",
+    "chinese_text": "诺亚说，她只有蝴蝶\n可以用魔法控制，自由画出来。"
+  },
+  {
+    "dialogue_id": "0101Adv35_AnAn007",
+    "speaker": "AnAn",
+    "japanese_text": "だから、おまじない、だと――。",
+    "chinese_text": "所以，她说，要施一道魔法——"
+  },
+  {
+    "dialogue_id": "0101Adv35_AnAn008",
+    "speaker": "AnAn",
+    "japanese_text": "『ノア！　わがはいのスケッチブックに勝手にラクガキしたな！』",
+    "chinese_text": "『诺亚！\n你是不是在吾辈的素描本上乱画了！』"
+  },
+  {
+    "dialogue_id": "0101Adv35_Noah003",
+    "speaker": "Noah",
+    "japanese_text": "あ、うん。えへへえ、のあね、蝶の絵は得意なんだよ。",
+    "chinese_text": "啊，嗯。\n欸嘿嘿，诺亚，很擅长画蝴蝶的画哦。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Noah004",
+    "speaker": "Noah",
+    "japanese_text": "これだけは、のあの魔法、コントロールできるみたい。",
+    "chinese_text": "好像只有这个，诺亚可以用魔法控制。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Noah005",
+    "speaker": "Noah",
+    "japanese_text": "蝶になぁれって念じると、ちゃーんと全部蝶の絵になってくれるんだぁ。",
+    "chinese_text": "只要想着，“变成蝴蝶吧”，\n就顺利地全部变成蝴蝶的画了。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Noah006",
+    "speaker": "Noah",
+    "japanese_text": "赤いのが怖かったんだよね？だからね、のあが魔法をかけたよ。",
+    "chinese_text": "记得你害怕红色的东西，对吗？\n所以，诺亚施放了魔法哦。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Noah007",
+    "speaker": "Noah",
+    "japanese_text": "赤色はみーんな、みーんな蝶の絵になあれって。",
+    "chinese_text": "让所有的红色，\n全部都变成蝴蝶的画～"
+  },
+  {
+    "dialogue_id": "0101Adv35_Noah008",
+    "speaker": "Noah",
+    "japanese_text": "これでもう、怖くないよね。",
+    "chinese_text": "这样，你就不会害怕了吧。"
+  },
+  {
+    "dialogue_id": "0101Adv35_AnAn009",
+    "speaker": "AnAn",
+    "japanese_text": "…………。",
+    "chinese_text": "…………"
+  },
+  {
+    "dialogue_id": "0101Adv35_AnAn010",
+    "speaker": "AnAn",
+    "japanese_text": "お守りに、スケッチブックにも、描いてくれたんだ。わがはいが怖い目に遭わないようにって。",
+    "chinese_text": "她说，为了不让吾辈遇上可怕的事，\n在我的素描本上也画了蝴蝶，当作是护身符。"
+  },
+  {
+    "dialogue_id": "0101Adv35_AnAn011",
+    "speaker": "AnAn",
+    "japanese_text": "流れる血まで、みんなが怖がらないようにって……蝶になったんだ……！",
+    "chinese_text": "就连流的血，也为了让大家不感到害怕……\n都变成蝴蝶了……！"
+  },
+  {
+    "dialogue_id": "0101Adv35_Narrative015",
+    "speaker": "[Narrative]",
+    "japanese_text": "アンアンはぽろぽろと涙をこぼす。久々に声を発したのか、その声はたどたどしく枯れている。",
+    "chinese_text": "安安流泪不止。\n或许是因为很久没开口说话，\n她的声音断断续续，十分沙哑。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Narrative016",
+    "speaker": "[Narrative]",
+    "japanese_text": "それでも、なんとか伝えようと必死で訴えかけてきている。",
+    "chinese_text": "即便如此，她仍拼命地诉说着，\n为了讲出她的心声。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Margo001",
+    "speaker": "Margo",
+    "japanese_text": "蝶の意味は、不死、不滅――。",
+    "chinese_text": "蝴蝶的内涵是，不死、不灭——"
+  },
+  {
+    "dialogue_id": "0101Adv35_Margo002",
+    "speaker": "Margo",
+    "japanese_text": "ノアちゃんのダイイングメッセージは、私たちに当てていたのかもしれないわね。",
+    "chinese_text": "诺亚的死亡讯息，\n或许我们已经都收到了。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Margo003",
+    "speaker": "Margo",
+    "japanese_text": "みんなどうか、死なないでって。",
+    "chinese_text": "那就是“请大家一定要活着”。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Narrative017",
+    "speaker": "[Narrative]",
+    "japanese_text": "マーゴがぽつりと呟いた言葉は、少女たちの胸に重々しく刺さったのだろう。全員が、哀しげに俯いた。",
+    "chinese_text": "玛格轻声的自言自语\n似乎深深刺痛了少女们的心。\n所有人都悲伤地低下了头。"
+  },
+  {
+    "dialogue_id": "0101Adv35_AnAn012",
+    "speaker": "AnAn",
+    "japanese_text": "……ノアが最期に見たのは、おそらくレイアの姿、だろう。",
+    "chinese_text": "……诺亚死前看到的，\n可能，就是蕾雅的身影。"
+  },
+  {
+    "dialogue_id": "0101Adv35_AnAn013",
+    "speaker": "AnAn",
+    "japanese_text": "ノアは、刺されてもなお、レイアを怖がらせないように血を、蝶の絵に変えたんじゃないのか。",
+    "chinese_text": "诺亚她就算被刺伤了……\n也还是为了不让蕾雅感到害怕，\n把血……变成了蝴蝶的画，不是吗。"
+  },
+  {
+    "dialogue_id": "0101Adv35_AnAn014",
+    "speaker": "AnAn",
+    "japanese_text": "本当にみんなのことを守ろうとしていたのは、ノアの方、じゃないのか……！",
+    "chinese_text": "真正想要保护大家的，\n是诺亚才对，不是吗……！"
+  },
+  {
+    "dialogue_id": "0101Adv35_Leia007",
+    "speaker": "Leia",
+    "japanese_text": "――！",
+    "chinese_text": "——！"
+  },
+  {
+    "dialogue_id": "0101Adv35_Narrative018",
+    "speaker": "[Narrative]",
+    "japanese_text": "レイアが衝撃によろめき、その場に膝をついた。",
+    "chinese_text": "受到冲击的蕾雅没有站稳，\n当场跪倒在地。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Narrative019",
+    "speaker": "[Narrative]",
+    "japanese_text": "みんなが怖がらないように。どうか、死なないように。",
+    "chinese_text": "大家请不要感到害怕。\n请一定要活着。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Narrative020",
+    "speaker": "[Narrative]",
+    "japanese_text": "それは、囚人の少女たち全員に当てられたノアからの心からの願いと、魔法。",
+    "chinese_text": "这就是，赠予全体囚犯少女的，\n诺亚发自真心的希望和魔法。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Leia008",
+    "speaker": "Leia",
+    "japanese_text": "そんな、そんな、私は――。",
+    "chinese_text": "怎么会，我，竟然——"
+  },
+  {
+    "dialogue_id": "0101Adv35_Narrative021",
+    "speaker": "[Narrative]",
+    "japanese_text": "レイアは目を見開き、力なく膝を折る。",
+    "chinese_text": "蕾雅睁大了眼睛，无力地跪坐着。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Warden001",
+    "speaker": "Warden",
+    "japanese_text": "あっ、お話終わりました？時間も押してますし、そろそろ進行したいんですが……。",
+    "chinese_text": "啊，你们讲完了吗？\n时间也拖很久了，\n是时候该继续了……"
+  },
+  {
+    "dialogue_id": "0101Adv35_Warden002",
+    "speaker": "Warden",
+    "japanese_text": "各自のスマホにボタンが表示されていると思うので、全員がそれを押したら処刑執行スタートします。",
+    "chinese_text": "现在大家的手机上应该都出现了一颗按钮，\n只要所有人按下它，就会开始执行处刑了。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Ema011",
+    "speaker": "Ema",
+    "japanese_text": "えっ、ボ、ボクらが押すの……？",
+    "chinese_text": "欸，要、要我们按吗……？"
+  },
+  {
+    "dialogue_id": "0101Adv35_Warden003",
+    "speaker": "Warden",
+    "japanese_text": "ええ。そのように決まっていますのでお願いします～。ぐーっと長く押していただけますと……。",
+    "chinese_text": "嗯。规矩是这么定的，\n有劳大家啦～\n只要用力～按住它……"
+  },
+  {
+    "dialogue_id": "0101Adv35_Ema012",
+    "speaker": "Ema",
+    "japanese_text": "（そ、そんな、ボクらが　レイアちゃんを処刑する　ボタンを押すなんて……）",
+    "chinese_text": "（怎、怎会这样，\n竟然要我们\n按下处死蕾雅的按钮……）"
+  },
+  {
+    "dialogue_id": "0101Adv35_Narrative022",
+    "speaker": "[Narrative]",
+    "japanese_text": "少女たちは青ざめながら、次々に手元のボタンを押していく。",
+    "chinese_text": "脸色煞白的少女们\n各自按下了手中的按钮。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Narrative023",
+    "speaker": "[Narrative]",
+    "japanese_text": "激しい動悸に襲われながら、エマもまたボタンの上に手を添えた。",
+    "chinese_text": "伴着一阵激烈的心跳，\n艾玛也把手放在了按钮上。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Warden004",
+    "speaker": "Warden",
+    "japanese_text": "はい！ ではこれより、魔女の処刑を執行します～。",
+    "chinese_text": "好了！那么，\n现在开始执行对魔女的刑罚～！"
+  },
+  {
+    "dialogue_id": "0101Adv35_Narrative024",
+    "speaker": "[Narrative]",
+    "japanese_text": "ゴクチョーの宣言と共に、何かの仕掛けが作動しはじめた。",
+    "chinese_text": "随着典狱长一声令下，\n某道机关启动了。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Narrative025",
+    "speaker": "[Narrative]",
+    "japanese_text": "どこからか歯車の回転音が聞こえ、中央の台座がわずかに揺れた。",
+    "chinese_text": "接着，从某处传来了齿轮的转动声，\n中央的底座颤动了一下。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Narrative026",
+    "speaker": "[Narrative]",
+    "japanese_text": "少女たちの注目が集まる中、床が開き、台座がゆっくりと下降していく。",
+    "chinese_text": "在少女们的目光注视下，地板开了一个洞，\n底座缓缓地往下降。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Narrative027",
+    "speaker": "[Narrative]",
+    "japanese_text": "そして、もともとあった台座と入れ替わる形で新たな台座が現れた。",
+    "chinese_text": "然后，一个新的底座出现，\n替换掉了原来的底座。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Narrative028",
+    "speaker": "[Narrative]",
+    "japanese_text": "大がかりな仕掛けと共に現れた台座に、エマたちは一様に唖然とし、言葉を失っていた。",
+    "chinese_text": "面对和大型机关一同出现的底座，\n众人都陷入了沉默，哑口无言。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Ema013",
+    "speaker": "Ema",
+    "japanese_text": "（これが……処刑台……？）",
+    "chinese_text": "（这是……处刑台……？）"
+  },
+  {
+    "dialogue_id": "0101Adv35_Narrative029",
+    "speaker": "[Narrative]",
+    "japanese_text": "台座の中央には、西洋風の天使像が現れていた。",
+    "chinese_text": "底座中央出现了一尊西洋风格的天使像。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Narrative030",
+    "speaker": "[Narrative]",
+    "japanese_text": "細部まで精巧に彫られた天使像は、柔らかな表情を浮かべている。",
+    "chinese_text": "雕刻精巧，细节丰富的天使像\n展示出一副安详的表情。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Narrative031",
+    "speaker": "[Narrative]",
+    "japanese_text": "翼を広げ、空を見上げる様は見る者に神聖さと安らぎをもたらす、まるで慈愛と平和の象徴――",
+    "chinese_text": "它双翼张开，仰望天空的神态\n散发出一道神圣和安宁的气息。\n这简直就是仁慈与和平的象征——"
+  },
+  {
+    "dialogue_id": "0101Adv35_Warden005",
+    "speaker": "Warden",
+    "japanese_text": "蓮見レイアさんには、この中に入ってもらいます。",
+    "chinese_text": "接下来就要\n把莲见蕾雅关进这里面咯。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Alisa001",
+    "speaker": "Alisa",
+    "japanese_text": "ハッ、天使の中に？ 綺麗になあれってか。嫌味かよ。",
+    "chinese_text": "哈，天使里面？是想挖苦她，要她变得和天使一样圣洁吗。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Margo004",
+    "speaker": "Margo",
+    "japanese_text": "なんだか悪趣味ね。",
+    "chinese_text": "感觉有些恶趣味。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Narrative032",
+    "speaker": "[Narrative]",
+    "japanese_text": "天使像を見てもどういった処刑がなされるのか、エマたちには想像もつかない。",
+    "chinese_text": "艾玛等人望着天使像，\n难以想像接下来会实施怎样的刑罚。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Narrative033",
+    "speaker": "[Narrative]",
+    "japanese_text": "ただ、レイアは先ほどよりももっと、ひどく青ざめていた。ガクガクと震えてすらいる。",
+    "chinese_text": "只不过，蕾雅的脸色比之前\n变得更加惨白了，甚至浑身在发抖。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Ema014",
+    "speaker": "Ema",
+    "japanese_text": "（レイアちゃん……？）",
+    "chinese_text": "（蕾雅……？）"
+  },
+  {
+    "dialogue_id": "0101Adv35_Warden006",
+    "speaker": "Warden",
+    "japanese_text": "あ、他の人たちは動かないでくださいね。邪魔や介入をすれば、看守がその者も同様に断罪します。",
+    "chinese_text": "啊，其他人请不要动哦。\n如果有人妨碍或者介入，看守将对其同样定罪。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Narrative034",
+    "speaker": "[Narrative]",
+    "japanese_text": "ゴクチョーが翼でばさりと合図し、入口付近に立っていた看守が動きはじめる。",
+    "chinese_text": "典狱长拍了拍翅膀发出指示，\n站在入口处的看守便开始行动了。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Narrative035",
+    "speaker": "[Narrative]",
+    "japanese_text": "看守がレイアの席へと近寄り、彼女をがっちりと捕まえてステージ上へと引きずっていく。",
+    "chinese_text": "看守来到蕾雅的位置处，\n将她牢牢架住，拖到行刑的舞台上。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Leia009",
+    "speaker": "Leia",
+    "japanese_text": "ま、待ってくれ……！い、いやだ！ 【あれ】の中には入りたくない！",
+    "chinese_text": "等、等一下……！\n不、不要啊！我不要进【这个】里面啊！"
+  },
+  {
+    "dialogue_id": "0101Adv35_Narrative036",
+    "speaker": "[Narrative]",
+    "japanese_text": "レイアは遅すぎる抵抗をはじめた。看守に捕まって、じたばたともがく。",
+    "chinese_text": "蕾雅开始了为时已晚的反抗。\n明明被看守抓住，却仍挣扎着手脚。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Narrative037",
+    "speaker": "[Narrative]",
+    "japanese_text": "少女たちは席に座ったまま、鎮痛な面持ちで一連の流れをただ見守ることしかできない。",
+    "chinese_text": "坐在席位上的各位少女无计可施，\n只能以沉痛的表情注视着事态的发展。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Leia010",
+    "speaker": "Leia",
+    "japanese_text": "や、やめてくれ！ 本当に嫌なんだ！！裁判のやり直しを要求する！",
+    "chinese_text": "住、住手啊！我不要被处死啊！！\n我要求重新审判！"
+  },
+  {
+    "dialogue_id": "0101Adv35_Coco001",
+    "speaker": "Coco",
+    "japanese_text": "バカじゃねーの。何度やってもお前は魔女だよ。人を殺したんだから。",
+    "chinese_text": "你是不是傻。\n既然人是你杀的，不管审几次都一样——你就是魔女。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Leia011",
+    "speaker": "Leia",
+    "japanese_text": "だって知らなかったんだ！ ノアくんとアンアンくんが同室で、うまくやっていけそうだったなんて。",
+    "chinese_text": "因为我不知道啊！我不知道诺亚和安安\n竟然因为同住一间房关系变好了……"
+  },
+  {
+    "dialogue_id": "0101Adv35_Leia012",
+    "speaker": "Leia",
+    "japanese_text": "知っていたらノアくんを殺さなかった！私はただみんなを守りたかっただけなんだ！",
+    "chinese_text": "我知道就不会杀了诺亚了！\n我只是想保护大家而已！"
+  },
+  {
+    "dialogue_id": "0101Adv35_Narrative038",
+    "speaker": "[Narrative]",
+    "japanese_text": "どんなに全力であがいても敵わず、看守は容赦なくレイアを引きずる。",
+    "chinese_text": "看守毫不留情地拖拽着蕾雅，\n她拼尽全力都无法挣脱。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Narrative039",
+    "speaker": "[Narrative]",
+    "japanese_text": "そして――天使像が中央から割れて、開いていく。そこであちこちから悲鳴が漏れた。",
+    "chinese_text": "接着——天使像的中间生出一条缝隙，打开了盖子。\n这时，四周传出了惊叫声。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Hanna001",
+    "speaker": "Hanna",
+    "japanese_text": "ひっ……。",
+    "chinese_text": "噫……"
+  },
+  {
+    "dialogue_id": "0101Adv35_Sherry001",
+    "speaker": "Sherry",
+    "japanese_text": "これはまた、痛そうですね……。",
+    "chinese_text": "这个是真的很痛耶……"
+  },
+  {
+    "dialogue_id": "0101Adv35_Narrative040",
+    "speaker": "[Narrative]",
+    "japanese_text": "少女たちの多くがあまりの光景に目を逸らした。エマも同様だった。",
+    "chinese_text": "面对这悲惨的场面，许多少女不禁挪开了视线。\n艾玛也一样。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Narrative041",
+    "speaker": "[Narrative]",
+    "japanese_text": "天使像の内部には大量の細長く鋭い針がついていて――これを閉じられたら、中にいる人間は全身串刺しになる。",
+    "chinese_text": "天使像的内部布满了大量纤长的利刺——\n只要关上盖子，\n里面的人就会被无数根针同时刺穿。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Ema015",
+    "speaker": "Ema",
+    "japanese_text": "（こ、これに入れって言うの……！？）",
+    "chinese_text": "（这、这是要把她关在里面吗……！？）"
+  },
+  {
+    "dialogue_id": "0101Adv35_Narrative042",
+    "speaker": "[Narrative]",
+    "japanese_text": "拘束されたレイアが、その中に入れられる。",
+    "chinese_text": "无法自由行动的蕾雅被放进天使像之中。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Narrative043",
+    "speaker": "[Narrative]",
+    "japanese_text": "針数はえげつないが、棺の中は美しく青い薔薇が、ぎっしりと敷き詰められていた。",
+    "chinese_text": "除了那些可怕的刺，\n石棺中还满满当当地塞满了美丽的蓝蔷薇。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Narrative044",
+    "speaker": "[Narrative]",
+    "japanese_text": "天使像の内部に入れられたレイアは、青い薔薇に囲まれ、恐怖で顔を引き攣らせていながらも、凄惨な美しさがあった。",
+    "chinese_text": "被放在天使像内部的蕾雅，被蓝蔷薇簇拥着，\n呈现出了凄惨的美——\n即使她的表情因恐惧而变得扭曲。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Margo005",
+    "speaker": "Margo",
+    "japanese_text": "外見は天使像だけど、処刑方法はアイアンメイデンということよね。",
+    "chinese_text": "长得像一尊天使像，\n可刑具的内部却是“铁处女”啊。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Margo006",
+    "speaker": "Margo",
+    "japanese_text": "やっぱり悪趣味だわ。",
+    "chinese_text": "真够恶趣味的。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Narrative045",
+    "speaker": "[Narrative]",
+    "japanese_text": "どこかうっとりしたようにマーゴが漏らす。",
+    "chinese_text": "有些神情恍惚的玛格不禁说道。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Leia013",
+    "speaker": "Leia",
+    "japanese_text": "いやだ！ お願い！ お願いします！これを閉めないで！！ やだあぁぁぁ！！",
+    "chinese_text": "不要啊！求求你！我求你了！\n不要把它关上啊！！我不要啊啊啊啊！！"
+  },
+  {
+    "dialogue_id": "0101Adv35_Narrative046",
+    "speaker": "[Narrative]",
+    "japanese_text": "レイアが命乞いのようなものを始めたのも、無理がないと感じた。",
+    "chinese_text": "蕾雅拼命求饶。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Ema016",
+    "speaker": "Ema",
+    "japanese_text": "（あの像が閉じたら、レイアちゃんは……）",
+    "chinese_text": "（只要关上天使像，蕾雅就……）"
+  },
+  {
+    "dialogue_id": "0101Adv35_Narrative047",
+    "speaker": "[Narrative]",
+    "japanese_text": "想像しただけで戦慄し、吐き気が込み上げてくる。",
+    "chinese_text": "只是想像了一下，艾玛便不禁颤抖了起来，\n甚至还泛起了一阵呕吐感。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Leia014",
+    "speaker": "Leia",
+    "japanese_text": "お願いだから他の処刑方法にして！！閉めないでください！！",
+    "chinese_text": "求你换其他方式处刑！！\n不要把我关进里面啊！！"
+  },
+  {
+    "dialogue_id": "0101Adv35_Leia015",
+    "speaker": "Leia",
+    "japanese_text": "他の処刑方法にしよう！！これはダメだ！！ だってみんなに見えないじゃないか！！",
+    "chinese_text": "用其他方式处刑好吗！！\n这个真的不行！！因为这样大家不是都看不见我吗！！"
+  },
+  {
+    "dialogue_id": "0101Adv35_Ema017",
+    "speaker": "Ema",
+    "japanese_text": "（みんなに、見えない……？）",
+    "chinese_text": "（大家都，看不到……？）"
+  },
+  {
+    "dialogue_id": "0101Adv35_Narrative048",
+    "speaker": "[Narrative]",
+    "japanese_text": "その悲痛な叫びに、エマはほんの少し違和感を抱いた。それは他の少女たちも同様だったらしい。",
+    "chinese_text": "艾玛在这道悲痛的呐喊中感到了些许不自然。\n看来其他人也有同样的疑惑。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Coco002",
+    "speaker": "Coco",
+    "japanese_text": "――やっぱね。みんなを守りたかったなんて、嘘ばーっか。ノアを殺した動機、わかっちゃった。",
+    "chinese_text": "——我就知道。什么想保护大家，根本都是假话。\n我知道你杀死诺亚的动机了。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Narrative049",
+    "speaker": "[Narrative]",
+    "japanese_text": "ココは、邪悪な笑みを浮かべて処刑台に立たされるレイアを見据えた。",
+    "chinese_text": "可可露出险恶的笑容，\n紧盯着在处刑台上的蕾雅。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Coco003",
+    "speaker": "Coco",
+    "japanese_text": "あんたがノアを殺したのは、自分が一番目立たない状況が許せなかったからでしょ？",
+    "chinese_text": "你会杀死诺亚，\n就是因为你最受人瞩目的地位被打破了，对不对？"
+  },
+  {
+    "dialogue_id": "0101Adv35_Leia016",
+    "speaker": "Leia",
+    "japanese_text": "！",
+    "chinese_text": "！"
+  },
+  {
+    "dialogue_id": "0101Adv35_Sherry002",
+    "speaker": "Sherry",
+    "japanese_text": "ああ、なるほど！ 【バルーン】の方が動機でしたか！",
+    "chinese_text": "哦，原来如此！【气球】才是动机！"
+  },
+  {
+    "dialogue_id": "0101Adv35_Narrative050",
+    "speaker": "[Narrative]",
+    "japanese_text": "ぽん、とシェリーが手を打った。",
+    "chinese_text": "雪莉“啪”地拍了下手。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Sherry003",
+    "speaker": "Sherry",
+    "japanese_text": "知名度的には、芸能人のレイアさんより、圧倒的に上ですもんね！",
+    "chinese_text": "她的知名度\n比当艺人的蕾雅还要高多了！"
+  },
+  {
+    "dialogue_id": "0101Adv35_Sherry004",
+    "speaker": "Sherry",
+    "japanese_text": "何せノアさんは、世界で有名なアーティストです。ああ、やっと殺害動機がしっくり来ました！",
+    "chinese_text": "毕竟诺亚是世界有名的艺术家。\n啊，终于找到有力的杀人动机了！"
+  },
+  {
+    "dialogue_id": "0101Adv35_Leia017",
+    "speaker": "Leia",
+    "japanese_text": "ちが、ちが……。",
+    "chinese_text": "不、不对……"
+  },
+  {
+    "dialogue_id": "0101Adv35_Narrative051",
+    "speaker": "[Narrative]",
+    "japanese_text": "レイアは涙目になって、がくがくと震えている。",
+    "chinese_text": "蕾雅两眼泪汪汪，\n身体不停颤抖着。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Narrative052",
+    "speaker": "[Narrative]",
+    "japanese_text": "王子様の仮面を容赦なく剥がされていき――",
+    "chinese_text": "她那副王子大人的假面，被毫不留情的揭下——"
+  },
+  {
+    "dialogue_id": "0101Adv35_Narrative053",
+    "speaker": "[Narrative]",
+    "japanese_text": "彼女は今までに見たことないほど、情けない表情になっていた。",
+    "chinese_text": "露出了，\n从未见过的可怜表情。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Narrative054",
+    "speaker": "[Narrative]",
+    "japanese_text": "その顔に亀裂が入り、手の爪がありえないスピードで伸びていく。",
+    "chinese_text": "她的脸生出了丝丝裂缝，\n手指正以超出常理的速度伸长着。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Ema018",
+    "speaker": "Ema",
+    "japanese_text": "（レイアちゃん、魔女化してる…！？）",
+    "chinese_text": "（蕾雅开始魔女化了……！？）"
+  },
+  {
+    "dialogue_id": "0101Adv35_Narrative055",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマたちは、蓮見レイアの深層に踏み込んでしまった。",
+    "chinese_text": "艾玛一众，已经踏入了莲见蕾雅的深层领域。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Narrative056",
+    "speaker": "[Narrative]",
+    "japanese_text": "――彼女の禁忌に、触れてしまったのだ。",
+    "chinese_text": "——触碰了，她的禁忌。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Leia018",
+    "speaker": "Leia",
+    "japanese_text": "あ、ああ、あ――。",
+    "chinese_text": "啊、啊啊、啊——"
+  },
+  {
+    "dialogue_id": "0101Adv35_Leia019",
+    "speaker": "Leia",
+    "japanese_text": "ああそうだ、認めるよ！私は目立ちたかった！",
+    "chinese_text": "啊，对，我承认！\n我想变得引人注目！"
+  },
+  {
+    "dialogue_id": "0101Adv35_Leia020",
+    "speaker": "Leia",
+    "japanese_text": "一番目立たないといけなかった！だから、許せなかった！",
+    "chinese_text": "我一定要是最显眼的那个！\n所以，我没法原谅她！"
+  },
+  {
+    "dialogue_id": "0101Adv35_Leia021",
+    "speaker": "Leia",
+    "japanese_text": "城ケ崎ノアに、舞台の主役を奪われて、あいつを殺さないといけないと思ったんだよ！",
+    "chinese_text": "城崎诺亚把舞台的主角抢走了，\n所以我就想，一定要杀了她！"
+  },
+  {
+    "dialogue_id": "0101Adv35_Leia022",
+    "speaker": "Leia",
+    "japanese_text": "あいつが邪魔だったんだよ！",
+    "chinese_text": "她真是太碍事了！"
+  },
+  {
+    "dialogue_id": "0101Adv35_Ema019",
+    "speaker": "Ema",
+    "japanese_text": "（ああ、そうか――レイアちゃんは　串刺しになるのが嫌なんじゃなくて……）",
+    "chinese_text": "（啊，原来是这样——蕾雅她并不是\n不愿意被针刺惨死……）"
+  },
+  {
+    "dialogue_id": "0101Adv35_Leia023",
+    "speaker": "Leia",
+    "japanese_text": "これを閉めたら、みんなが私のこと、見れなくなっちゃうじゃないか！！",
+    "chinese_text": "要是被关进这里面，大家不就\n看不到我了吗！！"
+  },
+  {
+    "dialogue_id": "0101Adv35_Narrative057",
+    "speaker": "[Narrative]",
+    "japanese_text": "見られないことが、嫌だった。",
+    "chinese_text": "而是不愿意让大家看不见她。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Leia024",
+    "speaker": "Leia",
+    "japanese_text": "もっと私を見てくれよ！私だけを見てよ！ やだぁぁぁ！！",
+    "chinese_text": "多注视我好吗！\n求你们只看我！不要啊啊啊！！"
+  },
+  {
+    "dialogue_id": "0101Adv35_Narrative058",
+    "speaker": "[Narrative]",
+    "japanese_text": "その悲痛な叫びは、今までのものとまるで違う。",
+    "chinese_text": "悲痛的呐喊与之前截然不同。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Narrative059",
+    "speaker": "[Narrative]",
+    "japanese_text": "レイアの、本当の声に聞こえた。",
+    "chinese_text": "因为这是蕾雅深处的真实心声。"
+  },
+  {
+    "dialogue_id": "0101Adv35_Leia025",
+    "speaker": "Leia",
+    "japanese_text": "あぁぁぁぁぁ！！",
+    "chinese_text": "啊啊啊啊啊啊！！"
+  },
+  {
+    "dialogue_id": "0101Adv35_Narrative060",
+    "speaker": "[Narrative]",
+    "japanese_text": "悲鳴を閉じ込めるように、天使像が閉じられた。",
+    "chinese_text": "天使像合上了盖子，\n将她的惨叫声一同封印在其中。"
+  }
+]

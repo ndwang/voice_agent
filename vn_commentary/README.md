@@ -8,7 +8,7 @@ A standalone program that analyzes visual novel dialogues and generates contextu
 - **Full Chapter Context**: LLM receives all dialogues in the chapter for better understanding of plot and character development
 - **Smart Pacing**: Tracks reaction history and provides pacing feedback to avoid over-commenting or staying silent too long
 - **Chapter-Aware Processing**: Supports chapter boundaries with proper state management
-- **Configurable**: YAML-based configuration for LLM settings, context size, and output options
+- **Configurable**: YAML-based configuration for LLM settings and output options
 - **Reusable Components**: Leverages LLM providers and utilities from the main voice agent project
 - **Structured Output**: Returns JSON-formatted decisions with action (silent/react), reaction text, and reasoning
 
@@ -17,7 +17,6 @@ A standalone program that analyzes visual novel dialogues and generates contextu
 The system consists of several components:
 
 - **DialogueReader**: Loads and parses visual novel dialogues from JSON files
-- **ContextManager**: Maintains a sliding window of recent dialogues for context (legacy - chapter context now used)
 - **CommentaryAnalyzer**: Uses LLM to analyze dialogues with full chapter context and pacing awareness
   - Tracks current position in chapter
   - Monitors lines since last reaction
@@ -42,9 +41,6 @@ llm:
   model: gemini-2.5-flash
   api_key: null  # Or set GEMINI_API_KEY environment variable
   temperature: 0.7
-
-context:
-  max_context_size: 20  # Number of previous dialogues to keep
 
 output:
   log_level: INFO
@@ -209,15 +205,6 @@ Create a text file with your custom prompt and reference it in config:
 system_prompt_file: path/to/custom_prompt.txt
 ```
 
-### Adjusting Context Size
-
-Increase or decrease the number of previous dialogues kept in context:
-
-```yaml
-context:
-  max_context_size: 30  # Keep more context
-```
-
 ### Rate Limiting
 
 Add delay between API calls to avoid rate limits:
@@ -234,7 +221,6 @@ vn_commentary/
 ├── __init__.py              # Package initialization
 ├── models.py                # Pydantic models (Dialogue, CommentaryDecision, etc.)
 ├── dialogue_reader.py       # JSON dialogue loader
-├── context_manager.py       # Context window management
 ├── commentary_analyzer.py   # LLM-based analysis engine
 ├── main.py                  # Main driver program
 ├── config.yaml             # Configuration file
@@ -279,7 +265,6 @@ processing:
 If the system stays silent too often:
 - Adjust the system prompt to be more reactive
 - Lower the temperature for more deterministic decisions
-- Increase context size for better understanding
 
 ## License
 

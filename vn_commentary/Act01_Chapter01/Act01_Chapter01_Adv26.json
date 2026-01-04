@@ -1,0 +1,512 @@
+[
+  {
+    "dialogue_id": "0101Adv26_Narrative001",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマたち一行は、何より証拠を得られそうな死体のある現場へと向かった。",
+    "chinese_text": "艾玛一行人决定前往\n最有可能找到证据的尸体目击现场。"
+  },
+  {
+    "dialogue_id": "0101Adv26_Narrative002",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマの足取りは重たい。ノアの死体を直視したくない、という気持ちが大きいのだろう。",
+    "chinese_text": "艾玛的步伐十分沉重。\n或许是因为，她非常不愿意直视诺亚的尸体。"
+  },
+  {
+    "dialogue_id": "0101Adv26_Narrative003",
+    "speaker": "[Narrative]",
+    "japanese_text": "そんな中、シェリーはスキップしている。",
+    "chinese_text": "而此时，雪莉的步伐则是一蹦一跳的。"
+  },
+  {
+    "dialogue_id": "0101Adv26_Hanna001",
+    "speaker": "Hanna",
+    "japanese_text": "ちょっとあなた、神経どうかしてるんじゃありません？よくスキップなんかできますわね。",
+    "chinese_text": "我说你，是不是太过神经大条了？\n真亏你走路还能一蹦一跳的。"
+  },
+  {
+    "dialogue_id": "0101Adv26_Sherry001",
+    "speaker": "Sherry",
+    "japanese_text": "ええっ、私気遣いの子ですよぉ？学校でも、みんなが避けてるの察知して距離あけてましたもん。",
+    "chinese_text": "欸，我可是很会察言观色的哦？\n在学校里我知道大家都会避开我，所以我也会主动拉开距离哦。"
+  },
+  {
+    "dialogue_id": "0101Adv26_Hanna002",
+    "speaker": "Hanna",
+    "japanese_text": "ナチュラルにハブられてません？",
+    "chinese_text": "你这是明显被人孤立了欸？"
+  },
+  {
+    "dialogue_id": "0101Adv26_Sherry002",
+    "speaker": "Sherry",
+    "japanese_text": "そんなことないですって！みんな【妖精さん】って親しみを込めて呼んでくれてました！",
+    "chinese_text": "没这回事啦！\n大家都很亲切地喊我【小仙子】呢！"
+  },
+  {
+    "dialogue_id": "0101Adv26_Hanna003",
+    "speaker": "Hanna",
+    "japanese_text": "それ絶対良い意味じゃないですわ。",
+    "chinese_text": "那绝对不是什么正面称呼啦。"
+  },
+  {
+    "dialogue_id": "0101Adv26_Ema001",
+    "speaker": "Ema",
+    "japanese_text": "（こんな時だけど……　ハンナちゃんが少し元気を取り戻してくれて良かった）",
+    "chinese_text": "（虽然才刚有人过世……\n不过汉娜能稍微恢复精神，真是太好了）"
+  },
+  {
+    "dialogue_id": "0101Adv26_Narrative004",
+    "speaker": "[Narrative]",
+    "japanese_text": "２人のやり取りを横目に、エマはホッとしていた。",
+    "chinese_text": "看到她们两个在拌嘴的样子，艾玛感到有些暖心。"
+  },
+  {
+    "dialogue_id": "0101Adv26_Ema002",
+    "speaker": "Ema",
+    "japanese_text": "そういえば昨夜、ノアちゃんの部屋付近で、アリサちゃんを見かけたよね。",
+    "chinese_text": "说起来，昨天晚上\n我们在诺亚房间附近看到亚里沙了。"
+  },
+  {
+    "dialogue_id": "0101Adv26_Narrative005",
+    "speaker": "[Narrative]",
+    "japanese_text": "ふとエマが口にしたことで、シェリーが興味深げに身を乗り出した。",
+    "chinese_text": "听艾玛不经意地说到，\n雪莉非常感兴趣地插进了话题。"
+  },
+  {
+    "dialogue_id": "0101Adv26_Sherry003",
+    "speaker": "Sherry",
+    "japanese_text": "アリサさんは私と同室です。私たちは一番手前の部屋なので、奥に行く用事でもあったのでしょうか？",
+    "chinese_text": "亚里沙和我是同一间房的。我们的房间是最外面的那间，\n她走到里面是不是有别的事呢？"
+  },
+  {
+    "dialogue_id": "0101Adv26_Hanna004",
+    "speaker": "Hanna",
+    "japanese_text": "なんだか慌ててる様子にも見えましたわね……。",
+    "chinese_text": "我是感觉她看起来有点慌张……"
+  },
+  {
+    "dialogue_id": "0101Adv26_Ema003",
+    "speaker": "Ema",
+    "japanese_text": "う、うん。だからボクも、変だなって。",
+    "chinese_text": "嗯，我也是。感觉她有点奇怪。"
+  },
+  {
+    "dialogue_id": "0101Adv26_Sherry004",
+    "speaker": "Sherry",
+    "japanese_text": "とっても気になりますね～！それはぜひ、アリサさんに話を聞いてみたいですっ",
+    "chinese_text": "真令人在意耶～！\n看来很有必要找亚里沙问话了。"
+  },
+  {
+    "dialogue_id": "0101Adv26_Ema004",
+    "speaker": "Ema",
+    "japanese_text": "（アリサちゃんが、ノアちゃんを……？）",
+    "chinese_text": "（难道是亚里沙把诺亚给……？）"
+  },
+  {
+    "dialogue_id": "0101Adv26_Narrative006",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマはすぐに首を横に振った。",
+    "chinese_text": "艾玛马上否定了这个念头。"
+  },
+  {
+    "dialogue_id": "0101Adv26_Ema005",
+    "speaker": "Ema",
+    "japanese_text": "（決めつけはよくないよね。　できるだけ調査しよう）",
+    "chinese_text": "（单方面断定并不好。\n还是尽量先调查吧）"
+  },
+  {
+    "dialogue_id": "0101Adv26_Narrative007",
+    "speaker": "[Narrative]",
+    "japanese_text": "話しているうちに、エマたち一行はノアの房の前へと舞い戻ってきた。",
+    "chinese_text": "在聊着天的时候，\n艾玛一行人不知不觉走到了诺亚的牢房前。"
+  },
+  {
+    "dialogue_id": "0101Adv26_Ema006",
+    "speaker": "Ema",
+    "japanese_text": "（ノアちゃん……）",
+    "chinese_text": "（诺亚……）"
+  },
+  {
+    "dialogue_id": "0101Adv26_Narrative008",
+    "speaker": "[Narrative]",
+    "japanese_text": "調べるためにはしっかりと観察しなければいけない。エマは涙を堪え、ノアの房を見た。",
+    "chinese_text": "为了调查，必须认真仔细去观察。\n艾玛忍住泪水，开始观察诺亚的牢房内部。"
+  },
+  {
+    "dialogue_id": "0101Adv26_Narrative009",
+    "speaker": "[Narrative]",
+    "japanese_text": "冷たくなって、動かないノアの遺体は房内の中央に倒れている。",
+    "chinese_text": "冰凉的，再也不会动的诺亚的遗体，\n正躺在房内的正中间。"
+  },
+  {
+    "dialogue_id": "0101Adv26_Sherry005",
+    "speaker": "Sherry",
+    "japanese_text": "うーん、中に入れないのが辛いですね……とりあえず現場の写真を撮っておきましょうか。",
+    "chinese_text": "唔，没法进去里面太难办了……\n总之，先拍下现场的照片吧。"
+  },
+  {
+    "dialogue_id": "0101Adv26_Narrative010",
+    "speaker": "[Narrative]",
+    "japanese_text": "シェリーがスマホを取り出し、房内の撮影をはじめた。",
+    "chinese_text": "雪莉取出手机，\n开始拍摄房内的情况。"
+  },
+  {
+    "dialogue_id": "0101Adv26_Hanna005",
+    "speaker": "Hanna",
+    "japanese_text": "こんな残酷なものを撮影しようなんてよく思えますわね……。",
+    "chinese_text": "亏你能想得到\n把这么残忍的景象拍下来……"
+  },
+  {
+    "dialogue_id": "0101Adv26_Sherry006",
+    "speaker": "Sherry",
+    "japanese_text": "捜査の基本ですから！",
+    "chinese_text": "因为这是搜查的基础！"
+  },
+  {
+    "dialogue_id": "0101Adv26_Narrative011",
+    "speaker": "[Narrative]",
+    "japanese_text": "シェリーは胸を張ってから、ふと思いついたのか人差し指をぴんと立てた。",
+    "chinese_text": "雪莉神气地说道。然后她好像想到了什么似的，\n举起了食指说。"
+  },
+  {
+    "dialogue_id": "0101Adv26_Sherry007",
+    "speaker": "Sherry",
+    "japanese_text": "そういえば、私たちチャットアプリのお友だち登録していませんでしたよね。",
+    "chinese_text": "说来，我们在聊天APP上\n还没有添加好友耶。"
+  },
+  {
+    "dialogue_id": "0101Adv26_Sherry008",
+    "speaker": "Sherry",
+    "japanese_text": "このアプリでお友だち登録すれば、チャットだけじゃなくて通話も可能になりますし、画像を送りあうこともできるんですよ。",
+    "chinese_text": "在APP上添加了好友后，\n不仅可以传文字信息，还可以通话，\n也可以传图片哦。"
+  },
+  {
+    "dialogue_id": "0101Adv26_Ema007",
+    "speaker": "Ema",
+    "japanese_text": "へぇ、そうなんだ……！",
+    "chinese_text": "欸，这样啊……！"
+  },
+  {
+    "dialogue_id": "0101Adv26_Hanna006",
+    "speaker": "Hanna",
+    "japanese_text": "わたくしたちが普段使っているチャットツールと同じですわね。それなら……。",
+    "chinese_text": "和我们平常用的聊天工具基本一样呢。\n那……"
+  },
+  {
+    "dialogue_id": "0101Adv26_Narrative012",
+    "speaker": "[Narrative]",
+    "japanese_text": "慣れた様子でシェリーとハンナが友だち登録をさっさと終えて、エマの方へと向き直る。",
+    "chinese_text": "雪莉和汉娜熟练地将对方添加为好友后，\n转过头面向艾玛。"
+  },
+  {
+    "dialogue_id": "0101Adv26_Ema008",
+    "speaker": "Ema",
+    "japanese_text": "あ、え、えっと……。",
+    "chinese_text": "啊、呃、那个……"
+  },
+  {
+    "dialogue_id": "0101Adv26_Ema009",
+    "speaker": "Ema",
+    "japanese_text": "（どうしよう、やり方がわからない……　ボク、もともと持ってた自分のスマホも　友だち０人だったし……！）",
+    "chinese_text": "（怎么办，我不知道怎么弄……\n我用我原来的手机都\n从没添加过好友……！）"
+  },
+  {
+    "dialogue_id": "0101Adv26_Narrative013",
+    "speaker": "[Narrative]",
+    "japanese_text": "もたつき、冷や汗をかきながらシェリーとハンナに教えてもらってエマはなんとか友だち登録を終える。",
+    "chinese_text": "艾玛不知所措，直冒冷汗。\n好在有雪莉和汉娜教她，\n艾玛总算成功添加了好友。"
+  },
+  {
+    "dialogue_id": "0101Adv26_Sherry009",
+    "speaker": "Sherry",
+    "japanese_text": "これで私とエマさん、ハンナさんはいつでも連絡が取り合えます！",
+    "chinese_text": "这下子，我和艾玛，还有汉娜\n就可以随时联络了！"
+  },
+  {
+    "dialogue_id": "0101Adv26_Ema010",
+    "speaker": "Ema",
+    "japanese_text": "う、うん。メルルちゃんとも後で繋がっておかなきゃね。",
+    "chinese_text": "嗯。之后也得跟梅露露加一下好友。"
+  },
+  {
+    "dialogue_id": "0101Adv26_Narrative014",
+    "speaker": "[Narrative]",
+    "japanese_text": "早速シェリーが、エマたちのスマホに画像を送る。",
+    "chinese_text": "雪莉很快就向她们两个\n传了一张图片。"
+  },
+  {
+    "dialogue_id": "Toast_001",
+    "speaker": "[Narrative]",
+    "japanese_text": "魔女図鑑 更新…",
+    "chinese_text": "魔女图鉴 更新…"
+  },
+  {
+    "dialogue_id": "0101Adv26_Ema011",
+    "speaker": "Ema",
+    "japanese_text": "このフルーツの写真は……？",
+    "chinese_text": "这张水果的照片是……？"
+  },
+  {
+    "dialogue_id": "0101Adv26_Sherry010",
+    "speaker": "Sherry",
+    "japanese_text": "ああそれは昨日撮ったんです！なんとなく記念になるかなって！",
+    "chinese_text": "哎呀，这个是我昨天拍的！\n总感觉应该纪念一下！"
+  },
+  {
+    "dialogue_id": "0101Adv26_Hanna007",
+    "speaker": "Hanna",
+    "japanese_text": "なんの記念ですの……。",
+    "chinese_text": "这是要纪念什么东西啊……"
+  },
+  {
+    "dialogue_id": "0101Adv26_Narrative015",
+    "speaker": "[Narrative]",
+    "japanese_text": "画像のやり取りを終え、３人は実際の死体現場の観察を続ける。",
+    "chinese_text": "讲完了图片的话题，\n三人继续观察现实里的尸体目击现场。"
+  },
+  {
+    "dialogue_id": "0101Adv26_Sherry011",
+    "speaker": "Sherry",
+    "japanese_text": "床が真っ白に塗られているのは、ノアさんがスプレーを使用したからですよね。",
+    "chinese_text": "地板是一片纯白色，\n这是用诺亚用喷漆弄的，对吧。"
+  },
+  {
+    "dialogue_id": "0101Adv26_Ema012",
+    "speaker": "Ema",
+    "japanese_text": "うん、ノアちゃんは新しくまた何かを描くって言ってた。そのために一旦、白くしたんじゃないかな。",
+    "chinese_text": "嗯，诺亚说她要重新画其他东西。\n所以我猜，她才会把地板先弄成白色的。"
+  },
+  {
+    "dialogue_id": "0101Adv26_Narrative016",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマは念のため、鉄格子に手を差し入れ、届く範囲の白い塗料を触ってみる。",
+    "chinese_text": "以防万一，艾玛把手伸进了铁栅栏内，\n在摸得到的范围内触碰了一下白色的颜料。"
+  },
+  {
+    "dialogue_id": "0101Adv26_Ema013",
+    "speaker": "Ema",
+    "japanese_text": "（既に乾いてる。　やっぱり昨夜のうちに、ノアちゃんが塗ったんだ）",
+    "chinese_text": "（颜料已经干了。\n我就说肯定是诺亚昨晚涂的）"
+  },
+  {
+    "dialogue_id": "0101Adv26_Sherry012",
+    "speaker": "Sherry",
+    "japanese_text": "それにしてもこれは足跡がついたら一目瞭然ですね。そしてノアさんの周辺に足跡はなし、と。",
+    "chinese_text": "既然如此，如果有足迹的话就会相当明显呢。\n但诺亚身边都没看到足迹。"
+  },
+  {
+    "dialogue_id": "0101Adv26_Sherry013",
+    "speaker": "Sherry",
+    "japanese_text": "宙に浮き上がってノアさんに近付かないと、殺せませんね！",
+    "chinese_text": "那么，不飞在半空中接近诺亚，\n就没法把她杀死耶！"
+  },
+  {
+    "dialogue_id": "0101Adv26_Hanna008",
+    "speaker": "Hanna",
+    "japanese_text": "…………。",
+    "chinese_text": "…………"
+  },
+  {
+    "dialogue_id": "0101Adv26_Narrative017",
+    "speaker": "[Narrative]",
+    "japanese_text": "鉄格子で中が見えるとはいえ、その隙間は手を通せる程度でしかない。",
+    "chinese_text": "虽然可以透过铁栅栏看到内部，\n但是它的缝隙并不宽，最多只能让手伸进去。"
+  },
+  {
+    "dialogue_id": "0101Adv26_Narrative018",
+    "speaker": "[Narrative]",
+    "japanese_text": "そしてノアの遺体は室内中央にある。近付かないと殺害は無理だと思われた。",
+    "chinese_text": "而诺亚的遗体在室内的中间位置。\n不靠近她本人应该没法杀死她。"
+  },
+  {
+    "dialogue_id": "0101Adv26_Ema014",
+    "speaker": "Ema",
+    "japanese_text": "で、でもさ、中に入らずに殺したのかもよ。あ、ほら、見て！",
+    "chinese_text": "不、不过呢，应该有办法在外面就能杀人。\n啊，你们看！"
+  },
+  {
+    "dialogue_id": "0101Adv26_Narrative019",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマが指さしたのは、ノアの遺体の近くに落ちている短い矢だった。",
+    "chinese_text": "艾玛指着的，\n是掉落在诺亚遗体附近的一根短箭。"
+  },
+  {
+    "dialogue_id": "0101Adv26_Sherry014",
+    "speaker": "Sherry",
+    "japanese_text": "これって、ボウガンの矢じゃないですか！？",
+    "chinese_text": "这不是弩枪的箭吗！？"
+  },
+  {
+    "dialogue_id": "0101Adv26_Ema015",
+    "speaker": "Ema",
+    "japanese_text": "ノアちゃんは、ボウガンを胸に撃たれて死んだ……？",
+    "chinese_text": "诺亚是被弩枪刺中胸口死掉的……？"
+  },
+  {
+    "dialogue_id": "0101Adv26_Sherry015",
+    "speaker": "Sherry",
+    "japanese_text": "その可能性は高いですね！それなら、中に入らず犯行に及べますし。",
+    "chinese_text": "可能性相当高！\n而且，也可以证明在房外也能作案。"
+  },
+  {
+    "dialogue_id": "0101Adv26_Ema016",
+    "speaker": "Ema",
+    "japanese_text": "（ラウンジのボウガンは誰かに盗まれてた……。　誰かがノアちゃんを殺すために持ち出したのかも）",
+    "chinese_text": "（会客厅的弩枪被人偷走了……\n可能是有人为了杀害诺亚把它拿走的）"
+  },
+  {
+    "dialogue_id": "0101Adv26_Ema017",
+    "speaker": "Ema",
+    "japanese_text": "（他に気になることは……やっぱり……）",
+    "chinese_text": "（其他我在意的地方……果然还是……）"
+  },
+  {
+    "dialogue_id": "0101Adv26_Narrative020",
+    "speaker": "[Narrative]",
+    "japanese_text": "真っ白なキャンバスのような部屋で、ノアから排出された血の赤が、アートのようになっている。",
+    "chinese_text": "在如同纯白画布的房间里，\n诺亚身上流出的血迹似乎变成了一幅画。"
+  },
+  {
+    "dialogue_id": "0101Adv26_Ema018",
+    "speaker": "Ema",
+    "japanese_text": "（蝶の絵――これはどうして、こうなったんだろう？）",
+    "chinese_text": "（是蝴蝶的画——为什么会变成这个样子？）"
+  },
+  {
+    "dialogue_id": "0101Adv26_Ema019",
+    "speaker": "Ema",
+    "japanese_text": "（何かの意味があるかもしれない。撮影しておこう）",
+    "chinese_text": "（或许有什么特殊意义。先把画面拍下来吧）"
+  },
+  {
+    "dialogue_id": "0101Adv26_Hanna009",
+    "speaker": "Hanna",
+    "japanese_text": "あなたたち、よくそんなじろじろと見られますわね……。わたくし気分が悪ぃですわ……。",
+    "chinese_text": "真亏你们能一直死盯着现场看……\n反正我感觉很不舒服……"
+  },
+  {
+    "dialogue_id": "0101Adv26_Ema020",
+    "speaker": "Ema",
+    "japanese_text": "（いや、ボクもいっぱいいっぱいだよ……）",
+    "chinese_text": "（那其实，我现在也非常非常地不舒服……）"
+  },
+  {
+    "dialogue_id": "0101Adv26_Narrative021",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマは喉に込み上げるものを堪え、首を振った。そこでハッと表情を硬くした。",
+    "chinese_text": "艾玛忍住没让某物冲出喉咙，\n然后摇了摇头。这时她的表情瞬间变得僵硬起来。"
+  },
+  {
+    "dialogue_id": "0101Adv26_Ema021",
+    "speaker": "Ema",
+    "japanese_text": "血のにおいがしない。ううん、スプレーの刺激臭で、消えちゃってるんだ……。",
+    "chinese_text": "没有血液的味道。不对，是因为喷漆的刺鼻气味\n挡住了血腥味……"
+  },
+  {
+    "dialogue_id": "0101Adv26_Narrative022",
+    "speaker": "[Narrative]",
+    "japanese_text": "ノアは狭い房内で、常にカラースプレーを噴射し続けていた。",
+    "chinese_text": "因为诺亚生前不断地\n在狭小的牢房里喷洒着颜料喷漆。"
+  },
+  {
+    "dialogue_id": "0101Adv26_Narrative023",
+    "speaker": "[Narrative]",
+    "japanese_text": "今も尚、房内にはスプレーの刺激臭が満ちている。",
+    "chinese_text": "即便现在她已过世，房内也仍然充满了喷漆的刺激气味。"
+  },
+  {
+    "dialogue_id": "0101Adv26_Narrative024",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマはノアの脇に転がるカラースプレーも、ズームして撮影した。",
+    "chinese_text": "艾玛将手机对准掉落在诺亚身旁的\n喷漆罐，放大焦距后拍下照片。"
+  },
+  {
+    "dialogue_id": "0101Adv26_Sherry016",
+    "speaker": "Sherry",
+    "japanese_text": "これで気付いたことは全部でしょうか？",
+    "chinese_text": "这下你把所有在意的地方都调查完啦？"
+  },
+  {
+    "dialogue_id": "0101Adv26_Ema022",
+    "speaker": "Ema",
+    "japanese_text": "う、うん。たぶんこれ以上見ても――。",
+    "chinese_text": "嗯。我想应该不会再有其他发现——"
+  },
+  {
+    "dialogue_id": "0101Adv26_Hanna010",
+    "speaker": "Hanna",
+    "japanese_text": "あの、気のせいかもしれませんけど、床にひっかき傷みたいなものがありません？",
+    "chinese_text": "我说，不知道是不是我的错觉，\n你们有没看到地上有一些划痕？"
+  },
+  {
+    "dialogue_id": "0101Adv26_Narrative025",
+    "speaker": "[Narrative]",
+    "japanese_text": "ハンナが嫌そうに指さした先に、エマ、シェリーも注目する。",
+    "chinese_text": "汉娜不情不愿的举起手指，\n艾玛和雪莉便往她手指的方向看去。"
+  },
+  {
+    "dialogue_id": "0101Adv26_Ema023",
+    "speaker": "Ema",
+    "japanese_text": "（本当だ……！）",
+    "chinese_text": "（真的欸……！）"
+  },
+  {
+    "dialogue_id": "0101Adv26_Narrative026",
+    "speaker": "[Narrative]",
+    "japanese_text": "微かなものだが、白い塗料に一部傷が入っているように見えた。",
+    "chinese_text": "虽然是很轻的痕迹，\n但是能看到白色颜料上有一点点划痕。"
+  },
+  {
+    "dialogue_id": "0101Adv26_Ema024",
+    "speaker": "Ema",
+    "japanese_text": "気のせいかもしれないけど、何か意味があるかもしれないよね。",
+    "chinese_text": "虽然可能是错觉，\n不过说不定会有什么特殊意义。"
+  },
+  {
+    "dialogue_id": "0101Adv26_Sherry017",
+    "speaker": "Sherry",
+    "japanese_text": "そうですね！ 全てを疑うのは探偵の鉄則ですから！",
+    "chinese_text": "是啊！侦探的铁则就是怀疑一切！"
+  },
+  {
+    "dialogue_id": "0101Adv26_Sherry018",
+    "speaker": "Sherry",
+    "japanese_text": "では、他のところも捜査しに行きましょう。",
+    "chinese_text": "那接下来，我们去搜查一下其他地方吧。"
+  },
+  {
+    "dialogue_id": "0101Adv26_Narrative027",
+    "speaker": "[Narrative]",
+    "japanese_text": "シェリーは歩き始めたが、エマは立ち止まり、通路脇に目を留めた。",
+    "chinese_text": "雪莉马上动身出发了，\n但艾玛却留在原地，目光停留在过道的角落处。"
+  },
+  {
+    "dialogue_id": "0101Adv26_Narrative028",
+    "speaker": "[Narrative]",
+    "japanese_text": "――地下通路の脇に置いてあるバケツ。",
+    "chinese_text": "——是放在地下过道角落的那个桶。"
+  },
+  {
+    "dialogue_id": "0101Adv26_Narrative029",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマが中を覗く。",
+    "chinese_text": "艾玛往里面看了看。"
+  },
+  {
+    "dialogue_id": "0101Adv26_Narrative030",
+    "speaker": "[Narrative]",
+    "japanese_text": "するとそこには、バラバラに解体された機械のパーツのようなものが昨日のまま入っていた。",
+    "chinese_text": "里面装着的，是从昨天开始就装在里面的，\n拆解得十分零碎的，\n状如机械零件的某些物体。"
+  },
+  {
+    "dialogue_id": "0101Adv26_Ema025",
+    "speaker": "Ema",
+    "japanese_text": "（昨日はそこまで気にしなかったけど、　これも何か意味があるのかもしれない）",
+    "chinese_text": "（虽然昨天并没特别在意，\n但说不定这也有什么特殊意义）"
+  },
+  {
+    "dialogue_id": "0101Adv26_Narrative031",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマたちはひととおりの捜査を終えて、殺害現場を後にした。",
+    "chinese_text": "艾玛她们大致结束了搜查，\n离开了凶杀现场。"
+  }
+]

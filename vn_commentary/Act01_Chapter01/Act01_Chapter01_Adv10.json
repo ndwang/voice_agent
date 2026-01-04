@@ -1,0 +1,278 @@
+[
+  {
+    "dialogue_id": "0101Adv10_Sherry001",
+    "speaker": "Sherry",
+    "japanese_text": "エマさん、エマさーん、朝ですよ～？ 起きてくださーい。",
+    "chinese_text": "艾玛，艾玛～\n天亮了哦～？快起床啦。"
+  },
+  {
+    "dialogue_id": "0101Adv10_Ema001",
+    "speaker": "Ema",
+    "japanese_text": "うう……ん……。あとちょっと……って、わあああっ！？",
+    "chinese_text": "呜呜……嗯……\n我再睡一会……呃，哇呀呀呀！？"
+  },
+  {
+    "dialogue_id": "0101Adv10_Narrative001",
+    "speaker": "[Narrative]",
+    "japanese_text": "薄く目を開いたエマの眼前に、シェリーの顔があり。エマはギョッとし、叫んだ。",
+    "chinese_text": "艾玛半睁开眼，便看到了雪莉的大脸。\n艾玛吓了一大跳，放声大喊。"
+  },
+  {
+    "dialogue_id": "0101Adv10_Narrative002",
+    "speaker": "[Narrative]",
+    "japanese_text": "それからきょろきょろと周囲に視線を巡らせる。牢屋の中だ。",
+    "chinese_text": "她慌慌张张四下看了看。\n这里是牢房里面。"
+  },
+  {
+    "dialogue_id": "0101Adv10_Ema002",
+    "speaker": "Ema",
+    "japanese_text": "（やっぱり夢じゃなかったんだ……　ボク、ここに捕まっちゃったんだ）",
+    "chinese_text": "（这果然不是做梦……\n我真的被抓到这个地方了）"
+  },
+  {
+    "dialogue_id": "0101Adv10_Sherry002",
+    "speaker": "Sherry",
+    "japanese_text": "朝食の後の自由時間が長いので、牢屋敷を探索しようと思ってるんです。一緒に行きません？",
+    "chinese_text": "早餐后的放风时间有点长，\n所以我想去探索一下监牢。你要一起来吗？"
+  },
+  {
+    "dialogue_id": "0101Adv10_Ema003",
+    "speaker": "Ema",
+    "japanese_text": "……うん、そうだね。顔洗うからちょっと待ってて。",
+    "chinese_text": "……嗯，也好。\n我去洗个脸，你等我一下。"
+  },
+  {
+    "dialogue_id": "0101Adv10_Narrative003",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマは急いで顔を洗い、シェリーと共に房を出た。",
+    "chinese_text": "艾玛急忙洗好脸，\n和雪莉一起走出牢房。"
+  },
+  {
+    "dialogue_id": "0101Adv10_Ema004",
+    "speaker": "Ema",
+    "japanese_text": "（そういえば隣は……）",
+    "chinese_text": "（说来，隔壁……）"
+  },
+  {
+    "dialogue_id": "0101Adv10_Noah001",
+    "speaker": "Noah",
+    "japanese_text": "ふんふふ～ん♪",
+    "chinese_text": "哼哼哼～哼♪"
+  },
+  {
+    "dialogue_id": "0101Adv10_Ema005",
+    "speaker": "Ema",
+    "japanese_text": "（相変わらず、お絵描きしてる……）",
+    "chinese_text": "（还是老样子，在画画……）"
+  },
+  {
+    "dialogue_id": "0101Adv10_Ema006",
+    "speaker": "Ema",
+    "japanese_text": "（アンアンちゃんはいないみたい……　あのあと大丈夫だったのかな）",
+    "chinese_text": "（安安好像不在……\n不知道那之后她还有没有事呢）"
+  },
+  {
+    "dialogue_id": "0101Adv10_Narrative004",
+    "speaker": "[Narrative]",
+    "japanese_text": "房内のノアの絵は、また様変わりしていた。",
+    "chinese_text": "诺亚在牢房内画的画，又变了一个样子。"
+  },
+  {
+    "dialogue_id": "0101Adv10_Narrative005",
+    "speaker": "[Narrative]",
+    "japanese_text": "スプレーアートは緻密に描きこまれ、カラフルに彩られている。とてもひと晩で描かれたものには見えない。",
+    "chinese_text": "喷漆画的细节相当丰富，\n颜色也十分美丽。\n很难相信一个晚上就能画出来这种品质。"
+  },
+  {
+    "dialogue_id": "0101Adv10_Ema007",
+    "speaker": "Ema",
+    "japanese_text": "すごい……。",
+    "chinese_text": "好厉害……"
+  },
+  {
+    "dialogue_id": "0101Adv10_Sherry003",
+    "speaker": "Sherry",
+    "japanese_text": "バルーン……。",
+    "chinese_text": "是气球……"
+  },
+  {
+    "dialogue_id": "0101Adv10_Narrative006",
+    "speaker": "[Narrative]",
+    "japanese_text": "ぽつりとシェリーが呟いた言葉で、エマは首を傾げる。",
+    "chinese_text": "雪莉不禁冒出的这句话，\n令艾玛有些疑惑。"
+  },
+  {
+    "dialogue_id": "0101Adv10_Ema008",
+    "speaker": "Ema",
+    "japanese_text": "バルーン？",
+    "chinese_text": "气球？"
+  },
+  {
+    "dialogue_id": "0101Adv10_Sherry004",
+    "speaker": "Sherry",
+    "japanese_text": "エマさん、知りませんか？世界的に有名なストリートアーティストですよ！",
+    "chinese_text": "艾玛你不知道吗？\n“气球”可是世界有名的街头艺术家哦！"
+  },
+  {
+    "dialogue_id": "0101Adv10_Sherry005",
+    "speaker": "Sherry",
+    "japanese_text": "正体不明でその姿を見た人もいないって噂だったんですけど……まさかのノアさんだったんですね！",
+    "chinese_text": "据说他的真实身份是个谜，\n从未有人见过他的真面目……没想到他就是诺亚耶！"
+  },
+  {
+    "dialogue_id": "0101Adv10_Sherry006",
+    "speaker": "Sherry",
+    "japanese_text": "すごいすごいすご～い！ノアさん、サインください！！",
+    "chinese_text": "好厉害好厉害好厉害～！\n诺亚，请你给我签个名！！"
+  },
+  {
+    "dialogue_id": "0101Adv10_Narrative007",
+    "speaker": "[Narrative]",
+    "japanese_text": "呼びかけにノアが振り返ってきた。",
+    "chinese_text": "听到有人喊她，诺亚转过头来。"
+  },
+  {
+    "dialogue_id": "0101Adv10_Noah002",
+    "speaker": "Noah",
+    "japanese_text": "さいん？",
+    "chinese_text": "签名？"
+  },
+  {
+    "dialogue_id": "0101Adv10_Sherry007",
+    "speaker": "Sherry",
+    "japanese_text": "ノアさん、【バルーン】なんですよね！？",
+    "chinese_text": "诺亚，你就是【气球】，对吗！？"
+  },
+  {
+    "dialogue_id": "0101Adv10_Noah003",
+    "speaker": "Noah",
+    "japanese_text": "ん？ ああ～そうだよ～？へへ～照れるな～。",
+    "chinese_text": "嗯？哦～对哦～？\n嘿嘿～好羞人啊～"
+  },
+  {
+    "dialogue_id": "0101Adv10_Ema009",
+    "speaker": "Ema",
+    "japanese_text": "（世界的に有名なアーティストって……本当に？　ただちょっと変わった子だとばかり……）",
+    "chinese_text": "（真的是……世界有名的艺术家？\n我只感觉她就是个有些奇怪的女孩……）"
+  },
+  {
+    "dialogue_id": "Toast_001",
+    "speaker": "[Narrative]",
+    "japanese_text": "魔女図鑑 更新…",
+    "chinese_text": "魔女图鉴 更新…"
+  },
+  {
+    "dialogue_id": "0101Adv10_Ema010",
+    "speaker": "Ema",
+    "japanese_text": "そんな有名人が捕まってるなんて……。",
+    "chinese_text": "连这么有名的人也抓来了……"
+  },
+  {
+    "dialogue_id": "0101Adv10_Ema011",
+    "speaker": "Ema",
+    "japanese_text": "ね、ねえ、ここに連れてこられたのって絶対騒ぎになってるよね！？",
+    "chinese_text": "我，我说，她这么有名，\n被抓来这里肯定会出大新闻吧！？"
+  },
+  {
+    "dialogue_id": "0101Adv10_Ema012",
+    "speaker": "Ema",
+    "japanese_text": "そういえばレイアちゃんも芸能人だし、世間が黙ってないよ！きっと警察がボクらのこと捜してる！",
+    "chinese_text": "说来，蕾雅也是艺人欸，肯定会有人讨论失踪的事！\n现在警察肯定在到处找我们！"
+  },
+  {
+    "dialogue_id": "0101Adv10_Narrative008",
+    "speaker": "[Narrative]",
+    "japanese_text": "縋るようにエマは口にしたが、シェリーにはピンと来なかったのか、首を捻る。",
+    "chinese_text": "艾玛的口吻就好像抓住了救命稻草一样。\n但雪莉没有被这番说法打动，把头扭到了一边。"
+  },
+  {
+    "dialogue_id": "0101Adv10_Sherry008",
+    "speaker": "Sherry",
+    "japanese_text": "どうでしょう？この牢屋敷は国家ぐるみな気がします。",
+    "chinese_text": "究竟会怎样呢？\n我感觉国家有在背后插手这个监牢的事哦。"
+  },
+  {
+    "dialogue_id": "0101Adv10_Sherry009",
+    "speaker": "Sherry",
+    "japanese_text": "ゴクチョーさんが言ってましたよね。全国で行われた検査に引っかかったって。",
+    "chinese_text": "典狱长也说过了，\n我们是在全国范围的检查被查验到的。"
+  },
+  {
+    "dialogue_id": "0101Adv10_Sherry010",
+    "speaker": "Sherry",
+    "japanese_text": "そうなると、警察が動くような事態にはなっていないのでは。むしろ協力した側かも。",
+    "chinese_text": "如果是真的话，那警察应该\n不会出手才对。不如说他们才是帮忙抓人的那一边。"
+  },
+  {
+    "dialogue_id": "0101Adv10_Sherry011",
+    "speaker": "Sherry",
+    "japanese_text": "もしかしたら私たち、死亡扱いになってるかもしれませんね。",
+    "chinese_text": "说不定，\n我们在外面已经被宣布死亡了哦。"
+  },
+  {
+    "dialogue_id": "0101Adv10_Narrative009",
+    "speaker": "[Narrative]",
+    "japanese_text": "なんでもないことのように、シェリーが爽やかな笑顔で言い放つ。",
+    "chinese_text": "雪莉露出清爽的笑容说道，\n好像说出口的事根本不值一提。"
+  },
+  {
+    "dialogue_id": "0101Adv10_Ema013",
+    "speaker": "Ema",
+    "japanese_text": "そんな……そんなのおかしい！このままにしちゃダメだよ！",
+    "chinese_text": "怎么会……那也太奇怪了！\n我们不可以坐以待毙！"
+  },
+  {
+    "dialogue_id": "0101Adv10_Ema014",
+    "speaker": "Ema",
+    "japanese_text": "ヒロちゃんが殺されたこと、ちゃんと外の人に知らせないと！救助を呼ぼうよ！",
+    "chinese_text": "我们一定要把希罗遇害的消息告诉外面的人！\n我们去联系救援吧！"
+  },
+  {
+    "dialogue_id": "0101Adv10_Sherry012",
+    "speaker": "Sherry",
+    "japanese_text": "ふむ。それもまたありな展開ですか。脱獄するってことですね？",
+    "chinese_text": "嗯。这个方向也算合理。\n那你就是想准备越狱，对吗？"
+  },
+  {
+    "dialogue_id": "0101Adv10_Ema015",
+    "speaker": "Ema",
+    "japanese_text": "脱獄……う、うん。ボクらは間違ってここに連れてこられた。",
+    "chinese_text": "越狱……对、对啊。\n我们是被误抓到这里来的。"
+  },
+  {
+    "dialogue_id": "0101Adv10_Ema016",
+    "speaker": "Ema",
+    "japanese_text": "だからまずは、脱獄を考えよう……。",
+    "chinese_text": "所以，我们先想想怎样越狱吧……"
+  },
+  {
+    "dialogue_id": "0101Adv10_Ema017",
+    "speaker": "Ema",
+    "japanese_text": "（ああでも……昨日脱走したアリサちゃんは、　あっさり看守に捕まってたっけ……）",
+    "chinese_text": "（啊，不过……昨天想逃跑的亚里沙\n好像一下子就被看守抓住了……）"
+  },
+  {
+    "dialogue_id": "0101Adv10_Ema018",
+    "speaker": "Ema",
+    "japanese_text": "看守って何人もいるのかな？",
+    "chinese_text": "看守会不会不止一个呢？"
+  },
+  {
+    "dialogue_id": "0101Adv10_Sherry013",
+    "speaker": "Sherry",
+    "japanese_text": "今のところ確認できたのはひとりですね。看守の目を盗めば、なんとかなりそうな気もします。",
+    "chinese_text": "目前确认到的只有一个吧。\n只要瞒得过看守的眼睛，\n我感觉应该有戏。"
+  },
+  {
+    "dialogue_id": "0101Adv10_Ema019",
+    "speaker": "Ema",
+    "japanese_text": "ボクらはまだここのことを知らなすぎるし、色々見回って良い脱獄方法がないか探そう！",
+    "chinese_text": "我们对这里的了解也太少了。\n多四处走走，找一下有没有比较好的越狱方法吧！"
+  },
+  {
+    "dialogue_id": "0101Adv10_Sherry014",
+    "speaker": "Sherry",
+    "japanese_text": "承知しました！",
+    "chinese_text": "收到！"
+  }
+]

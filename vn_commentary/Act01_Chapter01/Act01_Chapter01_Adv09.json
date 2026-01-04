@@ -1,0 +1,434 @@
+[
+  {
+    "dialogue_id": "0101Adv09_Narrative001",
+    "speaker": "[Narrative]",
+    "japanese_text": "夕食の後は、長めの自由時間となっていた。",
+    "chinese_text": "晚餐结束后，是一段较长的放风时间。"
+  },
+  {
+    "dialogue_id": "0101Adv09_Narrative002",
+    "speaker": "[Narrative]",
+    "japanese_text": "行ける範囲で散策できたり、シャワーを浴びたりできるらしかった。",
+    "chinese_text": "可以在受允许的范围内散步，\n也可以去冲澡。"
+  },
+  {
+    "dialogue_id": "0101Adv09_Ema001",
+    "speaker": "Ema",
+    "japanese_text": "（色々見てまわりたいけど……　すごく疲れてる）",
+    "chinese_text": "（今天到处都看过了……\n已经很累了）"
+  },
+  {
+    "dialogue_id": "0101Adv09_Ema002",
+    "speaker": "Ema",
+    "japanese_text": "（今日はもう寝よう……）",
+    "chinese_text": "（今天就先睡吧……）"
+  },
+  {
+    "dialogue_id": "0101Adv09_Narrative003",
+    "speaker": "[Narrative]",
+    "japanese_text": "地下の房へと入る前、エマは何気なくといった風に隣の房を覗いた。",
+    "chinese_text": "在走进自己的牢房前，\n艾玛不经意地往旁边的牢房看了一眼。"
+  },
+  {
+    "dialogue_id": "0101Adv09_Narrative004",
+    "speaker": "[Narrative]",
+    "japanese_text": "そして、息を呑んだ。",
+    "chinese_text": "然后，倒吸了一口凉气。"
+  },
+  {
+    "dialogue_id": "0101Adv09_Ema003",
+    "speaker": "Ema",
+    "japanese_text": "――！",
+    "chinese_text": "——！"
+  },
+  {
+    "dialogue_id": "0101Adv09_Noah001",
+    "speaker": "Noah",
+    "japanese_text": "ふんふふ～ん♪",
+    "chinese_text": "哼哼哼～哼♪"
+  },
+  {
+    "dialogue_id": "0101Adv09_Narrative005",
+    "speaker": "[Narrative]",
+    "japanese_text": "――室内全体は、真っ赤に塗りつぶされていた。",
+    "chinese_text": "——整个室内\n都被染成了一片通红。"
+  },
+  {
+    "dialogue_id": "0101Adv09_Narrative006",
+    "speaker": "[Narrative]",
+    "japanese_text": "ノアはそこにいて、ぺたりと地面に座っている。",
+    "chinese_text": "而诺亚就在里面\n一屁股坐在地上。"
+  },
+  {
+    "dialogue_id": "0101Adv09_Narrative007",
+    "speaker": "[Narrative]",
+    "japanese_text": "さほど広くない房内は、徹底的に塗りつぶされカラースプレーのにおいが充満していた。",
+    "chinese_text": "本就不算大的牢房被彻底涂满了颜色，\n散发出浓烈的喷漆气味。"
+  },
+  {
+    "dialogue_id": "0101Adv09_Narrative008",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマは驚き、鉄格子にしがみつく。",
+    "chinese_text": "艾玛吓了一跳，然后在铁栅栏前蹲了下来。"
+  },
+  {
+    "dialogue_id": "0101Adv09_Ema004",
+    "speaker": "Ema",
+    "japanese_text": "ノ、ノアちゃん！？",
+    "chinese_text": "诺、诺亚！？"
+  },
+  {
+    "dialogue_id": "0101Adv09_Narrative009",
+    "speaker": "[Narrative]",
+    "japanese_text": "ノアが振り向く。不思議そうな表情だった。",
+    "chinese_text": "诺亚转过头来，\n摆出了感到奇怪的表情。"
+  },
+  {
+    "dialogue_id": "0101Adv09_Noah002",
+    "speaker": "Noah",
+    "japanese_text": "ん？ そんなに慌てて、どうしたのかな？",
+    "chinese_text": "嗯？慌慌张张的，有什么事吗？"
+  },
+  {
+    "dialogue_id": "0101Adv09_Ema005",
+    "speaker": "Ema",
+    "japanese_text": "い、いやだって、この部屋……なんでこんなことに？",
+    "chinese_text": "呃，我说，这个房间……\n怎么变成这样了？"
+  },
+  {
+    "dialogue_id": "0101Adv09_Noah003",
+    "speaker": "Noah",
+    "japanese_text": "のあの描きたい絵になってくれなかったから、消さなきゃって思ったの。",
+    "chinese_text": "因为它怎么都不肯变成诺亚想画的样子，\n所以就想把它涂掉。"
+  },
+  {
+    "dialogue_id": "0101Adv09_Noah004",
+    "speaker": "Noah",
+    "japanese_text": "そしたら、全部こうなっちゃった。",
+    "chinese_text": "然后，就全都变成这样子了。"
+  },
+  {
+    "dialogue_id": "0101Adv09_Ema006",
+    "speaker": "Ema",
+    "japanese_text": "（絵が勝手に動くって言ってたっけ……　ノアちゃんは魔法をコントロールできない、ってこと？）",
+    "chinese_text": "（她好像说过是画自己会动……\n就是说，诺亚她不能主动控制魔法吗？）"
+  },
+  {
+    "dialogue_id": "Toast_001",
+    "speaker": "[Narrative]",
+    "japanese_text": "魔女図鑑 更新…",
+    "chinese_text": "魔女图鉴 更新…"
+  },
+  {
+    "dialogue_id": "0101Adv09_Narrative010",
+    "speaker": "[Narrative]",
+    "japanese_text": "そこで近寄る足音に気付く。その足音は極限まで小さく、忍ばせたものだった。",
+    "chinese_text": "然后她察觉到了靠近的脚步声。\n那脚步声非常非常小，应该是特意压低声音的。"
+  },
+  {
+    "dialogue_id": "0101Adv09_Narrative011",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマが通路の方へと目を遣ると、１人の少女が立っていた。",
+    "chinese_text": "艾玛把视线移到过道上，\n便看到有一位少女站在那里。"
+  },
+  {
+    "dialogue_id": "0101Adv09_Ema007",
+    "speaker": "Ema",
+    "japanese_text": "えっと……キミは、夏目、アンアンちゃんだよね。",
+    "chinese_text": "呃……记得你叫夏目安安，对吗。"
+  },
+  {
+    "dialogue_id": "0101Adv09_AnAn001",
+    "speaker": "AnAn",
+    "japanese_text": "…………。",
+    "chinese_text": "…………"
+  },
+  {
+    "dialogue_id": "0101Adv09_Narrative012",
+    "speaker": "[Narrative]",
+    "japanese_text": "アンアンは口を開かない。きゅっと固く唇を結んだまま、エマを片目でじとっと見ている。",
+    "chinese_text": "安安并没有开口回应。\n她的嘴唇紧闭，只用一只眼睛紧盯着艾玛。"
+  },
+  {
+    "dialogue_id": "0101Adv09_Ema008",
+    "speaker": "Ema",
+    "japanese_text": "（何かボクに言いたいことがあるのかな……？）",
+    "chinese_text": "（她是不是有话要跟我说……？）"
+  },
+  {
+    "dialogue_id": "0101Adv09_Narrative013",
+    "speaker": "[Narrative]",
+    "japanese_text": "アンアンは何かを焦れている様子で、ひたすらエマを見つめている。",
+    "chinese_text": "安安的神情有些焦急，\n一直望着艾玛。"
+  },
+  {
+    "dialogue_id": "0101Adv09_Ema009",
+    "speaker": "Ema",
+    "japanese_text": "えーと、ボクに何か用？",
+    "chinese_text": "呃，你找我有什么事？"
+  },
+  {
+    "dialogue_id": "0101Adv09_AnAn002",
+    "speaker": "AnAn",
+    "japanese_text": "…………。",
+    "chinese_text": "…………"
+  },
+  {
+    "dialogue_id": "0101Adv09_Ema010",
+    "speaker": "Ema",
+    "japanese_text": "（人見知りが激しいのかな……）",
+    "chinese_text": "（她是不是很怕生啊……）"
+  },
+  {
+    "dialogue_id": "0101Adv09_Narrative014",
+    "speaker": "[Narrative]",
+    "japanese_text": "大きくため息を吐いて、アンアンは手に持っていたスケッチブックを開こうとした。しかし――",
+    "chinese_text": "安安深深叹了一口气，\n准备打开手上拿着的素描本。\n可是——"
+  },
+  {
+    "dialogue_id": "0101Adv09_Narrative015",
+    "speaker": "[Narrative]",
+    "japanese_text": "不器用なのか、もたもたとした動きで、スケッチブックを落としてしまった。",
+    "chinese_text": "她有些笨手笨脚，\n不小心把素描本弄掉在地上。"
+  },
+  {
+    "dialogue_id": "0101Adv09_Narrative016",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマは咄嗟にそれを拾おうとしたが――",
+    "chinese_text": "艾玛没有多想，正要伸手帮她捡起来时——"
+  },
+  {
+    "dialogue_id": "0101Adv09_Ema011",
+    "speaker": "Ema",
+    "japanese_text": "っ……。",
+    "chinese_text": "……"
+  },
+  {
+    "dialogue_id": "0101Adv09_Narrative017",
+    "speaker": "[Narrative]",
+    "japanese_text": "その手を思い切り払われる。よっぽど触られるのが嫌だったらしい。",
+    "chinese_text": "她的手被安安用力甩开了。\n看来她很讨厌别人碰她的东西。"
+  },
+  {
+    "dialogue_id": "0101Adv09_Narrative018",
+    "speaker": "[Narrative]",
+    "japanese_text": "アンアンは急いでスケッチブックを拾い、持っていたペンでスケッチブックにすらすらと何かを書いている。",
+    "chinese_text": "安安急忙把素描本捡起来，\n然后用手上的笔\n在素描本上唰唰写着什么东西。"
+  },
+  {
+    "dialogue_id": "0101Adv09_Narrative019",
+    "speaker": "[Narrative]",
+    "japanese_text": "すぐにそのページを、エマの方へ見せてきた。",
+    "chinese_text": "然后她把刚写的那一页\n举起给艾玛看。"
+  },
+  {
+    "dialogue_id": "0101Adv09_AnAn003",
+    "speaker": "AnAn",
+    "japanese_text": "『どけ。わがはいの邪魔である』",
+    "chinese_text": "『滚开。你挡吾辈的路了』"
+  },
+  {
+    "dialogue_id": "0101Adv09_Ema012",
+    "speaker": "Ema",
+    "japanese_text": "え、どけって……わああっ、ごめん！",
+    "chinese_text": "欸，滚开……哇啊啊，对不起！"
+  },
+  {
+    "dialogue_id": "0101Adv09_Narrative020",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマはノアのいる房内の前、扉を塞ぐように立っていたことに気付いた。すぐにその場から移動する。",
+    "chinese_text": "艾玛发现她原来挡住了\n诺亚牢房的门口。\n于是她马上让开了路。"
+  },
+  {
+    "dialogue_id": "0101Adv09_Ema013",
+    "speaker": "Ema",
+    "japanese_text": "ノアちゃんと同室だったんだね。知らなくて、ほんとごめん。",
+    "chinese_text": "原来你和诺亚是同一间房。\n对不起，我才知道。"
+  },
+  {
+    "dialogue_id": "0101Adv09_AnAn004",
+    "speaker": "AnAn",
+    "japanese_text": "…………。",
+    "chinese_text": "…………"
+  },
+  {
+    "dialogue_id": "0101Adv09_Narrative021",
+    "speaker": "[Narrative]",
+    "japanese_text": "アンアンは小さく息をつき、房の扉の前に立った。",
+    "chinese_text": "安安小小叹了一口气，\n站到牢房门前。"
+  },
+  {
+    "dialogue_id": "0101Adv09_Narrative022",
+    "speaker": "[Narrative]",
+    "japanese_text": "そこでようやく顔を房内に向けて――",
+    "chinese_text": "然后才把头转向牢房内——"
+  },
+  {
+    "dialogue_id": "0101Adv09_AnAn005",
+    "speaker": "AnAn",
+    "japanese_text": "――！！",
+    "chinese_text": "——！！"
+  },
+  {
+    "dialogue_id": "0101Adv09_Narrative023",
+    "speaker": "[Narrative]",
+    "japanese_text": "悲鳴をあげそうになったのか、両手でバッと口を塞いだ。",
+    "chinese_text": "她马上用手捂住了嘴，\n好挡住自己下意识的惊声呼喊。"
+  },
+  {
+    "dialogue_id": "0101Adv09_Narrative024",
+    "speaker": "[Narrative]",
+    "japanese_text": "真っ赤に塗りつぶされた房内は、ショックを与えるに十分足りうるものだ。",
+    "chinese_text": "她看见了牢房被涂成一片鲜红的样子。\n这幅画面本身给人的冲击力就很大。"
+  },
+  {
+    "dialogue_id": "0101Adv09_Narrative025",
+    "speaker": "[Narrative]",
+    "japanese_text": "しかも、カラースプレーの刺激臭が房内に満ちて、外に漏れ出している。",
+    "chinese_text": "而且，室内还由内而外地散发出\n喷漆的刺鼻气味。"
+  },
+  {
+    "dialogue_id": "0101Adv09_Noah005",
+    "speaker": "Noah",
+    "japanese_text": "あ、アンアンちゃんだぁ。おかえりぃ。",
+    "chinese_text": "啊，是安安。\n你回来啦。"
+  },
+  {
+    "dialogue_id": "0101Adv09_Narrative026",
+    "speaker": "[Narrative]",
+    "japanese_text": "悪びれた様子もなく、ノアは満面の笑みを浮かべた。",
+    "chinese_text": "诺亚露出了满面笑容，\n但其中不掺杂半点恶意。"
+  },
+  {
+    "dialogue_id": "0101Adv09_Narrative027",
+    "speaker": "[Narrative]",
+    "japanese_text": "アンアンの顔からみるみる血の気が引き、真っ青になってガクガク震え……",
+    "chinese_text": "安安的脸上渐渐没了血色，\n变得一片苍白，身体止不住发抖……"
+  },
+  {
+    "dialogue_id": "0101Adv09_Narrative028",
+    "speaker": "[Narrative]",
+    "japanese_text": "そして、倒れた。",
+    "chinese_text": "然后，她晕倒了。"
+  },
+  {
+    "dialogue_id": "0101Adv09_Ema014",
+    "speaker": "Ema",
+    "japanese_text": "わぁっ、アンアンちゃん、大丈夫！？",
+    "chinese_text": "哇，安安，你没事吧！？"
+  },
+  {
+    "dialogue_id": "0101Adv09_Narrative029",
+    "speaker": "[Narrative]",
+    "japanese_text": "咄嗟にエマの伸ばした手は、アンアンにはねつけられる。かろうじて意識が残っているらしい。",
+    "chinese_text": "艾玛自然而然伸出了手，\n可是被安安挡开了。\n她似乎很拼命地保持住了意识。"
+  },
+  {
+    "dialogue_id": "0101Adv09_Narrative030",
+    "speaker": "[Narrative]",
+    "japanese_text": "騒ぎに気付いたのか、ほかの少女たちも数人駆け寄ってきた。",
+    "chinese_text": "其他少女应该是注意到了\n这边的异常，过来了好几个人。"
+  },
+  {
+    "dialogue_id": "0101Adv09_Leia001",
+    "speaker": "Leia",
+    "japanese_text": "一体何があったんだ！？",
+    "chinese_text": "究竟出了什么事！？"
+  },
+  {
+    "dialogue_id": "0101Adv09_Ema015",
+    "speaker": "Ema",
+    "japanese_text": "ええと、アンアンちゃんがこの部屋にびっくりして貧血を起こしちゃったみたいで……。",
+    "chinese_text": "呃，安安她被房间的样子吓了一跳，\n好像有点贫血……"
+  },
+  {
+    "dialogue_id": "0101Adv09_Narrative031",
+    "speaker": "[Narrative]",
+    "japanese_text": "レイアはアンアンの体を軽々と持ち上げた。",
+    "chinese_text": "蕾雅轻松地抱起了安安整个人。"
+  },
+  {
+    "dialogue_id": "0101Adv09_Narrative032",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマは驚く。小柄な少女とはいえ、相当な力が必要だろう。",
+    "chinese_text": "艾玛有点吃惊。虽然安安身材娇小，\n但要抱起她，应该也得花不少力气。"
+  },
+  {
+    "dialogue_id": "0101Adv09_Leia002",
+    "speaker": "Leia",
+    "japanese_text": "マップには医務室があったね。アンアンくんをそこに連れていく。",
+    "chinese_text": "地图上有标注医务室的位置，\n我会把她带到那边。"
+  },
+  {
+    "dialogue_id": "0101Adv09_Narrative033",
+    "speaker": "[Narrative]",
+    "japanese_text": "レイアはアンアンをお姫様抱っこし、颯爽と連れていってしまった。",
+    "chinese_text": "蕾雅用公主抱的姿势抱着安安，\n英姿飒爽地走掉了。"
+  },
+  {
+    "dialogue_id": "0101Adv09_Narrative034",
+    "speaker": "[Narrative]",
+    "japanese_text": "騒ぎが収束したので、集った少女たちも解散していった。",
+    "chinese_text": "骚动逐渐平息，\n聚集而来的少女也解散回房了。"
+  },
+  {
+    "dialogue_id": "0101Adv09_Narrative035",
+    "speaker": "[Narrative]",
+    "japanese_text": "監房の中で、ノアは困ったように立ち尽くしている。",
+    "chinese_text": "牢房内的诺亚感到有些为难，\n呆呆地站在原地。"
+  },
+  {
+    "dialogue_id": "0101Adv09_Noah006",
+    "speaker": "Noah",
+    "japanese_text": "……びっくりさせちゃったのかな？",
+    "chinese_text": "……诺亚是不是吓到大家了？"
+  },
+  {
+    "dialogue_id": "0101Adv09_Ema016",
+    "speaker": "Ema",
+    "japanese_text": "う、うん。そうみたい。",
+    "chinese_text": "嗯……大概是的。"
+  },
+  {
+    "dialogue_id": "0101Adv09_Noah007",
+    "speaker": "Noah",
+    "japanese_text": "じゃあ、今度はアンアンちゃんが喜んでくれる絵を描くね！",
+    "chinese_text": "那，下次诺亚要给安安\n画她会感到开心的画！"
+  },
+  {
+    "dialogue_id": "0101Adv09_Narrative036",
+    "speaker": "[Narrative]",
+    "japanese_text": "言って、ノアはまた地面にぺたりと座り込み、カラースプレーを噴出しはじめる。",
+    "chinese_text": "这么说着，诺亚又一屁股坐在地上，\n开始按动手上的喷漆。"
+  },
+  {
+    "dialogue_id": "0101Adv09_Noah008",
+    "speaker": "Noah",
+    "japanese_text": "ふんふふ～ん♪",
+    "chinese_text": "哼哼哼～哼♪"
+  },
+  {
+    "dialogue_id": "0101Adv09_Ema017",
+    "speaker": "Ema",
+    "japanese_text": "（たぶんこのにおいも原因っぽいから　アンアンちゃんとノアちゃんって、相性最悪なんじゃ……）",
+    "chinese_text": "（我猜这股味道也是安安不舒服的\n原因之一。她们两个真是相处不来……）"
+  },
+  {
+    "dialogue_id": "0101Adv09_Ema018",
+    "speaker": "Ema",
+    "japanese_text": "（でも楽しそう……本当に絵を描くのが好きなんだ……　やめたほうがいいなんて、言えないや）",
+    "chinese_text": "（不过诺亚好像很开心的样子……她应该是真心喜欢画画的……\n我实在说不出口，让她不要再画）"
+  },
+  {
+    "dialogue_id": "0101Adv09_Ema019",
+    "speaker": "Ema",
+    "japanese_text": "（ボクらはまだほとんど知らない者同士だし）",
+    "chinese_text": "（毕竟我们还根本不熟悉彼此）"
+  },
+  {
+    "dialogue_id": "0101Adv09_Narrative037",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマは喉元まで出かかった声を呑み込み、踵を返し、自分の房へと入っていった。",
+    "chinese_text": "艾玛把到了嘴边的话又吞了回去，\n转身回到自己的牢房里。"
+  }
+]

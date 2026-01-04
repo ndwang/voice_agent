@@ -1,0 +1,440 @@
+[
+  {
+    "dialogue_id": "0101Bad04_Ema001",
+    "speaker": "Ema",
+    "japanese_text": "さっき見たゲストハウスの方に逃げよう！",
+    "chinese_text": "往刚刚见到的招待所方向逃吧！"
+  },
+  {
+    "dialogue_id": "0101Bad04_Sherry001",
+    "speaker": "Sherry",
+    "japanese_text": "なるほど！ あそこなら建物の中に隠れて、やり過ごせるかもしれませんね！",
+    "chinese_text": "我知道了！我们可以藏建筑物里面，\n躲一阵子等它们走开，对不对！"
+  },
+  {
+    "dialogue_id": "0101Bad04_Narrative001",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマたちの考えは甘かった。",
+    "chinese_text": "但艾玛她们的想法过于单纯了。"
+  },
+  {
+    "dialogue_id": "0101Bad04_Narrative002",
+    "speaker": "[Narrative]",
+    "japanese_text": "逃げた先にも、看守が待ち構えていたのだ。",
+    "chinese_text": "在逃跑方向上，看守正拦在路中间等着她们。"
+  },
+  {
+    "dialogue_id": "0101Bad04_Hanna001",
+    "speaker": "Hanna",
+    "japanese_text": "そんなっ！？",
+    "chinese_text": "怎会这样！？"
+  },
+  {
+    "dialogue_id": "0101Bad04_Narrative003",
+    "speaker": "[Narrative]",
+    "japanese_text": "３人はあっさりと看守に捕まってしまった。そして――",
+    "chinese_text": "三人一下子就被看守抓住了。\n然后——"
+  },
+  {
+    "dialogue_id": "0101Bad04_Narrative004",
+    "speaker": "[Narrative]",
+    "japanese_text": "ハンナだけが、懲罰房行きになった。",
+    "chinese_text": "只有汉娜被送进了惩罚室。"
+  },
+  {
+    "dialogue_id": "0101Bad04_Ema002",
+    "speaker": "Ema",
+    "japanese_text": "なんで！？ どうしてハンナちゃんだけが……！",
+    "chinese_text": "为什么！？为什么只有汉娜进去了……！"
+  },
+  {
+    "dialogue_id": "0101Bad04_Sherry002",
+    "speaker": "Sherry",
+    "japanese_text": "そうですよ！壁を壊そうとしたのは私なのに……。",
+    "chinese_text": "就是啊！\n明明想要弄坏墙壁的是我……"
+  },
+  {
+    "dialogue_id": "0101Bad04_Ema003",
+    "speaker": "Ema",
+    "japanese_text": "（磔刑台とか拷問器具みたいなの、あったよね……）",
+    "chinese_text": "（记得那里有十字架之类的拷问工具……）"
+  },
+  {
+    "dialogue_id": "0101Bad04_Narrative005",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマはアリサが捕まっていたときの様子を思い出して、身を震わせた。",
+    "chinese_text": "艾玛回想起亚里沙被抓的情形，\n不禁浑身颤抖。"
+  },
+  {
+    "dialogue_id": "0101Bad04_Ema004",
+    "speaker": "Ema",
+    "japanese_text": "やっぱり何か、されるのかな……。",
+    "chinese_text": "她肯定会被惩罚……"
+  },
+  {
+    "dialogue_id": "0101Bad04_Narrative006",
+    "speaker": "[Narrative]",
+    "japanese_text": "扉には、覗き窓がある。そこから室内の様子を確かめることはできた。",
+    "chinese_text": "门上有个小窗，\n能看到室内的状况。"
+  },
+  {
+    "dialogue_id": "0101Bad04_Ema005",
+    "speaker": "Ema",
+    "japanese_text": "（どうしよう……見るのが怖い。　もし、ハンナちゃんが酷い目にあっていたら……）",
+    "chinese_text": "（怎么办……我不敢看里面。\n要是汉娜遭了严刑的话……）"
+  },
+  {
+    "dialogue_id": "0101Bad04_Sherry003",
+    "speaker": "Sherry",
+    "japanese_text": "…………。",
+    "chinese_text": "…………"
+  },
+  {
+    "dialogue_id": "0101Bad04_Narrative007",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマもシェリーも決心がつかないのか、ただ扉の前に佇むことしかできないでいる。",
+    "chinese_text": "艾玛和雪莉两人都下不了决心，\n只能呆站在门前一动不动。"
+  },
+  {
+    "dialogue_id": "0101Bad04_Ema006",
+    "speaker": "Ema",
+    "japanese_text": "ひっ……！ な、何……！？",
+    "chinese_text": "噫……！什、什么情况……！？"
+  },
+  {
+    "dialogue_id": "0101Bad04_Narrative008",
+    "speaker": "[Narrative]",
+    "japanese_text": "扉の向こうから聞こえた不穏な音に、エマは思わずシェリーに身を寄せる。",
+    "chinese_text": "艾玛听见门后传来令人不安的声音，\n不由得往雪莉身上倚靠。"
+  },
+  {
+    "dialogue_id": "0101Bad04_Hanna002",
+    "speaker": "Hanna",
+    "japanese_text": "あうっ！ な、何するんですの！？",
+    "chinese_text": "呀！你、你干什么！？"
+  },
+  {
+    "dialogue_id": "0101Bad04_Narrative009",
+    "speaker": "[Narrative]",
+    "japanese_text": "何かを叩きつけるような音とハンナの声が、中から聞こえてくる。",
+    "chinese_text": "能听见里面传来用什么东西敲打的声音\n还有汉娜的声音。"
+  },
+  {
+    "dialogue_id": "0101Bad04_Hanna003",
+    "speaker": "Hanna",
+    "japanese_text": "痛いっ！ やめてくださいまし！？",
+    "chinese_text": "好痛！住手呀！？"
+  },
+  {
+    "dialogue_id": "0101Bad04_Ema007",
+    "speaker": "Ema",
+    "japanese_text": "ハンナちゃん、大丈夫！？",
+    "chinese_text": "汉娜她没事吧！？"
+  },
+  {
+    "dialogue_id": "0101Bad04_Narrative010",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマとシェリーは、覗き窓から中の様子を窺う。",
+    "chinese_text": "艾玛和雪莉从小窗看向室内。"
+  },
+  {
+    "dialogue_id": "0101Bad04_Ema008",
+    "speaker": "Ema",
+    "japanese_text": "……！？",
+    "chinese_text": "……！？"
+  },
+  {
+    "dialogue_id": "0101Bad04_Hanna004",
+    "speaker": "Hanna",
+    "japanese_text": "ひうっ！ もう叩かないでくださいまし！？",
+    "chinese_text": "呜！不要再打我了！？"
+  },
+  {
+    "dialogue_id": "0101Bad04_Narrative011",
+    "speaker": "[Narrative]",
+    "japanese_text": "室内で繰り広げられている光景は、エマが想像していたであろうものとは少し違っていた。",
+    "chinese_text": "室内呈现的景象，\n跟艾玛的想像有少许出入。"
+  },
+  {
+    "dialogue_id": "0101Bad04_Ema009",
+    "speaker": "Ema",
+    "japanese_text": "看守が持ってるの……あれって、定規？",
+    "chinese_text": "看守手里的是……尺子？"
+  },
+  {
+    "dialogue_id": "0101Bad04_Narrative012",
+    "speaker": "[Narrative]",
+    "japanese_text": "ハンナは磔刑台に拘束されている。だが恐ろしい拷問器具ではなく、定規で叩かれていた。まるで教師か親が子供を折檻しているかのように。",
+    "chinese_text": "汉娜被绑在十字架上，\n但用来敲打她的并不是拷问工具，而是尺子。\n就好像老师或者父母责罚小朋友一样。"
+  },
+  {
+    "dialogue_id": "0101Bad04_Narrative013",
+    "speaker": "[Narrative]",
+    "japanese_text": "看守が定規を振り上げて、ハンナの頬を打つ。",
+    "chinese_text": "看守举起尺子，敲打汉娜的脸颊。"
+  },
+  {
+    "dialogue_id": "0101Bad04_Sherry004",
+    "speaker": "Sherry",
+    "japanese_text": "エマさん、ハンナさんを助けましょう。",
+    "chinese_text": "艾玛，我们去救汉娜吧。"
+  },
+  {
+    "dialogue_id": "0101Bad04_Ema010",
+    "speaker": "Ema",
+    "japanese_text": "で、でも、助けるって一体どうやって……。",
+    "chinese_text": "可、可是，我们要怎么救……"
+  },
+  {
+    "dialogue_id": "0101Bad04_Sherry005",
+    "speaker": "Sherry",
+    "japanese_text": "こうやってです！",
+    "chinese_text": "就是这么做！"
+  },
+  {
+    "dialogue_id": "0101Bad04_Ema011",
+    "speaker": "Ema",
+    "japanese_text": "え、ちょっとシェリーちゃん！？",
+    "chinese_text": "欸，等一下雪莉！？"
+  },
+  {
+    "dialogue_id": "0101Bad04_Narrative014",
+    "speaker": "[Narrative]",
+    "japanese_text": "シェリーは拳を握り、懲罰房の扉を勢いよく殴りつけた。",
+    "chinese_text": "雪莉握紧拳头，\n狠狠往惩罚室的门上砸。"
+  },
+  {
+    "dialogue_id": "0101Bad04_Hanna005",
+    "speaker": "Hanna",
+    "japanese_text": "な、なんなんですの！？",
+    "chinese_text": "怎、怎么回事！？"
+  },
+  {
+    "dialogue_id": "0101Bad04_Sherry006",
+    "speaker": "Sherry",
+    "japanese_text": "ハンナさん、助けに来ました！",
+    "chinese_text": "汉娜，我们来救你了！"
+  },
+  {
+    "dialogue_id": "0101Bad04_Narrative015",
+    "speaker": "[Narrative]",
+    "japanese_text": "扉を破壊して室内に現れたシェリーに、ハンナは唖然とする。",
+    "chinese_text": "面对破门而入的雪莉，\n汉娜哑口无言。"
+  },
+  {
+    "dialogue_id": "0101Bad04_Ema012",
+    "speaker": "Ema",
+    "japanese_text": "ちょ、ちょっと待ってシェリーちゃん！ダメだよ、看守に抵抗したら……！",
+    "chinese_text": "等、等一下雪莉！\n不可以啊，要是抵抗看守的话……！"
+  },
+  {
+    "dialogue_id": "0101Bad04_Narrative016",
+    "speaker": "[Narrative]",
+    "japanese_text": "――ヒロのように、殺されてしまう。",
+    "chinese_text": "——会跟希罗一样被杀的。"
+  },
+  {
+    "dialogue_id": "0101Bad04_Hanna006",
+    "speaker": "Hanna",
+    "japanese_text": "そうですわ！ わたくしなら大丈夫ですから、バカな真似はおよしなさい！",
+    "chinese_text": "对啊！我没事的，\n你别做傻事啊！"
+  },
+  {
+    "dialogue_id": "0101Bad04_Sherry007",
+    "speaker": "Sherry",
+    "japanese_text": "いえ、やってみないとわからないじゃないですか。",
+    "chinese_text": "不不，不试试怎么知道呢？"
+  },
+  {
+    "dialogue_id": "0101Bad04_Narrative017",
+    "speaker": "[Narrative]",
+    "japanese_text": "シェリーは一歩前に踏み出して、看守に近付いていく。",
+    "chinese_text": "雪莉往前踏出一步，\n靠近看守。"
+  },
+  {
+    "dialogue_id": "0101Bad04_Sherry008",
+    "speaker": "Sherry",
+    "japanese_text": "本気の本気でやれば、案外ぶっ殺せるかもしれませんよ？",
+    "chinese_text": "只要使出百分之二百的真本事，\n说不定就能轻松杀死它哦？"
+  },
+  {
+    "dialogue_id": "0101Bad04_Sherry009",
+    "speaker": "Sherry",
+    "japanese_text": "ここには武器もたくさんありますし！",
+    "chinese_text": "而且这里还有好多的武器！"
+  },
+  {
+    "dialogue_id": "0101Bad04_Narrative018",
+    "speaker": "[Narrative]",
+    "japanese_text": "シェリーは近くにあった金属の棒を手に取る。",
+    "chinese_text": "雪莉拿起近处的金属棒。"
+  },
+  {
+    "dialogue_id": "0101Bad04_Narrative019",
+    "speaker": "[Narrative]",
+    "japanese_text": "抵抗の意思を察知したのか、看守がシェリーに対して鎌を振り下ろした。",
+    "chinese_text": "看守察觉到了雪莉抵抗的想法，\n于是朝她挥下镰刀。"
+  },
+  {
+    "dialogue_id": "0101Bad04_Sherry010",
+    "speaker": "Sherry",
+    "japanese_text": "！",
+    "chinese_text": "！"
+  },
+  {
+    "dialogue_id": "0101Bad04_Narrative020",
+    "speaker": "[Narrative]",
+    "japanese_text": "シェリーは鎌による一撃を搔い潜り、看守に鉄の棒を叩きつけた。",
+    "chinese_text": "雪莉躲开镰刀的攻势，\n并用铁棒击打看守。"
+  },
+  {
+    "dialogue_id": "0101Bad04_Sherry011",
+    "speaker": "Sherry",
+    "japanese_text": "うああああああっ！",
+    "chinese_text": "唔啊啊啊啊啊啊！"
+  },
+  {
+    "dialogue_id": "0101Bad04_Narrative021",
+    "speaker": "[Narrative]",
+    "japanese_text": "のけぞるような体勢になった看守に、シェリーは容赦なく追い打ちをかけていく。",
+    "chinese_text": "看守往后一仰，\n雪莉毫不留情发出追击。"
+  },
+  {
+    "dialogue_id": "0101Bad04_Sherry012",
+    "speaker": "Sherry",
+    "japanese_text": "エマさん！ 今のうちに、ハンナさんを下ろして逃げてください！",
+    "chinese_text": "艾玛！趁现在，\n快给汉娜松绑，带她逃跑！"
+  },
+  {
+    "dialogue_id": "0101Bad04_Ema013",
+    "speaker": "Ema",
+    "japanese_text": "え、えええっ！？",
+    "chinese_text": "欸、欸欸欸！？"
+  },
+  {
+    "dialogue_id": "0101Bad04_Sherry013",
+    "speaker": "Sherry",
+    "japanese_text": "早くしてくださいー！いつまでもつかわかりませんので！",
+    "chinese_text": "动作快！\n我不知道我能坚持多久！"
+  },
+  {
+    "dialogue_id": "0101Bad04_Ema014",
+    "speaker": "Ema",
+    "japanese_text": "わ、わかった……！",
+    "chinese_text": "我、我知道了……！"
+  },
+  {
+    "dialogue_id": "0101Bad04_Narrative022",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマが磔刑台に駆け寄り、ハンナの拘束を解きにかかる。",
+    "chinese_text": "艾玛飞奔向十字架，\n为汉娜松绑。"
+  },
+  {
+    "dialogue_id": "0101Bad04_Narrative023",
+    "speaker": "[Narrative]",
+    "japanese_text": "どれだけシェリーの怪力で殴られても、看守が死ぬ気配はない。",
+    "chinese_text": "不管雪莉用怪力如何殴打，\n看守都没有濒死的迹象。"
+  },
+  {
+    "dialogue_id": "0101Bad04_Sherry014",
+    "speaker": "Sherry",
+    "japanese_text": "わわっと！",
+    "chinese_text": "哇哟！"
+  },
+  {
+    "dialogue_id": "0101Bad04_Narrative024",
+    "speaker": "[Narrative]",
+    "japanese_text": "死なないどころか、恐るべきスピードで鎌による反撃を繰り出してきた。",
+    "chinese_text": "不仅不死，\n还以可怕的速度挥出反击的镰刀。"
+  },
+  {
+    "dialogue_id": "0101Bad04_Narrative025",
+    "speaker": "[Narrative]",
+    "japanese_text": "咄嗟に受け止めた鉄の棒が、真っ二つに切断される。",
+    "chinese_text": "雪莉用铁棒瞬间招架住了攻击，\n但铁棒直接断成了两截。"
+  },
+  {
+    "dialogue_id": "0101Bad04_Sherry015",
+    "speaker": "Sherry",
+    "japanese_text": "それなら、これで……！",
+    "chinese_text": "那，我就用这个……！"
+  },
+  {
+    "dialogue_id": "0101Bad04_Narrative026",
+    "speaker": "[Narrative]",
+    "japanese_text": "武器は、まだまだある。シェリーは処刑用と思しき剣を掴んだ。",
+    "chinese_text": "武器要多少有多少。\n雪莉握住似乎是用来处刑的剑。"
+  },
+  {
+    "dialogue_id": "0101Bad04_Sherry016",
+    "speaker": "Sherry",
+    "japanese_text": "やああああっ！",
+    "chinese_text": "呀啊啊啊啊！"
+  },
+  {
+    "dialogue_id": "0101Bad04_Narrative027",
+    "speaker": "[Narrative]",
+    "japanese_text": "剣を手に、体ごと看守に突っ込む。",
+    "chinese_text": "雪莉手持利剑，向看守发起冲锋。"
+  },
+  {
+    "dialogue_id": "0101Bad04_Ema015",
+    "speaker": "Ema",
+    "japanese_text": "ぐっ……。",
+    "chinese_text": "咕……"
+  },
+  {
+    "dialogue_id": "0101Bad04_Hanna007",
+    "speaker": "Hanna",
+    "japanese_text": "あっ……。",
+    "chinese_text": "啊……"
+  },
+  {
+    "dialogue_id": "0101Bad04_Sherry017",
+    "speaker": "Sherry",
+    "japanese_text": "……あれ？",
+    "chinese_text": "……哎呀？"
+  },
+  {
+    "dialogue_id": "0101Bad04_Narrative028",
+    "speaker": "[Narrative]",
+    "japanese_text": "シェリーの剣が貫いたのは、看守ではなかった。",
+    "chinese_text": "但雪莉的剑贯穿的，并不是看守。"
+  },
+  {
+    "dialogue_id": "0101Bad04_Narrative029",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマと、ハンナだ。",
+    "chinese_text": "而是艾玛和汉娜。"
+  },
+  {
+    "dialogue_id": "0101Bad04_Narrative030",
+    "speaker": "[Narrative]",
+    "japanese_text": "看守の背後で、エマは磔刑台からハンナを下ろそうとしていた。",
+    "chinese_text": "在看守的身后，\n艾玛正在十字架处为汉娜松绑。"
+  },
+  {
+    "dialogue_id": "0101Bad04_Narrative031",
+    "speaker": "[Narrative]",
+    "japanese_text": "シェリーの突進を看守が避けたことで、２人を刺し貫いてしまったのだ。",
+    "chinese_text": "而看守躲开了雪莉的冲锋，\n自然剑就刺中了她们两个。"
+  },
+  {
+    "dialogue_id": "0101Bad04_Sherry018",
+    "speaker": "Sherry",
+    "japanese_text": "……あちゃー、失敗ですね。",
+    "chinese_text": "……哎呀，失败了呢。"
+  },
+  {
+    "dialogue_id": "0101Bad04_Sherry019",
+    "speaker": "Sherry",
+    "japanese_text": "助けられると思ったんです。でも……やっぱり壊しちゃいましたね。エマさん、ハンナさん、ごめんなさい。",
+    "chinese_text": "我还以为能救到的。\n可是……结果还是搞砸了呢。\n艾玛、汉娜，对不起。"
+  },
+  {
+    "dialogue_id": "0101Bad04_Narrative032",
+    "speaker": "[Narrative]",
+    "japanese_text": "呆然と口にするシェリーの背後で、看守が鎌を掲げて――",
+    "chinese_text": "雪莉呆呆地说道。在她背后，\n看守举起了镰刀——"
+  }
+]

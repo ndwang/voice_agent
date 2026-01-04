@@ -1,0 +1,326 @@
+[
+  {
+    "dialogue_id": "0101Adv07_Narrative001",
+    "speaker": "[Narrative]",
+    "japanese_text": "スマホの通知音が、室内に響いた。",
+    "chinese_text": "这时，手机响起提示音。"
+  },
+  {
+    "dialogue_id": "0101Adv07_Narrative002",
+    "speaker": "[Narrative]",
+    "japanese_text": "まどろんでいたエマはがばりと頭を上げ、急いでスマホを確認した。",
+    "chinese_text": "半梦半醒的艾玛忽然醒来，\n急匆匆把手机点开。"
+  },
+  {
+    "dialogue_id": "0101Adv07_Narrative003",
+    "speaker": "[Narrative]",
+    "japanese_text": "内容はゴクチョーからの通知だった。",
+    "chinese_text": "是典狱长的通知。"
+  },
+  {
+    "dialogue_id": "0101Adv07_Narrative004",
+    "speaker": "[Narrative]",
+    "japanese_text": "『皆さん、夕食の時間です。　速やかに食堂へ集合してください』",
+    "chinese_text": "『各位，到晚餐时间了。\n请迅速集合到食堂来』"
+  },
+  {
+    "dialogue_id": "0101Adv07_Narrative005",
+    "speaker": "[Narrative]",
+    "japanese_text": "並ぶ牢屋が、一斉に開錠されていく。",
+    "chinese_text": "所有的牢房在同一时间解锁了。"
+  },
+  {
+    "dialogue_id": "0101Adv07_Ema001",
+    "speaker": "Ema",
+    "japanese_text": "夕食……。",
+    "chinese_text": "晚餐……"
+  },
+  {
+    "dialogue_id": "0101Adv07_Ema002",
+    "speaker": "Ema",
+    "japanese_text": "（そういえば起きてから何も食べてない……。　お腹は空いてる……）",
+    "chinese_text": "（说起来，从醒来后就没吃过东西……\n肚子饿了……）"
+  },
+  {
+    "dialogue_id": "0101Adv07_Ema003",
+    "speaker": "Ema",
+    "japanese_text": "（こんな生活受け入れたくないけど……　食べないと考えがまとまらない）",
+    "chinese_text": "（虽然不想接受这样的生活……\n可是不吃饭头脑也转不起来）"
+  },
+  {
+    "dialogue_id": "0101Adv07_Narrative006",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマはため息をつき、立ち上がった。",
+    "chinese_text": "艾玛叹了口气，站起身来。"
+  },
+  {
+    "dialogue_id": "0101Adv07_Ema004",
+    "speaker": "Ema",
+    "japanese_text": "食堂ってどこだろ……。",
+    "chinese_text": "食堂在哪里呢……"
+  },
+  {
+    "dialogue_id": "0101Adv07_Narrative007",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマは【魔女図鑑】のマップを思い出し、スマホを開いた。",
+    "chinese_text": "艾玛想起【魔女图鉴】里面有地图，\n于是点开手机。"
+  },
+  {
+    "dialogue_id": "0101Adv07_Ema005",
+    "speaker": "Ema",
+    "japanese_text": "あ、あったあった、食堂は……。",
+    "chinese_text": "啊，找到了，食堂在这边……"
+  },
+  {
+    "dialogue_id": "0101Adv07_Narrative008",
+    "speaker": "[Narrative]",
+    "japanese_text": "マップを頼りに歩きだそうとした足は、すぐに止まってしまう。",
+    "chinese_text": "她正要准备跟着地图走，\n却停住了脚步。"
+  },
+  {
+    "dialogue_id": "0101Adv07_Narrative009",
+    "speaker": "[Narrative]",
+    "japanese_text": "隣の房に誰かが残っている気配がし、気になったエマは中を覗き込んだ。",
+    "chinese_text": "隔壁房好像还有人没动身，\n有点好奇的艾玛悄悄往里面看了一眼。"
+  },
+  {
+    "dialogue_id": "0101Adv07_Ema006",
+    "speaker": "Ema",
+    "japanese_text": "（城ケ崎、ノアちゃん……）",
+    "chinese_text": "（是城崎诺亚……）"
+  },
+  {
+    "dialogue_id": "0101Adv07_Noah001",
+    "speaker": "Noah",
+    "japanese_text": "ふんふふ～ん♪",
+    "chinese_text": "哼哼哼～哼♪"
+  },
+  {
+    "dialogue_id": "0101Adv07_Narrative010",
+    "speaker": "[Narrative]",
+    "japanese_text": "ノアはぺたりと地面に座り込み、熱心に何かをしている様子だった。エマには背中を向けている。",
+    "chinese_text": "诺亚一屁股坐在地上，\n好像在专注做着什么事情。她现在正背对着艾玛。"
+  },
+  {
+    "dialogue_id": "0101Adv07_Ema007",
+    "speaker": "Ema",
+    "japanese_text": "あの、あのさ、ごはんだけど行かないの？",
+    "chinese_text": "呃，你好？现在是晚餐时间，你不去吃饭吗？"
+  },
+  {
+    "dialogue_id": "0101Adv07_Narrative011",
+    "speaker": "[Narrative]",
+    "japanese_text": "鉄格子越しに、エマが声をかけた。",
+    "chinese_text": "艾玛在铁栅栏外向她说道。"
+  },
+  {
+    "dialogue_id": "0101Adv07_Narrative012",
+    "speaker": "[Narrative]",
+    "japanese_text": "くるんと、ノアは顔を振り向かせた。手にはカラースプレーを持っている。",
+    "chinese_text": "诺亚把头转了过来。\n她手上拿着喷漆。"
+  },
+  {
+    "dialogue_id": "0101Adv07_Noah002",
+    "speaker": "Noah",
+    "japanese_text": "のあは今日、ごはん食べないんだよ？まだお絵描きの途中だから。",
+    "chinese_text": "诺亚今天不去吃饭哦？\n诺亚才刚画到一半呢。"
+  },
+  {
+    "dialogue_id": "0101Adv07_Ema008",
+    "speaker": "Ema",
+    "japanese_text": "（この子、捕まってる自覚あるのかな？　なんかやたら呑気だけど……）",
+    "chinese_text": "（她到底有没有意识到自己被抓了？\n感觉她悠哉游哉的……）"
+  },
+  {
+    "dialogue_id": "0101Adv07_Ema009",
+    "speaker": "Ema",
+    "japanese_text": "お絵描きって、何を描いてるのかな。",
+    "chinese_text": "那你现在在画什么东西呢？"
+  },
+  {
+    "dialogue_id": "0101Adv07_Noah003",
+    "speaker": "Noah",
+    "japanese_text": "んー……ちょっと待ってね。",
+    "chinese_text": "嗯……你等一下哦。"
+  },
+  {
+    "dialogue_id": "0101Adv07_Narrative013",
+    "speaker": "[Narrative]",
+    "japanese_text": "ノアは立ち上がり、エマに地面が見えるように、少し横に移動する。",
+    "chinese_text": "诺亚站起身来，\n往旁边移动了一下，好让艾玛看到地面。"
+  },
+  {
+    "dialogue_id": "0101Adv07_Ema010",
+    "speaker": "Ema",
+    "japanese_text": "えっ……！",
+    "chinese_text": "欸……！"
+  },
+  {
+    "dialogue_id": "0101Adv07_Narrative014",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマは驚愕の声を上げる。地面に描かれた絵が――動いていた。",
+    "chinese_text": "艾玛发出惊愕的声音。\n地面上画着的画——竟然自己会动。"
+  },
+  {
+    "dialogue_id": "0101Adv07_Narrative015",
+    "speaker": "[Narrative]",
+    "japanese_text": "カラースプレーで描かれた何かは、ぐねぐねと動き、形を成していく。",
+    "chinese_text": "喷漆画成的不知名图案\n开始扭来扭去，变化成另一个形状。"
+  },
+  {
+    "dialogue_id": "0101Adv07_Narrative016",
+    "speaker": "[Narrative]",
+    "japanese_text": "それはあっという間に、蛇になっていた。",
+    "chinese_text": "转眼间，就变成了蛇的形状。"
+  },
+  {
+    "dialogue_id": "0101Adv07_Narrative017",
+    "speaker": "[Narrative]",
+    "japanese_text": "カラフルに彩られた蛇は地面を這うように動き、リアルであまりに気味が悪い。",
+    "chinese_text": "五颜六色的蛇在地面蠕动着，\n给人带来恶心的真实感。"
+  },
+  {
+    "dialogue_id": "0101Adv07_Ema011",
+    "speaker": "Ema",
+    "japanese_text": "な、な、何で！",
+    "chinese_text": "怎、怎么回事！"
+  },
+  {
+    "dialogue_id": "0101Adv07_Narrative018",
+    "speaker": "[Narrative]",
+    "japanese_text": "ノアは首を傾げ、困ったように微笑む。",
+    "chinese_text": "诺亚歪着头，有点为难地微笑着说。"
+  },
+  {
+    "dialogue_id": "0101Adv07_Noah004",
+    "speaker": "Noah",
+    "japanese_text": "ええとね、のあの絵、勝手に動いちゃうんだ。絵だけじゃなくて、液体はね、全部勝手に動くの。",
+    "chinese_text": "怎么说呢，诺亚的画，会自己动起来。\n不只是画，只要是液体，都会自己动。"
+  },
+  {
+    "dialogue_id": "0101Adv07_Noah005",
+    "speaker": "Noah",
+    "japanese_text": "蛇なんて描くつもりなかったのにな。やり直さなきゃ。",
+    "chinese_text": "本来没想着画蛇的。\n这下要重新画了。"
+  },
+  {
+    "dialogue_id": "0101Adv07_Ema012",
+    "speaker": "Ema",
+    "japanese_text": "（勝手に動くって……　それって、魔法、だよね？）",
+    "chinese_text": "（会动……\n是因为，用了魔法？）"
+  },
+  {
+    "dialogue_id": "Toast_001",
+    "speaker": "[Narrative]",
+    "japanese_text": "魔女図鑑 更新…",
+    "chinese_text": "魔女图鉴 更新…"
+  },
+  {
+    "dialogue_id": "0101Adv07_Narrative019",
+    "speaker": "[Narrative]",
+    "japanese_text": "再び背を向け地面にぺたりと座ったノアを、エマはしばし呆然と見つめていた。",
+    "chinese_text": "诺亚重新转过身坐在了地上。\n艾玛茫然地呆望着她好一阵子。"
+  },
+  {
+    "dialogue_id": "0101Adv07_Ema013",
+    "speaker": "Ema",
+    "japanese_text": "（さっき、メルルちゃんの手が光って、　ボクの血を止めてくれたのと同じだ）",
+    "chinese_text": "（跟刚才梅露露的手发光\n帮我止血的时候一样）"
+  },
+  {
+    "dialogue_id": "0101Adv07_Ema014",
+    "speaker": "Ema",
+    "japanese_text": "（魔法は本当に、存在する……？）",
+    "chinese_text": "（魔法真的存在吗……？）"
+  },
+  {
+    "dialogue_id": "0101Adv07_Narrative020",
+    "speaker": "[Narrative]",
+    "japanese_text": "不思議な現象を目の当たりにしても、どうしても信じがたいのか、エマは首を振る。",
+    "chinese_text": "尽管目睹了神奇的现象，\n但艾玛还是难以相信，不禁摇了摇头。"
+  },
+  {
+    "dialogue_id": "0101Adv07_Ema015",
+    "speaker": "Ema",
+    "japanese_text": "（今は考える余裕がないや……）",
+    "chinese_text": "（现在没有功夫慢慢想了……）"
+  },
+  {
+    "dialogue_id": "0101Adv07_Ema016",
+    "speaker": "Ema",
+    "japanese_text": "……じゃ、じゃあボクは行くね。",
+    "chinese_text": "……那，那我先走啦。"
+  },
+  {
+    "dialogue_id": "0101Adv07_Narrative021",
+    "speaker": "[Narrative]",
+    "japanese_text": "ノアの背に声をかけてから、１階へと続く階段へと向かいはじめたところで――",
+    "chinese_text": "艾玛朝诺亚的背影说道。\n接着，在她正准备往上一楼的方向走的时候——"
+  },
+  {
+    "dialogue_id": "0101Adv07_Alisa001",
+    "speaker": "Alisa",
+    "japanese_text": "離せ！ クソッ！ 離せよバケモンがよぉ！",
+    "chinese_text": "放开我！混蛋！放开我啊怪物！"
+  },
+  {
+    "dialogue_id": "0101Adv07_Narrative022",
+    "speaker": "[Narrative]",
+    "japanese_text": "階下へと降りてきた看守と、脇に抱えられているアリサを目撃する。",
+    "chinese_text": "她看到看守走下了楼梯，\n而它的手好像夹篮球一样拦腰扣住了亚里沙。"
+  },
+  {
+    "dialogue_id": "0101Adv07_Ema017",
+    "speaker": "Ema",
+    "japanese_text": "（あの子は、確か紫藤アリサちゃん！？）",
+    "chinese_text": "（我记得她，是紫藤亚里沙！？）"
+  },
+  {
+    "dialogue_id": "0101Adv07_Alisa002",
+    "speaker": "Alisa",
+    "japanese_text": "ふざけんな！ なんでウチが！",
+    "chinese_text": "开什么玩笑！凭什么就抓我！"
+  },
+  {
+    "dialogue_id": "0101Adv07_Narrative023",
+    "speaker": "[Narrative]",
+    "japanese_text": "口では抵抗しているものの、アリサは抱えられたままになって暴れたりはしていない。",
+    "chinese_text": "尽管亚里沙嘴上\n不依不饶，但是身体却没有表示出反抗。"
+  },
+  {
+    "dialogue_id": "0101Adv07_Ema018",
+    "speaker": "Ema",
+    "japanese_text": "（抵抗したら……殺されるかも）",
+    "chinese_text": "（要是反抗的话……说不定会被杀死）"
+  },
+  {
+    "dialogue_id": "0101Adv07_Narrative024",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマは――",
+    "chinese_text": "艾玛她——"
+  },
+  {
+    "dialogue_id": "0101Adv07_Narrative025",
+    "speaker": "[Narrative]",
+    "japanese_text": "その場から動かない。",
+    "chinese_text": "站在原地一动不动。"
+  },
+  {
+    "dialogue_id": "0101Adv07_Narrative026",
+    "speaker": "[Narrative]",
+    "japanese_text": "つい数時間前に見たおぞましい光景が脳裏を過ったのか、エマは立ち尽くし、震えている。",
+    "chinese_text": "数小时前目击的恐怖情景在她脑海中复苏，\n艾玛呆站在原地，身体止不住颤抖。"
+  },
+  {
+    "dialogue_id": "0101Adv07_Narrative027",
+    "speaker": "[Narrative]",
+    "japanese_text": "看守はアリサを抱えて、通路の向こうへと消えていった。",
+    "chinese_text": "看守抱着亚里沙的身影\n消失在过道的远方。"
+  },
+  {
+    "dialogue_id": "0101Adv07_Ema019",
+    "speaker": "Ema",
+    "japanese_text": "（アリサちゃんを連れて、一体どこへ……？）",
+    "chinese_text": "（它究竟要把亚里沙带到什么地方……？）"
+  }
+]

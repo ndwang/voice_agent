@@ -1,0 +1,266 @@
+[
+  {
+    "dialogue_id": "0101Adv21_Narrative001",
+    "speaker": "[Narrative]",
+    "japanese_text": "しばらく険悪な空気に付き合わされ、時間を食ってしまった。",
+    "chinese_text": "现场再次充满了火药味，\n不知不觉又浪费了许多时间。"
+  },
+  {
+    "dialogue_id": "0101Adv21_Narrative002",
+    "speaker": "[Narrative]",
+    "japanese_text": "ようやく落ち着いてから、エマらのグループはシャワーを浴びにいった。",
+    "chinese_text": "等事情终于平息后，\n艾玛一组人去冲了个澡。"
+  },
+  {
+    "dialogue_id": "0101Adv21_Narrative003",
+    "speaker": "[Narrative]",
+    "japanese_text": "先ほどのトラブルと今日の走り回った疲れもあってか、地下に戻ってきた頃には、全員足元が覚束ない。",
+    "chinese_text": "今天奔波了一整天，又遇上刚刚的闹剧，\n艾玛她们积累了不少疲劳。回到地下后，她们几个累得脚都软了。"
+  },
+  {
+    "dialogue_id": "0101Adv21_Narrative004",
+    "speaker": "[Narrative]",
+    "japanese_text": "一番手前の房であるシェリーは、早々に中へと入っていった。",
+    "chinese_text": "雪莉的牢房最靠前，\n她最先回到自己的房间里。"
+  },
+  {
+    "dialogue_id": "0101Adv21_Ema001",
+    "speaker": "Ema",
+    "japanese_text": "うう……明日、筋肉痛になりそう……。",
+    "chinese_text": "呜呜……明天肌肉要痛一整天了……"
+  },
+  {
+    "dialogue_id": "0101Adv21_Hanna001",
+    "speaker": "Hanna",
+    "japanese_text": "シャワーだけでなく、お風呂に浸かりてえですわ。ふわあ～。",
+    "chinese_text": "累死了，光冲澡已经缓解不了疲劳了，好想泡个澡啊。\n呼啊～"
+  },
+  {
+    "dialogue_id": "0101Adv21_Narrative005",
+    "speaker": "[Narrative]",
+    "japanese_text": "盛大にあくびをしているハンナは、既にうつらうつらしている。",
+    "chinese_text": "汉娜打了个哈欠，\n眼神都有些朦胧了。"
+  },
+  {
+    "dialogue_id": "0101Adv21_Narrative006",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマもつられてあくびし、ぼんやりと通路を歩いていく。",
+    "chinese_text": "艾玛也跟着打了个哈欠，\n迷迷糊糊走在过道上。"
+  },
+  {
+    "dialogue_id": "0101Adv21_Narrative007",
+    "speaker": "[Narrative]",
+    "japanese_text": "自分の房の前までやってきて、エマもさっさと中へ入ろうとした。",
+    "chinese_text": "接着，她走到了自己的房门前，\n正准备回房。"
+  },
+  {
+    "dialogue_id": "0101Adv21_Narrative008",
+    "speaker": "[Narrative]",
+    "japanese_text": "そこで――",
+    "chinese_text": "这时——"
+  },
+  {
+    "dialogue_id": "0101Adv21_Ema002",
+    "speaker": "Ema",
+    "japanese_text": "わぁっ",
+    "chinese_text": "哇！"
+  },
+  {
+    "dialogue_id": "0101Adv21_Narrative009",
+    "speaker": "[Narrative]",
+    "japanese_text": "誰かが勢いよくぶつかってきて、エマは弾かれ、尻もちをついてしまう。",
+    "chinese_text": "有个人撞到了艾玛，\n害艾玛一屁股跌坐在地上。"
+  },
+  {
+    "dialogue_id": "0101Adv21_Narrative010",
+    "speaker": "[Narrative]",
+    "japanese_text": "目を白黒させたエマが見上げると、立っていたのはアリサだった。",
+    "chinese_text": "两眼昏花的艾玛抬头定睛一看，\n站在面前的是亚里沙。"
+  },
+  {
+    "dialogue_id": "0101Adv21_Alisa001",
+    "speaker": "Alisa",
+    "japanese_text": "チッ……またてめえか。ボサッとしてんじゃねーぞ！",
+    "chinese_text": "啧……又是你。\n走路能不能不要做白日梦啊！"
+  },
+  {
+    "dialogue_id": "0101Adv21_Ema003",
+    "speaker": "Ema",
+    "japanese_text": "ご、ごめん。",
+    "chinese_text": "对、对不起。"
+  },
+  {
+    "dialogue_id": "0101Adv21_Narrative011",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマが謝るとアリサはもう一度舌打ちし、行ってしまった。",
+    "chinese_text": "听到艾玛的道歉，亚里沙又咂了咂舌，\n然后走掉了。"
+  },
+  {
+    "dialogue_id": "0101Adv21_Hanna002",
+    "speaker": "Hanna",
+    "japanese_text": "自分からぶつかっておいて、失礼なヤツですわね！",
+    "chinese_text": "明明是她自己撞上来的，真是没礼貌！"
+  },
+  {
+    "dialogue_id": "0101Adv21_Meruru001",
+    "speaker": "Meruru",
+    "japanese_text": "だっ、大丈夫ですか、エマさん。怪我はないですか？",
+    "chinese_text": "你、你没事吧，艾玛小姐。有没有受伤？"
+  },
+  {
+    "dialogue_id": "0101Adv21_Ema004",
+    "speaker": "Ema",
+    "japanese_text": "うん、へーきへーき！ よいしょっと！",
+    "chinese_text": "嗯，完全没事！嘿咻！"
+  },
+  {
+    "dialogue_id": "0101Adv21_Narrative012",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマは勢いをつけて立ち上がり、土埃をぱんぱんと払う。",
+    "chinese_text": "艾玛快速站起身来，\n动手拍落身上的灰尘。"
+  },
+  {
+    "dialogue_id": "0101Adv21_Leia001",
+    "speaker": "Leia",
+    "japanese_text": "――キミたち、大丈夫かい？",
+    "chinese_text": "——你们没事吧？"
+  },
+  {
+    "dialogue_id": "0101Adv21_Narrative013",
+    "speaker": "[Narrative]",
+    "japanese_text": "いつの間にか、近くにレイアが立っていた。全員の視線がレイアに集う。",
+    "chinese_text": "不知什么时候，蕾雅也来到了她们的身边。\n所有人的视线集中在蕾雅身上。"
+  },
+  {
+    "dialogue_id": "0101Adv21_Hanna003",
+    "speaker": "Hanna",
+    "japanese_text": "べ、別にあなたに気を遣ってもらわなくてもけっこうですわ！",
+    "chinese_text": "本、\n本小姐可用不着你来关心！"
+  },
+  {
+    "dialogue_id": "0101Adv21_Leia002",
+    "speaker": "Leia",
+    "japanese_text": "……私はキミに嫌われるようなことをしただろうか？仲良くやっていきたいんだけど、困ったね。",
+    "chinese_text": "……我做了什么害你讨厌的事情吗？\n真头疼，我可是想和大家友好相处的。"
+  },
+  {
+    "dialogue_id": "0101Adv21_Leia003",
+    "speaker": "Leia",
+    "japanese_text": "そうだ、これから配信もしようと思っているんだ。良かったら、見てほしい。",
+    "chinese_text": "对了，我等一下准备直播。\n你们愿意的话，希望你们也能看一下。"
+  },
+  {
+    "dialogue_id": "0101Adv21_Hanna004",
+    "speaker": "Hanna",
+    "japanese_text": "ふん、毎日毎日みんなに気を配ってご苦労なことね。",
+    "chinese_text": "哼，真是辛苦你每天费心照顾其他人呢。"
+  },
+  {
+    "dialogue_id": "0101Adv21_Leia004",
+    "speaker": "Leia",
+    "japanese_text": "気苦労がないわけじゃないけれど、はは、性格かな。",
+    "chinese_text": "虽然辛苦是辛苦了点啦，哈哈，性格使然而已。"
+  },
+  {
+    "dialogue_id": "0101Adv21_Narrative014",
+    "speaker": "[Narrative]",
+    "japanese_text": "困ったように微笑むレイアを前に、ハンナはぽっと頬を染めている。",
+    "chinese_text": "面对露出为难笑容的蕾雅，\n汉娜涨红了脸。"
+  },
+  {
+    "dialogue_id": "0101Adv21_Ema005",
+    "speaker": "Ema",
+    "japanese_text": "（レイアちゃんってやっぱり、　魅了の魔法使いじゃ……）",
+    "chinese_text": "（蕾雅她果然是\n魅惑人心的魔法师……）"
+  },
+  {
+    "dialogue_id": "0101Adv21_Leia005",
+    "speaker": "Leia",
+    "japanese_text": "今日の配信は、ココくんやミリアくんに誘われているんだ。",
+    "chinese_text": "今天的直播是可可和米莉亚邀我的。"
+  },
+  {
+    "dialogue_id": "0101Adv21_Leia006",
+    "speaker": "Leia",
+    "japanese_text": "きっとにぎやかで楽しいものを見せられると思う。こんなところだが、少しでも娯楽を提供できれば。",
+    "chinese_text": "我想今天这场应该会比较热闹和开心。\n如果能在这个令人郁闷的地方里给大家带来一些消遣，\n我就满足了。"
+  },
+  {
+    "dialogue_id": "0101Adv21_Hanna005",
+    "speaker": "Hanna",
+    "japanese_text": "ふ、ふーん。まあ、見てあげなくもないですわよ？い、行きましょうメルルさん！",
+    "chinese_text": "哼～倒也不是不能看一眼哦？\n走、走啦，梅露露！"
+  },
+  {
+    "dialogue_id": "0101Adv21_Meruru002",
+    "speaker": "Meruru",
+    "japanese_text": "は、はぁい……っ",
+    "chinese_text": "嗯、嗯……"
+  },
+  {
+    "dialogue_id": "0101Adv21_Narrative015",
+    "speaker": "[Narrative]",
+    "japanese_text": "ハンナはメルルの手首を掴み、逃げるようにずんずんと自分の房へと走っていってしまった。",
+    "chinese_text": "汉娜抓住梅露露的手腕，\n逃也似的跑回了自己的房里。"
+  },
+  {
+    "dialogue_id": "0101Adv21_Narrative016",
+    "speaker": "[Narrative]",
+    "japanese_text": "残されたエマは、レイアと目が合う。",
+    "chinese_text": "只剩艾玛一人留在了原地，\n和蕾雅四目相对。"
+  },
+  {
+    "dialogue_id": "0101Adv21_Leia007",
+    "speaker": "Leia",
+    "japanese_text": "ああ、そうだ。今日医務室に行った時、間違ってアンアンくんのスマホを持ってきてしまったらしい。",
+    "chinese_text": "啊，对了。今天我去医务室的时候，\n不小心错拿了安安的手机。"
+  },
+  {
+    "dialogue_id": "0101Adv21_Narrative017",
+    "speaker": "[Narrative]",
+    "japanese_text": "レイアはポケットから、ごそごそとスマホを取り出した。",
+    "chinese_text": "蕾雅从口袋里摸出了一部手机。"
+  },
+  {
+    "dialogue_id": "0101Adv21_Leia008",
+    "speaker": "Leia",
+    "japanese_text": "届けてくれると助かる。私はこれから、配信の予定があって……申し訳ないんだが。",
+    "chinese_text": "我等一下有直播要开……\n真是不好意思，希望你可以帮我还给她。"
+  },
+  {
+    "dialogue_id": "0101Adv21_Ema006",
+    "speaker": "Ema",
+    "japanese_text": "うん、それくらいぜんぜんいいよ。",
+    "chinese_text": "嗯，这么点小事没关系的。"
+  },
+  {
+    "dialogue_id": "0101Adv21_Ema007",
+    "speaker": "Ema",
+    "japanese_text": "あの、あのさ、レイアちゃんのやってること、すごく偉いと思う！",
+    "chinese_text": "我、我想说，\n我觉得蕾雅你在做的事情真的很棒！"
+  },
+  {
+    "dialogue_id": "0101Adv21_Ema008",
+    "speaker": "Ema",
+    "japanese_text": "ボクら、グループは別になっちゃったけど……でも、助け合えたらいいなって思うんだ。",
+    "chinese_text": "虽然我们意见不太一样……不过，\n我希望我们可以互相帮助。"
+  },
+  {
+    "dialogue_id": "0101Adv21_Narrative018",
+    "speaker": "[Narrative]",
+    "japanese_text": "レイアは少し驚いた風に目を丸くした。しかしすぐ、柔らかい微笑を浮かべる。",
+    "chinese_text": "蕾雅有些惊讶地瞪大了眼睛。\n不过很快，她便露出了一个温柔的微笑。"
+  },
+  {
+    "dialogue_id": "0101Adv21_Leia009",
+    "speaker": "Leia",
+    "japanese_text": "ありがとう。",
+    "chinese_text": "谢谢你。"
+  },
+  {
+    "dialogue_id": "0101Adv21_Narrative019",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマはレイアからスマホを受け取り、急ぎ、医務室へと向かった。",
+    "chinese_text": "艾玛从蕾雅手里拿过手机，\n急匆匆前往了医务室。"
+  }
+]

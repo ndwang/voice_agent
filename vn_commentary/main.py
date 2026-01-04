@@ -23,7 +23,6 @@ if sys.platform == 'win32':
 from core.logging import get_logger, setup_logging
 from vn_commentary.dialogue_reader import DialogueReader
 from vn_commentary.commentary_analyzer import CommentaryAnalyzer
-from vn_commentary.context_manager import ContextManager
 from vn_commentary.models import CommentaryResult
 from llm.providers.gemini import GeminiProvider
 
@@ -66,9 +65,6 @@ class VNCommentaryDriver:
                 "api_key": None,
                 "temperature": 0.7
             },
-            "context": {
-                "max_context_size": 20
-            },
             "system_prompt_file": None,
             "output": {
                 "log_level": "INFO",
@@ -88,7 +84,6 @@ class VNCommentaryDriver:
     def _create_analyzer(self) -> CommentaryAnalyzer:
         """Create and configure commentary analyzer."""
         llm_config = self.config.get("llm", {})
-        context_config = self.config.get("context", {})
 
         # Load custom system prompt if specified
         system_prompt = None
@@ -108,15 +103,9 @@ class VNCommentaryDriver:
         else:
             raise ValueError(f"Unsupported LLM provider: {provider}")
 
-        # Create context manager
-        context_manager = ContextManager(
-            max_context_size=context_config.get("max_context_size", 20)
-        )
-
         # Create analyzer
         analyzer = CommentaryAnalyzer(
             llm_provider=llm_provider,
-            context_manager=context_manager,
             system_prompt=system_prompt
         )
 

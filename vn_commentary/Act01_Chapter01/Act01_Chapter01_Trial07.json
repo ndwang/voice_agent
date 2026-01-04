@@ -1,0 +1,1196 @@
+[
+  {
+    "dialogue_id": "0101Trial07_Coco001",
+    "speaker": "Coco",
+    "japanese_text": "あてぃしたちは寝る前にノアの部屋の前を通ってるわけ。そこに死体があったら、気付かないわけないじゃん？",
+    "chinese_text": "我们睡前的时候\n经过了诺亚的房门口啦。\n如果那里有一具尸体，\n不可能会没发现吧？"
+  },
+  {
+    "dialogue_id": "0101Trial07_Coco002",
+    "speaker": "Coco",
+    "japanese_text": "だからあの時さぁ、ノアは【生きてた】んじゃねーの？",
+    "chinese_text": "所以那时\n诺亚她\n不是应该【还活着】吗？"
+  },
+  {
+    "dialogue_id": "0101Trial07_Coco003",
+    "speaker": "Coco",
+    "japanese_text": "絵でも描いてたとかさ。そういや足音も聞こえた気がするし！ピンピンしてたはずだって！",
+    "chinese_text": "说不定她还在画画呢。\n说来我好像\n听到过脚步声呢！\n肯定还活蹦乱跳的！"
+  },
+  {
+    "dialogue_id": "0101Trial07_Miria001",
+    "speaker": "Miria",
+    "japanese_text": "そ、そうだったっけ……？うーん……言われてみれば、そうかもしれないけど……。",
+    "chinese_text": "是、是这样吗……？\n唔……\n听你这么说，\n好像确实是这样……"
+  },
+  {
+    "dialogue_id": "0101Trial07_Coco004",
+    "speaker": "Coco",
+    "japanese_text": "だからノアが殺されたのはその後！【就寝時間から朝まで】の間しかねーの！",
+    "chinese_text": "所以诺亚的遇害时间\n就是那之后！\n只可能是【就寝时间到第二天早上】\n之间的事！"
+  },
+  {
+    "dialogue_id": "0101Trial07_Leia001",
+    "speaker": "Leia",
+    "japanese_text": "……しかし就寝時間は鍵がかけられるはずだよ。外に出る事ができても、入る事はできないんじゃないかな？",
+    "chinese_text": "……可是，就寝时间的房门\n应该是锁着的。\n就算有办法出去，\n也应该没办法\n回来吧？"
+  },
+  {
+    "dialogue_id": "0101Trial07_Margo001",
+    "speaker": "Margo",
+    "japanese_text": "あら、それなら就寝時間前にノアちゃんの部屋に忍び込んでおけば問題ないんじゃないかしら。",
+    "chinese_text": "哎呀，\n那只要在就寝时间之前\n偷偷藏在\n诺亚的房间里，\n应该就没问题了吧。"
+  },
+  {
+    "dialogue_id": "0101Trial07_Coco005",
+    "speaker": "Coco",
+    "japanese_text": "それだ！そしてそれができるのは、就寝時間にルームメイトと一緒にいなかったヤツだけ……！",
+    "chinese_text": "就是这样！\n能做到这件事的，\n只有在就寝时间时\n和室友不在一块的人……！"
+  },
+  {
+    "dialogue_id": "0101Trial07_Coco006",
+    "speaker": "Coco",
+    "japanese_text": "メルちゃんが隣の部屋にいたのはあてぃし見てるし……。",
+    "chinese_text": "我当时有看到\n小梅她\n就待在隔壁的房间里……"
+  },
+  {
+    "dialogue_id": "0101Trial07_Coco007",
+    "speaker": "Coco",
+    "japanese_text": "つまりノアを殺せるのは就寝時間にアリバイがない……医務室のアンアンか、１人部屋のエマっちのどっちかなんだよ！",
+    "chinese_text": "也就是说，能杀害诺亚的，\n只有在就寝时间时\n没有不在场证明的……\n在医务室的安安，\n还有单人间的艾玛亲，\n你们其中的一个！"
+  },
+  {
+    "dialogue_id": "0101Trial07_Coco008",
+    "speaker": "Coco",
+    "japanese_text": "違うってんなら……証拠見せてよ、証拠！！",
+    "chinese_text": "要说我哪里不对……\n就拿证据出来！！"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema001",
+    "speaker": "Ema",
+    "japanese_text": "（ココちゃんの言ってることが本当なら、　たしかにボクかアンアンちゃんのどっちかが　犯人になっちゃうかも……！）",
+    "chinese_text": "（如果可可说的是事实，\n那的确只有我和安安两个人\n有嫌疑……！）"
+  },
+  {
+    "dialogue_id": "0101Trial07_Meruru001",
+    "speaker": "Meruru",
+    "japanese_text": "……なんだかミリアさん、少し自信なさげのように見えますね……。",
+    "chinese_text": "……总感觉米莉亚小姐她\n有些不太自信呢……"
+  },
+  {
+    "dialogue_id": "0101Trial07_Meruru002",
+    "speaker": "Meruru",
+    "japanese_text": "もしかしたら……そこに何か、ココさんの推理の穴があるのかも……。",
+    "chinese_text": "说不定……\n可可的推理漏洞就在其中……"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema002",
+    "speaker": "Ema",
+    "japanese_text": "（ココちゃんの推理が間違ってる事を証明する　証拠品……何かなかったかな？）",
+    "chinese_text": "（有没有证物可以证明\n可可的推理不对呢……？）"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema003",
+    "speaker": "Ema",
+    "japanese_text": "……ちょっと待って。それはおかしいよ。",
+    "chinese_text": "……等一下，这里很不对劲。"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema004",
+    "speaker": "Ema",
+    "japanese_text": "ノアちゃんはその時、絵を描いてないはずだよ……！",
+    "chinese_text": "诺亚当时应该没在画画才对……！"
+  },
+  {
+    "dialogue_id": "0101Trial07_Coco009",
+    "speaker": "Coco",
+    "japanese_text": "ああん！？まだ言い訳するってーの！？ならそれを証明する証拠品でも出してみろよ！",
+    "chinese_text": "哈！？\n还在死鸭子嘴硬！？\n那就把证明这件事的证物拿出来看看啊！"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema005",
+    "speaker": "Ema",
+    "japanese_text": "それはきっと、この【証拠品】で証明できると思うよ！",
+    "chinese_text": "这件【证物】肯定可以证明这件事！"
+  },
+  {
+    "dialogue_id": "0101Trial07_Coco010",
+    "speaker": "Coco",
+    "japanese_text": "それのどこが絵を描いてないって証拠になるんだっての！",
+    "chinese_text": "哪个部分\n可以证明她没画画啊！"
+  },
+  {
+    "dialogue_id": "0101Trial07_Coco011",
+    "speaker": "Coco",
+    "japanese_text": "そんなわけわかんない反論するなんて……怪しすぎんだろ！",
+    "chinese_text": "莫名其妙地在那里反驳……\n你也太可疑了！"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema006",
+    "speaker": "Ema",
+    "japanese_text": "（ダメだ……！　証明できなかったみたい……！　もう一度考え直してみよう……！）",
+    "chinese_text": "（不行……！\n好像没法证明……！\n重新再思考一下吧……！）"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema007",
+    "speaker": "Ema",
+    "japanese_text": "（ココちゃんの言葉とは　明らかに矛盾した証拠があるはずだ……！　それを突きつけてみよう！）",
+    "chinese_text": "（应该有证据跟可可的话\n有明显的矛盾才对……！\n把它指出来吧！）"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema008",
+    "speaker": "Ema",
+    "japanese_text": "……ちょっと待って。それはおかしいよ。",
+    "chinese_text": "……等一下，这里很不对劲。"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema009",
+    "speaker": "Ema",
+    "japanese_text": "ノアちゃんはその時、元気がなかったはず……。",
+    "chinese_text": "诺亚当时应该没什么精神才对……"
+  },
+  {
+    "dialogue_id": "0101Trial07_Coco012",
+    "speaker": "Coco",
+    "japanese_text": "ああん！？まだ言い訳するってーの！？ならそれを証明する証拠品でも出してみろよ！",
+    "chinese_text": "哈！？\n还在死鸭子嘴硬！？\n那就把证明这件事的证物拿出来看看啊！"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema010",
+    "speaker": "Ema",
+    "japanese_text": "それはきっと、この【証拠品】で証明できると思うよ！",
+    "chinese_text": "这件【证物】肯定可以证明这件事！"
+  },
+  {
+    "dialogue_id": "0101Trial07_Coco013",
+    "speaker": "Coco",
+    "japanese_text": "それのどこが元気がないって証拠になるんだっての！",
+    "chinese_text": "哪个部分可以证明她没精神啊！"
+  },
+  {
+    "dialogue_id": "0101Trial07_Meruru003",
+    "speaker": "Meruru",
+    "japanese_text": "体調が悪そうな様子はありませんでしたし……それを証明するのは難しいかもしれませんね……。",
+    "chinese_text": "我们当时也看不出她哪里不舒服……\n我想这件事应该很难证明了……"
+  },
+  {
+    "dialogue_id": "0101Trial07_Coco014",
+    "speaker": "Coco",
+    "japanese_text": "そんなわけわかんない反論するなんて……怪しすぎんだろ！",
+    "chinese_text": "莫名其妙地在那里反驳……\n你也太可疑了！"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema011",
+    "speaker": "Ema",
+    "japanese_text": "（ダメだ……！　証明できなかったみたい……！　もう一度考え直してみよう……！）",
+    "chinese_text": "（不行……！\n好像没法证明……！\n重新再思考一下吧……！）"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema012",
+    "speaker": "Ema",
+    "japanese_text": "（ココちゃんの言葉とは　明らかに矛盾した証拠があるはずだ……！　それを突きつけてみよう！）",
+    "chinese_text": "（应该有证据跟可可的话\n有明显的矛盾才对……！\n把它指出来吧！）"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema013",
+    "speaker": "Ema",
+    "japanese_text": "……ちょっと待って。就寝時間のアリバイって成立するのかな？",
+    "chinese_text": "……等一下。\n就寝时间的不在场证明真的能成立吗？"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema014",
+    "speaker": "Ema",
+    "japanese_text": "だって全員が全員、監視しあってたわけじゃないでしょ？もしかしたら誰かが抜け出した可能性だって……。",
+    "chinese_text": "你想想看，不可能所有人都在互相监视吧？\n说不定可能有人偷偷走开了……"
+  },
+  {
+    "dialogue_id": "0101Trial07_Coco015",
+    "speaker": "Coco",
+    "japanese_text": "だから夜は鍵がかけられるって言ってんだろ！",
+    "chinese_text": "不是说了晚上门会上锁吗！"
+  },
+  {
+    "dialogue_id": "0101Trial07_Leia002",
+    "speaker": "Leia",
+    "japanese_text": "それにさすがに同室の者が一晩中いなかったら気付くだろうしね。誰か怪しい人はいるのかい？",
+    "chinese_text": "而且，如果室友一晚上都不见人，\n另一个人肯定会发现吧。\n有人发现哪个人不对劲吗？"
+  },
+  {
+    "dialogue_id": "0101Trial07_Margo002",
+    "speaker": "Margo",
+    "japanese_text": "私たちは大丈夫だったけど……特に他にも怪しい人はいなそうね？",
+    "chinese_text": "我们没发现有什么不对劲……\n其他人也应该没发现有异常吧？"
+  },
+  {
+    "dialogue_id": "0101Trial07_Coco016",
+    "speaker": "Coco",
+    "japanese_text": "だからそれがアリバイになるんだっての！……頭ちゃんとついてんのか！？",
+    "chinese_text": "所以我说构成不在场证明啊！\n……你头里面到底有没有脑子的！？"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema015",
+    "speaker": "Ema",
+    "japanese_text": "（ダメだ……！　たしかにそこに隙はないみたい……！）",
+    "chinese_text": "（不行……！\n这里好像确实没漏洞……！）"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema016",
+    "speaker": "Ema",
+    "japanese_text": "（ココちゃんの言葉とは明らかに矛盾した証拠があるはずだ……！　それを突きつけてみよう！）",
+    "chinese_text": "（应该有证据跟可可的话有明显的矛盾才对……！\n把它指出来吧！）"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema017",
+    "speaker": "Ema",
+    "japanese_text": "……ちょっと待って。それはおかしいよ。",
+    "chinese_text": "……等一下，这里很不对劲。"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema018",
+    "speaker": "Ema",
+    "japanese_text": "少なくともアンアンちゃんはその時間、間違いなく医務室にいたはず……。",
+    "chinese_text": "至少安安在那时，\n肯定就在医务室里面……"
+  },
+  {
+    "dialogue_id": "0101Trial07_Coco017",
+    "speaker": "Coco",
+    "japanese_text": "ああん！？まだ言い訳するってーの！？ならそれを証明する証拠品でも出してみろよ！",
+    "chinese_text": "哈！？\n还在死鸭子嘴硬！？\n那就把证明这件事的证物拿出来看看啊！"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema019",
+    "speaker": "Ema",
+    "japanese_text": "それはきっと、この【証拠品】で証明できると思うよ！",
+    "chinese_text": "这件【证物】肯定可以证明这件事！"
+  },
+  {
+    "dialogue_id": "0101Trial07_Coco018",
+    "speaker": "Coco",
+    "japanese_text": "それのどこがアリバイを証明する証拠になるんだっての！",
+    "chinese_text": "哪个部分可以证明不在场啊！"
+  },
+  {
+    "dialogue_id": "0101Trial07_AnAn001",
+    "speaker": "AnAn",
+    "japanese_text": "『少なくともわがはい自身、アリバイは証明できない』",
+    "chinese_text": "『至少吾辈自身的不在场无法证明』"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema020",
+    "speaker": "Ema",
+    "japanese_text": "あ、あれ……！？そうだっけ……！？",
+    "chinese_text": "欸、欸……！？\n是这样吗……！？"
+  },
+  {
+    "dialogue_id": "0101Trial07_Coco019",
+    "speaker": "Coco",
+    "japanese_text": "もしかしてかばってるとか！？なんにせよエマっち……ドチャクソ怪しいじゃん！",
+    "chinese_text": "难道是在包庇吗！？\n毕竟艾玛亲你……\n真是可疑到冒烟啊！"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema021",
+    "speaker": "Ema",
+    "japanese_text": "（ダメだ……！　ボクの勘違いだったみたい……！　もう一度考え直してみよう……！）",
+    "chinese_text": "（不行……！\n我好像判断错误了……！\n重新再思考一下吧……！）"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema022",
+    "speaker": "Ema",
+    "japanese_text": "（ココちゃんの言葉とは明らかに矛盾した証拠があるはずだ……！　それを突きつけてみよう！）",
+    "chinese_text": "（应该有证据跟可可的话有明显的矛盾才对……！\n把它指出来吧！）"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema023",
+    "speaker": "Ema",
+    "japanese_text": "……ちょっと待って。それはおかしいよ。",
+    "chinese_text": "……等一下，这里很不对劲。"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema024",
+    "speaker": "Ema",
+    "japanese_text": "ボクが自分の部屋にいたことは、証明できるはず……！",
+    "chinese_text": "我应该有办法证明我在自己的房间里……！"
+  },
+  {
+    "dialogue_id": "0101Trial07_Coco020",
+    "speaker": "Coco",
+    "japanese_text": "ああん！？まだ言い訳するってーの！？ならそれを証明する証拠品でも出してみろよ！",
+    "chinese_text": "哈！？\n还在死鸭子嘴硬！？\n那就把证明这件事的证物拿出来看看啊！"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema025",
+    "speaker": "Ema",
+    "japanese_text": "それはきっと、この【証拠品】で証明できると思うよ！",
+    "chinese_text": "这件【证物】肯定可以证明这件事！"
+  },
+  {
+    "dialogue_id": "0101Trial07_Coco021",
+    "speaker": "Coco",
+    "japanese_text": "それのどこがアリバイを証明する証拠になるんだっての！",
+    "chinese_text": "哪个部分可以证明不在场啊！"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema026",
+    "speaker": "Ema",
+    "japanese_text": "あ、あれ……！？できない……かな……？",
+    "chinese_text": "哎、哎呀……！？\n证明不了……吗……？"
+  },
+  {
+    "dialogue_id": "0101Trial07_Coco022",
+    "speaker": "Coco",
+    "japanese_text": "そんなわけわかんない反論するなんて……怪しすぎんだろ！",
+    "chinese_text": "莫名其妙地在那里反驳……\n你也太可疑了！"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema027",
+    "speaker": "Ema",
+    "japanese_text": "（ダメだ……！　怪しまれちゃったみたい……！　もう一度考え直してみよう……！）",
+    "chinese_text": "（不行……！\n惹她怀疑了……！\n重新再思考一下吧……！）"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema028",
+    "speaker": "Ema",
+    "japanese_text": "（ココちゃんの言葉とは明らかに矛盾した証拠があるはずだ……！　それを突きつけてみよう！）",
+    "chinese_text": "（应该有证据跟可可的话有明显的矛盾才对……！\n把它指出来吧！）"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema029",
+    "speaker": "Ema",
+    "japanese_text": "……ちょっと待って。それはおかしいよ。",
+    "chinese_text": "……等一下，这里很不对劲。"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema030",
+    "speaker": "Ema",
+    "japanese_text": "ノアちゃんはその時、足音を立てていないはず……。",
+    "chinese_text": "诺亚她当时应该没发出脚步声才对……"
+  },
+  {
+    "dialogue_id": "0101Trial07_Coco023",
+    "speaker": "Coco",
+    "japanese_text": "ああん！？まだ言い訳するってーの！？ならそれを証明する証拠品でも出してみろよ！",
+    "chinese_text": "哈！？\n还在死鸭子嘴硬！？\n那就把证明这件事的证物拿出来看看啊！"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema031",
+    "speaker": "Ema",
+    "japanese_text": "それはきっと、この【証拠品】で証明できると思うよ！",
+    "chinese_text": "这件【证物】肯定可以证明这件事！"
+  },
+  {
+    "dialogue_id": "0101Trial07_Coco024",
+    "speaker": "Coco",
+    "japanese_text": "それのどこが足音がしてない証拠になるんだっての！",
+    "chinese_text": "哪个部分可以证明她没发出脚步声啊！"
+  },
+  {
+    "dialogue_id": "0101Trial07_Coco025",
+    "speaker": "Coco",
+    "japanese_text": "そんなわけわかんない反論するなんて……怪しすぎんだろ！",
+    "chinese_text": "莫名其妙地在那里反驳……\n你也太可疑了！"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema032",
+    "speaker": "Ema",
+    "japanese_text": "（ダメだ……！　証明できなかったみたい……！　もう一度考え直してみよう……！）",
+    "chinese_text": "（不行……！\n好像没法证明……！\n重新再思考一下吧……！）"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema033",
+    "speaker": "Ema",
+    "japanese_text": "（でも……ココちゃんの言葉は何か部屋の状況と比べて、　違和感があるような……）",
+    "chinese_text": "（可是……可可的发言和房间内的状况，\n好像有哪里有些矛盾……）"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema034",
+    "speaker": "Ema",
+    "japanese_text": "（ココちゃんの言葉とは明らかに矛盾した証拠があるはずだ……！　それを突きつけてみよう！）",
+    "chinese_text": "（应该有证据跟可可的话有明显的矛盾才对……！\n把它指出来吧！）"
+  },
+  {
+    "dialogue_id": "0101Trial07_Coco026",
+    "speaker": "Coco",
+    "japanese_text": "……んん？それのどこが足音がしてない証拠になんの？",
+    "chinese_text": "……嗯？\n哪个部分可以证明她没发出脚步声？"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema035",
+    "speaker": "Ema",
+    "japanese_text": "（ダメだ……！　この証拠品じゃあちゃんとわからないみたい……！　もっと直接、足音がしなかった証拠をつきつけないと……！）",
+    "chinese_text": "（不行……！\n靠这个证物没法清楚地说明……！\n我要拿出可以直接证明没有脚步声的证据……！）"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema036",
+    "speaker": "Ema",
+    "japanese_text": "（ノアちゃんの部屋から足音がしなかった証拠　……それを示す証拠品は、これだ！）",
+    "chinese_text": "（诺亚没有在房间内发出脚步声……\n能证明这件事的证物，就是这个！）"
+  },
+  {
+    "dialogue_id": "0101Trial07_Coco027",
+    "speaker": "Coco",
+    "japanese_text": "それって……現場の写真……？",
+    "chinese_text": "这是……现场的照片……？"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema037",
+    "speaker": "Ema",
+    "japanese_text": "そう……もし足音がしたなら、当然あるはずのものが現場にないんだよ。",
+    "chinese_text": "没错……如果发出了脚步声，\n那么现场就缺了一样应该出现的东西。"
+  },
+  {
+    "dialogue_id": "0101Trial07_Coco028",
+    "speaker": "Coco",
+    "japanese_text": "あ～ん……？",
+    "chinese_text": "啊～嗯……？"
+  },
+  {
+    "dialogue_id": "0101Trial07_Coco029",
+    "speaker": "Coco",
+    "japanese_text": "……あっ！ま、まさか……！",
+    "chinese_text": "……啊！\n难、难道说……！"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema038",
+    "speaker": "Ema",
+    "japanese_text": "そう……。",
+    "chinese_text": "是的……"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema039",
+    "speaker": "Ema",
+    "japanese_text": "【足跡】がないんだ。",
+    "chinese_text": "【足迹】不见了。"
+  },
+  {
+    "dialogue_id": "0101Trial07_Coco030",
+    "speaker": "Coco",
+    "japanese_text": "ぎゃあっ！？",
+    "chinese_text": "嘎！？"
+  },
+  {
+    "dialogue_id": "0101Trial07_Miria002",
+    "speaker": "Miria",
+    "japanese_text": "……あ～、そっか～！そうだよね～！なんかおかしいと思ってたんだ～。",
+    "chinese_text": "……啊～这样啊～！\n原来如此～！\n我就说哪里不对劲～"
+  },
+  {
+    "dialogue_id": "0101Trial07_Miria003",
+    "speaker": "Miria",
+    "japanese_text": "やっぱり足音なんてしてなかったんだよ、ココちゃん。",
+    "chinese_text": "小可，我就说没脚步声了。"
+  },
+  {
+    "dialogue_id": "0101Trial07_Coco031",
+    "speaker": "Coco",
+    "japanese_text": "……あ、あああ、あれ！？そ、そんな！？た、たしかに聞こえた……よう……な……？",
+    "chinese_text": "……啊、啊啊啊、啊呀！？\n怎、怎么会！？\n我、我确实听到了……才……对……？"
+  },
+  {
+    "dialogue_id": "0101Trial07_Miria004",
+    "speaker": "Miria",
+    "japanese_text": "いやあ……聞いてないと思うけどなぁ～……。配信終わりの帰り道、けっこう盛り上がっておしゃべりしてたと思うし……。",
+    "chinese_text": "呃……我觉得是没听到啦～……\n我记得昨天下播回房的路上，\n我们聊得可火热了……"
+  },
+  {
+    "dialogue_id": "0101Trial07_Coco032",
+    "speaker": "Coco",
+    "japanese_text": "あうっ！？……そ、そういえば……。",
+    "chinese_text": "啊呜！？\n……说、说来是这样……"
+  },
+  {
+    "dialogue_id": "0101Trial07_Coco033",
+    "speaker": "Coco",
+    "japanese_text": "で、でもさぁ！さすがにあんだけ血流してたら、においとかで気付くっしょ！？",
+    "chinese_text": "可、可是啊！\n她流了那么多血，\n再怎么说也闻得到血腥味吧！？"
+  },
+  {
+    "dialogue_id": "0101Trial07_Coco034",
+    "speaker": "Coco",
+    "japanese_text": "それで見逃してたら……あてぃしらバカみたいじゃん！そんなの……信じられないって！！",
+    "chinese_text": "如果连这都能没发现……\n那我们几个岂不是傻瓜！\n实在是……难以置信！！"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema040",
+    "speaker": "Ema",
+    "japanese_text": "（たぶんココちゃんは、部屋の中まで見てないんだ……！　ミリアちゃんの話を信じるなら、音も聞いてない……！）",
+    "chinese_text": "（我猜可可她当时并没有往房间里面看……！\n如果米莉亚的话可信，那么连声音也没听到……！）"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema041",
+    "speaker": "Ema",
+    "japanese_text": "（なら、においは？　当時においがしたかどうかがわかる物は……！）",
+    "chinese_text": "（只不过，气味又如何呢？\n能推测当时能否闻到气味的东西是……！）"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema042",
+    "speaker": "Ema",
+    "japanese_text": "（……いや、これはにおいがしたかどうか　わかる証拠にはならないんじゃないかな……）",
+    "chinese_text": "（……不行，这件东西没法证明\n当时能不能闻到气味吧……）"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema043",
+    "speaker": "Ema",
+    "japanese_text": "（もう一度考えなおそう……！　当時においがしたかわかる証拠品は……！）",
+    "chinese_text": "（重新再思考一下吧……！\n能推测当时能否闻到气味的证物是……！）"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema044",
+    "speaker": "Ema",
+    "japanese_text": "……この塗料は、部屋に塗られてたものだよ。",
+    "chinese_text": "……这个就是涂遍整个房间的颜料。"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema045",
+    "speaker": "Ema",
+    "japanese_text": "そしてこの塗料……すごく、においが強いんだ。",
+    "chinese_text": "而这个颜料……\n气味十分浓烈。"
+  },
+  {
+    "dialogue_id": "0101Trial07_Coco035",
+    "speaker": "Coco",
+    "japanese_text": "そ、そうじゃん！そうだよ、覚えてる！ そのにおいだ！",
+    "chinese_text": "对、对哦！\n是这样，我想起来了！就是这股气味！"
+  },
+  {
+    "dialogue_id": "0101Trial07_Coco036",
+    "speaker": "Coco",
+    "japanese_text": "夜に通った時、そのキツイにおいがしてたんだ！鼻を塞ぎたくなるぐらいに強烈でさ！ほら、あてぃしちゃんと覚えて――。",
+    "chinese_text": "晚上路过的时候，就有那股刺鼻的气味！\n浓烈到我想把鼻子都塞住！\n你看，我记得很清楚——"
+  },
+  {
+    "dialogue_id": "0101Trial07_Coco037",
+    "speaker": "Coco",
+    "japanese_text": "――うぐぅっ！？",
+    "chinese_text": "——咕！？"
+  },
+  {
+    "dialogue_id": "0101Trial07_Leia003",
+    "speaker": "Leia",
+    "japanese_text": "……どうやら指摘するまでもなくキミも気付いたようだね。",
+    "chinese_text": "……看来不用我们说\n你也发现了。"
+  },
+  {
+    "dialogue_id": "0101Trial07_Coco038",
+    "speaker": "Coco",
+    "japanese_text": "う、ううう……！そ、そうじゃん……！【キツイにおいがしてた】ってことは――！",
+    "chinese_text": "呜、呜呜呜……！\n是、是这样啊……！\n散发着【刺鼻的气味】就意味着——！"
+  },
+  {
+    "dialogue_id": "0101Trial07_Coco039",
+    "speaker": "Coco",
+    "japanese_text": "――そのときもう死んでたとしても、【血のにおいに気付けなかった】ってことじゃん……！",
+    "chinese_text": "——就算那时已经死了，\n也【无法察觉血液的气味】啊……！"
+  },
+  {
+    "dialogue_id": "0101Trial07_Leia004",
+    "speaker": "Leia",
+    "japanese_text": "……そうだね。私たちは、部屋の中を確認せずに素通りした。中も見ていないし、音も聞いていない――。",
+    "chinese_text": "……是啊。\n我们当时没有确认房内情况，就径直走过了。\n没有看房间里面，也没有听见声音——"
+  },
+  {
+    "dialogue_id": "0101Trial07_Leia005",
+    "speaker": "Leia",
+    "japanese_text": "――そしてたとえ部屋の中で血を流して倒れている者がいても、その匂いは塗料の匂いにかき消され、何もわからなかった……。",
+    "chinese_text": "——而且，就算房间里面\n有人流着血倒在地上，\n血液的气味也被颜料覆盖，什么都闻不到……"
+  },
+  {
+    "dialogue_id": "0101Trial07_Leia006",
+    "speaker": "Leia",
+    "japanese_text": "つまり……私たちは見逃していた可能性があるという事だね。彼女の死体を。",
+    "chinese_text": "也就是说……\n我们有可能错过了\n目击她尸体的机会。"
+  },
+  {
+    "dialogue_id": "0101Trial07_Coco040",
+    "speaker": "Coco",
+    "japanese_text": "うぐっ！？……ぐ、ぐぐ……！",
+    "chinese_text": "呜咕！？\n……咕、咕咕……！"
+  },
+  {
+    "dialogue_id": "0101Trial07_AnAn002",
+    "speaker": "AnAn",
+    "japanese_text": "『そもそも、今の推理には穴があるだろう』",
+    "chinese_text": "『说到底，刚刚的推理也有漏洞吧』"
+  },
+  {
+    "dialogue_id": "0101Trial07_AnAn003",
+    "speaker": "AnAn",
+    "japanese_text": "『今朝のわがはいは、扉のロックが開いてすぐに　自分の部屋へと向かった』",
+    "chinese_text": "『今天早上门锁打开后不久，\n吾辈就动身回自己房间了』"
+  },
+  {
+    "dialogue_id": "0101Trial07_AnAn004",
+    "speaker": "AnAn",
+    "japanese_text": "『そしてそこに、ちょうどエマが現れて同時に死体を発見した』",
+    "chinese_text": "『而艾玛也刚好在那时出现，同时又发现了尸体』"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema046",
+    "speaker": "Ema",
+    "japanese_text": "あっ……そういえばそうだったね。ということは……。",
+    "chinese_text": "啊……听你一说好像是这样。\n那就是说……"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema047",
+    "speaker": "Ema",
+    "japanese_text": "ボクから、アンアンちゃんが隣の部屋に潜んでなかったって証言できるかも……。",
+    "chinese_text": "我应该可以作证，\n安安没有藏在隔壁的房间里……"
+  },
+  {
+    "dialogue_id": "0101Trial07_Nanoka001",
+    "speaker": "Nanoka",
+    "japanese_text": "……それを言うなら私も証言できるわ。",
+    "chinese_text": "……你这么说，我应该也可以作证。"
+  },
+  {
+    "dialogue_id": "0101Trial07_Margo003",
+    "speaker": "Margo",
+    "japanese_text": "朝は静かだものね。",
+    "chinese_text": "因为今天早上非常安静。"
+  },
+  {
+    "dialogue_id": "0101Trial07_Margo004",
+    "speaker": "Margo",
+    "japanese_text": "今日は朝から私たち２人とも起きていたし、音でわかると思うわ。",
+    "chinese_text": "今天我们两个一早就都起来了，\n我想，只要听声音就知道了。"
+  },
+  {
+    "dialogue_id": "0101Trial07_Margo005",
+    "speaker": "Margo",
+    "japanese_text": "……まあ、死んでたのには気付かなかったんだけどね？",
+    "chinese_text": "……不过，我们倒是没发现死了人哦？"
+  },
+  {
+    "dialogue_id": "0101Trial07_Nanoka002",
+    "speaker": "Nanoka",
+    "japanese_text": "…………そうね。",
+    "chinese_text": "…………是啊。"
+  },
+  {
+    "dialogue_id": "0101Trial07_AnAn005",
+    "speaker": "AnAn",
+    "japanese_text": "『２人の証言と、わがはいとエマ双方の目撃証言を組み合わせれば　わがはいたちが部屋から出ていない事を証明できるのでは？』",
+    "chinese_text": "『结合她们两个的证词，以及吾辈和艾玛双方的目击证词，\n应该能证明我们未走出过房间吧？』"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema048",
+    "speaker": "Ema",
+    "japanese_text": "そう……かもしれない。",
+    "chinese_text": "应该……可以吧。"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema049",
+    "speaker": "Ema",
+    "japanese_text": "ボクとアンアンちゃん、それにナノカちゃんとマーゴちゃんの４人の証言を合わせて証明できるのは……。",
+    "chinese_text": "结合我和安安，\n以及奈叶香和玛格\n四个人的证词，可以证明的事是……"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema050",
+    "speaker": "Ema",
+    "japanese_text": "それってつまり、朝まで誰でも犯行可能だった……ってことだよね？",
+    "chinese_text": "就是说，到早上为止谁都有可能作案……\n对吧？"
+  },
+  {
+    "dialogue_id": "0101Trial07_Nanoka003",
+    "speaker": "Nanoka",
+    "japanese_text": "いいえ、全然違うわ。",
+    "chinese_text": "不，完全不对。"
+  },
+  {
+    "dialogue_id": "0101Trial07_Margo006",
+    "speaker": "Margo",
+    "japanese_text": "夜間の扉には鍵がかかっているのよ、エマちゃん。",
+    "chinese_text": "艾玛，晚上的房门可是上锁的哦。"
+  },
+  {
+    "dialogue_id": "0101Trial07_AnAn006",
+    "speaker": "AnAn",
+    "japanese_text": "『いちからか？ いちから説明しないとダメか？』",
+    "chinese_text": "『要从头讲吗？不从头讲你就搞不明白吗？』"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema051",
+    "speaker": "Ema",
+    "japanese_text": "（まずい……！ 呆れられてるみたい……！）",
+    "chinese_text": "（不好……！被人当傻瓜看了……！）"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema052",
+    "speaker": "Ema",
+    "japanese_text": "（もう一度考えてみよう……！）",
+    "chinese_text": "（重新思考一下吧……！）"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema053",
+    "speaker": "Ema",
+    "japanese_text": "（朝にノアちゃんの部屋から誰も出て来てないってことは、　【誰もそこに潜むことができなかった】って事だから……）",
+    "chinese_text": "（早上没人从诺亚的房间里走出来，\n意味着【没有人可以藏身在那里】……）"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema054",
+    "speaker": "Ema",
+    "japanese_text": "ノアちゃんが殺されたのって……もしかして早朝だったんじゃないかな……！？",
+    "chinese_text": "难道说诺亚遇害的时间……\n就是一大清早……！？"
+  },
+  {
+    "dialogue_id": "0101Trial07_Nanoka004",
+    "speaker": "Nanoka",
+    "japanese_text": "……どうしてそう思ったの。",
+    "chinese_text": "……为什么你会这么想。"
+  },
+  {
+    "dialogue_id": "0101Trial07_Margo007",
+    "speaker": "Margo",
+    "japanese_text": "そんな話、誰かしてたかしら？",
+    "chinese_text": "有人这么说过吗？"
+  },
+  {
+    "dialogue_id": "0101Trial07_AnAn007",
+    "speaker": "AnAn",
+    "japanese_text": "『わがはいには理解できない』",
+    "chinese_text": "『吾辈无法理解』"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema055",
+    "speaker": "Ema",
+    "japanese_text": "（呆れられちゃった……！）",
+    "chinese_text": "（让大家傻眼了……！）"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema056",
+    "speaker": "Ema",
+    "japanese_text": "（もう一度考えてみよう……！）",
+    "chinese_text": "（重新思考一下吧……！）"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema057",
+    "speaker": "Ema",
+    "japanese_text": "（朝にノアちゃんの部屋から誰も出て来てないってことは、　【誰もそこに潜むことができなかった】って事だから……）",
+    "chinese_text": "（早上没人从诺亚的房间里走出来，\n意味着【没有人可以藏身在那里】……）"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema058",
+    "speaker": "Ema",
+    "japanese_text": "夜時間の間は、【誰もノアちゃんの部屋に入れなかった】って事だよね。",
+    "chinese_text": "就是说在夜晚\n【没人能进诺亚的房间】才对。"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema059",
+    "speaker": "Ema",
+    "japanese_text": "もし夜時間の間に誰かがいたのだとしたら、朝まで閉じ込められていたはずだし……。",
+    "chinese_text": "如果晚上有人在诺亚的房间里，\n这个人应该会被关到第二天早上……"
+  },
+  {
+    "dialogue_id": "0101Trial07_Margo008",
+    "speaker": "Margo",
+    "japanese_text": "あらあら、それじゃあ結局就寝時間の間に殺すことは最初からできなかったのね？",
+    "chinese_text": "哎呀呀，就是说到头来\n根本不可能有人\n在就寝时间内下手，对吧？"
+  },
+  {
+    "dialogue_id": "0101Trial07_Hanna001",
+    "speaker": "Hanna",
+    "japanese_text": "えーと……ということはつまり、どういうことなんですの？",
+    "chinese_text": "呃……那究竟\n说明了什么呢？"
+  },
+  {
+    "dialogue_id": "0101Trial07_Sherry001",
+    "speaker": "Sherry",
+    "japanese_text": "ノアさんの部屋には朝まで誰も侵入できず、死体は朝に発見された……。",
+    "chinese_text": "到早上为止没人能侵入诺亚的房间，\n而尸体是早上被发现的……"
+  },
+  {
+    "dialogue_id": "0101Trial07_Sherry002",
+    "speaker": "Sherry",
+    "japanese_text": "つまりノアさんは、【昨夜の時点で死んでいた】ということですね～！",
+    "chinese_text": "也就是说，\n诺亚她\n【在昨晚就已经死掉了】～！"
+  },
+  {
+    "dialogue_id": "0101Trial07_Nanoka005",
+    "speaker": "Nanoka",
+    "japanese_text": "……昨晩、配信していた３人が部屋の前を通ったときは、やはり彼女の部屋に死体があったみたいね。",
+    "chinese_text": "……看来昨晚直播的三人组路过房间的时候，\n她其实已经死了。"
+  },
+  {
+    "dialogue_id": "0101Trial07_Coco041",
+    "speaker": "Coco",
+    "japanese_text": "……マジぃ？じゃああてぃし、死体あったの見逃してたってこと……？",
+    "chinese_text": "……真的假的？\n那我就是看漏了尸体咯……？"
+  },
+  {
+    "dialogue_id": "0101Trial07_Leia007",
+    "speaker": "Leia",
+    "japanese_text": "……どうやらそのようだね。",
+    "chinese_text": "……看来的确如此。"
+  },
+  {
+    "dialogue_id": "0101Trial07_Miria005",
+    "speaker": "Miria",
+    "japanese_text": "本当にノアちゃんのご遺体……スルーしちゃってたんだね……。",
+    "chinese_text": "我们真的漏发现……\n诺亚的遗体了啊……"
+  },
+  {
+    "dialogue_id": "0101Trial07_Coco042",
+    "speaker": "Coco",
+    "japanese_text": "うええ……そんなことある……？",
+    "chinese_text": "欸欸……这真的合理吗……？"
+  },
+  {
+    "dialogue_id": "0101Trial07_Miria006",
+    "speaker": "Miria",
+    "japanese_text": "……ま、まあまあ。３人ともが見逃してたんだし…！ココちゃんが責任を感じることないよ……。",
+    "chinese_text": "……唉，别想太多，\n毕竟我们三个人都漏掉了……！\n这不全是你一个人的责任啦……"
+  },
+  {
+    "dialogue_id": "0101Trial07_Coco043",
+    "speaker": "Coco",
+    "japanese_text": "……んなこと当たり前だろ！あてぃしだけの責任にしたら許さねーぞザコスケ！",
+    "chinese_text": "……那不然呢！\n要是把责任都推我头上，\n我可饶不了你，你个龙套女！"
+  },
+  {
+    "dialogue_id": "0101Trial07_Miria007",
+    "speaker": "Miria",
+    "japanese_text": "はう……！？足音がしたとか勘違いしてたのはココちゃんなのに……！",
+    "chinese_text": "呀……！？\n明明误以为有脚步声的\n是你才对……！"
+  },
+  {
+    "dialogue_id": "0101Trial07_Sherry003",
+    "speaker": "Sherry",
+    "japanese_text": "しかしそうなると、死亡推定時刻がだいぶ絞られて来るんじゃないですか？",
+    "chinese_text": "不过，这么一来我们就能\n大概排查出可能的推定死亡时间了吧？"
+  },
+  {
+    "dialogue_id": "0101Trial07_Sherry004",
+    "speaker": "Sherry",
+    "japanese_text": "みなさんの夕飯の終了時間はだいたい２０時。そして就寝時間は２２時ですね。",
+    "chinese_text": "大家晚餐的结束时间都在晚上8点左右。\n然后就寝时间是在晚上10点，对吧。"
+  },
+  {
+    "dialogue_id": "0101Trial07_Sherry005",
+    "speaker": "Sherry",
+    "japanese_text": "なので、この２時間の間に犯行が行われたことになります。",
+    "chinese_text": "那么，可以判断凶案就是在这2小时内发生的。"
+  },
+  {
+    "dialogue_id": "0101Trial07_Miria008",
+    "speaker": "Miria",
+    "japanese_text": "……あっ。でもそれなら、配信してた３人は２１時から２２時までのほとんどの時間【アリバイがある】って言えるかな……？",
+    "chinese_text": "……啊。可是这样一来，\n我们直播的三人算是\n在晚上9到10点都【有不在场证明】吗……？"
+  },
+  {
+    "dialogue_id": "0101Trial07_Hanna002",
+    "speaker": "Hanna",
+    "japanese_text": "わたくしとメルルさんも、部屋で配信を見ていましたわー！",
+    "chinese_text": "我和梅露露一起在房间里看了直播！"
+  },
+  {
+    "dialogue_id": "0101Trial07_Alisa001",
+    "speaker": "Alisa",
+    "japanese_text": "……ウチは配信なんて見てねーけど。",
+    "chinese_text": "……我那时没看直播。"
+  },
+  {
+    "dialogue_id": "0101Trial07_Sherry006",
+    "speaker": "Sherry",
+    "japanese_text": "でもアリサさんがその時間部屋にいたのは私が証言できますね～！私も部屋で配信を見ていたので！",
+    "chinese_text": "不过我可以作证\n亚里沙那时在房间里～！\n因为我也在房间里看了直播！"
+  },
+  {
+    "dialogue_id": "0101Trial07_Margo009",
+    "speaker": "Margo",
+    "japanese_text": "あら、それを言うなら私も配信を見ながらだけど、部屋にナノカちゃんがいるのを見てるわ。",
+    "chinese_text": "哎呀，这么说的话，虽然我也是在看直播，\n不过我有看到奈叶香在房间里。"
+  },
+  {
+    "dialogue_id": "0101Trial07_Nanoka006",
+    "speaker": "Nanoka",
+    "japanese_text": "……そうね。その間あなたは、トイレにすら立たなかった。",
+    "chinese_text": "……是啊。\n那时你全程连洗手间都没去。"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema060",
+    "speaker": "Ema",
+    "japanese_text": "ボクはそのとき……えっと。",
+    "chinese_text": "我在那时……呃。"
+  },
+  {
+    "dialogue_id": "0101Trial07_AnAn008",
+    "speaker": "AnAn",
+    "japanese_text": "…………。",
+    "chinese_text": "…………"
+  },
+  {
+    "dialogue_id": "0101Trial07_AnAn009",
+    "speaker": "AnAn",
+    "japanese_text": "『配信の間、医務室にエマがいた事はわがはいが証明できる』",
+    "chinese_text": "『吾辈可以证明，直播的时候艾玛在医务室内』"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema061",
+    "speaker": "Ema",
+    "japanese_text": "……うん。ボクらあのとき、医務室で一緒に配信を見てたんだ。",
+    "chinese_text": "……嗯。\n那时我们在医务室里一起看了直播。"
+  },
+  {
+    "dialogue_id": "0101Trial07_Coco044",
+    "speaker": "Coco",
+    "japanese_text": "じゃあほとんど全員見てたってこと！？いや～、やっぱあてぃしの配信人気過ぎるな～！超人気コンテンツじゃん！",
+    "chinese_text": "那就是几乎所有人都在看咯！？\n哎呀～看来我的直播人气真的太火爆了～！\n简直就是超人气节目！"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema062",
+    "speaker": "Ema",
+    "japanese_text": "……はは。",
+    "chinese_text": "……哈哈。"
+  },
+  {
+    "dialogue_id": "0101Trial07_Coco045",
+    "speaker": "Coco",
+    "japanese_text": "鼻で笑うなし！",
+    "chinese_text": "不许嘲笑我！"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema063",
+    "speaker": "Ema",
+    "japanese_text": "そ、そんなつもりじゃ……！",
+    "chinese_text": "我、我才没有嘲笑……！"
+  },
+  {
+    "dialogue_id": "0101Trial07_Sherry007",
+    "speaker": "Sherry",
+    "japanese_text": "まとめると、ノアさんが生きているのが確認された１９時以降、２０時～２１時以外は全員にアリバイがあるという事ですね！",
+    "chinese_text": "整理一下，\n诺亚确认还活着的时间是晚上7点以后，\n而除了晚上8～9点之外所有人都有不在场证明，对吧！"
+  },
+  {
+    "dialogue_id": "0101Trial07_Coco046",
+    "speaker": "Coco",
+    "japanese_text": "……あ！っていうかあてぃし、２０時から２１時だったらそこのザコと配信準備してたけど？",
+    "chinese_text": "……啊！\n我想起来，晚上8到9点\n我在跟那边的龙套女一起做直播的准备欸？"
+  },
+  {
+    "dialogue_id": "0101Trial07_Miria009",
+    "speaker": "Miria",
+    "japanese_text": "ああ、そうだね。夕飯の後はずっとココちゃんに手伝わされてたから、お互いにアリバイを証明できると思うよ。",
+    "chinese_text": "嗯，是啊。\n晚餐后我就一直被她使唤，\n我想我们两个的不在场应该能互相证明。"
+  },
+  {
+    "dialogue_id": "0101Trial07_Coco047",
+    "speaker": "Coco",
+    "japanese_text": "だからあてぃしたちが共犯でもない限り、ここの２人は 絶対犯人じゃねーってこと！犯人はご愁傷さま～♪",
+    "chinese_text": "所以只要我们两个不是共犯，\n我们两个就绝不可能是凶手！\n可惜我们不是凶手～♪"
+  },
+  {
+    "dialogue_id": "0101Trial07_Sherry008",
+    "speaker": "Sherry",
+    "japanese_text": "では他のみなさんのその時間帯は……。",
+    "chinese_text": "那其他人在这个时间段里面的行动是……"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema064",
+    "speaker": "Ema",
+    "japanese_text": "夕飯直後から配信にかけて……？たしかその時って……。",
+    "chinese_text": "晚餐之后到直播开始前吗……？\n记得我那时好像……"
+  },
+  {
+    "dialogue_id": "0101Trial07_Margo010",
+    "speaker": "Margo",
+    "japanese_text": "そのときは娯楽室にいたわね。エマちゃんとも会ってるわ。時計を見ていたから時間も間違いないと思うけど。",
+    "chinese_text": "那时在娱乐室里\n我跟艾玛碰了面。\n我当时看了时钟，应该没搞错时间。"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema065",
+    "speaker": "Ema",
+    "japanese_text": "マーゴちゃんと……？あっ、それってあの時の……！",
+    "chinese_text": "那时我和你在一起……？\n啊，那时好像是……！"
+  },
+  {
+    "dialogue_id": "0101Trial07_Nanoka007",
+    "speaker": "Nanoka",
+    "japanese_text": "……リボンを探していたときね。",
+    "chinese_text": "……那时在找我的发带。"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema066",
+    "speaker": "Ema",
+    "japanese_text": "そうだ……。ナノカちゃんが無くしたリボンを探してて、娯楽室でアリサちゃんと……。",
+    "chinese_text": "对……\n那时我们在找奈叶香不见了的发带，\n在娱乐室碰见了亚里沙……"
+  },
+  {
+    "dialogue_id": "0101Trial07_Sherry009",
+    "speaker": "Sherry",
+    "japanese_text": "当時の時間については私も確認していますね～！２０時から２１時頃までかかったと思いますよ！",
+    "chinese_text": "当时我也有确认时间哦～！\n晚上8点到9点之间我们应该还在那里！"
+  },
+  {
+    "dialogue_id": "0101Trial07_Hanna003",
+    "speaker": "Hanna",
+    "japanese_text": "……あのとき、ひとりになった人はいなかったと思いますわ。わたくし、なんとか止めたくて皆さんの様子を見ていましたし。",
+    "chinese_text": "……我觉得那时应该没有人落单。\n那时我也想劝架，在旁边观察着大家的情况。"
+  },
+  {
+    "dialogue_id": "0101Trial07_Sherry010",
+    "speaker": "Sherry",
+    "japanese_text": "あのとき見たのは、エマさんと、ハンナさんとメルルさんと……。",
+    "chinese_text": "当时我们见到的人有艾玛、汉娜、\n梅露露……"
+  },
+  {
+    "dialogue_id": "0101Trial07_Margo011",
+    "speaker": "Margo",
+    "japanese_text": "私と、アリサちゃんは娯楽室にいて、そこにナノカちゃんが来たわね。",
+    "chinese_text": "在娱乐室的还有我和亚里沙，\n之后奈叶香也来了。"
+  },
+  {
+    "dialogue_id": "0101Trial07_Hanna004",
+    "speaker": "Hanna",
+    "japanese_text": "……あ、あら？ ならそのときも、大半の人にアリバイがあるということですわね……？なら誰が……。",
+    "chinese_text": "……啊、啊呀？这么说，当时有\n一大半的人都有不在场证明欸……？\n究竟还有谁可以行凶……"
+  },
+  {
+    "dialogue_id": "0101Trial07_Alisa002",
+    "speaker": "Alisa",
+    "japanese_text": "……おいおい、ふざけてんのか？長い時間アリバイがない奴、そこにひとりいるじゃねーか。",
+    "chinese_text": "……喂，你开什么玩笑？\n不是有那么一个人\n很长时间都没有不在场证明吗。"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema067",
+    "speaker": "Ema",
+    "japanese_text": "長い時間アリバイのない人……それって。",
+    "chinese_text": "有一个人长时间没有不在场证明……那就是。"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema068",
+    "speaker": "Ema",
+    "japanese_text": "……ボクのこと？ でもボクは……。",
+    "chinese_text": "……是我吗？可是我……"
+  },
+  {
+    "dialogue_id": "0101Trial07_Alisa003",
+    "speaker": "Alisa",
+    "japanese_text": "ちげぇよ。……お前、人の話を整理するの苦手なのか？",
+    "chinese_text": "才不对。\n……我说你，连整理别人说过的话都不会吗？"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema069",
+    "speaker": "Ema",
+    "japanese_text": "（あう……。怒らせちゃったみたい……）",
+    "chinese_text": "（呜……惹她生气了……）"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema070",
+    "speaker": "Ema",
+    "japanese_text": "（もう一度……考えてみよう……！　時系列を整理するんだ……！）",
+    "chinese_text": "（重新……再想想……！\n我要按时间顺序整理一下……！）"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema071",
+    "speaker": "Ema",
+    "japanese_text": "……それって、アンアンちゃんのこと？でもアンアンちゃんはボクが医務室で……。",
+    "chinese_text": "……是安安？\n可是安安和我都在医务室里……"
+  },
+  {
+    "dialogue_id": "0101Trial07_Alisa004",
+    "speaker": "Alisa",
+    "japanese_text": "べつに病人を疑ってるわけじゃねーよ。もう１人いるだろ。アリバイのないヤツが。",
+    "chinese_text": "我没打算怀疑病人啦。\n没有不在场证明的\n不是还有一个人吗。"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema072",
+    "speaker": "Ema",
+    "japanese_text": "……それって……。",
+    "chinese_text": "……这个人就是……"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema073",
+    "speaker": "Ema",
+    "japanese_text": "レイアちゃんのこと……だよね？",
+    "chinese_text": "蕾雅……是你没错吧？"
+  },
+  {
+    "dialogue_id": "0101Trial07_Leia008",
+    "speaker": "Leia",
+    "japanese_text": "…………。",
+    "chinese_text": "…………"
+  },
+  {
+    "dialogue_id": "0101Trial07_Meruru004",
+    "speaker": "Meruru",
+    "japanese_text": "……そういえば、あの出来事があったあと、レイアさんとお会いしましたね……。",
+    "chinese_text": "……说起来，出了那件事之后，\n你好像碰见过蕾雅……"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema074",
+    "speaker": "Ema",
+    "japanese_text": "……レイアちゃん。あのときキミは……いったいどこで、何をしていたの……？",
+    "chinese_text": "……蕾雅。\n那时……\n你到底待在什么地方，做了什么事……？"
+  },
+  {
+    "dialogue_id": "0101Trial07_Leia009",
+    "speaker": "Leia",
+    "japanese_text": "…………。",
+    "chinese_text": "…………"
+  },
+  {
+    "dialogue_id": "0101Trial07_Leia010",
+    "speaker": "Leia",
+    "japanese_text": "……さて、なんだったかな。",
+    "chinese_text": "……唔，我做了什么呢。"
+  },
+  {
+    "dialogue_id": "0101Trial07_Ema075",
+    "speaker": "Ema",
+    "japanese_text": "え……？",
+    "chinese_text": "欸……？"
+  },
+  {
+    "dialogue_id": "0101Trial07_Leia011",
+    "speaker": "Leia",
+    "japanese_text": "申し訳ないけれど、あまり覚えていないよ。",
+    "chinese_text": "真不好意思，我记不太清楚了。"
+  },
+  {
+    "dialogue_id": "0101Trial07_Alisa005",
+    "speaker": "Alisa",
+    "japanese_text": "……んな言い訳、通ると思ってんのか？",
+    "chinese_text": "……你觉得你这个借口说得通吗？"
+  },
+  {
+    "dialogue_id": "0101Trial07_Leia012",
+    "speaker": "Leia",
+    "japanese_text": "そんなことを言われても……困ったな。本当に覚えていないんだし……。",
+    "chinese_text": "你要这样怀疑我也没办法……真头疼，\n我真的不记得了……"
+  },
+  {
+    "dialogue_id": "0101Trial07_Leia013",
+    "speaker": "Leia",
+    "japanese_text": "人の記憶は信用できないものだ。さっきのココくんの話を思い返してみなよ。",
+    "chinese_text": "人的记忆是不可信的。\n回想一下刚刚可可说的话吧。"
+  },
+  {
+    "dialogue_id": "0101Trial07_Leia014",
+    "speaker": "Leia",
+    "japanese_text": "私たちが部屋を通ったとき、ココくんはノアくんが【まだ生きていた】と言っていた……。",
+    "chinese_text": "她说，\n我们经过房间的时候\n诺亚【还活着】……"
+  },
+  {
+    "dialogue_id": "0101Trial07_Leia015",
+    "speaker": "Leia",
+    "japanese_text": "けど、実際は勘違いだった。……このように人の記憶というものはなかなか信用できないものなのさ。",
+    "chinese_text": "可结果是她搞错了。\n……也证明了人的记忆\n实在不可置信。"
+  },
+  {
+    "dialogue_id": "0101Trial07_Coco048",
+    "speaker": "Coco",
+    "japanese_text": "うぐ……！たしかにさっきは……そうだったけど……。",
+    "chinese_text": "呜……！\n刚刚确实……是我搞错了……"
+  },
+  {
+    "dialogue_id": "0101Trial07_Leia016",
+    "speaker": "Leia",
+    "japanese_text": "……まあ、疑われたままでも気持ちが悪いし、少しだけ自己弁護をさせてもらおうかな。",
+    "chinese_text": "……不过，被人怀疑总归是难受的。\n可不可以让我自辩一下清白呢？"
+  },
+  {
+    "dialogue_id": "0101Trial07_Leia017",
+    "speaker": "Leia",
+    "japanese_text": "その時私が何をしていたか……をね。",
+    "chinese_text": "说明一下我当时究竟做了什么……"
+  }
+]

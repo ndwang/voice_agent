@@ -1,0 +1,272 @@
+[
+  {
+    "dialogue_id": "0101Adv34_Narrative001",
+    "speaker": "[Narrative]",
+    "japanese_text": "長い調査の末、すっかり陽が暮れて――",
+    "chinese_text": "经过漫长的调查，\n太阳也快要下山了——"
+  },
+  {
+    "dialogue_id": "0101Adv34_Narrative002",
+    "speaker": "[Narrative]",
+    "japanese_text": "今まで聞いたことのない、荘厳な鐘の音が牢屋敷に響きわたった。",
+    "chinese_text": "此时，一道从未听过的\n庄严的钟声响彻整座监牢。"
+  },
+  {
+    "dialogue_id": "0101Adv34_Narrative003",
+    "speaker": "[Narrative]",
+    "japanese_text": "弾かれるように、エマ、シェリー、ハンナは顔を上げる。",
+    "chinese_text": "艾玛、雪莉、汉娜三人一个激灵，\n抬起了头。"
+  },
+  {
+    "dialogue_id": "0101Adv34_Hanna001",
+    "speaker": "Hanna",
+    "japanese_text": "鐘の音……。",
+    "chinese_text": "是钟声……"
+  },
+  {
+    "dialogue_id": "0101Adv34_Sherry001",
+    "speaker": "Sherry",
+    "japanese_text": "これってもしかして……。",
+    "chinese_text": "难道说……"
+  },
+  {
+    "dialogue_id": "0101Adv34_Narrative004",
+    "speaker": "[Narrative]",
+    "japanese_text": "『魔女裁判の時間となりました』",
+    "chinese_text": "『魔女审判即将开始』"
+  },
+  {
+    "dialogue_id": "0101Adv34_Narrative005",
+    "speaker": "[Narrative]",
+    "japanese_text": "『皆さん、必ず自身のスマホを持って、　速やかに裁判所に集合してください』",
+    "chinese_text": "『请大家务必带好自己的手机，\n迅速到审判庭集合』"
+  },
+  {
+    "dialogue_id": "0101Adv34_Narrative006",
+    "speaker": "[Narrative]",
+    "japanese_text": "『従わない者は看守によって　強制連行します』",
+    "chinese_text": "『如有不遵守者，将由看守强制带走』"
+  },
+  {
+    "dialogue_id": "0101Adv34_Narrative007",
+    "speaker": "[Narrative]",
+    "japanese_text": "ゴクチョーからのメッセージは、予想したとおりのものだった。",
+    "chinese_text": "典狱长传来的信息\n和预想中的一样。"
+  },
+  {
+    "dialogue_id": "0101Adv34_Ema001",
+    "speaker": "Ema",
+    "japanese_text": "（時間切れだ……）",
+    "chinese_text": "（到时间了……）"
+  },
+  {
+    "dialogue_id": "0101Adv34_Sherry002",
+    "speaker": "Sherry",
+    "japanese_text": "行くしかないですね。",
+    "chinese_text": "只好过去了呢。"
+  },
+  {
+    "dialogue_id": "0101Adv34_Narrative008",
+    "speaker": "[Narrative]",
+    "japanese_text": "シェリーがお手上げと肩をすくめ、エマもハンナも渋々と頷き、通路を歩きだした。",
+    "chinese_text": "雪莉摊开双手耸了耸肩。\n艾玛和汉娜不情不愿地点了点头，开始在过道上移动。"
+  },
+  {
+    "dialogue_id": "0101Adv34_Narrative009",
+    "speaker": "[Narrative]",
+    "japanese_text": "これまで牢屋敷を何度か探索してきたが、鍵がかかって開かなかった大部屋――",
+    "chinese_text": "她们数次探索这座监牢，\n但因为上锁，从未踏足过这个大房间——"
+  },
+  {
+    "dialogue_id": "0101Adv34_Narrative010",
+    "speaker": "[Narrative]",
+    "japanese_text": "そこが、裁判所だった。",
+    "chinese_text": "而这间大房间，就是审判庭。"
+  },
+  {
+    "dialogue_id": "0101Adv34_Narrative011",
+    "speaker": "[Narrative]",
+    "japanese_text": "ホールのように広い室内中央には意味深な台座があり、それを取り囲む形で、ぐるりと証言台が並んでいた。",
+    "chinese_text": "和大厅一样宽阔的室内，中心有一个耐人寻味的底座。\n十数个证人席绕着底座围成了一圈。"
+  },
+  {
+    "dialogue_id": "0101Adv34_Narrative012",
+    "speaker": "[Narrative]",
+    "japanese_text": "証言台には各囚人の番号が振ってあり、席は決められているらしい。",
+    "chinese_text": "证人席上标记有各自的囚犯编号，\n每个人的座位都已分配好了。"
+  },
+  {
+    "dialogue_id": "0101Adv34_Narrative013",
+    "speaker": "[Narrative]",
+    "japanese_text": "出入口の大扉の前には、見張りなのか看守が立っている。",
+    "chinese_text": "而出入口大门处，\n看守正在站岗放哨。"
+  },
+  {
+    "dialogue_id": "0101Adv34_Narrative014",
+    "speaker": "[Narrative]",
+    "japanese_text": "そして、高い位置の手すりで羽を休めているゴクチョーが喋りはじめた。",
+    "chinese_text": "此时，典狱长站在高处的栏杆上，\n开口说道。"
+  },
+  {
+    "dialogue_id": "0101Adv34_Warden001",
+    "speaker": "Warden",
+    "japanese_text": "あのー……まずは魔女裁判のルールについて説明しますね。",
+    "chinese_text": "嗯……首先我要说明一下\n魔女审判的规则。"
+  },
+  {
+    "dialogue_id": "0101Adv34_Warden002",
+    "speaker": "Warden",
+    "japanese_text": "１時間の議論の後、犯人と思われる人物に各自の端末で投票してもらいます。",
+    "chinese_text": "经过1小时的辩论之后，\n我会请各位用你们的手机投票，选出你们心中认定的凶手。"
+  },
+  {
+    "dialogue_id": "0101Adv34_Warden003",
+    "speaker": "Warden",
+    "japanese_text": "投票で魔女に決められた人物は中央の台座へと連行、処刑執行になる……て感じです。",
+    "chinese_text": "而在投票中被选为魔女的人物，\n会被带到中间的底座处，执行处刑……大概就这样。"
+  },
+  {
+    "dialogue_id": "0101Adv34_Narrative015",
+    "speaker": "[Narrative]",
+    "japanese_text": "１１名の少女たちは証言台に立ち、お互いを探り合うようにじっとにらみ合っている。",
+    "chinese_text": "11位少女站在证人席上，\n彼此试探着，向对方投去尖锐的视线。"
+  },
+  {
+    "dialogue_id": "0101Adv34_Ema002",
+    "speaker": "Ema",
+    "japanese_text": "（犯人を、魔女を確定させないと……　でも、一体誰なの……？）",
+    "chinese_text": "（必须要选出一位魔女……\n可凶手究竟是谁……？）"
+  },
+  {
+    "dialogue_id": "0101Adv34_Alisa001",
+    "speaker": "Alisa",
+    "japanese_text": "１時間もいらねーよ。さっさと投票して終わらせろ！",
+    "chinese_text": "一小时都用不着。\n赶紧投票赶紧结束吧！"
+  },
+  {
+    "dialogue_id": "0101Adv34_Margo001",
+    "speaker": "Margo",
+    "japanese_text": "あら、それならあなたが犯人だって名乗り出てくれるかしら？",
+    "chinese_text": "哎呀，那你愿不愿意自告奋勇\n说自己就是凶手呢？"
+  },
+  {
+    "dialogue_id": "0101Adv34_Margo002",
+    "speaker": "Margo",
+    "japanese_text": "そうしたらお話は簡単に終わるけれど。",
+    "chinese_text": "这样一来，这事很快就可以结束了。"
+  },
+  {
+    "dialogue_id": "0101Adv34_Alisa002",
+    "speaker": "Alisa",
+    "japanese_text": "……ウチは殺ってねえ。疑うのは勝手だけどな。覚えのない殺人犯になるつもりはねえよ！",
+    "chinese_text": "……人不是我杀的。你要怀疑随便你，\n但不是我的杀人黑锅，我可不打算背！"
+  },
+  {
+    "dialogue_id": "0101Adv34_Coco001",
+    "speaker": "Coco",
+    "japanese_text": "いやぁ、アンタ何人か殺してそうだけどね～？ほんとは殺したんじゃないの～？",
+    "chinese_text": "哈，我看你就是一副杀过好几个人的样子欸～？\n其实人就是你杀的吧～？"
+  },
+  {
+    "dialogue_id": "0101Adv34_Coco002",
+    "speaker": "Coco",
+    "japanese_text": "あてぃし、アリサに投票しちゃおっかな～。",
+    "chinese_text": "要不要把票投给亚里沙呢～"
+  },
+  {
+    "dialogue_id": "0101Adv34_Alisa003",
+    "speaker": "Alisa",
+    "japanese_text": "てめえ……っ",
+    "chinese_text": "你这家伙……"
+  },
+  {
+    "dialogue_id": "0101Adv34_Narrative016",
+    "speaker": "[Narrative]",
+    "japanese_text": "早速火花を散らし始めた少女らに、エマは萎縮してしまう。",
+    "chinese_text": "少女们很快便火星四溅起来，\n令艾玛感到有些退缩。"
+  },
+  {
+    "dialogue_id": "0101Adv34_Ema003",
+    "speaker": "Ema",
+    "japanese_text": "（こんな空気の中で発言するなんて、　ボクには……）",
+    "chinese_text": "（让我在这种气氛下发言，\n我做不到……）"
+  },
+  {
+    "dialogue_id": "0101Adv34_Narrative017",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマが俯き加減に視線を彷徨わせていると、隣にいるメルルが視界に入る。",
+    "chinese_text": "艾玛低着头，视线无处安放。\n这时，她看见了旁边的梅露露。"
+  },
+  {
+    "dialogue_id": "0101Adv34_Narrative018",
+    "speaker": "[Narrative]",
+    "japanese_text": "メルルも泣きそうな表情だ。青ざめて震え、険悪な空気に怯えきっている。",
+    "chinese_text": "梅露露一副要哭出来的表情。\n她脸色苍白，身体颤抖着，看着非常害怕这个充满火药味的气氛。"
+  },
+  {
+    "dialogue_id": "0101Adv34_Meruru001",
+    "speaker": "Meruru",
+    "japanese_text": "う、うぅ……皆さん怖いです……。",
+    "chinese_text": "呜、呜呜……大家好可怕……"
+  },
+  {
+    "dialogue_id": "0101Adv34_Ema004",
+    "speaker": "Ema",
+    "japanese_text": "（メルルちゃんも不安なんだ）",
+    "chinese_text": "（梅露露也觉得很害怕）"
+  },
+  {
+    "dialogue_id": "0101Adv34_Ema005",
+    "speaker": "Ema",
+    "japanese_text": "メルルちゃん、大丈夫。ボクらは信じ合って頑張ろう。",
+    "chinese_text": "梅露露，没事的。\n我们要相信彼此，互相加油。"
+  },
+  {
+    "dialogue_id": "0101Adv34_Narrative019",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマがそっと励ましの声をかけると、メルルはハッと顔を上げた。",
+    "chinese_text": "艾玛小声地送去鼓励的话语，\n此时梅露露终于回过神来，抬起了头。"
+  },
+  {
+    "dialogue_id": "0101Adv34_Meruru002",
+    "speaker": "Meruru",
+    "japanese_text": "は、はい……ありがとうございます、エマさん。",
+    "chinese_text": "嗯、嗯……谢谢你，艾玛小姐。"
+  },
+  {
+    "dialogue_id": "0101Adv34_Meruru003",
+    "speaker": "Meruru",
+    "japanese_text": "私、こういう時に強く出られる自信がなく……。きっとまともに何も言えないと思います……。",
+    "chinese_text": "我在这种时候就没法提起坚定的自信心……\n肯定没法作出有意义的发言……"
+  },
+  {
+    "dialogue_id": "0101Adv34_Meruru004",
+    "speaker": "Meruru",
+    "japanese_text": "だから、エマさんのサポートさせてください……！",
+    "chinese_text": "所以，\n请让我在一旁支援你吧，艾玛小姐……！"
+  },
+  {
+    "dialogue_id": "0101Adv34_Ema006",
+    "speaker": "Ema",
+    "japanese_text": "ありがとう！",
+    "chinese_text": "谢谢你！"
+  },
+  {
+    "dialogue_id": "0101Adv34_Narrative020",
+    "speaker": "[Narrative]",
+    "japanese_text": "近くに心強い味方を得て、エマの瞳に光が宿る。",
+    "chinese_text": "艾玛得到了一位近在身边的可靠盟友。她的眼里生出一道希望之光。"
+  },
+  {
+    "dialogue_id": "0101Adv34_Ema007",
+    "speaker": "Ema",
+    "japanese_text": "（負けない！ 絶対に犯人を探し当てるんだ！）",
+    "chinese_text": "（我不会认输的！我一定要找出凶手！）"
+  },
+  {
+    "dialogue_id": "0101Adv34_Warden004",
+    "speaker": "Warden",
+    "japanese_text": "それでは、魔女裁判開廷です！",
+    "chinese_text": "那么，魔女审判现在开庭！"
+  }
+]

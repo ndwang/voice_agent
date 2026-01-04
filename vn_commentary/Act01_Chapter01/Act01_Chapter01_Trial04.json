@@ -1,0 +1,650 @@
+[
+  {
+    "dialogue_id": "0101Trial04_Sherry001",
+    "speaker": "Sherry",
+    "japanese_text": "ノアさんを殺した凶器についてもう一度詳しく考えてみましょうか！",
+    "chinese_text": "那就再来\n认真想一想\n杀死诺亚的凶器的事吧！"
+  },
+  {
+    "dialogue_id": "0101Trial04_Alisa001",
+    "speaker": "Alisa",
+    "japanese_text": "……なんか話し合う必要あるのか？さっき桜羽と宝生が話してただろ……。あの矢が城ケ崎を殺した凶器だってな。",
+    "chinese_text": "……有讨论的必要吗？\n刚刚樱羽和宝生\n不是讲过了吗……\n说那支箭就是\n杀死城崎的凶器。"
+  },
+  {
+    "dialogue_id": "0101Trial04_Hanna001",
+    "speaker": "Hanna",
+    "japanese_text": "部屋に転がってた矢……ですわね？これを胸に刺されてノアさんは死んだんですわよね……？",
+    "chinese_text": "你是说……\n掉落在房间里的箭矢？\n诺亚应该就是\n被这支箭刺中胸口\n死掉的，对吧……？"
+  },
+  {
+    "dialogue_id": "0101Trial04_Meruru001",
+    "speaker": "Meruru",
+    "japanese_text": "だ、だとしたら犯人はその矢をどうやって刺したんでしょうか……？",
+    "chinese_text": "那、那么\n凶手究竟是\n怎么插\n这支箭的呢……？"
+  },
+  {
+    "dialogue_id": "0101Trial04_Meruru002",
+    "speaker": "Meruru",
+    "japanese_text": "部屋の中は白一色で塗られていて、そこには足跡もありませんでした。",
+    "chinese_text": "房间里涂满了\n纯白的颜料，\n上面也没发现\n有足迹。"
+  },
+  {
+    "dialogue_id": "0101Trial04_Alisa002",
+    "speaker": "Alisa",
+    "japanese_text": "そりゃ遠くから投げつけたんじゃねーのか。犯人はダーツの経験でもあったんだろ。",
+    "chinese_text": "难道不是\n从远处投掷的吗。\n凶手应该有\n投掷飞镖的经验吧。"
+  },
+  {
+    "dialogue_id": "0101Trial04_Alisa003",
+    "speaker": "Alisa",
+    "japanese_text": "矢を部屋の外から投げ込んだだけ……単純でシンプルな答えだ。",
+    "chinese_text": "只是\n从房间外投掷进去而已……\n答案就是这么简单好懂。"
+  },
+  {
+    "dialogue_id": "0101Trial04_Coco001",
+    "speaker": "Coco",
+    "japanese_text": "……ダーツで人殺しとか、それ本気で言ってる？頭ヤンキー過ぎん？",
+    "chinese_text": "……说什么飞镖杀人，\n你认真的吗？\n脑子没问题吧？"
+  },
+  {
+    "dialogue_id": "0101Trial04_Alisa004",
+    "speaker": "Alisa",
+    "japanese_text": "仮の話だっての……！とりあえず仮定として進めてんだよ！文句があるならお前が仕切れ！",
+    "chinese_text": "我这是假设……！\n先假设是这么回事\n再来展开！\n有意见的话你来讲啊！"
+  },
+  {
+    "dialogue_id": "0101Trial04_Ema001",
+    "speaker": "Ema",
+    "japanese_text": "（矢を投げて人を殺すことが可能かはわからないけど……　それはそれとして、何か違和感があるような）",
+    "chinese_text": "（我不清楚投掷箭矢能不能杀人啦……\n这个先暂且不提，就是总感觉哪里不太对劲）"
+  },
+  {
+    "dialogue_id": "0101Trial04_Meruru003",
+    "speaker": "Meruru",
+    "japanese_text": "エマさん……。やっぱり、皆さんが知っている事には人によって差があるみたいですね。",
+    "chinese_text": "艾玛小姐……\n看来大家掌握的情报\n确实都不太一样。"
+  },
+  {
+    "dialogue_id": "0101Trial04_Ema002",
+    "speaker": "Ema",
+    "japanese_text": "うん……！アリサちゃんに説明して話を聞いてもらおう……！",
+    "chinese_text": "嗯……！\n我要和亚里沙\n认真讲清楚才行……！"
+  },
+  {
+    "dialogue_id": "0101Trial04_Ema003",
+    "speaker": "Ema",
+    "japanese_text": "（……ちょっとだけ怖いけど）",
+    "chinese_text": "（……虽然我还有一点害怕）"
+  },
+  {
+    "dialogue_id": "0101Trial04_Ema004",
+    "speaker": "Ema",
+    "japanese_text": "ちょっと待って！そんな都合よくダーツの経験者がいたりするのかな……！？",
+    "chinese_text": "等一下！\n你是说这里刚好有一位飞镖熟手，对吗？\n事实会有那么巧合吗……！？"
+  },
+  {
+    "dialogue_id": "0101Trial04_Alisa005",
+    "speaker": "Alisa",
+    "japanese_text": "……そんなんたまたまいた可能性だってあるだろ。",
+    "chinese_text": "……这个嘛，\n刚好有那么一位的可能性还是有的吧。"
+  },
+  {
+    "dialogue_id": "0101Trial04_Hanna002",
+    "speaker": "Hanna",
+    "japanese_text": "別に今それを追求する場面ではないと思いますわ……？",
+    "chinese_text": "我倒不认为现在有必要\n深究这一点欸……？"
+  },
+  {
+    "dialogue_id": "0101Trial04_Coco002",
+    "speaker": "Coco",
+    "japanese_text": "なんかダーツに思い入れでもあるん？お気持ち表明は後にしてもろて。",
+    "chinese_text": "你对飞镖是有什么执念吗？\n无关的话麻烦往后放一放好吗。"
+  },
+  {
+    "dialogue_id": "0101Trial04_Ema005",
+    "speaker": "Ema",
+    "japanese_text": "（み、みんな呆れてる……！　空気悪くしちゃったかも……！）",
+    "chinese_text": "（搞、搞砸了……！\n现场的气氛好像变差了……！）"
+  },
+  {
+    "dialogue_id": "0101Trial04_Ema006",
+    "speaker": "Ema",
+    "japanese_text": "（もう一度考えてみよう……！　アリサちゃんの発言の違和感を……！）",
+    "chinese_text": "（重新再思考一下吧……！\n亚里沙的发言中有哪里不对劲……！）"
+  },
+  {
+    "dialogue_id": "0101Trial04_Ema007",
+    "speaker": "Ema",
+    "japanese_text": "思うんだけど、矢って本当に刺さったのかな？もしかして刺さらなかった可能性もあるんじゃ……。",
+    "chinese_text": "虽然只是猜测，那支箭真的有刺中她吗？\n说不定有可能并没刺到……"
+  },
+  {
+    "dialogue_id": "0101Trial04_Sherry002",
+    "speaker": "Sherry",
+    "japanese_text": "えっと……でも、たしか矢じりに血痕がありましたよね。",
+    "chinese_text": "呃……\n可是箭头上确实有血迹耶。"
+  },
+  {
+    "dialogue_id": "0101Trial04_Sherry003",
+    "speaker": "Sherry",
+    "japanese_text": "私にはノアさんの傷は、あの矢の形状と同じ傷に見えましたよ？メルルさんはどうですか？",
+    "chinese_text": "在我看来，诺亚的伤口\n和那支箭的形状是吻合的哦？\n梅露露你怎么看？"
+  },
+  {
+    "dialogue_id": "0101Trial04_Meruru004",
+    "speaker": "Meruru",
+    "japanese_text": "え、ええと……私も検死の経験があるわけじゃないですから、詳しく断定することはできませんけど……。",
+    "chinese_text": "呃、呃……\n我并没有验尸的经验，\n没有办法下百分百的判断……"
+  },
+  {
+    "dialogue_id": "0101Trial04_Meruru005",
+    "speaker": "Meruru",
+    "japanese_text": "でも、シェリーさんがそう言うならそうなのかも……。",
+    "chinese_text": "不过，既然你都这么说，\n应该就是这样没错……"
+  },
+  {
+    "dialogue_id": "0101Trial04_Alisa006",
+    "speaker": "Alisa",
+    "japanese_text": "実際死体は刺されてて、矢に血もついてただろ。他の凶器が出てきたわけでもあるまいし……。",
+    "chinese_text": "实际上就是箭刺中了身体，\n然后沾上了血吧。\n我们又没发现其他凶器……"
+  },
+  {
+    "dialogue_id": "0101Trial04_Sherry004",
+    "speaker": "Sherry",
+    "japanese_text": "逆にエマさんはどうして矢が刺さってないと思ったんですか？",
+    "chinese_text": "我倒想问，为什么艾玛你会觉得\n箭没有刺中她呢？"
+  },
+  {
+    "dialogue_id": "0101Trial04_Ema008",
+    "speaker": "Ema",
+    "japanese_text": "えっと……それは……なんとなく……。",
+    "chinese_text": "呃……就是……直觉……"
+  },
+  {
+    "dialogue_id": "0101Trial04_Alisa007",
+    "speaker": "Alisa",
+    "japanese_text": "……真面目にやってくれ。",
+    "chinese_text": "……给我认真一点。"
+  },
+  {
+    "dialogue_id": "0101Trial04_Ema009",
+    "speaker": "Ema",
+    "japanese_text": "（うぐっ！ アリサちゃんの言う通りだよね……！　ちゃんと考えて話さないと……！）",
+    "chinese_text": "（呜！亚里沙说得对……！\n我要认真思考再发言……！）"
+  },
+  {
+    "dialogue_id": "0101Trial04_Ema010",
+    "speaker": "Ema",
+    "japanese_text": "（可能性を根拠なく否定しても邪魔をするだけかも……。　新しい可能性を提示するか、　根拠を示さないと……！）",
+    "chinese_text": "（无凭无据地否定可能性，只会被认为是捣乱……\n我要提出新的可能性，\n或者提出依据才行……！）"
+  },
+  {
+    "dialogue_id": "0101Trial04_Ema011",
+    "speaker": "Ema",
+    "japanese_text": "ちょっと待って！……犯人が矢を投げたとは限らないんじゃないかな。",
+    "chinese_text": "等一下！\n……我想，凶手不一定是\n投掷了箭矢吧。"
+  },
+  {
+    "dialogue_id": "0101Trial04_Alisa008",
+    "speaker": "Alisa",
+    "japanese_text": "……あ？投げ矢だろうと吹き矢だろうと変わんねーだろ。",
+    "chinese_text": "……啊？\n不管是投箭还是吹箭，都没什么不一样吧。"
+  },
+  {
+    "dialogue_id": "0101Trial04_Hanna003",
+    "speaker": "Hanna",
+    "japanese_text": "吹き矢って……その発想、あなた秘境の先住民か何かですの～？",
+    "chinese_text": "亏你想得到吹箭……\n难道你是什么密境原住民吗～？"
+  },
+  {
+    "dialogue_id": "0101Trial04_Alisa009",
+    "speaker": "Alisa",
+    "japanese_text": "ああ！？なんだ文句あんのかてめぇ……！？",
+    "chinese_text": "啊！？\n怎么，你有意见吗，啊……！？"
+  },
+  {
+    "dialogue_id": "0101Trial04_Hanna004",
+    "speaker": "Hanna",
+    "japanese_text": "ぴっ……！？",
+    "chinese_text": "噫……！？"
+  },
+  {
+    "dialogue_id": "0101Trial04_Ema012",
+    "speaker": "Ema",
+    "japanese_text": "ア、アリサちゃん落ち着いて……！",
+    "chinese_text": "亚、亚里沙你冷静下……！"
+  },
+  {
+    "dialogue_id": "0101Trial04_Meruru006",
+    "speaker": "Meruru",
+    "japanese_text": "……エ、エマさん。アリサさんはまだ知らないだけです……！【証拠】を見てもらえば、きっとわかってくれます！",
+    "chinese_text": "……艾、艾玛小姐。\n亚里沙只是不知道而已……！\n只要给她看看【证据】，她一定会理解我们的！"
+  },
+  {
+    "dialogue_id": "0101Trial04_Ema013",
+    "speaker": "Ema",
+    "japanese_text": "……うん。わかった。やってみよう……！",
+    "chinese_text": "……嗯，我知道了。\n来试试看吧……！"
+  },
+  {
+    "dialogue_id": "0101Trial04_Ema014",
+    "speaker": "Ema",
+    "japanese_text": "（凶器が【投げた】以外でどう使われたのか……　手がかりになる情報をみんなと共有するんだ！）",
+    "chinese_text": "（凶器是如何通过【投掷】以外的手段使用的……\n我要把这份线索分享给大家才行！）"
+  },
+  {
+    "dialogue_id": "0101Trial04_Alisa010",
+    "speaker": "Alisa",
+    "japanese_text": "はぁ……！？【矢を投げつけた】ってことにそれがどう関係すんだよ……！",
+    "chinese_text": "哈啊……！？\n【投掷了箭矢】和这东西\n有什么关系吗……！"
+  },
+  {
+    "dialogue_id": "0101Trial04_Alisa011",
+    "speaker": "Alisa",
+    "japanese_text": "今は【凶器】の話をしてんだ！真面目にやれ！",
+    "chinese_text": "现在是在讨论【凶器】的事！\n给我认真一点！"
+  },
+  {
+    "dialogue_id": "0101Trial04_Ema015",
+    "speaker": "Ema",
+    "japanese_text": "（怒られちゃった……！　もう一度考え直してみよう……！）",
+    "chinese_text": "（惹她生气了……！\n重新再思考一下吧……！）"
+  },
+  {
+    "dialogue_id": "0101Trial04_Ema016",
+    "speaker": "Ema",
+    "japanese_text": "……ねぇ、これを見てアリサちゃん。",
+    "chinese_text": "……亚里沙，请你看一下这个。"
+  },
+  {
+    "dialogue_id": "0101Trial04_Alisa012",
+    "speaker": "Alisa",
+    "japanese_text": "……だからその矢がどうしたってんだ！",
+    "chinese_text": "……所以那支箭究竟怎么了！"
+  },
+  {
+    "dialogue_id": "0101Trial04_Ema017",
+    "speaker": "Ema",
+    "japanese_text": "これって……ボウガンの矢なんだ。",
+    "chinese_text": "这个其实是……\n弩枪的箭。"
+  },
+  {
+    "dialogue_id": "0101Trial04_Alisa013",
+    "speaker": "Alisa",
+    "japanese_text": "投げ矢だろうがボウガンの矢だろうが――。",
+    "chinese_text": "不管是投箭还是弩箭不都一样——"
+  },
+  {
+    "dialogue_id": "0101Trial04_Alisa014",
+    "speaker": "Alisa",
+    "japanese_text": "――ってボウガン？そういやそんなもん、どっかで……。",
+    "chinese_text": "——嗯，弩枪？\n我说，你怎么知道有这回事……"
+  },
+  {
+    "dialogue_id": "0101Trial04_Ema018",
+    "speaker": "Ema",
+    "japanese_text": "……ナノカちゃん。昨日ラウンジにあったボウガンが無くなったって言ってたよね？",
+    "chinese_text": "……奈叶香，\n你昨天说过\n会客厅里的弩枪不见了，对不对？"
+  },
+  {
+    "dialogue_id": "0101Trial04_Nanoka001",
+    "speaker": "Nanoka",
+    "japanese_text": "…………。",
+    "chinese_text": "…………"
+  },
+  {
+    "dialogue_id": "0101Trial04_Ema019",
+    "speaker": "Ema",
+    "japanese_text": "……ナ、ナノカちゃん。",
+    "chinese_text": "……你、你可以回答一下吗？"
+  },
+  {
+    "dialogue_id": "0101Trial04_Nanoka002",
+    "speaker": "Nanoka",
+    "japanese_text": "……ええ、そうよ。",
+    "chinese_text": "……嗯，对。"
+  },
+  {
+    "dialogue_id": "0101Trial04_Ema020",
+    "speaker": "Ema",
+    "japanese_text": "（よかった……！　答えてくれた……！）",
+    "chinese_text": "（太好了……！\n她回应我了……！）"
+  },
+  {
+    "dialogue_id": "0101Trial04_Alisa015",
+    "speaker": "Alisa",
+    "japanese_text": "なんだと……？",
+    "chinese_text": "你说什么……？"
+  },
+  {
+    "dialogue_id": "0101Trial04_Ema021",
+    "speaker": "Ema",
+    "japanese_text": "昨日の夜、ナノカちゃんがラウンジのボウガンがなくなってた事に気付いて教えてくれたんだよ。",
+    "chinese_text": "昨天晚上，奈叶香发现\n会客厅里的弩枪不见了，\n还把这事告诉了我。"
+  },
+  {
+    "dialogue_id": "0101Trial04_Ema022",
+    "speaker": "Ema",
+    "japanese_text": "きっと、そのボウガンの矢がこれなんだと思う。",
+    "chinese_text": "我想，这支箭一定\n就是弩枪用的箭。"
+  },
+  {
+    "dialogue_id": "0101Trial04_Sherry005",
+    "speaker": "Sherry",
+    "japanese_text": "ええ、間違いありません！矢羽も少ないですし、これは洋弓銃の矢ですよ！",
+    "chinese_text": "嗯，没错！\n尾部的箭羽比一般弓箭少，\n看来就是西洋弓枪的箭！"
+  },
+  {
+    "dialogue_id": "0101Trial04_Coco003",
+    "speaker": "Coco",
+    "japanese_text": "よーきゅーじゅー……？って何？ ボウガンのこと……？",
+    "chinese_text": "西……洋……什么……？\n是说弩枪吗……？"
+  },
+  {
+    "dialogue_id": "0101Trial04_Sherry006",
+    "speaker": "Sherry",
+    "japanese_text": "はい！ 正式にはクロスボウと言うらしいんですが……それはともかく。",
+    "chinese_text": "嗯！英文名叫crossbow，\n所以又叫十字弓……不提这个了。"
+  },
+  {
+    "dialogue_id": "0101Trial04_Sherry007",
+    "speaker": "Sherry",
+    "japanese_text": "きっとラウンジにあったボウガンの矢ですね！",
+    "chinese_text": "这一定就是会客厅的弩枪的箭没错！"
+  },
+  {
+    "dialogue_id": "0101Trial04_Alisa016",
+    "speaker": "Alisa",
+    "japanese_text": "……そうか。それなら……。",
+    "chinese_text": "……这样啊。\n那么……"
+  },
+  {
+    "dialogue_id": "0101Trial04_Alisa017",
+    "speaker": "Alisa",
+    "japanese_text": "その矢は【投げた】んじゃなくて【撃った】かもしれねーって事か……！",
+    "chinese_text": "那支箭就很可能不是【投掷】进去的，\n而是【射击】进去的才对……！"
+  },
+  {
+    "dialogue_id": "0101Trial04_Ema023",
+    "speaker": "Ema",
+    "japanese_text": "う、うん……！細かい事だけど……。道具を使ったかどうかって、大きな違いかと思って。",
+    "chinese_text": "嗯、嗯……！\n虽然是很细枝末节的事……\n但是我想，有没有借助工具，可能会造成很大的差别。"
+  },
+  {
+    "dialogue_id": "0101Trial04_Alisa018",
+    "speaker": "Alisa",
+    "japanese_text": "…………。",
+    "chinese_text": "…………"
+  },
+  {
+    "dialogue_id": "0101Trial04_Alisa019",
+    "speaker": "Alisa",
+    "japanese_text": "……ああ、たしかに桜羽の言う通りだな。ウチが見落としてたみたいだ。",
+    "chinese_text": "……嗯，你说得确实对。\n是我没注意到这一回事。"
+  },
+  {
+    "dialogue_id": "0101Trial04_Ema024",
+    "speaker": "Ema",
+    "japanese_text": "（良かった……！　アリサちゃん、納得してくれた……！　やっぱり話せばわかってくれるんだ！）",
+    "chinese_text": "（太好了……！\n亚里沙认可我的主张了……！\n只要说清楚，她真的会理解我！）"
+  },
+  {
+    "dialogue_id": "0101Trial04_Alisa020",
+    "speaker": "Alisa",
+    "japanese_text": "……たしかに矢を投げたってよりも、ボウガンで撃たれたって方が筋が通るな。",
+    "chinese_text": "……比起投掷，\n用弩枪射击的说法确实更有说服力。"
+  },
+  {
+    "dialogue_id": "0101Trial04_Alisa021",
+    "speaker": "Alisa",
+    "japanese_text": "けどそうなると……誰がそのボウガンを使えたんだ？",
+    "chinese_text": "可是，这么一来……\n用了那把弩枪的到底是谁？"
+  },
+  {
+    "dialogue_id": "0101Trial04_Leia001",
+    "speaker": "Leia",
+    "japanese_text": "ボウガンを使えた人物がノアくんを殺した犯人……ということだね？",
+    "chinese_text": "就是说，使用了弩枪的人物\n就是杀害诺亚的凶手……对吗？"
+  },
+  {
+    "dialogue_id": "0101Trial04_Hanna005",
+    "speaker": "Hanna",
+    "japanese_text": "ボウガンを盗んだ人は誰なんですの！？さっさと出てきやがりなさいませ～！",
+    "chinese_text": "偷了弩枪的究竟是谁啊！？\n快站出来认罪啊～！"
+  },
+  {
+    "dialogue_id": "0101Trial04_Coco004",
+    "speaker": "Coco",
+    "japanese_text": "いやそんなん名乗り出てくるわけないじゃん……。十中八九そいつが犯人なんだし……。",
+    "chinese_text": "呃，\n怎么可能会有人承认呢……\n毕竟那个人多半就是凶手……"
+  },
+  {
+    "dialogue_id": "0101Trial04_Sherry008",
+    "speaker": "Sherry",
+    "japanese_text": "あ、それ私です。",
+    "chinese_text": "啊，是我做的。"
+  },
+  {
+    "dialogue_id": "0101Trial04_Coco005",
+    "speaker": "Coco",
+    "japanese_text": "……………は？",
+    "chinese_text": "……………哈？"
+  },
+  {
+    "dialogue_id": "0101Trial04_Sherry009",
+    "speaker": "Sherry",
+    "japanese_text": "ですからぁ……ラウンジからボウガンを持ち出したのは私ですよ？",
+    "chinese_text": "我说……\n从会客厅拿走弩枪的\n就是我哦？"
+  },
+  {
+    "dialogue_id": "0101Trial04_Coco006",
+    "speaker": "Coco",
+    "japanese_text": "……はああぁぁ！？",
+    "chinese_text": "……哈啊啊啊啊！？"
+  },
+  {
+    "dialogue_id": "0101Trial04_Ema025",
+    "speaker": "Ema",
+    "japanese_text": "な、なんでシェリーちゃん、そんなことを……！？",
+    "chinese_text": "为、为什么，雪莉，\n你为什么要做这样的事……！？"
+  },
+  {
+    "dialogue_id": "0101Trial04_Sherry010",
+    "speaker": "Sherry",
+    "japanese_text": "えー？だって危ないじゃないですか。",
+    "chinese_text": "咦～？\n你想啊，那东西不是很危险吗。"
+  },
+  {
+    "dialogue_id": "0101Trial04_Sherry011",
+    "speaker": "Sherry",
+    "japanese_text": "人を殺せるような道具が誰でも使えるラウンジに飾ってあるんですよ！",
+    "chinese_text": "一件能杀人的工具，\n竟堂而皇之地摆在\n人人都可以随意进出的会客厅里耶！"
+  },
+  {
+    "dialogue_id": "0101Trial04_Sherry012",
+    "speaker": "Sherry",
+    "japanese_text": "当然、気になりますよね！",
+    "chinese_text": "我肯定很在意啊！"
+  },
+  {
+    "dialogue_id": "0101Trial04_Leia002",
+    "speaker": "Leia",
+    "japanese_text": "え、ええと……。",
+    "chinese_text": "呃，呃……"
+  },
+  {
+    "dialogue_id": "0101Trial04_Leia003",
+    "speaker": "Leia",
+    "japanese_text": "それじゃあキミが、盗んだボウガンでノアくんを撃ち殺した……という事でいいのかい？",
+    "chinese_text": "那么，就是你\n用那把偷走的弩枪射杀了诺亚……\n我这么理解对不对？"
+  },
+  {
+    "dialogue_id": "0101Trial04_Sherry013",
+    "speaker": "Sherry",
+    "japanese_text": "まさかまさか〜！そんなバレバレな事しませんよ～！",
+    "chinese_text": "怎么会呢～！\n这么漏洞百出的事，我才不会蠢到去做～！"
+  },
+  {
+    "dialogue_id": "0101Trial04_Sherry014",
+    "speaker": "Sherry",
+    "japanese_text": "ボウガンが犯行に使われたときのことを考えて分解して構造を知っておいたんです。",
+    "chinese_text": "我是考虑到弩枪可能会被用于作案，\n所以想分解看看，了解它的构造。"
+  },
+  {
+    "dialogue_id": "0101Trial04_Sherry015",
+    "speaker": "Sherry",
+    "japanese_text": "……でもなんか戻せなくなっちゃいましたけど。",
+    "chinese_text": "……只不过，\n我最后组装不回去了。"
+  },
+  {
+    "dialogue_id": "0101Trial04_Coco007",
+    "speaker": "Coco",
+    "japanese_text": "ダメじゃん！",
+    "chinese_text": "你好笨啊！"
+  },
+  {
+    "dialogue_id": "0101Trial04_Hanna006",
+    "speaker": "Hanna",
+    "japanese_text": "で、でも、どっちにしろボウガンを盗んだなら怪しいに決まってますわ！こいつが犯人ですわ～～！",
+    "chinese_text": "可、可是，不管怎么说，\n你偷了弩枪肯定会被怀疑啊！\n凶手就是你～～！"
+  },
+  {
+    "dialogue_id": "0101Trial04_Sherry016",
+    "speaker": "Sherry",
+    "japanese_text": "いえいえ〜！違いますって～！",
+    "chinese_text": "不不不～！\n我就说不是啦～！"
+  },
+  {
+    "dialogue_id": "0101Trial04_Sherry017",
+    "speaker": "Sherry",
+    "japanese_text": "……それに私が盗んだボウガンには、その時すでに【矢がなかった】んですよ。",
+    "chinese_text": "……而且我偷弩枪那时，\n那支箭其实【已经不见了】。"
+  },
+  {
+    "dialogue_id": "0101Trial04_Ema026",
+    "speaker": "Ema",
+    "japanese_text": "矢が……？",
+    "chinese_text": "箭不见了……？"
+  },
+  {
+    "dialogue_id": "0101Trial04_Sherry018",
+    "speaker": "Sherry",
+    "japanese_text": "ええ、おそらく何者かが、私が借りる前にもう矢を盗んでいたんでしょうね。",
+    "chinese_text": "嗯，恐怕在我借走弩枪之前，\n已经有人偷走了箭。"
+  },
+  {
+    "dialogue_id": "0101Trial04_Sherry019",
+    "speaker": "Sherry",
+    "japanese_text": "矢がないなら当然、撃てませんよね！",
+    "chinese_text": "没有箭的话，\n我肯定没办法射箭啊！"
+  },
+  {
+    "dialogue_id": "0101Trial04_Coco008",
+    "speaker": "Coco",
+    "japanese_text": "なるほど～！",
+    "chinese_text": "原来如此～！"
+  },
+  {
+    "dialogue_id": "0101Trial04_Coco009",
+    "speaker": "Coco",
+    "japanese_text": "……ってそんな言い訳が通るかっての！",
+    "chinese_text": "……才怪，你这借口骗得了谁啊！"
+  },
+  {
+    "dialogue_id": "0101Trial04_Sherry020",
+    "speaker": "Sherry",
+    "japanese_text": "ええ～！？でも本当なんですよぉ～！",
+    "chinese_text": "欸欸～！？\n可是我说的都是真的～！"
+  },
+  {
+    "dialogue_id": "0101Trial04_Nanoka003",
+    "speaker": "Nanoka",
+    "japanese_text": "…………。",
+    "chinese_text": "…………"
+  },
+  {
+    "dialogue_id": "0101Trial04_Nanoka004",
+    "speaker": "Nanoka",
+    "japanese_text": "……そうね。彼女が言っていることはきっと本当よ。",
+    "chinese_text": "……嗯。\n她说的应该是真的没错。"
+  },
+  {
+    "dialogue_id": "0101Trial04_Ema027",
+    "speaker": "Ema",
+    "japanese_text": "（ナノカちゃんが……　自分から喋ってくれた！）",
+    "chinese_text": "（奈叶香……\n她竟然主动开口了！）"
+  },
+  {
+    "dialogue_id": "0101Trial04_Ema028",
+    "speaker": "Ema",
+    "japanese_text": "ナノカちゃん……それってどういうこと？",
+    "chinese_text": "奈叶香……\n这究竟是怎么一回事？"
+  },
+  {
+    "dialogue_id": "0101Trial04_Nanoka005",
+    "speaker": "Nanoka",
+    "japanese_text": "……私はあのボウガンが殺人に使われる可能性を見越して、注意して見ていたの。",
+    "chinese_text": "……我早就注意到\n那把弩枪可能会用作杀人凶器，\n一直有留心观察它。"
+  },
+  {
+    "dialogue_id": "0101Trial04_Nanoka006",
+    "speaker": "Nanoka",
+    "japanese_text": "……彼女の言う通り、一昨日の時点ですでに【矢はなかった】わ。",
+    "chinese_text": "……正如她所说，\n那支箭在两天前就【已经不见了】。"
+  },
+  {
+    "dialogue_id": "0101Trial04_Nanoka007",
+    "speaker": "Nanoka",
+    "japanese_text": "その前には一緒に矢も飾られていたことは確認している……。",
+    "chinese_text": "而在那之前，\n我也确认了箭是有装在弩枪上面的……"
+  },
+  {
+    "dialogue_id": "0101Trial04_Nanoka008",
+    "speaker": "Nanoka",
+    "japanese_text": "……だから、【矢だけが盗まれていた】という彼女の証言は本当のことよ。",
+    "chinese_text": "……所以，她\n【箭被偷了】的作证是真实的。"
+  },
+  {
+    "dialogue_id": "0101Trial04_Sherry021",
+    "speaker": "Sherry",
+    "japanese_text": "ほらほら！ ナノカさんも言っている通り、私がお借りした時にすでに矢はなかったんですって！",
+    "chinese_text": "你们看！就像奈叶香所说的那样，\n我借走弩枪的时候，\n箭已经不见了！"
+  },
+  {
+    "dialogue_id": "0101Trial04_Nanoka009",
+    "speaker": "Nanoka",
+    "japanese_text": "……まあ、あなたが事前に矢だけを盗んで、そのあとに本体も追加で盗んだ可能性は否定できないけどね。",
+    "chinese_text": "……只不过，我没办法否定\n你事先偷完箭之后，\n又把弩枪偷走的可能性。"
+  },
+  {
+    "dialogue_id": "0101Trial04_Sherry022",
+    "speaker": "Sherry",
+    "japanese_text": "ええー！？ だとしたらわざわざボウガンを盗んだなんて言い出しませんよ〜。疑われるだけじゃないですかー。",
+    "chinese_text": "欸——！？早知道我就\n不说偷走弩枪的事了～\n我这不是白白被怀疑了吗——"
+  },
+  {
+    "dialogue_id": "0101Trial04_Leia004",
+    "speaker": "Leia",
+    "japanese_text": "……何にせよ、【犯人は事件の２日前には凶器を盗んで手にしていた】……ということでいいのかな？",
+    "chinese_text": "……总之，【凶手在案件发生的2天前\n已经将凶器偷到手了】……\n就是这么一回事对吗？"
+  },
+  {
+    "dialogue_id": "0101Trial04_Sherry023",
+    "speaker": "Sherry",
+    "japanese_text": "そうですよ～！それであってます！",
+    "chinese_text": "对啊～！\n就是这样！"
+  },
+  {
+    "dialogue_id": "0101Trial04_Ema029",
+    "speaker": "Ema",
+    "japanese_text": "（シェリーちゃんがボウガンを盗んで分解した……？　でも殺した犯人とは限らない……よね……？）",
+    "chinese_text": "（雪莉偷了弩枪后把它拆解了……？\n不过也没法认定她就是杀人凶手……吧……？）"
+  },
+  {
+    "dialogue_id": "0101Trial04_Sherry024",
+    "speaker": "Sherry",
+    "japanese_text": "……では改めて、今の話の流れを整理しましょうか！",
+    "chinese_text": "……那么，重新来整理一下\n目前我们讨论的成果吧！"
+  }
+]

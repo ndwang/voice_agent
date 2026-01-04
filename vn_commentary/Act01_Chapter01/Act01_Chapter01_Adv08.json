@@ -1,0 +1,554 @@
+[
+  {
+    "dialogue_id": "0101Adv08_Narrative001",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマはマップにしたがって、たどりついた食堂の中へと入る。",
+    "chinese_text": "艾玛跟着地图的指引，\n来到了食堂。"
+  },
+  {
+    "dialogue_id": "0101Adv08_Narrative002",
+    "speaker": "[Narrative]",
+    "japanese_text": "食堂の中では、少女たちはすでに食事をはじめていた。",
+    "chinese_text": "而食堂内的少女们\n都已经开始用餐了。"
+  },
+  {
+    "dialogue_id": "0101Adv08_Ema001",
+    "speaker": "Ema",
+    "japanese_text": "えっと……。",
+    "chinese_text": "呃……"
+  },
+  {
+    "dialogue_id": "0101Adv08_Narrative003",
+    "speaker": "[Narrative]",
+    "japanese_text": "先ほど見た光景に未だ動揺し、エマは青ざめながらも周囲を見回す。すると――",
+    "chinese_text": "艾玛四周观察着。\n刚刚的事冲击太大，她现在脸色不是很好。\n这时——"
+  },
+  {
+    "dialogue_id": "0101Adv08_Sherry001",
+    "speaker": "Sherry",
+    "japanese_text": "おーい、エマさーん！こっちこっち！",
+    "chinese_text": "喂～艾玛～！\n过来这边！"
+  },
+  {
+    "dialogue_id": "0101Adv08_Narrative004",
+    "speaker": "[Narrative]",
+    "japanese_text": "シェリーがぶんぶんと手を振って、エマを呼んだ。",
+    "chinese_text": "雪莉兴冲冲的挥着小手，\n喊艾玛过去。"
+  },
+  {
+    "dialogue_id": "0101Adv08_Ema002",
+    "speaker": "Ema",
+    "japanese_text": "（あ、別に席が決められてるわけじゃないんだ）",
+    "chinese_text": "（啊，原来是这里是自由就座啊）"
+  },
+  {
+    "dialogue_id": "0101Adv08_Narrative005",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマはシェリーたちが寄り合うテーブルに椅子を引いて座った。",
+    "chinese_text": "艾玛走到雪莉她们的餐桌前，\n拉开椅子坐了下来。"
+  },
+  {
+    "dialogue_id": "0101Adv08_Narrative006",
+    "speaker": "[Narrative]",
+    "japanese_text": "先ほど団結したシェリー、ハンナ、メルルがいる。トレーにのせられた食事も既に置いてあった。",
+    "chinese_text": "刚刚表明了团结意向的雪莉、汉娜和梅露露也都在。\n而餐盘上已经盛好了食物。"
+  },
+  {
+    "dialogue_id": "0101Adv08_Sherry002",
+    "speaker": "Sherry",
+    "japanese_text": "ビュッフェ形式だったので、エマさんの分も適当に取っておきましたよ！",
+    "chinese_text": "这边用餐是自助餐形式，\n所以你的份我也帮你取好了！"
+  },
+  {
+    "dialogue_id": "0101Adv08_Ema003",
+    "speaker": "Ema",
+    "japanese_text": "あ、ありがとう。",
+    "chinese_text": "谢、谢谢你。"
+  },
+  {
+    "dialogue_id": "0101Adv08_Narrative007",
+    "speaker": "[Narrative]",
+    "japanese_text": "お礼を伝える口元はひきつっている。",
+    "chinese_text": "刚道完谢，她的嘴角却有些抽动。"
+  },
+  {
+    "dialogue_id": "0101Adv08_Narrative008",
+    "speaker": "[Narrative]",
+    "japanese_text": "皿に盛られた食事はどろりとしていて、色もグロテスク。なんの料理なのか判然としない。",
+    "chinese_text": "餐盘盛放的食物看起来黏糊糊的，颜色也十分诡异。\n根本看不出这是哪样食物。"
+  },
+  {
+    "dialogue_id": "0101Adv08_Ema004",
+    "speaker": "Ema",
+    "japanese_text": "（い、いじめじゃないよね？）",
+    "chinese_text": "（……她们没有故意霸凌我吧？）"
+  },
+  {
+    "dialogue_id": "0101Adv08_Narrative009",
+    "speaker": "[Narrative]",
+    "japanese_text": "シェリー、ハンナ、メルルのトレーにあるものも、ビュッフェカウンターに並んでいる料理も、全て似たり寄ったりの気味が悪いものだった。",
+    "chinese_text": "雪莉、汉娜和梅露露的餐盘上的，\n还有取餐处盛放的，\n都是这种令人恶心的饭菜。"
+  },
+  {
+    "dialogue_id": "0101Adv08_Ema005",
+    "speaker": "Ema",
+    "japanese_text": "（ってことは、　この牢屋敷の料理がひどいってことか……）",
+    "chinese_text": "（那就是说，\n这座监牢的饭菜都是这么糟糕……）"
+  },
+  {
+    "dialogue_id": "0101Adv08_Narrative010",
+    "speaker": "[Narrative]",
+    "japanese_text": "そのままのリンゴが１つ置いてあり、エマはほっと息を吐く。",
+    "chinese_text": "不过她看到，饭菜中还是有完整的一颗苹果。\n艾玛松了口气。"
+  },
+  {
+    "dialogue_id": "0101Adv08_Sherry003",
+    "speaker": "Sherry",
+    "japanese_text": "見た目はアレですが、けっこうイケますよ！",
+    "chinese_text": "虽然看起来不太妙，不过味道还是不错的哦！"
+  },
+  {
+    "dialogue_id": "0101Adv08_Hanna001",
+    "speaker": "Hanna",
+    "japanese_text": "あなた味覚ぶっ壊れていますの？超絶まじーですわ……。",
+    "chinese_text": "你的舌头是不是坏掉了？\n这个超级难吃的……"
+  },
+  {
+    "dialogue_id": "0101Adv08_Ema006",
+    "speaker": "Ema",
+    "japanese_text": "……これって、あの看守が作ってるのかな。",
+    "chinese_text": "……这些饭菜都是那些看守做的吧。"
+  },
+  {
+    "dialogue_id": "0101Adv08_Sherry004",
+    "speaker": "Sherry",
+    "japanese_text": "それを想像すると、なんだかあの看守も可愛く思えてきますよねっ",
+    "chinese_text": "想像了一下，\n总感觉看守也是蛮可爱的耶。"
+  },
+  {
+    "dialogue_id": "0101Adv08_Narrative011",
+    "speaker": "[Narrative]",
+    "japanese_text": "ハンナが無言でシェリーを見ている。味覚どころか頭自体疑っているらしい。",
+    "chinese_text": "汉娜无言望着雪莉。\n她很怀疑雪莉，不止是舌头，连脑子也是坏掉的。"
+  },
+  {
+    "dialogue_id": "0101Adv08_Ema007",
+    "speaker": "Ema",
+    "japanese_text": "あの、その看守のことなんだけど……ボク、さっきアリサちゃんが捕まっちゃってるの見ちゃって……。",
+    "chinese_text": "说到看守……\n我刚刚碰见有看守\n把亚里沙抓走了……"
+  },
+  {
+    "dialogue_id": "0101Adv08_Meruru001",
+    "speaker": "Meruru",
+    "japanese_text": "わ、私も見ました……何があったのでしょうか……うぅ、とても心配です……。",
+    "chinese_text": "我、我也看到了……不知道发生什么事了……\n呜呜，好担心她……"
+  },
+  {
+    "dialogue_id": "0101Adv08_Sherry005",
+    "speaker": "Sherry",
+    "japanese_text": "さっき出てってやるって息巻いていましたし、脱走でもしたんですかね？",
+    "chinese_text": "刚刚她还气势汹汹地说“我要逃出去”呢，\n应该是真的在想办法逃跑吧？"
+  },
+  {
+    "dialogue_id": "0101Adv08_Hanna002",
+    "speaker": "Hanna",
+    "japanese_text": "禁止時間に外にいたのなら、懲罰房とやらへ連れていかれたのかもしれませんわね……。",
+    "chinese_text": "如果在禁止时间内被发现人在外面，\n应该就会被带到\n那个所谓的惩罚室吧……"
+  },
+  {
+    "dialogue_id": "0101Adv08_Ema008",
+    "speaker": "Ema",
+    "japanese_text": "懲罰房……何かされるところなのかな。",
+    "chinese_text": "惩罚室……究竟会有什么惩罚呢。"
+  },
+  {
+    "dialogue_id": "0101Adv08_Narrative012",
+    "speaker": "[Narrative]",
+    "japanese_text": "怖ろしい想像をしてしまったのか、全員が沈黙し、俯いてしまう。",
+    "chinese_text": "不知是不是都想到了可怕的事情，\n所有人都低着头，一言不发。"
+  },
+  {
+    "dialogue_id": "0101Adv08_Narrative013",
+    "speaker": "[Narrative]",
+    "japanese_text": "食堂にはノアとアリサ以外がそろっている。皆、仕方なく規則に沿って行動している様子だ。",
+    "chinese_text": "除了诺亚和亚里沙，所有人都在食堂里了。\n在场的人看来都选择老实遵守规定行动。"
+  },
+  {
+    "dialogue_id": "0101Adv08_Narrative014",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマたちの席から少し離れたところで、レイアたちの一団も食事をしていた。",
+    "chinese_text": "离艾玛一桌稍远处，\n蕾雅一众也在用餐。"
+  },
+  {
+    "dialogue_id": "0101Adv08_Narrative015",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマとレイアの目が合う。レイアがにっこりと微笑んだことで、エマは頬を染め、慌てて目を逸らした。",
+    "chinese_text": "这时艾玛和蕾雅的眼神对上了。\n蕾雅抛出了一个微笑，\n害得艾玛脸上热乎乎的，慌忙移开了视线。"
+  },
+  {
+    "dialogue_id": "0101Adv08_Narrative016",
+    "speaker": "[Narrative]",
+    "japanese_text": "一連の挙動を見ていたらしい、ハンナがずいっとエマに顔を寄せた。",
+    "chinese_text": "汉娜看到了两人的互动后，\n便把脸凑到艾玛旁边。"
+  },
+  {
+    "dialogue_id": "0101Adv08_Hanna003",
+    "speaker": "Hanna",
+    "japanese_text": "あいつ……魔法を使っているにちげーねーですわ。",
+    "chinese_text": "那个女人……\n刚刚肯定在用魔法。"
+  },
+  {
+    "dialogue_id": "0101Adv08_Ema009",
+    "speaker": "Ema",
+    "japanese_text": "魔法……？",
+    "chinese_text": "魔法……？"
+  },
+  {
+    "dialogue_id": "0101Adv08_Narrative017",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマの顔がぎくりと強張る。",
+    "chinese_text": "艾玛的脸一下子僵住了。"
+  },
+  {
+    "dialogue_id": "0101Adv08_Ema010",
+    "speaker": "Ema",
+    "japanese_text": "（メルルちゃんや、さっきのノアちゃんにも　信じられないものを見せられた。　それって普通のことなのかな……？）",
+    "chinese_text": "（刚刚梅露露还有诺亚\n都做出了超乎想像的事情。\n这些都是很普通的事情吗……？）"
+  },
+  {
+    "dialogue_id": "0101Adv08_Hanna004",
+    "speaker": "Hanna",
+    "japanese_text": "女子を誘惑する魔法なんか使って……しかも芸能人だからって、囲いを作って、偉そうに！",
+    "chinese_text": "竟然使出诱惑女孩子的魔法……\n而且还仗着自己是艺人，搞什么小团体，真叫人生气！"
+  },
+  {
+    "dialogue_id": "0101Adv08_Narrative018",
+    "speaker": "[Narrative]",
+    "japanese_text": "ハンナはよっぽどレイアが気に食わないようだ。腹立ちのまま、ガツガツと謎の料理を口に運んでいる。",
+    "chinese_text": "看样子，汉娜十分看不惯蕾雅。\n她一边生气，一边一口口把神秘饭菜往嘴里送。"
+  },
+  {
+    "dialogue_id": "0101Adv08_Narrative019",
+    "speaker": "[Narrative]",
+    "japanese_text": "口調はお嬢様然としているが、その食べ方は粗雑だった。",
+    "chinese_text": "虽然她操着大小姐的口吻，\n可用餐的方式却有些粗鲁。"
+  },
+  {
+    "dialogue_id": "0101Adv08_Sherry006",
+    "speaker": "Sherry",
+    "japanese_text": "魔法っていえば、メルルさんの魔法もすごかったですよね！",
+    "chinese_text": "说到魔法，梅露露的魔法\n真厉害呀！"
+  },
+  {
+    "dialogue_id": "0101Adv08_Sherry007",
+    "speaker": "Sherry",
+    "japanese_text": "いや現実に魔法があるっていうので私はもうびっくりなんですけどね！",
+    "chinese_text": "哎呀，现实中竟然真的有魔法，\n真是吓了我一跳！"
+  },
+  {
+    "dialogue_id": "0101Adv08_Meruru002",
+    "speaker": "Meruru",
+    "japanese_text": "は、はわわ……そ、そんなそんな……。",
+    "chinese_text": "哇、哇哇哇……说、说太过了啦……"
+  },
+  {
+    "dialogue_id": "0101Adv08_Narrative020",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマの隣で大人しく食べていたメルルは、会話を向けられただけで、極限まで恐縮している。",
+    "chinese_text": "在艾玛旁边安安分分用餐的梅露露\n突然被拉进了对话，她一下子就羞得不行。"
+  },
+  {
+    "dialogue_id": "0101Adv08_Meruru003",
+    "speaker": "Meruru",
+    "japanese_text": "たいしたことは、できません……。エマさんの血を止められただけです、し。",
+    "chinese_text": "也没做，很厉害的事情……\n只是帮艾玛小姐，止了血而已。"
+  },
+  {
+    "dialogue_id": "Toast_001",
+    "speaker": "[Narrative]",
+    "japanese_text": "魔女図鑑 更新…",
+    "chinese_text": "魔女图鉴 更新…"
+  },
+  {
+    "dialogue_id": "0101Adv08_Narrative021",
+    "speaker": "[Narrative]",
+    "japanese_text": "メルルは真っ赤になって俯いてしまった。エマは黙っていられず、思わず立ち上がってしまう。",
+    "chinese_text": "梅露露满脸通红低下了头。\n艾玛感觉自己想要说些什么，不由自主地站起身来。"
+  },
+  {
+    "dialogue_id": "0101Adv08_Ema011",
+    "speaker": "Ema",
+    "japanese_text": "ね、ねえみんなは当たり前みたいに魔法って言ってるけど……ここに捕まったみんな、魔法を使えるってこと？",
+    "chinese_text": "大家都在理所当然地聊什么魔法……\n我想问，被抓进来的大家是不是都会魔法？"
+  },
+  {
+    "dialogue_id": "0101Adv08_Ema012",
+    "speaker": "Ema",
+    "japanese_text": "ボク、魔法なんて使えないと思うんだけど……。",
+    "chinese_text": "可是我根本就不会使用魔法……"
+  },
+  {
+    "dialogue_id": "0101Adv08_Sherry008",
+    "speaker": "Sherry",
+    "japanese_text": "私もエマさんと同じですよ。魔法なんて初めて知りましたし、使えません。",
+    "chinese_text": "我和艾玛一样哦。\n我也是刚知道有魔法这回事，也不会用。"
+  },
+  {
+    "dialogue_id": "0101Adv08_Hanna005",
+    "speaker": "Hanna",
+    "japanese_text": "……ふぅ、何も知りませんのね。シェリーさんも、あなたも。",
+    "chinese_text": "……哈啊，看来你们两个\n是真的什么都不知道呢。"
+  },
+  {
+    "dialogue_id": "0101Adv08_Narrative022",
+    "speaker": "[Narrative]",
+    "japanese_text": "スプーンを置き、ハンナは大仰なため息をつく。",
+    "chinese_text": "汉娜放下汤匙，夸张地叹了一口气。"
+  },
+  {
+    "dialogue_id": "0101Adv08_Hanna006",
+    "speaker": "Hanna",
+    "japanese_text": "魔女因子を持っている子は、不思議な力が使えるんですの。それが【魔法】。",
+    "chinese_text": "拥有魔女因子的人，可以使用神奇的力量哦。\n那就是【魔法】。"
+  },
+  {
+    "dialogue_id": "0101Adv08_Hanna007",
+    "speaker": "Hanna",
+    "japanese_text": "あなたたちも気付いてないだけで、何か不思議な力を持っているはずですわ。",
+    "chinese_text": "只是你们没有发现，\n自己其实也会用某些神奇的能力而已。"
+  },
+  {
+    "dialogue_id": "0101Adv08_Sherry009",
+    "speaker": "Sherry",
+    "japanese_text": "ええ～？ 私不思議な力なんて持ってないですよ？ 特技っていえば。",
+    "chinese_text": "欸～？我可没有什么\n神奇能力耶？不过特技倒是有一样。"
+  },
+  {
+    "dialogue_id": "0101Adv08_Narrative023",
+    "speaker": "[Narrative]",
+    "japanese_text": "シェリーは目の前のリンゴに手を伸ばした。",
+    "chinese_text": "雪莉拿起眼前的苹果。"
+  },
+  {
+    "dialogue_id": "0101Adv08_Narrative024",
+    "speaker": "[Narrative]",
+    "japanese_text": "それを片手で、いともたやすく、ぐしゃっと粉砕した。",
+    "chinese_text": "然后便轻易地单手把它捏碎了。"
+  },
+  {
+    "dialogue_id": "0101Adv08_Narrative025",
+    "speaker": "[Narrative]",
+    "japanese_text": "指の力を使っているようには見えなかったが、ものの見事にバラバラになった。果汁が飛び散って、周辺を汚す。",
+    "chinese_text": "她看起来不像有使出手指的力量，\n可是苹果却碎得一干二净。\n溅出的果汁把周围都弄脏了。"
+  },
+  {
+    "dialogue_id": "0101Adv08_Hanna008",
+    "speaker": "Hanna",
+    "japanese_text": "あ……あ……。",
+    "chinese_text": "啊……啊……"
+  },
+  {
+    "dialogue_id": "0101Adv08_Sherry010",
+    "speaker": "Sherry",
+    "japanese_text": "ちょっと力が強いかなってくらいで。",
+    "chinese_text": "也就是力气稍微有点大而已啦。"
+  },
+  {
+    "dialogue_id": "0101Adv08_Narrative026",
+    "speaker": "[Narrative]",
+    "japanese_text": "ハンナも、エマも、唖然としている。",
+    "chinese_text": "汉娜和艾玛都哑口无言了。"
+  },
+  {
+    "dialogue_id": "0101Adv08_Hanna009",
+    "speaker": "Hanna",
+    "japanese_text": "どこがちょっとなんですの！？ ゴリラ女！？",
+    "chinese_text": "这算哪门子的“稍微”啦！？你是猩猩女吗！？"
+  },
+  {
+    "dialogue_id": "0101Adv08_Sherry011",
+    "speaker": "Sherry",
+    "japanese_text": "ひどいです～。リンゴくらい誰でも潰せますよね？",
+    "chinese_text": "好过分哦～小小一颗苹果，人人都能捏碎的对吧？"
+  },
+  {
+    "dialogue_id": "0101Adv08_Hanna010",
+    "speaker": "Hanna",
+    "japanese_text": "はいそれあなたの魔法！！",
+    "chinese_text": "好啦那就是你的魔法啦！！"
+  },
+  {
+    "dialogue_id": "0101Adv08_Narrative027",
+    "speaker": "[Narrative]",
+    "japanese_text": "きょとんと目を丸くしたシェリーは、照れくさそうに、にへらと相好を崩した。",
+    "chinese_text": "雪莉瞪大眼睛愣了一下，\n然后摆出羞涩的微笑。"
+  },
+  {
+    "dialogue_id": "0101Adv08_Sherry012",
+    "speaker": "Sherry",
+    "japanese_text": "そっかあ……私って魔法が使えたんですね。いやぁ、照れますね～。",
+    "chinese_text": "是吗……原来我会用魔法啊。\n哎呀，好羞人耶～"
+  },
+  {
+    "dialogue_id": "0101Adv08_Hanna011",
+    "speaker": "Hanna",
+    "japanese_text": "逆に今まで気付かなかったのが信じがたいですわ……。",
+    "chinese_text": "我才不信你真的从来都没发现呢……"
+  },
+  {
+    "dialogue_id": "0101Adv08_Sherry013",
+    "speaker": "Sherry",
+    "japanese_text": "で、ハンナさんはどんな魔法をお持ちで？",
+    "chinese_text": "那，汉娜你会什么魔法呢？"
+  },
+  {
+    "dialogue_id": "0101Adv08_Narrative028",
+    "speaker": "[Narrative]",
+    "japanese_text": "シェリーが問いかけると、ハンナは得意げな顔になって立ち上がった。",
+    "chinese_text": "听到雪莉提问，\n汉娜一脸得意地站起身来。"
+  },
+  {
+    "dialogue_id": "0101Adv08_Hanna012",
+    "speaker": "Hanna",
+    "japanese_text": "仕方ないですわね。そんなに見たいのなら見せてあげてもよろしくってよ？ よ？",
+    "chinese_text": "真拿你没办法。这么想看的话\n本小姐就表演给你看咯？看好咯？"
+  },
+  {
+    "dialogue_id": "0101Adv08_Narrative029",
+    "speaker": "[Narrative]",
+    "japanese_text": "ハンナは目立つところへと移動していき、そこでバッと両手をひろげ――",
+    "chinese_text": "然后汉娜走到显眼处，\n忽然张开了双手——"
+  },
+  {
+    "dialogue_id": "0101Adv08_Hanna013",
+    "speaker": "Hanna",
+    "japanese_text": "これがわたくしの魔法ですわあぁっ",
+    "chinese_text": "这就是我的魔法哇哇哇～"
+  },
+  {
+    "dialogue_id": "0101Adv08_Narrative030",
+    "speaker": "[Narrative]",
+    "japanese_text": "ちょっと浮いた。",
+    "chinese_text": "然后飘起来了，一点点。"
+  },
+  {
+    "dialogue_id": "0101Adv08_Narrative031",
+    "speaker": "[Narrative]",
+    "japanese_text": "……１０センチくらいだろうか。足先が地面に接しておらず、ふわふわしている。",
+    "chinese_text": "……大概有10厘米左右。\n她的脚已经离开地面，像气球一样飘着。"
+  },
+  {
+    "dialogue_id": "0101Adv08_Sherry014",
+    "speaker": "Sherry",
+    "japanese_text": "すごいすごいすご～い！",
+    "chinese_text": "好厉害好厉害好厉害～！"
+  },
+  {
+    "dialogue_id": "0101Adv08_Narrative032",
+    "speaker": "[Narrative]",
+    "japanese_text": "シェリーは大はしゃぎだ。ハンナはますます鼻息を荒くし、頬を紅潮させている。",
+    "chinese_text": "雪莉满脸写着兴奋，\n而汉娜的呼吸却渐渐变得紊乱，脸也变得愈来愈红。"
+  },
+  {
+    "dialogue_id": "0101Adv08_Hanna014",
+    "speaker": "Hanna",
+    "japanese_text": "このまま移動もできますのよ！",
+    "chinese_text": "我还可以一边飞一边移动！"
+  },
+  {
+    "dialogue_id": "0101Adv08_Narrative033",
+    "speaker": "[Narrative]",
+    "japanese_text": "少しだけ、移動した。シェリーだけが拍手喝采だ。",
+    "chinese_text": "然后移动了，一点点。\n只有雪莉送去了掌声和欢呼。"
+  },
+  {
+    "dialogue_id": "0101Adv08_Narrative034",
+    "speaker": "[Narrative]",
+    "japanese_text": "疲れたのか、すぐにハンナは地面に降り立った。息も荒くなっている。",
+    "chinese_text": "接着汉娜就着地了。\n她现在上气不接下气，看起来很疲累的样子。"
+  },
+  {
+    "dialogue_id": "0101Adv08_Hanna015",
+    "speaker": "Hanna",
+    "japanese_text": "……と、こんな風にわたくしたちは魔法を持っていますの。きっと魔女見習いみたいなものね。",
+    "chinese_text": "……就像这样，我们是\n会使用魔法的。\n我想这算是实习魔女吧。"
+  },
+  {
+    "dialogue_id": "0101Adv08_Narrative035",
+    "speaker": "[Narrative]",
+    "japanese_text": "ぜえぜえと喘ぎながらハンナが言い、自分の席に戻ってきた。",
+    "chinese_text": "汉娜喘着大气一边说道，\n然后坐回自己的位置。"
+  },
+  {
+    "dialogue_id": "0101Adv08_Hanna016",
+    "speaker": "Hanna",
+    "japanese_text": "自分が不思議な力を使えるって気付いた時から、わたくし、色々調べてきましたの。",
+    "chinese_text": "我发现自己会使用神奇能力之后，\n就开始了调查，知道了很多事。"
+  },
+  {
+    "dialogue_id": "0101Adv08_Hanna017",
+    "speaker": "Hanna",
+    "japanese_text": "魔女因子や牢屋敷のことは、都市伝説で聞いたことがありますわ。",
+    "chinese_text": "魔女因子还有监牢的事，\n我有听都市传说讲过哦。"
+  },
+  {
+    "dialogue_id": "0101Adv08_Hanna018",
+    "speaker": "Hanna",
+    "japanese_text": "魔法を持つ者は、魔女になるかもしれないから１５才で牢屋敷送りになるって。",
+    "chinese_text": "说拥有魔法的人可能会变成魔女，\n所以要在15岁的时候送到监牢里。"
+  },
+  {
+    "dialogue_id": "0101Adv08_Sherry015",
+    "speaker": "Sherry",
+    "japanese_text": "そういえば、私も友だちからそんなような噂聞いたことあったかも？",
+    "chinese_text": "听你这么一讲，我好像也听\n我的朋友讲过类似的传闻耶？"
+  },
+  {
+    "dialogue_id": "0101Adv08_Ema013",
+    "speaker": "Ema",
+    "japanese_text": "ボク、ぜんぜん知らなかった……。",
+    "chinese_text": "我完全没听说过有这么一回事……"
+  },
+  {
+    "dialogue_id": "0101Adv08_Ema014",
+    "speaker": "Ema",
+    "japanese_text": "（ボク、友だち、いなかったもんな……　でも、やっぱり魔法なんて信じられないや……）",
+    "chinese_text": "（因为我没有朋友……\n可是魔法实在是太难以置信了……）"
+  },
+  {
+    "dialogue_id": "0101Adv08_Ema015",
+    "speaker": "Ema",
+    "japanese_text": "ボク、間違えてここに連れてこられたんじゃないかな？",
+    "chinese_text": "我想，他们是不是搞错了\n才把我送到这里来了？"
+  },
+  {
+    "dialogue_id": "0101Adv08_Hanna019",
+    "speaker": "Hanna",
+    "japanese_text": "可能性はありますわね。検査なんて、いつされたのかもわからないですし。",
+    "chinese_text": "嗯，有可能。\n毕竟也不知道所谓的检查是什么时候做的。"
+  },
+  {
+    "dialogue_id": "0101Adv08_Narrative036",
+    "speaker": "[Narrative]",
+    "japanese_text": "ハンナは悔しそうに爪を噛む。",
+    "chinese_text": "汉娜有些不甘心地咬着指甲。"
+  },
+  {
+    "dialogue_id": "0101Adv08_Hanna020",
+    "speaker": "Hanna",
+    "japanese_text": "わたくし、牢屋敷送りが嫌でこの能力をずっと隠してきましたのに……。",
+    "chinese_text": "我本来是不想被关进监牢，\n才一直以来都隐瞒了这份能力……"
+  },
+  {
+    "dialogue_id": "0101Adv08_Hanna021",
+    "speaker": "Hanna",
+    "japanese_text": "こんなところに閉じ込められて、この先、どうなってしまうんですの……。",
+    "chinese_text": "关进这种地方，接下来究竟\n会变成什么样……"
+  },
+  {
+    "dialogue_id": "0101Adv08_Narrative037",
+    "speaker": "[Narrative]",
+    "japanese_text": "ハンナの呟きは、空気を重くするに十分だった。",
+    "chinese_text": "汉娜的自言自语，\n让现场的空气变得十分凝重。"
+  }
+]

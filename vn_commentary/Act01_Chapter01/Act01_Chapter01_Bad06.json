@@ -1,0 +1,344 @@
+[
+  {
+    "dialogue_id": "0101Bad06_Narrative001",
+    "speaker": "[Narrative]",
+    "japanese_text": "やっぱりなんでもないと首を振った。",
+    "chinese_text": "摇了摇头，说“算了，还是没事了”。"
+  },
+  {
+    "dialogue_id": "0101Bad06_Meruru001",
+    "speaker": "Meruru",
+    "japanese_text": "そうですか……？ では行きましょう。",
+    "chinese_text": "真的吗……？那我们走吧。"
+  },
+  {
+    "dialogue_id": "0101Bad06_Narrative002",
+    "speaker": "[Narrative]",
+    "japanese_text": "メルルに手を引かれながら、エマは歩き出す。",
+    "chinese_text": "梅露露和艾玛手牵手离开了。"
+  },
+  {
+    "dialogue_id": "0101Bad06_Narrative003",
+    "speaker": "[Narrative]",
+    "japanese_text": "それでもノアの様子が気になったのか、一瞬だけ彼女の房に目を向けた。",
+    "chinese_text": "不过艾玛还是有些在意诺亚的情况，\n扭头往她的房间看了一眼。"
+  },
+  {
+    "dialogue_id": "0101Bad06_Ema001",
+    "speaker": "Ema",
+    "japanese_text": "（ノアちゃん、今日もごはん行かないのかな）",
+    "chinese_text": "（诺亚她今天也不去用餐吗）"
+  },
+  {
+    "dialogue_id": "0101Bad06_Narrative004",
+    "speaker": "[Narrative]",
+    "japanese_text": "またアートに勤しんでいるのだろうか。",
+    "chinese_text": "也许她还在专心搞艺术吧。"
+  },
+  {
+    "dialogue_id": "0101Bad06_Ema002",
+    "speaker": "Ema",
+    "japanese_text": "（でも、おかしいな。　いつもなら、スプレーの音が聞こえてくるはずだけど……）",
+    "chinese_text": "（可是，有点奇怪。\n平常的话，应该能听到她的喷罐声音才对……）"
+  },
+  {
+    "dialogue_id": "0101Bad06_Meruru002",
+    "speaker": "Meruru",
+    "japanese_text": "エマさん、やっぱり何か気になることがあるんじゃないですか？",
+    "chinese_text": "艾玛小姐，\n你其实是不是还有在意的事？"
+  },
+  {
+    "dialogue_id": "0101Bad06_Ema003",
+    "speaker": "Ema",
+    "japanese_text": "……ううん、大丈夫。行こう。",
+    "chinese_text": "……不，没事的。我们走吧。"
+  },
+  {
+    "dialogue_id": "0101Bad06_Meruru003",
+    "speaker": "Meruru",
+    "japanese_text": "本当ですか？もしかして、具合が悪いんじゃ……！",
+    "chinese_text": "真的吗？\n你是不是哪里不舒服……！"
+  },
+  {
+    "dialogue_id": "0101Bad06_Narrative005",
+    "speaker": "[Narrative]",
+    "japanese_text": "メルルに心配されながら、エマは階段を上がっていく。",
+    "chinese_text": "面对正爬着楼梯的艾玛，梅露露有些担心。"
+  },
+  {
+    "dialogue_id": "0101Bad06_Ema004",
+    "speaker": "Ema",
+    "japanese_text": "（今日もまた、あのごはんかぁ）",
+    "chinese_text": "（今天又要吃那种饭菜了啊）"
+  },
+  {
+    "dialogue_id": "0101Bad06_Narrative006",
+    "speaker": "[Narrative]",
+    "japanese_text": "食堂に入ったエマはどろりとしたグロテスクな色の料理を思い浮かべて、ため息をついた。",
+    "chinese_text": "走进食堂的艾玛一想到那些黏糊糊的\n诡异饭菜，便叹了口气。"
+  },
+  {
+    "dialogue_id": "0101Bad06_Ema005",
+    "speaker": "Ema",
+    "japanese_text": "あれ？ なんか今日はいい匂いがするような……。",
+    "chinese_text": "哎呀？感觉今天好像味道香香的……"
+  },
+  {
+    "dialogue_id": "0101Bad06_Narrative007",
+    "speaker": "[Narrative]",
+    "japanese_text": "漂う香ばしい匂いに、エマは思わずといった様子で鼻を鳴らした。",
+    "chinese_text": "香飘四溢的气味，\n令艾玛大感意外，禁不住再用力闻上一闻。"
+  },
+  {
+    "dialogue_id": "0101Bad06_Sherry001",
+    "speaker": "Sherry",
+    "japanese_text": "あっ、エマさーん！やっと来ましたね！",
+    "chinese_text": "啊，艾玛！\n你终于来了！"
+  },
+  {
+    "dialogue_id": "0101Bad06_Narrative008",
+    "speaker": "[Narrative]",
+    "japanese_text": "シェリーが手を振って、エマを呼ぶ。珍しく、他の少女たちも同じテーブルに寄り合っていた。既に全員が、食事をはじめている。",
+    "chinese_text": "雪莉挥手向艾玛招呼。\n其他的少女今天也难得地都坐在了一起。\n所有人都已经开始用餐了。"
+  },
+  {
+    "dialogue_id": "0101Bad06_Ema006",
+    "speaker": "Ema",
+    "japanese_text": "ええっ、嘘でしょ……！？",
+    "chinese_text": "欸欸，不是真的吧……！？"
+  },
+  {
+    "dialogue_id": "0101Bad06_Narrative009",
+    "speaker": "[Narrative]",
+    "japanese_text": "トレーにのせられた料理を目にして、エマは驚きの声を上げた。",
+    "chinese_text": "看着托盘上盛放的饭菜，\n艾玛发出惊讶的声音。"
+  },
+  {
+    "dialogue_id": "0101Bad06_Narrative010",
+    "speaker": "[Narrative]",
+    "japanese_text": "盛り付けられているのは、いつもの気味が悪い料理ではない。焼き目がいい具合についたステーキだった。",
+    "chinese_text": "上面盛放的，\n不是平时那些恶心的饭菜，\n而是烤得恰到好处的肉排。"
+  },
+  {
+    "dialogue_id": "0101Bad06_Ema007",
+    "speaker": "Ema",
+    "japanese_text": "……これ、お肉なの！？",
+    "chinese_text": "……这是肉！？"
+  },
+  {
+    "dialogue_id": "0101Bad06_Narrative011",
+    "speaker": "[Narrative]",
+    "japanese_text": "ステーキだけじゃない。シチューに、揚げ物、スペアリブ。他にも、色とりどりの肉料理が並んでいる。",
+    "chinese_text": "不止有肉排，\n还有浓汤、炸物、排骨。\n除此之外，还有其他丰富多样的肉菜。"
+  },
+  {
+    "dialogue_id": "0101Bad06_Hanna001",
+    "speaker": "Hanna",
+    "japanese_text": "このシチュー、お肉ホロホロで、うんめえ～ですわ！",
+    "chinese_text": "浓汤里面的肉松松软软的，\n好好吃～！"
+  },
+  {
+    "dialogue_id": "0101Bad06_Leia001",
+    "speaker": "Leia",
+    "japanese_text": "これは、極上の味と香りだね。ステーキの焼き加減も絶妙だよ。",
+    "chinese_text": "这味道和香气可谓顶级。\n肉排的熟度也控制得十分绝妙。"
+  },
+  {
+    "dialogue_id": "0101Bad06_Sherry002",
+    "speaker": "Sherry",
+    "japanese_text": "ほら、ナノカさんも食べてください！こっちの赤いジュースも美味しいですよ！",
+    "chinese_text": "来，奈叶香你也快吃吧！\n这边的红色果汁很好喝哦！"
+  },
+  {
+    "dialogue_id": "0101Bad06_Nanoka001",
+    "speaker": "Nanoka",
+    "japanese_text": "え、ええ…………あ、たしかに美味しいかも。",
+    "chinese_text": "好、好的……\n……啊，还真的挺好喝。"
+  },
+  {
+    "dialogue_id": "0101Bad06_AnAn001",
+    "speaker": "AnAn",
+    "japanese_text": "『癖になりそう。どんな隠し味が？』",
+    "chinese_text": "『吃了感觉有瘾。里面放了什么香料？』"
+  },
+  {
+    "dialogue_id": "0101Bad06_Coco001",
+    "speaker": "Coco",
+    "japanese_text": "てか、こっちの唐揚げもうますぎだし！ほら、ミリアも食えって！",
+    "chinese_text": "我说，这边的炸物也好吃爆了！\n来，米莉亚你也快吃！"
+  },
+  {
+    "dialogue_id": "0101Bad06_Miria001",
+    "speaker": "Miria",
+    "japanese_text": "おじさん、こってりしてるのはちょっと……あっ、でもこれ思ったよりあっさりしてるかも。",
+    "chinese_text": "大叔我吃不来这种腻的……\n啊，可是这个比想像中的爽口欸。"
+  },
+  {
+    "dialogue_id": "0101Bad06_Alisa001",
+    "speaker": "Alisa",
+    "japanese_text": "本当、めでたいやつら。飯ぐらいでよくもまぁそんなに喜べるよな。",
+    "chinese_text": "看你们这一脸幸福的样子，\n不就是一顿饭，亏你们能吃得这么开心。"
+  },
+  {
+    "dialogue_id": "0101Bad06_Margo001",
+    "speaker": "Margo",
+    "japanese_text": "ウフフ……そんなこと言って、あなたそれ何皿目かしら？",
+    "chinese_text": "呵呵呵……嘴上就会说别人，\n你这都第几盘了？"
+  },
+  {
+    "dialogue_id": "0101Bad06_Sherry003",
+    "speaker": "Sherry",
+    "japanese_text": "エマさんもメルルさんも、早く一緒に食べましょう！",
+    "chinese_text": "艾玛，梅露露，你们两个也快一起吃吧！"
+  },
+  {
+    "dialogue_id": "0101Bad06_Ema008",
+    "speaker": "Ema",
+    "japanese_text": "あ……う、うん！",
+    "chinese_text": "啊……好、好的！"
+  },
+  {
+    "dialogue_id": "0101Bad06_Narrative012",
+    "speaker": "[Narrative]",
+    "japanese_text": "シェリーに促されて、エマとメルルも席につく。",
+    "chinese_text": "在雪莉的催促下，艾玛和梅露露也就座了。"
+  },
+  {
+    "dialogue_id": "0101Bad06_Ema009",
+    "speaker": "Ema",
+    "japanese_text": "いただきまーす。",
+    "chinese_text": "我开吃咯——"
+  },
+  {
+    "dialogue_id": "0101Bad06_Narrative013",
+    "speaker": "[Narrative]",
+    "japanese_text": "手を合わせて、エマも料理を口に運ぶ。",
+    "chinese_text": "艾玛双手合掌后，开始将饭菜送进嘴里。"
+  },
+  {
+    "dialogue_id": "0101Bad06_Ema010",
+    "speaker": "Ema",
+    "japanese_text": "うん、美味しい……！！",
+    "chinese_text": "嗯，好好吃……！！"
+  },
+  {
+    "dialogue_id": "0101Bad06_Meruru004",
+    "speaker": "Meruru",
+    "japanese_text": "今日はみなさん幸せそうでよかった、ですね……。",
+    "chinese_text": "今天大家看起来好幸福，真是太好了……"
+  },
+  {
+    "dialogue_id": "0101Bad06_Ema011",
+    "speaker": "Ema",
+    "japanese_text": "そうだね。なんか、こういうのっていいな……。",
+    "chinese_text": "嗯。感觉，这样也挺不错的……"
+  },
+  {
+    "dialogue_id": "0101Bad06_Ema012",
+    "speaker": "Ema",
+    "japanese_text": "みんなで一緒にワイワイごはん食べるのって、やっぱり楽しいよね……。",
+    "chinese_text": "大家能在一起热热闹闹吃饭，\n真是开心……"
+  },
+  {
+    "dialogue_id": "0101Bad06_Narrative014",
+    "speaker": "[Narrative]",
+    "japanese_text": "ここに来て以来、常に殺伐とした空気や緊張感に包まれていた。だが今夜は、少女たちの間にも和やかなムードが漂っている。",
+    "chinese_text": "自从来到这里，她们身边常常充满着杀气和紧张的气氛。\n不过今晚，少女之间的气氛却是十分和睦。"
+  },
+  {
+    "dialogue_id": "0101Bad06_Ema013",
+    "speaker": "Ema",
+    "japanese_text": "（このまま殺し合いなんて起きずに、　全員でここを出られたら最高なのに）",
+    "chinese_text": "（要是之后可以一直不发生互相厮杀，\n所有人能一起离开这里就更好了）"
+  },
+  {
+    "dialogue_id": "0101Bad06_Ema014",
+    "speaker": "Ema",
+    "japanese_text": "……あ、ノアちゃん。",
+    "chinese_text": "……啊，诺亚……"
+  },
+  {
+    "dialogue_id": "0101Bad06_Narrative015",
+    "speaker": "[Narrative]",
+    "japanese_text": "ふと、今ここに１人足りていないことを思い出す。",
+    "chinese_text": "忽然间，她想起现在这里缺了一个人。"
+  },
+  {
+    "dialogue_id": "0101Bad06_Ema015",
+    "speaker": "Ema",
+    "japanese_text": "（こんなに美味しいごはん、食べないなんてもったいないよね。　後でノアちゃんにも持っていってあげよう）",
+    "chinese_text": "（这么好吃的饭菜，没吃到真是太可惜了。\n之后给诺亚也带一些饭菜过去吧）"
+  },
+  {
+    "dialogue_id": "0101Bad06_Ema016",
+    "speaker": "Ema",
+    "japanese_text": "それにしても、本当に美味しいなぁ……このお肉！",
+    "chinese_text": "话说回来，这个肉……真的好好吃！"
+  },
+  {
+    "dialogue_id": "0101Bad06_Narrative016",
+    "speaker": "[Narrative]",
+    "japanese_text": "夕食のあと。エマはノアに料理の差し入れを持ってきた。",
+    "chinese_text": "晚餐后，\n艾玛去给诺亚送饭了。"
+  },
+  {
+    "dialogue_id": "0101Bad06_Ema017",
+    "speaker": "Ema",
+    "japanese_text": "ノアちゃん、今日の夕飯なんだけど……あれ？",
+    "chinese_text": "诺亚，我给你带今天的晚餐了……哎呀？"
+  },
+  {
+    "dialogue_id": "0101Bad06_Narrative017",
+    "speaker": "[Narrative]",
+    "japanese_text": "スプレーアートで埋め尽くされた房の中に、ノアの姿はなかった。",
+    "chinese_text": "涂满喷漆画的房内，\n不见诺亚的影子。"
+  },
+  {
+    "dialogue_id": "0101Bad06_Narrative018",
+    "speaker": "[Narrative]",
+    "japanese_text": "彼女が使ったであろうスプレー缶が、ポツンと転がっている。",
+    "chinese_text": "只见她用过的喷罐\n孤零零地躺在地上。"
+  },
+  {
+    "dialogue_id": "0101Bad06_Ema018",
+    "speaker": "Ema",
+    "japanese_text": "（おかしいな……どこかに行ってるのかな？）",
+    "chinese_text": "（真奇怪……她跑哪里去了？）"
+  },
+  {
+    "dialogue_id": "0101Bad06_Narrative019",
+    "speaker": "[Narrative]",
+    "japanese_text": "夕食後は長めの自由時間だ。別の場所で過ごしているのかもしれない。",
+    "chinese_text": "晚餐后是一段较长的放风时间，\n或许她是跑到别的地方打发时间了。"
+  },
+  {
+    "dialogue_id": "0101Bad06_Ema019",
+    "speaker": "Ema",
+    "japanese_text": "（だったら、そのうち帰ってくるよね。　差し入れ、喜んでくれるかなあ）",
+    "chinese_text": "（如果是这样的话，那她晚点就回来了吧。\n希望她能喜欢我给她带的饭）"
+  },
+  {
+    "dialogue_id": "0101Bad06_Narrative020",
+    "speaker": "[Narrative]",
+    "japanese_text": "だが、いつまで経っても城ケ崎ノアは戻ってこなかった。",
+    "chinese_text": "可是，不管过了多久，\n城崎诺亚都没有再回来过了。"
+  },
+  {
+    "dialogue_id": "0101Bad06_Narrative021",
+    "speaker": "[Narrative]",
+    "japanese_text": "あちこち探したが、見つからないまま１日、２日と時間だけが流れていく。",
+    "chinese_text": "虽然四处找过她，但都没找着。\n时间就这样一天天地流逝。"
+  },
+  {
+    "dialogue_id": "0101Bad06_Narrative022",
+    "speaker": "[Narrative]",
+    "japanese_text": "その後も、牢屋敷では定期的に【ごちそう】が出たのだが――",
+    "chinese_text": "之后，监牢内\n定期会有【美味大餐】供应，但——"
+  },
+  {
+    "dialogue_id": "0101Bad06_Narrative023",
+    "speaker": "[Narrative]",
+    "japanese_text": "そのたびに少女が１人、姿を消した。",
+    "chinese_text": "每次出餐，都会有一位少女不知所踪。"
+  }
+]

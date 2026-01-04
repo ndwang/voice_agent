@@ -1,0 +1,146 @@
+[
+  {
+    "dialogue_id": "0101Adv29_Ema001",
+    "speaker": "Ema",
+    "japanese_text": "（このあたりを歩くの苦手なんだよな）",
+    "chinese_text": "（我还是有点害怕在这附近走动）"
+  },
+  {
+    "dialogue_id": "0101Adv29_Narrative001",
+    "speaker": "[Narrative]",
+    "japanese_text": "見張りのためか、看守はよく玄関ホールに立っている。いつのっそりと現れてもおかしくない。",
+    "chinese_text": "看守经常会来玄关大厅这边巡逻站岗。\n它什么时候悄悄出现在这里都不出奇。"
+  },
+  {
+    "dialogue_id": "0101Adv29_Ema002",
+    "speaker": "Ema",
+    "japanese_text": "（で、でも怖がってる場合じゃない……！　調査をしないと！）",
+    "chinese_text": "（现、现在不是害怕的时候……！\n我要调查才行！）"
+  },
+  {
+    "dialogue_id": "0101Adv29_Sherry001",
+    "speaker": "Sherry",
+    "japanese_text": "……ふぅ。",
+    "chinese_text": "……呼。"
+  },
+  {
+    "dialogue_id": "0101Adv29_Narrative002",
+    "speaker": "[Narrative]",
+    "japanese_text": "珍しくシェリーが、重々しくため息をついた。",
+    "chinese_text": "这时雪莉竟大大地叹了一口气。很少见她会有这种反应。"
+  },
+  {
+    "dialogue_id": "0101Adv29_Hanna001",
+    "speaker": "Hanna",
+    "japanese_text": "どうしましたの？あなたがため息なんて。",
+    "chinese_text": "你怎么了？\n天不怕地不怕的雪莉竟然会叹气。"
+  },
+  {
+    "dialogue_id": "0101Adv29_Sherry002",
+    "speaker": "Sherry",
+    "japanese_text": "なんだか最近、どっと疲れるんです。",
+    "chinese_text": "总感觉最近好容易变累啊。"
+  },
+  {
+    "dialogue_id": "0101Adv29_Sherry003",
+    "speaker": "Sherry",
+    "japanese_text": "私、体力バカなんですけどねぇ。これは一体どうしたことか。",
+    "chinese_text": "我可是无限体力的怪人耶，\n怎么会这样呢。"
+  },
+  {
+    "dialogue_id": "0101Adv29_Ema003",
+    "speaker": "Ema",
+    "japanese_text": "ヒロちゃんに次いでノアちゃんまで死んじゃって……そんなの見せられて、普通でいられるわけないよ……。",
+    "chinese_text": "先是希罗死了，接着连诺亚也死了……\n目击了这些残忍的事，怎么还可能保持正常……"
+  },
+  {
+    "dialogue_id": "0101Adv29_Narrative003",
+    "speaker": "[Narrative]",
+    "japanese_text": "シェリーは唇に指を添え、首を傾げた。",
+    "chinese_text": "但雪莉却把手指抵在唇尖上，歪头表示疑问。"
+  },
+  {
+    "dialogue_id": "0101Adv29_Sherry004",
+    "speaker": "Sherry",
+    "japanese_text": "ん～……死体は見慣れているんですけどねえ。",
+    "chinese_text": "唔～……不过尸体我倒是看习惯了耶。"
+  },
+  {
+    "dialogue_id": "0101Adv29_Ema004",
+    "speaker": "Ema",
+    "japanese_text": "（え……？ それってどういう意味……？）",
+    "chinese_text": "（欸……？那是什么意思……？）"
+  },
+  {
+    "dialogue_id": "0101Adv29_Narrative004",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマは問いただそうとしてか口を開きかけたが、その前にハンナが声を上げた。",
+    "chinese_text": "艾玛正准备张嘴回问，\n但汉娜抢先发言了。"
+  },
+  {
+    "dialogue_id": "0101Adv29_Hanna002",
+    "speaker": "Hanna",
+    "japanese_text": "ここにある掃除ロッカー、開きっぱなしになっていますわ。",
+    "chinese_text": "这边的清扫工具柜\n没有关上欸。"
+  },
+  {
+    "dialogue_id": "0101Adv29_Sherry005",
+    "speaker": "Sherry",
+    "japanese_text": "あれ、ほんとですね！",
+    "chinese_text": "啊，真的耶！"
+  },
+  {
+    "dialogue_id": "0101Adv29_Narrative005",
+    "speaker": "[Narrative]",
+    "japanese_text": "３人は階段のそばにある掃除ロッカーへと歩み寄っていく。",
+    "chinese_text": "三人来到了楼梯附近的\n清扫工具柜跟前。"
+  },
+  {
+    "dialogue_id": "0101Adv29_Sherry006",
+    "speaker": "Sherry",
+    "japanese_text": "看守が掃除しているところ、見たことあります？",
+    "chinese_text": "你们有没有亲眼见过\n看守打扫的样子？"
+  },
+  {
+    "dialogue_id": "0101Adv29_Ema005",
+    "speaker": "Ema",
+    "japanese_text": "ううん。誰か掃除したのかな？",
+    "chinese_text": "没见过。是谁打扫的呢？"
+  },
+  {
+    "dialogue_id": "0101Adv29_Narrative006",
+    "speaker": "[Narrative]",
+    "japanese_text": "掃除ロッカーからは、長い柄のほうきがはみ出していた。しかもブラシ部分のジョイントが外されている。",
+    "chinese_text": "清扫工具柜的柜门处露出了扫帚的长柄。\n仔细一看，扫帚的接头部分也被人拆开了。"
+  },
+  {
+    "dialogue_id": "0101Adv29_Ema006",
+    "speaker": "Ema",
+    "japanese_text": "（なんか気になるな）",
+    "chinese_text": "（感觉有些可疑）"
+  },
+  {
+    "dialogue_id": "Toast_001",
+    "speaker": "[Narrative]",
+    "japanese_text": "魔女図鑑 更新…",
+    "chinese_text": "魔女图鉴 更新…"
+  },
+  {
+    "dialogue_id": "0101Adv29_Hanna003",
+    "speaker": "Hanna",
+    "japanese_text": "たしかにここは埃っぽいですけれど、掃除をする心の余裕はもてませんわね。",
+    "chinese_text": "虽然这里确实到处都是灰尘，\n可大家也不至于有心情打扫吧。"
+  },
+  {
+    "dialogue_id": "0101Adv29_Ema007",
+    "speaker": "Ema",
+    "japanese_text": "（他に気になるものはなさそうだ）",
+    "chinese_text": "（这里没有其他令人在意的事了）"
+  },
+  {
+    "dialogue_id": "0101Adv29_Narrative007",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマたちは、看守の目から逃れるように、そそくさと玄関ホールを後にした。",
+    "chinese_text": "为了躲避看守的视线，\n艾玛她们慌忙离开了玄关大厅。"
+  }
+]

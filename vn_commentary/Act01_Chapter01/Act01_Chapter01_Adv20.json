@@ -1,0 +1,392 @@
+[
+  {
+    "dialogue_id": "0101Adv20_Narrative001",
+    "speaker": "[Narrative]",
+    "japanese_text": "いつもどおりの夕食を終え、エマ、シェリー、ハンナ、メルルの４人は食堂を出た。",
+    "chinese_text": "吃完了一如既往的晚餐，\n艾玛、雪莉、汉娜、梅露露四人走出了食堂。"
+  },
+  {
+    "dialogue_id": "0101Adv20_Narrative002",
+    "speaker": "[Narrative]",
+    "japanese_text": "シャワーを浴びに行こうかと相談しながら歩いていると、背後から声をかけられる。",
+    "chinese_text": "她们走在路上，讨论要不要去冲澡。\n这时背后有人喊住了她们。"
+  },
+  {
+    "dialogue_id": "0101Adv20_Nanoka001",
+    "speaker": "Nanoka",
+    "japanese_text": "ちょっといい？",
+    "chinese_text": "请问可以打扰一下吗？"
+  },
+  {
+    "dialogue_id": "0101Adv20_Narrative003",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマらが振り向くと、ナノカが立っていた。ナノカは集団で行動せず、１人で歩き回っている少女だ。",
+    "chinese_text": "艾玛她们回头一看，原来是奈叶香。\n奈叶香一直都是独来独往，从未跟随团体一起行动过。"
+  },
+  {
+    "dialogue_id": "0101Adv20_Narrative004",
+    "speaker": "[Narrative]",
+    "japanese_text": "行動は謎に包まれており、おのずと、エマたち４人に緊張が走る。",
+    "chinese_text": "她的行动充满谜团。\n艾玛她们四个不禁有些紧张。"
+  },
+  {
+    "dialogue_id": "0101Adv20_Sherry001",
+    "speaker": "Sherry",
+    "japanese_text": "なんでしょう？ 何かお困りごとでしょうか？",
+    "chinese_text": "什么事？你有什么烦恼吗？"
+  },
+  {
+    "dialogue_id": "0101Adv20_Nanoka002",
+    "speaker": "Nanoka",
+    "japanese_text": "ラウンジに飾ってあるボウガンが消えていたの。誰かが持ち出したんだと思う。",
+    "chinese_text": "装饰在会客厅里的弩枪不见了。\n我猜是有人把它拿走了。"
+  },
+  {
+    "dialogue_id": "0101Adv20_Hanna001",
+    "speaker": "Hanna",
+    "japanese_text": "なんですって……それって一大事じゃ！？",
+    "chinese_text": "什么……这事很严重欸！？"
+  },
+  {
+    "dialogue_id": "0101Adv20_Narrative005",
+    "speaker": "[Narrative]",
+    "japanese_text": "ハンナが青ざめ、エマも嫌な予感に鼓動が速まっていた。",
+    "chinese_text": "汉娜脸色煞白，\n艾玛也产生了不好的预感，心跳越来越快。"
+  },
+  {
+    "dialogue_id": "0101Adv20_Ema001",
+    "speaker": "Ema",
+    "japanese_text": "（ボウガンを、なんのために……？）",
+    "chinese_text": "（为什么要把弩枪拿走……？）"
+  },
+  {
+    "dialogue_id": "0101Adv20_Ema002",
+    "speaker": "Ema",
+    "japanese_text": "い、一度確認に行こう。",
+    "chinese_text": "去、去确认一下吧。"
+  },
+  {
+    "dialogue_id": "0101Adv20_Narrative006",
+    "speaker": "[Narrative]",
+    "japanese_text": "５人はぞろぞろと、ラウンジへ入っていく。",
+    "chinese_text": "她们五人\n陆续进入了会客厅。"
+  },
+  {
+    "dialogue_id": "0101Adv20_Narrative007",
+    "speaker": "[Narrative]",
+    "japanese_text": "そして、壁に掛けられていたはずのボウガンがなくなっているのを目の当たりにした。",
+    "chinese_text": "然后她们看到，\n本该挂在墙壁上的弩枪不见了。"
+  },
+  {
+    "dialogue_id": "0101Adv20_Ema003",
+    "speaker": "Ema",
+    "japanese_text": "ほんとだ……一体いつから……？",
+    "chinese_text": "是真的……什么时候开始不见的……？"
+  },
+  {
+    "dialogue_id": "0101Adv20_Nanoka003",
+    "speaker": "Nanoka",
+    "japanese_text": "昨日の日中に見た時はあって、今日見に行ったらなかった。だから昨日の夜だと思う。",
+    "chinese_text": "昨天白天来的时候还在，今天来的时候就不见了。\n所以我猜是昨晚不见的。"
+  },
+  {
+    "dialogue_id": "0101Adv20_Nanoka004",
+    "speaker": "Nanoka",
+    "japanese_text": "それに……昨日なくなったものがもう１つあるの。",
+    "chinese_text": "而且……昨天还有另一件东西不见了。"
+  },
+  {
+    "dialogue_id": "0101Adv20_Ema004",
+    "speaker": "Ema",
+    "japanese_text": "何がなくなったの？",
+    "chinese_text": "是什么不见了？"
+  },
+  {
+    "dialogue_id": "0101Adv20_Nanoka005",
+    "speaker": "Nanoka",
+    "japanese_text": "私の髪リボン。どこかに落としたのかもしれなくて、思い当たるところは探し回ったんだけど、見つからない。",
+    "chinese_text": "是我的发带。我以为是弄丢了，\n可有头绪的地方我都找过了，还是没找到。"
+  },
+  {
+    "dialogue_id": "0101Adv20_Narrative008",
+    "speaker": "[Narrative]",
+    "japanese_text": "ナノカは淡々と事実を述べているように見えるが、握りしめている拳が微かに震えている。",
+    "chinese_text": "奈叶香嘴上用平淡的口吻描述着事实，\n但手里却是紧握着拳头，并且微微颤抖着。"
+  },
+  {
+    "dialogue_id": "0101Adv20_Ema005",
+    "speaker": "Ema",
+    "japanese_text": "（あ、もしかして日中に見たナノカちゃんは……　リボンを探してたのかな）",
+    "chinese_text": "（啊，白天我有看见奈叶香。难道说……\n她当时是在找那条发带吗）"
+  },
+  {
+    "dialogue_id": "0101Adv20_Ema006",
+    "speaker": "Ema",
+    "japanese_text": "（大切なリボンなのかも……　ナノカちゃん、切羽詰まっているように見えた）",
+    "chinese_text": "（奈叶香应该相当珍惜那条发带……\n她现在看起来很焦急）"
+  },
+  {
+    "dialogue_id": "0101Adv20_Nanoka006",
+    "speaker": "Nanoka",
+    "japanese_text": "囚人の中に、泥棒がいる。私は、許さない。",
+    "chinese_text": "囚犯里有小偷，\n我不会放过她。"
+  },
+  {
+    "dialogue_id": "0101Adv20_Narrative009",
+    "speaker": "[Narrative]",
+    "japanese_text": "暗い瞳で吐き出された言葉に、エマの背筋がぞくりと凍りつく。",
+    "chinese_text": "眼神昏暗的奈叶香作出宣言。\n这句话让艾玛感到脊背发凉。"
+  },
+  {
+    "dialogue_id": "0101Adv20_Ema007",
+    "speaker": "Ema",
+    "japanese_text": "（許さないって、何をするつもり……？）",
+    "chinese_text": "（她说的不会放过，究竟要做什么……？）"
+  },
+  {
+    "dialogue_id": "0101Adv20_Narrative010",
+    "speaker": "[Narrative]",
+    "japanese_text": "ナノカはさっさと踵を返し、ラウンジを出て行ってしまった。",
+    "chinese_text": "接着，\n奈叶香便转身离开了会客厅。"
+  },
+  {
+    "dialogue_id": "0101Adv20_Meruru001",
+    "speaker": "Meruru",
+    "japanese_text": "ナノカさん、どうしちゃったんでしょう。心配です……。",
+    "chinese_text": "奈叶香小姐她不太对劲。\n我很担心她……"
+  },
+  {
+    "dialogue_id": "0101Adv20_Hanna002",
+    "speaker": "Hanna",
+    "japanese_text": "あんな状態じゃ、トラブルを起こしそうですわ。",
+    "chinese_text": "她这副样子，很容易惹出事欸。"
+  },
+  {
+    "dialogue_id": "0101Adv20_Ema008",
+    "speaker": "Ema",
+    "japanese_text": "気になるよね……。ちょっと追いかけてみよう！",
+    "chinese_text": "令人在意……\n我们快跟上去吧！"
+  },
+  {
+    "dialogue_id": "0101Adv20_Narrative011",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマらがナノカを追いかけていくと、ナノカが２階の娯楽室へと入って行く姿が見えた。",
+    "chinese_text": "艾玛她们跟着奈叶香后面，\n看见她走进二楼的娱乐室。"
+  },
+  {
+    "dialogue_id": "0101Adv20_Narrative012",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマたちも急いで中に入ると、案の定、すでにトラブルは起こっていた。",
+    "chinese_text": "艾玛她们也急忙跟着进去了。\n果不其然，她和别人起了争执。"
+  },
+  {
+    "dialogue_id": "0101Adv20_Alisa001",
+    "speaker": "Alisa",
+    "japanese_text": "人の顔見ていきなり泥棒ってなんだよ！？ふざけてんのかてめえ！",
+    "chinese_text": "你搞什么，见人就说别人是小偷！？\n开什么玩笑啊你！"
+  },
+  {
+    "dialogue_id": "0101Adv20_Nanoka007",
+    "speaker": "Nanoka",
+    "japanese_text": "ふざけてない。あなたはいかにも何かしそう。",
+    "chinese_text": "我没在开玩笑。所有人之中你看起来最可疑。"
+  },
+  {
+    "dialogue_id": "0101Adv20_Alisa002",
+    "speaker": "Alisa",
+    "japanese_text": "そっちこそ、その銃はなんだよ！？ どこで手に入れた！？てめえの方が怪しいだろうが！！",
+    "chinese_text": "我才想说你呢，你那把枪是搞什么鬼！？是从哪里弄到手的！？\n最可疑的是你才对！！"
+  },
+  {
+    "dialogue_id": "0101Adv20_Narrative013",
+    "speaker": "[Narrative]",
+    "japanese_text": "アリサが今にもナノカに掴みかかろうとしている。",
+    "chinese_text": "亚里沙眼看着就要\n伸出手来抓住奈叶香。"
+  },
+  {
+    "dialogue_id": "0101Adv20_Narrative014",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマは慌て、仲裁のため間に立った。",
+    "chinese_text": "艾玛慌忙站在她们两人中间，想要从中说和。"
+  },
+  {
+    "dialogue_id": "0101Adv20_Ema009",
+    "speaker": "Ema",
+    "japanese_text": "２人とも待って！落ち着いて！",
+    "chinese_text": "你们两个等一下！\n冷静一下！"
+  },
+  {
+    "dialogue_id": "0101Adv20_Alisa003",
+    "speaker": "Alisa",
+    "japanese_text": "うるせえ！ 引っ込んでろ！",
+    "chinese_text": "吵死了！滚一边去！"
+  },
+  {
+    "dialogue_id": "0101Adv20_Narrative015",
+    "speaker": "[Narrative]",
+    "japanese_text": "アリサは近くにあったチェス卓を蹴った。床にチェスの駒が散らばる。",
+    "chinese_text": "亚里沙踢了一脚旁边的西洋棋桌，\n害棋子撒得满地都是。"
+  },
+  {
+    "dialogue_id": "0101Adv20_Narrative016",
+    "speaker": "[Narrative]",
+    "japanese_text": "それからエマを押しのけ、ナノカの胸倉を掴んだ。２人は間近でギリギリと睨み合う。",
+    "chinese_text": "接着她推开了艾玛，抓住了奈叶香的衣领。\n二人在近距离互相瞪着对方。"
+  },
+  {
+    "dialogue_id": "0101Adv20_Nanoka008",
+    "speaker": "Nanoka",
+    "japanese_text": "あなたは虚勢ばかり。本気で誰かと向き合う気なんてない。",
+    "chinese_text": "你总是在虚张声势，从来没想过认真直面其他人。"
+  },
+  {
+    "dialogue_id": "0101Adv20_Alisa004",
+    "speaker": "Alisa",
+    "japanese_text": "てめえ……っ",
+    "chinese_text": "你说够没……"
+  },
+  {
+    "dialogue_id": "0101Adv20_Narrative017",
+    "speaker": "[Narrative]",
+    "japanese_text": "振り上げたアリサの拳が震えている。今にも殴り合いが始まりそうなほど、空気が張りつめていた。",
+    "chinese_text": "亚里沙高举起的拳头正在颤抖。\n互殴一触即发，现场的气氛十分紧张。"
+  },
+  {
+    "dialogue_id": "0101Adv20_Meruru002",
+    "speaker": "Meruru",
+    "japanese_text": "はわ、わわわ……。",
+    "chinese_text": "哇哇、哇哇哇……"
+  },
+  {
+    "dialogue_id": "0101Adv20_Hanna003",
+    "speaker": "Hanna",
+    "japanese_text": "大変ですわ、暴力沙汰になりますわ！",
+    "chinese_text": "不好啦，要发生暴力事件了！"
+  },
+  {
+    "dialogue_id": "0101Adv20_Narrative018",
+    "speaker": "[Narrative]",
+    "japanese_text": "するとエマの隣にシェリーが立ち、こそっと耳打ちしてきた。",
+    "chinese_text": "这时，雪莉来到艾玛身边，\n悄悄在她耳边说道。"
+  },
+  {
+    "dialogue_id": "0101Adv20_Sherry002",
+    "speaker": "Sherry",
+    "japanese_text": "どうします？ 私だったら止められますけど。２人を気絶でもさせますか？",
+    "chinese_text": "要怎么办？我倒是可以阻止她们两个。\n要我把她们两个打晕吗？"
+  },
+  {
+    "dialogue_id": "0101Adv20_Narrative019",
+    "speaker": "[Narrative]",
+    "japanese_text": "不穏なことを言ってのけるシェリーに、エマは――",
+    "chinese_text": "对于雪莉的危险建议，艾玛她——"
+  },
+  {
+    "dialogue_id": "0101Adv20_Narrative020",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマはぶんぶんっと首を横に振った。",
+    "chinese_text": "艾玛用力摇了摇头。"
+  },
+  {
+    "dialogue_id": "0101Adv20_Ema010",
+    "speaker": "Ema",
+    "japanese_text": "それじゃ乱闘になっちゃうよ。",
+    "chinese_text": "那样会变成大混战啦。"
+  },
+  {
+    "dialogue_id": "0101Adv20_Ema011",
+    "speaker": "Ema",
+    "japanese_text": "喧嘩なんてしたら、トラブルを起こしたって言われて、懲罰房行きになるかもしれない。",
+    "chinese_text": "要是真的打起来了，说不定会违反不能惹事的规定，\n被关进惩罚室的。"
+  },
+  {
+    "dialogue_id": "0101Adv20_Ema012",
+    "speaker": "Ema",
+    "japanese_text": "――２人ともやめてほしい。いい加減にして。",
+    "chinese_text": "——你们两个快住手，不要再闹了。"
+  },
+  {
+    "dialogue_id": "0101Adv20_Narrative021",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマが静かに言い放つと、ふと、アリサとナノカは何かを畏れたかのように距離を置いた。",
+    "chinese_text": "艾玛平静地说道。\n这时，亚里沙和奈叶香似乎一时间想到了什么，心生怯意，\n然后各自拉开了距离。"
+  },
+  {
+    "dialogue_id": "0101Adv20_Margo001",
+    "speaker": "Margo",
+    "japanese_text": "あら、案外すごいのね、エマちゃん。",
+    "chinese_text": "哎呀，艾玛，你还挺厉害的。"
+  },
+  {
+    "dialogue_id": "0101Adv20_Narrative022",
+    "speaker": "[Narrative]",
+    "japanese_text": "離れたところで、くすっと笑ったのはマーゴだった。",
+    "chinese_text": "在不远处，玛格小声笑了起来。"
+  },
+  {
+    "dialogue_id": "0101Adv20_Narrative023",
+    "speaker": "[Narrative]",
+    "japanese_text": "娯楽室に最初からいたのだろう、ソファーに座り、傍観者を決め込んでいた様子だ。",
+    "chinese_text": "她好像一开始就在娱乐室里面了。\n现在她坐在沙发上，摆出一副当旁观者当到底的态度。"
+  },
+  {
+    "dialogue_id": "0101Adv20_Margo002",
+    "speaker": "Margo",
+    "japanese_text": "泥棒って、なんのことかは知らないけれどこの牢屋敷で自分の持ち物なんてひとつもないでしょう？",
+    "chinese_text": "虽然我不知道有什么东西被偷了，\n可是，这座监牢没有一样东西是自己的吧？"
+  },
+  {
+    "dialogue_id": "0101Adv20_Margo003",
+    "speaker": "Margo",
+    "japanese_text": "私は、誰が何を持ち出しても構わないと思うけれど？",
+    "chinese_text": "我倒是认为，不管是谁拿走了什么东西都无所谓哦？"
+  },
+  {
+    "dialogue_id": "0101Adv20_Narrative024",
+    "speaker": "[Narrative]",
+    "japanese_text": "ナノカのじとりとした眼が、今度はマーゴの方へと向けられた。",
+    "chinese_text": "奈叶香尖锐的眼神\n转移到了玛格身上。"
+  },
+  {
+    "dialogue_id": "0101Adv20_Nanoka009",
+    "speaker": "Nanoka",
+    "japanese_text": "あなたも自分の部屋に、色々持ち込んでいる。リボンを盗んでてもおかしくない。",
+    "chinese_text": "你也拿了不少东西到自己的房间里。\n是你偷了我的发带也不奇怪。"
+  },
+  {
+    "dialogue_id": "0101Adv20_Margo004",
+    "speaker": "Margo",
+    "japanese_text": "リボン？ 知らないわ。でも素敵なものだったら、自分のものにしてしまうかもね。",
+    "chinese_text": "发带？没见过呢。\n不过，如果是很漂亮的东西，说不定我会把它占为己有哦。"
+  },
+  {
+    "dialogue_id": "0101Adv20_Nanoka010",
+    "speaker": "Nanoka",
+    "japanese_text": "返して、今すぐ。",
+    "chinese_text": "现在马上还给我。"
+  },
+  {
+    "dialogue_id": "0101Adv20_Margo005",
+    "speaker": "Margo",
+    "japanese_text": "私じゃないわよ、たぶんね。フフッ。",
+    "chinese_text": "不是我干的，或许啦。呵呵。"
+  },
+  {
+    "dialogue_id": "0101Adv20_Nanoka011",
+    "speaker": "Nanoka",
+    "japanese_text": "返して。",
+    "chinese_text": "快还我。"
+  },
+  {
+    "dialogue_id": "0101Adv20_Ema013",
+    "speaker": "Ema",
+    "japanese_text": "（ああもう……）",
+    "chinese_text": "（真头大……）"
+  },
+  {
+    "dialogue_id": "0101Adv20_Narrative025",
+    "speaker": "[Narrative]",
+    "japanese_text": "今度はナノカとマーゴの間に火花が散りはじめ、エマは頭を抱えた。",
+    "chinese_text": "这次换玛格和奈叶香针锋相对，\n害得艾玛头疼了起来。"
+  }
+]

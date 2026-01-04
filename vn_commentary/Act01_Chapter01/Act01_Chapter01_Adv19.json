@@ -1,0 +1,266 @@
+[
+  {
+    "dialogue_id": "0101Adv19_Narrative001",
+    "speaker": "[Narrative]",
+    "japanese_text": "本日の大半を、エマらは看守との鬼ごっこに費やしてしまった。",
+    "chinese_text": "今天有一大半的时间\n都消耗在和看守捉迷藏上面了。"
+  },
+  {
+    "dialogue_id": "0101Adv19_Ema001",
+    "speaker": "Ema",
+    "japanese_text": "（捕まらなくて良かったけど、　もうへっとへとだよ……）",
+    "chinese_text": "（还好没被抓到，\n累死了……）"
+  },
+  {
+    "dialogue_id": "0101Adv19_Narrative002",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマはよろよろと自分の房から出る。すると、メルルが待ち構えるように立っていた。",
+    "chinese_text": "艾玛晃悠悠地走出房门外。\n然后，碰见了梅露露。她好像一直站在门外等艾玛。"
+  },
+  {
+    "dialogue_id": "0101Adv19_Meruru001",
+    "speaker": "Meruru",
+    "japanese_text": "エマさん、大丈夫ですか？か、看守さんに追いかけられたって聞いて……。",
+    "chinese_text": "艾玛小姐，你没事吧？\n我、我听说你刚刚被看守追赶……"
+  },
+  {
+    "dialogue_id": "0101Adv19_Ema002",
+    "speaker": "Ema",
+    "japanese_text": "う、うん。何もされてないよ。ちょっと疲れただけ。",
+    "chinese_text": "嗯，没事。我还好啦。\n就是有些累了。"
+  },
+  {
+    "dialogue_id": "0101Adv19_Meruru002",
+    "speaker": "Meruru",
+    "japanese_text": "ほっぺた汚れちゃってます。",
+    "chinese_text": "你的脸弄脏了。"
+  },
+  {
+    "dialogue_id": "0101Adv19_Narrative003",
+    "speaker": "[Narrative]",
+    "japanese_text": "メルルは心配そうに眉を下げ、エマの頬をハンカチで拭いた。",
+    "chinese_text": "梅露露满脸写着担心，\n拿出手帕擦着艾玛的脸。"
+  },
+  {
+    "dialogue_id": "0101Adv19_Ema003",
+    "speaker": "Ema",
+    "japanese_text": "（なんかお母さんみたい）",
+    "chinese_text": "（感觉她好像妈妈一样）"
+  },
+  {
+    "dialogue_id": "0101Adv19_Narrative004",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマは照れくさそうに、はにかんで俯いた。",
+    "chinese_text": "艾玛有点害羞地\n低下了头。"
+  },
+  {
+    "dialogue_id": "0101Adv19_Narrative005",
+    "speaker": "[Narrative]",
+    "japanese_text": "それからメルルは通路脇に置いてあるバケツの方へと、歩いていった。",
+    "chinese_text": "之后，梅露露走到\n放在过道转弯处的水桶那边。"
+  },
+  {
+    "dialogue_id": "0101Adv19_Narrative006",
+    "speaker": "[Narrative]",
+    "japanese_text": "掃除のために置いてあるのかもしれないが、今は囚人たちのごみ箱に利用されている。",
+    "chinese_text": "那个桶应该是打扫的时候用的，\n不过现在已经成了囚犯们的垃圾桶。"
+  },
+  {
+    "dialogue_id": "0101Adv19_Narrative007",
+    "speaker": "[Narrative]",
+    "japanese_text": "ハンカチを捨てようとしたところで、メルルは首を傾げた。",
+    "chinese_text": "梅露露准备把手帕丢掉。\n可是在看到桶里的东西后，她感到有些奇怪。"
+  },
+  {
+    "dialogue_id": "0101Adv19_Meruru003",
+    "speaker": "Meruru",
+    "japanese_text": "これ、なんでしょう？",
+    "chinese_text": "这是什么？"
+  },
+  {
+    "dialogue_id": "0101Adv19_Narrative008",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマも移動し、バケツの中を覗いてみた。",
+    "chinese_text": "艾玛也走过来，看了一下桶里的东西。"
+  },
+  {
+    "dialogue_id": "0101Adv19_Narrative009",
+    "speaker": "[Narrative]",
+    "japanese_text": "バラバラに分解された機械のパーツのようなもので、バケツの中はいっぱいになっている。",
+    "chinese_text": "原来是一些拆得十分零碎的，像机械零件一样的东西\n塞满了整个垃圾桶。"
+  },
+  {
+    "dialogue_id": "0101Adv19_Ema004",
+    "speaker": "Ema",
+    "japanese_text": "なんだろうね？",
+    "chinese_text": "我也不知道欸？"
+  },
+  {
+    "dialogue_id": "0101Adv19_Narrative010",
+    "speaker": "[Narrative]",
+    "japanese_text": "通路は綺麗だとはいいがたく、そのあたりのゴミを誰かが集めて入れたのかもしれない。",
+    "chinese_text": "过道本来就不太干净。\n可能是有人打扫了一下，把垃圾倒进这里面了。"
+  },
+  {
+    "dialogue_id": "0101Adv19_Ema005",
+    "speaker": "Ema",
+    "japanese_text": "（考えても仕方ないか。　ここは、おかしなことばっかりだから）",
+    "chinese_text": "（多想也是白费力气。\n这里到处都是怪事）"
+  },
+  {
+    "dialogue_id": "0101Adv19_Narrative011",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマがため息を吐くと、メルルの手がそっと触れた。",
+    "chinese_text": "艾玛叹了一口气。\n这时，梅露露轻轻牵起了她的手。"
+  },
+  {
+    "dialogue_id": "0101Adv19_Meruru004",
+    "speaker": "Meruru",
+    "japanese_text": "夕食に、行きましょうか。",
+    "chinese_text": "我们去吃晚餐吧。"
+  },
+  {
+    "dialogue_id": "0101Adv19_Ema006",
+    "speaker": "Ema",
+    "japanese_text": "そうだね。",
+    "chinese_text": "嗯。"
+  },
+  {
+    "dialogue_id": "0101Adv19_Narrative012",
+    "speaker": "[Narrative]",
+    "japanese_text": "手を引いてくれるメルルに、エマは微笑む。",
+    "chinese_text": "面对温柔相待的梅露露，\n艾玛露出了微笑。"
+  },
+  {
+    "dialogue_id": "0101Adv19_Ema007",
+    "speaker": "Ema",
+    "japanese_text": "あ、でもそうだ。ちょっと待って。",
+    "chinese_text": "啊，我想起一件事。\n你等我一下哦。"
+  },
+  {
+    "dialogue_id": "0101Adv19_Narrative013",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマは――",
+    "chinese_text": "艾玛她——"
+  },
+  {
+    "dialogue_id": "0101Adv19_Narrative014",
+    "speaker": "[Narrative]",
+    "japanese_text": "いつものように、ノアの房の方を覗いてみた。",
+    "chinese_text": "一如往常地，往诺亚的房间里看了看。"
+  },
+  {
+    "dialogue_id": "0101Adv19_Narrative015",
+    "speaker": "[Narrative]",
+    "japanese_text": "相変わらずノアの房は、スプレーアートで埋め尽くされている。",
+    "chinese_text": "诺亚的房间也是老样子，\n满满当当涂满了喷漆画。"
+  },
+  {
+    "dialogue_id": "0101Adv19_Ema008",
+    "speaker": "Ema",
+    "japanese_text": "ノアちゃん、今日もごはん行かないの？",
+    "chinese_text": "诺亚，今天你还是不去用餐吗？"
+  },
+  {
+    "dialogue_id": "0101Adv19_Noah001",
+    "speaker": "Noah",
+    "japanese_text": "あ、エマちゃん、メルルちゃん。のあはへーきだよ？ みんな優しいんだあ。",
+    "chinese_text": "啊，艾玛，梅露露。\n诺亚没事哦？大家都对诺亚很好。"
+  },
+  {
+    "dialogue_id": "0101Adv19_Ema009",
+    "speaker": "Ema",
+    "japanese_text": "みんな？",
+    "chinese_text": "大家？"
+  },
+  {
+    "dialogue_id": "0101Adv19_Noah002",
+    "speaker": "Noah",
+    "japanese_text": "うん。差し入れもってきてくれたり、声をかけてくれたりする。",
+    "chinese_text": "嗯。她们有时会给诺亚送饭，\n有时会陪诺亚聊天。"
+  },
+  {
+    "dialogue_id": "0101Adv19_Noah003",
+    "speaker": "Noah",
+    "japanese_text": "のあの魔法を見て、みんな驚いてたけど……でも、ここは不思議なことがたくさんで。",
+    "chinese_text": "虽然看到诺亚的魔法，大家有点吃惊……\n不过，这里神奇的事情太多了。"
+  },
+  {
+    "dialogue_id": "0101Adv19_Noah004",
+    "speaker": "Noah",
+    "japanese_text": "のあの魔法、怖がられたりしないんだ。えへへ、嬉しいな。",
+    "chinese_text": "大家也不害怕诺亚的魔法。\n欸嘿嘿，好开心。"
+  },
+  {
+    "dialogue_id": "0101Adv19_Ema010",
+    "speaker": "Ema",
+    "japanese_text": "（へえ……みんなけっこう、　ノアちゃんのこと気にかけてあげてるんだな）",
+    "chinese_text": "（哦……大家其实还\n挺关心诺亚的情况的）"
+  },
+  {
+    "dialogue_id": "0101Adv19_Ema011",
+    "speaker": "Ema",
+    "japanese_text": "それなら良かった。",
+    "chinese_text": "那就好。"
+  },
+  {
+    "dialogue_id": "0101Adv19_Noah005",
+    "speaker": "Noah",
+    "japanese_text": "うん。お礼にみんなの喜んでくれる絵を頑張って完成させるね。",
+    "chinese_text": "嗯。为了报答大家，诺亚要加油画完这幅画。\n大家看到一定会喜欢。"
+  },
+  {
+    "dialogue_id": "0101Adv19_Narrative016",
+    "speaker": "[Narrative]",
+    "japanese_text": "ノアは早速スプレーを撒き始めている。刺激臭が立ち去るエマの鼻をついた。",
+    "chinese_text": "诺亚转过身，继续喷着手上的喷漆。\n刺鼻的气味传到了正要离开的艾玛的鼻子里。"
+  },
+  {
+    "dialogue_id": "0101Adv19_Ema012",
+    "speaker": "Ema",
+    "japanese_text": "……そういえば、アンアンちゃんは、ノアちゃんとうまくやれてるのかな？",
+    "chinese_text": "……对了，安安她\n和诺亚相处得怎么样了？"
+  },
+  {
+    "dialogue_id": "0101Adv19_Narrative017",
+    "speaker": "[Narrative]",
+    "japanese_text": "上り階段の方へと向かいながら、エマはメルルに問いかけた。",
+    "chinese_text": "走上楼梯时，\n艾玛向梅露露问道。"
+  },
+  {
+    "dialogue_id": "0101Adv19_Meruru005",
+    "speaker": "Meruru",
+    "japanese_text": "どうでしょうか……昨日の夜は房に戻ったんですが、今日また体調を崩してしまって、医務室で寝ています。",
+    "chinese_text": "该怎么说呢……虽然昨晚安安回房了，\n可是到了今天，身体情况又变差了，现在还在医务室里躺着。"
+  },
+  {
+    "dialogue_id": "0101Adv19_Meruru006",
+    "speaker": "Meruru",
+    "japanese_text": "どうしても、同室が辛いらしくて……。",
+    "chinese_text": "好像待在同一间房里实在很难受……"
+  },
+  {
+    "dialogue_id": "0101Adv19_Ema013",
+    "speaker": "Ema",
+    "japanese_text": "うーん、そっかあ……なんとかならないかな。ほら、ボクと部屋を交換するとか！",
+    "chinese_text": "唔，这样啊……有没有什么好方法呢。\n有了，和我换一个房间，怎么样！"
+  },
+  {
+    "dialogue_id": "0101Adv19_Meruru007",
+    "speaker": "Meruru",
+    "japanese_text": "いいかもしれませんね！",
+    "chinese_text": "是个好办法！"
+  },
+  {
+    "dialogue_id": "0101Adv19_Ema014",
+    "speaker": "Ema",
+    "japanese_text": "（早速掛け合ってみよう……　今度ゴクチョーに遭遇した時にでも……）",
+    "chinese_text": "（马上去商量一下吧……\n下次碰到典狱长也要说一下……）"
+  },
+  {
+    "dialogue_id": "0101Adv19_Narrative018",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマとメルルは階段を上がっていく。",
+    "chinese_text": "艾玛和梅露露走上了楼梯。"
+  }
+]

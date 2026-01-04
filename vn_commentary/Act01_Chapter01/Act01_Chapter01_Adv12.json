@@ -1,0 +1,320 @@
+[
+  {
+    "dialogue_id": "0101Adv12_Narrative001",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマたちは囚人が最も利用するであろう、２階にある娯楽室へとやってきた。",
+    "chinese_text": "艾玛她们来到了二楼的娱乐室。\n这里应该是囚犯最常来的地方。"
+  },
+  {
+    "dialogue_id": "0101Adv12_Sherry001",
+    "speaker": "Sherry",
+    "japanese_text": "おお、ここは正に憩いの場ですね！",
+    "chinese_text": "呀，这里正是适合休息的地方耶！"
+  },
+  {
+    "dialogue_id": "0101Adv12_Narrative002",
+    "speaker": "[Narrative]",
+    "japanese_text": "広い室内は、柔らかいカーペットで覆われてくつろげるソファーもいくつかある。",
+    "chinese_text": "宽广的室内铺着柔软的地毯，\n设置有舒适宜居的沙发。"
+  },
+  {
+    "dialogue_id": "0101Adv12_Narrative003",
+    "speaker": "[Narrative]",
+    "japanese_text": "チェスやボードゲーム、ビリヤード台……大型スクリーンやプロジェクターまであった。",
+    "chinese_text": "这里的设备一应俱全。有西洋棋、桌游、桌球台……\n连大型银幕和投影机都有。"
+  },
+  {
+    "dialogue_id": "0101Adv12_Narrative004",
+    "speaker": "[Narrative]",
+    "japanese_text": "そして、エマたちより先客がいた。佐伯ミリアがソファに座っていたのだ。",
+    "chinese_text": "有人比艾玛她们先到这里。\n是佐伯米莉亚，她正坐在沙发上。"
+  },
+  {
+    "dialogue_id": "0101Adv12_Narrative005",
+    "speaker": "[Narrative]",
+    "japanese_text": "自然、エマとシェリーの視線は、ミリアへ向けられた。",
+    "chinese_text": "艾玛和雪莉的视线自然而然\n转向米莉亚身上。"
+  },
+  {
+    "dialogue_id": "0101Adv12_Narrative006",
+    "speaker": "[Narrative]",
+    "japanese_text": "ミリアは８ミリフィルムで、スクリーンに白黒映画を再生させていた。",
+    "chinese_text": "她正在银幕上\n播放着8mm胶片里的黑白电影。"
+  },
+  {
+    "dialogue_id": "0101Adv12_Miria001",
+    "speaker": "Miria",
+    "japanese_text": "……はあ。",
+    "chinese_text": "……唉。"
+  },
+  {
+    "dialogue_id": "0101Adv12_Narrative007",
+    "speaker": "[Narrative]",
+    "japanese_text": "映画はほぼ見ておらず、憂いげなため息をつき。気だるそうに手元のスマホをいじりはじめる。",
+    "chinese_text": "米莉亚发出一声忧郁的叹息。她几乎没在看电影，\n而是面露困倦地按着手机。"
+  },
+  {
+    "dialogue_id": "0101Adv12_Narrative008",
+    "speaker": "[Narrative]",
+    "japanese_text": "彼女の外見に合わせてなのか、ミリアのスマホはキラキラした派手なデコカバーが取り付けられていた。",
+    "chinese_text": "米莉亚的手机上\n也装着一个亮晶晶的豪华保护套，\n看起来相当衬她的外表。"
+  },
+  {
+    "dialogue_id": "0101Adv12_Sherry002",
+    "speaker": "Sherry",
+    "japanese_text": "なんだか安心しません？",
+    "chinese_text": "你不觉得有点安心吗？"
+  },
+  {
+    "dialogue_id": "0101Adv12_Ema001",
+    "speaker": "Ema",
+    "japanese_text": "え？",
+    "chinese_text": "欸？"
+  },
+  {
+    "dialogue_id": "0101Adv12_Sherry003",
+    "speaker": "Sherry",
+    "japanese_text": "いやぁ、学校によくいる女子の光景だなぁって。",
+    "chinese_text": "哎呀，就是感觉，学校里面常见的女孩子就是这个样子的啦。"
+  },
+  {
+    "dialogue_id": "0101Adv12_Ema002",
+    "speaker": "Ema",
+    "japanese_text": "（たしかに……派手グループにいそう……。　口もきいたこともないタイプだけど……）",
+    "chinese_text": "（确实……感觉她应该属于班上最引人注目的小团体……\n是我从来不敢搭话的那类人……）"
+  },
+  {
+    "dialogue_id": "0101Adv12_Narrative009",
+    "speaker": "[Narrative]",
+    "japanese_text": "――と。",
+    "chinese_text": "——接着。"
+  },
+  {
+    "dialogue_id": "0101Adv12_Miria002",
+    "speaker": "Miria",
+    "japanese_text": "わぁっ！",
+    "chinese_text": "哇啊！"
+  },
+  {
+    "dialogue_id": "0101Adv12_Narrative010",
+    "speaker": "[Narrative]",
+    "japanese_text": "唐突にミリアが肩をびくんと跳ねさせたので、エマとシェリーも驚く。",
+    "chinese_text": "米莉亚的肩膀忽然夸张地颤抖了一下，\n害艾玛和雪莉也吓了一跳。"
+  },
+  {
+    "dialogue_id": "0101Adv12_Sherry004",
+    "speaker": "Sherry",
+    "japanese_text": "どうしましたミリアさん！？",
+    "chinese_text": "你怎么啦米莉亚！？"
+  },
+  {
+    "dialogue_id": "0101Adv12_Miria003",
+    "speaker": "Miria",
+    "japanese_text": "あ、えっと……誰だっけ。ごめん、まだ顔と名前一致してなくて。良くないよね。",
+    "chinese_text": "啊，呃……叫什么来着。\n不好意思，我还记不太清楚你们的长相和名字。对不起啦。"
+  },
+  {
+    "dialogue_id": "0101Adv12_Narrative011",
+    "speaker": "[Narrative]",
+    "japanese_text": "駆け寄ったエマとシェリーを前に、ミリアは戸惑いの表情を浮かべている。",
+    "chinese_text": "面对刚来的艾玛和雪莉，\n米莉亚露出了不知所措的神色。"
+  },
+  {
+    "dialogue_id": "0101Adv12_Sherry005",
+    "speaker": "Sherry",
+    "japanese_text": "橘シェリーです。この子は、桜羽エマさん。で、何に驚いてたんですか？",
+    "chinese_text": "我叫橘雪莉，她是樱羽艾玛。\n我说，你刚才是被什么吓到了？"
+  },
+  {
+    "dialogue_id": "0101Adv12_Miria004",
+    "speaker": "Miria",
+    "japanese_text": "そ、そう。スマホを見てたら、いきなり猫耳の子が映って。君らのスマホでも見れるかも。",
+    "chinese_text": "是、是吗。我刚刚在看手机，\n突然有个猫耳女孩子出现在屏幕上。\n你们的手机应该也可以看到。"
+  },
+  {
+    "dialogue_id": "0101Adv12_Ema003",
+    "speaker": "Ema",
+    "japanese_text": "（スマホに映った……？）",
+    "chinese_text": "（出现在手机里……？）"
+  },
+  {
+    "dialogue_id": "0101Adv12_Narrative012",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマは持ち歩いている自分のスマホを取り出し、起動させた。",
+    "chinese_text": "艾玛打开了自己的手机。"
+  },
+  {
+    "dialogue_id": "0101Adv12_Narrative013",
+    "speaker": "[Narrative]",
+    "japanese_text": "すると、囚人一覧の『沢渡ココ』が、配信中であるという表示が出ていた。",
+    "chinese_text": "接着，她就看到囚犯名单上的“泽渡可可”那边\n显示“正在直播”。"
+  },
+  {
+    "dialogue_id": "0101Adv12_Narrative014",
+    "speaker": "[Narrative]",
+    "japanese_text": "表示させてみると、画面にココの顔がアップで映る。",
+    "chinese_text": "点开之后，\n可可的大脸立刻占领了整个屏幕。"
+  },
+  {
+    "dialogue_id": "0101Adv12_Ema004",
+    "speaker": "Ema",
+    "japanese_text": "わぁっ！",
+    "chinese_text": "哇啊！"
+  },
+  {
+    "dialogue_id": "0101Adv12_Ema005",
+    "speaker": "Ema",
+    "japanese_text": "（ミリアちゃんと同じ反応しちゃった……）",
+    "chinese_text": "（和米莉亚做了一模一样的反应……）"
+  },
+  {
+    "dialogue_id": "0101Adv12_Sherry006",
+    "speaker": "Sherry",
+    "japanese_text": "へえ～このアプリ、配信もできるんですね！",
+    "chinese_text": "欸～这个APP居然还可以直播耶！"
+  },
+  {
+    "dialogue_id": "0101Adv12_Narrative015",
+    "speaker": "[Narrative]",
+    "japanese_text": "シェリーも感心したように自分のスマホを見ている。画面の中のココは、はしゃいだ様子で喋りだす。",
+    "chinese_text": "雪莉看着自己的手机，十分感慨地说道。\n这时，画面里神情兴奋的可可也开始发言。"
+  },
+  {
+    "dialogue_id": "0101Adv12_Coco001",
+    "speaker": "Coco",
+    "japanese_text": "どもども～ココたんだよ～！今日からあてぃしの配信がはじまるよ～！ みんな見ろよ～！",
+    "chinese_text": "大家好～我是可可碳～！\n今天开始我会经常开直播～！记得多来看哦～！"
+  },
+  {
+    "dialogue_id": "0101Adv12_Coco002",
+    "speaker": "Coco",
+    "japanese_text": "おっ、同接３！良いペースなんじゃね？ 拡散宣伝よろしくぅ！",
+    "chinese_text": "哦，在线观众3个！\n看来开了个好头？请多多转发推介哦！"
+  },
+  {
+    "dialogue_id": "0101Adv12_Sherry007",
+    "speaker": "Sherry",
+    "japanese_text": "最高同接でも、１１しかいないですよね。",
+    "chinese_text": "可最多也只能同时在线11个人耶。"
+  },
+  {
+    "dialogue_id": "0101Adv12_Ema006",
+    "speaker": "Ema",
+    "japanese_text": "それ、言っちゃダメなやつ……。",
+    "chinese_text": "这个是不能直说的吧……"
+  },
+  {
+    "dialogue_id": "0101Adv12_Coco003",
+    "speaker": "Coco",
+    "japanese_text": "まずは、うーん……あてぃしの趣味について語るか。",
+    "chinese_text": "首先是，嗯……从我的兴趣讲起吧。"
+  },
+  {
+    "dialogue_id": "0101Adv12_Coco004",
+    "speaker": "Coco",
+    "japanese_text": "あてぃしは推し活が趣味なのね。",
+    "chinese_text": "我的兴趣就是推活哦。"
+  },
+  {
+    "dialogue_id": "0101Adv12_Coco005",
+    "speaker": "Coco",
+    "japanese_text": "推し活こそ我が人生！ 推し以外生きてる価値なし！ほかはみんな死ね！ って感じで――。",
+    "chinese_text": "推活正是我的人生！除了我推都没有活着的价值！\n其他人全都给我去死！就这样子——"
+  },
+  {
+    "dialogue_id": "0101Adv12_Narrative016",
+    "speaker": "[Narrative]",
+    "japanese_text": "ほぼ同時に、その場にいる全員が配信を閉じていた。",
+    "chinese_text": "在场所有人几乎同时\n关闭了直播。"
+  },
+  {
+    "dialogue_id": "0101Adv12_Sherry008",
+    "speaker": "Sherry",
+    "japanese_text": "時間の無駄でしたね。",
+    "chinese_text": "根本浪费时间呢。"
+  },
+  {
+    "dialogue_id": "0101Adv12_Ema007",
+    "speaker": "Ema",
+    "japanese_text": "それ、言っちゃダメなやつ……。",
+    "chinese_text": "这个是不能直说的吧……"
+  },
+  {
+    "dialogue_id": "0101Adv12_Narrative017",
+    "speaker": "[Narrative]",
+    "japanese_text": "沢渡ココは配信者としては特に魅力的でもなさそうだ、という共通の認識が出来上がった。",
+    "chinese_text": "现场所有人达成了共识：\n泽渡可可毫无作为直播主的吸引力。"
+  },
+  {
+    "dialogue_id": "0101Adv12_Ema008",
+    "speaker": "Ema",
+    "japanese_text": "なんのために配信機能なんてついてるんだろう。",
+    "chinese_text": "究竟为什么会有直播的功能呢。"
+  },
+  {
+    "dialogue_id": "0101Adv12_Sherry009",
+    "speaker": "Sherry",
+    "japanese_text": "せめてもの慰みじゃないですか？私たちにとって身近なものですし。",
+    "chinese_text": "算是某种程度的安慰剂吧？\n毕竟是我们日常生活会见到的东西。"
+  },
+  {
+    "dialogue_id": "0101Adv12_Ema009",
+    "speaker": "Ema",
+    "japanese_text": "外との連絡手段になったりとかは……。",
+    "chinese_text": "那可不可以当联络外部的手段……"
+  },
+  {
+    "dialogue_id": "0101Adv12_Sherry010",
+    "speaker": "Sherry",
+    "japanese_text": "ないでしょうね。そんなザルだとは思えません。",
+    "chinese_text": "不行吧，\n幕后黑手不至于这么笨。"
+  },
+  {
+    "dialogue_id": "0101Adv12_Ema010",
+    "speaker": "Ema",
+    "japanese_text": "だよね……。",
+    "chinese_text": "说得也对……"
+  },
+  {
+    "dialogue_id": "0101Adv12_Narrative018",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマとシェリーは気持ちを切り替え、娯楽室の探索をはじめた。",
+    "chinese_text": "艾玛和雪莉重整旗鼓，\n开始探索娱乐室。"
+  },
+  {
+    "dialogue_id": "0101Adv12_Narrative019",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマがキャビネットの中を覗いてみると、古びたフィルムが多数収められていた。",
+    "chinese_text": "艾玛往收纳柜里瞧了瞧，\n里面放满了老旧的胶片。"
+  },
+  {
+    "dialogue_id": "0101Adv12_Ema011",
+    "speaker": "Ema",
+    "japanese_text": "（ミリアちゃん、よくこんな古い映画の再生方法　知ってたな……）",
+    "chinese_text": "（米莉亚竟然懂得怎么播放\n这么老的电影……）"
+  },
+  {
+    "dialogue_id": "0101Adv12_Narrative020",
+    "speaker": "[Narrative]",
+    "japanese_text": "ソファーに座っているミリアは、ぼんやりと白黒映画を眺めたまま微動だにしない。",
+    "chinese_text": "坐在沙发上的米莉亚，\n精神散漫地看着黑白电影，一动也不动。"
+  },
+  {
+    "dialogue_id": "0101Adv12_Miria005",
+    "speaker": "Miria",
+    "japanese_text": "はあぁ……。",
+    "chinese_text": "唉……"
+  },
+  {
+    "dialogue_id": "0101Adv12_Ema012",
+    "speaker": "Ema",
+    "japanese_text": "（なんか……心病んでる……？）",
+    "chinese_text": "（感觉……她是不是有些心病……？）"
+  },
+  {
+    "dialogue_id": "0101Adv12_Narrative021",
+    "speaker": "[Narrative]",
+    "japanese_text": "他にこれといって何も見つからず、エマとシェリーは室内を後にすることにした。",
+    "chinese_text": "艾玛和雪莉再也没找到值得关注的事物，\n于是便离开了娱乐室。"
+  }
+]

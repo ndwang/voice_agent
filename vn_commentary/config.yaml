@@ -7,10 +7,6 @@ llm:
   api_key: null  # Set to your API key or use GEMINI_API_KEY environment variable
   temperature: 0.7
 
-# Context management
-context:
-  max_context_size: 20  # Number of previous dialogues to keep in context
-
 # System prompt (optional - overrides default if specified)
 system_prompt_file: null  # Path to custom system prompt file
 

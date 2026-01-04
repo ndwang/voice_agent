@@ -1,0 +1,386 @@
+[
+  {
+    "dialogue_id": "0101Adv30_Narrative001",
+    "speaker": "[Narrative]",
+    "japanese_text": "医務室では、ベッドで横になっているアンアンと、メルルがいた。",
+    "chinese_text": "她们来到医务室，\n便看见躺在床上的安安，还有梅露露。"
+  },
+  {
+    "dialogue_id": "0101Adv30_Meruru001",
+    "speaker": "Meruru",
+    "japanese_text": "シェ、シェリーさん、顔色がすぐれないように見えますが……。",
+    "chinese_text": "雪、雪莉小姐，\n你的脸色不是很好……"
+  },
+  {
+    "dialogue_id": "0101Adv30_Narrative002",
+    "speaker": "[Narrative]",
+    "japanese_text": "メルルはいちはやく青ざめているシェリーに気付き、心配そうに近寄ってくる。",
+    "chinese_text": "梅露露最先注意到脸色发白的雪莉，\n一脸担心地走了过来。"
+  },
+  {
+    "dialogue_id": "0101Adv30_Sherry001",
+    "speaker": "Sherry",
+    "japanese_text": "健康と元気が取り柄なんですけどねー。さすがに疲れが出たのか、うーん……そんなはずないのになあ。",
+    "chinese_text": "虽说健康和充满活力是我屈指可数的优点啦，\n但还是感觉好累啊。唔……不应该啊。"
+  },
+  {
+    "dialogue_id": "0101Adv30_Meruru002",
+    "speaker": "Meruru",
+    "japanese_text": "や、休んでください！疲れが取れるハーブティーを淹れます……！",
+    "chinese_text": "请、请你休息一下！\n我去给你泡缓解疲劳的香草茶哦……！"
+  },
+  {
+    "dialogue_id": "0101Adv30_Sherry002",
+    "speaker": "Sherry",
+    "japanese_text": "わあい！ ありがとうございます！",
+    "chinese_text": "哇！谢谢你！"
+  },
+  {
+    "dialogue_id": "0101Adv30_Narrative003",
+    "speaker": "[Narrative]",
+    "japanese_text": "ポットでお湯を沸かし始めたメルルの方へとエマは歩み寄った。",
+    "chinese_text": "梅露露开始用壶烧水，\n艾玛走到她身旁。"
+  },
+  {
+    "dialogue_id": "0101Adv30_Ema001",
+    "speaker": "Ema",
+    "japanese_text": "メルルちゃん。",
+    "chinese_text": "梅露露。"
+  },
+  {
+    "dialogue_id": "0101Adv30_Meruru003",
+    "speaker": "Meruru",
+    "japanese_text": "はいぃぃぃ……！",
+    "chinese_text": "什、什么事～～……！"
+  },
+  {
+    "dialogue_id": "0101Adv30_Narrative004",
+    "speaker": "[Narrative]",
+    "japanese_text": "ハーブティーを淹れるのに集中していたのか、メルルはびくんっと大きく肩を跳ねさせた。",
+    "chinese_text": "梅露露精神集中在泡茶上，\n听到有人喊她，不禁吓到抖了一下。"
+  },
+  {
+    "dialogue_id": "0101Adv30_Ema002",
+    "speaker": "Ema",
+    "japanese_text": "わ、驚かせちゃってごめん！",
+    "chinese_text": "哇，不好意思吓到你！"
+  },
+  {
+    "dialogue_id": "0101Adv30_Meruru004",
+    "speaker": "Meruru",
+    "japanese_text": "いえいえいえいえ！私の方こそびっくりしちゃって申し訳ないです……！",
+    "chinese_text": "没、没事的没事的！\n被吓到都是我的不好，对不起……！"
+  },
+  {
+    "dialogue_id": "0101Adv30_Meruru005",
+    "speaker": "Meruru",
+    "japanese_text": "し、し、深呼吸しますので、少々お待ちください……すーはーすーはー……。",
+    "chinese_text": "我、我、我要做深呼吸，\n请你等我一下……嘶～呼～嘶～呼～……"
+  },
+  {
+    "dialogue_id": "0101Adv30_Narrative005",
+    "speaker": "[Narrative]",
+    "japanese_text": "しばしメルルの気分が落ち着くのを待って、エマは口を開いた。",
+    "chinese_text": "等梅露露冷静下来后，\n艾玛便开口问。"
+  },
+  {
+    "dialogue_id": "0101Adv30_Ema003",
+    "speaker": "Ema",
+    "japanese_text": "アンアンちゃんの具合はどう？",
+    "chinese_text": "安安的情况怎么样了？"
+  },
+  {
+    "dialogue_id": "0101Adv30_Meruru006",
+    "speaker": "Meruru",
+    "japanese_text": "今は落ち着いています……ショックですよね、自分のお部屋に戻ったらノアさんがあんなことに……。",
+    "chinese_text": "现在已经冷静下来了……她一定受到了很大的冲击，\n毕竟回自己的房间时却看到了诺亚小姐她……"
+  },
+  {
+    "dialogue_id": "0101Adv30_Narrative006",
+    "speaker": "[Narrative]",
+    "japanese_text": "メルルの瞳が泣きそうに潤む。",
+    "chinese_text": "梅露露眼眶湿润，似乎马上就要哭出来似的。"
+  },
+  {
+    "dialogue_id": "0101Adv30_Meruru007",
+    "speaker": "Meruru",
+    "japanese_text": "私、ノアさんに、何もしてあげられなかった。",
+    "chinese_text": "我还没来得及为诺亚小姐做任何事，她就……"
+  },
+  {
+    "dialogue_id": "0101Adv30_Ema004",
+    "speaker": "Ema",
+    "japanese_text": "こんなことになるなんて、誰も予測できないよ……あ、あのさ！",
+    "chinese_text": "谁都不会想到\n会发生这种事……啊，对了！"
+  },
+  {
+    "dialogue_id": "0101Adv30_Narrative007",
+    "speaker": "[Narrative]",
+    "japanese_text": "項垂れるメルルが見ていられなかったのか、エマは大きな声を上げた。",
+    "chinese_text": "艾玛不忍心看到梅露露垂头丧气的样子，\n于是大声说道。"
+  },
+  {
+    "dialogue_id": "0101Adv30_Ema005",
+    "speaker": "Ema",
+    "japanese_text": "それってなんのハーブ？すごいよね、ハーブを摘んでお茶淹れられるなんて。",
+    "chinese_text": "那是什么香草？\n你还会摘香草泡茶，真的好厉害。"
+  },
+  {
+    "dialogue_id": "0101Adv30_Meruru008",
+    "speaker": "Meruru",
+    "japanese_text": "ローズマリーです。疲労回復に良いんですよ。",
+    "chinese_text": "是迷迭香。\n这个很有益于恢复疲劳哦。"
+  },
+  {
+    "dialogue_id": "0101Adv30_Narrative008",
+    "speaker": "[Narrative]",
+    "japanese_text": "気を逸らすことに成功したらしく、メルルがほんわかとした笑顔になる。",
+    "chinese_text": "看来艾玛成功分散了她的注意力，\n梅露露的脸上终于露出了些许笑容。"
+  },
+  {
+    "dialogue_id": "0101Adv30_Meruru009",
+    "speaker": "Meruru",
+    "japanese_text": "良かったらエマさんも飲んでいってくださいね。",
+    "chinese_text": "请你们一定要喝一口看看哦。"
+  },
+  {
+    "dialogue_id": "0101Adv30_Ema006",
+    "speaker": "Ema",
+    "japanese_text": "うん、ありがとう。",
+    "chinese_text": "嗯，谢谢你。"
+  },
+  {
+    "dialogue_id": "0101Adv30_Narrative009",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマたちはメルルからハーブティーを受け取った。",
+    "chinese_text": "艾玛一行人\n从梅露露手里接过香草茶。"
+  },
+  {
+    "dialogue_id": "0101Adv30_Ema007",
+    "speaker": "Ema",
+    "japanese_text": "（すっきりした爽やかな香り……。　ちょっと気分が良くなったかも）",
+    "chinese_text": "（好清爽通透的香气……\n感觉整个人都变得舒服了一些）"
+  },
+  {
+    "dialogue_id": "0101Adv30_Narrative010",
+    "speaker": "[Narrative]",
+    "japanese_text": "一息ついてから、エマはアンアンのベッドに目を向けた。",
+    "chinese_text": "经过短暂的休息，\n艾玛望向安安所在的床上。"
+  },
+  {
+    "dialogue_id": "0101Adv30_Ema008",
+    "speaker": "Ema",
+    "japanese_text": "（アンアンちゃんはノアちゃんと同室……　話を聞いておきたい）",
+    "chinese_text": "（安安和诺亚是住在同一间房的……\n我想和她谈一谈）"
+  },
+  {
+    "dialogue_id": "0101Adv30_Ema009",
+    "speaker": "Ema",
+    "japanese_text": "（コミュニケーションが取れるか、　不安だけど……）",
+    "chinese_text": "（有些担心\n能不能和她顺利对话……）"
+  },
+  {
+    "dialogue_id": "0101Adv30_Narrative011",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマは覚悟を決めた表情となって、アンアンへと近付いていった。",
+    "chinese_text": "艾玛下定了决心，\n来到安安的面前。"
+  },
+  {
+    "dialogue_id": "0101Adv30_Ema010",
+    "speaker": "Ema",
+    "japanese_text": "アンアンちゃん、その、大丈夫……？",
+    "chinese_text": "安安，你还好吗……？"
+  },
+  {
+    "dialogue_id": "0101Adv30_AnAn001",
+    "speaker": "AnAn",
+    "japanese_text": "…………。",
+    "chinese_text": "…………"
+  },
+  {
+    "dialogue_id": "0101Adv30_Narrative012",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマがベッド脇に立ってみれば、アンアンはぼんやりと天井を見上げていた。",
+    "chinese_text": "艾玛站在床边，\n看到安安眼神呆滞地望着天花板。"
+  },
+  {
+    "dialogue_id": "0101Adv30_Ema011",
+    "speaker": "Ema",
+    "japanese_text": "そのさ、アンアンちゃんとノアちゃんは、同室だったよね。",
+    "chinese_text": "那个，安安你和诺亚她\n住在同一间房，对不对。"
+  },
+  {
+    "dialogue_id": "0101Adv30_Ema012",
+    "speaker": "Ema",
+    "japanese_text": "一緒に過ごした時間は長くないとは思うけど……何か気付いたことはないかな？",
+    "chinese_text": "虽然你和她相处的时间\n应该不是很长……你有没有注意到什么特别的事？"
+  },
+  {
+    "dialogue_id": "0101Adv30_Narrative013",
+    "speaker": "[Narrative]",
+    "japanese_text": "アンアンは盛大なため息をついた後、気だるそうにスケッチブックを手に取った。",
+    "chinese_text": "安安大大地叹了一口气，\n毫无干劲地取出了素描本。"
+  },
+  {
+    "dialogue_id": "0101Adv30_Narrative014",
+    "speaker": "[Narrative]",
+    "japanese_text": "すらすらと何かを書いて、エマの方へと見せてくる。",
+    "chinese_text": "她在上面唰唰地写着什么东西，\n然后举起来给艾玛看。"
+  },
+  {
+    "dialogue_id": "0101Adv30_AnAn002",
+    "speaker": "AnAn",
+    "japanese_text": "『同室はとてもとても嫌だった』",
+    "chinese_text": "『吾辈非常非常讨厌和她住一间房』"
+  },
+  {
+    "dialogue_id": "0101Adv30_Narrative015",
+    "speaker": "[Narrative]",
+    "japanese_text": "スケッチブックに走り書きされた文面は、力強く本音を物語っていた。",
+    "chinese_text": "写在素描本上的文字\n强烈地反映出了她的心声。"
+  },
+  {
+    "dialogue_id": "0101Adv30_Ema013",
+    "speaker": "Ema",
+    "japanese_text": "そ、そうだよね……。",
+    "chinese_text": "也、也是啦……"
+  },
+  {
+    "dialogue_id": "0101Adv30_Ema014",
+    "speaker": "Ema",
+    "japanese_text": "（あれ――？）",
+    "chinese_text": "（嗯——？）"
+  },
+  {
+    "dialogue_id": "0101Adv30_Narrative016",
+    "speaker": "[Narrative]",
+    "japanese_text": "スケッチブックの端が一部折れていて、ちらと見えたものにエマの目が留まる。",
+    "chinese_text": "素描本的一角留有折痕，\n而折痕后稍稍露出的内容吸引住了艾玛的视线。"
+  },
+  {
+    "dialogue_id": "0101Adv30_Ema015",
+    "speaker": "Ema",
+    "japanese_text": "アンアンちゃん、あの、そのページに描かれてるのって――。",
+    "chinese_text": "安安，我说，\n你在那一页上面画的是——"
+  },
+  {
+    "dialogue_id": "0101Adv30_Narrative017",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマが指を差すと、アンアンは気まずそうに視線を逸らした。",
+    "chinese_text": "艾玛伸手指着那一角，\n安安变得有些心虚，把视线移到了别处。"
+  },
+  {
+    "dialogue_id": "0101Adv30_Narrative018",
+    "speaker": "[Narrative]",
+    "japanese_text": "やがて諦め、スケッチブックを１枚破って、エマに渡してきた。",
+    "chinese_text": "不久后她便放弃了掩饰，\n撕下素描本里的其中一页，递给了艾玛。"
+  },
+  {
+    "dialogue_id": "Toast_001",
+    "speaker": "[Narrative]",
+    "japanese_text": "魔女図鑑 更新…",
+    "chinese_text": "魔女图鉴 更新…"
+  },
+  {
+    "dialogue_id": "0101Adv30_Ema016",
+    "speaker": "Ema",
+    "japanese_text": "（蝶の絵！？）",
+    "chinese_text": "（蝴蝶的画！？）"
+  },
+  {
+    "dialogue_id": "0101Adv30_Narrative019",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマは思わず身を乗り出し、ぐっとアンアンに顔を寄せてしまう。",
+    "chinese_text": "艾玛下意识探出身子，\n一下子凑近了安安的脸。"
+  },
+  {
+    "dialogue_id": "0101Adv30_Ema017",
+    "speaker": "Ema",
+    "japanese_text": "こ、これってもしかして、ノアちゃんが描いたんじゃ。",
+    "chinese_text": "这、这个难道是，\n诺亚画的？"
+  },
+  {
+    "dialogue_id": "0101Adv30_Ema018",
+    "speaker": "Ema",
+    "japanese_text": "どうしてノアちゃんは蝶の絵を！？アンアンちゃんのスケッチブックに描いたのは、なんで！？",
+    "chinese_text": "为什么诺亚会画蝴蝶的画！？\n又是为什么会\n画在安安的素描本上！？"
+  },
+  {
+    "dialogue_id": "0101Adv30_Narrative020",
+    "speaker": "[Narrative]",
+    "japanese_text": "アンアンはとても嫌そうな顔で、ゆっくりと口を開いた。",
+    "chinese_text": "安安的表情变得十分不悦，\n她缓缓开口说道。"
+  },
+  {
+    "dialogue_id": "0101Adv30_AnAn003",
+    "speaker": "AnAn",
+    "japanese_text": "わがはいは具合が悪い。大声を出されるとわがはいの具合がもっと悪くなる。だから――【出て行け】。",
+    "chinese_text": "吾辈现在很不舒服。\n大声对吾辈讲话会害吾辈更不舒服。\n所以——【出去】。"
+  },
+  {
+    "dialogue_id": "0101Adv30_Narrative021",
+    "speaker": "[Narrative]",
+    "japanese_text": "低くその言葉が、紡がれた途端だった。",
+    "chinese_text": "就在轻声的话语说出口的瞬间。"
+  },
+  {
+    "dialogue_id": "0101Adv30_Narrative022",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマの体は意思に反して、アンアンから後ずさりをはじめてしまう。",
+    "chinese_text": "艾玛的身体违背她本人的意愿\n开始往后退，离安安越来越远。"
+  },
+  {
+    "dialogue_id": "0101Adv30_Ema019",
+    "speaker": "Ema",
+    "japanese_text": "え、あれ、なんで……！？",
+    "chinese_text": "咦，啊，为什么……！？"
+  },
+  {
+    "dialogue_id": "0101Adv30_Narrative023",
+    "speaker": "[Narrative]",
+    "japanese_text": "アンアンはスケッチブックにさらさらと文字を書いてから、見せてくる。",
+    "chinese_text": "安安在素描本上唰唰写了字，\n然后举了起来。"
+  },
+  {
+    "dialogue_id": "0101Adv30_AnAn004",
+    "speaker": "AnAn",
+    "japanese_text": "『わがはいの魔法は、相手を納得させられたら　命令に従わせることができるものだ』",
+    "chinese_text": "『吾辈的魔法是，只要得到对方的认可，\n就可以令对方服从指令』"
+  },
+  {
+    "dialogue_id": "0101Adv30_AnAn005",
+    "speaker": "AnAn",
+    "japanese_text": "『いわば、軽度の【洗脳】』",
+    "chinese_text": "『换言之，就是轻度的【洗脑】』"
+  },
+  {
+    "dialogue_id": "0101Adv30_Ema020",
+    "speaker": "Ema",
+    "japanese_text": "え、えー……。",
+    "chinese_text": "欸——……"
+  },
+  {
+    "dialogue_id": "0101Adv30_Ema021",
+    "speaker": "Ema",
+    "japanese_text": "（それでアンアンちゃん、　喋らないんだ……）",
+    "chinese_text": "（这就是安安\n不说话的原因……）"
+  },
+  {
+    "dialogue_id": "0101Adv30_Narrative024",
+    "speaker": "[Narrative]",
+    "japanese_text": "どんどん距離が離れていき。",
+    "chinese_text": "两人的距离越来越远。"
+  },
+  {
+    "dialogue_id": "0101Adv30_Narrative025",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマは思う。アンアンはエマを……他人を拒絶しているのだろうと。",
+    "chinese_text": "艾玛心想，\n安安的内心或许是在拒绝着艾玛……也就是拒绝着他人。"
+  },
+  {
+    "dialogue_id": "0101Adv30_Narrative026",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマは盛大なため息を漏らしながら、医務室を追い出される形となった。",
+    "chinese_text": "艾玛重重地叹了一口气，\n最终被赶出了医务室。"
+  }
+]

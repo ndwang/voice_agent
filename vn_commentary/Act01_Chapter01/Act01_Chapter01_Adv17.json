@@ -1,0 +1,308 @@
+[
+  {
+    "dialogue_id": "0101Adv17_Narrative001",
+    "speaker": "[Narrative]",
+    "japanese_text": "夕食後、エマたちはシャワールームを利用した。",
+    "chinese_text": "晚餐结束后，艾玛她们去了淋浴房洗澡。"
+  },
+  {
+    "dialogue_id": "0101Adv17_Narrative002",
+    "speaker": "[Narrative]",
+    "japanese_text": "昨日も利用したが、シャワールームには各囚人番号が振られたロッカーがある。その中には、下着や衣服の替えがきっちりと収められていた。",
+    "chinese_text": "她们昨天也来洗过，所以她们都知道，\n淋浴房里有标记了各个囚犯编号的存衣柜。\n里面整齐地放着一整套的替换衣服，包括内衣裤在内。"
+  },
+  {
+    "dialogue_id": "0101Adv17_Narrative003",
+    "speaker": "[Narrative]",
+    "japanese_text": "規則によれば着ていた服は、シャワールームに設置されているダストシュートに捨てなければいけない。",
+    "chinese_text": "根据规定，穿过的衣服\n要投进淋浴房内设置的\n垃圾滑槽里丢掉。"
+  },
+  {
+    "dialogue_id": "0101Adv17_Hanna001",
+    "speaker": "Hanna",
+    "japanese_text": "服を捨てるなんて……ぐぬぬ、もったいないですわ……。",
+    "chinese_text": "竟然要丢掉衣服……咕唔唔，太浪费了……"
+  },
+  {
+    "dialogue_id": "0101Adv17_Sherry001",
+    "speaker": "Sherry",
+    "japanese_text": "このダストシュート、地下の焼却炉に通じているんですよね。焼却炉室を地下で見かけました。",
+    "chinese_text": "这条垃圾滑槽，联通着地下的焚烧炉哦。\n我在地下看到过焚烧炉室。"
+  },
+  {
+    "dialogue_id": "0101Adv17_Ema001",
+    "speaker": "Ema",
+    "japanese_text": "ああ、そういえば……。",
+    "chinese_text": "啊，听你这么一讲……"
+  },
+  {
+    "dialogue_id": "0101Adv17_Ema002",
+    "speaker": "Ema",
+    "japanese_text": "（地下を探索した時、焼却炉室があるのは見かけた）",
+    "chinese_text": "（之前在探索地下的时候，确实见到过焚烧炉室）"
+  },
+  {
+    "dialogue_id": "0101Adv17_Ema003",
+    "speaker": "Ema",
+    "japanese_text": "（魔女図鑑の規則には【毎週月曜の１５時に稼働】　とあったっけ）",
+    "chinese_text": "（魔女图鉴的规定有写，\n说是【每周一15时启动】）"
+  },
+  {
+    "dialogue_id": "0101Adv17_Hanna002",
+    "speaker": "Hanna",
+    "japanese_text": "まだ全然着られますのに！",
+    "chinese_text": "明明还能穿欸！"
+  },
+  {
+    "dialogue_id": "0101Adv17_Sherry002",
+    "speaker": "Sherry",
+    "japanese_text": "私たちが魔女候補だからかもしれませんねー。着てたものを全て焼却処分って、偏見のようなものを感じます。",
+    "chinese_text": "说不定是因为我们是预备魔女才会这样。\n穿过的东西都要烧掉，感觉像是某种偏见。"
+  },
+  {
+    "dialogue_id": "0101Adv17_Ema004",
+    "speaker": "Ema",
+    "japanese_text": "うん……。",
+    "chinese_text": "嗯……"
+  },
+  {
+    "dialogue_id": "0101Adv17_Sherry003",
+    "speaker": "Sherry",
+    "japanese_text": "単純に洗濯が面倒なのかもしれませんが！",
+    "chinese_text": "也有可能只是因为洗衣服很麻烦！"
+  },
+  {
+    "dialogue_id": "0101Adv17_Sherry004",
+    "speaker": "Sherry",
+    "japanese_text": "でもそこまでチェックもされていない感じしますし、嫌なら捨てなくても良いのでは。",
+    "chinese_text": "不过我感觉这个查得不是很严，\n不愿意的话不丢掉也可以吧。"
+  },
+  {
+    "dialogue_id": "0101Adv17_Hanna003",
+    "speaker": "Hanna",
+    "japanese_text": "うっ……嫌ですが、規則違反がバレたら何をされるかわかりませんし……。",
+    "chinese_text": "呜……虽然很不愿意，\n但是要是被抓到违反了规定，不知道会遭怎样的处罚……"
+  },
+  {
+    "dialogue_id": "0101Adv17_Hanna004",
+    "speaker": "Hanna",
+    "japanese_text": "仕方ないですわ、くそ～～！",
+    "chinese_text": "真是没办法，该死～～！"
+  },
+  {
+    "dialogue_id": "0101Adv17_Hanna005",
+    "speaker": "Hanna",
+    "japanese_text": "――しかも毎日同じ服着なきゃならないなんて！せめて寝間着は用意してほしかったですわ。",
+    "chinese_text": "——而且每天都要我们穿一模一样的衣服！\n应该至少给我们准备一套睡衣才对。"
+  },
+  {
+    "dialogue_id": "0101Adv17_Narrative004",
+    "speaker": "[Narrative]",
+    "japanese_text": "シャワーを浴びた後も、ハンナの愚痴は続いていた。エマは苦笑を浮かべる。",
+    "chinese_text": "冲完澡后，汉娜还继续吐着苦水。\n艾玛只好露出苦笑。"
+  },
+  {
+    "dialogue_id": "0101Adv17_Ema005",
+    "speaker": "Ema",
+    "japanese_text": "ま、まあまあ。同じ服でも替えがあるのはありがたいよ。",
+    "chinese_text": "算啦算啦。\n虽说是一样的衣服，有得换就谢天谢地了。"
+  },
+  {
+    "dialogue_id": "0101Adv17_Sherry005",
+    "speaker": "Sherry",
+    "japanese_text": "ゴクチョーさんの趣味かもしれませんねぇ。",
+    "chinese_text": "说不定这是典狱长的私人喜好哦。"
+  },
+  {
+    "dialogue_id": "0101Adv17_Narrative005",
+    "speaker": "[Narrative]",
+    "japanese_text": "火照った体から湯気を立てながら、エマ、シェリー、ハンナの３人で通路を歩く。",
+    "chinese_text": "艾玛、雪莉、汉娜她们三人正走在过道上，\n热乎乎的身体还冒着白色的蒸气。"
+  },
+  {
+    "dialogue_id": "0101Adv17_Hanna006",
+    "speaker": "Hanna",
+    "japanese_text": "ふん、趣味は悪くないんじゃないかしら？",
+    "chinese_text": "呵，看来它的喜好还不算太差……"
+  },
+  {
+    "dialogue_id": "0101Adv17_Sherry006",
+    "speaker": "Sherry",
+    "japanese_text": "気に入ってるんですね。",
+    "chinese_text": "看来你还蛮喜欢的耶。"
+  },
+  {
+    "dialogue_id": "0101Adv17_Hanna007",
+    "speaker": "Hanna",
+    "japanese_text": "べ、べべべべっつにぃ？ 気に入っていませんけどぉ？",
+    "chinese_text": "才、才才才才没有吧？一点都不喜欢哦？"
+  },
+  {
+    "dialogue_id": "0101Adv17_Ema006",
+    "speaker": "Ema",
+    "japanese_text": "（なんか……こういうのいいなって思ったり）",
+    "chinese_text": "（总感觉……这样的小打小闹也蛮不赖的）"
+  },
+  {
+    "dialogue_id": "0101Adv17_Narrative006",
+    "speaker": "[Narrative]",
+    "japanese_text": "歩くエマの口元は緩んでいる。",
+    "chinese_text": "走在路上的艾玛微微弯起了嘴角。"
+  },
+  {
+    "dialogue_id": "0101Adv17_Ema007",
+    "speaker": "Ema",
+    "japanese_text": "（こうやって友だち同士でおしゃべりしながら歩くのって　憧れだった）",
+    "chinese_text": "（我很向往像这样子\n可以和朋友一起边走边聊天的时光）"
+  },
+  {
+    "dialogue_id": "0101Adv17_Ema008",
+    "speaker": "Ema",
+    "japanese_text": "（もちろん、ボクらは囚人で、ここは牢獄なんだけど……　なんか、忘れちゃいそうになるな）",
+    "chinese_text": "（当然了，我们是囚犯，这里是监狱……\n差点不知不觉，就把这件事忘了）"
+  },
+  {
+    "dialogue_id": "0101Adv17_Sherry007",
+    "speaker": "Sherry",
+    "japanese_text": "あ、エマさん、ハンナさん、スマホ見てください。",
+    "chinese_text": "啊，艾玛，汉娜，你们快看手机。"
+  },
+  {
+    "dialogue_id": "0101Adv17_Narrative007",
+    "speaker": "[Narrative]",
+    "japanese_text": "唐突にシェリーが切り出したことで、エマとハンナはスマホを取り出す。",
+    "chinese_text": "雪莉忽然打断了话题，\n于是艾玛和汉娜拿出了手机。"
+  },
+  {
+    "dialogue_id": "0101Adv17_Narrative008",
+    "speaker": "[Narrative]",
+    "japanese_text": "すると、【蓮見レイア】の配信中ランプが点灯しており、レイアの顔が画面に映った。",
+    "chinese_text": "只见【莲见蕾雅】亮起了“正在直播”的灯，\n屏幕上显示出蕾雅的脸。"
+  },
+  {
+    "dialogue_id": "0101Adv17_Leia001",
+    "speaker": "Leia",
+    "japanese_text": "――団結するためにも私も定期的に配信をしようと思う。",
+    "chinese_text": "——也为了团结，\n我觉得，我也应该定期开展直播。"
+  },
+  {
+    "dialogue_id": "0101Adv17_Leia002",
+    "speaker": "Leia",
+    "japanese_text": "みんな、気持ちをしっかり持ってほしいんだ。どうか衝動的にならないでほしい。",
+    "chinese_text": "希望各位可以保持积极的心态，\n千万不要冲动行事。"
+  },
+  {
+    "dialogue_id": "0101Adv17_Leia003",
+    "speaker": "Leia",
+    "japanese_text": "今は従うしか方法はない。だが、私たちは決して屈しない。",
+    "chinese_text": "目前我们别无办法，只能遵守规定。\n但是，我们绝不屈服。"
+  },
+  {
+    "dialogue_id": "0101Adv17_Leia004",
+    "speaker": "Leia",
+    "japanese_text": "全員で生き残って、必ずここを出るんだ。大丈夫。私が必ず、なんとかしてみせる。",
+    "chinese_text": "我们一定要做到，所有人能活着离开这里。\n请放心，我一定会想办法实现。"
+  },
+  {
+    "dialogue_id": "0101Adv17_Narrative009",
+    "speaker": "[Narrative]",
+    "japanese_text": "力強いレイアの言葉はエマの胸を打ち、瞳が潤む。",
+    "chinese_text": "艾玛的心被蕾雅充满力量的话语打动了。\n她的眼角渗出了热泪。"
+  },
+  {
+    "dialogue_id": "0101Adv17_Ema009",
+    "speaker": "Ema",
+    "japanese_text": "（さっき食堂でひりついて、みんなが怖がってたから　安心させるために……レイアちゃんは偉いな……）",
+    "chinese_text": "（刚刚食堂的事让大家都觉得很害怕。\n为了安抚大家，蕾雅才开直播讲话的……她真的很了不起……）"
+  },
+  {
+    "dialogue_id": "0101Adv17_Ema010",
+    "speaker": "Ema",
+    "japanese_text": "（ボクは自分のことしか考えられていない……）",
+    "chinese_text": "（而我只会想着自己的事……）"
+  },
+  {
+    "dialogue_id": "0101Adv17_Hanna008",
+    "speaker": "Hanna",
+    "japanese_text": "ふんっ、こんなもの見る価値ありませんわね。",
+    "chinese_text": "哼，这样的东西根本没有看的价值。"
+  },
+  {
+    "dialogue_id": "0101Adv17_Narrative010",
+    "speaker": "[Narrative]",
+    "japanese_text": "捨て台詞を吐きながら、ハンナは食い入るようにスマホを見ている。",
+    "chinese_text": "汉娜嘴上说着嫌弃，可视线还是\n紧紧盯着手机不放。"
+  },
+  {
+    "dialogue_id": "0101Adv17_Sherry008",
+    "speaker": "Sherry",
+    "japanese_text": "ふむ。",
+    "chinese_text": "哦～"
+  },
+  {
+    "dialogue_id": "0101Adv17_Narrative011",
+    "speaker": "[Narrative]",
+    "japanese_text": "その様子が興味深かったのか、シェリーがさっとハンナのスマホを取り上げた。",
+    "chinese_text": "雪莉好像十分在意这个反应，\n于是乎，她忽然间拿走了汉娜的手机。"
+  },
+  {
+    "dialogue_id": "0101Adv17_Hanna009",
+    "speaker": "Hanna",
+    "japanese_text": "！",
+    "chinese_text": "！"
+  },
+  {
+    "dialogue_id": "0101Adv17_Narrative012",
+    "speaker": "[Narrative]",
+    "japanese_text": "ハンナが慌てたように、スマホに映ったレイアの姿を追い求める。",
+    "chinese_text": "汉娜慌了神，\n伸手就要取回映在手机上的蕾雅的身影。"
+  },
+  {
+    "dialogue_id": "0101Adv17_Hanna010",
+    "speaker": "Hanna",
+    "japanese_text": "何しますの！？ お返しなさい！",
+    "chinese_text": "你在干什么！？把手机还给我！"
+  },
+  {
+    "dialogue_id": "0101Adv17_Sherry009",
+    "speaker": "Sherry",
+    "japanese_text": "ハンナさん、本当はレイアさんのこと好きなんじゃないですか～？ そんな一生懸命になって。",
+    "chinese_text": "汉娜，你这么拼命抢手机，\n意思是你其实很喜欢蕾雅，对不对～？"
+  },
+  {
+    "dialogue_id": "0101Adv17_Narrative013",
+    "speaker": "[Narrative]",
+    "japanese_text": "ぶんぶんスマホを振り回され、ハンナが真っ赤になって、忙しなく視線を動かしている。",
+    "chinese_text": "雪莉拿着手机左晃右晃，\n汉娜的脸涨得通红，视线也跟着手机左来右去。"
+  },
+  {
+    "dialogue_id": "0101Adv17_Hanna011",
+    "speaker": "Hanna",
+    "japanese_text": "このゴリラ女！ 返せ！！",
+    "chinese_text": "你个猩猩女！快还给我！！"
+  },
+  {
+    "dialogue_id": "0101Adv17_Sherry010",
+    "speaker": "Sherry",
+    "japanese_text": "ふふふ、捕まえてごらんなさいな～。",
+    "chinese_text": "呵呵呵，来抓我呀～"
+  },
+  {
+    "dialogue_id": "0101Adv17_Narrative014",
+    "speaker": "[Narrative]",
+    "japanese_text": "追いかけっこを始めた２人に、エマは呆れた表情になって、ため息を漏らした。",
+    "chinese_text": "面对开始你追我赶的二人，\n艾玛露出傻眼的表情，叹了一口气。"
+  },
+  {
+    "dialogue_id": "0101Adv17_Narrative015",
+    "speaker": "[Narrative]",
+    "japanese_text": "その間、エマ自身もレイアの映った画面から目が離せずにいる。",
+    "chinese_text": "这期间，连艾玛自己也\n目不转睛的望着屏幕上的蕾雅。"
+  },
+  {
+    "dialogue_id": "0101Adv17_Ema011",
+    "speaker": "Ema",
+    "japanese_text": "（レイアちゃんって、　女の子を惚れさせる魔法を使えるのかな）",
+    "chinese_text": "（蕾雅她是不是\n会用迷住女孩子的魔法呢）"
+  }
+]

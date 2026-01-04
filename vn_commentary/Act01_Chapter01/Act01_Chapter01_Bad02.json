@@ -1,0 +1,500 @@
+[
+  {
+    "dialogue_id": "0101Bad02_Narrative001",
+    "speaker": "[Narrative]",
+    "japanese_text": "看守とアリサの後を追った。",
+    "chinese_text": "跟随在了看守和亚里沙的身后。"
+  },
+  {
+    "dialogue_id": "0101Bad02_Narrative002",
+    "speaker": "[Narrative]",
+    "japanese_text": "マップで、通路の先が懲罰房だと確認する。",
+    "chinese_text": "根据地图，可以得知过道的尽头是惩罚室。"
+  },
+  {
+    "dialogue_id": "0101Bad02_Ema001",
+    "speaker": "Ema",
+    "japanese_text": "（アリサちゃんは何か、　規則を破ったのかもしれない）",
+    "chinese_text": "（说不定亚里沙她\n违反了某些规定）"
+  },
+  {
+    "dialogue_id": "0101Bad02_Ema002",
+    "speaker": "Ema",
+    "japanese_text": "（出てやるって言ってたし……　脱走しようとして、捕まったのかも）",
+    "chinese_text": "（毕竟她说过要逃出这里……\n也许是因为策划逃跑才会被抓的）"
+  },
+  {
+    "dialogue_id": "0101Bad02_Ema003",
+    "speaker": "Ema",
+    "japanese_text": "（懲罰房って……　やっぱり、ひどいことされるのかな）",
+    "chinese_text": "（惩罚室……\n肯定会在里面遭受可怕的惩罚吧）"
+  },
+  {
+    "dialogue_id": "0101Bad02_Narrative003",
+    "speaker": "[Narrative]",
+    "japanese_text": "もしかしたら、ヒロのように――",
+    "chinese_text": "说不定，会跟希罗一样——"
+  },
+  {
+    "dialogue_id": "0101Bad02_Narrative004",
+    "speaker": "[Narrative]",
+    "japanese_text": "血に染まったラウンジを思い出して、エマは身を震わせる。",
+    "chinese_text": "回想起沾满血迹的会客厅，\n艾玛浑身颤抖。"
+  },
+  {
+    "dialogue_id": "0101Bad02_Ema004",
+    "speaker": "Ema",
+    "japanese_text": "（大丈夫だよね……　アリサちゃん、暴れたりはしてなかったし）",
+    "chinese_text": "（应该没事吧……\n亚里沙也没有很激烈地反抗）"
+  },
+  {
+    "dialogue_id": "0101Bad02_Ema005",
+    "speaker": "Ema",
+    "japanese_text": "きっと、殺されはしないはず。",
+    "chinese_text": "一定不会被杀的。"
+  },
+  {
+    "dialogue_id": "0101Bad02_Narrative005",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマは自分に言い聞かせるように呟いた。",
+    "chinese_text": "艾玛自言自语着，就好像在说给她自己听一样。"
+  },
+  {
+    "dialogue_id": "0101Bad02_Ema006",
+    "speaker": "Ema",
+    "japanese_text": "（ここが懲罰房……）",
+    "chinese_text": "（这里就是惩罚室……）"
+  },
+  {
+    "dialogue_id": "0101Bad02_Narrative006",
+    "speaker": "[Narrative]",
+    "japanese_text": "南京錠で閉ざされた重厚な扉が、ずらりと並んでいた。囚人の房よりも、一段と空気が澱んでいる。",
+    "chinese_text": "这里并排着几扇厚实的门，每扇门都用挂锁封闭着。\n相比囚犯的房间，这里的空气显得更加沉重。"
+  },
+  {
+    "dialogue_id": "0101Bad02_Narrative007",
+    "speaker": "[Narrative]",
+    "japanese_text": "通路にはエマ以外、誰の姿もなかった。アリサはすでにもう、扉の向こうに入れられてしまったのかもしれない。",
+    "chinese_text": "过道上除了艾玛之外，别无他人。\n说不定亚里沙已经被关进\n房间里面了。"
+  },
+  {
+    "dialogue_id": "0101Bad02_Ema007",
+    "speaker": "Ema",
+    "japanese_text": "アリサちゃん……？",
+    "chinese_text": "亚里沙……？"
+  },
+  {
+    "dialogue_id": "0101Bad02_Narrative008",
+    "speaker": "[Narrative]",
+    "japanese_text": "か細く震える声で、エマはアリサの名前を呼んだ。",
+    "chinese_text": "艾玛用颤抖的声音，轻轻呼喊亚里沙的名字。"
+  },
+  {
+    "dialogue_id": "0101Bad02_Narrative009",
+    "speaker": "[Narrative]",
+    "japanese_text": "たとえどこかにアリサがいたとしても、届くような声量じゃない。",
+    "chinese_text": "就算亚里沙人在里面某处，\n只凭目前的音量，根本无法传达。"
+  },
+  {
+    "dialogue_id": "0101Bad02_Narrative010",
+    "speaker": "[Narrative]",
+    "japanese_text": "当然、返事はなかったが――",
+    "chinese_text": "当然，此时不应该会有回应——"
+  },
+  {
+    "dialogue_id": "0101Bad02_Ema008",
+    "speaker": "Ema",
+    "japanese_text": "ひっ……。",
+    "chinese_text": "噫……"
+  },
+  {
+    "dialogue_id": "0101Bad02_Narrative011",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマのすぐ目の前にある懲罰房の扉が、激しい音を立てて開かれた。",
+    "chinese_text": "紧贴在艾玛眼前的这道惩罚室的门，\n发出了巨大声响，自行打开了。"
+  },
+  {
+    "dialogue_id": "0101Bad02_Narrative012",
+    "speaker": "[Narrative]",
+    "japanese_text": "中から誰か出てくるのかと、エマは身構える。",
+    "chinese_text": "艾玛摆好了姿势，以为会有人从里面走出来。"
+  },
+  {
+    "dialogue_id": "0101Bad02_Ema009",
+    "speaker": "Ema",
+    "japanese_text": "…………。",
+    "chinese_text": "…………"
+  },
+  {
+    "dialogue_id": "0101Bad02_Narrative013",
+    "speaker": "[Narrative]",
+    "japanese_text": "だが、しばらく経っても誰かが出てくるような気配はない。",
+    "chinese_text": "不过，等了好一会，\n也不见有人出来。"
+  },
+  {
+    "dialogue_id": "0101Bad02_Ema010",
+    "speaker": "Ema",
+    "japanese_text": "……？",
+    "chinese_text": "……？"
+  },
+  {
+    "dialogue_id": "0101Bad02_Narrative014",
+    "speaker": "[Narrative]",
+    "japanese_text": "不審に思ったエマは扉に近付き、おそるおそるといった風に室内を覗いた。",
+    "chinese_text": "感到异状的艾玛靠近了门，\n战战兢兢地往室内看去。"
+  },
+  {
+    "dialogue_id": "0101Bad02_Ema011",
+    "speaker": "Ema",
+    "japanese_text": "！！",
+    "chinese_text": "！！"
+  },
+  {
+    "dialogue_id": "0101Bad02_Narrative015",
+    "speaker": "[Narrative]",
+    "japanese_text": "上げそうになった声を押し殺すため、エマは手で口を塞いだ。",
+    "chinese_text": "艾玛用手捂住嘴巴，\n好止住不自觉发出的喊声。"
+  },
+  {
+    "dialogue_id": "0101Bad02_Narrative016",
+    "speaker": "[Narrative]",
+    "japanese_text": "懲罰房の中にある禍々しい道具類に戦慄し、後ずさる。",
+    "chinese_text": "她看见惩罚室内那些充满邪恶气息的工具，不禁浑身颤抖，\n往后退了一步。"
+  },
+  {
+    "dialogue_id": "0101Bad02_Ema012",
+    "speaker": "Ema",
+    "japanese_text": "え？",
+    "chinese_text": "欸？"
+  },
+  {
+    "dialogue_id": "0101Bad02_Narrative017",
+    "speaker": "[Narrative]",
+    "japanese_text": "背後から押されて、エマは懲罰房の中に転がった。振り向いた視線の先で、扉が閉まっていく。",
+    "chinese_text": "背后有什么推了她一把，害艾玛跌倒在惩罚室内。\n等她回头一看，发现房门正要关上。"
+  },
+  {
+    "dialogue_id": "0101Bad02_Ema013",
+    "speaker": "Ema",
+    "japanese_text": "ま、待って！",
+    "chinese_text": "等、等下！"
+  },
+  {
+    "dialogue_id": "0101Bad02_Narrative018",
+    "speaker": "[Narrative]",
+    "japanese_text": "慌てて起き上がったエマの眼前で、懲罰房の扉は重々しく閉ざされた。",
+    "chinese_text": "艾玛慌忙爬起身来，\n但惩罚室的厚重房门已在她眼前紧紧闭上了。"
+  },
+  {
+    "dialogue_id": "0101Bad02_Ema014",
+    "speaker": "Ema",
+    "japanese_text": "開けてよ！ なんでボクを閉じ込めるの！？",
+    "chinese_text": "开门啊！为什么要把我关在里面！？"
+  },
+  {
+    "dialogue_id": "0101Bad02_Narrative019",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマの叫びに、答えは返ってこない。",
+    "chinese_text": "艾玛大喊着，但没有得到任何回应。"
+  },
+  {
+    "dialogue_id": "0101Bad02_Narrative020",
+    "speaker": "[Narrative]",
+    "japanese_text": "『閉じ込められた』という状況が、エマの脳裏に嫌な思い出を呼び起こしていた。",
+    "chinese_text": "“被关在室内”这一情况，\n唤醒了艾玛脑海深处的痛苦记忆。"
+  },
+  {
+    "dialogue_id": "0101Bad02_Narrative021",
+    "speaker": "[Narrative]",
+    "japanese_text": "中学時代、トイレの個室や体育倉庫に閉じ込められて――",
+    "chinese_text": "在初中时期，她被人关在厕所的隔间，\n或者是体育用品仓库里面——"
+  },
+  {
+    "dialogue_id": "0101Bad02_Narrative022",
+    "speaker": "[Narrative]",
+    "japanese_text": "トイレでは、上から水やゴミをかけられていた。",
+    "chinese_text": "在厕所里，她被人从上方洒水或者丢垃圾。"
+  },
+  {
+    "dialogue_id": "0101Bad02_Narrative023",
+    "speaker": "[Narrative]",
+    "japanese_text": "体育倉庫では、何時間も外に出してもらえなかった。",
+    "chinese_text": "在体育仓库里，则是好几个小时无法外出。"
+  },
+  {
+    "dialogue_id": "0101Bad02_Narrative024",
+    "speaker": "[Narrative]",
+    "japanese_text": "悪意に満ちた嘲笑は、今でもエマの耳にこびりついて離れない。",
+    "chinese_text": "充满恶意的嘲笑，\n如今仍萦绕在艾玛的耳边，不见消散。"
+  },
+  {
+    "dialogue_id": "0101Bad02_Narrative025",
+    "speaker": "[Narrative]",
+    "japanese_text": "やめて。",
+    "chinese_text": "住手呀。"
+  },
+  {
+    "dialogue_id": "0101Bad02_Narrative026",
+    "speaker": "[Narrative]",
+    "japanese_text": "やめてやめてやめてやめてやめて！",
+    "chinese_text": "住手住手住手住手住手！"
+  },
+  {
+    "dialogue_id": "0101Bad02_Ema015",
+    "speaker": "Ema",
+    "japanese_text": "開けて！ どうしてこんなことするんだよ！",
+    "chinese_text": "开门啊！为什么要做这样的事！"
+  },
+  {
+    "dialogue_id": "0101Bad02_Narrative027",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマがいくら叫んでも、扉が開かれることはなかった――",
+    "chinese_text": "不管艾玛怎样叫喊，\n门再也不会开了——"
+  },
+  {
+    "dialogue_id": "0101Bad02_Narrative028",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマは懲罰房の床に力なく横たわっていた。",
+    "chinese_text": "艾玛无力地躺倒在惩罚室的地面上。"
+  },
+  {
+    "dialogue_id": "0101Bad02_Ema016",
+    "speaker": "Ema",
+    "japanese_text": "（……どのくらい経ったのかな）",
+    "chinese_text": "（……究竟过了有多久呢）"
+  },
+  {
+    "dialogue_id": "0101Bad02_Narrative029",
+    "speaker": "[Narrative]",
+    "japanese_text": "閉じ込められてから、どれだけ時間が流れたのだろうかと考える。",
+    "chinese_text": "她在想，被关进来后\n究竟过了多长的时间。"
+  },
+  {
+    "dialogue_id": "0101Bad02_Narrative030",
+    "speaker": "[Narrative]",
+    "japanese_text": "スマホは何故かこの懲罰房では電源が入らず、使用できなかった。",
+    "chinese_text": "不知为何，在惩罚室里无法打开手机的电源，\n没法使用。"
+  },
+  {
+    "dialogue_id": "0101Bad02_Ema017",
+    "speaker": "Ema",
+    "japanese_text": "！！",
+    "chinese_text": "！！"
+  },
+  {
+    "dialogue_id": "0101Bad02_Narrative031",
+    "speaker": "[Narrative]",
+    "japanese_text": "扉の向こうで足音が聞こえた気がした。",
+    "chinese_text": "她似乎听见了门的另一侧传来了脚步声。"
+  },
+  {
+    "dialogue_id": "0101Bad02_Narrative032",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマは力を振り絞って立ち上がり、扉に縋りつくようにして耳をそばだてる。",
+    "chinese_text": "艾玛使出全力站起身来，\n用门支撑住身体，竖起耳朵仔细倾听。"
+  },
+  {
+    "dialogue_id": "0101Bad02_Hanna001",
+    "speaker": "Hanna",
+    "japanese_text": "なんなんですのここ……やけに空気が重苦しくありません？",
+    "chinese_text": "这里是怎么回事……\n不觉得空气超级沉重吗？"
+  },
+  {
+    "dialogue_id": "0101Bad02_Sherry001",
+    "speaker": "Sherry",
+    "japanese_text": "そうですか？ 私は特に感じませんけど。",
+    "chinese_text": "是吗？我倒是没什么特别感觉耶。"
+  },
+  {
+    "dialogue_id": "0101Bad02_Ema018",
+    "speaker": "Ema",
+    "japanese_text": "（ハンナちゃん、シェリーちゃん！）",
+    "chinese_text": "（汉娜，雪莉！）"
+  },
+  {
+    "dialogue_id": "0101Bad02_Narrative033",
+    "speaker": "[Narrative]",
+    "japanese_text": "絶望感に囚われていたエマに、一筋の光が差し込んだ。",
+    "chinese_text": "在饱受绝望折磨的艾玛眼前，出现了一道希望之光。"
+  },
+  {
+    "dialogue_id": "0101Bad02_Ema019",
+    "speaker": "Ema",
+    "japanese_text": "助けて！ お願い！ ここから出して！",
+    "chinese_text": "救救我！求你们！放我出去！"
+  },
+  {
+    "dialogue_id": "0101Bad02_Narrative034",
+    "speaker": "[Narrative]",
+    "japanese_text": "扉にある覗き窓から、エマは必死に叫ぶ。",
+    "chinese_text": "在门上的小窗处，艾玛拼命喊道。"
+  },
+  {
+    "dialogue_id": "0101Bad02_Ema020",
+    "speaker": "Ema",
+    "japanese_text": "ハンナちゃん！ シェリーちゃん！ ここだよ！",
+    "chinese_text": "汉娜！雪莉！我在这里！"
+  },
+  {
+    "dialogue_id": "0101Bad02_Narrative035",
+    "speaker": "[Narrative]",
+    "japanese_text": "すると声に気がついたのか、２人はエマがいる房に歩み寄ってくる。そして、シェリーが中を覗き込んだ。",
+    "chinese_text": "不知二人是不是听到了她的呼声，\n她们来到了艾玛所在的房间前。\n接着，雪莉往里面看了看。"
+  },
+  {
+    "dialogue_id": "0101Bad02_Ema021",
+    "speaker": "Ema",
+    "japanese_text": "シェリーちゃん！ よかったぁ……！よくわからないけどボク、閉じ込められちゃって……。",
+    "chinese_text": "雪莉！太好了……！\n不知道为什么，我被关进了这里面……"
+  },
+  {
+    "dialogue_id": "0101Bad02_Narrative036",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマは違和感を覚えて、言葉を止めた。",
+    "chinese_text": "艾玛感受到了异样，于是停下了话语。"
+  },
+  {
+    "dialogue_id": "0101Bad02_Sherry002",
+    "speaker": "Sherry",
+    "japanese_text": "う～～～～ん……。",
+    "chinese_text": "唔～～～～……"
+  },
+  {
+    "dialogue_id": "0101Bad02_Narrative037",
+    "speaker": "[Narrative]",
+    "japanese_text": "シェリーは間違いなく室内を覗き込んでいる。ところが、その目はまるでエマの存在に気付いていないかのようだった。",
+    "chinese_text": "毫无疑问，雪莉正在探视室内。\n只不过，她的眼睛似乎\n完全没有看见艾玛。"
+  },
+  {
+    "dialogue_id": "0101Bad02_Ema022",
+    "speaker": "Ema",
+    "japanese_text": "なん……で……？",
+    "chinese_text": "为什……么……？"
+  },
+  {
+    "dialogue_id": "0101Bad02_Hanna002",
+    "speaker": "Hanna",
+    "japanese_text": "どうしましたの？もしや、中に誰かいるとか……！？",
+    "chinese_text": "怎么啦？\n难道里面有人……！？"
+  },
+  {
+    "dialogue_id": "0101Bad02_Sherry003",
+    "speaker": "Sherry",
+    "japanese_text": "いいえ、誰もいませんねぇ～。なんとも、えぐい道具はありますけど。",
+    "chinese_text": "不，一个人都没有哦～\n不过，倒是有很多不得了的刑具呢。"
+  },
+  {
+    "dialogue_id": "0101Bad02_Narrative038",
+    "speaker": "[Narrative]",
+    "japanese_text": "シェリーとハンナは扉から離れて、そのまま立ち去っていく。",
+    "chinese_text": "雪莉和汉娜远离了房门，\n径直离开了。"
+  },
+  {
+    "dialogue_id": "0101Bad02_Ema023",
+    "speaker": "Ema",
+    "japanese_text": "そんな……待ってよ！シェリーちゃん！ ハンナちゃん！",
+    "chinese_text": "怎么会这样……等一下啊！\n雪莉！汉娜！"
+  },
+  {
+    "dialogue_id": "0101Bad02_Ema024",
+    "speaker": "Ema",
+    "japanese_text": "見えてるでしょ！？ 聞こえてるでしょ！？ボクはここにいるんだよ！",
+    "chinese_text": "你们有看到吧！？你们有听见吧！？\n我可是在这里啊！"
+  },
+  {
+    "dialogue_id": "0101Bad02_Ema025",
+    "speaker": "Ema",
+    "japanese_text": "なんで……どうして……？あんなのまるで……。",
+    "chinese_text": "为什么……为什么呀……？\n这根本就是……"
+  },
+  {
+    "dialogue_id": "0101Bad02_Narrative039",
+    "speaker": "[Narrative]",
+    "japanese_text": "無視されているみたいだった。",
+    "chinese_text": "把我无视掉了吧。"
+  },
+  {
+    "dialogue_id": "0101Bad02_Ema026",
+    "speaker": "Ema",
+    "japanese_text": "ここに……いるのに……。",
+    "chinese_text": "明明……我在这里……"
+  },
+  {
+    "dialogue_id": "0101Bad02_Narrative040",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマは頭の奥で、少女たちの声を聞いた。こちらを貶めるかのような笑い声が、頭の中で反響する。",
+    "chinese_text": "艾玛在脑海中听见了少女们的声音。\n那些笑声好像在嘲笑她一样，不断在脑海中回荡。"
+  },
+  {
+    "dialogue_id": "0101Bad02_Ema027",
+    "speaker": "Ema",
+    "japanese_text": "うるさい……うるさいうるさいうるさいうるさいうるさい！！",
+    "chinese_text": "吵死了……\n吵死了吵死了吵死了吵死了吵死了！！"
+  },
+  {
+    "dialogue_id": "0101Bad02_Narrative041",
+    "speaker": "[Narrative]",
+    "japanese_text": "笑い声はやがて、エマを責め立てる言葉に変わっていく。",
+    "chinese_text": "而嘲笑声最终转变成了责骂艾玛的话语。"
+  },
+  {
+    "dialogue_id": "0101Bad02_Ema028",
+    "speaker": "Ema",
+    "japanese_text": "やめてよ！ ボクは悪くない……ボクはっ！",
+    "chinese_text": "住口啊！我没有做错事……我没有！"
+  },
+  {
+    "dialogue_id": "0101Bad02_Narrative042",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマは手近にあった拷問器具を手に取り、懲罰房の扉を何度も叩いた。",
+    "chinese_text": "艾玛拿起手边的拷问器具，\n无数次敲打惩罚室的房门。"
+  },
+  {
+    "dialogue_id": "0101Bad02_Ema029",
+    "speaker": "Ema",
+    "japanese_text": "あぁぁぁぁぁっ！！",
+    "chinese_text": "啊啊啊啊啊啊！！"
+  },
+  {
+    "dialogue_id": "0101Bad02_Narrative043",
+    "speaker": "[Narrative]",
+    "japanese_text": "不意に、エマは理解した。",
+    "chinese_text": "忽然间，艾玛理解了。"
+  },
+  {
+    "dialogue_id": "0101Bad02_Narrative044",
+    "speaker": "[Narrative]",
+    "japanese_text": "自分はみんなに、世界に嫌われている。こんなにも嫌われるような自分はきっと――",
+    "chinese_text": "自己正被所有人讨厌，自己正被世界讨厌。\n如此遭人讨厌的自己，肯定是——"
+  },
+  {
+    "dialogue_id": "0101Bad02_Narrative045",
+    "speaker": "[Narrative]",
+    "japanese_text": "死んだほうがいい。",
+    "chinese_text": "去死比较好。"
+  },
+  {
+    "dialogue_id": "0101Bad02_Ema030",
+    "speaker": "Ema",
+    "japanese_text": "…………。",
+    "chinese_text": "…………"
+  },
+  {
+    "dialogue_id": "0101Bad02_Narrative046",
+    "speaker": "[Narrative]",
+    "japanese_text": "手にした拷問器具をじっと見つめて、エマは笑みを浮かべた。",
+    "chinese_text": "艾玛盯着手上的拷问器具，\n露出了笑容。"
+  },
+  {
+    "dialogue_id": "0101Bad02_Narrative047",
+    "speaker": "[Narrative]",
+    "japanese_text": "先の鋭く尖った、鉄の棒――",
+    "chinese_text": "那是一根铁棒，其中一端锋利且尖锐——"
+  },
+  {
+    "dialogue_id": "0101Bad02_Ema031",
+    "speaker": "Ema",
+    "japanese_text": "ちょうどいいや。",
+    "chinese_text": "这不是正好吗。"
+  }
+]

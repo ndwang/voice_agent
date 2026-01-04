@@ -1,0 +1,362 @@
+[
+  {
+    "dialogue_id": "0101Adv22_Ema001",
+    "speaker": "Ema",
+    "japanese_text": "失礼しまーす……。",
+    "chinese_text": "不好意思打扰了……"
+  },
+  {
+    "dialogue_id": "0101Adv22_Narrative001",
+    "speaker": "[Narrative]",
+    "japanese_text": "夜の医務室はひっそりとしており、エマも自然に声を潜め、入室していく。",
+    "chinese_text": "夜晚的医务室静悄悄的。\n艾玛也自然地压低了音量，走进房间里。"
+  },
+  {
+    "dialogue_id": "0101Adv22_Narrative002",
+    "speaker": "[Narrative]",
+    "japanese_text": "アンアンのベッドにエマが近付くと、のそりと起き上がる気配がした。",
+    "chinese_text": "艾玛走到安安的床边时，\n感觉到床上有人正爬起身的动静。"
+  },
+  {
+    "dialogue_id": "0101Adv22_Ema002",
+    "speaker": "Ema",
+    "japanese_text": "あ、アンアンちゃん、起こしちゃった？",
+    "chinese_text": "啊，安安，我是不是把你吵醒了？"
+  },
+  {
+    "dialogue_id": "0101Adv22_AnAn001",
+    "speaker": "AnAn",
+    "japanese_text": "『なんのようだ』",
+    "chinese_text": "『你有什么事』"
+  },
+  {
+    "dialogue_id": "0101Adv22_Ema003",
+    "speaker": "Ema",
+    "japanese_text": "ええと、レイアちゃんが日中お見舞いに来たでしょ？その時、スマホを間違えて持っていっちゃったらしくって。",
+    "chinese_text": "呃，今天白天蕾雅不是来看望你了吗？\n那时她好像错拿了你的手机。"
+  },
+  {
+    "dialogue_id": "0101Adv22_Ema004",
+    "speaker": "Ema",
+    "japanese_text": "届けてほしいって。――はい、これ。",
+    "chinese_text": "所以她想让我把手机还你。\n——呐，给你。"
+  },
+  {
+    "dialogue_id": "0101Adv22_Narrative003",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマがスマホを差し出すと、アンアンはバッと奪い取る。エマは苦笑を漏らした。",
+    "chinese_text": "艾玛刚伸出手，安安就一下子把手机抢了过去。\n艾玛不禁苦笑了一下。"
+  },
+  {
+    "dialogue_id": "0101Adv22_Ema005",
+    "speaker": "Ema",
+    "japanese_text": "（ボクが嫌われてるのか、みんなにこういう態度なのか　どっちなんだろ……）",
+    "chinese_text": "（她这是讨厌我一个人呢，还是对所有人\n都是这副态度呢……）"
+  },
+  {
+    "dialogue_id": "0101Adv22_Ema006",
+    "speaker": "Ema",
+    "japanese_text": "じゃあボクは戻ろうかな。",
+    "chinese_text": "那我先回去咯。"
+  },
+  {
+    "dialogue_id": "0101Adv22_Narrative004",
+    "speaker": "[Narrative]",
+    "japanese_text": "用事は済ませたので、入口の方へと目を向ける。",
+    "chinese_text": "做完要做的事，\n艾玛便回过头来准备离开。"
+  },
+  {
+    "dialogue_id": "0101Adv22_Narrative005",
+    "speaker": "[Narrative]",
+    "japanese_text": "そこで、アンアンの手元のスマホがけたたましい音を立てはじめた。",
+    "chinese_text": "这时，安安的手机里\n传出一阵吵吵闹闹的声音。"
+  },
+  {
+    "dialogue_id": "0101Adv22_Narrative006",
+    "speaker": "[Narrative]",
+    "japanese_text": "聞こえてくるのは、どうやらココの声だ。",
+    "chinese_text": "那好像是可可的声音。"
+  },
+  {
+    "dialogue_id": "0101Adv22_Ema007",
+    "speaker": "Ema",
+    "japanese_text": "ああ、配信がはじまったんだ。ボクも見なきゃ。",
+    "chinese_text": "啊，直播开始了。\n我也要看一下才行。"
+  },
+  {
+    "dialogue_id": "0101Adv22_Narrative007",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマが少し焦った素振りを見せたことに気付いたのか、アンアンは自身のスマホを差し出してきた。",
+    "chinese_text": "安安注意到了艾玛有些焦急的神情，\n于是伸手向她递出了自己的手机。"
+  },
+  {
+    "dialogue_id": "0101Adv22_Ema008",
+    "speaker": "Ema",
+    "japanese_text": "（これは、一緒に見ていけってこと、かな？）",
+    "chinese_text": "（她的意思是，想让我陪她一起看完再走？）"
+  },
+  {
+    "dialogue_id": "0101Adv22_Ema009",
+    "speaker": "Ema",
+    "japanese_text": "（部屋に戻って見ようと思ったけど……　アンアンちゃんが好意を見せてくれるなんて、　滅多にないチャンスだ）",
+    "chinese_text": "（虽然我想回自己房间看啦……\n不过安安竟然对我展现了善意，\n这是个难得的机会）"
+  },
+  {
+    "dialogue_id": "0101Adv22_Ema010",
+    "speaker": "Ema",
+    "japanese_text": "ありがとう。じゃあ、ここで見せてもらうね。",
+    "chinese_text": "谢谢你，那我就和你一起看咯。"
+  },
+  {
+    "dialogue_id": "0101Adv22_Narrative008",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマは遠慮がちにベッドに腰掛け、アンアンのスマホを覗き込んだ。",
+    "chinese_text": "艾玛小心翼翼地坐在床边，\n把视线移到安安的手机上。"
+  },
+  {
+    "dialogue_id": "0101Adv22_Narrative009",
+    "speaker": "[Narrative]",
+    "japanese_text": "画面には、３人の少女たちが映っている。",
+    "chinese_text": "画面上出现了\n3名少女。"
+  },
+  {
+    "dialogue_id": "0101Adv22_Coco001",
+    "speaker": "Coco",
+    "japanese_text": "やっほぉ～ココたんだよ～！",
+    "chinese_text": "呀吼～我是可可碳～！"
+  },
+  {
+    "dialogue_id": "0101Adv22_Coco002",
+    "speaker": "Coco",
+    "japanese_text": "今日はなんと！ あの！芸能人、蓮見レイアとのコラボ実現回だよ～！",
+    "chinese_text": "今天我们竟然！迎来了！\n那位知名艺人莲见蕾雅，一起开联动台～！"
+  },
+  {
+    "dialogue_id": "0101Adv22_Leia001",
+    "speaker": "Leia",
+    "japanese_text": "はは、ずいぶんテンションが高いんだね。",
+    "chinese_text": "哈哈，你今天好兴奋啊。"
+  },
+  {
+    "dialogue_id": "0101Adv22_Miria001",
+    "speaker": "Miria",
+    "japanese_text": "あの……おじさんはなんで呼ばれてるのか……。",
+    "chinese_text": "请问……为什么要把大叔我喊来呢……"
+  },
+  {
+    "dialogue_id": "0101Adv22_Coco003",
+    "speaker": "Coco",
+    "japanese_text": "アンタはただの賑やかし！ ザコだし！",
+    "chinese_text": "你就是单纯用来暖场的！你就是个龙套！"
+  },
+  {
+    "dialogue_id": "0101Adv22_Miria002",
+    "speaker": "Miria",
+    "japanese_text": "ザコ……。",
+    "chinese_text": "龙套……"
+  },
+  {
+    "dialogue_id": "0101Adv22_Coco004",
+    "speaker": "Coco",
+    "japanese_text": "てかおじさんってなんだよ！どう見てもギャルじゃねーかよ！",
+    "chinese_text": "说来“大叔”又是演哪一出啦！\n你怎么看都是辣妹吧！"
+  },
+  {
+    "dialogue_id": "0101Adv22_Miria003",
+    "speaker": "Miria",
+    "japanese_text": "いや、その、おじさんはおじさんだから……こういうの慣れてなくて、あんま喋りかけないで……。",
+    "chinese_text": "不对，那个，大叔就是大叔啊……\n我不是很习惯这种场面，你不要老是跟我说话啦……"
+  },
+  {
+    "dialogue_id": "0101Adv22_Coco005",
+    "speaker": "Coco",
+    "japanese_text": "なんのために出てんだよ！！",
+    "chinese_text": "那你是来做什么的啊！！"
+  },
+  {
+    "dialogue_id": "0101Adv22_Narrative010",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマはくすりと笑ってしまう。彼女たちはどうやら、ラウンジで配信しているらしい。",
+    "chinese_text": "艾玛不禁笑出了声。\n看样子，她们应该是在会客厅直播的。"
+  },
+  {
+    "dialogue_id": "0101Adv22_Narrative011",
+    "speaker": "[Narrative]",
+    "japanese_text": "同接数はたった６。",
+    "chinese_text": "同时在线观众只有6人。"
+  },
+  {
+    "dialogue_id": "0101Adv22_Ema011",
+    "speaker": "Ema",
+    "japanese_text": "（ココちゃん、この同接数でよくテンションもつなあ）",
+    "chinese_text": "（在线观众才这么点，真佩服可可还能这么兴奋）"
+  },
+  {
+    "dialogue_id": "0101Adv22_Narrative012",
+    "speaker": "[Narrative]",
+    "japanese_text": "はしゃいでいるココは、レイアに芸までやらせようとする始末だった。",
+    "chinese_text": "结果，全程亢奋的可可\n竟想到让蕾雅表演杂技。"
+  },
+  {
+    "dialogue_id": "0101Adv22_Coco006",
+    "speaker": "Coco",
+    "japanese_text": "このリンゴを投げて、レイアにレイピアで受け止めてもらいま～す！",
+    "chinese_text": "接下来，我要把这颗苹果丢出去，\n而蕾雅就会用刺剑戳中它～！"
+  },
+  {
+    "dialogue_id": "0101Adv22_Leia002",
+    "speaker": "Leia",
+    "japanese_text": "え？ ちょっと、そんなの聞いてないよ？",
+    "chinese_text": "欸？等一下，我可没听说过要表演这个？"
+  },
+  {
+    "dialogue_id": "0101Adv22_Coco007",
+    "speaker": "Coco",
+    "japanese_text": "いいじゃんいいじゃん！ 絶対盛り上がるから！",
+    "chinese_text": "有什么不好的啦！肯定能炒热气氛的！"
+  },
+  {
+    "dialogue_id": "0101Adv22_Miria004",
+    "speaker": "Miria",
+    "japanese_text": "盛り上がるって……見てる人がこれだけじゃ……。",
+    "chinese_text": "炒热什么气氛啊……看直播的才几个人……"
+  },
+  {
+    "dialogue_id": "0101Adv22_Coco008",
+    "speaker": "Coco",
+    "japanese_text": "ザコは黙ってろ！",
+    "chinese_text": "龙套就给我闭嘴！"
+  },
+  {
+    "dialogue_id": "0101Adv22_Narrative013",
+    "speaker": "[Narrative]",
+    "japanese_text": "ココの懇願に負けて、結局レイアは投げたリンゴをレイピアで受け止める芸をやらされていた。",
+    "chinese_text": "蕾雅推脱不掉可可的恳求，最终还是表演了\n用刺剑戳中抛出苹果的杂技。"
+  },
+  {
+    "dialogue_id": "0101Adv22_Narrative014",
+    "speaker": "[Narrative]",
+    "japanese_text": "あっさり成功させてしまうところは、さすがレイアだ。",
+    "chinese_text": "真不愧是蕾雅，\n她轻易地就表演成功了。"
+  },
+  {
+    "dialogue_id": "0101Adv22_Narrative015",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマもアンアンも、すっかり夢中になって配信を見ていた。",
+    "chinese_text": "艾玛和安安也\n看直播看得很入迷。"
+  },
+  {
+    "dialogue_id": "0101Adv22_Narrative016",
+    "speaker": "[Narrative]",
+    "japanese_text": "ふと、エマの顔が近いことに気付いたのか、アンアンはぷいっとそっぽを向いてしまう。",
+    "chinese_text": "忽然，安安发现艾玛的脸靠得很近，\n于是便一下子把头转到另一边。"
+  },
+  {
+    "dialogue_id": "0101Adv22_Narrative017",
+    "speaker": "[Narrative]",
+    "japanese_text": "――と。",
+    "chinese_text": "——这时。"
+  },
+  {
+    "dialogue_id": "0101Adv22_Narrative018",
+    "speaker": "[Narrative]",
+    "japanese_text": "『皆さん、間もなく就寝時間です』",
+    "chinese_text": "『各位，马上就到就寝时间了』"
+  },
+  {
+    "dialogue_id": "0101Adv22_Narrative019",
+    "speaker": "[Narrative]",
+    "japanese_text": "『外出禁止時間となりますので、　速やかに房へお戻りください』",
+    "chinese_text": "『之后属于禁止外出时间，\n请迅速回到牢房内』"
+  },
+  {
+    "dialogue_id": "0101Adv22_Narrative020",
+    "speaker": "[Narrative]",
+    "japanese_text": "配信の途中で、ゴクチョーの通知が入ってしまった。",
+    "chinese_text": "直播还未结束，\n就收到了典狱长的通知。"
+  },
+  {
+    "dialogue_id": "0101Adv22_Narrative021",
+    "speaker": "[Narrative]",
+    "japanese_text": "スマホに映るレイアは肩をすくめる。",
+    "chinese_text": "屏幕上的蕾雅耸了耸肩。"
+  },
+  {
+    "dialogue_id": "0101Adv22_Leia003",
+    "speaker": "Leia",
+    "japanese_text": "今日はこれで時間切れのようだ。みんなおやすみ。",
+    "chinese_text": "今天就到此为止了。\n各位晚安。"
+  },
+  {
+    "dialogue_id": "0101Adv22_Coco009",
+    "speaker": "Coco",
+    "japanese_text": "また見てね～！ 拡散宣伝よろしくぅ！",
+    "chinese_text": "记得再来看哦～！请多多转发推介！"
+  },
+  {
+    "dialogue_id": "0101Adv22_Miria005",
+    "speaker": "Miria",
+    "japanese_text": "このリンゴは、スタッフが美味しく食べるので、ちゃんとしまっておきますね～……。",
+    "chinese_text": "工作人员之后会好好品尝这颗苹果，\n我就把它好好收起来咯～……"
+  },
+  {
+    "dialogue_id": "0101Adv22_Narrative022",
+    "speaker": "[Narrative]",
+    "japanese_text": "３人が手を振って、ぷつりと配信が終了し、画面は暗くなった。",
+    "chinese_text": "三人挥起手来，然后直播直接断掉，\n画面一下子变黑了。"
+  },
+  {
+    "dialogue_id": "0101Adv22_Ema012",
+    "speaker": "Ema",
+    "japanese_text": "……っと、ボクも部屋に戻らなきゃ！",
+    "chinese_text": "……好了，我也要回房间了！"
+  },
+  {
+    "dialogue_id": "0101Adv22_Ema013",
+    "speaker": "Ema",
+    "japanese_text": "アンアンちゃん、見せてくれてありがとね！おやすみ！",
+    "chinese_text": "安安，谢谢你给我看手机！\n晚安！"
+  },
+  {
+    "dialogue_id": "0101Adv22_Narrative023",
+    "speaker": "[Narrative]",
+    "japanese_text": "時間内に房内に入っていないと、規則違反になってしまう。",
+    "chinese_text": "如果超时未回到房间，\n就会违反规定。"
+  },
+  {
+    "dialogue_id": "0101Adv22_Narrative024",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマは慌ただしく医務室を後にした。",
+    "chinese_text": "于是艾玛急匆匆地离开了医务室。"
+  },
+  {
+    "dialogue_id": "0101Adv22_Narrative025",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマは滑り込むように自分の房に入り、数分後には各監房の施錠音が響いた。",
+    "chinese_text": "艾玛飞快地钻回自己的房间，\n过了几分钟后，响起了各个牢房的上锁音。"
+  },
+  {
+    "dialogue_id": "0101Adv22_Ema014",
+    "speaker": "Ema",
+    "japanese_text": "ギリギリセーフ……。",
+    "chinese_text": "安全踩点回到家……"
+  },
+  {
+    "dialogue_id": "0101Adv22_Narrative026",
+    "speaker": "[Narrative]",
+    "japanese_text": "ドサリとベッドに倒れこむ。",
+    "chinese_text": "然后她一头倒在床上。"
+  },
+  {
+    "dialogue_id": "0101Adv22_Ema015",
+    "speaker": "Ema",
+    "japanese_text": "（レイアちゃんたちも、　走って自分の部屋に駆けこんだだろうな）",
+    "chinese_text": "（蕾雅她们也是\n跑步回到自己房间的吧）"
+  },
+  {
+    "dialogue_id": "0101Adv22_Narrative027",
+    "speaker": "[Narrative]",
+    "japanese_text": "今日はずいぶん疲れてしまった。エマはすぐに目を閉じ、深い眠りの世界へと落ちていった。",
+    "chinese_text": "今天已经相当累了。\n艾玛闭上眼睛，马上就深深堕入了\n梦中世界。"
+  }
+]

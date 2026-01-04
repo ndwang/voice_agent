@@ -1,0 +1,458 @@
+[
+  {
+    "dialogue_id": "0101Adv24_Narrative001",
+    "speaker": "[Narrative]",
+    "japanese_text": "ラウンジに集った少女たちは、１１人。誰もが、どこか気まずそうに目を合わさないようにしている。",
+    "chinese_text": "集合到会客厅的少女共有11位。\n每个人都略显尴尬地回避着其他人的视线。"
+  },
+  {
+    "dialogue_id": "0101Adv24_Narrative002",
+    "speaker": "[Narrative]",
+    "japanese_text": "そんな中、エマの隣に立ったのは、シェリーとメルルの２人だった。",
+    "chinese_text": "站在艾玛身旁的是\n雪莉和梅露露。"
+  },
+  {
+    "dialogue_id": "0101Adv24_Sherry001",
+    "speaker": "Sherry",
+    "japanese_text": "エマさん、大丈夫ですか？今にも倒れそうですけど……。",
+    "chinese_text": "艾玛，你没事吧？\n看你现在好像随时会昏倒的样子……"
+  },
+  {
+    "dialogue_id": "0101Adv24_Meruru001",
+    "speaker": "Meruru",
+    "japanese_text": "ソ、ソファーに座った方が……。",
+    "chinese_text": "还、还是在沙发上坐着会比较好……"
+  },
+  {
+    "dialogue_id": "0101Adv24_Narrative003",
+    "speaker": "[Narrative]",
+    "japanese_text": "この状況下で心配してくれる彼女らに、エマはなんとか笑顔を作る。",
+    "chinese_text": "对于陷入这种状况也还在关心她的二位，\n艾玛努力挤出了一个笑容。"
+  },
+  {
+    "dialogue_id": "0101Adv24_Ema001",
+    "speaker": "Ema",
+    "japanese_text": "大丈夫だよ。ショックなのは、みんなきっとおんなじだろうし……。",
+    "chinese_text": "我没事的。震惊的不只有我，\n大家肯定也一样……"
+  },
+  {
+    "dialogue_id": "0101Adv24_Sherry002",
+    "speaker": "Sherry",
+    "japanese_text": "犯人以外は。",
+    "chinese_text": "除了凶手之外。"
+  },
+  {
+    "dialogue_id": "0101Adv24_Ema002",
+    "speaker": "Ema",
+    "japanese_text": "……っ",
+    "chinese_text": "……"
+  },
+  {
+    "dialogue_id": "0101Adv24_Ema003",
+    "speaker": "Ema",
+    "japanese_text": "（……この中に、ノアちゃんを殺した犯人がいる？　そんな、まさか）",
+    "chinese_text": "（……我们之中有杀害诺亚的凶手？\n怎么可能呢）"
+  },
+  {
+    "dialogue_id": "0101Adv24_Narrative004",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマの視線は、ラウンジにいる全員の様子を窺うように彷徨う。",
+    "chinese_text": "艾玛的视线摇摆不定，\n想要悄悄观察大家的反应。"
+  },
+  {
+    "dialogue_id": "0101Adv24_Narrative005",
+    "speaker": "[Narrative]",
+    "japanese_text": "誰もが青ざめ、信じられないといった表情だ。",
+    "chinese_text": "所有人都脸色苍白，\n满脸写着难以置信。"
+  },
+  {
+    "dialogue_id": "0101Adv24_Ema004",
+    "speaker": "Ema",
+    "japanese_text": "犯人なんて、いるわけないよ……。",
+    "chinese_text": "怎么可能，会有凶手……"
+  },
+  {
+    "dialogue_id": "0101Adv24_Narrative006",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマの呟きは、どこか空虚に響いた。",
+    "chinese_text": "艾玛的自言自语有些苍白无力。"
+  },
+  {
+    "dialogue_id": "0101Adv24_Narrative007",
+    "speaker": "[Narrative]",
+    "japanese_text": "そこで、天井近くからの羽ばたき音とともに、ゴクチョーが現れる。",
+    "chinese_text": "这时，随着天花板边上传来一阵翅膀拍动的声音，\n典狱长现身了。"
+  },
+  {
+    "dialogue_id": "0101Adv24_Warden001",
+    "speaker": "Warden",
+    "japanese_text": "はぁ……殺人事件……起きちゃいましたね……。",
+    "chinese_text": "唉……结果还是\n发生了凶杀案……"
+  },
+  {
+    "dialogue_id": "0101Adv24_Warden002",
+    "speaker": "Warden",
+    "japanese_text": "今夜、【魔女裁判】を開廷します。",
+    "chinese_text": "今晚，将会举行【魔女审判】。"
+  },
+  {
+    "dialogue_id": "0101Adv24_Warden003",
+    "speaker": "Warden",
+    "japanese_text": "今いる囚人の中から必ず殺人犯を特定してください。その者は、【魔女】として処刑するので。",
+    "chinese_text": "请各位务必从在押囚犯当中锁定杀人凶手的身份。\n选中的人将以【魔女】的身份被处以死刑。"
+  },
+  {
+    "dialogue_id": "0101Adv24_Warden004",
+    "speaker": "Warden",
+    "japanese_text": "やすやすと死なない魔女の活動を確実に沈黙させる方法での処刑です。かなり酷いこととか……しちゃうので。",
+    "chinese_text": "我们会用特殊方法行刑，\n令不会轻易死亡的魔女永久地安息。\n那会是非常……非常残酷的方法。"
+  },
+  {
+    "dialogue_id": "0101Adv24_Warden005",
+    "speaker": "Warden",
+    "japanese_text": "また、囚人全員への告知ですが、特定ができなかった場合は、全員処刑とします。",
+    "chinese_text": "另外，有件事要向全体囚犯通告。\n如果没有选出凶手，将会对所有人处刑。"
+  },
+  {
+    "dialogue_id": "0101Adv24_Narrative008",
+    "speaker": "[Narrative]",
+    "japanese_text": "簡単に言ってきたあまりにおぞましい宣言に、少女たちはざわついた。",
+    "chinese_text": "听到典狱长轻松说出十分可怕的宣言，\n少女们开始躁动起来。"
+  },
+  {
+    "dialogue_id": "0101Adv24_Warden006",
+    "speaker": "Warden",
+    "japanese_text": "私としても仕事が増えるんで避けたいんですが、もともと皆さんは、危険人物として捕らえられているので……。",
+    "chinese_text": "虽然我很不想增加无谓的工作，\n不过各位本来就是\n以危险分子的身份囚禁在此……"
+  },
+  {
+    "dialogue_id": "0101Adv24_Warden007",
+    "speaker": "Warden",
+    "japanese_text": "ただ……主が、いや……まぁこの牢屋敷側の気持ちとしては、そんなのはあまりにかわいそうだと思っているんですよ。",
+    "chinese_text": "只是……主人说……不对，\n总之呢，以我们监牢管理方的感受而言，\n要是全员处死就太可怜了。"
+  },
+  {
+    "dialogue_id": "0101Adv24_Warden008",
+    "speaker": "Warden",
+    "japanese_text": "だから投票で確実に【魔女】を選んでもらって、【魔女】だけを排除しましょう。",
+    "chinese_text": "所以呢，各位一定要\n选出一位【魔女】，\n只把【魔女】做掉就好了。"
+  },
+  {
+    "dialogue_id": "0101Adv24_Warden009",
+    "speaker": "Warden",
+    "japanese_text": "全員処刑措置は、あくまで【魔女】を選出できなかった場合にだけ適用します。",
+    "chinese_text": "说到底，只有在\n无法选定【魔女】的情况下\n才会触发全员处死的规定。"
+  },
+  {
+    "dialogue_id": "0101Adv24_Warden010",
+    "speaker": "Warden",
+    "japanese_text": "がんばって犯人を特定してくださいね……犯人を見つければ、生き残れるので……まあ、あの、前向きに楽しんでください。",
+    "chinese_text": "请各位努力找到凶手哦……\n只要找到凶手，就能活下来……\n哎，总之，大家乐观一点享受当下的状况吧。"
+  },
+  {
+    "dialogue_id": "0101Adv24_Warden011",
+    "speaker": "Warden",
+    "japanese_text": "あ、あと捜査中に不正がされないようにみだりに遺体に触れたりしないでください。現場はそのまま保持しておいてくださいね。",
+    "chinese_text": "啊，还有，为了避免搜查期间有人做手脚，\n请大家不要随意触碰遗体。\n现场也请保持原状不动。"
+  },
+  {
+    "dialogue_id": "0101Adv24_Warden012",
+    "speaker": "Warden",
+    "japanese_text": "では捜査をお願いします。あっ！ どうせ難しいので、無理はしないでくださいね……。わからなくても皆さんが死ぬだけなので……。",
+    "chinese_text": "那么，就拜托大家进行搜查了。\n啊！不过搜查也挺难的，大家不要勉强自己哦……\n搞不懂的话，各位只要去死就好了……"
+  },
+  {
+    "dialogue_id": "0101Adv24_Warden013",
+    "speaker": "Warden",
+    "japanese_text": "期限は魔女裁判開廷のアナウンスが入るまでです。業務中なら万が一気が向けば質問も答えますね……たぶん。",
+    "chinese_text": "搜查期限到魔女审判开庭广播为止。\n只要我还没下班，视乎我的心情，也会回答各位的提问……\n或许吧。"
+  },
+  {
+    "dialogue_id": "0101Adv24_Narrative009",
+    "speaker": "[Narrative]",
+    "japanese_text": "一方的な話を終え、ゴクチョーは去っていった。",
+    "chinese_text": "典狱长结束了自说自话后\n便离开了。"
+  },
+  {
+    "dialogue_id": "0101Adv24_Narrative010",
+    "speaker": "[Narrative]",
+    "japanese_text": "裁判にて、誰かを選ばなければいけない。エマは全身の血の気が引いたようだった。",
+    "chinese_text": "必须要在审判中选一个人去死。\n艾玛感到自己全身手脚冰凉。"
+  },
+  {
+    "dialogue_id": "0101Adv24_Ema005",
+    "speaker": "Ema",
+    "japanese_text": "（今日中に犯人を特定しなきゃ、全員処刑……？　そんな、時間がなさすぎる！）",
+    "chinese_text": "（如果不能在今天之内找到凶手，就要全体处死……？\n时间也太不够用了！）"
+  },
+  {
+    "dialogue_id": "0101Adv24_Ema006",
+    "speaker": "Ema",
+    "japanese_text": "（いやそれよりも、　この中の誰かが殺人を犯してるなんて、信じたくない！）",
+    "chinese_text": "（而且，我不愿意相信\n我们之中竟有人行凶杀人！）"
+  },
+  {
+    "dialogue_id": "0101Adv24_Ema007",
+    "speaker": "Ema",
+    "japanese_text": "（でも、誰かがノアちゃんを殺したんだ……。　ひどすぎる……許せない……）",
+    "chinese_text": "（可是，诺亚确实是被人杀死的……\n太过分了……无法原谅……）"
+  },
+  {
+    "dialogue_id": "0101Adv24_Narrative011",
+    "speaker": "[Narrative]",
+    "japanese_text": "ラウンジ内に、気まずい沈黙が落ちていた。",
+    "chinese_text": "会客厅充斥着一股尴尬的沉默。"
+  },
+  {
+    "dialogue_id": "0101Adv24_Narrative012",
+    "speaker": "[Narrative]",
+    "japanese_text": "少女たちは、お互いの腹を探り合うように誰もが視線を彷徨わせている。",
+    "chinese_text": "像是在猜测他人的想法一样，\n每个人的视线都游离不定。"
+  },
+  {
+    "dialogue_id": "0101Adv24_Narrative013",
+    "speaker": "[Narrative]",
+    "japanese_text": "数日間、共同生活をしてきた少女たち。",
+    "chinese_text": "少女们度过的共同生活仅仅数日。"
+  },
+  {
+    "dialogue_id": "0101Adv24_Narrative014",
+    "speaker": "[Narrative]",
+    "japanese_text": "マーゴが言っていたように、お互いのことをほとんど知らない。",
+    "chinese_text": "正如玛格所说，\n大家对彼此都不甚熟悉。"
+  },
+  {
+    "dialogue_id": "0101Adv24_Narrative015",
+    "speaker": "[Narrative]",
+    "japanese_text": "その中で信じ合うことは、とても、とても難しい。",
+    "chinese_text": "要在这种情况下互相信任，\n真的是非常，非常困难。"
+  },
+  {
+    "dialogue_id": "0101Adv24_Narrative016",
+    "speaker": "[Narrative]",
+    "japanese_text": "やがてレイアが室内の中央に立つ。全員の注目は、レイアへと集まった。",
+    "chinese_text": "之后，蕾雅站在室内正中心。\n所有人的目光集中在她身上。"
+  },
+  {
+    "dialogue_id": "0101Adv24_Leia001",
+    "speaker": "Leia",
+    "japanese_text": "こんな事態になってしまい、本当に辛いと思うが……私は、犯人を特定したいと思う。",
+    "chinese_text": "发生这样的事，我真的很难受……\n但，我想要找出凶手。"
+  },
+  {
+    "dialogue_id": "0101Adv24_Margo001",
+    "speaker": "Margo",
+    "japanese_text": "賛成よ。私もいわれない理由で選ばれて死にたくないもの。",
+    "chinese_text": "我同意。\n我也不想蒙冤被判死刑。"
+  },
+  {
+    "dialogue_id": "0101Adv24_Margo002",
+    "speaker": "Margo",
+    "japanese_text": "殺人事件の犯人を、きちんと【魔女】として裁いてもらうべきだと思うわ。",
+    "chinese_text": "这起凶杀案的凶手，\n应当以【魔女】的身份老实接受惩罚。"
+  },
+  {
+    "dialogue_id": "0101Adv24_Leia002",
+    "speaker": "Leia",
+    "japanese_text": "ああ、みんな同じ気持ちだと思う。時間はあまりない。手分けして捜査をはじめよう。",
+    "chinese_text": "嗯，我相信大家都是这个想法。\n没多少时间了，我们分头去搜查吧。"
+  },
+  {
+    "dialogue_id": "0101Adv24_Narrative017",
+    "speaker": "[Narrative]",
+    "japanese_text": "出入口に向かって歩きだす、レイアとマーゴの２人。",
+    "chinese_text": "蕾雅和玛格二人\n正准备离开。"
+  },
+  {
+    "dialogue_id": "0101Adv24_Narrative018",
+    "speaker": "[Narrative]",
+    "japanese_text": "慌てたのはエマだ。",
+    "chinese_text": "艾玛慌张了起来。"
+  },
+  {
+    "dialogue_id": "0101Adv24_Ema008",
+    "speaker": "Ema",
+    "japanese_text": "ま、待ってレイアちゃん！誰が犯人かわかったら、それでその子を処刑させるの！？",
+    "chinese_text": "等、等一下，蕾雅！\n只要知道谁是凶手，就要把她送上处刑台吗！？"
+  },
+  {
+    "dialogue_id": "0101Adv24_Narrative019",
+    "speaker": "[Narrative]",
+    "japanese_text": "レイアはエマの横をすれ違っていく。その表情は、辛そうに歪んでいた。",
+    "chinese_text": "蕾雅从艾玛身边走过。\n她的脸因难受扭作一团。"
+  },
+  {
+    "dialogue_id": "0101Adv24_Leia003",
+    "speaker": "Leia",
+    "japanese_text": "みんなを助けるためだ。疑わしい人物も、目星がついている。",
+    "chinese_text": "这是为了帮助大家。\n而且我心里已经有了可疑人选。"
+  },
+  {
+    "dialogue_id": "0101Adv24_Ema009",
+    "speaker": "Ema",
+    "japanese_text": "え……！？",
+    "chinese_text": "欸……！？"
+  },
+  {
+    "dialogue_id": "0101Adv24_Narrative020",
+    "speaker": "[Narrative]",
+    "japanese_text": "レイアの言葉に、エマは衝撃で立ち尽くす。",
+    "chinese_text": "听到蕾雅的话后，\n艾玛惊得呆住了。"
+  },
+  {
+    "dialogue_id": "0101Adv24_Narrative021",
+    "speaker": "[Narrative]",
+    "japanese_text": "レイアの眼差しは、ハンナへと向けられていた。",
+    "chinese_text": "此时蕾雅的眼神，\n指向了汉娜。"
+  },
+  {
+    "dialogue_id": "0101Adv24_Leia004",
+    "speaker": "Leia",
+    "japanese_text": "遠野ハンナ。――キミが、城ケ崎ノアを殺したんじゃないか？",
+    "chinese_text": "远野汉娜。\n——你就是杀害了城崎诺亚的凶手，对不对？"
+  },
+  {
+    "dialogue_id": "0101Adv24_Hanna001",
+    "speaker": "Hanna",
+    "japanese_text": "なっ……。",
+    "chinese_text": "什么……"
+  },
+  {
+    "dialogue_id": "0101Adv24_Leia005",
+    "speaker": "Leia",
+    "japanese_text": "まだしっかり調べていないが、あの現場は足跡が残っていなかった。",
+    "chinese_text": "虽然我还没仔细调查，\n但是现场没有留下足迹。"
+  },
+  {
+    "dialogue_id": "0101Adv24_Leia006",
+    "speaker": "Leia",
+    "japanese_text": "つまり……浮ける魔法を持つ者が犯行に及んだんじゃないか？",
+    "chinese_text": "也就是说……只有拥有飘浮魔法的人\n才有办法作案，我没说错吧？"
+  },
+  {
+    "dialogue_id": "0101Adv24_Ema010",
+    "speaker": "Ema",
+    "japanese_text": "ハンナちゃんが犯人なわけない！",
+    "chinese_text": "汉娜她不可能是凶手！"
+  },
+  {
+    "dialogue_id": "0101Adv24_Leia007",
+    "speaker": "Leia",
+    "japanese_text": "……そう思うなら、キミたちも捜査を進めたまえ。今夜には全てがはっきりする。",
+    "chinese_text": "……你如果是这么想的话，就去搜查吧。\n我今晚会让一切水落石出。"
+  },
+  {
+    "dialogue_id": "0101Adv24_Narrative022",
+    "speaker": "[Narrative]",
+    "japanese_text": "立ち去るレイアの表情は険しかった。",
+    "chinese_text": "蕾雅一脸阴沉地走出了会客厅。"
+  },
+  {
+    "dialogue_id": "0101Adv24_Ema011",
+    "speaker": "Ema",
+    "japanese_text": "（みんなを助けたかったら、誰かを魔女にしなくちゃいけない……　だからレイアちゃんは、シビアになってるんだ……）",
+    "chinese_text": "（因为想帮助大家，她必须要选某个人做魔女……\n所以蕾雅她也变得相当冷酷……）"
+  },
+  {
+    "dialogue_id": "0101Adv24_Ema012",
+    "speaker": "Ema",
+    "japanese_text": "（わかるけど、でも、ハンナちゃんを疑うなんて！）",
+    "chinese_text": "（虽然我懂她的想法，可是，我怎么可以怀疑汉娜！）"
+  },
+  {
+    "dialogue_id": "0101Adv24_Narrative023",
+    "speaker": "[Narrative]",
+    "japanese_text": "ココ、ナノカ、アリサもそれぞれが勝手にラウンジを出ていく。",
+    "chinese_text": "可可、奈叶香、亚里沙三人\n也各自走出了会客厅。"
+  },
+  {
+    "dialogue_id": "0101Adv24_Narrative024",
+    "speaker": "[Narrative]",
+    "japanese_text": "ソファーに座っているアンアンの隣には、メルルが心配そうに寄り添っている。",
+    "chinese_text": "安安坐在沙发上，梅露露一脸担心地\n坐在她的身旁。"
+  },
+  {
+    "dialogue_id": "0101Adv24_Meruru002",
+    "speaker": "Meruru",
+    "japanese_text": "あの、私アンアンさんを医務室に連れていきます。アンアンさんは、とても捜査なんてできる状態じゃ……。",
+    "chinese_text": "那，我就带安安小姐去医务室了。\n以安安小姐现在的情况，她根本没法参加搜查……"
+  },
+  {
+    "dialogue_id": "0101Adv24_Narrative025",
+    "speaker": "[Narrative]",
+    "japanese_text": "ノアの死体を最初に見たアンアンは、ショックが大きいのか青ざめて震えていた。",
+    "chinese_text": "安安是第一个发现诺亚的尸体的人。\n事情造成的冲击太大，她现在脸色煞白，身体还在不断颤抖着。"
+  },
+  {
+    "dialogue_id": "0101Adv24_Ema013",
+    "speaker": "Ema",
+    "japanese_text": "そうだね……お願いできると助かる。",
+    "chinese_text": "是啊……希望你可以好好照顾她。"
+  },
+  {
+    "dialogue_id": "0101Adv24_Narrative026",
+    "speaker": "[Narrative]",
+    "japanese_text": "メルルに支えられ、アンアンたちも出ていった。",
+    "chinese_text": "梅露露搀扶着安安走出去了。"
+  },
+  {
+    "dialogue_id": "0101Adv24_Narrative027",
+    "speaker": "[Narrative]",
+    "japanese_text": "残されたのは、エマとシェリー、そしてハンナの３人だった。",
+    "chinese_text": "留在原地的只剩\n艾玛、雪莉和汉娜三人。"
+  },
+  {
+    "dialogue_id": "0101Adv24_Narrative028",
+    "speaker": "[Narrative]",
+    "japanese_text": "ハンナは唇を噛み、俯いていた。よっぽど悔しいのか、涙目になっている。",
+    "chinese_text": "汉娜正低头咬着嘴唇。\n她似乎相当难受，两只眼睛都是湿乎乎的。"
+  },
+  {
+    "dialogue_id": "0101Adv24_Ema014",
+    "speaker": "Ema",
+    "japanese_text": "ハンナちゃん……。",
+    "chinese_text": "汉娜……"
+  },
+  {
+    "dialogue_id": "0101Adv24_Sherry003",
+    "speaker": "Sherry",
+    "japanese_text": "探偵の出番ですねっ！真犯人を見つけて、ハンナさんの疑いを晴らしましょう！",
+    "chinese_text": "是时候该侦探出马了！\n我们一起去找到真凶，洗刷汉娜的冤屈吧！"
+  },
+  {
+    "dialogue_id": "0101Adv24_Narrative029",
+    "speaker": "[Narrative]",
+    "japanese_text": "シェリーが明るく言い放ったことで、エマはほっと表情を緩ませた。",
+    "chinese_text": "雪莉充满干劲地说道。\n艾玛受到感染，表情也变得缓和些了。"
+  },
+  {
+    "dialogue_id": "0101Adv24_Ema015",
+    "speaker": "Ema",
+    "japanese_text": "そ、そうだよ。ハンナちゃんは犯人じゃない。処刑なんて、絶対させない！",
+    "chinese_text": "对、对啊，汉娜才不是凶手。\n绝对不能让她被处刑！"
+  },
+  {
+    "dialogue_id": "0101Adv24_Ema016",
+    "speaker": "Ema",
+    "japanese_text": "ボクたちで、真犯人を探そう！",
+    "chinese_text": "就靠我们找出真凶吧！"
+  },
+  {
+    "dialogue_id": "0101Adv24_Hanna002",
+    "speaker": "Hanna",
+    "japanese_text": "……そうね、絶対に犯人を見つけましょう。",
+    "chinese_text": "……说得对，一定要找到凶手。"
+  },
+  {
+    "dialogue_id": "0101Adv24_Narrative030",
+    "speaker": "[Narrative]",
+    "japanese_text": "泣きそうになっているハンナが、ようやく顔を上げてくれた。",
+    "chinese_text": "几乎要哭出来的汉娜，\n也终于抬起了头。"
+  },
+  {
+    "dialogue_id": "0101Adv24_Narrative031",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマたちは勢いづき、城ケ崎ノア殺人事件の捜査へと乗り出すこととなった。",
+    "chinese_text": "艾玛她们乘着这股气势，\n开始参与城崎诺亚遇害一案的搜查。"
+  }
+]

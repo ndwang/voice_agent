@@ -1,0 +1,656 @@
+[
+  {
+    "dialogue_id": "0101Trial03_Margo001",
+    "speaker": "Margo",
+    "japanese_text": "ノアちゃんの死体の状況を思い出して欲しいのだけど……。",
+    "chinese_text": "请大家\n回想一下\n诺亚尸体的\n状况……"
+  },
+  {
+    "dialogue_id": "0101Trial03_Margo002",
+    "speaker": "Margo",
+    "japanese_text": "その死体はまるで、真っ白なキャンバスに自分を蝶と見立てたかのように横たわっていたわ。",
+    "chinese_text": "现场是一幅\n纯白色的画布，\n而她尸体的摆放位置\n仿佛在诉说，她就是那只蝴蝶。"
+  },
+  {
+    "dialogue_id": "0101Trial03_Margo003",
+    "speaker": "Margo",
+    "japanese_text": "あの子は自分の肉体を最期の作品の画材として使った……そうは考えられないかしら？",
+    "chinese_text": "她将自己的身体\n用作她最终作品的\n画具……\n这样子想是不是就说得通了呢？"
+  },
+  {
+    "dialogue_id": "0101Trial03_Alisa001",
+    "speaker": "Alisa",
+    "japanese_text": "……そんなこと、ありえんのか？",
+    "chinese_text": "这……\n真的说得通吗？"
+  },
+  {
+    "dialogue_id": "0101Trial03_Margo004",
+    "speaker": "Margo",
+    "japanese_text": "……心が疲弊してしまった天才芸術家のノアちゃんは凶器を手にとって自らの胸を貫いたの。",
+    "chinese_text": "……内心疲惫不堪的\n天才艺术家诺亚，\n选择拿起凶器\n刺穿自己的心脏。"
+  },
+  {
+    "dialogue_id": "0101Trial03_Margo005",
+    "speaker": "Margo",
+    "japanese_text": "そして傷口から血が噴き出て、それはあらかじめ塗料で塗られていた部屋を真っ赤に染めた……。",
+    "chinese_text": "接着，\n从伤口处喷出了血液，\n将事先涂满颜料的房间\n染成一片通红……"
+  },
+  {
+    "dialogue_id": "0101Trial03_Margo006",
+    "speaker": "Margo",
+    "japanese_text": "そうしてノアちゃんは、一枚の絵を完成させたのよ。自分の人生最後の遺作を……。",
+    "chinese_text": "然后诺亚她\n完成了\n一幅绘画。\n那就是她人生\n最后的遗作……"
+  },
+  {
+    "dialogue_id": "0101Trial03_Margo007",
+    "speaker": "Margo",
+    "japanese_text": "美しい自死。そう考えればすべての辻褄が合うわ。",
+    "chinese_text": "多么美丽的自杀。\n这么想的话，\n一切都说得通了。"
+  },
+  {
+    "dialogue_id": "0101Trial03_Margo008",
+    "speaker": "Margo",
+    "japanese_text": "あの部屋の状況も、全てノアちゃんが作り上げた芸術作品だったのよ。",
+    "chinese_text": "那房间内的状况，\n也全都是诺亚她亲手制作的\n艺术作品的一部分哦。"
+  },
+  {
+    "dialogue_id": "0101Trial03_Sherry001",
+    "speaker": "Sherry",
+    "japanese_text": "……ちょっと待ってください。ノアさんの死体の近くには、凶器と思われる【矢】が落ちていました。",
+    "chinese_text": "……等一下。\n疑似凶器的\n那个【箭矢】\n掉落在诺亚的尸体附近。"
+  },
+  {
+    "dialogue_id": "0101Trial03_Sherry002",
+    "speaker": "Sherry",
+    "japanese_text": "普通に考えるなら、自分で刺したというよりも【撃たれた】と考えるのが自然じゃありませんか？",
+    "chinese_text": "按常理想，\n不是她自己刺伤自己，\n而是被人【射中】了，\n这样想才更自然，不是吗？"
+  },
+  {
+    "dialogue_id": "0101Trial03_Margo009",
+    "speaker": "Margo",
+    "japanese_text": "あら、そうとも限らないんじゃない？",
+    "chinese_text": "哎呀，那可说不定哦？"
+  },
+  {
+    "dialogue_id": "0101Trial03_Margo010",
+    "speaker": "Margo",
+    "japanese_text": "自らの手で突き刺す事ぐらいできるでしょう。それとも何かそうではない証拠でもあるのかしら？",
+    "chinese_text": "亲手刺伤自己这么简单的事，\n她当然能做到啊。\n还是说，\n你有证据\n能否定这个主张吗？"
+  },
+  {
+    "dialogue_id": "0101Trial03_Leia001",
+    "speaker": "Leia",
+    "japanese_text": "……たしかにこのような監獄生活では、多少おかしくなっても仕方ないとは思うけどね。",
+    "chinese_text": "……我觉得，\n过着这样的监狱生活，\n思考变得不太正常\n也无可厚非。"
+  },
+  {
+    "dialogue_id": "0101Trial03_Hanna001",
+    "speaker": "Hanna",
+    "japanese_text": "心の調子を崩してしまっていたなら……ありえないとも言い切れませんわ……。",
+    "chinese_text": "如果她的内心\n已经崩溃了……\n很难说\n一切完全没可能……"
+  },
+  {
+    "dialogue_id": "0101Trial03_Ema001",
+    "speaker": "Ema",
+    "japanese_text": "（ノアちゃんがどうやって死んだのか……。　ノアちゃんの事については　わからない事も多いかもしれない……）",
+    "chinese_text": "（诺亚究竟是怎么死的呢……\n她还有很多事情\n我们根本都不清楚……）"
+  },
+  {
+    "dialogue_id": "0101Trial03_Meruru001",
+    "speaker": "Meruru",
+    "japanese_text": "……エマさん。私たちにわかることは、限られています。当たり前ですが、わからないことはわからないんです。",
+    "chinese_text": "……艾玛小姐，你听我讲。\n我们目前知道的事是有限的。\n不知道的事情就是不知道，这是理所当然的。"
+  },
+  {
+    "dialogue_id": "0101Trial03_Meruru002",
+    "speaker": "Meruru",
+    "japanese_text": "なら……議論すべきなのは、【今わかっている事】だと思います。",
+    "chinese_text": "那么，我想……我们应该讨论的是\n【现在已经知道的事情】才对。"
+  },
+  {
+    "dialogue_id": "0101Trial03_Ema002",
+    "speaker": "Ema",
+    "japanese_text": "うん……！ そうだね！",
+    "chinese_text": "嗯……！你说得对！"
+  },
+  {
+    "dialogue_id": "0101Trial03_Ema003",
+    "speaker": "Ema",
+    "japanese_text": "（……もう一度、魔女図鑑の情報と　マーゴちゃんが言った事に違いがないか　確認してみよう……！）",
+    "chinese_text": "（……重新确认一下，\n魔女图鉴的情报和玛格的发言\n有没有出入吧……！）"
+  },
+  {
+    "dialogue_id": "0101Trial03_Ema004",
+    "speaker": "Ema",
+    "japanese_text": "……本当にそうなのかな。だって、ノアちゃんは昨日も絵を描いてたんだよ……？",
+    "chinese_text": "……真的会是这样吗。\n诺亚她可是昨天也画了画哦……？"
+  },
+  {
+    "dialogue_id": "0101Trial03_Ema005",
+    "speaker": "Ema",
+    "japanese_text": "絶望して自殺したなんて信じられないよ……！",
+    "chinese_text": "难以置信她会因绝望自杀……！"
+  },
+  {
+    "dialogue_id": "0101Trial03_Margo011",
+    "speaker": "Margo",
+    "japanese_text": "他人の内心なんて知りようがないわ？",
+    "chinese_text": "一个人的内心，旁人怎么可能琢磨得透呢？"
+  },
+  {
+    "dialogue_id": "0101Trial03_Coco001",
+    "speaker": "Coco",
+    "japanese_text": "そうそう。芸術家なんて何考えてんのかわかんないって。",
+    "chinese_text": "对啊。\n怎么可能知道艺术家脑子里想什么嘛。"
+  },
+  {
+    "dialogue_id": "0101Trial03_Leia002",
+    "speaker": "Leia",
+    "japanese_text": "彼女は絶対に絶望しない……か。そう思うのは自由だよ。この場にふさわしい意見でなかったとしてもね。",
+    "chinese_text": "认为她绝对不会绝望\n是你的自由……\n而认为你的观点不对，也是我的自由。"
+  },
+  {
+    "dialogue_id": "0101Trial03_Leia003",
+    "speaker": "Leia",
+    "japanese_text": "……ノアくんが死んで悲しかったんだよね。キミの感情は、私が受け止めてあげるよ。だからそんな悲しげな顔をしないで、エマくん。",
+    "chinese_text": "……诺亚的死让你感到很难受吧。\n你的悲伤由我来陪你一起承受。\n所以请不要露出悲伤的表情了，艾玛。"
+  },
+  {
+    "dialogue_id": "0101Trial03_Ema006",
+    "speaker": "Ema",
+    "japanese_text": "（はわわわ……！　慰められちゃった……！？）",
+    "chinese_text": "（哇哇哇……！\n我被她安慰了……！？）"
+  },
+  {
+    "dialogue_id": "0101Trial03_Ema007",
+    "speaker": "Ema",
+    "japanese_text": "（もう一度マーゴちゃんの話をしっかり聞いてみよう……！　何かの証拠品と矛盾している事が　あるかもしれないし……！）",
+    "chinese_text": "（重新认真听玛格的发言吧……！\n或许她的话\n和某些证物有矛盾……！）"
+  },
+  {
+    "dialogue_id": "0101Trial03_Ema008",
+    "speaker": "Ema",
+    "japanese_text": "……ちょっと待って！ノアちゃんが自分の胸を刺すなんて、難しいんじゃないかな。",
+    "chinese_text": "……稍等一下！\n诺亚应该很难做到\n把箭插进自己的胸口才对。"
+  },
+  {
+    "dialogue_id": "0101Trial03_Hanna002",
+    "speaker": "Hanna",
+    "japanese_text": "それはどうしてですの？",
+    "chinese_text": "这是为什么呢？"
+  },
+  {
+    "dialogue_id": "0101Trial03_Ema009",
+    "speaker": "Ema",
+    "japanese_text": "だって痛いし……それに手の角度とか……力の入れ方とか……難しいんじゃない？",
+    "chinese_text": "因为很痛呀……\n而且手的角度……还有发力的方式……\n不感觉很难做到吗？"
+  },
+  {
+    "dialogue_id": "0101Trial03_Alisa002",
+    "speaker": "Alisa",
+    "japanese_text": "意見がふわふわしすぎだろ。",
+    "chinese_text": "你的描述太模糊了吧。"
+  },
+  {
+    "dialogue_id": "0101Trial03_AnAn001",
+    "speaker": "AnAn",
+    "japanese_text": "『ちゃんと考えてから喋れ』",
+    "chinese_text": "『认真想清楚再讲话』"
+  },
+  {
+    "dialogue_id": "0101Trial03_Ema010",
+    "speaker": "Ema",
+    "japanese_text": "（お、怒られちゃった……！）",
+    "chinese_text": "（惹、惹她们生气了……！）"
+  },
+  {
+    "dialogue_id": "0101Trial03_Sherry003",
+    "speaker": "Sherry",
+    "japanese_text": "たしかに心臓に届くほど深く刺したなら、矢がひとりでに抜けるのかは疑問ですけど……。",
+    "chinese_text": "既然箭头都插进了心脏，\n她一个人如何拔出箭，确实还存在疑点……"
+  },
+  {
+    "dialogue_id": "0101Trial03_Sherry004",
+    "speaker": "Sherry",
+    "japanese_text": "でも実際、血液で絵が描かれている以上、【血が噴出して矢が抜けた】……ぐらいの事は起こっていてもおかしくなさそうです。",
+    "chinese_text": "不过，她用血液画画已是既成事实……\n发生【拔出箭头血液喷出】这件事\n也并不算奇怪。"
+  },
+  {
+    "dialogue_id": "0101Trial03_Miria001",
+    "speaker": "Miria",
+    "japanese_text": "血を操ったのはたしかなんだろうしね……。",
+    "chinese_text": "显然她有操纵过血液呢……"
+  },
+  {
+    "dialogue_id": "0101Trial03_Ema011",
+    "speaker": "Ema",
+    "japanese_text": "（そう考えると、自殺でも不自然な状況じゃないのかな……？）",
+    "chinese_text": "（这样考虑的话，自杀也算不上是不自然的状况……？）"
+  },
+  {
+    "dialogue_id": "0101Trial03_Ema012",
+    "speaker": "Ema",
+    "japanese_text": "（もう一度調べた事を思い出してみよう……！　何かおかしい所があるかもしれない……！）",
+    "chinese_text": "（重新想一想已经调查过的事物吧……！\n说不定会有什么不自然的地方……！）"
+  },
+  {
+    "dialogue_id": "0101Trial03_Ema013",
+    "speaker": "Ema",
+    "japanese_text": "……ねえ、本当にノアちゃんが自分の胸を刺したのかな？ボクには信じられないよ……。",
+    "chinese_text": "……我说，诺亚她真的\n自己刺伤了自己吗？\n我不相信她会这样做……"
+  },
+  {
+    "dialogue_id": "0101Trial03_Ema014",
+    "speaker": "Ema",
+    "japanese_text": "凶器を使っていない証拠とかがあれば否定できるんじゃ……。",
+    "chinese_text": "只要找到未使用过凶器的证据，\n应该就可以否定……"
+  },
+  {
+    "dialogue_id": "0101Trial03_Coco002",
+    "speaker": "Coco",
+    "japanese_text": "それで？その証拠ってどこにあんの？",
+    "chinese_text": "然后呢？\n你说的证据在哪里？"
+  },
+  {
+    "dialogue_id": "0101Trial03_Ema015",
+    "speaker": "Ema",
+    "japanese_text": "そ、それは……指紋とか……？",
+    "chinese_text": "证、证据就是……指纹……？"
+  },
+  {
+    "dialogue_id": "0101Trial03_Leia004",
+    "speaker": "Leia",
+    "japanese_text": "……この屋敷に指紋検出キットのようなものはあるのかい？",
+    "chinese_text": "……这座宅子里能找到\n指纹检测套组吗？"
+  },
+  {
+    "dialogue_id": "0101Trial03_Sherry005",
+    "speaker": "Sherry",
+    "japanese_text": "仮にあったとしても、【使った証拠】にはなっても【使ってない証拠】にはなりませんよね！",
+    "chinese_text": "假设可以检测指纹，\n也最多只能找到【用过的证据】，\n并不能找到【没用过的证据】哦！"
+  },
+  {
+    "dialogue_id": "0101Trial03_Margo012",
+    "speaker": "Margo",
+    "japanese_text": "悪魔の証明というやつね♡",
+    "chinese_text": "这就是所谓的恶魔的证明♡"
+  },
+  {
+    "dialogue_id": "0101Trial03_Ema016",
+    "speaker": "Ema",
+    "japanese_text": "（うぐ……。　やっぱりボクの考えが間違ってたのかも……）",
+    "chinese_text": "（呜……\n看来我的想法果然不对……）"
+  },
+  {
+    "dialogue_id": "0101Trial03_Ema017",
+    "speaker": "Ema",
+    "japanese_text": "（もう一度考えてみよう……！　ノアちゃんの身にいったい何が起こったのか……！）",
+    "chinese_text": "（重新思考一下吧……！\n诺亚的身上究竟发生了什么事……！）"
+  },
+  {
+    "dialogue_id": "0101Trial03_Ema018",
+    "speaker": "Ema",
+    "japanese_text": "……マーゴちゃん。でも１つ、部屋にはおかしな点があるんだ。",
+    "chinese_text": "……玛格，\n房间里面明显有一处地方不对劲。"
+  },
+  {
+    "dialogue_id": "0101Trial03_Margo013",
+    "speaker": "Margo",
+    "japanese_text": "おかしな点？それは何かしら？",
+    "chinese_text": "不对劲？\n哪里不对劲？"
+  },
+  {
+    "dialogue_id": "0101Trial03_Ema019",
+    "speaker": "Ema",
+    "japanese_text": "これを見て欲しいんだけど……。",
+    "chinese_text": "请你看一下这个……"
+  },
+  {
+    "dialogue_id": "0101Trial03_Margo014",
+    "speaker": "Margo",
+    "japanese_text": "その写真は……床の傷……？それがどうかしたのかしら？",
+    "chinese_text": "这张照片是……地板的划痕……？\n这里有什么问题吗？"
+  },
+  {
+    "dialogue_id": "0101Trial03_Ema020",
+    "speaker": "Ema",
+    "japanese_text": "マーゴちゃんは【部屋を白いキャンバスに見立てた】って言ってたけど……。",
+    "chinese_text": "你说，\n【现场是一幅纯白色的画布】……"
+  },
+  {
+    "dialogue_id": "0101Trial03_Ema021",
+    "speaker": "Ema",
+    "japanese_text": "じゃあこの傷って何だと思う？",
+    "chinese_text": "那么，你觉得这道划痕是什么呢？"
+  },
+  {
+    "dialogue_id": "0101Trial03_Margo015",
+    "speaker": "Margo",
+    "japanese_text": "絵の一部ではなさそうだし……予定外の傷をつけてしまったんじゃないかしら。",
+    "chinese_text": "这看起来不像是绘画的一部分……\n难道不是预料之外的损伤吗？"
+  },
+  {
+    "dialogue_id": "0101Trial03_Margo016",
+    "speaker": "Margo",
+    "japanese_text": "ノアちゃんが自殺した後、矢が地面に抜け落ちた……。",
+    "chinese_text": "诺亚她自杀以后，\n箭被取出，掉在了地上……"
+  },
+  {
+    "dialogue_id": "0101Trial03_Margo017",
+    "speaker": "Margo",
+    "japanese_text": "それで矢が床に傷を作ったのよ。それなら何も問題ないでしょう？",
+    "chinese_text": "然后箭头就在地上留下了划痕。\n这样想就没问题了吧？"
+  },
+  {
+    "dialogue_id": "0101Trial03_Ema022",
+    "speaker": "Ema",
+    "japanese_text": "（矢が傷を作った……そのマーゴちゃんの説明に問題は……）",
+    "chinese_text": "（划痕是箭头造成的……玛格的这个主张是……）"
+  },
+  {
+    "dialogue_id": "0101Trial03_Ema023",
+    "speaker": "Ema",
+    "japanese_text": "たしかにそれなら、筋は通るのかも……。",
+    "chinese_text": "这样想的话，好像确实说得通……"
+  },
+  {
+    "dialogue_id": "0101Trial03_Meruru003",
+    "speaker": "Meruru",
+    "japanese_text": "……あ、あの……本当にそうでしょうか？",
+    "chinese_text": "……那、那个……\n真的是这样吗？"
+  },
+  {
+    "dialogue_id": "0101Trial03_Ema024",
+    "speaker": "Ema",
+    "japanese_text": "え……？",
+    "chinese_text": "欸……？"
+  },
+  {
+    "dialogue_id": "0101Trial03_Meruru004",
+    "speaker": "Meruru",
+    "japanese_text": "死体の横に落ちていた矢についてなんですけど……。",
+    "chinese_text": "我想说，掉在尸体旁边的箭……"
+  },
+  {
+    "dialogue_id": "0101Trial03_Meruru005",
+    "speaker": "Meruru",
+    "japanese_text": "あの先端には【血がついて】ました。逆に言えば……【他に何もついていない】という事です。",
+    "chinese_text": "箭头上面【沾了血】。\n反过来说……\n就是【没有沾上其他的东西】哦。"
+  },
+  {
+    "dialogue_id": "0101Trial03_Meruru006",
+    "speaker": "Meruru",
+    "japanese_text": "でも思い出してください。死体のあった床は……。",
+    "chinese_text": "可是，请你回想一下。\n尸体所在的地板上面其实……"
+  },
+  {
+    "dialogue_id": "0101Trial03_Ema025",
+    "speaker": "Ema",
+    "japanese_text": "（そうか……！　メルルちゃんの言う通りだ……！）",
+    "chinese_text": "（原来如此……！\n梅露露她说得对……！）"
+  },
+  {
+    "dialogue_id": "0101Trial03_Ema026",
+    "speaker": "Ema",
+    "japanese_text": "（この矢が、床に傷を作ったっていう説は……）",
+    "chinese_text": "（箭在地板上造成了划痕的主张……）"
+  },
+  {
+    "dialogue_id": "0101Trial03_Ema027",
+    "speaker": "Ema",
+    "japanese_text": "……問題あるよ。",
+    "chinese_text": "……有问题。"
+  },
+  {
+    "dialogue_id": "0101Trial03_Ema028",
+    "speaker": "Ema",
+    "japanese_text": "この矢を見て欲しいんだけど……。",
+    "chinese_text": "请你看一下这支箭……"
+  },
+  {
+    "dialogue_id": "0101Trial03_Margo018",
+    "speaker": "Margo",
+    "japanese_text": "……凶器の矢ね？",
+    "chinese_text": "……是那把凶器吧？"
+  },
+  {
+    "dialogue_id": "0101Trial03_Ema029",
+    "speaker": "Ema",
+    "japanese_text": "これには、床に塗られていた白い塗料がどこにもついてないんだ。",
+    "chinese_text": "这支箭完全没有沾上\n涂在地板上的颜料。"
+  },
+  {
+    "dialogue_id": "0101Trial03_Margo019",
+    "speaker": "Margo",
+    "japanese_text": "あら……！本当ね……。",
+    "chinese_text": "哎呀……！\n真的欸……"
+  },
+  {
+    "dialogue_id": "0101Trial03_Ema030",
+    "speaker": "Ema",
+    "japanese_text": "この矢がもし床に傷をつけたなら、こんなことありえないよね？",
+    "chinese_text": "如果地板的划痕是这支箭造成的，\n那么就不可能有这种状况，对吧？"
+  },
+  {
+    "dialogue_id": "0101Trial03_Ema031",
+    "speaker": "Ema",
+    "japanese_text": "だって、床から剥がれた分の塗料がこっちにもつくはずだもん……！",
+    "chinese_text": "因为从地板上刮下来的颜料，\n本应该沾在这支箭上才对……！"
+  },
+  {
+    "dialogue_id": "0101Trial03_Margo020",
+    "speaker": "Margo",
+    "japanese_text": "……そういえば矢の落ちていた位置も、少し傷から離れていた気がするわ。",
+    "chinese_text": "……这么说来，我感觉箭掉落的位置\n离伤口稍微有些远了。"
+  },
+  {
+    "dialogue_id": "0101Trial03_Margo021",
+    "speaker": "Margo",
+    "japanese_text": "ならたしかに、エマちゃんの言う通りあの傷はこの矢で付いたわけではないかもしれないのね……。",
+    "chinese_text": "也许正如艾玛所说，\n那道划痕并不是\n箭头造成的……"
+  },
+  {
+    "dialogue_id": "0101Trial03_Coco003",
+    "speaker": "Coco",
+    "japanese_text": "……けどさ～。たしかにちょっと不自然かもだけど……そんな細かい事、なんか事件に関係あんの？",
+    "chinese_text": "……我说～\n这件事可能确实不太自然……\n可是这么细枝末节的事，和案件有什么关系吗？"
+  },
+  {
+    "dialogue_id": "0101Trial03_Ema032",
+    "speaker": "Ema",
+    "japanese_text": "あっ、えーと……それは……。",
+    "chinese_text": "啊，呃……这个嘛……"
+  },
+  {
+    "dialogue_id": "0101Trial03_Margo022",
+    "speaker": "Margo",
+    "japanese_text": "ふふ、関係あるわよ。……事件にとても大きな関係がね？",
+    "chinese_text": "呵呵，当然有关系。\n……而且还是非常大的关系哦？"
+  },
+  {
+    "dialogue_id": "0101Trial03_Ema033",
+    "speaker": "Ema",
+    "japanese_text": "（マーゴちゃん……！）",
+    "chinese_text": "（玛格……！）"
+  },
+  {
+    "dialogue_id": "0101Trial03_Margo023",
+    "speaker": "Margo",
+    "japanese_text": "だって、矢に塗料が付いていないということは……他に【床を傷付けた物】があるということでしょう？",
+    "chinese_text": "你想想看，箭头上没有沾上颜料的话……\n这不就表明，还存在其他\n【造成了地板划痕的东西】吗？"
+  },
+  {
+    "dialogue_id": "0101Trial03_Margo024",
+    "speaker": "Margo",
+    "japanese_text": "でも現場ではそれが見つかっていない。……それはどういうことだと思う？",
+    "chinese_text": "可是现场却没有发现那样东西。\n……你们认为，这件事意味着什么呢？"
+  },
+  {
+    "dialogue_id": "0101Trial03_Coco004",
+    "speaker": "Coco",
+    "japanese_text": "……どういうことだよ。",
+    "chinese_text": "……那你说这是怎么一回事。"
+  },
+  {
+    "dialogue_id": "0101Trial03_Sherry006",
+    "speaker": "Sherry",
+    "japanese_text": "……誰かが床に傷をつけた物を、持ち去ったということでしょうか？",
+    "chinese_text": "……就是说有人\n将造成地板划痕的东西拿走了，对吗？"
+  },
+  {
+    "dialogue_id": "0101Trial03_Margo025",
+    "speaker": "Margo",
+    "japanese_text": "そういうこと♪シェリーちゃんは賢いわね。",
+    "chinese_text": "就是这么一回事♪\n雪莉你好聪明呀。"
+  },
+  {
+    "dialogue_id": "0101Trial03_Margo026",
+    "speaker": "Margo",
+    "japanese_text": "つまりノアちゃんではない【何者かがそこにいた】……この傷はそういう事を表しているの。",
+    "chinese_text": "也就是说，有并非诺亚的\n【第三人在场】……\n这就是这道划痕带来的结论。"
+  },
+  {
+    "dialogue_id": "0101Trial03_Margo027",
+    "speaker": "Margo",
+    "japanese_text": "それは明確に【殺人者がいた】ということを示しているわ。",
+    "chinese_text": "它明确的指示出了\n【存在杀人犯】的可能性。"
+  },
+  {
+    "dialogue_id": "0101Trial03_Sherry007",
+    "speaker": "Sherry",
+    "japanese_text": "たしかに少なくとも、死体を見た後に立ち去っている人物はいるはずですもんね！",
+    "chinese_text": "说得对，至少还应该存在一位\n目击了尸体后\n离开的人物！"
+  },
+  {
+    "dialogue_id": "0101Trial03_Margo028",
+    "speaker": "Margo",
+    "japanese_text": "ええ。……あなたもそう言いたかったのよね？エマちゃん。",
+    "chinese_text": "嗯。\n……你也是想说这一回事，对吗？\n可爱的小艾玛。"
+  },
+  {
+    "dialogue_id": "0101Trial03_Ema034",
+    "speaker": "Ema",
+    "japanese_text": "えっ！？えっと……た、たぶん……！そうかも……！",
+    "chinese_text": "欸！？\n呃……或、或许……！\n是这样没错……！"
+  },
+  {
+    "dialogue_id": "0101Trial03_Coco005",
+    "speaker": "Coco",
+    "japanese_text": "……じゃあやっぱ、あてぃしらの中の誰かが殺したってこと！？",
+    "chinese_text": "……那果然\n是我们之中的某一个人动手杀人的！？"
+  },
+  {
+    "dialogue_id": "0101Trial03_Margo029",
+    "speaker": "Margo",
+    "japanese_text": "そう……つまり。",
+    "chinese_text": "嗯……就是说，"
+  },
+  {
+    "dialogue_id": "0101Trial03_Margo030",
+    "speaker": "Margo",
+    "japanese_text": "この中に、ノアちゃんを殺した【殺人鬼】が紛れ込んでいるという事よ。",
+    "chinese_text": "杀死了诺亚的【杀人魔】\n就藏匿在我们之中哦。"
+  },
+  {
+    "dialogue_id": "0101Trial03_Hanna003",
+    "speaker": "Hanna",
+    "japanese_text": "そ、そんな……！嘘ですわっ！？",
+    "chinese_text": "怎、怎么会……！\n不是真的吧！？"
+  },
+  {
+    "dialogue_id": "0101Trial03_Miria002",
+    "speaker": "Miria",
+    "japanese_text": "そ、そそ、それが本当なら……！ど、どうしよう……！？",
+    "chinese_text": "是、是是、是真的话……！\n该、该怎么办……！？"
+  },
+  {
+    "dialogue_id": "0101Trial03_Ema035",
+    "speaker": "Ema",
+    "japanese_text": "（マーゴちゃん……！　それはたしかにそうかもしれないけど……！　そんな言い方……！）",
+    "chinese_text": "（玛格……！\n虽然是这么一回事没错……！\n但是也说得太过了……！）"
+  },
+  {
+    "dialogue_id": "0101Trial03_Margo031",
+    "speaker": "Margo",
+    "japanese_text": "危うくそんな大事な情報を見落とす所だったわ♡ありがとう、エマちゃん。おかげで議論が進んだわ。",
+    "chinese_text": "差点就遗漏了重要的情报呢♡\n谢谢你，艾玛。\n多亏有你，讨论才前进了一大步。"
+  },
+  {
+    "dialogue_id": "0101Trial03_Ema036",
+    "speaker": "Ema",
+    "japanese_text": "う、うん……。",
+    "chinese_text": "嗯、嗯……"
+  },
+  {
+    "dialogue_id": "0101Trial03_Margo032",
+    "speaker": "Margo",
+    "japanese_text": "……ふふ。そう……。",
+    "chinese_text": "……呵呵。没错……"
+  },
+  {
+    "dialogue_id": "0101Trial03_Margo033",
+    "speaker": "Margo",
+    "japanese_text": "【誰かを処刑しなくてはいけない議論】が。",
+    "chinese_text": "就是这场【必须要将某人处死的讨论】。"
+  },
+  {
+    "dialogue_id": "0101Trial03_Margo034",
+    "speaker": "Margo",
+    "japanese_text": "……ね？",
+    "chinese_text": "……你说对吧？"
+  },
+  {
+    "dialogue_id": "0101Trial03_Ema037",
+    "speaker": "Ema",
+    "japanese_text": "う……！？",
+    "chinese_text": "呜……！？"
+  },
+  {
+    "dialogue_id": "0101Trial03_Ema038",
+    "speaker": "Ema",
+    "japanese_text": "（マーゴちゃんの言う通り、ボクが指摘したのは　【この中に犯人がいる】ということなのかも……）",
+    "chinese_text": "（玛格说的没错，我想指出的\n大概就是【凶手就在我们之中】这件事……）"
+  },
+  {
+    "dialogue_id": "0101Trial03_Ema039",
+    "speaker": "Ema",
+    "japanese_text": "（マーゴちゃんはこんな状況なのに何か楽しげだ。　それに――）",
+    "chinese_text": "（明明都到了这种状况，玛格她看起来却很享受。\n另一方面——）"
+  },
+  {
+    "dialogue_id": "0101Trial03_Nanoka001",
+    "speaker": "Nanoka",
+    "japanese_text": "…………。",
+    "chinese_text": "…………"
+  },
+  {
+    "dialogue_id": "0101Trial03_Ema040",
+    "speaker": "Ema",
+    "japanese_text": "（――ナノカちゃんはさっきから　一言も口をひらいてない）",
+    "chinese_text": "（——奈叶香从刚刚开始就\n一直闭口不言）"
+  },
+  {
+    "dialogue_id": "0101Trial03_Ema041",
+    "speaker": "Ema",
+    "japanese_text": "（みんなが何を考えてるのか……　全然わかんないよ……！）",
+    "chinese_text": "（根本搞不明白……\n大家到底都在想什么……！）"
+  },
+  {
+    "dialogue_id": "0101Trial03_Ema042",
+    "speaker": "Ema",
+    "japanese_text": "（こんな状況で犯人を探し出すなんて……　本当にできるのかな……）",
+    "chinese_text": "（我真的可以……\n在这种情况下找出凶手吗……）"
+  },
+  {
+    "dialogue_id": "0101Trial03_Sherry008",
+    "speaker": "Sherry",
+    "japanese_text": "……さあ！議論も盛り上がってきましたし、次は死因についての話をしてみましょうか！",
+    "chinese_text": "……好啦！\n讨论越来越热烈了，\n接下来我们聊一聊死因吧！"
+  },
+  {
+    "dialogue_id": "0101Trial03_Margo035",
+    "speaker": "Margo",
+    "japanese_text": "そうね。話し合いましょう？みんなが頭の中で考えていることを……♡",
+    "chinese_text": "嗯。\n大家都来交流一下吧？\n讲一讲大家的脑袋里面在想什么……♡"
+  }
+]

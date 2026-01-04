@@ -1,0 +1,692 @@
+[
+  {
+    "dialogue_id": "0101Bad05_Ema001",
+    "speaker": "Ema",
+    "japanese_text": "わからないけど、とにかく逃げよう！",
+    "chinese_text": "不知道，总之先跑起来吧！"
+  },
+  {
+    "dialogue_id": "0101Bad05_Sherry001",
+    "speaker": "Sherry",
+    "japanese_text": "そうですね、そのうち諦めてくれるかもしれませんし！",
+    "chinese_text": "嗯，说不定之后它们就会放弃追我们了！"
+  },
+  {
+    "dialogue_id": "0101Bad05_Hanna001",
+    "speaker": "Hanna",
+    "japanese_text": "無謀ですわ……！",
+    "chinese_text": "真是乱来……！"
+  },
+  {
+    "dialogue_id": "0101Bad05_Narrative001",
+    "speaker": "[Narrative]",
+    "japanese_text": "ハンナの言う通りだった。",
+    "chinese_text": "汉娜说得没错。"
+  },
+  {
+    "dialogue_id": "0101Bad05_Narrative002",
+    "speaker": "[Narrative]",
+    "japanese_text": "逃げた先にも、看守が待ち構えていたのだ。",
+    "chinese_text": "在逃跑方向上，看守正拦在路中间等着她们。"
+  },
+  {
+    "dialogue_id": "0101Bad05_Hanna002",
+    "speaker": "Hanna",
+    "japanese_text": "どうするんですのっ！？",
+    "chinese_text": "现在怎么办！？"
+  },
+  {
+    "dialogue_id": "0101Bad05_Ema002",
+    "speaker": "Ema",
+    "japanese_text": "止まらないで！ あっち！",
+    "chinese_text": "不要停！往那边！"
+  },
+  {
+    "dialogue_id": "0101Bad05_Narrative003",
+    "speaker": "[Narrative]",
+    "japanese_text": "背後からも看守が迫る中、エマたちは急いで方向転換して脇道に逸れる。",
+    "chinese_text": "看守前后夹击，\n艾玛她们急匆匆偏离方向，跑向岔道的另一头。"
+  },
+  {
+    "dialogue_id": "0101Bad05_Narrative004",
+    "speaker": "[Narrative]",
+    "japanese_text": "そうして３人が森の中を駆けずり回っていると――",
+    "chinese_text": "于是3人不停奔跑在森林之中。忽然间——"
+  },
+  {
+    "dialogue_id": "0101Bad05_Ema003",
+    "speaker": "Ema",
+    "japanese_text": "わっ……！！",
+    "chinese_text": "哇……！！"
+  },
+  {
+    "dialogue_id": "0101Bad05_Sherry002",
+    "speaker": "Sherry",
+    "japanese_text": "えっ……！？",
+    "chinese_text": "欸……！？"
+  },
+  {
+    "dialogue_id": "0101Bad05_Hanna003",
+    "speaker": "Hanna",
+    "japanese_text": "きゃああああっ！？",
+    "chinese_text": "呀啊啊啊啊！？"
+  },
+  {
+    "dialogue_id": "0101Bad05_Ema004",
+    "speaker": "Ema",
+    "japanese_text": "いたた……。",
+    "chinese_text": "好痛……"
+  },
+  {
+    "dialogue_id": "0101Bad05_Hanna004",
+    "speaker": "Hanna",
+    "japanese_text": "うぅ……。",
+    "chinese_text": "呜呜……"
+  },
+  {
+    "dialogue_id": "0101Bad05_Sherry003",
+    "speaker": "Sherry",
+    "japanese_text": "……っ",
+    "chinese_text": "……"
+  },
+  {
+    "dialogue_id": "0101Bad05_Ema005",
+    "speaker": "Ema",
+    "japanese_text": "どこかに落ちちゃったみたいだけど……２人とも、怪我はない？",
+    "chinese_text": "看来好像掉进洞里了……\n你们两个没受伤吧？"
+  },
+  {
+    "dialogue_id": "0101Bad05_Sherry004",
+    "speaker": "Sherry",
+    "japanese_text": "……私は大丈夫です！",
+    "chinese_text": "……我没事！"
+  },
+  {
+    "dialogue_id": "0101Bad05_Hanna005",
+    "speaker": "Hanna",
+    "japanese_text": "わたくしも、とりあえず平気ですわ。それより、ここは一体なんなんですの？",
+    "chinese_text": "我也姑且没事。\n这个先不提，这里到底是什么地方？"
+  },
+  {
+    "dialogue_id": "0101Bad05_Ema006",
+    "speaker": "Ema",
+    "japanese_text": "うーん……。",
+    "chinese_text": "唔……"
+  },
+  {
+    "dialogue_id": "0101Bad05_Sherry005",
+    "speaker": "Sherry",
+    "japanese_text": "おそらく、枯れ井戸じゃないでしょうか。",
+    "chinese_text": "我猜这里应该是座枯井吧。"
+  },
+  {
+    "dialogue_id": "0101Bad05_Narrative005",
+    "speaker": "[Narrative]",
+    "japanese_text": "そう口にして、シェリーは上を向く。エマとハンナも、頭上を振り仰いだ。かなり高い位置に空が見える。",
+    "chinese_text": "说着，雪莉抬头往上看。\n于是艾玛和汉娜也抬头看。\n能看到外面的天空在很高的地方，这里离外界十分地远。"
+  },
+  {
+    "dialogue_id": "0101Bad05_Ema007",
+    "speaker": "Ema",
+    "japanese_text": "この高さから落ちて、よく無事で済んだよね……。",
+    "chinese_text": "掉到这么深的地方，\n真亏我们还能没事……"
+  },
+  {
+    "dialogue_id": "0101Bad05_Sherry006",
+    "speaker": "Sherry",
+    "japanese_text": "クッションが効いていたおかげだと思いますよ。柔らかい土と、葉っぱが積もってますから。",
+    "chinese_text": "我想应该是垫子起作用了吧。\n这里的土壤很柔软，也积了很多的叶子。"
+  },
+  {
+    "dialogue_id": "0101Bad05_Hanna006",
+    "speaker": "Hanna",
+    "japanese_text": "なるほど……って、納得してる場合じゃないですわ！どうやってここから出るんですの！？",
+    "chinese_text": "原来如此……不对，现在不是讨论这个的时候啦！\n我们要怎么出去啊！？"
+  },
+  {
+    "dialogue_id": "0101Bad05_Sherry007",
+    "speaker": "Sherry",
+    "japanese_text": "壁をのぼるしかないんじゃないでしょうか。",
+    "chinese_text": "那只能爬墙上去了啊。"
+  },
+  {
+    "dialogue_id": "0101Bad05_Ema008",
+    "speaker": "Ema",
+    "japanese_text": "やっぱり、そうなるよね。",
+    "chinese_text": "看来也只能这样了。"
+  },
+  {
+    "dialogue_id": "0101Bad05_Narrative006",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマは苔むした壁に手を触れる。",
+    "chinese_text": "艾玛把手放在爬满青苔的墙上。"
+  },
+  {
+    "dialogue_id": "0101Bad05_Ema009",
+    "speaker": "Ema",
+    "japanese_text": "でも、のぼりきれるかな……。",
+    "chinese_text": "可是，这真的能爬到顶吗……"
+  },
+  {
+    "dialogue_id": "0101Bad05_Narrative007",
+    "speaker": "[Narrative]",
+    "japanese_text": "自信なさげな声をもらす。さっきもエマは塀をのぼろうとして、すぐに力尽きてしまった。",
+    "chinese_text": "艾玛的声音里没什么自信。\n刚刚艾玛也是想着爬上围墙，没过多久就用尽力气了。"
+  },
+  {
+    "dialogue_id": "0101Bad05_Hanna007",
+    "speaker": "Hanna",
+    "japanese_text": "こうなったら、わたくしの魔法で脱出してみせますわあああっ……！",
+    "chinese_text": "这样的话，就试试靠我的魔法\n逃出这里哇啊啊啊……！"
+  },
+  {
+    "dialogue_id": "0101Bad05_Narrative008",
+    "speaker": "[Narrative]",
+    "japanese_text": "ハンナがちょっとだけ浮かぶ。",
+    "chinese_text": "汉娜稍微飘起来了一点点。"
+  },
+  {
+    "dialogue_id": "0101Bad05_Narrative009",
+    "speaker": "[Narrative]",
+    "japanese_text": "ふらふらと揺れながら上昇しようと試みたようだが、すぐ地面に足がついた。",
+    "chinese_text": "她摇摇晃晃地试着抬升高度，\n但没一会就落地了。"
+  },
+  {
+    "dialogue_id": "0101Bad05_Hanna008",
+    "speaker": "Hanna",
+    "japanese_text": "くそー！ 高すぎて無理ですわ！！",
+    "chinese_text": "该死的！太高了，我做不到！！"
+  },
+  {
+    "dialogue_id": "0101Bad05_Sherry008",
+    "speaker": "Sherry",
+    "japanese_text": "ふむ……。私がお２人を上に投げるというのはどうでしょう？",
+    "chinese_text": "唔……\n我来把你们两个往上抛，怎么样？"
+  },
+  {
+    "dialogue_id": "0101Bad05_Narrative010",
+    "speaker": "[Narrative]",
+    "japanese_text": "シェリーの提案に、エマとハンナは目を丸くする。",
+    "chinese_text": "面对雪莉的提议，艾玛和汉娜都瞪圆了眼睛。"
+  },
+  {
+    "dialogue_id": "0101Bad05_Ema010",
+    "speaker": "Ema",
+    "japanese_text": "投げるって……。",
+    "chinese_text": "往上抛……"
+  },
+  {
+    "dialogue_id": "0101Bad05_Hanna009",
+    "speaker": "Hanna",
+    "japanese_text": "発想がゴリラ過ぎですわ……。",
+    "chinese_text": "你的想法也有够像猩猩的……"
+  },
+  {
+    "dialogue_id": "0101Bad05_Sherry009",
+    "speaker": "Sherry",
+    "japanese_text": "とはいえ、外まで投げるというのはさすがに無理だと思いますけどね。",
+    "chinese_text": "只不过，我想我是实在做不到\n把你们直接抛出外面。"
+  },
+  {
+    "dialogue_id": "0101Bad05_Sherry010",
+    "speaker": "Sherry",
+    "japanese_text": "私が壁の途中まで投げて、そこからは自力でのぼってもらう……という感じで。",
+    "chinese_text": "所以我在想，把你们抛到爬墙的半路上，\n剩下的距离靠你们自己来爬……怎么样。"
+  },
+  {
+    "dialogue_id": "0101Bad05_Narrative011",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマとハンナは顔を見合わせる。確かにシェリーの怪力なら、可能かもしれない。",
+    "chinese_text": "艾玛和汉娜对视了一下。\n靠雪莉的怪力，或许真的可行。"
+  },
+  {
+    "dialogue_id": "0101Bad05_Ema011",
+    "speaker": "Ema",
+    "japanese_text": "でも、その後は？ シェリーちゃんはどうするの？",
+    "chinese_text": "可是，之后呢？雪莉你怎么办？"
+  },
+  {
+    "dialogue_id": "0101Bad05_Sherry011",
+    "speaker": "Sherry",
+    "japanese_text": "そこはご安心を！このくらいの高さなら、自力でのぼれそうですから。",
+    "chinese_text": "之后不用担心！\n就这么点高度，我能自己爬。"
+  },
+  {
+    "dialogue_id": "0101Bad05_Hanna010",
+    "speaker": "Hanna",
+    "japanese_text": "ちょっとお待ちなさい。だったらあなたが先に出て、助けを呼んでくることもできるんじゃ……。",
+    "chinese_text": "给我等一下。\n那你先出去，\n再来喊人帮忙不是更好……"
+  },
+  {
+    "dialogue_id": "0101Bad05_Sherry012",
+    "speaker": "Sherry",
+    "japanese_text": "……あちゃー、そこ気付いちゃいました？",
+    "chinese_text": "……哎呀，被发现了？"
+  },
+  {
+    "dialogue_id": "0101Bad05_Narrative012",
+    "speaker": "[Narrative]",
+    "japanese_text": "笑みを浮かべながら、シェリーはハンナに手を伸ばして――",
+    "chinese_text": "雪莉边笑着，然后向汉娜伸出手——"
+  },
+  {
+    "dialogue_id": "0101Bad05_Narrative013",
+    "speaker": "[Narrative]",
+    "japanese_text": "上方に投げ飛ばした。",
+    "chinese_text": "然后抓住她往上抛去。"
+  },
+  {
+    "dialogue_id": "0101Bad05_Hanna011",
+    "speaker": "Hanna",
+    "japanese_text": "イヤアアアッ！？",
+    "chinese_text": "不要啊啊啊！？"
+  },
+  {
+    "dialogue_id": "0101Bad05_Ema012",
+    "speaker": "Ema",
+    "japanese_text": "ちょ、ちょっとシェリーちゃん！？",
+    "chinese_text": "雪、雪莉你在做什么！？"
+  },
+  {
+    "dialogue_id": "0101Bad05_Hanna012",
+    "speaker": "Hanna",
+    "japanese_text": "いきなり何するんですの！？ このゴリラ女～！",
+    "chinese_text": "突然间搞什么啦！？你这个猩猩女～！"
+  },
+  {
+    "dialogue_id": "0101Bad05_Narrative014",
+    "speaker": "[Narrative]",
+    "japanese_text": "壁面の中間あたりに掴まったハンナが、シェリーに向かって叫ぶ。",
+    "chinese_text": "抓住壁面中段的汉娜\n朝雪莉喊道。"
+  },
+  {
+    "dialogue_id": "0101Bad05_Sherry013",
+    "speaker": "Sherry",
+    "japanese_text": "あはは～。はい、次はエマさんの番ですよ。しっかり壁に掴まってくださいね。",
+    "chinese_text": "啊哈哈～好啦，下一个轮到艾玛了。\n要抓紧墙壁哦。"
+  },
+  {
+    "dialogue_id": "0101Bad05_Ema013",
+    "speaker": "Ema",
+    "japanese_text": "え、待って、まだ心の準備が……。",
+    "chinese_text": "欸，等一下，我还没做好心理准备……"
+  },
+  {
+    "dialogue_id": "0101Bad05_Ema014",
+    "speaker": "Ema",
+    "japanese_text": "わああああっ！？",
+    "chinese_text": "哇啊啊啊啊！？"
+  },
+  {
+    "dialogue_id": "0101Bad05_Narrative015",
+    "speaker": "[Narrative]",
+    "japanese_text": "シェリーに放り投げられたエマが、なんとか壁に掴みかかる。",
+    "chinese_text": "被雪莉抛出的艾玛\n尽力抓住了墙面。"
+  },
+  {
+    "dialogue_id": "0101Bad05_Ema015",
+    "speaker": "Ema",
+    "japanese_text": "はぁ、はぁ……怖かった……。",
+    "chinese_text": "哈啊，哈啊……吓死人了……"
+  },
+  {
+    "dialogue_id": "0101Bad05_Sherry014",
+    "speaker": "Sherry",
+    "japanese_text": "さあ、のぼっちゃってください！",
+    "chinese_text": "好啦，爬上去吧！"
+  },
+  {
+    "dialogue_id": "0101Bad05_Ema016",
+    "speaker": "Ema",
+    "japanese_text": "う、うん……シェリーちゃんも早く！",
+    "chinese_text": "嗯、嗯……雪莉你也快点上来！"
+  },
+  {
+    "dialogue_id": "0101Bad05_Narrative016",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマの言葉に、シェリーは首を横に振った。",
+    "chinese_text": "听到艾玛的话，雪莉摇了摇头。"
+  },
+  {
+    "dialogue_id": "0101Bad05_Sherry015",
+    "speaker": "Sherry",
+    "japanese_text": "私のことは、お構いなく。やっぱり、のぼれそうにないんで。",
+    "chinese_text": "不用管我了，\n我确实没办法爬上去了。"
+  },
+  {
+    "dialogue_id": "0101Bad05_Hanna013",
+    "speaker": "Hanna",
+    "japanese_text": "はぁっ！？ 何を言ってるんです！？あなたさっき、自力でのぼれると言ったじゃありませんか！",
+    "chinese_text": "哈！？你说什么啊！？\n你刚才不是说自己能爬上来吗！"
+  },
+  {
+    "dialogue_id": "0101Bad05_Sherry016",
+    "speaker": "Sherry",
+    "japanese_text": "あははー。すみません、あれは嘘です。実は……こんな状態でして。",
+    "chinese_text": "啊哈哈～对不起，我骗你们的。\n其实……我已经不行了。"
+  },
+  {
+    "dialogue_id": "0101Bad05_Narrative017",
+    "speaker": "[Narrative]",
+    "japanese_text": "シェリーが自らの脇腹を見せる。そこには、太い木の枝が深々と突き刺さっていた。",
+    "chinese_text": "雪莉翻身露出了自己的侧腹。\n有根粗大的树枝深深地刺进了里面。"
+  },
+  {
+    "dialogue_id": "0101Bad05_Narrative018",
+    "speaker": "[Narrative]",
+    "japanese_text": "息を呑むエマとハンナに、シェリーは微笑む。",
+    "chinese_text": "艾玛和汉娜倒抽一口凉气。雪莉朝她们笑了笑。"
+  },
+  {
+    "dialogue_id": "0101Bad05_Sherry017",
+    "speaker": "Sherry",
+    "japanese_text": "落ちたときに刺さっちゃったみたいで。内臓まで届いちゃってる感じなんですよね。なので、私のことは置いていってください！",
+    "chinese_text": "好像是掉下来的时候被刺中了，\n能感觉到它已经捅到内脏了。\n所以呢，你们不用管我啦！"
+  },
+  {
+    "dialogue_id": "0101Bad05_Hanna014",
+    "speaker": "Hanna",
+    "japanese_text": "ふ……ふざけるんじゃねえですわよ！そんなこと、できるわけないでしょう！",
+    "chinese_text": "开……开什么玩笑啊！\n我们怎么可能会丢下你不管！"
+  },
+  {
+    "dialogue_id": "0101Bad05_Ema017",
+    "speaker": "Ema",
+    "japanese_text": "そうだよ！ せめてボクかハンナちゃん、どっちか１人が助けを呼びに行くとか……！",
+    "chinese_text": "对啊！至少我们其中的一个\n去找帮手来就好……！"
+  },
+  {
+    "dialogue_id": "0101Bad05_Sherry018",
+    "speaker": "Sherry",
+    "japanese_text": "いえ、いいんです。なんか、もう間に合わなそうな感じなんで……お２人で、行ってください……。",
+    "chinese_text": "不，没关系的。\n总感觉，到时候已经来不及了……\n你们两个快去吧……"
+  },
+  {
+    "dialogue_id": "0101Bad05_Narrative019",
+    "speaker": "[Narrative]",
+    "japanese_text": "シェリーはふらふらと壁に寄りかかる。",
+    "chinese_text": "雪莉摇摇晃晃地倚靠在墙壁上。"
+  },
+  {
+    "dialogue_id": "0101Bad05_Hanna015",
+    "speaker": "Hanna",
+    "japanese_text": "……勝手に諦めるんじゃねえですわよ！殺しても死ななそうな顔してるくせに！",
+    "chinese_text": "……不许你擅自放弃！\n明明你平时就摆出一副打不死的样子！"
+  },
+  {
+    "dialogue_id": "0101Bad05_Narrative020",
+    "speaker": "[Narrative]",
+    "japanese_text": "声を荒げたハンナは、腕を伸ばして壁をのぼり始める。",
+    "chinese_text": "汉娜的声音变得急促，开始伸手爬墙。"
+  },
+  {
+    "dialogue_id": "0101Bad05_Ema018",
+    "speaker": "Ema",
+    "japanese_text": "ハンナちゃん……！",
+    "chinese_text": "汉娜……！"
+  },
+  {
+    "dialogue_id": "0101Bad05_Hanna016",
+    "speaker": "Hanna",
+    "japanese_text": "急いでここを出ますわよ！すぐに助けを呼んで戻ってきて……。",
+    "chinese_text": "快爬出这里吧！\n要尽快找人过来帮忙……"
+  },
+  {
+    "dialogue_id": "0101Bad05_Hanna017",
+    "speaker": "Hanna",
+    "japanese_text": "ヒーロー気取りのあいつを笑い飛ばしてやりますわ！格好つけたくせに、助かってるじゃないって！",
+    "chinese_text": "之后我要狠狠笑话这个自以为是英雄的家伙！\n在那里耍帅，结果还是要人救！"
+  },
+  {
+    "dialogue_id": "0101Bad05_Ema019",
+    "speaker": "Ema",
+    "japanese_text": "そうだね……絶対にシェリーちゃんを助けよう！",
+    "chinese_text": "嗯……一定要救雪莉她出来！"
+  },
+  {
+    "dialogue_id": "0101Bad05_Narrative021",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマとハンナは枯れ井戸から抜け出し、牢屋敷に戻った。",
+    "chinese_text": "艾玛和汉娜爬出了枯井，回到了监牢。"
+  },
+  {
+    "dialogue_id": "0101Bad05_Narrative022",
+    "speaker": "[Narrative]",
+    "japanese_text": "しかし自由時間が終了しており、２人は規則を破ったとして懲罰房に入れられてしまい――",
+    "chinese_text": "可是放风时间已经结束了，\n二人被视为违反了规定，送进了惩罚室——"
+  },
+  {
+    "dialogue_id": "0101Bad05_Narrative023",
+    "speaker": "[Narrative]",
+    "japanese_text": "２日後。懲罰房を出たエマとハンナに、レイアは沈痛な面持ちで告げる。",
+    "chinese_text": "两天后，\n蕾雅一脸沉痛地向放出惩罚室的艾玛和汉娜告知。"
+  },
+  {
+    "dialogue_id": "0101Bad05_Leia001",
+    "speaker": "Leia",
+    "japanese_text": "すまない、我々が見つけたときにはもう……。",
+    "chinese_text": "对不起，我们找到她的时候，她已经……"
+  },
+  {
+    "dialogue_id": "0101Bad05_Ema020",
+    "speaker": "Ema",
+    "japanese_text": "う、嘘だよね……。",
+    "chinese_text": "不、不是真的吧……"
+  },
+  {
+    "dialogue_id": "0101Bad05_Leia002",
+    "speaker": "Leia",
+    "japanese_text": "残念ながら、事実だ……。",
+    "chinese_text": "很遗憾，是真的……"
+  },
+  {
+    "dialogue_id": "0101Bad05_Narrative024",
+    "speaker": "[Narrative]",
+    "japanese_text": "懲罰房に連れて行かれる直前、エマとハンナは他の少女たちにシェリーのことを伝えていた。",
+    "chinese_text": "被带去惩罚室之前，\n艾玛和汉娜向其他少女们讲述了雪莉的遭遇。"
+  },
+  {
+    "dialogue_id": "0101Bad05_Ema021",
+    "speaker": "Ema",
+    "japanese_text": "（でも、間に合わなかったんだ……　シェリーちゃんは、あのまま……）",
+    "chinese_text": "（可是，最后还是没来得及……\n雪莉她就那样……）"
+  },
+  {
+    "dialogue_id": "0101Bad05_Narrative025",
+    "speaker": "[Narrative]",
+    "japanese_text": "枯れ井戸の底で、息絶えた。",
+    "chinese_text": "在枯井的底部，咽了气。"
+  },
+  {
+    "dialogue_id": "0101Bad05_Hanna018",
+    "speaker": "Hanna",
+    "japanese_text": "そん、な……いや……いや……。",
+    "chinese_text": "怎么、会……不……不……"
+  },
+  {
+    "dialogue_id": "0101Bad05_Narrative026",
+    "speaker": "[Narrative]",
+    "japanese_text": "青ざめた顔で、ハンナが爪を噛む。いや、ぶちぶちと噛みちぎるような勢いだ。",
+    "chinese_text": "汉娜脸色煞白，咬住了手指甲。\n力度之猛，几乎要把指甲咬断。"
+  },
+  {
+    "dialogue_id": "0101Bad05_Hanna019",
+    "speaker": "Hanna",
+    "japanese_text": "置き去りに、したから……わたくしに、もっと力があれば……！",
+    "chinese_text": "因为我们，把她丢下了……\n如果我有更强大的力量……！"
+  },
+  {
+    "dialogue_id": "0101Bad05_Ema022",
+    "speaker": "Ema",
+    "japanese_text": "ハンナちゃん！？ 落ち着いて……！",
+    "chinese_text": "汉娜！？你冷静点……！"
+  },
+  {
+    "dialogue_id": "0101Bad05_Hanna020",
+    "speaker": "Hanna",
+    "japanese_text": "だってそうでしょう！？わたくしがもっと自由に空を飛べたら！シェリーさんを助けられたかもしれないのに！！",
+    "chinese_text": "我说得不对吗！？\n要是我能更自由地飞在空中！\n说不定我就能救到雪莉了！！"
+  },
+  {
+    "dialogue_id": "0101Bad05_Hanna021",
+    "speaker": "Hanna",
+    "japanese_text": "あのときだってそう！！わたくしがもっとしっかりしていれば、置き去りにされたあの子だって死なせずにすんだ！！",
+    "chinese_text": "以前也是！！\n如果我能更中用，\n被丢下的那孩子也就不会死了！！"
+  },
+  {
+    "dialogue_id": "0101Bad05_Ema023",
+    "speaker": "Ema",
+    "japanese_text": "（あのときって、ハンナちゃん一体……？）",
+    "chinese_text": "（以前是怎么回事……汉娜她究竟怎么了……？）"
+  },
+  {
+    "dialogue_id": "0101Bad05_Narrative027",
+    "speaker": "[Narrative]",
+    "japanese_text": "爪を噛みちぎりながら、ハンナはうわごとのように繰り返す。",
+    "chinese_text": "汉娜边狠狠咬着手指甲，一边开始说着胡话。"
+  },
+  {
+    "dialogue_id": "0101Bad05_Hanna022",
+    "speaker": "Hanna",
+    "japanese_text": "もっともっと、ちゃんとできれば……わたくしが、わたくしのせいで……力が……そう、力があれば……。",
+    "chinese_text": "如果我能更加中用……\n都怪我，都怪我……\n只要有力量……对，只要有力量……"
+  },
+  {
+    "dialogue_id": "0101Bad05_Leia003",
+    "speaker": "Leia",
+    "japanese_text": "ハンナくん、あまり自分を責めるのは……。",
+    "chinese_text": "汉娜，你不要太过自责了……"
+  },
+  {
+    "dialogue_id": "0101Bad05_Narrative028",
+    "speaker": "[Narrative]",
+    "japanese_text": "声をかけながら、レイアがハンナの肩にそっと手を置く。",
+    "chinese_text": "蕾雅对她说道，把手放在她的肩上。"
+  },
+  {
+    "dialogue_id": "0101Bad05_Narrative029",
+    "speaker": "[Narrative]",
+    "japanese_text": "レイアの頭部が不自然な方向に折れ曲がり、そのまま倒れ伏した。",
+    "chinese_text": "这时蕾雅的头部向不自然的方向弯折，\n当场倒在地上。"
+  },
+  {
+    "dialogue_id": "0101Bad05_Ema024",
+    "speaker": "Ema",
+    "japanese_text": "え……なんで……何が……。",
+    "chinese_text": "欸……怎么会……发生什么……"
+  },
+  {
+    "dialogue_id": "0101Bad05_Hanna023",
+    "speaker": "Hanna",
+    "japanese_text": "うるせえですわ。今は安っぽい慰めなんて聞きたくない。",
+    "chinese_text": "你好烦。\n我现在不想听这些廉价的安慰。"
+  },
+  {
+    "dialogue_id": "0101Bad05_Hanna024",
+    "speaker": "Hanna",
+    "japanese_text": "まったく、ぶっ殺しますわよ。……って、あら？ もう殺っちゃってますわね。",
+    "chinese_text": "真是的，小心我把你杀了。\n……哎呀，好像已经杀了。"
+  },
+  {
+    "dialogue_id": "0101Bad05_Hanna025",
+    "speaker": "Hanna",
+    "japanese_text": "あははははははっ！",
+    "chinese_text": "啊哈哈哈哈哈哈！"
+  },
+  {
+    "dialogue_id": "0101Bad05_Narrative030",
+    "speaker": "[Narrative]",
+    "japanese_text": "レイアの死体を見下ろして、ハンナが哄笑を上げる。",
+    "chinese_text": "汉娜俯视着蕾雅的尸体，哈哈大笑起来。"
+  },
+  {
+    "dialogue_id": "0101Bad05_Ema025",
+    "speaker": "Ema",
+    "japanese_text": "ハンナ、ちゃん……どうして。",
+    "chinese_text": "汉娜……你为什么……"
+  },
+  {
+    "dialogue_id": "0101Bad05_Narrative031",
+    "speaker": "[Narrative]",
+    "japanese_text": "呆然とするエマに、ハンナが目を向ける。その双眸には、殺意が滲んでいた。",
+    "chinese_text": "汉娜转头望向呆住的艾玛。\n此时她的双眼散发着杀意。"
+  },
+  {
+    "dialogue_id": "0101Bad05_Hanna026",
+    "speaker": "Hanna",
+    "japanese_text": "エマさん……なんででしょうね？なんだか、わたくし……殺したくて殺したくて、しかたがないんです。",
+    "chinese_text": "艾玛……为什么呢？\n总感觉我……\n突然好想杀人，想得不得了。"
+  },
+  {
+    "dialogue_id": "0101Bad05_Ema026",
+    "speaker": "Ema",
+    "japanese_text": "（これって、まさか……）",
+    "chinese_text": "（这难道是……）"
+  },
+  {
+    "dialogue_id": "0101Bad05_Narrative032",
+    "speaker": "[Narrative]",
+    "japanese_text": "『囚人は強いストレスを受けると　魔女因子が高まり、魔女化が進む』",
+    "chinese_text": "『囚犯受到强烈精神压力后，\n魔女因子会得到增强，魔女化程度便会加深』"
+  },
+  {
+    "dialogue_id": "0101Bad05_Narrative033",
+    "speaker": "[Narrative]",
+    "japanese_text": "『魔女になった者は堪えきれない殺人衝動で、　殺人を犯すおそれがある』",
+    "chinese_text": "『成为魔女之人，有可能会因为难以忍受的\n杀人冲动，犯下杀人的罪行』"
+  },
+  {
+    "dialogue_id": "0101Bad05_Narrative034",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマは、にじり寄ってくるハンナから距離を取ろうとした。だが恐怖で足がもつれて、尻もちをついてしまう。",
+    "chinese_text": "艾玛试图和步步紧逼的汉娜拉开距离。\n但是因为过于害怕，不小心左脚踢到右脚，一屁股跌坐在了地上。"
+  },
+  {
+    "dialogue_id": "0101Bad05_Hanna027",
+    "speaker": "Hanna",
+    "japanese_text": "ねえ、エマさん。空を飛んでみたくはありません？",
+    "chinese_text": "我说，艾玛，你想不想试试飞上天空呀？"
+  },
+  {
+    "dialogue_id": "0101Bad05_Narrative035",
+    "speaker": "[Narrative]",
+    "japanese_text": "ハンナはエマの頭を鷲掴み、牢屋敷の外に連れ出す。そして、魔法で空高く飛んだ。",
+    "chinese_text": "汉娜一把抓住艾玛的头，把她带出了监牢外。\n然后，用魔法一跃腾空。"
+  },
+  {
+    "dialogue_id": "0101Bad05_Hanna028",
+    "speaker": "Hanna",
+    "japanese_text": "あははは！ いい眺めですわ。この高さから落としたら、人間ってどうなるんでしょう。潰れたトマトみてえになるのかしら？",
+    "chinese_text": "啊哈哈哈！风景真好啊。\n要是人从这个高度掉下来，会变成什么样呢。\n会跟打扁的番茄一样吗？"
+  },
+  {
+    "dialogue_id": "0101Bad05_Ema027",
+    "speaker": "Ema",
+    "japanese_text": "やめて！ ハンナちゃん、お願いだよ！離さないで！ やだやだやだ！！",
+    "chinese_text": "住手！汉娜，求你！\n不要放手！不要不要不要！！"
+  },
+  {
+    "dialogue_id": "0101Bad05_Hanna029",
+    "speaker": "Hanna",
+    "japanese_text": "うーん……どうしようかしら。",
+    "chinese_text": "嗯……该怎么办呢。"
+  },
+  {
+    "dialogue_id": "0101Bad05_Ema028",
+    "speaker": "Ema",
+    "japanese_text": "助けて！ お願いだから許してください！！",
+    "chinese_text": "饶命！求你了放过我！！"
+  },
+  {
+    "dialogue_id": "0101Bad05_Hanna030",
+    "speaker": "Hanna",
+    "japanese_text": "……なんだか必死で惨めだから、嫌ですわ。",
+    "chinese_text": "……因为你看起来很拼命又可怜，所以我不想答应你。"
+  },
+  {
+    "dialogue_id": "0101Bad05_Narrative036",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマの懇願するような声が、悲鳴に変わる。けどそれもすぐに掻き消えて――",
+    "chinese_text": "艾玛的恳求声最终变成了惨叫声。\n但这道声音也很快消失了——"
+  }
+]

@@ -1,0 +1,146 @@
+[
+  {
+    "dialogue_id": "0101Trial00_Leia001",
+    "speaker": "Leia",
+    "japanese_text": "さて、まずは何から話すべきかな。",
+    "chinese_text": "接下来，我们要从什么话题开始讨论呢？"
+  },
+  {
+    "dialogue_id": "0101Trial00_Sherry001",
+    "speaker": "Sherry",
+    "japanese_text": "それはもちろん、犯人を示す明確な証拠からですよ！",
+    "chinese_text": "那当然是，能明确指出凶手的证据了！"
+  },
+  {
+    "dialogue_id": "0101Trial00_Alisa001",
+    "speaker": "Alisa",
+    "japanese_text": "んなもんあったら苦労してねぇよ。",
+    "chinese_text": "有那玩意也用不着我们想这么辛苦了。"
+  },
+  {
+    "dialogue_id": "0101Trial00_Sherry002",
+    "speaker": "Sherry",
+    "japanese_text": "ふっふっふー。それがあるって言ったらどうします？",
+    "chinese_text": "哼哼哼，如果我说存在这样的证据呢？"
+  },
+  {
+    "dialogue_id": "0101Trial00_Alisa002",
+    "speaker": "Alisa",
+    "japanese_text": "……死体に犯人の名前でも書いてあるってのか？",
+    "chinese_text": "……比如尸体上写了凶手的名字？"
+  },
+  {
+    "dialogue_id": "0101Trial00_Coco001",
+    "speaker": "Coco",
+    "japanese_text": "ていうかそんなのあったらみんな見つけてるし！",
+    "chinese_text": "要是有这种证据，大家早就发现了！"
+  },
+  {
+    "dialogue_id": "0101Trial00_Miria001",
+    "speaker": "Miria",
+    "japanese_text": "まあまあ。とにかくシェリーちゃんの話を聞いてみようよ。",
+    "chinese_text": "别急嘛。\n先听听小莉她\n是怎么讲的，好吗？"
+  },
+  {
+    "dialogue_id": "0101Trial00_Miria002",
+    "speaker": "Miria",
+    "japanese_text": "どうせ何から話していいのかわからないんだし……。",
+    "chinese_text": "反正我也不知道\n该从哪里开始讨论……"
+  },
+  {
+    "dialogue_id": "0101Trial00_Leia002",
+    "speaker": "Leia",
+    "japanese_text": "ああ、それじゃあ聞かせてくれシェリーくん。キミの見つけた証拠について。",
+    "chinese_text": "好，那就拜托雪莉你讲一下，\n你找到的证据是什么。"
+  },
+  {
+    "dialogue_id": "0101Trial00_Sherry003",
+    "speaker": "Sherry",
+    "japanese_text": "ええ！ お任せください！",
+    "chinese_text": "好的！交给我吧！"
+  },
+  {
+    "dialogue_id": "0101Trial00_Ema001",
+    "speaker": "Ema",
+    "japanese_text": "（これから議論が本格的に始まるんだ……。　みんなの話をちゃんと聞かないと……）",
+    "chinese_text": "（接下来讨论要真正开始了……\n我得认真听大家讲的话……）"
+  },
+  {
+    "dialogue_id": "0101Trial00_Ema002",
+    "speaker": "Ema",
+    "japanese_text": "（でもいったい、何を話したらいいんだろう……？）",
+    "chinese_text": "（可是我到底应该说什么话才好呢……？）"
+  },
+  {
+    "dialogue_id": "0101Trial00_Meruru001",
+    "speaker": "Meruru",
+    "japanese_text": "……あっ、あの、エマさん。",
+    "chinese_text": "……啊，那个，艾玛小姐。"
+  },
+  {
+    "dialogue_id": "0101Trial00_Ema003",
+    "speaker": "Ema",
+    "japanese_text": "あっ……何？メルルちゃん。",
+    "chinese_text": "啊……梅露露，\n你喊我有什么事？"
+  },
+  {
+    "dialogue_id": "0101Trial00_Meruru002",
+    "speaker": "Meruru",
+    "japanese_text": "たぶん、ここからみんなで【議論】をすることになると思うんですが……。",
+    "chinese_text": "我想，接下来大家要开始\n【讨论】了……"
+  },
+  {
+    "dialogue_id": "0101Trial00_Meruru003",
+    "speaker": "Meruru",
+    "japanese_text": "みんなが話す内容で……【気になるところ】が出てくると思うんです。",
+    "chinese_text": "在大家的讲话内容之中……\n应该会出现一些\n你【在意的地方】。"
+  },
+  {
+    "dialogue_id": "0101Trial00_Meruru004",
+    "speaker": "Meruru",
+    "japanese_text": "そんなところがあったら……【指摘】できるかどうか考えてみてください。",
+    "chinese_text": "如果出现这样的地方……\n请你思考一下\n可不可以【指出】这些地方。"
+  },
+  {
+    "dialogue_id": "0101Trial00_Meruru005",
+    "speaker": "Meruru",
+    "japanese_text": "間違っている意見には反論することができるはずです。",
+    "chinese_text": "如果是错误的见解，\n你应该可以反驳它们。"
+  },
+  {
+    "dialogue_id": "0101Trial00_Meruru006",
+    "speaker": "Meruru",
+    "japanese_text": "私も何か変なことを言ってしまうかもしれませんし……。",
+    "chinese_text": "大家可能会有\n认知或者理解错误的地方……"
+  },
+  {
+    "dialogue_id": "0101Trial00_Meruru007",
+    "speaker": "Meruru",
+    "japanese_text": "皆さんも、何か勘違いしていることがあるかもしれません。",
+    "chinese_text": "或许连我也会\n说出一些不太对劲的发言……"
+  },
+  {
+    "dialogue_id": "0101Trial00_Meruru008",
+    "speaker": "Meruru",
+    "japanese_text": "エマさんならきっと、みんなの議論を正しい方向に導けると思うんです……！",
+    "chinese_text": "但我相信，艾玛小姐你\n一定可以将大家的讨论\n引导至正确的方向……！"
+  },
+  {
+    "dialogue_id": "0101Trial00_Meruru009",
+    "speaker": "Meruru",
+    "japanese_text": "……なんとなく、ですけど。",
+    "chinese_text": "……虽然，这只是我的感觉。"
+  },
+  {
+    "dialogue_id": "0101Trial00_Ema004",
+    "speaker": "Ema",
+    "japanese_text": "メルルちゃん……！",
+    "chinese_text": "梅露露……！"
+  },
+  {
+    "dialogue_id": "0101Trial00_Ema005",
+    "speaker": "Ema",
+    "japanese_text": "（メルルちゃんの言う通り、何か気になる事があったら　勇気を出して指摘してみよう……！）",
+    "chinese_text": "（正如梅露露所说，如果出现了在意的地方，\n就试着拿出勇气指出它们吧……！）"
+  }
+]

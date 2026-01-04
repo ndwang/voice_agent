@@ -1,0 +1,476 @@
+[
+  {
+    "dialogue_id": "0101Adv02_Ema001",
+    "speaker": "Ema",
+    "japanese_text": "――ちがう！",
+    "chinese_text": "——不对！"
+  },
+  {
+    "dialogue_id": "0101Adv02_Narrative001",
+    "speaker": "[Narrative]",
+    "japanese_text": "桜羽エマは叫び、起き上がった。",
+    "chinese_text": "樱羽艾玛大喊着，爬起身来。"
+  },
+  {
+    "dialogue_id": "0101Adv02_Narrative002",
+    "speaker": "[Narrative]",
+    "japanese_text": "彼女の呼吸はひどく乱れ、全身はじっとりと汗ばんでいた。悪夢を見たせいだろう。",
+    "chinese_text": "大概是因为做了噩梦，她的呼吸相当紊乱，\n而且满身都是汗水。"
+  },
+  {
+    "dialogue_id": "0101Adv02_Narrative003",
+    "speaker": "[Narrative]",
+    "japanese_text": "夢だったのだと安堵したのも束の間――その眼がみるみる見開かれていく。",
+    "chinese_text": "原来是做梦。她才刚安下心来——\n眼前的光景就逐渐清晰了起来。"
+  },
+  {
+    "dialogue_id": "0101Adv02_Ema002",
+    "speaker": "Ema",
+    "japanese_text": "え、な、なに、ここ……？",
+    "chinese_text": "咦，怎么回事，这里是……？"
+  },
+  {
+    "dialogue_id": "0101Adv02_Narrative004",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマが起き上がったのは、自分の部屋ではなかった。粗悪な造りの、２段ベッドの下段にいる。",
+    "chinese_text": "醒来的艾玛发现，这里不是她自己的房间。\n这是张做工粗糙的双层床，她睡在了这里的下铺。"
+  },
+  {
+    "dialogue_id": "0101Adv02_Narrative005",
+    "speaker": "[Narrative]",
+    "japanese_text": "古びた石壁が真横にあり、それは見る者にぞくりとした冷たさを感じさせた。",
+    "chinese_text": "床紧贴着老旧的石墙，\n而石墙似乎透着一股寒气，总令人不禁为之一颤。"
+  },
+  {
+    "dialogue_id": "0101Adv02_Narrative006",
+    "speaker": "[Narrative]",
+    "japanese_text": "室内は薄暗く、空気が澱 んでいる。そして――鉄格子に閉ざされていた。",
+    "chinese_text": "室内光线昏暗，空气也并不畅通。\n并且——有一道铁栅栏限制了自由。"
+  },
+  {
+    "dialogue_id": "0101Adv02_Ema003",
+    "speaker": "Ema",
+    "japanese_text": "ろ、牢屋……！？ なんで！？",
+    "chinese_text": "牢、牢房……！？为什么！？"
+  },
+  {
+    "dialogue_id": "0101Adv02_Narrative007",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマはパニックに陥りながらも、眠る前の記憶を懸命に手繰り寄せる。",
+    "chinese_text": "艾玛陷入了恐慌，\n拼命回想着睡前的记忆。"
+  },
+  {
+    "dialogue_id": "0101Adv02_Ema004",
+    "speaker": "Ema",
+    "japanese_text": "（明日から高校生だって……　ワクワクしながら眠ったはず）",
+    "chinese_text": "（昨天是想到明天我就要上高中了……\n很开心地睡着了才对）"
+  },
+  {
+    "dialogue_id": "0101Adv02_Narrative008",
+    "speaker": "[Narrative]",
+    "japanese_text": "春休みの最終日。",
+    "chinese_text": "昨天是春假的最后一天。"
+  },
+  {
+    "dialogue_id": "0101Adv02_Narrative009",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマは入浴して、パジャマに着替えて、早めにベッドに入った。",
+    "chinese_text": "艾玛早早地洗了澡，换了睡衣，\n早早地钻进了被窝里。"
+  },
+  {
+    "dialogue_id": "0101Adv02_Ema005",
+    "speaker": "Ema",
+    "japanese_text": "（眠る前に覚えてるのは……壁にかけてあった　ピカピカの高校の制服）",
+    "chinese_text": "（记得睡觉前……我还看着挂在墙上的\n全新的高中制服）"
+  },
+  {
+    "dialogue_id": "0101Adv02_Narrative010",
+    "speaker": "[Narrative]",
+    "japanese_text": "明日から袖を通すはずだったそれを眺め、エマは至福の笑みを浮かべていた。",
+    "chinese_text": "望着那件明天就要穿上的制服，\n艾玛露出了十分幸福的笑容。"
+  },
+  {
+    "dialogue_id": "0101Adv02_Ema006",
+    "speaker": "Ema",
+    "japanese_text": "（いちからぜんぶやりなおすんだって、決めて……）",
+    "chinese_text": "（还下了决心，一切要重头来过……）"
+  },
+  {
+    "dialogue_id": "0101Adv02_Narrative011",
+    "speaker": "[Narrative]",
+    "japanese_text": "それからふかふかのシーツにくるまれ、目を閉じた。",
+    "chinese_text": "然后在温暖的被窝包裹下，闭上了双眼。"
+  },
+  {
+    "dialogue_id": "0101Adv02_Narrative012",
+    "speaker": "[Narrative]",
+    "japanese_text": "しかし今は、牢屋に閉じ込められている。服も見たこともないものを着せられている。",
+    "chinese_text": "可是现在，她正被关在牢房里。\n身上还穿着自己从没见过的衣服。"
+  },
+  {
+    "dialogue_id": "0101Adv02_Ema007",
+    "speaker": "Ema",
+    "japanese_text": "（これって悪夢の続き……？）",
+    "chinese_text": "（这是噩梦的后续……？）"
+  },
+  {
+    "dialogue_id": "0101Adv02_Narrative013",
+    "speaker": "[Narrative]",
+    "japanese_text": "それにしては、触れる空気があまりにも生々しい。",
+    "chinese_text": "但，四周的一切却如此真实。"
+  },
+  {
+    "dialogue_id": "0101Adv02_Narrative014",
+    "speaker": "[Narrative]",
+    "japanese_text": "室内をざっと観察すると、通路側の鉄格子以外は四方をがっしりとした石壁で囲まれている。",
+    "chinese_text": "她大致观察了下室内。四周被结实的石墙包围，\n只有铁栅栏一面联通着过道。"
+  },
+  {
+    "dialogue_id": "0101Adv02_Narrative015",
+    "speaker": "[Narrative]",
+    "japanese_text": "壁にはテレビモニターが設置されている。",
+    "chinese_text": "墙上安装有电视屏幕。"
+  },
+  {
+    "dialogue_id": "0101Adv02_Narrative016",
+    "speaker": "[Narrative]",
+    "japanese_text": "中世めいた古牢の中で、現代でよく見るモニターは妙に浮いて見えた。",
+    "chinese_text": "在透着中世纪气息的古牢里面，\n这块现代随处可见的显示屏幕实在是格格不入。"
+  },
+  {
+    "dialogue_id": "0101Adv02_Ema008",
+    "speaker": "Ema",
+    "japanese_text": "ねえ、ここどこなのかな！？",
+    "chinese_text": "我说，这里究竟是什么地方！？"
+  },
+  {
+    "dialogue_id": "0101Adv02_Narrative017",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマは鉄格子に縋りついて叫んだ。",
+    "chinese_text": "艾玛抓着铁栅栏，喊出声来。"
+  },
+  {
+    "dialogue_id": "0101Adv02_Narrative018",
+    "speaker": "[Narrative]",
+    "japanese_text": "するとすぐに他の場所から、別の少女たちの悲鳴が遠く聞こえてくる。",
+    "chinese_text": "紧接着，远远地从其他地方传来了\n其他少女们的叫喊声。"
+  },
+  {
+    "dialogue_id": "0101Adv02_Unknown001",
+    "speaker": "Unknown",
+    "japanese_text": "何を考えていますの！？わたくしをこんなところに閉じ込めるなんて！",
+    "chinese_text": "竟把本小姐关在这种地方！\n究竟是什么意思啊！？"
+  },
+  {
+    "dialogue_id": "0101Adv02_Unknown002",
+    "speaker": "Unknown",
+    "japanese_text": "少女監禁とか、犯罪だよこれ！誰だか知らないけど、人生終わるよ！？",
+    "chinese_text": "监禁少女可是犯罪欸！虽然不知是谁，\n可干出来这种事，这辈子就到头了欸！？"
+  },
+  {
+    "dialogue_id": "0101Adv02_Unknown003",
+    "speaker": "Unknown",
+    "japanese_text": "ざけんなぶっ殺すぞおらぁ！ 出せぇ！！",
+    "chinese_text": "喂，开什么玩笑，我要杀了你！放我出去！！"
+  },
+  {
+    "dialogue_id": "0101Adv02_Ema009",
+    "speaker": "Ema",
+    "japanese_text": "（……よかった、閉じ込められているのは　ボクだけじゃない）",
+    "chinese_text": "（……太好了，被关进来的\n不止我一个人）"
+  },
+  {
+    "dialogue_id": "0101Adv02_Narrative019",
+    "speaker": "[Narrative]",
+    "japanese_text": "にわかに騒がしくなった場に、エマがホッとした表情を見せた、直後。",
+    "chinese_text": "现场忽然吵闹起来，\n艾玛的脸上露出了安心。紧接着——"
+  },
+  {
+    "dialogue_id": "0101Adv02_Unknown004",
+    "speaker": "Unknown",
+    "japanese_text": "――静かにしてくれないか？",
+    "chinese_text": "——能不能给我安静一下？"
+  },
+  {
+    "dialogue_id": "0101Adv02_Narrative020",
+    "speaker": "[Narrative]",
+    "japanese_text": "不意に、エマの背後から凛とした声が届いた。",
+    "chinese_text": "从艾玛身后冷不防传来一道清冽的声音。"
+  },
+  {
+    "dialogue_id": "0101Adv02_Narrative021",
+    "speaker": "[Narrative]",
+    "japanese_text": "その声にエマが振り返ると、２段ベッドの上段で、起き上がった人物がいた。",
+    "chinese_text": "艾玛顺着声音望去，\n发现双层床的上铺有个刚起身的人。"
+  },
+  {
+    "dialogue_id": "0101Adv02_Unknown005",
+    "speaker": "Unknown",
+    "japanese_text": "騒がしいのは正しくない。",
+    "chinese_text": "大吵大闹是不对的。"
+  },
+  {
+    "dialogue_id": "0101Adv02_Ema010",
+    "speaker": "Ema",
+    "japanese_text": "――！！",
+    "chinese_text": "——！！"
+  },
+  {
+    "dialogue_id": "0101Adv02_Narrative022",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマは衝撃で立ち尽くし、息を呑んだ。起き上がって発言したその少女を知っていたからだ。",
+    "chinese_text": "艾玛十分吃惊，瞬间忘记了呼吸。\n因为，她认识这位说话的少女。"
+  },
+  {
+    "dialogue_id": "0101Adv02_Ema011",
+    "speaker": "Ema",
+    "japanese_text": "（ウソでしょ……　二階堂ヒロ……ちゃん？）",
+    "chinese_text": "（真的假的……\n是二阶堂希罗……？）"
+  },
+  {
+    "dialogue_id": "0101Adv02_Narrative023",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマの中学時代を暗黒に貶めた、幼なじみ。",
+    "chinese_text": "二阶堂希罗——"
+  },
+  {
+    "dialogue_id": "0101Adv02_Narrative024",
+    "speaker": "[Narrative]",
+    "japanese_text": "みんなの憧れで、常に中心で可憐に微笑んでいた少女――それが、二階堂ヒロだった。",
+    "chinese_text": "是在艾玛的初中时代，令她深陷黑暗的同窗，\n也是广受众人仰慕，常在人群中心可爱地微笑着的少女……"
+  },
+  {
+    "dialogue_id": "0101Adv02_Narrative025",
+    "speaker": "[Narrative]",
+    "japanese_text": "目が合ったヒロの方も、今までエマが見たことないほど大きく目を見開いていた。",
+    "chinese_text": "和她对上眼的希罗，也大大的瞪圆了眼睛。\n艾玛还是第一次见有人把眼睛瞪得那么大。"
+  },
+  {
+    "dialogue_id": "0101Adv02_Hiro001",
+    "speaker": "Hiro",
+    "japanese_text": "何故、君がここに？",
+    "chinese_text": "为什么你会在这里？"
+  },
+  {
+    "dialogue_id": "0101Adv02_Narrative026",
+    "speaker": "[Narrative]",
+    "japanese_text": "ヒロはベッドからひらりと降りて、エマに問いかける。",
+    "chinese_text": "希罗轻快的爬下了床，向艾玛问道。"
+  },
+  {
+    "dialogue_id": "0101Adv02_Narrative027",
+    "speaker": "[Narrative]",
+    "japanese_text": "かつての幼なじみが目の前に現れたことで、エマはひどく狼狽し、言葉を失っていた。",
+    "chinese_text": "往日同窗竟出现在眼前，\n惊慌失措的艾玛哑口无言。"
+  },
+  {
+    "dialogue_id": "0101Adv02_Ema012",
+    "speaker": "Ema",
+    "japanese_text": "あ……。",
+    "chinese_text": "啊……"
+  },
+  {
+    "dialogue_id": "0101Adv02_Hiro002",
+    "speaker": "Hiro",
+    "japanese_text": "ここはどこだ？",
+    "chinese_text": "这是哪里？"
+  },
+  {
+    "dialogue_id": "0101Adv02_Narrative028",
+    "speaker": "[Narrative]",
+    "japanese_text": "ヒロがきょろきょろと視線を巡らし、うわずった声を出す。",
+    "chinese_text": "希罗四下张望着，\n紧张地尖声问道。"
+  },
+  {
+    "dialogue_id": "0101Adv02_Ema013",
+    "speaker": "Ema",
+    "japanese_text": "あ、あのね、ヒロちゃ……。",
+    "chinese_text": "我、我说，希罗……"
+  },
+  {
+    "dialogue_id": "0101Adv02_Narrative029",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマはかつて呼んできたように、懐かしい呼称で彼女に声をかけようとする。",
+    "chinese_text": "艾玛鼓起勇气，\n尝试向往日旧识搭话。"
+  },
+  {
+    "dialogue_id": "0101Adv02_Narrative030",
+    "speaker": "[Narrative]",
+    "japanese_text": "その時――",
+    "chinese_text": "这时——"
+  },
+  {
+    "dialogue_id": "0101Adv02_Narrative031",
+    "speaker": "[Narrative]",
+    "japanese_text": "壁のモニターの方から、音が聞こえた。エマ、ヒロはハッとし、モニターに注目する。",
+    "chinese_text": "声音从墙壁上的显示屏幕传来。\n艾玛和希罗吓了一跳，然后望向屏幕。"
+  },
+  {
+    "dialogue_id": "0101Adv02_Ema014",
+    "speaker": "Ema",
+    "japanese_text": "（え、何！？ フ、フクロウの化け物……！？）",
+    "chinese_text": "（欸，怎么回事！？猫、猫头鹰怪物……！？）"
+  },
+  {
+    "dialogue_id": "0101Adv02_Warden001",
+    "speaker": "Warden",
+    "japanese_text": "あ……もしもし……映像って見えてます……？何せ古くて故障が多いので……やれやれ。",
+    "chinese_text": "啊……喂喂……看得见画面吗……？\n毕竟机器有好些年头了，故障特别多……唉呀呀。"
+  },
+  {
+    "dialogue_id": "0101Adv02_Warden002",
+    "speaker": "Warden",
+    "japanese_text": "私、ゴクチョーと申します。",
+    "chinese_text": "大家好，我是典狱长。"
+  },
+  {
+    "dialogue_id": "0101Adv02_Warden003",
+    "speaker": "Warden",
+    "japanese_text": "詳しい説明がしたいので、ラウンジに集合してください。",
+    "chinese_text": "我想给大家作详细说明，\n请各位到会客厅来集合。"
+  },
+  {
+    "dialogue_id": "0101Adv02_Warden004",
+    "speaker": "Warden",
+    "japanese_text": "監房の鍵を開けますので、看守の後についてきてください。",
+    "chinese_text": "我会给大家打开牢房的锁，\n之后请大家跟着带路的看守。"
+  },
+  {
+    "dialogue_id": "0101Adv02_Warden005",
+    "speaker": "Warden",
+    "japanese_text": "抵抗とかは自由なんですが……命とかなくなっちゃうので……はい……。",
+    "chinese_text": "想反抗也没问题……\n只不过小命不保罢了……嗯……"
+  },
+  {
+    "dialogue_id": "0101Adv02_Narrative032",
+    "speaker": "[Narrative]",
+    "japanese_text": "モニターは再び真っ暗になった。",
+    "chinese_text": "显示屏幕再次回归一片漆黑。"
+  },
+  {
+    "dialogue_id": "0101Adv02_Ema015",
+    "speaker": "Ema",
+    "japanese_text": "ゴクチョー……？ 看守……？",
+    "chinese_text": "典狱长……？看守……？"
+  },
+  {
+    "dialogue_id": "0101Adv02_Narrative033",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマは理解が追いつかないのか、しばらく立ち尽くしていた。ヒロも同様だ。すると、",
+    "chinese_text": "艾玛似乎思考不太跟得上状况的变化，呆站在原地一动不动——\n而她身边的希罗也一样。紧接着——"
+  },
+  {
+    "dialogue_id": "0101Adv02_Narrative034",
+    "speaker": "[Narrative]",
+    "japanese_text": "鉄格子の向こう、通路の方から。引きずるような重々しい音が近付いてきている。",
+    "chinese_text": "从铁栅栏的另一侧——过道处，\n传来了某样沉重物体的移动声，且愈来愈接近。"
+  },
+  {
+    "dialogue_id": "0101Adv02_Narrative035",
+    "speaker": "[Narrative]",
+    "japanese_text": "その音はどこかおぞましく、不穏なものが接近していることをエマたちに感じさせた。",
+    "chinese_text": "那声音透着一股令人汗毛直竖的感觉，\n令艾玛她们本能地察觉到了危险。"
+  },
+  {
+    "dialogue_id": "0101Adv02_Narrative036",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマもヒロも身を強張らせ、――その視線が、ゆるゆると、通路に向けられる。",
+    "chinese_text": "艾玛和希罗绷紧了身子，\n——然后缓慢地将视线挪动到过道上。"
+  },
+  {
+    "dialogue_id": "0101Adv02_Ema016",
+    "speaker": "Ema",
+    "japanese_text": "ひっ……。",
+    "chinese_text": "噫……"
+  },
+  {
+    "dialogue_id": "0101Adv02_Narrative037",
+    "speaker": "[Narrative]",
+    "japanese_text": "悲鳴をあげかけたエマが、両手で自身の口を塞いだ。",
+    "chinese_text": "差点惊声大喊的艾玛，用双手捂住了自己的嘴。"
+  },
+  {
+    "dialogue_id": "0101Adv02_Narrative038",
+    "speaker": "[Narrative]",
+    "japanese_text": "２、３メートルはあるだろうか。ぼろぼろの黒衣をまとった大きな何かが立っていた。",
+    "chinese_text": "面前出现了披着破烂黑衣的不明物体。\n那东西大概有两三米高。"
+  },
+  {
+    "dialogue_id": "0101Adv02_Narrative039",
+    "speaker": "[Narrative]",
+    "japanese_text": "仮面をつけていて顔はわからないが、明らかに人間ではない、何か。",
+    "chinese_text": "虽然戴着面具，看不见面孔，\n但从外形看，明显不是人类。"
+  },
+  {
+    "dialogue_id": "0101Adv02_Ema017",
+    "speaker": "Ema",
+    "japanese_text": "ヒ、ヒロちゃ……。",
+    "chinese_text": "希、希罗……"
+  },
+  {
+    "dialogue_id": "0101Adv02_Narrative040",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマは恐怖のあまり、ヒロの腕にしがみつく。ヒロもさすがに、呆然と通路の異形を見ている。",
+    "chinese_text": "艾玛在恐惧的驱使下，不禁抓紧了希罗的手臂。\n就连刚才还很冷静的希罗也望着过道上的异形，呆站着一动不动。"
+  },
+  {
+    "dialogue_id": "0101Adv02_Unknown006",
+    "speaker": "Unknown",
+    "japanese_text": "ぎゃああぁ！ 触んな化け物ぉ！ キモいから！わかった、わかりました、行くから！！",
+    "chinese_text": "呀啊啊啊！怪物别碰我！好恶心！\n好了，好了啦，我走就是！！"
+  },
+  {
+    "dialogue_id": "0101Adv02_Narrative041",
+    "speaker": "[Narrative]",
+    "japanese_text": "他の牢屋にいた誰かが、化け物に連行されている様子がエマたちの耳に届いた。",
+    "chinese_text": "艾玛她们听见，其他牢房里\n有人被怪物强行带走了。"
+  },
+  {
+    "dialogue_id": "0101Adv02_Narrative042",
+    "speaker": "[Narrative]",
+    "japanese_text": "２人はますますゾッとする。",
+    "chinese_text": "这让她们两个感到越来越害怕了。"
+  },
+  {
+    "dialogue_id": "0101Adv02_Hiro003",
+    "speaker": "Hiro",
+    "japanese_text": "正しい説明がなされるのかな。それなら早く向かわないと……。",
+    "chinese_text": "所谓的说明，会解释清楚情况吗。\n那我得快点过去……"
+  },
+  {
+    "dialogue_id": "0101Adv02_Narrative043",
+    "speaker": "[Narrative]",
+    "japanese_text": "ヒロは言いかけてから、横にいるエマに目を向けた。",
+    "chinese_text": "希罗自言自语着，然后望向身旁的艾玛。"
+  },
+  {
+    "dialogue_id": "0101Adv02_Narrative044",
+    "speaker": "[Narrative]",
+    "japanese_text": "その時になってようやく、エマが腕にしがみついていることに気付き。",
+    "chinese_text": "这时她终于发现，\n艾玛紧紧抓住了她的手臂。"
+  },
+  {
+    "dialogue_id": "0101Adv02_Narrative045",
+    "speaker": "[Narrative]",
+    "japanese_text": "――バッと、強く、手を振り払った。",
+    "chinese_text": "——唰。\n她用力地甩开了艾玛的手。"
+  },
+  {
+    "dialogue_id": "0101Adv02_Ema018",
+    "speaker": "Ema",
+    "japanese_text": "っ……！",
+    "chinese_text": "……！"
+  },
+  {
+    "dialogue_id": "0101Adv02_Hiro004",
+    "speaker": "Hiro",
+    "japanese_text": "気安く触れないでほしい。忘れてもらっては困る。私は君が嫌いなんだ。",
+    "chinese_text": "不要随便碰我。\n你可别忘了，我讨厌你。"
+  },
+  {
+    "dialogue_id": "0101Adv02_Narrative046",
+    "speaker": "[Narrative]",
+    "japanese_text": "吐き捨てるヒロの瞳は、根深い嫌悪の色を宿していた。",
+    "chinese_text": "希罗的眼神中\n透着一股深深的厌弃。"
+  }
+]

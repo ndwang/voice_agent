@@ -1,0 +1,362 @@
+[
+  {
+    "dialogue_id": "0101Adv13_Narrative001",
+    "speaker": "[Narrative]",
+    "japanese_text": "牢屋敷２階で入れる部屋は、２つあった。図書室と、娯楽室だ。",
+    "chinese_text": "监牢二楼可以进的房间只有两个。\n一个是图书室，一个是娱乐室。"
+  },
+  {
+    "dialogue_id": "0101Adv13_Narrative002",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマとシェリーは、図書室の方へと踏み込んでみる。",
+    "chinese_text": "艾玛和雪莉决定\n去图书室看一看。"
+  },
+  {
+    "dialogue_id": "0101Adv13_Narrative003",
+    "speaker": "[Narrative]",
+    "japanese_text": "そこは本棚がずらりと並び、古い紙のにおいが漂う静謐な空間だった。",
+    "chinese_text": "图书室内的书架整齐地排列着，\n空气中飘着一股老旧的纸香味，呈现出静谧的气氛。"
+  },
+  {
+    "dialogue_id": "0101Adv13_Ema001",
+    "speaker": "Ema",
+    "japanese_text": "どんな本が置いてあるのかな。",
+    "chinese_text": "这里会有什么书呢。"
+  },
+  {
+    "dialogue_id": "0101Adv13_Narrative004",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマは適当に抜き取ってぱらぱらと捲ってみるが、読めない文字が並んでいる。",
+    "chinese_text": "艾玛随手拿出一本书翻了起来，\n可上面写的全是看不懂的字。"
+  },
+  {
+    "dialogue_id": "0101Adv13_Ema002",
+    "speaker": "Ema",
+    "japanese_text": "うーん……読めない……。",
+    "chinese_text": "唔……看不懂……"
+  },
+  {
+    "dialogue_id": "0101Adv13_Sherry001",
+    "speaker": "Sherry",
+    "japanese_text": "私たちの国の文字じゃありませんね。この牢屋敷って、どこの国にあるんでしょうね？というか……まさか異世界！？",
+    "chinese_text": "这不是我们国家的文字呢。\n这座监牢究竟在哪个国家？\n难不成……是异世界！？"
+  },
+  {
+    "dialogue_id": "0101Adv13_Ema003",
+    "speaker": "Ema",
+    "japanese_text": "そっ、そんな絶望するようなこと言わないで！",
+    "chinese_text": "你、你不要说这么令人绝望的话啦！"
+  },
+  {
+    "dialogue_id": "0101Adv13_Narrative005",
+    "speaker": "[Narrative]",
+    "japanese_text": "シェリーも本棚の本を取り出し、何気なくぱらぱらと捲っていく。",
+    "chinese_text": "雪莉也从书架上拿出一本书，\n随意的翻动着。"
+  },
+  {
+    "dialogue_id": "0101Adv13_Sherry002",
+    "speaker": "Sherry",
+    "japanese_text": "エマさん、エマさん！これ、これ見てください！",
+    "chinese_text": "艾玛，艾玛！\n快，快来看这个！"
+  },
+  {
+    "dialogue_id": "0101Adv13_Narrative006",
+    "speaker": "[Narrative]",
+    "japanese_text": "シェリーが手招きしたので、エマも本を覗き込む。開かれたページには――",
+    "chinese_text": "见雪莉朝她挥手，\n艾玛的视线也往书上面移动。\n只见打开的那一页上面写着——"
+  },
+  {
+    "dialogue_id": "0101Adv13_Narrative007",
+    "speaker": "[Narrative]",
+    "japanese_text": "たすけて",
+    "chinese_text": "救命"
+  },
+  {
+    "dialogue_id": "0101Adv13_Narrative008",
+    "speaker": "[Narrative]",
+    "japanese_text": "と、血文字で書かれていた。エマは息を呑んだ。",
+    "chinese_text": "血红的字迹写着这么一句话。\n艾玛倒吸一口凉气。"
+  },
+  {
+    "dialogue_id": "0101Adv13_Sherry003",
+    "speaker": "Sherry",
+    "japanese_text": "これって、前捕まってた魔女候補の子たちの誰かが書いたんですかね！？",
+    "chinese_text": "这个难道是之前被抓的预备魔女\n在上面写的！？"
+  },
+  {
+    "dialogue_id": "0101Adv13_Ema004",
+    "speaker": "Ema",
+    "japanese_text": "そうかも……。",
+    "chinese_text": "可能是……"
+  },
+  {
+    "dialogue_id": "0101Adv13_Sherry004",
+    "speaker": "Sherry",
+    "japanese_text": "高まりますね～！",
+    "chinese_text": "令人兴奋耶～！"
+  },
+  {
+    "dialogue_id": "0101Adv13_Ema005",
+    "speaker": "Ema",
+    "japanese_text": "ちっとも高まらないよ！",
+    "chinese_text": "一点都不兴奋啦！"
+  },
+  {
+    "dialogue_id": "0101Adv13_Sherry005",
+    "speaker": "Sherry",
+    "japanese_text": "他の本にも、こういうメッセージが残されていたりするんですかね。ちょっと調べてみませんか？",
+    "chinese_text": "其他书上会不会\n也留下了这类信息呢。\n你要不要再调查一下？"
+  },
+  {
+    "dialogue_id": "0101Adv13_Narrative009",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマはシェリーの提案に――",
+    "chinese_text": "对于雪莉的建议，艾玛——"
+  },
+  {
+    "dialogue_id": "0101Adv13_Narrative010",
+    "speaker": "[Narrative]",
+    "japanese_text": "首を横に振った。",
+    "chinese_text": "摇了摇头。"
+  },
+  {
+    "dialogue_id": "0101Adv13_Ema006",
+    "speaker": "Ema",
+    "japanese_text": "今はやめとこう。さっきの血文字、なんだか怖いよ……。",
+    "chinese_text": "现在还是算了。总觉得\n刚刚的血字好吓人……"
+  },
+  {
+    "dialogue_id": "0101Adv13_Ema007",
+    "speaker": "Ema",
+    "japanese_text": "それにこの数の本を調べるなら、もっと人手もあったほうがいいと思うし……。",
+    "chinese_text": "而且要调查这么多书的话，\n我觉得应该多找几个人来比较好……"
+  },
+  {
+    "dialogue_id": "0101Adv13_Margo001",
+    "speaker": "Margo",
+    "japanese_text": "――あら。",
+    "chinese_text": "——哎呀。"
+  },
+  {
+    "dialogue_id": "0101Adv13_Narrative011",
+    "speaker": "[Narrative]",
+    "japanese_text": "並ぶ本棚の陰から、少女が１人、ひょっこりと顔をのぞかせた。",
+    "chinese_text": "在某个书架的阴影处，有一位少女\n稍稍探了探头看向这边。"
+  },
+  {
+    "dialogue_id": "0101Adv13_Ema008",
+    "speaker": "Ema",
+    "japanese_text": "マーゴちゃん……だよね。いたんだ。",
+    "chinese_text": "你叫玛格……对吗。你原来在这里啊。"
+  },
+  {
+    "dialogue_id": "0101Adv13_Margo002",
+    "speaker": "Margo",
+    "japanese_text": "ええ。可愛いさえずりが聞こえたから、ちょっとのぞきにきたの。",
+    "chinese_text": "嗯。听到有小鸟在这里唱歌，\n我就想看看是什么情况。"
+  },
+  {
+    "dialogue_id": "0101Adv13_Ema009",
+    "speaker": "Ema",
+    "japanese_text": "う、うるさくしてごめん。",
+    "chinese_text": "不、不好意思吵到你了。"
+  },
+  {
+    "dialogue_id": "0101Adv13_Margo003",
+    "speaker": "Margo",
+    "japanese_text": "いいのよ。読める本も見当たらないし、暇してたところだったの。",
+    "chinese_text": "没关系啦。\n我在这里没找到能看的书，正愁没事可干呢。"
+  },
+  {
+    "dialogue_id": "0101Adv13_Narrative012",
+    "speaker": "[Narrative]",
+    "japanese_text": "そう言って、彼女はふらりと歩いていく。誘われるように、エマとシェリーもついていってしまう。",
+    "chinese_text": "她边说着，边迈着轻飘飘的步伐走到了别处。\n明明没有招呼她们，艾玛和雪莉却像着了魔似的，跟在了她后面。"
+  },
+  {
+    "dialogue_id": "0101Adv13_Narrative013",
+    "speaker": "[Narrative]",
+    "japanese_text": "読書スペースの小さな机には、カードがひろがっていた。",
+    "chinese_text": "阅读区的一张小桌子上\n铺满了卡片。"
+  },
+  {
+    "dialogue_id": "0101Adv13_Sherry006",
+    "speaker": "Sherry",
+    "japanese_text": "これってタロットカードですよね？",
+    "chinese_text": "这是塔罗牌，对吗？"
+  },
+  {
+    "dialogue_id": "0101Adv13_Margo004",
+    "speaker": "Margo",
+    "japanese_text": "ええ。娯楽室に置いてあったからもらったの。もともと好きだったのよ。",
+    "chinese_text": "嗯。是放在娱乐室的，我把它拿过来了。\n我本来就很喜欢塔罗牌哦。"
+  },
+  {
+    "dialogue_id": "0101Adv13_Margo005",
+    "speaker": "Margo",
+    "japanese_text": "あなたたちのことも、占ってさしあげましょうか？",
+    "chinese_text": "要不要我来帮你们\n占卜一下呢？"
+  },
+  {
+    "dialogue_id": "0101Adv13_Sherry007",
+    "speaker": "Sherry",
+    "japanese_text": "マーゴさんはもしかして、タロットカードで魔法を使うんですか？",
+    "chinese_text": "难道玛格你是通过\n塔罗牌使用魔法的吗？"
+  },
+  {
+    "dialogue_id": "0101Adv13_Narrative014",
+    "speaker": "[Narrative]",
+    "japanese_text": "マーゴは椅子に腰掛け、妖艶に微笑む。",
+    "chinese_text": "玛格坐在椅子上，露出一个妖艳的微笑。"
+  },
+  {
+    "dialogue_id": "0101Adv13_Margo006",
+    "speaker": "Margo",
+    "japanese_text": "いいえ。なんでそんなことを聞くのかしら？",
+    "chinese_text": "不是的。你们为什么想到问这个？"
+  },
+  {
+    "dialogue_id": "0101Adv13_Sherry008",
+    "speaker": "Sherry",
+    "japanese_text": "私、みんながどんな魔法を使うのか気になっちゃって、気になっちゃって！",
+    "chinese_text": "我很好奇，大家都会用一些\n怎样的魔法，好奇得不得了！"
+  },
+  {
+    "dialogue_id": "0101Adv13_Narrative015",
+    "speaker": "[Narrative]",
+    "japanese_text": "くすくすと、マーゴは笑った。",
+    "chinese_text": "玛格不禁笑了起来。"
+  },
+  {
+    "dialogue_id": "0101Adv13_Margo007",
+    "speaker": "Margo",
+    "japanese_text": "可愛いわね。",
+    "chinese_text": "真可爱。"
+  },
+  {
+    "dialogue_id": "0101Adv13_Narrative016",
+    "speaker": "[Narrative]",
+    "japanese_text": "すんなり教えてくれるのかと思ったが、笑顔のままマーゴは首を横に振った。",
+    "chinese_text": "和设想相反，玛格没有直接配合提问，\n而是边笑着摇了摇头。"
+  },
+  {
+    "dialogue_id": "0101Adv13_Margo008",
+    "speaker": "Margo",
+    "japanese_text": "でも、ごめんなさい。どんな魔法を使えるのか教えたくないわ。",
+    "chinese_text": "不过，很抱歉，\n我不能告诉你们我会用怎样的魔法。"
+  },
+  {
+    "dialogue_id": "0101Adv13_Margo009",
+    "speaker": "Margo",
+    "japanese_text": "この牢屋敷でこれから殺人事件が起こるとしたら、手持ちカードを晒すのは、愚かだと思わない？",
+    "chinese_text": "如果说，之后这座监牢内会发生凶杀案，\n你们难道不觉得，暴露手里的底牌是很愚蠢的吗？"
+  },
+  {
+    "dialogue_id": "0101Adv13_Narrative017",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマはマーゴの言い分に、むっと眉根を寄せてしまう。",
+    "chinese_text": "听玛格这么讲，\n艾玛不禁皱起眉头。"
+  },
+  {
+    "dialogue_id": "0101Adv13_Ema010",
+    "speaker": "Ema",
+    "japanese_text": "殺人事件なんて、起こるはずないよ。",
+    "chinese_text": "我相信不会发生凶杀案的。"
+  },
+  {
+    "dialogue_id": "0101Adv13_Narrative018",
+    "speaker": "[Narrative]",
+    "japanese_text": "マーゴは１枚のカードを、エマとシェリーに翳してみせた。",
+    "chinese_text": "玛格拿出一张牌，\n放在了艾玛和雪莉面前。"
+  },
+  {
+    "dialogue_id": "0101Adv13_Margo010",
+    "speaker": "Margo",
+    "japanese_text": "【塔】の正位置。……近い未来、誰か死ぬわ。",
+    "chinese_text": "【塔】的正位。\n……在不久的将来，会有某个人死去。"
+  },
+  {
+    "dialogue_id": "0101Adv13_Narrative019",
+    "speaker": "[Narrative]",
+    "japanese_text": "たかだか占いなのに、マーゴの言葉は妙な説得力がある。",
+    "chinese_text": "明明只是普通的占卜，\n但玛格的话却莫名地有说服力。"
+  },
+  {
+    "dialogue_id": "0101Adv13_Margo011",
+    "speaker": "Margo",
+    "japanese_text": "あなたたちも身辺に気を付けて。誰が殺意を抱いているかわからないもの。",
+    "chinese_text": "你们也要小心周遭的事物。\n毕竟我们没法知道，哪个人的身上埋藏着杀意。"
+  },
+  {
+    "dialogue_id": "0101Adv13_Ema011",
+    "speaker": "Ema",
+    "japanese_text": "そんな……みんなを疑うようなこと……。",
+    "chinese_text": "太过分了……竟然要让我怀疑其他人……"
+  },
+  {
+    "dialogue_id": "0101Adv13_Margo012",
+    "speaker": "Margo",
+    "japanese_text": "あら。昨日知り合ったばかりなのに、ずいぶん優しいのね。甘い、と言った方がいいかしら。",
+    "chinese_text": "哎呀。我们只不过才认识了一天，\n你还真是善良……还是应该说是天真呢。"
+  },
+  {
+    "dialogue_id": "0101Adv13_Margo013",
+    "speaker": "Margo",
+    "japanese_text": "お互いのことまだ何も知らないのに、どうして信じられるの？",
+    "chinese_text": "明明每个人之间都不是很熟悉，\n为什么你会选择相信别人？"
+  },
+  {
+    "dialogue_id": "0101Adv13_Ema012",
+    "speaker": "Ema",
+    "japanese_text": "それは……で、でも！少なくともボクは、殺人をするような子はいないと思う！",
+    "chinese_text": "我……不、不过！\n至少我觉得，她们不是会下手杀人的人！"
+  },
+  {
+    "dialogue_id": "0101Adv13_Margo014",
+    "speaker": "Margo",
+    "japanese_text": "あなたが唯一親しかった二階堂ヒロは、誰より早く殺意を剥き出しにしていたようだけど？",
+    "chinese_text": "你最熟悉的那位二阶堂希罗，\n不是比谁都要更早地展露出杀意了吗？"
+  },
+  {
+    "dialogue_id": "0101Adv13_Ema013",
+    "speaker": "Ema",
+    "japanese_text": "……っ",
+    "chinese_text": "……"
+  },
+  {
+    "dialogue_id": "0101Adv13_Narrative020",
+    "speaker": "[Narrative]",
+    "japanese_text": "マーゴはあくまで満面の笑みを崩さない。それなのに、言葉は鋭利な刃物のようにエマに突き刺さる。",
+    "chinese_text": "玛格的脸上仍堆着满面的笑容，\n可是她的话语就像一把锋利的刀，狠狠刺伤了艾玛。"
+  },
+  {
+    "dialogue_id": "0101Adv13_Narrative021",
+    "speaker": "[Narrative]",
+    "japanese_text": "穏やかではない空気が、エマとマーゴの間に漂う。察したようにシェリーが間に立ってきた。",
+    "chinese_text": "眼看艾玛和玛格之间要掀起一股波浪，\n雪莉便插到了她们两人中间。"
+  },
+  {
+    "dialogue_id": "0101Adv13_Sherry009",
+    "speaker": "Sherry",
+    "japanese_text": "あーっと、そろそろ行きましょうか、エマさん！",
+    "chinese_text": "那个，我们该走啦，\n艾玛！"
+  },
+  {
+    "dialogue_id": "0101Adv13_Ema014",
+    "speaker": "Ema",
+    "japanese_text": "うん……。",
+    "chinese_text": "嗯……"
+  },
+  {
+    "dialogue_id": "0101Adv13_Sherry010",
+    "speaker": "Sherry",
+    "japanese_text": "お邪魔しましたっ！またマーゴさんのこと詳しく聞かせてくださいねっ",
+    "chinese_text": "打搅了！\n我们下次再来跟你讨教你的事哦。"
+  },
+  {
+    "dialogue_id": "0101Adv13_Margo015",
+    "speaker": "Margo",
+    "japanese_text": "ウフフ……占ってほしかったら、いつでも言ってちょうだい。",
+    "chinese_text": "呵呵……想要占卜的话，\n随时来跟我说哦。"
+  }
+]

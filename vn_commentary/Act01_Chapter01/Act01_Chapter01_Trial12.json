@@ -1,0 +1,776 @@
+[
+  {
+    "dialogue_id": "0101Trial12_Margo001",
+    "speaker": "Margo",
+    "japanese_text": "レイアちゃんが犯人で、これまでの疑問を魔法で解決しているのだとしたら……。",
+    "chinese_text": "假设蕾雅是凶手，\n而至今为止的疑问\n都可以用魔法\n来解释的话……"
+  },
+  {
+    "dialogue_id": "0101Trial12_Margo002",
+    "speaker": "Margo",
+    "japanese_text": "レイアちゃんの魔法は、次の【３つの条件】を満たす必要があると思うわ。",
+    "chinese_text": "我认为她的魔法\n需要全部满足以下\n【三种条件】才可以。"
+  },
+  {
+    "dialogue_id": "0101Trial12_Margo003",
+    "speaker": "Margo",
+    "japanese_text": "１つは当然、【普段から魅了が嘘だとバレないこと】ね。",
+    "chinese_text": "第一个当然就是，\n【平时就不会暴露\n魅惑是个谎言】。"
+  },
+  {
+    "dialogue_id": "0101Trial12_Hanna001",
+    "speaker": "Hanna",
+    "japanese_text": "あまりにも遠い効果の魔法だと、取り繕うのが大変そうですわ……。",
+    "chinese_text": "如果魔法的效果\n相差得太远，\n要掩饰这件事\n就太麻烦了……"
+  },
+  {
+    "dialogue_id": "0101Trial12_Margo004",
+    "speaker": "Margo",
+    "japanese_text": "そして２つ目に満たさなくてはいけない条件……。それは【目の前で殺害準備をしていても抵抗できなくする】こと……。",
+    "chinese_text": "而第二个\n必须满足的条件……\n那就是\n【就算在面前做杀人准备\n也没办法抵抗】……"
+  },
+  {
+    "dialogue_id": "0101Trial12_Nanoka001",
+    "speaker": "Nanoka",
+    "japanese_text": "城ケ崎ノアが目の前で準備していた相手に何も抵抗しなかったとは、少し考えにくいわね。……部屋の外から、正面を刺されているのだし。",
+    "chinese_text": "很难想像，\n面对正在做准备的凶手，\n城崎诺亚没有做\n任何的反抗。\n……毕竟是有人从房间外\n当面把她刺死的。"
+  },
+  {
+    "dialogue_id": "0101Trial12_Margo005",
+    "speaker": "Margo",
+    "japanese_text": "最後の３つ目の条件。それは【殺害現場の前を通った時、中の死体に気付かれない】ようにすること……。",
+    "chinese_text": "最后第三个条件，\n那就是\n让其他人\n【经过凶杀现场时，\n察觉不到其中的尸体】……"
+  },
+  {
+    "dialogue_id": "0101Trial12_Meruru001",
+    "speaker": "Meruru",
+    "japanese_text": "ココさんやミリアさんは死体現場の前を通ったのに中を見ていません。",
+    "chinese_text": "可可和米莉亚\n明明经过了尸体现场，\n却没有往里面看一眼。"
+  },
+  {
+    "dialogue_id": "0101Trial12_Meruru002",
+    "speaker": "Meruru",
+    "japanese_text": "もしかするとそれも偶然で済ませられてしまうのかもしれませんが……。",
+    "chinese_text": "说不定，\n这也许可以\n用偶然\n来解释……"
+  },
+  {
+    "dialogue_id": "0101Trial12_Alisa001",
+    "speaker": "Alisa",
+    "japanese_text": "……逆にいえば、偶然じゃないって言えるなら蓮見が犯人という意見にも納得できるな。",
+    "chinese_text": "……反过来讲，\n如果能证明并非偶然，\n那么莲见是凶手的意见\n就有说服力了。"
+  },
+  {
+    "dialogue_id": "0101Trial12_Margo006",
+    "speaker": "Margo",
+    "japanese_text": "さあエマちゃん。この３つの条件が成立する魔法……あるのかしら？",
+    "chinese_text": "怎么样，艾玛。\n能让这三样条件\n成立的魔法……\n究竟存不存在呢？"
+  },
+  {
+    "dialogue_id": "0101Trial12_Leia001",
+    "speaker": "Leia",
+    "japanese_text": "私の魔法は間違いなく【魅了】だよ。私に少しだけ恋心を抱いてもらう……そんな、役に立たない魔法さ。",
+    "chinese_text": "我的魔法\n毫无疑问是【魅惑】。\n让他人对我\n稍微怀抱爱意……\n就是这么没用的魔法。"
+  },
+  {
+    "dialogue_id": "0101Trial12_Hanna002",
+    "speaker": "Hanna",
+    "japanese_text": "た、たしかに目を離せなくなったり、ドキドキしてしまうことがありますわ……！見つめていると顔も熱くなって……。",
+    "chinese_text": "确、确实有过\n无法移开视线，\n心怦怦直跳的情况……！\n盯着看的话\n脸也会发烫……"
+  },
+  {
+    "dialogue_id": "0101Trial12_Hanna003",
+    "speaker": "Hanna",
+    "japanese_text": "これは魅了の魔法に違いありませんわ～！！",
+    "chinese_text": "这百分百就是\n魅惑的魔法～！！"
+  },
+  {
+    "dialogue_id": "0101Trial12_Miria001",
+    "speaker": "Miria",
+    "japanese_text": "うんうん。本当に綺麗だよねぇ、レイアちゃんは……。",
+    "chinese_text": "嗯嗯，\n小蕾她长得\n确实很漂亮啦……"
+  },
+  {
+    "dialogue_id": "0101Trial12_Miria002",
+    "speaker": "Miria",
+    "japanese_text": "……あ、いやこれは変な意味じゃないからね？一般論としてね？",
+    "chinese_text": "……啊，我可没有\n奇怪的意思哦？\n只是按普通人的看法来讲哦？"
+  },
+  {
+    "dialogue_id": "0101Trial12_Coco001",
+    "speaker": "Coco",
+    "japanese_text": "あてぃしはべつにそうは思わんけど～？本当に魅了なんか～？怪しい！",
+    "chinese_text": "我倒不觉得\n是这样欸～？\n真的是魅惑吗～？\n太可疑了！"
+  },
+  {
+    "dialogue_id": "0101Trial12_Leia002",
+    "speaker": "Leia",
+    "japanese_text": "効きやすい相手と効きにくい相手がいるだけだよ。",
+    "chinese_text": "只是对某些人很有效，\n对某些人\n没什么效果罢了。"
+  },
+  {
+    "dialogue_id": "0101Trial12_Leia003",
+    "speaker": "Leia",
+    "japanese_text": "たとえば……既に恋をしている人とかは効きにくいのかもね。ココくんは何か心当たりはないかい？",
+    "chinese_text": "比如说……\n对已经有心上人的人\n就不太有效。\n可可你\n有没有头绪呢？"
+  },
+  {
+    "dialogue_id": "0101Trial12_Coco002",
+    "speaker": "Coco",
+    "japanese_text": "は、はぁ！？べ、べつにあてぃしは推しがいるけど恋とかそういうんじゃねーし……！！な、なんか根拠でもあって言ってんのかぁ！？",
+    "chinese_text": "哈、哈！？\n虽、虽然我\n有我推啦，\n但这算不上\n恋爱对象……！！\n你、你说这话\n有什么\n根据吗！？"
+  },
+  {
+    "dialogue_id": "0101Trial12_Ema001",
+    "speaker": "Ema",
+    "japanese_text": "（レイアちゃんの魔法が嘘だったとき……　本物の魔法はマーゴちゃんが言った３つの条件を　満たすはず……！）",
+    "chinese_text": "（如果蕾雅的魔法是谎言……\n那真正的魔法就应该\n能满足玛格说的3种条件才对……！）"
+  },
+  {
+    "dialogue_id": "0101Trial12_Meruru003",
+    "speaker": "Meruru",
+    "japanese_text": "エマさん。皆さんの言葉が、私たちの力になります……！よく聞いてみましょう……！",
+    "chinese_text": "艾玛小姐，大家所说的话，会成为我们的力量……！\n认真倾听她们讲的话吧……！"
+  },
+  {
+    "dialogue_id": "0101Trial12_Ema002",
+    "speaker": "Ema",
+    "japanese_text": "うん……！",
+    "chinese_text": "嗯……！"
+  },
+  {
+    "dialogue_id": "0101Trial12_Ema003",
+    "speaker": "Ema",
+    "japanese_text": "【ドキドキ】……？……そうか！",
+    "chinese_text": "【心怦怦直跳】……？\n……对了！"
+  },
+  {
+    "dialogue_id": "0101Trial12_Ema004",
+    "speaker": "Ema",
+    "japanese_text": "もしかして、それがレイアちゃんの本当の魔法なんじゃないかな……！？",
+    "chinese_text": "说不定，那就是\n蕾雅真正的魔法……！？"
+  },
+  {
+    "dialogue_id": "0101Trial12_Ema005",
+    "speaker": "Ema",
+    "japanese_text": "レイアちゃんの魔法は、【動悸を激しくする魔法】だったんだよ！",
+    "chinese_text": "蕾雅的魔法其实就是\n【让心跳加速的魔法】！"
+  },
+  {
+    "dialogue_id": "0101Trial12_Hanna004",
+    "speaker": "Hanna",
+    "japanese_text": "たしかにそれなら、このドキドキも納得できますわー！",
+    "chinese_text": "这样的话，我的莫名心跳确实讲得通！"
+  },
+  {
+    "dialogue_id": "0101Trial12_Alisa002",
+    "speaker": "Alisa",
+    "japanese_text": "ああ、納得いくな。……その他の点に目をつぶれば、な。",
+    "chinese_text": "嗯，说得通呢。\n……只要捂住眼睛不考虑其他的点就可以。"
+  },
+  {
+    "dialogue_id": "0101Trial12_Nanoka002",
+    "speaker": "Nanoka",
+    "japanese_text": "全然不自然な点の説明になっていないわ。",
+    "chinese_text": "完全没办法解释不自然的地方呢。"
+  },
+  {
+    "dialogue_id": "0101Trial12_Ema006",
+    "speaker": "Ema",
+    "japanese_text": "（すっぱり切り捨てられちゃった……！）",
+    "chinese_text": "（被干脆地否定了……！）"
+  },
+  {
+    "dialogue_id": "0101Trial12_Sherry001",
+    "speaker": "Sherry",
+    "japanese_text": "それに心臓の鼓動を制御できるなら、動きを止めて【病死】してもらった方が完全犯罪としては簡単そうですよね～！",
+    "chinese_text": "而且，如果能控制心跳的话，\n还不如让心跳停止制造【病死】，\n轻松实现完美犯罪呢～！"
+  },
+  {
+    "dialogue_id": "0101Trial12_Alisa003",
+    "speaker": "Alisa",
+    "japanese_text": "……発想が怖ぇよ。",
+    "chinese_text": "……你的想法也太可怕了。"
+  },
+  {
+    "dialogue_id": "0101Trial12_Ema007",
+    "speaker": "Ema",
+    "japanese_text": "（見当違いのことを言っちゃったみたいだ……！　もう一度考え直さないと！）",
+    "chinese_text": "（我好像作出了错误的判断……！\n我要重新思考一下才行！）"
+  },
+  {
+    "dialogue_id": "0101Trial12_Ema008",
+    "speaker": "Ema",
+    "japanese_text": "（でも、ならレイアちゃんの本当の魔法ってどんなのだろう？）",
+    "chinese_text": "（可是，蕾雅真正的魔法究竟是怎么样的呢？）"
+  },
+  {
+    "dialogue_id": "0101Trial12_Ema009",
+    "speaker": "Ema",
+    "japanese_text": "（マーゴちゃんの言った３つの条件……　それに当てはまる魔法って……？）",
+    "chinese_text": "（玛格所说的3种条件……\n符合这些条件的魔法究竟是……？）"
+  },
+  {
+    "dialogue_id": "0101Trial12_Ema010",
+    "speaker": "Ema",
+    "japanese_text": "【熱】……？……それだ！",
+    "chinese_text": "【发烫】……？\n……就是这个！"
+  },
+  {
+    "dialogue_id": "0101Trial12_Ema011",
+    "speaker": "Ema",
+    "japanese_text": "レイアちゃんの魔法は熱を操って自分が恋してるって勘違いさせる魔法なんじゃないかな！？",
+    "chinese_text": "蕾雅的魔法会不会就是\n通过操作热能\n令人误会自己产生了恋意的魔法！？"
+  },
+  {
+    "dialogue_id": "0101Trial12_Hanna005",
+    "speaker": "Hanna",
+    "japanese_text": "たしかに！そうでも考えないと、このドキドキは納得できませんわー！",
+    "chinese_text": "还真是！\n不然的话，\n要怎么解释我的心跳才好～！"
+  },
+  {
+    "dialogue_id": "0101Trial12_Alisa004",
+    "speaker": "Alisa",
+    "japanese_text": "……で、それがどうやって殺害現場を他のヤツの目からごまかせるのに使えるんだ？",
+    "chinese_text": "……那，究竟要怎么用这个魔法\n蒙蔽其他人的双眼，\n让她看不见凶杀现场？"
+  },
+  {
+    "dialogue_id": "0101Trial12_Ema012",
+    "speaker": "Ema",
+    "japanese_text": "えっと……それは……。高熱を出させて、フラフラさせてたとか……。",
+    "chinese_text": "呃……这个……\n让她发高烧，变得头昏昏之类的……"
+  },
+  {
+    "dialogue_id": "0101Trial12_Coco003",
+    "speaker": "Coco",
+    "japanese_text": "あてぃしらが高熱出してたっての？",
+    "chinese_text": "我们当时有发高烧吗？"
+  },
+  {
+    "dialogue_id": "0101Trial12_Miria003",
+    "speaker": "Miria",
+    "japanese_text": "少なくとも、判断力が低下するぐらいにフラフラじゃなかったと思うけどなぁ……。",
+    "chinese_text": "至少没感觉出现\n头昏昏降低过判断力欸……"
+  },
+  {
+    "dialogue_id": "0101Trial12_Nanoka003",
+    "speaker": "Nanoka",
+    "japanese_text": "……無理がある理屈ね。",
+    "chinese_text": "……你的说法缺乏说服力啊。"
+  },
+  {
+    "dialogue_id": "0101Trial12_Ema013",
+    "speaker": "Ema",
+    "japanese_text": "（呆れられちゃったみたい……！）",
+    "chinese_text": "（好像让大家傻眼了……！）"
+  },
+  {
+    "dialogue_id": "0101Trial12_Ema014",
+    "speaker": "Ema",
+    "japanese_text": "（でも、ならレイアちゃんの本当の魔法ってどんなのだろう？）",
+    "chinese_text": "（可是，蕾雅真正的魔法究竟是怎么样的呢？）"
+  },
+  {
+    "dialogue_id": "0101Trial12_Ema015",
+    "speaker": "Ema",
+    "japanese_text": "（マーゴちゃんの言った３つの条件……　それに当てはまる魔法って……？）",
+    "chinese_text": "（玛格所说的3种条件……\n符合这些条件的魔法究竟是……？）"
+  },
+  {
+    "dialogue_id": "0101Trial12_Ema016",
+    "speaker": "Ema",
+    "japanese_text": "【恋】……？そうか、レイアちゃん！キミの魔法は相手が恋してるか見抜く魔法なんだね！",
+    "chinese_text": "【恋爱】……？\n我知道了，蕾雅！\n你的魔法就是看穿他人恋心的魔法，对不对！"
+  },
+  {
+    "dialogue_id": "0101Trial12_Ema017",
+    "speaker": "Ema",
+    "japanese_text": "他の人の恋愛感情を見分けることで、まるで恋心自体を操っているように見せかけてたんだ……！",
+    "chinese_text": "只要能分辨对方的恋爱感情，\n就能让他人误认\n自己在操纵恋心……！"
+  },
+  {
+    "dialogue_id": "0101Trial12_Leia004",
+    "speaker": "Leia",
+    "japanese_text": "ロマンチックな魔法だね。恋をしているかどうかがわかるなんて。……自分ですらわからない事があるものなのに。",
+    "chinese_text": "能判断他人是否恋爱……\n真是浪漫的魔法啊。\n……明明这种感情连我自己都不甚熟悉。"
+  },
+  {
+    "dialogue_id": "0101Trial12_Leia005",
+    "speaker": "Leia",
+    "japanese_text": "……それで？それがノアくんの殺人事件にどう関わってくるんだい？",
+    "chinese_text": "……所以呢？\n这种能力要怎么参与到诺亚的凶杀案之中呢？"
+  },
+  {
+    "dialogue_id": "0101Trial12_Ema018",
+    "speaker": "Ema",
+    "japanese_text": "ええっと……それは……その……。",
+    "chinese_text": "呃……这……这个……"
+  },
+  {
+    "dialogue_id": "0101Trial12_AnAn001",
+    "speaker": "AnAn",
+    "japanese_text": "『妄想は日記帳にでも書いておくのがオススメ』",
+    "chinese_text": "『推荐你把妄想写进日记本里』"
+  },
+  {
+    "dialogue_id": "0101Trial12_Ema019",
+    "speaker": "Ema",
+    "japanese_text": "（辛辣なコメント……！）",
+    "chinese_text": "（好毒辣的评论……！）"
+  },
+  {
+    "dialogue_id": "0101Trial12_Ema020",
+    "speaker": "Ema",
+    "japanese_text": "（でも、ならレイアちゃんの本当の魔法ってどんなのだろう？）",
+    "chinese_text": "（可是，蕾雅真正的魔法究竟是怎么样的呢？）"
+  },
+  {
+    "dialogue_id": "0101Trial12_Ema021",
+    "speaker": "Ema",
+    "japanese_text": "（マーゴちゃんの言った３つの条件……　それに当てはまる魔法って……？）",
+    "chinese_text": "（玛格所说的3种条件……\n符合这些条件的魔法究竟是……？）"
+  },
+  {
+    "dialogue_id": "0101Trial12_Ema022",
+    "speaker": "Ema",
+    "japanese_text": "……【動揺】……。そうか、レイアちゃんの魔法は【嘘を見抜く魔法】だったんだよ！",
+    "chinese_text": "……【动摇】……\n原来是这样，蕾雅的魔法\n其实是【看穿谎言的魔法】！"
+  },
+  {
+    "dialogue_id": "0101Trial12_Ema023",
+    "speaker": "Ema",
+    "japanese_text": "これなら、相手の気持ちを見抜いて自分の魔法を魅了だと思わせられるんじゃないかな！？",
+    "chinese_text": "这样的话，不就能看穿对方的想法，\n让对方误认为自己被魔法魅惑了吗！？"
+  },
+  {
+    "dialogue_id": "0101Trial12_Leia006",
+    "speaker": "Leia",
+    "japanese_text": "なるほど、面白い発想だね。",
+    "chinese_text": "原来如此，真是有趣的想法。"
+  },
+  {
+    "dialogue_id": "0101Trial12_Leia007",
+    "speaker": "Leia",
+    "japanese_text": "……それで？私が嘘を見抜けると、この事件の何が変わるんだい？",
+    "chinese_text": "……所以呢？\n就算我能看穿谎言，那这起案件的状况有什么变化呢？"
+  },
+  {
+    "dialogue_id": "0101Trial12_Ema024",
+    "speaker": "Ema",
+    "japanese_text": "……えっと……そ、それは……。",
+    "chinese_text": "……呃……这、这个……"
+  },
+  {
+    "dialogue_id": "0101Trial12_Coco004",
+    "speaker": "Coco",
+    "japanese_text": "エマっち、適当な嘘ついて話をごちゃごちゃにしようとしてんじゃないのー？迷惑なんですけどー。",
+    "chinese_text": "艾玛亲，你不要随口撒谎\n把讨论搅乱哦？\n很影响别人欸～"
+  },
+  {
+    "dialogue_id": "0101Trial12_Ema025",
+    "speaker": "Ema",
+    "japanese_text": "ご、誤解だよ……！",
+    "chinese_text": "你、你误解了……！"
+  },
+  {
+    "dialogue_id": "0101Trial12_Ema026",
+    "speaker": "Ema",
+    "japanese_text": "（迂闊な発言で怪しまれちゃったみたい……！）",
+    "chinese_text": "（不谨慎的发言招其他人怀疑了……！）"
+  },
+  {
+    "dialogue_id": "0101Trial12_Ema027",
+    "speaker": "Ema",
+    "japanese_text": "（でも、ならレイアちゃんの本当の魔法ってどんなのだろう？）",
+    "chinese_text": "（可是，蕾雅真正的魔法究竟是怎么样的呢？）"
+  },
+  {
+    "dialogue_id": "0101Trial12_Ema028",
+    "speaker": "Ema",
+    "japanese_text": "（マーゴちゃんの言った３つの条件……　それに当てはまる魔法って……？）",
+    "chinese_text": "（玛格所说的3种条件……\n符合这些条件的魔法究竟是……？）"
+  },
+  {
+    "dialogue_id": "0101Trial12_Ema029",
+    "speaker": "Ema",
+    "japanese_text": "（ココちゃんの動揺……　そうか、もしかして……！）",
+    "chinese_text": "（可可的动摇……\n对了，说不定……！）"
+  },
+  {
+    "dialogue_id": "0101Trial12_Ema030",
+    "speaker": "Ema",
+    "japanese_text": "……レイアちゃんの魔法って、体温を読み取る魔法なんじゃないかな？それで相手の感情を読み取るんだ。",
+    "chinese_text": "……蕾雅的魔法会不会是\n读取体温的魔法呢？\n就靠这个来读取对方的感情。"
+  },
+  {
+    "dialogue_id": "0101Trial12_Meruru004",
+    "speaker": "Meruru",
+    "japanese_text": "素敵な魔法です……！見ただけで相手の体調を知ることができそうで……！",
+    "chinese_text": "好棒的魔法……！\n只要看一眼就能知道对方的身体状况……！"
+  },
+  {
+    "dialogue_id": "0101Trial12_Hanna006",
+    "speaker": "Hanna",
+    "japanese_text": "それはそうですけど……それって事件になにか関係あるんですの？",
+    "chinese_text": "这倒没错啦……\n可是这和案件有什么关系呢？"
+  },
+  {
+    "dialogue_id": "0101Trial12_Ema031",
+    "speaker": "Ema",
+    "japanese_text": "えっと……それは……。",
+    "chinese_text": "呃……这个……"
+  },
+  {
+    "dialogue_id": "0101Trial12_Leia008",
+    "speaker": "Leia",
+    "japanese_text": "エマくんは私のことを蛇か何かだと思ってるのかな。想像力が豊かだね。",
+    "chinese_text": "艾玛是把我当成了蟒蛇了吗？\n好丰富的想像力。"
+  },
+  {
+    "dialogue_id": "0101Trial12_Leia009",
+    "speaker": "Leia",
+    "japanese_text": "……できればそんな妄想は心の中に秘めておいて欲しいところだけど。",
+    "chinese_text": "……只不过，\n希望你可以把那些妄想都放在心里面，不要随便拿出来搞笑。"
+  },
+  {
+    "dialogue_id": "0101Trial12_Ema032",
+    "speaker": "Ema",
+    "japanese_text": "（ピット器官……！！）",
+    "chinese_text": "（蛇颊窝……！！）"
+  },
+  {
+    "dialogue_id": "0101Trial12_Ema033",
+    "speaker": "Ema",
+    "japanese_text": "（根拠のない発言のせいで、呆れられちゃったみたい……！）",
+    "chinese_text": "（我无凭无据的发言害大家傻眼了……！）"
+  },
+  {
+    "dialogue_id": "0101Trial12_Ema034",
+    "speaker": "Ema",
+    "japanese_text": "（でも、ならレイアちゃんの本当の魔法ってどんなのだろう？）",
+    "chinese_text": "（可是，蕾雅真正的魔法究竟是怎么样的呢？）"
+  },
+  {
+    "dialogue_id": "0101Trial12_Ema035",
+    "speaker": "Ema",
+    "japanese_text": "（マーゴちゃんの言った３つの条件……　それに当てはまる魔法って……？）",
+    "chinese_text": "（玛格所说的3种条件……\n符合这些条件的魔法究竟是……？）"
+  },
+  {
+    "dialogue_id": "0101Trial12_Ema036",
+    "speaker": "Ema",
+    "japanese_text": "【目が離せなくなる】……？",
+    "chinese_text": "【无法移开视线】……？"
+  },
+  {
+    "dialogue_id": "0101Trial12_Ema037",
+    "speaker": "Ema",
+    "japanese_text": "……そうか！それがレイアちゃんの魔法だったんだよ！",
+    "chinese_text": "……我知道了！\n其实这就是蕾雅的魔法！"
+  },
+  {
+    "dialogue_id": "0101Trial12_Hanna007",
+    "speaker": "Hanna",
+    "japanese_text": "じゃ、じゃあ……レイアさんを見てるとドキドキするから目が離せなくなるんじゃなくて……。",
+    "chinese_text": "那、那么……\n其实不是因为看着蕾雅才会心怦怦跳，\n无法移开视线……"
+  },
+  {
+    "dialogue_id": "0101Trial12_Ema038",
+    "speaker": "Ema",
+    "japanese_text": "……逆だったんだ。",
+    "chinese_text": "……反过来才对。"
+  },
+  {
+    "dialogue_id": "0101Trial12_Ema039",
+    "speaker": "Ema",
+    "japanese_text": "【目が離せなくなるから、ドキドキさせられてしまう】んだよ！",
+    "chinese_text": "是因为【无法移开视线，\n所以才会心跳不停】！"
+  },
+  {
+    "dialogue_id": "0101Trial12_Leia010",
+    "speaker": "Leia",
+    "japanese_text": "くっ……！？",
+    "chinese_text": "唔……！？"
+  },
+  {
+    "dialogue_id": "0101Trial12_Nanoka004",
+    "speaker": "Nanoka",
+    "japanese_text": "なら……城ケ崎ノアが、工作する犯人を前にして何も抵抗しなかったのは……。",
+    "chinese_text": "那……\n城崎诺亚面对正做着准备的凶手\n却不做任何反抗的原因是……"
+  },
+  {
+    "dialogue_id": "0101Trial12_Ema040",
+    "speaker": "Ema",
+    "japanese_text": "……当然だよ。別の方向に注目させて、工作自体が視界に入らないようにしていたんだ。",
+    "chinese_text": "……没错。\n只要让她望着别的方向，\n不让她看到准备工作就可以。"
+  },
+  {
+    "dialogue_id": "0101Trial12_Miria004",
+    "speaker": "Miria",
+    "japanese_text": "……なら、おじさんたちが死体があった部屋の前を通ったときに見逃したのは……？",
+    "chinese_text": "……那么，大叔我们路过\n尸体所在的房间前\n却没有看见尸体的原因也是……？"
+  },
+  {
+    "dialogue_id": "0101Trial12_Ema041",
+    "speaker": "Ema",
+    "japanese_text": "そのとき、部屋ではない方向に視線を固定されていたからじゃないかな。",
+    "chinese_text": "我想当时你们的视线\n应该是被固定到了看不见房间的方向了。"
+  },
+  {
+    "dialogue_id": "0101Trial12_Ema042",
+    "speaker": "Ema",
+    "japanese_text": "それにココちゃんたちが配信をする前にも、ボクたちは地下でレイアちゃんと会ってる……。",
+    "chinese_text": "而且在可可她们开直播之前，\n我在地下\n碰见过蕾雅……"
+  },
+  {
+    "dialogue_id": "0101Trial12_Ema043",
+    "speaker": "Ema",
+    "japanese_text": "きっとあのときレイアちゃんは魔法を使ってノアちゃんの部屋を誰も見れないようにしてたんだ。",
+    "chinese_text": "那时蕾雅她肯定\n用了魔法，让谁都看不见\n诺亚的房间才对。"
+  },
+  {
+    "dialogue_id": "0101Trial12_Ema044",
+    "speaker": "Ema",
+    "japanese_text": "この魔法なら、マーゴちゃんが言った３つの条件全てを満たせるよ……！",
+    "chinese_text": "如果是这个魔法，\n就能完全满足\n玛格所说的三种条件……！"
+  },
+  {
+    "dialogue_id": "0101Trial12_Margo007",
+    "speaker": "Margo",
+    "japanese_text": "なるほど。……【ミスディレクション】ね。",
+    "chinese_text": "原来如此。\n……是【误导】啊。"
+  },
+  {
+    "dialogue_id": "0101Trial12_Alisa005",
+    "speaker": "Alisa",
+    "japanese_text": "なんだそれ？",
+    "chinese_text": "那是什么玩意？"
+  },
+  {
+    "dialogue_id": "0101Trial12_Margo008",
+    "speaker": "Margo",
+    "japanese_text": "手品で、トリックを隠す手法のことを言うわ。右手に種を仕掛ける時、左手は観客の注意を引くように動かす……。",
+    "chinese_text": "是指表演魔术的时候，用来隐藏把戏的手法。\n在右手使出把戏的时候，\n用左手摆动作来吸引观众的注意……"
+  },
+  {
+    "dialogue_id": "0101Trial12_Margo009",
+    "speaker": "Margo",
+    "japanese_text": "わかりやすく言うなら……【視線誘導】と言ったらいいのかしら。",
+    "chinese_text": "简单地来说……\n就是【视线诱导】吧。"
+  },
+  {
+    "dialogue_id": "0101Trial12_Margo010",
+    "speaker": "Margo",
+    "japanese_text": "その概念を体現したかのような魔法であれば、たしかに全てを説明できてしまうわね？",
+    "chinese_text": "如果是能够体现出这个概念的魔法的话，\n确实就能解释一切了。大家觉得呢？"
+  },
+  {
+    "dialogue_id": "0101Trial12_Margo011",
+    "speaker": "Margo",
+    "japanese_text": "……ええ、エマちゃん。素晴らしいわ。あなたの意見に、私は賛成よ。",
+    "chinese_text": "……嗯，你很厉害啊，艾玛。\n我认同你的观点。"
+  },
+  {
+    "dialogue_id": "0101Trial12_Ema045",
+    "speaker": "Ema",
+    "japanese_text": "そう、これなら全部の謎が説明できるんだ……！",
+    "chinese_text": "对，这样一来就能解释所有的问题了……！"
+  },
+  {
+    "dialogue_id": "0101Trial12_Ema046",
+    "speaker": "Ema",
+    "japanese_text": "レイアちゃん……それがキミの魔法だよ！",
+    "chinese_text": "蕾雅……这就是你的魔法！"
+  },
+  {
+    "dialogue_id": "0101Trial12_Leia011",
+    "speaker": "Leia",
+    "japanese_text": "………。",
+    "chinese_text": "………"
+  },
+  {
+    "dialogue_id": "0101Trial12_Leia012",
+    "speaker": "Leia",
+    "japanese_text": "……やれやれ。",
+    "chinese_text": "……哎呀呀。"
+  },
+  {
+    "dialogue_id": "0101Trial12_Ema047",
+    "speaker": "Ema",
+    "japanese_text": "（レイアちゃんの落ち着き払っていた仮面が……　剥がれた……！）",
+    "chinese_text": "（终于揭穿了……\n蕾雅冷静沉着的假面具……！）"
+  },
+  {
+    "dialogue_id": "0101Trial12_Leia013",
+    "speaker": "Leia",
+    "japanese_text": "【私の魔法が魅了じゃないかもしれない】？……そんな論でいいなら私だっていくらでも言えるよ。",
+    "chinese_text": "【我的魔法说不定不是魅惑】？\n……靠这种推理就足够了的话，我还能再提无数个。"
+  },
+  {
+    "dialogue_id": "0101Trial12_Leia014",
+    "speaker": "Leia",
+    "japanese_text": "たとえばエマくん。キミの魔法はサイコキネシス……念動力なんじゃないかい？それで矢を操れば殺害は可能だ。",
+    "chinese_text": "比如说，艾玛，你的魔法会不会是念动力……\n也就是所谓的意念控物呢？\n只要用这个来操控箭矢的话，就能够行凶。"
+  },
+  {
+    "dialogue_id": "0101Trial12_Leia015",
+    "speaker": "Leia",
+    "japanese_text": "周りの状況も全てその魔法によって起こされた偽装工作だ……そう考えることもできるんじゃないかな？",
+    "chinese_text": "周围的状况也全都是用这个魔法进行的伪装……\n我这么想没问题吧？"
+  },
+  {
+    "dialogue_id": "0101Trial12_Ema048",
+    "speaker": "Ema",
+    "japanese_text": "ボ、ボクは魔法は使えないから……！",
+    "chinese_text": "我、我才不会用魔法……！"
+  },
+  {
+    "dialogue_id": "0101Trial12_Leia016",
+    "speaker": "Leia",
+    "japanese_text": "それを証明することは？……できないのだろう？",
+    "chinese_text": "你能证明吗？\n……做不到吧？"
+  },
+  {
+    "dialogue_id": "0101Trial12_Leia017",
+    "speaker": "Leia",
+    "japanese_text": "ここにいる魔女候補の少女たち……私たちは何かしらの魔法を持っているはず。だがその内容は誰も証明できない……。",
+    "chinese_text": "我们在场所有人都是所谓的预备魔女……\n应该都会某些魔法才对。\n但谁都没办法证明魔法的具体内容……"
+  },
+  {
+    "dialogue_id": "0101Trial12_Ema049",
+    "speaker": "Ema",
+    "japanese_text": "で、でもそれじゃあ、これまで議論してきた不自然な点が――！",
+    "chinese_text": "可、可是这么一来，我们至今为止\n讨论的不自然之处就——！"
+  },
+  {
+    "dialogue_id": "0101Trial12_Leia018",
+    "speaker": "Leia",
+    "japanese_text": "――キミが言う事はすべて状況証拠だ！",
+    "chinese_text": "——你说的全都是间接证据！"
+  },
+  {
+    "dialogue_id": "0101Trial12_Leia019",
+    "speaker": "Leia",
+    "japanese_text": "……私が疑わしいのは認めるけどね。でも、確たる証拠はないはずだよ。",
+    "chinese_text": "……好啊，我承认我很可疑。\n可是，没有确切的证据。"
+  },
+  {
+    "dialogue_id": "0101Trial12_Ema050",
+    "speaker": "Ema",
+    "japanese_text": "それはそうかもしれないけど……でも……！",
+    "chinese_text": "也许是这样没错……可是……！"
+  },
+  {
+    "dialogue_id": "0101Trial12_Leia020",
+    "speaker": "Leia",
+    "japanese_text": "……私はみんなを信じているよ。私に投票するなんて愚かな事はしないで欲しい。……私が犯人だという証拠はないのだからね。",
+    "chinese_text": "……我很相信大家。\n希望大家不要做投票给我这种蠢事。\n……因为根本没有证据证明我是凶手。"
+  },
+  {
+    "dialogue_id": "0101Trial12_Leia021",
+    "speaker": "Leia",
+    "japanese_text": "……これはきっと何者かが私を陥れようとしている陰謀だね。私たちは仲間だろう？お互いを信じる心を忘れてしまっては黒幕の思うツボだよ。",
+    "chinese_text": "……这肯定是阴谋，是某个人想要陷害我。\n我们不是朋友吗？\n一旦我们抛弃了互相信任，就正中幕后黑手的下怀了。"
+  },
+  {
+    "dialogue_id": "0101Trial12_Hanna008",
+    "speaker": "Hanna",
+    "japanese_text": "そ、それは……！",
+    "chinese_text": "这、这……！"
+  },
+  {
+    "dialogue_id": "0101Trial12_Ema051",
+    "speaker": "Ema",
+    "japanese_text": "（うう……！　たしかにレイアちゃんの言う事も、もっともかも……！）",
+    "chinese_text": "（呜……！\n蕾雅她说得确实很在理……！）"
+  },
+  {
+    "dialogue_id": "0101Trial12_Ema052",
+    "speaker": "Ema",
+    "japanese_text": "（……ボクが勘違いして、レイアちゃんを犯人と決めつけている　だけかもしれない。　もしも冤罪だったとしたら……！）",
+    "chinese_text": "（……也许只是我搞错了，\n断定了蕾雅就是凶手。\n如果这是冤罪的话……！）"
+  },
+  {
+    "dialogue_id": "0101Trial12_Ema053",
+    "speaker": "Ema",
+    "japanese_text": "（こんなとき、どうしたらいいんだろう。　このままじゃみんなの意見もまとまらないし……！）",
+    "chinese_text": "（这个时候，我该怎么办才好。\n这么下去大家的意见也会乱作一团的……！）"
+  },
+  {
+    "dialogue_id": "0101Trial12_Ema054",
+    "speaker": "Ema",
+    "japanese_text": "（……ボクは本当に、【正しい】のかな……？　こんな時、ヒロちゃんなら――）",
+    "chinese_text": "（……我真的【正确】吗……？\n这个时候，如果是希罗——）"
+  },
+  {
+    "dialogue_id": "0101Trial12_Meruru005",
+    "speaker": "Meruru",
+    "japanese_text": "――な、なら……！話し合いを、しましょう……！",
+    "chinese_text": "——那、那么……！\n我们，大家一起来商量吧……！"
+  },
+  {
+    "dialogue_id": "0101Trial12_Ema055",
+    "speaker": "Ema",
+    "japanese_text": "……え？",
+    "chinese_text": "……欸？"
+  },
+  {
+    "dialogue_id": "0101Trial12_Meruru006",
+    "speaker": "Meruru",
+    "japanese_text": "時間は……まだあります。",
+    "chinese_text": "我们……还有时间。"
+  },
+  {
+    "dialogue_id": "0101Trial12_Meruru007",
+    "speaker": "Meruru",
+    "japanese_text": "レイアさんが犯人である証拠があるかどうか……。",
+    "chinese_text": "究竟有没有蕾雅是凶手的证据……"
+  },
+  {
+    "dialogue_id": "0101Trial12_Meruru008",
+    "speaker": "Meruru",
+    "japanese_text": "……話し合うんです。ノアさんの無念を晴らすためにも……！",
+    "chinese_text": "……我们要好好商量才行。\n至少要查清真相，告慰过世的诺亚……！"
+  },
+  {
+    "dialogue_id": "0101Trial12_Nanoka005",
+    "speaker": "Nanoka",
+    "japanese_text": "……そうね。",
+    "chinese_text": "……是啊。"
+  },
+  {
+    "dialogue_id": "0101Trial12_Nanoka006",
+    "speaker": "Nanoka",
+    "japanese_text": "彼女が殺人を犯したなら……必ずその罪の痕跡は残ってるはず。私たちがそれにまだ気付いていないだけ。",
+    "chinese_text": "如果凶杀是她所为……\n那就一定会留下犯罪的痕迹。\n只是我们现在还没发现而已。"
+  },
+  {
+    "dialogue_id": "0101Trial12_Sherry002",
+    "speaker": "Sherry",
+    "japanese_text": "ですね！エマさんの推理はここまで筋が通っていると思いますし、検討の余地はまだあります！",
+    "chinese_text": "说得对！\n我觉得艾玛的推理到现在为止都说得通，\n还有可以讨论的空间！"
+  },
+  {
+    "dialogue_id": "0101Trial12_Hanna009",
+    "speaker": "Hanna",
+    "japanese_text": "――徹底的に議論してやりますわ～！！",
+    "chinese_text": "——来彻底讨论一番吧～！！"
+  },
+  {
+    "dialogue_id": "0101Trial12_Ema056",
+    "speaker": "Ema",
+    "japanese_text": "みんな……！",
+    "chinese_text": "大家……！"
+  },
+  {
+    "dialogue_id": "0101Trial12_Leia022",
+    "speaker": "Leia",
+    "japanese_text": "……ああ、いいとも。どうやったって証拠なんて出てくるはずはない。",
+    "chinese_text": "……好啊，随便。\n不管你们怎么讨论，都不可能拿得出证据。"
+  },
+  {
+    "dialogue_id": "0101Trial12_Leia023",
+    "speaker": "Leia",
+    "japanese_text": "私が犯人ではないと、証明してみせるよ。",
+    "chinese_text": "我会证明，我不是凶手。"
+  }
+]

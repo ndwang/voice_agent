@@ -1,0 +1,662 @@
+[
+  {
+    "dialogue_id": "0101Adv18_Narrative001",
+    "speaker": "[Narrative]",
+    "japanese_text": "牢屋敷での囚人生活は、４日目へと突入し――",
+    "chinese_text": "监牢的囚犯生活\n来到了第4天——"
+  },
+  {
+    "dialogue_id": "0101Adv18_Narrative002",
+    "speaker": "[Narrative]",
+    "japanese_text": "本日もエマとシェリーは、自由時間に連れだって探索をしようと話し合った。",
+    "chinese_text": "今天艾玛和雪莉也约好了，到放风时间\n就一起去探索。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Narrative003",
+    "speaker": "[Narrative]",
+    "japanese_text": "本格的に牢屋敷の外を見てまわり、脱獄方法を探るのが本日の目標だ。",
+    "chinese_text": "而今天的目标，就是在监牢外面认真转一圈，\n找寻越狱的方法。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Narrative004",
+    "speaker": "[Narrative]",
+    "japanese_text": "正面玄関から外に出て、エマはいちど牢屋敷の方を振り返る。",
+    "chinese_text": "从正门走出外面后，\n艾玛回头望向监牢。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Ema001",
+    "speaker": "Ema",
+    "japanese_text": "これが牢屋敷……。",
+    "chinese_text": "这就是监牢……"
+  },
+  {
+    "dialogue_id": "0101Adv18_Sherry001",
+    "speaker": "Sherry",
+    "japanese_text": "こうやって見ると、やっぱり堅牢そうですねぇ。",
+    "chinese_text": "这么看上去，还真是相当坚固啊。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Ema002",
+    "speaker": "Ema",
+    "japanese_text": "うん……で、でも自由に外に出られるならきっとどこかに脱出口が見つけられるよ。",
+    "chinese_text": "嗯……不过能自由外出的话，\n肯定能在什么地方找到逃脱的出口。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Narrative005",
+    "speaker": "[Narrative]",
+    "japanese_text": "屋敷は高台に位置していた。そしてレイアの話にあったように、エマの眼下には、絵画のような美しい風景が広がっていた。",
+    "chinese_text": "整个宅邸处在高坡之上。\n而且正如蕾雅所说，\n在艾玛的眼前铺开的这道风景就像绘画一般美丽。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Narrative006",
+    "speaker": "[Narrative]",
+    "japanese_text": "大地を包み込むように遠くまで続く深緑の森――",
+    "chinese_text": "有像怀抱着大地一般，不断往远处延伸的青翠森林——"
+  },
+  {
+    "dialogue_id": "0101Adv18_Narrative007",
+    "speaker": "[Narrative]",
+    "japanese_text": "色とりどりの花が咲き誇る花畑――どこかに小川があるのか、せせらぎの音も聞こえる。",
+    "chinese_text": "有盛放着五颜六色花朵的花田——\n她还能听到，从不知什么地方传来溪流的流水声音。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Ema003",
+    "speaker": "Ema",
+    "japanese_text": "すごく綺麗なところ……。",
+    "chinese_text": "好美丽的地方……"
+  },
+  {
+    "dialogue_id": "0101Adv18_Narrative008",
+    "speaker": "[Narrative]",
+    "japanese_text": "風が吹くたびに、森の木々はささやくように葉を揺らし、鳥たちのさえずりがかすかに届いた。",
+    "chinese_text": "每当有风吹过，森林里的树木就像在低声细语般，\n颤动着枝桠上的叶片。\n她还能微微听见远方小鸟的欢唱声。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Sherry002",
+    "speaker": "Sherry",
+    "japanese_text": "めちゃくちゃ広いですね。自由に出入りできるなら、どこかに身を隠すことも可能なのでは。",
+    "chinese_text": "这里好宽广耶。\n如果能自由出入的话，\n说不定可以藏身在某个地方。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Ema004",
+    "speaker": "Ema",
+    "japanese_text": "うん、でもアリサちゃんが言ってた【監視フクロウ】が気になるよね。",
+    "chinese_text": "嗯。不过我很在意\n亚里沙说过的【监视猫头鹰】。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Sherry003",
+    "speaker": "Sherry",
+    "japanese_text": "ですねえ。このあたりには飛んでいないようですが……。",
+    "chinese_text": "确实。\n不过看起来这附近没有它们的影子……"
+  },
+  {
+    "dialogue_id": "0101Adv18_Sherry004",
+    "speaker": "Sherry",
+    "japanese_text": "時間も限られていますし、とりあえず見まわってみましょうか！",
+    "chinese_text": "时间有限，\n总之我们四周看看吧！"
+  },
+  {
+    "dialogue_id": "0101Adv18_Ema005",
+    "speaker": "Ema",
+    "japanese_text": "そうだね、行こう！",
+    "chinese_text": "嗯，走吧！"
+  },
+  {
+    "dialogue_id": "0101Adv18_Narrative009",
+    "speaker": "[Narrative]",
+    "japanese_text": "石畳の道に沿って歩いていくと、牢屋敷のすぐ傍にログハウス風の建物が３棟並んでいた。",
+    "chinese_text": "沿着石砖地面的道路走，\n能看见监牢旁边有3栋原木屋风格的建筑物。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Ema006",
+    "speaker": "Ema",
+    "japanese_text": "ここなんだろう……？",
+    "chinese_text": "这里是什么地方……？"
+  },
+  {
+    "dialogue_id": "0101Adv18_Sherry005",
+    "speaker": "Sherry",
+    "japanese_text": "なんでしょうね。看守の家とか……？とりあえず入ってみましょうか！",
+    "chinese_text": "是什么地方呢。我猜是看守的住处……？\n总之进去看看吧！"
+  },
+  {
+    "dialogue_id": "0101Adv18_Narrative010",
+    "speaker": "[Narrative]",
+    "japanese_text": "並ぶ建物の扉には、意味深なプレートが提げられていた。",
+    "chinese_text": "面前的建筑物的门上\n都挂着耐人寻味的牌子。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Ema007",
+    "speaker": "Ema",
+    "japanese_text": "マップで見た感じ、ここは【火精の間】……？",
+    "chinese_text": "按照地图的位置，\n这里是【火精之室】……？"
+  },
+  {
+    "dialogue_id": "0101Adv18_Sherry006",
+    "speaker": "Sherry",
+    "japanese_text": "こっちは【水精の間】ですね！",
+    "chinese_text": "这边是【水精之室】耶！"
+  },
+  {
+    "dialogue_id": "0101Adv18_Ema008",
+    "speaker": "Ema",
+    "japanese_text": "で、ここは【地精の間】だね。何か違いがあるのかな……？",
+    "chinese_text": "那，这里就是【地精之室】了。\n会有什么不一样呢……？"
+  },
+  {
+    "dialogue_id": "0101Adv18_Narrative011",
+    "speaker": "[Narrative]",
+    "japanese_text": "鍵がかかっている可能性も考えられたが、扉はあっさりと開く。",
+    "chinese_text": "她们本以为门应该是锁着的，\n但没想到竟然一下子就打开了。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Narrative012",
+    "speaker": "[Narrative]",
+    "japanese_text": "建物内部は小綺麗で、誰かが生活しているというより、宿泊用施設である印象だった。",
+    "chinese_text": "建筑物的内部整洁而大方。\n这里看起来不像是日常居住的地方，\n更像是那种专为住宿设计的设施。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Ema009",
+    "speaker": "Ema",
+    "japanese_text": "ボクらの牢屋よりずっと綺麗だね……。",
+    "chinese_text": "这里比我们的牢房漂亮多了……"
+  },
+  {
+    "dialogue_id": "0101Adv18_Sherry007",
+    "speaker": "Sherry",
+    "japanese_text": "むむむ……これはおそらく、【ゲストハウス】ではないでしょうか！",
+    "chinese_text": "唔唔唔……这里有可能是\n【招待所】耶！"
+  },
+  {
+    "dialogue_id": "0101Adv18_Ema010",
+    "speaker": "Ema",
+    "japanese_text": "ゲストハウス……？",
+    "chinese_text": "招待所……？"
+  },
+  {
+    "dialogue_id": "0101Adv18_Sherry008",
+    "speaker": "Sherry",
+    "japanese_text": "牢屋敷の運営が国家ぐるみであると想定すれば、要人がこの監獄施設に来ることもあると思うんです。",
+    "chinese_text": "如果监牢的运营有国家在幕后参与，\n我想应该会有什么高层领导会来这座监狱视察。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Ema011",
+    "speaker": "Ema",
+    "japanese_text": "ああ、そうか！",
+    "chinese_text": "哦，是这么一回事啊！"
+  },
+  {
+    "dialogue_id": "0101Adv18_Sherry009",
+    "speaker": "Sherry",
+    "japanese_text": "想像でしかないのですが、要人が牢屋敷に宿泊するのは避けたいと思うんですよね。",
+    "chinese_text": "虽然只是我的想像，\n那些领导肯定不愿意住在\n监牢里面。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Sherry010",
+    "speaker": "Sherry",
+    "japanese_text": "何せ私たちは、世界に害をなすおそろしい魔女らしいですから。",
+    "chinese_text": "毕竟我们可是会对世界\n造成威胁的可怕魔女。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Sherry011",
+    "speaker": "Sherry",
+    "japanese_text": "そうなると、たとえば要人が視察に来るとかそういった場合、このゲストハウスに宿泊するわけですよ。",
+    "chinese_text": "这么一来，如果有领导来视察的话，\n这个情况下，\n他们应该就会住进这些招待所里。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Sherry012",
+    "speaker": "Sherry",
+    "japanese_text": "わぁ、私の推理、冴えてません！？できればその証拠を見つけたい～！",
+    "chinese_text": "哇，有没觉得我的推理实在太妙了！？\n可以的话，真想找到证据～！"
+  },
+  {
+    "dialogue_id": "0101Adv18_Narrative013",
+    "speaker": "[Narrative]",
+    "japanese_text": "シェリーは自画自賛してから、虫眼鏡で室内を隈なくチェックしはじめている。",
+    "chinese_text": "雪莉一边自卖自夸，\n一边举着放大镜，仔细检查房间里的每一个角落。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Ema012",
+    "speaker": "Ema",
+    "japanese_text": "あ、あの、シェリーちゃん、他のところも見回りたいから……。",
+    "chinese_text": "那、那个，雪莉，\n我想看看其他地方……"
+  },
+  {
+    "dialogue_id": "0101Adv18_Narrative014",
+    "speaker": "[Narrative]",
+    "japanese_text": "仕方なくといった風に、エマはシェリーを引きずって出るのであった。",
+    "chinese_text": "最终艾玛只能把\n不情不愿的雪莉从房间里拖了出来。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Narrative015",
+    "speaker": "[Narrative]",
+    "japanese_text": "他のゲストハウスも軽く調べてみたところ、室内は同様の構造になっていた。",
+    "chinese_text": "随后她们稍稍调查了其他招待所，\n得知其室内的构造是一样的。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Narrative016",
+    "speaker": "[Narrative]",
+    "japanese_text": "それからエマたちがしばらく歩いていくと、高い塀の前にたどりついた。",
+    "chinese_text": "之后，艾玛她们再走了一会，\n便来到一堵高高的围墙前。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Narrative017",
+    "speaker": "[Narrative]",
+    "japanese_text": "頑強な造りのコンクリート塀は、はるか上空を見上げるほどに高い。",
+    "chinese_text": "这堵混凝土围墙不单结实，\n而且还很高，抬头一望看不见尽头。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Ema013",
+    "speaker": "Ema",
+    "japanese_text": "この塀の向こうに行けたら、外部と連絡が取れるんじゃないかな？",
+    "chinese_text": "如果能到围墙另一边，\n应该可以和外界取得联系吧？"
+  },
+  {
+    "dialogue_id": "0101Adv18_Sherry013",
+    "speaker": "Sherry",
+    "japanese_text": "そうかもしれませんね。でも、めちゃくちゃ高いですよ。",
+    "chinese_text": "说不定可以。\n不过，这超级高的耶。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Ema014",
+    "speaker": "Ema",
+    "japanese_text": "ボク、のぼってみようかな。ほら、少しなら足場もある。",
+    "chinese_text": "我试试看能不能爬上去。\n你看，那里有一小块能落脚的地方。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Narrative018",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマは塀のひび割れた部分に足をかけ、体を持ち上げた。",
+    "chinese_text": "艾玛踩上围墙裂开的地方，\n用力爬了上去。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Narrative019",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマの背の高さくらいまでは登れたが、そこから先に足場が見つからない。",
+    "chinese_text": "虽然能爬到接近她自己身高的位置，\n但艾玛再也找不到更高处的落脚点了。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Ema015",
+    "speaker": "Ema",
+    "japanese_text": "う、うう……。",
+    "chinese_text": "呜、呜呜……"
+  },
+  {
+    "dialogue_id": "0101Adv18_Narrative020",
+    "speaker": "[Narrative]",
+    "japanese_text": "指の力が続かなかったのか、地面に落ちてしまった。",
+    "chinese_text": "她手指力气用尽，\n最终还是落回了地面上。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Sherry014",
+    "speaker": "Sherry",
+    "japanese_text": "ダメでしたねぇ。",
+    "chinese_text": "行不通呢。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Sherry015",
+    "speaker": "Sherry",
+    "japanese_text": "確かアリサさんが塀には不思議な力が宿っているとも言っていましたし、そもそものぼれないようになっているのかもしれませんね。",
+    "chinese_text": "记得亚里沙说过，\n围墙上作用着一道神奇力量，\n或许根本就没法让人爬上去。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Hanna001",
+    "speaker": "Hanna",
+    "japanese_text": "あなたたち、何をやっていやがりますの？看守に見つかったら懲罰房行きになりますわよ。",
+    "chinese_text": "你们在这里干什么呀？\n万一被看守看见了，可是要被关进惩罚室里的哦。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Narrative021",
+    "speaker": "[Narrative]",
+    "japanese_text": "どこかから、呆れた表情のハンナが現れた。",
+    "chinese_text": "汉娜摆出一副看傻眼的表情，不知从哪里出现了。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Hanna002",
+    "speaker": "Hanna",
+    "japanese_text": "どこで見られてるのか、わかったもんじゃねえですわよ。",
+    "chinese_text": "我们根本就不知道\n它们会从什么地方看着我们。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Ema016",
+    "speaker": "Ema",
+    "japanese_text": "う……。",
+    "chinese_text": "呜……"
+  },
+  {
+    "dialogue_id": "0101Adv18_Narrative022",
+    "speaker": "[Narrative]",
+    "japanese_text": "木陰に看守が潜んでいるかもと想像したのか、エマは視線をぐるりと巡らす。",
+    "chinese_text": "一想到看守有可能藏在了树丛里，\n艾玛便快速地扫视了周遭。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Hanna003",
+    "speaker": "Hanna",
+    "japanese_text": "少し遠くまで歩いていってみたのですが、監視の化け物フクロウが大量に飛んでいましたわ。",
+    "chinese_text": "我刚刚去了比较远的地方，\n看到有好多监视的怪物猫头鹰在天上飞。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Sherry016",
+    "speaker": "Sherry",
+    "japanese_text": "このあたりはいないんですけどね。見張られずに自由に散策できるのは、牢屋敷の近くだけなんでしょうね。",
+    "chinese_text": "这附近倒是没见耶。\n也就只有监牢附近\n可以不受监视自由散步了吧。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Hanna004",
+    "speaker": "Hanna",
+    "japanese_text": "ええ……正確な仕組みはわかりませんが、遠くまで逃亡して監視のフクロウに発見されたら、看守に連絡が入るんでしょう。",
+    "chinese_text": "嗯……虽然不清楚准确的机制，\n我猜只要往远处逃，被监视的猫头鹰发现的话，\n看守就会收到联络。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Hanna005",
+    "speaker": "Hanna",
+    "japanese_text": "フクロウなら夜目もきくでしょうし……夜闇にまぎれて脱獄しようとする囚人もいるのでしょうね。はぁ……。",
+    "chinese_text": "猫头鹰的夜间视力应该很好……\n这也是为了提防趁夜色昏暗越狱的囚犯吧。\n唉……"
+  },
+  {
+    "dialogue_id": "0101Adv18_Narrative023",
+    "speaker": "[Narrative]",
+    "japanese_text": "そんなことを話していると、エマの視界の端に、ちらりと人影が映った。",
+    "chinese_text": "在她们进行对话时，\n艾玛发现，她视野的角落处出现了一个人影。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Ema017",
+    "speaker": "Ema",
+    "japanese_text": "（ナノカちゃん……？）",
+    "chinese_text": "（是奈叶香……？）"
+  },
+  {
+    "dialogue_id": "0101Adv18_Narrative024",
+    "speaker": "[Narrative]",
+    "japanese_text": "その人影はすぐに森の茂みの向こうへと消えた。まるで暗躍しているかのような挙動だった。",
+    "chinese_text": "那人影好像有意掩人耳目，\n马上钻进森林的草丛里，消失不见了。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Narrative025",
+    "speaker": "[Narrative]",
+    "japanese_text": "どうやら気付いたのはエマだけだったらしい。",
+    "chinese_text": "注意到这件事的，似乎只有艾玛一个。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Sherry017",
+    "speaker": "Sherry",
+    "japanese_text": "ハンナさんは、何をしていたんですか？",
+    "chinese_text": "汉娜，你刚其实在做什么？"
+  },
+  {
+    "dialogue_id": "0101Adv18_Hanna006",
+    "speaker": "Hanna",
+    "japanese_text": "わたくしも、どこか出られる場所がないか探してみてたんですわ。",
+    "chinese_text": "我也有在找找看，有没有什么地方\n可以逃出这里。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Ema018",
+    "speaker": "Ema",
+    "japanese_text": "出られそうな場所あった！？",
+    "chinese_text": "你有找到逃跑的地方！？"
+  },
+  {
+    "dialogue_id": "0101Adv18_Narrative026",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマはハンナへとぐいっと近寄る。",
+    "chinese_text": "艾玛一下子拉近了和汉娜的距离。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Narrative027",
+    "speaker": "[Narrative]",
+    "japanese_text": "しかし、ハンナはその距離を厭 うように――すっと、一歩下がった。",
+    "chinese_text": "可是汉娜好像不喜欢这样的距离感——\n她往后退了一步。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Ema019",
+    "speaker": "Ema",
+    "japanese_text": "（あれ……？ 気のせい、だよね）",
+    "chinese_text": "（嗯……？是我的错觉，对吧）"
+  },
+  {
+    "dialogue_id": "0101Adv18_Narrative028",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマは胸にちくりとした痛みを覚え、表情を強張らせる。",
+    "chinese_text": "艾玛的内心有些刺痛，\n脸上的表情也变得僵硬起来。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Narrative029",
+    "speaker": "[Narrative]",
+    "japanese_text": "脳裏に過ったのは、かつての友人の素振り。中学時代の嫌な思い出と重なる。",
+    "chinese_text": "过去朋友的影子在她脑海中浮现，\n和初中时代的讨厌回忆重叠在一起。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Hanna007",
+    "speaker": "Hanna",
+    "japanese_text": "そんな簡単にいくわけねえですわ。見たらわかるでしょう？一帯全てが高いコンクリート塀に囲まれていて。",
+    "chinese_text": "怎么可能那么顺利。你也看到了吧，\n这附近全部都被混凝土高墙围住。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Hanna008",
+    "speaker": "Hanna",
+    "japanese_text": "残念ながらわたくしたちが閉じ込められているという事実に、変わりはねーですわ。",
+    "chinese_text": "很遗憾，我们被困在这个地方的事实\n没有任何改变。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Sherry018",
+    "speaker": "Sherry",
+    "japanese_text": "それに加えて遠くに行けば、監視フクロウが常に巡回している……うーん、思ったよりもセキュリティレベル高そうですね。",
+    "chinese_text": "而且走到远处，\n就会碰到时常巡逻的监视猫头鹰……\n唔，安保等级比想像中高好多。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Hanna009",
+    "speaker": "Hanna",
+    "japanese_text": "それと、ひとつわかったことがありますわ。",
+    "chinese_text": "我还发现了一件事。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Sherry019",
+    "speaker": "Sherry",
+    "japanese_text": "なんでしょう？",
+    "chinese_text": "什么事？"
+  },
+  {
+    "dialogue_id": "0101Adv18_Hanna010",
+    "speaker": "Hanna",
+    "japanese_text": "ここは島ですわね。微かに潮のにおいと……塀に耳をつけたら波の音が聞こえました。",
+    "chinese_text": "这里是座小岛吧。我有闻到一丝海浪的气味……\n把耳朵贴在围墙上，还听到了波浪的声音。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Narrative030",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマはハンナの言葉にならい、塀に耳をつけてみる。",
+    "chinese_text": "艾玛按照汉娜所说，\n把耳朵贴在围墙上。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Ema020",
+    "speaker": "Ema",
+    "japanese_text": "ほんとだ……！そういえばゴクチョーも【島】って言ってたっけ。",
+    "chinese_text": "是真的……！\n说来，我好像记得典狱长也说过，这里是一座【岛】。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Narrative031",
+    "speaker": "[Narrative]",
+    "japanese_text": "シェリーは、ぽんっと手を打った。",
+    "chinese_text": "雪莉也恍然大悟般拍了拍手。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Sherry020",
+    "speaker": "Sherry",
+    "japanese_text": "おおっ！ 予感はしていましたがここは絶海の孤島ってやつですよ、きっと！",
+    "chinese_text": "哦哦！虽然我早有预感了，\n这里一定就是与世隔绝的孤岛！"
+  },
+  {
+    "dialogue_id": "0101Adv18_Sherry021",
+    "speaker": "Sherry",
+    "japanese_text": "我々は眠らされて、ここに連れてこられたんでしょうね。おそらくヘリとかで。",
+    "chinese_text": "我们应该是被迷昏了，然后被人\n用直升机这类运输工具运过来的。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Hanna011",
+    "speaker": "Hanna",
+    "japanese_text": "そしてこの島全体を塀で囲っているのなら、ここからの脱出は相当難しいですわ。",
+    "chinese_text": "而且整座岛都被围墙围住，\n想逃出这里一定很困难。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Ema021",
+    "speaker": "Ema",
+    "japanese_text": "そんな……塀を越えられたとしても、海じゃあ……。",
+    "chinese_text": "怎么会这样……\n就算翻过了围墙，也还有一片大海……"
+  },
+  {
+    "dialogue_id": "0101Adv18_Narrative032",
+    "speaker": "[Narrative]",
+    "japanese_text": "ハンナは青ざめて、爪を噛んでいる。小さな声で何かをぶつぶつと呟いていた。",
+    "chinese_text": "脸色惨白的汉娜咬着手指头，\n低声自言自语着。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Hanna012",
+    "speaker": "Hanna",
+    "japanese_text": "早く、早くここを出ないと……。",
+    "chinese_text": "我一定要早点逃出这里……"
+  },
+  {
+    "dialogue_id": "0101Adv18_Ema022",
+    "speaker": "Ema",
+    "japanese_text": "ハ、ハンナちゃん、大丈夫？",
+    "chinese_text": "汉娜，你、你没事吧？"
+  },
+  {
+    "dialogue_id": "0101Adv18_Hanna013",
+    "speaker": "Hanna",
+    "japanese_text": "――大丈夫なわけないじゃない！",
+    "chinese_text": "——怎么可能没事！"
+  },
+  {
+    "dialogue_id": "0101Adv18_Ema023",
+    "speaker": "Ema",
+    "japanese_text": "……っ",
+    "chinese_text": "……"
+  },
+  {
+    "dialogue_id": "0101Adv18_Hanna014",
+    "speaker": "Hanna",
+    "japanese_text": "おぞましい化け物が常にわたくしたちのことを見張っていますのよ！？",
+    "chinese_text": "可怕的怪物\n可是时时刻刻都在监视我们哦！？"
+  },
+  {
+    "dialogue_id": "0101Adv18_Hanna015",
+    "speaker": "Hanna",
+    "japanese_text": "こんなところはもう嫌ですわ！！いつかわたくしたちもあんな化け物に――。",
+    "chinese_text": "我已经受够了这个地方了！！\n而且我们以后可能也会变成那样子的怪物——"
+  },
+  {
+    "dialogue_id": "0101Adv18_Narrative033",
+    "speaker": "[Narrative]",
+    "japanese_text": "凄まじい音がして、エマとハンナは飛び上がった。",
+    "chinese_text": "这时突然响起一道巨大的响声，\n把艾玛和汉娜吓了一跳。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Narrative034",
+    "speaker": "[Narrative]",
+    "japanese_text": "シェリーが、塀を思いきり殴ったのだ。その轟音は塀全体を揺るがしたかのように感じる。",
+    "chinese_text": "是雪莉她用力地砸了一下围墙。\n气势猛烈的巨响似乎震撼了整堵围墙。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Narrative035",
+    "speaker": "[Narrative]",
+    "japanese_text": "ただ、残念ながら破壊はできていなかった。ひびひとつ入っていない。",
+    "chinese_text": "遗憾的是，围墙并没有倒塌。\n甚至连一道裂痕都没有产生。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Narrative036",
+    "speaker": "[Narrative]",
+    "japanese_text": "シェリーは、エマとハンナの方を見てぺろっと舌を出してみせた。",
+    "chinese_text": "雪莉看着艾玛和汉娜，\n吐了一下舌头。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Sherry022",
+    "speaker": "Sherry",
+    "japanese_text": "ハンナさんがかわいそうで見てられなくて、塀を破壊して脱獄しようと試みたんですが、ダメでした。",
+    "chinese_text": "我不忍心看汉娜那么伤心，\n就想试试看能不能砸坏围墙，不过失败了。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Sherry023",
+    "speaker": "Sherry",
+    "japanese_text": "この塀は、かたい！！",
+    "chinese_text": "这堵围墙，好硬！！"
+  },
+  {
+    "dialogue_id": "0101Adv18_Hanna016",
+    "speaker": "Hanna",
+    "japanese_text": "素手でどうにかしようという思考がどうにかしてますわよ！？",
+    "chinese_text": "竟然想赤手空拳解决问题，你的想法也太不正常了吧！？"
+  },
+  {
+    "dialogue_id": "0101Adv18_Ema024",
+    "speaker": "Ema",
+    "japanese_text": "シェ、シェリーちゃん、ハンナちゃん……やばいかも……。",
+    "chinese_text": "雪莉，汉娜……\n大、大事不好了……"
+  },
+  {
+    "dialogue_id": "0101Adv18_Narrative037",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマは森のように茂っている木々の方を指さし、震える声を放つ。",
+    "chinese_text": "艾玛指着茂密树林的方向，\n用颤抖的声音说道。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Narrative038",
+    "speaker": "[Narrative]",
+    "japanese_text": "――看守が、近付いてきている。",
+    "chinese_text": "——看守要过来了。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Hanna017",
+    "speaker": "Hanna",
+    "japanese_text": "ひっ……。",
+    "chinese_text": "噫……"
+  },
+  {
+    "dialogue_id": "0101Adv18_Sherry024",
+    "speaker": "Sherry",
+    "japanese_text": "あらら。",
+    "chinese_text": "哎哟。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Narrative039",
+    "speaker": "[Narrative]",
+    "japanese_text": "看守は鎌を掲げて、いつもよりずっと移動速度が速い。",
+    "chinese_text": "看守举起了镰刀。\n它的步速比平常还要快。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Narrative040",
+    "speaker": "[Narrative]",
+    "japanese_text": "おそらく、シェリーが塀を殴った音を聞きつけ、様子を見に来たのだ。",
+    "chinese_text": "它很有可能是听到雪莉砸墙的声音后，\n过来确认情况的。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Ema025",
+    "speaker": "Ema",
+    "japanese_text": "逃げよう――！",
+    "chinese_text": "快逃——！"
+  },
+  {
+    "dialogue_id": "0101Adv18_Narrative041",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマが呼びかけ、３人は全速力で駆け出した。",
+    "chinese_text": "艾玛话音刚落，\n三人便全力飞奔起来。"
+  },
+  {
+    "dialogue_id": "0101Adv18_Hanna018",
+    "speaker": "Hanna",
+    "japanese_text": "一体どこに逃げるんですの！？",
+    "chinese_text": "到底往哪里逃！？"
+  },
+  {
+    "dialogue_id": "0101Adv18_Narrative042",
+    "speaker": "[Narrative]",
+    "japanese_text": "ハンナの叫びにエマは――",
+    "chinese_text": "听到汉娜的呼喊，艾玛她——"
+  },
+  {
+    "dialogue_id": "0101Adv18_Narrative043",
+    "speaker": "[Narrative]",
+    "japanese_text": "牢屋敷と答えた。",
+    "chinese_text": "回答道：往监牢里逃。"
+  }
+]

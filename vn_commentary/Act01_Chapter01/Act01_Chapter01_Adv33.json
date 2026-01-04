@@ -1,0 +1,356 @@
+[
+  {
+    "dialogue_id": "0101Adv33_Narrative001",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマたちがシャワールームに行ってみると、調査中のレイア、マーゴ、ミリアと遭遇した。",
+    "chinese_text": "艾玛她们来到淋浴房，\n正好遇到调查中的蕾雅、玛格、米莉亚三人。"
+  },
+  {
+    "dialogue_id": "0101Adv33_Narrative002",
+    "speaker": "[Narrative]",
+    "japanese_text": "どうやら彼女たちも捜査中に鉢合わせ、合流した様子だ。",
+    "chinese_text": "对面似乎是\n在搜查期间正好遇上，才一起行动的。"
+  },
+  {
+    "dialogue_id": "0101Adv33_Narrative003",
+    "speaker": "[Narrative]",
+    "japanese_text": "ハンナは嫌そうに顔をしかめ、早々にシャワールームから出て行く。",
+    "chinese_text": "汉娜一脸不悦地皱起眉头，\n马上就离开了淋浴房。"
+  },
+  {
+    "dialogue_id": "0101Adv33_Margo001",
+    "speaker": "Margo",
+    "japanese_text": "あら、あなたたちも探偵ごっこ？",
+    "chinese_text": "哎呀，你们也在玩侦探游戏吗？"
+  },
+  {
+    "dialogue_id": "0101Adv33_Narrative004",
+    "speaker": "[Narrative]",
+    "japanese_text": "ロッカーを調べていたマーゴが、エマたちにくすっと微笑みかけてきた。",
+    "chinese_text": "刚还在调查柜子的玛格，\n转过脸对着艾玛她们轻轻一笑。"
+  },
+  {
+    "dialogue_id": "0101Adv33_Ema001",
+    "speaker": "Ema",
+    "japanese_text": "ごっこなんかじゃ……！",
+    "chinese_text": "才不是什么游戏……！"
+  },
+  {
+    "dialogue_id": "0101Adv33_Sherry001",
+    "speaker": "Sherry",
+    "japanese_text": "まあまあ、喧嘩してる場合じゃありませんから。",
+    "chinese_text": "算啦，现在不是吵架的时候。"
+  },
+  {
+    "dialogue_id": "0101Adv33_Narrative005",
+    "speaker": "[Narrative]",
+    "japanese_text": "シェリーに宥められ、エマは深呼吸でなんとか気持ちを鎮める。",
+    "chinese_text": "在雪莉的劝说下，\n艾玛做了深呼吸，总算压抑住不快的感情。"
+  },
+  {
+    "dialogue_id": "0101Adv33_Ema002",
+    "speaker": "Ema",
+    "japanese_text": "（マーゴちゃんはわざと煽るようなこと言ってきてるんだ。　落ち着かなきゃ）",
+    "chinese_text": "（玛格是故意这么讲话惹我们不爽的。\n我要冷静才行）"
+  },
+  {
+    "dialogue_id": "0101Adv33_Sherry002",
+    "speaker": "Sherry",
+    "japanese_text": "そっちは何か手がかり、得られました？",
+    "chinese_text": "你们那边有收获什么线索吗？"
+  },
+  {
+    "dialogue_id": "0101Adv33_Narrative006",
+    "speaker": "[Narrative]",
+    "japanese_text": "その言葉に肩をすくめたのはレイアだった。",
+    "chinese_text": "蕾雅耸了耸肩，以示回应。"
+  },
+  {
+    "dialogue_id": "0101Adv33_Leia001",
+    "speaker": "Leia",
+    "japanese_text": "いや、有力な手がかりは何も。",
+    "chinese_text": "不，完全没有有力的线索。"
+  },
+  {
+    "dialogue_id": "0101Adv33_Margo002",
+    "speaker": "Margo",
+    "japanese_text": "私たちの見解では、怪しいのはやっぱりハンナちゃんじゃないかって、まとまりつつあるわね。",
+    "chinese_text": "我们的看法基本达成一致，\n最可疑的人就是汉娜。"
+  },
+  {
+    "dialogue_id": "0101Adv33_Ema003",
+    "speaker": "Ema",
+    "japanese_text": "ハンナちゃんは絶対そんなことしない！",
+    "chinese_text": "汉娜绝对不会做出这样的事！"
+  },
+  {
+    "dialogue_id": "0101Adv33_Narrative007",
+    "speaker": "[Narrative]",
+    "japanese_text": "今度こそエマが噛みつく。するとレイアが、深々とため息を漏らした。",
+    "chinese_text": "艾玛这下真的生气了。\n这时，蕾雅深深地叹了口气。"
+  },
+  {
+    "dialogue_id": "0101Adv33_Leia002",
+    "speaker": "Leia",
+    "japanese_text": "エマくん、キミはハンナくんのことをどれだけ知っているんだい？",
+    "chinese_text": "艾玛，你对汉娜她\n到底有多少了解？"
+  },
+  {
+    "dialogue_id": "0101Adv33_Leia003",
+    "speaker": "Leia",
+    "japanese_text": "私は彼女のことをほとんど知らない。",
+    "chinese_text": "我几乎不了解她。"
+  },
+  {
+    "dialogue_id": "0101Adv33_Leia004",
+    "speaker": "Leia",
+    "japanese_text": "人を殺すような少女かもしれないし、そうではないかもしれない。",
+    "chinese_text": "她或许是会动手杀人的少女，\n也或许不是。"
+  },
+  {
+    "dialogue_id": "0101Adv33_Leia005",
+    "speaker": "Leia",
+    "japanese_text": "真っすぐに信じられるキミが、少し羨ましくもあるよ。",
+    "chinese_text": "我有点羡慕你，\n可以发自真心地信任他人。"
+  },
+  {
+    "dialogue_id": "0101Adv33_Ema004",
+    "speaker": "Ema",
+    "japanese_text": "……っ、レイアちゃんは、誰も信じていないの……？",
+    "chinese_text": "……蕾雅，\n你难道无法相信任何人吗……？"
+  },
+  {
+    "dialogue_id": "0101Adv33_Narrative008",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマは反撃にもならない弱弱しい声音で問いかけた。するとレイアは優しく微笑む。",
+    "chinese_text": "艾玛反问的声音软弱无力，根本算不上反击。\n这时，蕾雅露出了温柔的微笑。"
+  },
+  {
+    "dialogue_id": "0101Adv33_Leia006",
+    "speaker": "Leia",
+    "japanese_text": "私はみんなを守りたいと思っている。だから、信じている少女たちを全力で魔女から守るんだよ。",
+    "chinese_text": "我想保护所有人。\n所以，我会尽全力保护我所相信的少女们，不受魔女的伤害。"
+  },
+  {
+    "dialogue_id": "0101Adv33_Ema005",
+    "speaker": "Ema",
+    "japanese_text": "（レイアちゃんの考え方が間違ってるとは思わない。　でもハンナちゃんは……）",
+    "chinese_text": "（我不认为蕾雅的想法是错误的。\n可是，汉娜她……）"
+  },
+  {
+    "dialogue_id": "0101Adv33_Ema006",
+    "speaker": "Ema",
+    "japanese_text": "（友だちがいないボクと、仲良くしてくれた。　……個人的な感情でしかないかもしれないけど）",
+    "chinese_text": "（她愿意和没有朋友的我一起玩。\n……虽然这可能只是我单方面的情感）"
+  },
+  {
+    "dialogue_id": "0101Adv33_Ema007",
+    "speaker": "Ema",
+    "japanese_text": "（ボクはハンナちゃんが魔女じゃないって　信じたい）",
+    "chinese_text": "（我想要相信，相信汉娜她\n并不是魔女）"
+  },
+  {
+    "dialogue_id": "0101Adv33_Sherry003",
+    "speaker": "Sherry",
+    "japanese_text": "シャワールームは何もなさそうですね。どうします？ もう出ますか？",
+    "chinese_text": "看来淋浴房也没什么线索。\n怎么办？要离开吗？"
+  },
+  {
+    "dialogue_id": "0101Adv33_Narrative009",
+    "speaker": "[Narrative]",
+    "japanese_text": "シェリーがエマの肩にそっと触れてきた。",
+    "chinese_text": "雪莉轻轻碰了碰艾玛的肩膀。"
+  },
+  {
+    "dialogue_id": "0101Adv33_Narrative010",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマは――",
+    "chinese_text": "艾玛她——"
+  },
+  {
+    "dialogue_id": "0101Adv33_Narrative011",
+    "speaker": "[Narrative]",
+    "japanese_text": "シェリーに頷きを返した。",
+    "chinese_text": "向雪莉点了点头。"
+  },
+  {
+    "dialogue_id": "0101Adv33_Ema008",
+    "speaker": "Ema",
+    "japanese_text": "そうだね……。ああ、でも、魔法について聞いておきたいんだ。",
+    "chinese_text": "嗯……\n哦，还有件事，我想问一下她们魔法的事。"
+  },
+  {
+    "dialogue_id": "0101Adv33_Ema009",
+    "speaker": "Ema",
+    "japanese_text": "レイアちゃんたちがどんな魔法を使うのかボクらは知らないから。",
+    "chinese_text": "我们不知道蕾雅你们\n会用怎样的魔法。"
+  },
+  {
+    "dialogue_id": "0101Adv33_Miria001",
+    "speaker": "Miria",
+    "japanese_text": "え”っ…。",
+    "chinese_text": "呃……"
+  },
+  {
+    "dialogue_id": "0101Adv33_Narrative012",
+    "speaker": "[Narrative]",
+    "japanese_text": "ぎょっとした声をあげたのは、ミリアだった。",
+    "chinese_text": "发出了惊讶声的\n是米莉亚。"
+  },
+  {
+    "dialogue_id": "0101Adv33_Narrative013",
+    "speaker": "[Narrative]",
+    "japanese_text": "猛烈な勢いでエマに迫ってくる。",
+    "chinese_text": "她猛地凑到艾玛面前。"
+  },
+  {
+    "dialogue_id": "0101Adv33_Narrative014",
+    "speaker": "[Narrative]",
+    "japanese_text": "金髪でピアス。頭からつま先までばっちり決まっている、モデル体型のカリスマ美女。",
+    "chinese_text": "这是一位一头金发，穿着耳钉，\n由头到脚都打理得美丽动人的，拥有模特身材的超魅力少女。"
+  },
+  {
+    "dialogue_id": "0101Adv33_Narrative015",
+    "speaker": "[Narrative]",
+    "japanese_text": "間近に迫られたエマは、ごくりと喉を鳴らした。",
+    "chinese_text": "这样一位美少女在超近距离面对着自己，\n艾玛忍不住吞了吞口水。"
+  },
+  {
+    "dialogue_id": "0101Adv33_Miria002",
+    "speaker": "Miria",
+    "japanese_text": "ままっ、まままま魔法なんてあるわけないよ？その話はやめよ？ ははははは。",
+    "chinese_text": "魔、魔魔魔魔魔法怎么可能会存在呢？\n别再说这个话题了好吗？哈哈哈哈哈。"
+  },
+  {
+    "dialogue_id": "0101Adv33_Narrative016",
+    "speaker": "[Narrative]",
+    "japanese_text": "乾いた笑いがシャワールームに響く。",
+    "chinese_text": "一阵干笑声\n响遍整间淋浴房。"
+  },
+  {
+    "dialogue_id": "0101Adv33_Ema010",
+    "speaker": "Ema",
+    "japanese_text": "（む、むちゃくちゃ怪しい……！）",
+    "chinese_text": "（超、超级可疑……！）"
+  },
+  {
+    "dialogue_id": "0101Adv33_Narrative017",
+    "speaker": "[Narrative]",
+    "japanese_text": "咳払いをしたのはレイアだ。",
+    "chinese_text": "这时，蕾雅清了清嗓子。"
+  },
+  {
+    "dialogue_id": "0101Adv33_Leia007",
+    "speaker": "Leia",
+    "japanese_text": "エマくんもどうやら魔法を使えないみたいだし、みんながみんな自覚があるわけではないんじゃないか？",
+    "chinese_text": "既然艾玛你怎样也使不出魔法，\n那不就说明，不是每个人都对自己的魔法有认知，对不对？"
+  },
+  {
+    "dialogue_id": "0101Adv33_Ema011",
+    "speaker": "Ema",
+    "japanese_text": "ああ、うん。そうだよね……。",
+    "chinese_text": "啊，嗯。说得有道理……"
+  },
+  {
+    "dialogue_id": "0101Adv33_Leia008",
+    "speaker": "Leia",
+    "japanese_text": "ちなみに私は少々キミたちを誘惑してしまう魔法を、無自覚に使ってしまっているようだね。",
+    "chinese_text": "顺带一提，我似乎是在无意中\n使出了轻微地诱惑了你们的魔法。"
+  },
+  {
+    "dialogue_id": "0101Adv33_Ema012",
+    "speaker": "Ema",
+    "japanese_text": "（レイアちゃんはたしかに）",
+    "chinese_text": "（确实有这个感觉）"
+  },
+  {
+    "dialogue_id": "0101Adv33_Leia009",
+    "speaker": "Leia",
+    "japanese_text": "もういいかい？",
+    "chinese_text": "还有其他问题吗？"
+  },
+  {
+    "dialogue_id": "0101Adv33_Ema013",
+    "speaker": "Ema",
+    "japanese_text": "ええと……あと、昨夜の行動について聞いておきたくて。",
+    "chinese_text": "呃……还有，我想知道你们昨晚的行动。"
+  },
+  {
+    "dialogue_id": "0101Adv33_Miria003",
+    "speaker": "Miria",
+    "japanese_text": "え”っ…。",
+    "chinese_text": "呃……"
+  },
+  {
+    "dialogue_id": "0101Adv33_Narrative018",
+    "speaker": "[Narrative]",
+    "japanese_text": "ミリアがまたもぎょっとした声を上げ、エマにせかせかと迫ってくる。",
+    "chinese_text": "米莉亚又一次发出惊讶声，\n又慌张地靠近了艾玛。"
+  },
+  {
+    "dialogue_id": "0101Adv33_Miria004",
+    "speaker": "Miria",
+    "japanese_text": "レイアちゃんと同室で寝ているけど、同室ってだけだからね？変な意味じゃないからね？",
+    "chinese_text": "虽然我和小蕾睡一间房，但只是单纯的室友关系哦？\n并没有什么奇怪的意思哦？"
+  },
+  {
+    "dialogue_id": "0101Adv33_Miria005",
+    "speaker": "Miria",
+    "japanese_text": "それぞれ違うベッドで寝ているからね？",
+    "chinese_text": "我和她睡的床也不是同一张哦？"
+  },
+  {
+    "dialogue_id": "0101Adv33_Leia010",
+    "speaker": "Leia",
+    "japanese_text": "…………。",
+    "chinese_text": "…………"
+  },
+  {
+    "dialogue_id": "0101Adv33_Ema014",
+    "speaker": "Ema",
+    "japanese_text": "…………。",
+    "chinese_text": "…………"
+  },
+  {
+    "dialogue_id": "0101Adv33_Sherry004",
+    "speaker": "Sherry",
+    "japanese_text": "そんなに焦って言われると逆に怪しんでしまいそうですね。",
+    "chinese_text": "你说得这么慌张，\n反而更招人怀疑了耶。"
+  },
+  {
+    "dialogue_id": "0101Adv33_Narrative019",
+    "speaker": "[Narrative]",
+    "japanese_text": "満面の笑顔でシェリーがさらりと突っ込む。",
+    "chinese_text": "雪莉满面笑容，自然地发出吐槽。"
+  },
+  {
+    "dialogue_id": "0101Adv33_Miria006",
+    "speaker": "Miria",
+    "japanese_text": "あああっ……。",
+    "chinese_text": "啊啊啊……"
+  },
+  {
+    "dialogue_id": "0101Adv33_Narrative020",
+    "speaker": "[Narrative]",
+    "japanese_text": "ミリアは頭を抱えてしまった。",
+    "chinese_text": "米莉亚双手抱头。"
+  },
+  {
+    "dialogue_id": "0101Adv33_Ema015",
+    "speaker": "Ema",
+    "japanese_text": "（どっちかというと、　昨夜の配信について聞きたかったんだけど）",
+    "chinese_text": "（我其实更想问\n昨天晚上直播的事）"
+  },
+  {
+    "dialogue_id": "0101Adv33_Ema016",
+    "speaker": "Ema",
+    "japanese_text": "（なんだろう、このいたたまれない空気は……）",
+    "chinese_text": "（这股尴尬死的气氛究竟是怎么回事……）"
+  },
+  {
+    "dialogue_id": "0101Adv33_Narrative021",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマとシェリーは、シャワールームを後にした。",
+    "chinese_text": "艾玛和雪莉\n离开了淋浴房。"
+  }
+]
