@@ -1,0 +1,25 @@
+# Visual Novel Commentary System Configuration
+
+# LLM configuration
+llm:
+  provider: gemini  # Options: gemini, ollama
+  model: gemini-2.5-flash
+  api_key: null  # Set to your API key or use GEMINI_API_KEY environment variable
+  temperature: 0.7
+
+# Context management
+context:
+  max_context_size: 20  # Number of previous dialogues to keep in context
+
+# System prompt (optional - overrides default if specified)
+system_prompt_file: null  # Path to custom system prompt file
+
+# Output settings
+output:
+  log_level: INFO  # DEBUG, INFO, WARNING, ERROR
+  save_results: true  # Save analysis results to JSON
+  results_file: commentary_results.json
+
+# Processing settings
+processing:
+  delay_between_dialogues: 0.0  # Delay in seconds between processing each dialogue (for rate limiting)

@@ -1,0 +1,74 @@
+[
+  {
+    "dialogue_id": "0101Adv01_Narrative001",
+    "speaker": "[Narrative]",
+    "japanese_text": "春の陽気な朝だった。",
+    "chinese_text": "那是一个春天的清晨。"
+  },
+  {
+    "dialogue_id": "0101Adv01_Protagonist002",
+    "speaker": "[主人公]",
+    "japanese_text": "今日もいい天気だな。",
+    "chinese_text": "今天天气真好啊。"
+  },
+  {
+    "dialogue_id": "0101Adv01_Ema003",
+    "speaker": "艾玛",
+    "japanese_text": "お兄ちゃん!朝ごはんできたよ!",
+    "chinese_text": "哥哥!早饭做好了!"
+  },
+  {
+    "dialogue_id": "0101Adv01_Protagonist004",
+    "speaker": "[主人公]",
+    "japanese_text": "ありがとう、エマ。",
+    "chinese_text": "谢谢,艾玛。"
+  },
+  {
+    "dialogue_id": "0101Adv01_Narrative005",
+    "speaker": "[Narrative]",
+    "japanese_text": "食卓に着くと、豪華な朝食が並んでいた。",
+    "chinese_text": "来到餐桌前,丰盛的早餐已经摆好了。"
+  },
+  {
+    "dialogue_id": "0101Adv01_Ema006",
+    "speaker": "艾玛",
+    "japanese_text": "今日は特別な日だから、いつもより頑張ったんだ。",
+    "chinese_text": "因为今天是特别的日子,所以比平时更用心了。"
+  },
+  {
+    "dialogue_id": "0101Adv01_Protagonist007",
+    "speaker": "[主人公]",
+    "japanese_text": "特別な日?今日は何かあったっけ?",
+    "chinese_text": "特别的日子?今天有什么事吗?"
+  },
+  {
+    "dialogue_id": "0101Adv01_Ema008",
+    "speaker": "艾玛",
+    "japanese_text": "えっ...お兄ちゃん、まさか忘れたの?今日は...今日は私の誕生日だよ!",
+    "chinese_text": "诶...哥哥,你该不会忘了吧?今天是...今天是我的生日啊!"
+  },
+  {
+    "dialogue_id": "0101Adv01_Protagonist009",
+    "speaker": "[主人公]",
+    "japanese_text": "あっ...そ、そうだった!ごめん、エマ!",
+    "chinese_text": "啊...对、对了!对不起,艾玛!"
+  },
+  {
+    "dialogue_id": "0101Adv01_Ema010",
+    "speaker": "艾玛",
+    "japanese_text": "もう...お兄ちゃんのバカ!",
+    "chinese_text": "真是的...哥哥这个笨蛋!"
+  },
+  {
+    "dialogue_id": "0101Adv01_Narrative011",
+    "speaker": "[Narrative]",
+    "japanese_text": "エマは涙目になりながら、部屋を飛び出していった。",
+    "chinese_text": "艾玛眼含泪水,冲出了房间。"
+  },
+  {
+    "dialogue_id": "0101Adv01_Protagonist012",
+    "speaker": "[主人公]",
+    "japanese_text": "やばい...完全に忘れてた。どうしよう...",
+    "chinese_text": "糟了...完全忘记了。怎么办..."
+  }
+]

@@ -24,3 +24,6 @@ stt/FunASR/
 CLAUDE.md
 .claude/
 .plan/
+
+# VN Commentary outputs
+commentary_results.json
