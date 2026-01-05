@@ -10,6 +10,8 @@ class ServicesSettings(BaseModel):
     tts_websocket_url: str = "ws://localhost:8003/synthesize/stream"
     ocr_websocket_url: str = "ws://localhost:8004/monitor/stream"
     ocr_base_url: str = "http://localhost:8004"
+    bilibili_enabled: bool = False
+    bilibili_base_url: str = "http://localhost:8002"
 
     @classmethod
     def from_dict(cls, data: dict) -> "ServicesSettings":

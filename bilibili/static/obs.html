@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bilibili Live Chat - OBS Overlay</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: transparent;
+            font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+            overflow: hidden;
+            color: #ffffff;
+        }
+
+        #chat-container {
+            width: 100vw;
+            height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        .message {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 10px 15px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            animation: fadeIn 0.3s ease-in;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+
+        .message.superchat {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.9), rgba(255, 140, 0, 0.9));
+            border-left: 4px solid #ff4500;
+            font-weight: bold;
+        }
+
+        .message-user {
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .message-content {
+            display: inline;
+        }
+
+        .superchat-amount {
+            color: #ffeb3b;
+            font-size: 1.1em;
+            margin-left: 5px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+            }
+        }
+
+        .fading-out {
+            animation: fadeOut 0.5s ease-out forwards;
+        }
+    </style>
+</head>
+<body>
+    <div id="chat-container"></div>
+
+    <script>
+        // Get URL parameters for configuration
+        const params = new URLSearchParams(window.location.search);
+        const theme = params.get('theme') || 'dark';
+        const showDanmaku = params.get('show_danmaku') !== 'false';
+        const showSuperchat = params.get('show_superchat') !== 'false';
+        const fontSize = parseInt(params.get('font_size')) || 16;
+        const maxMessages = parseInt(params.get('max_messages')) || 20;
+
+        // Apply font size
+        document.body.style.fontSize = fontSize + 'px';
+
+        // WebSocket connection
+        const wsUrl = `ws://${window.location.host}/ws/stream`;
+        let ws = null;
+        let reconnectDelay = 1000;
+        const maxReconnectDelay = 30000;
+
+        const chatContainer = document.getElementById('chat-container');
+
+        function connect() {
+            ws = new WebSocket(wsUrl);
+
+            ws.onopen = () => {
+                console.log('Connected to Bilibili service');
+                reconnectDelay = 1000;
+
+                // Subscribe to channels
+                const channels = [];
+                if (showDanmaku) channels.push('danmaku');
+                if (showSuperchat) channels.push('superchat');
+
+                ws.send(JSON.stringify({
+                    type: 'subscribe',
+                    channels: channels
+                }));
+
+                // Send ping every 30 seconds
+                setInterval(() => {
+                    if (ws.readyState === WebSocket.OPEN) {
+                        ws.send(JSON.stringify({ type: 'ping' }));
+                    }
+                }, 30000);
+            };
+
+            ws.onmessage = (event) => {
+                const data = JSON.parse(event.data);
+
+                if (data.type === 'danmaku' && showDanmaku) {
+                    addMessage(data.data, false);
+                } else if (data.type === 'superchat' && showSuperchat) {
+                    addMessage(data.data, true);
+                } else if (data.type === 'pong') {
+                    // Pong received
+                }
+            };
+
+            ws.onclose = () => {
+                console.log('Disconnected from Bilibili service, reconnecting...');
+                setTimeout(connect, reconnectDelay);
+                reconnectDelay = Math.min(reconnectDelay * 2, maxReconnectDelay);
+            };
+
+            ws.onerror = (error) => {
+                console.error('WebSocket error:', error);
+            };
+        }
+
+        function addMessage(message, isSuperchat) {
+            const div = document.createElement('div');
+            div.className = 'message' + (isSuperchat ? ' superchat' : '');
+
+            const userSpan = document.createElement('span');
+            userSpan.className = 'message-user';
+            userSpan.textContent = message.user + ':';
+
+            const contentSpan = document.createElement('span');
+            contentSpan.className = 'message-content';
+            contentSpan.textContent = message.content;
+
+            div.appendChild(userSpan);
+            div.appendChild(contentSpan);
+
+            if (isSuperchat) {
+                const amountSpan = document.createElement('span');
+                amountSpan.className = 'superchat-amount';
+                amountSpan.textContent = `¥${message.amount}`;
+                div.appendChild(amountSpan);
+            }
+
+            chatContainer.appendChild(div);
+
+            // Limit number of messages
+            while (chatContainer.children.length > maxMessages) {
+                const firstChild = chatContainer.firstChild;
+                firstChild.classList.add('fading-out');
+                setTimeout(() => {
+                    if (firstChild.parentNode) {
+                        firstChild.remove();
+                    }
+                }, 500);
+            }
+
+            // Auto-scroll to bottom
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        // Start connection
+        connect();
+    </script>
+</body>
+</html>

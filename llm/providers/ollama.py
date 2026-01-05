@@ -133,6 +133,15 @@ class OllamaProvider(LLMProvider):
         """
         # Process messages - handle images field
         final_messages = []
+
+        # Add system prompt if provided and no system message exists
+        has_system_message = any(msg.get("role") == "system" for msg in messages)
+        if system_prompt and not has_system_message:
+            final_messages.append({
+                "role": "system",
+                "content": system_prompt
+            })
+
         for msg in messages:
             processed_msg = {
                 "role": msg["role"],
@@ -226,6 +235,15 @@ class OllamaProvider(LLMProvider):
         """
         # Process messages - handle images field
         final_messages = []
+
+        # Add system prompt if provided and no system message exists
+        has_system_message = any(msg.get("role") == "system" for msg in messages)
+        if system_prompt and not has_system_message:
+            final_messages.append({
+                "role": "system",
+                "content": system_prompt
+            })
+
         for msg in messages:
             processed_msg = {
                 "role": msg["role"],
