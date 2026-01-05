@@ -25,12 +25,29 @@ class OllamaConfig(BaseModel):
     generation_config: Optional[dict] = Field(default_factory=dict)
 
 
+class OpenAIConfig(BaseModel):
+    """Configuration for OpenAI provider"""
+    model: str = "gpt-4o"
+    api_key: Optional[str] = None
+    base_url: Optional[str] = None
+    organization: Optional[str] = None
+    timeout: float = 60.0
+    max_retries: int = 2
+    generation_config: Optional[dict] = Field(default_factory=dict)
+
+    @field_validator('api_key', mode='before')
+    @classmethod
+    def convert_none_to_empty(cls, v):
+        """Convert None to empty string for api_key"""
+        return v if v is not None else ""
+
+
 class LLMSettings(BaseModel):
     """LLM configuration settings"""
-    provider: Literal["gemini", "ollama"] = "ollama"
+    provider: Literal["gemini", "ollama", "openai"] = "ollama"
     providers: dict[str, Any] = Field(default_factory=dict)
 
-    def get_provider_config(self) -> GeminiConfig | OllamaConfig:
+    def get_provider_config(self) -> GeminiConfig | OllamaConfig | OpenAIConfig:
         """
         Get configuration for the active provider.
 
@@ -48,6 +65,8 @@ class LLMSettings(BaseModel):
             return GeminiConfig(**provider_data)
         elif self.provider == "ollama":
             return OllamaConfig(**provider_data)
+        elif self.provider == "openai":
+            return OpenAIConfig(**provider_data)
         else:
             raise ValueError(f"Unknown provider: {self.provider}")
 

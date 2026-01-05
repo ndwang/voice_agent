@@ -79,6 +79,8 @@ class OrchestratorServer:
         logger.debug("ReloadCoordinator initialized with handlers")
         
     async def start(self):
+        settings = get_settings()
+
         # Start event bus processor
         await self.event_bus.start()
 
