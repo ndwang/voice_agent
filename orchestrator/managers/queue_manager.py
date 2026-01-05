@@ -55,13 +55,12 @@ class QueueManager(BaseManager):
         # Future: Subscribe to ocr events, game events
 
     async def on_bilibili_danmaku(self, event: Event):
-        """Handle incoming danmaku."""
-        from orchestrator.core.activity_state import get_activity_state
+        """
+        Handle incoming danmaku.
 
-        # Check toggle state first
-        if not get_activity_state().state.bilibili_danmaku_enabled:
-            return
-
+        Note: The Bilibili service already filters messages based on danmaku_enabled state,
+        so we don't need to check it again here.
+        """
         danmaku = event.data
 
         # Existing '!' filter
@@ -78,13 +77,12 @@ class QueueManager(BaseManager):
         await self._enqueue(item)
 
     async def on_bilibili_superchat(self, event: Event):
-        """Handle incoming SuperChat."""
-        from orchestrator.core.activity_state import get_activity_state
+        """
+        Handle incoming SuperChat.
 
-        # Check toggle state
-        if not get_activity_state().state.bilibili_superchat_enabled:
-            return
-
+        Note: The Bilibili service already filters messages based on superchat_enabled state,
+        so we don't need to check it again here.
+        """
         superchat = event.data
 
         item = InputItem(

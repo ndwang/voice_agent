@@ -3,6 +3,7 @@ Image Utilities
 
 Utilities for validating, reading, and processing image files for LLM providers.
 """
+import base64
 import mimetypes
 from pathlib import Path
 from typing import List, Optional
@@ -135,3 +136,24 @@ def get_mime_type(path: str) -> str:
     }
 
     return mime_map.get(ext, 'application/octet-stream')
+
+
+def encode_image_to_base64(image_path: str) -> str:
+    """
+    Read image file and encode to base64 data URL.
+
+    Args:
+        image_path: Path to image file
+
+    Returns:
+        Base64 data URL string (e.g., "data:image/jpeg;base64,...")
+
+    Raises:
+        FileNotFoundError: If file doesn't exist
+        PermissionError: If file cannot be read
+        ValueError: If file is too large
+    """
+    image_bytes = read_image_file(image_path)
+    mime_type = get_mime_type(image_path)
+    base64_data = base64.b64encode(image_bytes).decode('utf-8')
+    return f"data:{mime_type};base64,{base64_data}"
