@@ -30,7 +30,7 @@ from core.logging import get_logger, setup_logging
 from vn_commentary.dialogue_reader import DialogueReader
 from vn_commentary.commentary_analyzer import CommentaryAnalyzer
 from vn_commentary.models import CommentaryResult
-from llm.providers.gemini import GeminiProvider
+from llm.providers import GeminiProvider, OllamaProvider
 
 logger = get_logger(__name__)
 
@@ -141,6 +141,12 @@ class VNCommentaryDriver:
             llm_provider = GeminiProvider(
                 model=llm_config.get("model", "gemini-2.5-flash"),
                 api_key=llm_config.get("api_key") or os.getenv("GEMINI_API_KEY")
+            )
+        elif provider == "ollama":
+            llm_provider = OllamaProvider(
+                model=llm_config.get("model", "Qwen3-8B-Q4-4kcontext"),
+                base_url=llm_config.get("base_url", "http://localhost:11434"),
+                disable_thinking=llm_config.get("disable_thinking", True)
             )
         else:
             raise ValueError(f"Unsupported LLM provider: {provider}")

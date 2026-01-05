@@ -1,7 +1,8 @@
 """
 Commentary analyzer using LLM to decide whether to react to dialogues.
 """
-from typing import Optional, List
+from typing import Optional, List, Dict
+from collections import deque
 import json
 
 from core.logging import get_logger
@@ -52,7 +53,8 @@ class CommentaryAnalyzer:
         llm_provider: Optional[LLMProvider] = None,
         system_prompt: Optional[str] = None,
         model: str = "gemini-2.5-flash",
-        api_key: Optional[str] = None
+        api_key: Optional[str] = None,
+        max_recent_reactions: int = 5
     ):
         """
         Initialize commentary analyzer.
@@ -62,16 +64,37 @@ class CommentaryAnalyzer:
             system_prompt: Custom system prompt (if None, uses default)
             model: Model name for default Gemini provider
             api_key: API key for default Gemini provider
+            max_recent_reactions: Maximum number of recent reactions to track
         """
         self.llm_provider = llm_provider or GeminiProvider(model=model, api_key=api_key)
         self.system_prompt = system_prompt or self.DEFAULT_SYSTEM_PROMPT
+        self.max_recent_reactions = max_recent_reactions
 
         # Chapter state
         self.current_chapter: List[Dialogue] = []
         self.current_index: int = 0
-        self.last_reaction_index: Optional[int] = None
+        self.recent_reactions: deque = deque(maxlen=max_recent_reactions)
+        self.last_reaction_index: Optional[int] = None  # Keep for backward compatibility
+
+        # Token usage tracking (latest call only)
+        self.last_prompt_tokens: int = 0
+        self.last_completion_tokens: int = 0
 
         logger.info(f"Initialized CommentaryAnalyzer with model: {model}")
+
+    @property
+    def last_token_usage(self) -> Dict:
+        """
+        Get token usage from the most recent LLM call.
+
+        Returns:
+            Dictionary with prompt_tokens, completion_tokens, and total_tokens
+        """
+        return {
+            "prompt_tokens": self.last_prompt_tokens,
+            "completion_tokens": self.last_completion_tokens,
+            "total_tokens": self.last_prompt_tokens + self.last_completion_tokens
+        }
 
     def set_chapter(self, dialogues: List[Dialogue]):
         """
@@ -83,6 +106,7 @@ class CommentaryAnalyzer:
         self.current_chapter = dialogues
         self.current_index = 0
         self.last_reaction_index = None
+        self.recent_reactions.clear()
         logger.info(f"Loaded chapter with {len(dialogues)} dialogues")
 
     def end_chapter(self):
@@ -92,11 +116,11 @@ class CommentaryAnalyzer:
         self.current_chapter = []
         self.current_index = 0
         self.last_reaction_index = None
+        self.recent_reactions.clear()
 
     def _get_reaction_indices(self) -> List[int]:
         """Get all indices where reactions occurred (for debugging)."""
-        # This would require tracking all reactions, simplified for now
-        return [self.last_reaction_index] if self.last_reaction_index is not None else []
+        return [r["index"] for r in self.recent_reactions]
 
     def _format_chapter_context(self) -> str:
         """Format chapter context up to current line (no spoilers)."""
@@ -120,6 +144,28 @@ class CommentaryAnalyzer:
             return self.current_index
         return self.current_index - self.last_reaction_index
 
+    def _format_recent_reactions(self) -> str:
+        """
+        Format recent reactions for LLM prompt (KV cache friendly).
+
+        Returns a fixed-format section showing recent reaction history to help
+        the LLM maintain appropriate pacing.
+        """
+        if not self.recent_reactions:
+            return "=== 最近的反应记录 ===\n（暂无反应记录）\n"
+
+        lines = ["=== 最近的反应记录 ==="]
+        for reaction in self.recent_reactions:
+            idx = reaction["index"]
+            mode = reaction.get("mode", "未知")
+            emotion = reaction.get("emotion", "未知")
+            intensity = reaction.get("intensity", "未知")
+            instruction = reaction.get("instruction", "未知")
+
+            lines.append(f"行{idx+1}: [{mode}] {emotion} {intensity} - {instruction}")
+
+        return "\n".join(lines) + "\n"
+
     async def analyze_dialogue(self, dialogue: Dialogue) -> CommentaryResult:
         """
         Analyze a dialogue line and decide whether to comment.
@@ -130,7 +176,8 @@ class CommentaryAnalyzer:
         Returns:
             CommentaryResult with decision and optional reaction
         """
-        # Build prompt with full chapter context
+        # Build prompt with optimal KV cache structure: static → semi-static → dynamic
+        recent_reactions = self._format_recent_reactions()
         chapter_context = self._format_chapter_context()
         current_line = dialogue.format_for_llm()
         lines_since_reaction = self._calculate_lines_since_last_reaction()
@@ -138,23 +185,30 @@ class CommentaryAnalyzer:
         # Build pacing info (just the number, let LLM decide)
         pacing_info = f"距离上次发言过去了{lines_since_reaction}行台词。"
 
-        user_prompt = f"""{chapter_context}
-
-{pacing_info}
-
-当前需要分析的对话：
-{current_line}
-
-艾玛，现在的气氛适合你开口吗？考虑到直播间的观感和你对这段剧情的感触，以及回复的频率。
+        # KV cache optimized structure:
+        # 1. Static instructions (never changes - maximum cache reuse)
+        # 2. Chapter context (grows with each line)
+        # 3. Recent reactions (semi-static - changes only when reacting)
+        # 4. Current line + pacing (most dynamic - changes every call)
+        user_prompt = f"""艾玛，现在的气氛适合你开口吗？考虑到直播间的观感和你对这段剧情的感触，以及回复的频率。
 请输出 JSON：
 {{
     "reasoning": "限20字内。分析该行是否触动了艾玛的怕寂寞性格、推理直觉或直播效果。",
     "action": "silent" 或 "react",
-    "mode": "inner_monologue" | "spoken" | "streamer_aside" (silent时为null),
+    "mode": "spoken" | "streamer_aside" (silent时为null),
     "emotion": "情绪关键词" (silent时为null),
     "intensity": 0.0-1.0 (情绪波动强度),
     "instruction": "给下游模型的具体演说指导。说明侧重点、潜台词或互动方向(silent时为null)"
-}}"""
+}}
+
+{chapter_context}
+
+{recent_reactions}
+
+{pacing_info}
+
+当前需要分析的对话：
+{current_line}"""
 
         # Call LLM with structured output request
         messages = [
@@ -164,6 +218,7 @@ class CommentaryAnalyzer:
         try:
             logger.debug(f"Analyzing dialogue {dialogue.dialogue_id}")
             logger.debug(f"Pacing info: {pacing_info}")
+            logger.debug(f"User prompt: {user_prompt}")
             # Use generate (non-streaming) for structured output
             response = await self.llm_provider.generate(
                 messages=messages,
@@ -171,12 +226,31 @@ class CommentaryAnalyzer:
                 temperature=0.7
             )
 
+            # Capture token usage from provider
+            self.last_prompt_tokens = self.llm_provider.last_prompt_tokens
+            self.last_completion_tokens = self.llm_provider.last_completion_tokens
+            logger.debug(f"Token usage - Prompt: {self.last_prompt_tokens}, "
+                        f"Completion: {self.last_completion_tokens}, "
+                        f"Total: {self.last_prompt_tokens + self.last_completion_tokens}")
+
             # Parse JSON response
             decision = self._parse_llm_response(response)
 
             # Update state
             if decision.action == "react":
                 self.last_reaction_index = self.current_index
+
+                # Store reaction details for future context
+                reaction_record = {
+                    "index": self.current_index,
+                    "reasoning": decision.reasoning or "未提供原因",
+                    "mode": decision.mode,
+                    "emotion": decision.emotion,
+                    "intensity": decision.intensity,
+                    "instruction": decision.instruction
+                }
+                self.recent_reactions.append(reaction_record)
+
                 logger.info(f"[{dialogue.dialogue_id}] REACT: {decision.reasoning}")
             else:
                 logger.info(f"[{dialogue.dialogue_id}] SILENT: {decision.reasoning}")
