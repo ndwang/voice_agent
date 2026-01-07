@@ -9,6 +9,9 @@ orchestrator:
   hotkeys:
     toggle_listening: ctrl+shift+l
     cancel_speech: ctrl+shift+c
+  memory:
+    storage_path: data/memories/chroma_db
+    embedding_model: shibing624/text2vec-base-chinese
 llm:
   provider: openai
   providers:
