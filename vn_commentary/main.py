@@ -28,6 +28,7 @@ if sys.platform == 'win32':
 from core.logging import get_logger, setup_logging
 from vn_commentary.dialogue_reader import DialogueReader
 from vn_commentary.commentary_analyzer import CommentaryAnalyzer
+from vn_commentary.summary_generator import SummaryGenerator
 from vn_commentary.models import CommentaryResult
 from core.settings import LLMSettings
 
@@ -77,6 +78,7 @@ class VNCommentaryDriver:
         self.config = self._load_config(config_path)
         self._setup_logging()
         self.analyzer: Optional[CommentaryAnalyzer] = None
+        self.summary_generator: Optional[SummaryGenerator] = None
         self.results: List[CommentaryResult] = []
 
         # Initialize colors (disable if output is redirected)
@@ -110,7 +112,16 @@ class VNCommentaryDriver:
                     }
                 }
             },
-            "system_prompt_file": None,
+            "system_prompt_file": "vn_commentary/prompts/gatekeep_system_prompt.txt",
+            "user_prompt_file": "vn_commentary/prompts/gatekeep_user_prompt.txt",
+            "summary": {
+                "enabled": True,
+                "output_directory": None,
+                "system_prompt_file": "vn_commentary/prompts/summary_system_prompt.txt",
+                "user_prompt_file": "vn_commentary/prompts/summary_user_prompt.txt",
+                "include_reactions": True,
+                "max_words": 300
+            },
             "output": {
                 "log_level": "INFO",
                 "save_results": True,
@@ -139,15 +150,64 @@ class VNCommentaryDriver:
         if prompt_file and Path(prompt_file).exists():
             with open(prompt_file, 'r', encoding='utf-8') as f:
                 system_prompt = f.read()
-            logger.info(f"Loaded custom system prompt from {prompt_file}")
+            logger.info(f"Loaded gatekeep system prompt from {prompt_file}")
+
+        # Load user prompt template if specified
+        user_prompt_template = None
+        user_prompt_file = self.config.get("user_prompt_file")
+        if user_prompt_file and Path(user_prompt_file).exists():
+            with open(user_prompt_file, 'r', encoding='utf-8') as f:
+                user_prompt_template = f.read()
+            logger.info(f"Loaded gatekeep user prompt template from {user_prompt_file}")
 
         # Create analyzer
         analyzer = CommentaryAnalyzer(
             llm_settings=llm_settings,
-            system_prompt=system_prompt
+            system_prompt=system_prompt,
+            user_prompt_template=user_prompt_template
         )
 
         return analyzer
+
+    def _create_summary_generator(self) -> Optional[SummaryGenerator]:
+        """Create and configure summary generator if enabled."""
+        summary_config = self.config.get("summary", {})
+
+        if not summary_config.get("enabled", True):
+            logger.info("Summary generation disabled")
+            return None
+
+        # Load prompts
+        system_prompt_file = summary_config.get("system_prompt_file")
+        user_prompt_file = summary_config.get("user_prompt_file")
+
+        if not system_prompt_file or not Path(system_prompt_file).exists():
+            logger.warning(f"Summary system prompt not found: {system_prompt_file}")
+            return None
+
+        if not user_prompt_file or not Path(user_prompt_file).exists():
+            logger.warning(f"Summary user prompt not found: {user_prompt_file}")
+            return None
+
+        with open(system_prompt_file, 'r', encoding='utf-8') as f:
+            system_prompt = f.read()
+
+        with open(user_prompt_file, 'r', encoding='utf-8') as f:
+            user_prompt_template = f.read()
+
+        # Reuse LLM settings from analyzer config
+        llm_settings = LLMSettings.from_dict(self.config.get("llm", {}))
+
+        generator = SummaryGenerator(
+            llm_settings=llm_settings,
+            system_prompt=system_prompt,
+            user_prompt_template=user_prompt_template,
+            max_words=summary_config.get("max_words", 300),
+            include_reactions=summary_config.get("include_reactions", True)
+        )
+
+        logger.info("Summary generator initialized")
+        return generator
 
     async def process_dialogues(self, dialogue_file: str):
         """
@@ -163,6 +223,10 @@ class VNCommentaryDriver:
         # Create analyzer if not already created (reuse across chapters)
         if self.analyzer is None:
             self.analyzer = self._create_analyzer()
+
+        # Create summary generator if not already created
+        if self.summary_generator is None:
+            self.summary_generator = self._create_summary_generator()
 
         # Set chapter context (LLM will see lines progressively as we process)
         self.analyzer.set_chapter(reader.dialogues)
@@ -185,8 +249,12 @@ class VNCommentaryDriver:
             if delay > 0 and i < len(reader):
                 await asyncio.sleep(delay)
 
-        # Signal end of chapter
-        self.analyzer.end_chapter()
+        # Signal end of chapter and get data for summary
+        chapter_data = self.analyzer.end_chapter()
+
+        # Generate and save summary if enabled
+        if self.summary_generator:
+            await self._generate_and_save_summary(dialogue_file, chapter_data)
 
         # Save results if configured (append mode for multi-chapter)
         if self.config.get("output", {}).get("save_results", True):
@@ -248,6 +316,50 @@ class VNCommentaryDriver:
             json.dump(results_data, f, ensure_ascii=False, indent=2)
 
         logger.info(f"Saved {len(results_data)} results to {output_file}")
+
+    async def _generate_and_save_summary(self, dialogue_file: str, chapter_data: dict):
+        """Generate and save chapter summary."""
+        # Extract chapter name from file path
+        file_path = Path(dialogue_file)
+        chapter_name = file_path.stem  # e.g., "Act01_Chapter01_Adv01"
+
+        # Generate summary
+        print(f"\n{Colors.SEPARATOR}{'='*60}{Colors.RESET}")
+        print(f"{Colors.HEADER}{Colors.BOLD}生成摘要：{chapter_name}...{Colors.RESET}")
+        print(f"{Colors.SEPARATOR}{'='*60}{Colors.RESET}\n")
+
+        summary = await self.summary_generator.generate_summary(
+            chapter_name=chapter_name,
+            dialogues=chapter_data["dialogues"],
+            reactions=chapter_data.get("reactions", [])
+        )
+
+        # Determine output path
+        summary_config = self.config.get("summary", {})
+        output_dir = summary_config.get("output_directory")
+
+        if output_dir:
+            # Save to specified directory
+            output_path = Path(output_dir) / f"{chapter_name}_summary.txt"
+            output_path.parent.mkdir(parents=True, exist_ok=True)
+        else:
+            # Save in same directory as input file
+            output_path = file_path.parent / f"{chapter_name}_summary.txt"
+
+        # Save summary
+        with open(output_path, 'w', encoding='utf-8') as f:
+            f.write(f"# 摘要：{chapter_name}\n\n")
+            f.write(summary)
+            f.write(f"\n\n---\n")
+            f.write(f"对话数量：{chapter_data['dialogue_count']}\n")
+            f.write(f"反应数量：{chapter_data['reaction_count']}\n")
+
+        logger.info(f"Saved summary to {output_path}")
+
+        # Print summary to console
+        print(f"{Colors.HEADER}摘要：{Colors.RESET}")
+        print(f"{Colors.TEXT}{summary}{Colors.RESET}\n")
+        print(f"{Colors.DIM}保存至：{output_path}{Colors.RESET}\n")
 
     def _print_summary(self):
         """Print processing summary."""

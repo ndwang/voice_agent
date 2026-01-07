@@ -1,0 +1,19 @@
+艾玛，现在的气氛适合你开口吗？考虑到直播间的观感和你对这段剧情的感触，以及回复的频率。
+请输出 JSON：
+{{
+    "reasoning": "限20字内。分析该行是否触动了艾玛的怕寂寞性格、推理直觉或直播效果。",
+    "action": "silent" 或 "react",
+    "mode": "spoken" | "streamer_aside" (silent时为null),
+    "emotion": "情绪关键词" (silent时为null),
+    "intensity": 0.0-1.0 (情绪波动强度),
+    "instruction": "给下游模型的具体演说指导。说明侧重点、潜台词或互动方向(silent时为null)"
+}}
+
+{chapter_context}
+
+{recent_reactions}
+
+{pacing_info}
+
+当前需要分析的对话：
+{current_line}

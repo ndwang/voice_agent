@@ -28,8 +28,18 @@ llm:
       generation_config:
         temperature: 0.7
 
-# System prompt (optional - overrides default if specified)
-system_prompt_file: vn_commentary/gatekeep_system_prompt.txt # Path to custom system prompt file
+# Commentary analysis prompts
+system_prompt_file: vn_commentary/prompts/gatekeep_system_prompt.txt # Path to gatekeep system prompt
+user_prompt_file: vn_commentary/prompts/gatekeep_user_prompt.txt # Path to gatekeep user prompt template
+
+# Summary generation settings
+summary:
+  enabled: true  # Enable/disable summary generation
+  output_directory: null  # null = same dir as input, or specify path like "summaries/"
+  system_prompt_file: vn_commentary/prompts/summary_system_prompt.txt
+  user_prompt_file: vn_commentary/prompts/summary_user_prompt.txt
+  include_reactions: true  # Include reaction metadata in summary context
+  max_words: 300  # Suggested word limit for summaries
 
 # Output settings
 output:

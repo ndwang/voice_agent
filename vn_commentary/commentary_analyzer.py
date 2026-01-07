@@ -25,6 +25,7 @@ class CommentaryAnalyzer:
         self,
         llm_settings: LLMSettings,
         system_prompt: str,
+        user_prompt_template: Optional[str] = None,
         max_recent_reactions: int = 5
     ):
         """
@@ -33,10 +34,12 @@ class CommentaryAnalyzer:
         Args:
             llm_settings: LLM settings instance (if None, creates GeminiProvider)
             system_prompt: Custom system prompt
+            user_prompt_template: User prompt template with placeholders (optional)
             max_recent_reactions: Maximum number of recent reactions to track
         """
-        self.llm_provider = create_provider(llm_settings) 
+        self.llm_provider = create_provider(llm_settings)
         self.system_prompt = system_prompt
+        self.user_prompt_template = user_prompt_template
         self.max_recent_reactions = max_recent_reactions
 
         # Chapter state
@@ -78,14 +81,31 @@ class CommentaryAnalyzer:
         self.recent_reactions.clear()
         logger.info(f"Loaded chapter with {len(dialogues)} dialogues")
 
-    def end_chapter(self):
-        """Signal end of current chapter and reset state."""
+    def end_chapter(self) -> Dict[str, any]:
+        """
+        Signal end of current chapter and return chapter data for summary.
+
+        Returns:
+            Dict containing chapter data: dialogues, reactions, counts
+        """
         logger.info(f"Chapter ended. Processed {self.current_index} dialogues, "
                    f"reactions at indices: {self._get_reaction_indices()}")
+
+        # Prepare chapter data for summary generation
+        chapter_data = {
+            "dialogues": self.current_chapter.copy(),
+            "reactions": list(self.recent_reactions),  # Convert deque to list
+            "dialogue_count": self.current_index,
+            "reaction_count": len(self.recent_reactions)
+        }
+
+        # Reset state
         self.current_chapter = []
         self.current_index = 0
         self.last_reaction_index = None
         self.recent_reactions.clear()
+
+        return chapter_data
 
     def _get_reaction_indices(self) -> List[int]:
         """Get all indices where reactions occurred (for debugging)."""
@@ -154,12 +174,17 @@ class CommentaryAnalyzer:
         # Build pacing info (just the number, let LLM decide)
         pacing_info = f"距离上次发言过去了{lines_since_reaction}行台词。"
 
-        # KV cache optimized structure:
-        # 1. Static instructions (never changes - maximum cache reuse)
-        # 2. Chapter context (grows with each line)
-        # 3. Recent reactions (semi-static - changes only when reacting)
-        # 4. Current line + pacing (most dynamic - changes every call)
-        user_prompt = f"""艾玛，现在的气氛适合你开口吗？考虑到直播间的观感和你对这段剧情的感触，以及回复的频率。
+        # Use user prompt template if provided, otherwise use default
+        if self.user_prompt_template:
+            user_prompt = self.user_prompt_template.format(
+                chapter_context=chapter_context,
+                recent_reactions=recent_reactions,
+                pacing_info=pacing_info,
+                current_line=current_line
+            )
+        else:
+            # Fallback to original hardcoded prompt
+            user_prompt = f"""艾玛，现在的气氛适合你开口吗？考虑到直播间的观感和你对这段剧情的感触，以及回复的频率。
 请输出 JSON：
 {{
     "reasoning": "限20字内。分析该行是否触动了艾玛的怕寂寞性格、推理直觉或直播效果。",

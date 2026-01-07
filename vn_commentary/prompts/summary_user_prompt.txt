@@ -1,0 +1,12 @@
+请为以下视觉小说章节生成摘要。
+
+章节：{chapter_name}
+对话数量：{dialogue_count}
+反应数量：{reaction_count}
+
+对话内容：
+{dialogues_text}
+
+{reactions_context}
+
+请提供该章节剧情事件的简洁、中立摘要。
