@@ -8,7 +8,7 @@ from typing import List, Dict, Any, Optional
 from pathlib import Path
 from datetime import datetime
 
-import chromadb
+from chromadb import PersistentClient
 from chromadb.config import Settings
 from chromadb.utils import embedding_functions
 
@@ -44,12 +44,14 @@ class MemoryStorage:
         logger.info(f"Initializing MemoryStorage at {self.storage_path}")
         logger.info(f"Using embedding model: {self.embedding_model}")
 
-        # Initialize ChromaDB client with persistence
-        self.client = chromadb.Client(Settings(
-            chroma_db_impl="duckdb+parquet",
-            persist_directory=str(self.storage_path),
-            anonymized_telemetry=False
-        ))
+        # Initialize ChromaDB persistent client (new API)
+        # duckdb+parquet is the default implementation for PersistentClient
+        self.client = PersistentClient(
+            path=str(self.storage_path),
+            settings=Settings(
+                anonymized_telemetry=False,
+            ),
+        )
 
         # Create embedding function
         self.embedding_function = embedding_functions.SentenceTransformerEmbeddingFunction(

@@ -13,18 +13,18 @@ logger = get_logger(__name__)
 
 @tool(
     name="write_memory",
-    description="Store a memory for future retrieval. Use this to remember important information about the user, conversation context, or facts that should persist across interactions. Be specific and include context in the content.",
+    description="【储存长期记忆】将当前对话中的关键事实、用户偏好或背景信息提取并持久化存储。当用户提到未来可能需要引用的新信息（如职业变化、习惯、特定项目背景）时，应调用此工具。请确保储存的内容具有独立性，且包含完整的语境，避免存储模糊的代词（如'他'、'那个'）。",
     schema={
         "type": "object",
         "properties": {
             "content": {
                 "type": "string",
-                "description": "The text content to remember. Be descriptive and include context. Example: 'User Alex is a software engineer who prefers Python and works on ML projects.'"
+                "description": "要记忆的具体内容。应包含主题和背景。例如：'用户 Alex 是一名软件工程师，偏好 Python 语言，目前在从事机器学习项目。'"
             },
             "tags": {
                 "type": "array",
                 "items": {"type": "string"},
-                "description": "Optional tags to categorize this memory. Examples: ['user_info', 'preferences'], ['work', 'projects'], ['important']"
+                "description": "（可选）用于对该记忆进行分类的标签。例如：['用户信息', '偏好'], ['工作', '项目'], ['重要']"
             }
         },
         "required": ["content"]
@@ -59,22 +59,22 @@ async def write_memory(params: Dict[str, Any]) -> str:
 
 @tool(
     name="search_memories",
-    description="Search stored memories using semantic search. Returns the most relevant memories matching your query. Use this to recall information from previous conversations.",
+    description="通过语义匹配检索之前存储的记忆。当用户询问‘我之前说过什么’、‘我的偏好是什么’或提到模型不具备的特定上下文时，必须调用此工具。支持模糊匹配，因此查询词应侧重于核心实体名或概念词。",
     schema={
         "type": "object",
         "properties": {
             "query": {
                 "type": "string",
-                "description": "The search query to find relevant memories. Examples: 'What does the user do for work?', 'user preferences about coffee'"
+                "description": "语义搜索关键词或自然语言问题。例如：'用户的职业背景是什么？' 或 '项目A的截止日期'"
             },
             "tags": {
                 "type": "array",
                 "items": {"type": "string"},
-                "description": "Optional: filter results to only memories with these tags. Example: ['user_info']"
+                "description": "（可选）缩小搜索范围的标签过滤器。如果已知信息类别，应提供标签以提高检索准确度。"
             },
             "limit": {
                 "type": "integer",
-                "description": "Maximum number of results to return (default: 5, max: 20)",
+                "description": "（可选）返回的最相关记忆条数。对于宽泛的查询建议设为 10，对于精确查询设为 3-5。",
                 "default": 5
             }
         },
@@ -120,7 +120,7 @@ async def search_memories(params: Dict[str, Any]) -> str:
 
 @tool(
     name="list_memory_tags",
-    description="Get a list of all unique tags used in stored memories. Useful for discovering what categories of information are available.",
+    description="获取当前已存储记忆的所有标签分类。当你需要了解目前掌握了用户哪方面的信息，或者在执行搜索前需要确定过滤范围时，调用此工具。这通常是复杂检索任务的第一步，用于确定后续的过滤范围。",
     schema={
         "type": "object",
         "properties": {},
