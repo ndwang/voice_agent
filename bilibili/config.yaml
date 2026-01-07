@@ -7,7 +7,7 @@ service:
 
 bilibili:
   room_id: 1852504554
-  sessdata: "d10a8829%2C1782692006%2C9540c%2Ac2CjCRf7tmL8kcxPkhHcVlsM3Jgj_zSL2-ZxOx5tj8CFHG3FceyugoVJta1N3bnnHnEwUSVnhVRmsxbmJHQlZabnN0OUx4TnZNVkMydUFUM0R5NDgzSlpRLU1TVjN4OThnbHFucG1ydFNqQk9qRURPX1ZXUGVxMl8yV3J6aXE2eWVyd2ZFa0RwdzhBIIEC"
+  sessdata: ""
   danmaku_ttl_seconds: 60
   enabled: true  # Auto-start connection on service launch
   danmaku_enabled_default: true
