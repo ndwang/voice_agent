@@ -2,10 +2,31 @@
 
 # LLM configuration
 llm:
-  provider: ollama  # Options: gemini, ollama
-  model: Qwen3-8B-Q4-4kcontext
-  api_key: null  # Set to your API key or use GEMINI_API_KEY environment variable
-  disable_thinking: true
+  provider: openai  # Options: gemini, ollama, openai
+  providers:
+    gemini:
+      model: gemini-2.5-flash
+      api_key: null
+      disable_thinking: false
+      generation_config:
+        temperature: 0.7
+    ollama:
+      model: qwen2.5:32b
+      base_url: http://localhost:11434
+      timeout: 300.0
+      disable_thinking: false
+      generation_config:
+        temperature: 0.7
+    openai:
+      model: Qwen/Qwen3-4B-Instruct-2507-FP8
+      api_key: null
+      base_url: http://localhost:8080/v1
+      organization: null
+      timeout: 60.0
+      max_retries: 2
+      disable_thinking: false
+      generation_config:
+        temperature: 0.7
 
 # System prompt (optional - overrides default if specified)
 system_prompt_file: vn_commentary/gatekeep_system_prompt.txt # Path to custom system prompt file

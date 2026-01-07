@@ -17,7 +17,6 @@ import logging
 from pathlib import Path
 from typing import List, Optional
 import yaml
-import os
 import sys
 
 # Ensure UTF-8 encoding for stdout/stderr on Windows
@@ -30,7 +29,7 @@ from core.logging import get_logger, setup_logging
 from vn_commentary.dialogue_reader import DialogueReader
 from vn_commentary.commentary_analyzer import CommentaryAnalyzer
 from vn_commentary.models import CommentaryResult
-from llm.providers import GeminiProvider, OllamaProvider
+from core.settings import LLMSettings
 
 logger = get_logger(__name__)
 
@@ -100,9 +99,16 @@ class VNCommentaryDriver:
         return {
             "llm": {
                 "provider": "gemini",
-                "model": "gemini-2.5-flash",
-                "api_key": None,
-                "temperature": 0.7
+                "providers": {
+                    "gemini": {
+                        "model": "gemini-2.5-flash",
+                        "api_key": None,
+                        "disable_thinking": False,
+                        "generation_config": {
+                            "temperature": 0.7
+                        }
+                    }
+                }
             },
             "system_prompt_file": None,
             "output": {
@@ -125,7 +131,7 @@ class VNCommentaryDriver:
 
     def _create_analyzer(self) -> CommentaryAnalyzer:
         """Create and configure commentary analyzer."""
-        llm_config = self.config.get("llm", {})
+        llm_settings = LLMSettings.from_dict(self.config.get("llm", {}))
 
         # Load custom system prompt if specified
         system_prompt = None
@@ -135,25 +141,9 @@ class VNCommentaryDriver:
                 system_prompt = f.read()
             logger.info(f"Loaded custom system prompt from {prompt_file}")
 
-        # Create LLM provider
-        provider = llm_config.get("provider", "gemini")
-        if provider == "gemini":
-            llm_provider = GeminiProvider(
-                model=llm_config.get("model", "gemini-2.5-flash"),
-                api_key=llm_config.get("api_key") or os.getenv("GEMINI_API_KEY")
-            )
-        elif provider == "ollama":
-            llm_provider = OllamaProvider(
-                model=llm_config.get("model", "Qwen3-8B-Q4-4kcontext"),
-                base_url=llm_config.get("base_url", "http://localhost:11434"),
-                disable_thinking=llm_config.get("disable_thinking", True)
-            )
-        else:
-            raise ValueError(f"Unsupported LLM provider: {provider}")
-
         # Create analyzer
         analyzer = CommentaryAnalyzer(
-            llm_provider=llm_provider,
+            llm_settings=llm_settings,
             system_prompt=system_prompt
         )
 
@@ -247,7 +237,7 @@ class VNCommentaryDriver:
                 "chinese_text": result.dialogue.chinese_text,
                 "japanese_text": result.dialogue.japanese_text,
                 "action": result.decision.action,
-                "reaction": result.decision.reaction,
+                "reaction": result.decision.instruction,
                 "reasoning": result.decision.reasoning
             })
 

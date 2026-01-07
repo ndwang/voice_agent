@@ -6,9 +6,9 @@ from collections import deque
 import json
 
 from core.logging import get_logger
-from llm.base import LLMProvider
-from llm.providers.gemini import GeminiProvider
 from vn_commentary.models import Dialogue, CommentaryDecision, CommentaryResult
+from core.settings import LLMSettings
+from orchestrator.utils.llm_factory import create_provider
 
 logger = get_logger(__name__)
 
@@ -50,23 +50,19 @@ class CommentaryAnalyzer:
 
     def __init__(
         self,
-        llm_provider: Optional[LLMProvider] = None,
+        llm_settings: LLMSettings,
         system_prompt: Optional[str] = None,
-        model: str = "gemini-2.5-flash",
-        api_key: Optional[str] = None,
         max_recent_reactions: int = 5
     ):
         """
         Initialize commentary analyzer.
 
         Args:
-            llm_provider: LLM provider instance (if None, creates GeminiProvider)
+            llm_settings: LLM settings instance (if None, creates GeminiProvider)
             system_prompt: Custom system prompt (if None, uses default)
-            model: Model name for default Gemini provider
-            api_key: API key for default Gemini provider
             max_recent_reactions: Maximum number of recent reactions to track
         """
-        self.llm_provider = llm_provider or GeminiProvider(model=model, api_key=api_key)
+        self.llm_provider = create_provider(llm_settings) 
         self.system_prompt = system_prompt or self.DEFAULT_SYSTEM_PROMPT
         self.max_recent_reactions = max_recent_reactions
 
@@ -80,7 +76,7 @@ class CommentaryAnalyzer:
         self.last_prompt_tokens: int = 0
         self.last_completion_tokens: int = 0
 
-        logger.info(f"Initialized CommentaryAnalyzer with model: {model}")
+        logger.info(f"Initialized CommentaryAnalyzer with model: {llm_settings.get_provider_config().model}")
 
     @property
     def last_token_usage(self) -> Dict:
