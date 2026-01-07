@@ -78,15 +78,23 @@ class STTManager:
                 self.asr_chunk_samples = int(chunk_size[1] * 960) if len(chunk_size) > 1 else 9600
                 # VAD chunk size: 200ms = 3200 samples at 16kHz
                 self.vad_chunk_samples = int(vad_chunk_size_ms * self.sample_rate / 1000)
-                logger.info(f"Streaming chunk sizes: ASR={self.asr_chunk_samples} samples ({self.asr_chunk_samples/self.sample_rate*1000:.0f}ms), VAD={self.vad_chunk_samples} samples ({vad_chunk_size_ms}ms)")
+                # Keep the VAD chunk duration in ms so we can align VAD end times to wall-clock time
+                self.vad_chunk_ms = float(vad_chunk_size_ms)
+                logger.info(
+                    f"Streaming chunk sizes: ASR={self.asr_chunk_samples} samples "
+                    f"({self.asr_chunk_samples/self.sample_rate*1000:.0f}ms), "
+                    f"VAD={self.vad_chunk_samples} samples ({vad_chunk_size_ms}ms)"
+                )
             else:
                 self.silence_threshold_ms = settings.audio.silence_threshold_ms
                 self.asr_chunk_samples = 0
                 self.vad_chunk_samples = 0
+                self.vad_chunk_ms = 0.0
         else:
             self.silence_threshold_ms = settings.audio.silence_threshold_ms
             self.asr_chunk_samples = 0
             self.vad_chunk_samples = 0
+            self.vad_chunk_ms = 0.0
     
     def _load_provider(self):
         logger.info(f"Initializing STT provider: {self.provider_name}...")
@@ -652,8 +660,20 @@ class STTManager:
                         # Speech end detected
                         logger.info(f"[Process-{client_id}] 🔇 SPEECH END detected (beg={beg}, end={end})")
                         state.is_speaking = False
-                        state.silence_start_time = current_time
-                        logger.debug(f"[Process-{client_id}] Silence started at {current_time:.0f}ms")
+
+                        # Use the VAD end position within the current chunk to back-compute
+                        # when silence actually started, instead of using "now".
+                        # FunASR's streaming VAD reports "end" in the same time unit as
+                        # the VAD chunk size (milliseconds), so we can align it with
+                        # the wall-clock timestamp of this VAD chunk.
+                        vad_chunk_ms = getattr(self, "vad_chunk_ms", 0.0) or 0.0
+                        end_ms = float(end) % vad_chunk_ms
+                        silence_offset_ms = vad_chunk_ms - end_ms
+
+                        state.silence_start_time = current_time - silence_offset_ms
+                        logger.info(
+                            f"[Process-{client_id}] Silence started {silence_offset_ms:.0f}ms ago, end={end_ms}ms, vad_chunk_ms={vad_chunk_ms}ms)"
+                        )
         
         # Process ASR when we have enough samples (600ms chunks)
         if state.asr_chunk_buffer.size >= self.asr_chunk_samples:

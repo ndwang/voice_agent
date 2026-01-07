@@ -82,7 +82,7 @@ class AudioDriver:
             if was_full:
                 self._dropped_frames += 1
                 if self._dropped_frames % 10 == 0:  # Log every 10 drops to avoid spam
-                    logger.warning(f"Ring buffer full, dropped {self._dropped_frames} old frames (keeping most recent audio)")
+                    logger.debug(f"Ring buffer full, dropped {self._dropped_frames} old frames (keeping most recent audio)")
 
         # Signal that data is available (thread-safe)
         self.data_available.set()
