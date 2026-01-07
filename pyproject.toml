@@ -48,6 +48,10 @@ dependencies = [
     "yarl~=1.9.3",
     "genie-tts>=2.0.2",
     "onnxruntime-gpu>=1.23.2",
+    "openai>=2.14.0",
+    # Memory storage
+    "chromadb>=0.4.22",
+    "sentence-transformers>=2.2.0",
 ]
 
 

@@ -163,20 +163,6 @@ class LLMStreamParser:
         while self.buffer:
             # 1. State Switching Logic (Detect Tags)
             if self.current_state is None:
-                # First, check if we see a closing tag without an opening tag
-                # This can happen if the opening tag was split and we missed it
-                for config in self.tag_configs:
-                    tag_name = config["name"]
-                    closing_tag = f"</{tag_name}>"
-                    if closing_tag in self.buffer:
-                        # Found closing tag but we're not in that state - skip it
-                        # This means the opening tag was likely split and we missed it
-                        parts = self.buffer.split(closing_tag, 1)
-                        # Discard content before closing tag (it was part of the missed tag)
-                        self.buffer = parts[1] if len(parts) > 1 else ""
-                        # Continue to look for opening tags
-                        continue
-                
                 # Look for opening tags in configuration order
                 found_tag = False
                 for config in self.tag_configs:
@@ -188,13 +174,21 @@ class LLMStreamParser:
                         # First, flush any remaining untagged content in content_buffer
                         if self.content_buffer and self.default_callback:
                             await self._extract_and_send_sentences(is_final=True)
-                        
-                        self.current_state = tag_name
+
                         # Remove tag from buffer and continue processing
                         parts = self.buffer.split(opening_tag, 1)
                         # Process any content before the tag (untagged content)
+                        # IMPORTANT: Do this BEFORE changing state so the correct callback is used
                         if parts[0]:
                             await self._process_untagged_content(parts[0])
+
+                        # Flush any remaining untagged content before switching state
+                        # This ensures content_buffer is empty when we start processing tagged content
+                        if self.content_buffer and self.default_callback:
+                            await self._extract_and_send_sentences(is_final=True)
+
+                        # NOW switch state after processing untagged content
+                        self.current_state = tag_name
                         self.buffer = parts[1] if len(parts) > 1 else ""
                         found_tag = True
                         break

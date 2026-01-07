@@ -31,6 +31,7 @@ from orchestrator.sources.bilibili_websocket_source import BilibiliWebSocketSour
 from orchestrator.tools.registry import ToolRegistry, get_registered_tools, discover_and_load_tools
 from orchestrator.hotkey_manager import HotkeyManager
 from orchestrator.ocr_client import OCRClient
+from orchestrator.memory.storage import get_memory_storage
 from audio.audio_driver import AudioDriver
 
 logger = get_logger(__name__)
@@ -48,6 +49,9 @@ class OrchestratorServer:
         discover_and_load_tools()
         for tool in get_registered_tools():
             self.tool_registry.register(tool)
+
+        # Initialize memory storage (singleton)
+        self.memory_storage = get_memory_storage()
 
         self.ocr_client = OCRClient()
 
@@ -129,6 +133,8 @@ class OrchestratorServer:
         await self.stt_source.stop()
         await self.bilibili_source.stop()
         self.hotkey_manager.stop()
+        # Persist memory storage
+        self.memory_storage.close()
         await self.event_bus.stop()
         logger.info("Orchestrator Logic Stopped")
 

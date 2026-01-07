@@ -2,6 +2,12 @@ from pydantic import BaseModel, Field
 from typing import Optional
 
 
+class MemorySettings(BaseModel):
+    """Memory storage configuration"""
+    storage_path: str = "data/memories/chroma_db"
+    embedding_model: str = "shibing624/text2vec-base-chinese"
+
+
 class OrchestratorSettings(BaseModel):
     """Orchestrator service configuration"""
     host: str = "0.0.0.0"
@@ -16,6 +22,7 @@ class OrchestratorSettings(BaseModel):
         "toggle_listening": "ctrl+shift+l",
         "cancel_speech": "ctrl+shift+c"
     })
+    memory: MemorySettings = Field(default_factory=MemorySettings)
 
     @classmethod
     def from_dict(cls, data: dict) -> "OrchestratorSettings":
