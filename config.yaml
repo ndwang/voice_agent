@@ -10,7 +10,7 @@ orchestrator:
     toggle_listening: ctrl+shift+l
     cancel_speech: ctrl+shift+c
 llm:
-  provider: gemini
+  provider: openai
   providers:
     gemini:
       model: gemini-2.5-flash
@@ -32,17 +32,18 @@ llm:
         top_k: 50
         repeat_penalty: 1.15
     openai:
-      model: gpt-4o
+      model: Qwen/Qwen3-4B-Instruct-2507-FP8
       api_key: null
-      base_url: null
+      base_url: http://localhost:8080/v1
       organization: null
       timeout: 60.0
       max_retries: 2
+      disable_thinking: false
       generation_config:
-        temperature: 1.0
-        top_p: 0.95
+        temperature: 1.1
+        top_p: 0.9
         max_tokens: null
-        frequency_penalty: 0.0
+        frequency_penalty: 1.15
         presence_penalty: 0.0
 tts:
   host: 0.0.0.0
@@ -105,10 +106,10 @@ stt:
       model_name: paraformer-zh-streaming
       vad_model: fsmn-vad
       vad_kwargs:
-        max_single_segment_time: 30000
+        max_single_segment_time: '30000'
       punc_model: ct-punc
       device: cpu
-      batch_size_s: 0
+      batch_size_s: '0'
       streaming:
         enabled: true
         chunk_size:

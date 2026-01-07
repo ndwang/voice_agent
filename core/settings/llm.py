@@ -33,6 +33,7 @@ class OpenAIConfig(BaseModel):
     organization: Optional[str] = None
     timeout: float = 60.0
     max_retries: int = 2
+    disable_thinking: bool = False
     generation_config: Optional[dict] = Field(default_factory=dict)
 
     @field_validator('api_key', mode='before')

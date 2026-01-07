@@ -106,6 +106,7 @@ class TTSManager(BaseManager):
         await self.activity_state.update({"playing": is_playing})
         if not is_playing:
             await self.event_bus.publish(Event(EventType.TURN_ENDED.value))
+            logger.info("TTS audio playback ended")
     
     async def on_llm_request(self, event: Event):
         """Pre-connect WebSocket when LLM request is published to reduce latency."""
