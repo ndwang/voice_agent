@@ -2,7 +2,7 @@
 
 # LLM configuration
 llm:
-  provider: openai  # Options: gemini, ollama, openai
+  provider: gemini  # Options: gemini, ollama, openai
   providers:
     gemini:
       model: gemini-2.5-flash

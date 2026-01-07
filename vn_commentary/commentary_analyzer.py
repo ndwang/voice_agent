@@ -21,37 +21,10 @@ class CommentaryAnalyzer:
     dialogue line based on context and character personality.
     """
 
-    DEFAULT_SYSTEM_PROMPT = """你是一个视觉小说解说助手，实时观察故事展开。
-
-你的任务是判断某一行对话是否值得评论，如果值得，提供简短自然的反应。
-
-指导原则：
-- 对于平淡、过渡性或无趣的台词保持沉默
-- 对重要的剧情发展、情感时刻、意外揭示或幽默情况做出反应
-- 反应要简短自然（最多1-2句话）
-- 你是实时看到故事的——你不知道接下来会发生什么
-- 作为一个投入的观察者来反应，而不是旁白
-
-节奏指导：
-- 保持自然的反应节奏，在重要时刻做出评论
-- 避免对每一行都评论，也不要长时间保持沉默
-- 关键在于平衡：根据内容的重要性和情感强度来判断
-
-你将收到：
-1. 目前为止的章节上下文（从章节开始到当前行的所有对话）
-2. 距离上次反应有多少行
-3. 当前需要分析的对话行
-
-以结构化输出回应：
-- action: "silent" 或 "react"
-- reaction: 你的评论文本（仅在反应时提供）
-- reasoning: 简要解释你的决定（用于调试）
-"""
-
     def __init__(
         self,
         llm_settings: LLMSettings,
-        system_prompt: Optional[str] = None,
+        system_prompt: str,
         max_recent_reactions: int = 5
     ):
         """
@@ -59,11 +32,11 @@ class CommentaryAnalyzer:
 
         Args:
             llm_settings: LLM settings instance (if None, creates GeminiProvider)
-            system_prompt: Custom system prompt (if None, uses default)
+            system_prompt: Custom system prompt
             max_recent_reactions: Maximum number of recent reactions to track
         """
         self.llm_provider = create_provider(llm_settings) 
-        self.system_prompt = system_prompt or self.DEFAULT_SYSTEM_PROMPT
+        self.system_prompt = system_prompt
         self.max_recent_reactions = max_recent_reactions
 
         # Chapter state
@@ -219,7 +192,11 @@ class CommentaryAnalyzer:
             response = await self.llm_provider.generate(
                 messages=messages,
                 system_prompt=self.system_prompt,
-                temperature=0.7
+                temperature=0.7,
+                generation_config={
+                    "response_mime_type": "application/json",
+                    "response_schema": CommentaryDecision.model_json_schema()
+                }
             )
 
             # Capture token usage from provider

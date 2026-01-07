@@ -237,7 +237,10 @@ class VNCommentaryDriver:
                 "chinese_text": result.dialogue.chinese_text,
                 "japanese_text": result.dialogue.japanese_text,
                 "action": result.decision.action,
-                "reaction": result.decision.instruction,
+                "mode": result.decision.mode,
+                "emotion": result.decision.emotion,
+                "intensity": result.decision.intensity,
+                "instruction": result.decision.instruction,
                 "reasoning": result.decision.reasoning
             })
 
