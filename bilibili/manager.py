@@ -115,6 +115,7 @@ class BilibiliManager:
 
     def __init__(self, config: BilibiliServiceConfig):
         self.config = config
+        self._conn_lock = asyncio.Lock()
 
         # Core components
         self.client: Optional[BilibiliClient] = None
@@ -188,58 +189,113 @@ class BilibiliManager:
 
     async def connect(self):
         """Connect to Bilibili room"""
-        if self.connected:
-            logger.warning("Already connected to Bilibili")
-            return
+        async with self._conn_lock:
+            if self.connected:
+                logger.warning("Already connected to Bilibili")
+                return
 
-        self._intentional_disconnect = False
+            self._intentional_disconnect = False
 
-        try:
-            self.client = BilibiliClient(
-                room_id=self.config.bilibili.room_id,
-                sessdata=self.config.bilibili.sessdata
-            )
-            self.client.set_handlers(
-                on_danmaku=self._on_danmaku,
-                on_super_chat=self._on_super_chat,
-                on_gift=self._on_gift,
-                on_guard=self._on_guard,
-                on_super_chat_delete=self._on_super_chat_delete,
-                on_client_stopped=self._on_client_stopped,
-            )
+            try:
+                self.client = BilibiliClient(
+                    room_id=self.config.bilibili.room_id,
+                    sessdata=self.config.bilibili.sessdata
+                )
+                self.client.set_handlers(
+                    on_danmaku=self._on_danmaku,
+                    on_super_chat=self._on_super_chat,
+                    on_gift=self._on_gift,
+                    on_guard=self._on_guard,
+                    on_super_chat_delete=self._on_super_chat_delete,
+                    on_client_stopped=self._on_client_stopped,
+                )
 
-            await self.client.start()
-            self.connected = True
-            logger.info(f"Connected to Bilibili room {self.config.bilibili.room_id}")
+                await self.client.start()
+                self.connected = True
+                logger.info(f"Connected to Bilibili room {self.config.bilibili.room_id}")
 
-            # Broadcast state change
-            await self._broadcast_state_change()
+                # Broadcast state change
+                await self._broadcast_state_change()
 
-        except Exception as e:
-            logger.error(f"Failed to connect to Bilibili: {e}")
-            self.connected = False
-            raise
+            except Exception as e:
+                logger.error(f"Failed to connect to Bilibili: {e}")
+                self.connected = False
+                raise
 
     async def disconnect(self):
         """Disconnect from Bilibili room"""
-        if not self.connected:
-            return
+        async with self._conn_lock:
+            if not self.connected:
+                return
 
-        self._intentional_disconnect = True
+            self._intentional_disconnect = True
 
-        try:
-            if self.client:
-                await self.client.stop()
-                self.client = None
+            try:
+                if self.client:
+                    await self.client.stop()
+                    self.client = None
 
-            self.connected = False
-            logger.info("Disconnected from Bilibili")
+                self.connected = False
+                logger.info("Disconnected from Bilibili")
 
-            # Broadcast state change
+                # Broadcast state change
+                await self._broadcast_state_change()
+
+            except Exception as e:
+                logger.error(f"Error disconnecting from Bilibili: {e}")
+
+    async def switch_room(self, room_id: int, *, reconnect: bool = True, clear_buffers: bool = True):
+        """
+        Switch to a different Bilibili room without restarting the service.
+
+        - Updates in-memory config.room_id
+        - Optionally clears buffers/stats (recommended to avoid mixing rooms)
+        - Optionally reconnects immediately
+        """
+        if room_id <= 0:
+            raise ValueError("room_id must be a positive integer")
+
+        async with self._conn_lock:
+            old_room = self.config.bilibili.room_id
+            if room_id == old_room and (self.connected or not reconnect):
+                logger.info(f"Room unchanged (room_id={room_id}); no switch needed")
+                return
+
+            # Stop any reconnect loop to avoid races
+            if self._reconnect_task:
+                self._reconnect_task.cancel()
+                try:
+                    await self._reconnect_task
+                except asyncio.CancelledError:
+                    pass
+                self._reconnect_task = None
+
+            # Disconnect from old room if connected
+            if self.connected:
+                self._intentional_disconnect = True
+                try:
+                    if self.client:
+                        await self.client.stop()
+                finally:
+                    self.client = None
+                    self.connected = False
+
+            # Update room id
+            self.config.bilibili.room_id = room_id
+            logger.info(f"Switched room_id {old_room} -> {room_id}")
+
+            if clear_buffers:
+                self.danmaku_buffer.clear()
+                self.paid_buffer.clear()
+                self.total_danmaku_received = 0
+                self.total_paid_received = 0
+                self.total_gift_coins = 0
+                self.start_time = time.time()
+
             await self._broadcast_state_change()
 
-        except Exception as e:
-            logger.error(f"Error disconnecting from Bilibili: {e}")
+        if reconnect:
+            await self.connect()
 
     async def set_danmaku_enabled(self, enabled: bool):
         """Deprecated: danmaku processing is always enabled."""

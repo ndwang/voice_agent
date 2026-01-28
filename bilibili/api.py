@@ -146,6 +146,24 @@ async def disable_paid():
 # Connection Endpoints
 # ============================================================================
 
+@router.post("/room/switch")
+async def switch_room(req: models.SwitchRoomRequest):
+    """Switch Bilibili room while service is running"""
+    manager = get_manager()
+    try:
+        await manager.switch_room(
+            req.room_id,
+            reconnect=req.reconnect,
+            clear_buffers=req.clear_buffers,
+        )
+        return {"success": True, "room_id": manager.get_state()["room_id"], "connected": manager.get_state()["connected"]}
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        logger.error(f"Failed to switch room: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 @router.post("/connect")
 async def connect():
     """Start Bilibili client connection"""

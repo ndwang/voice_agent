@@ -156,3 +156,10 @@ class EnableStateResponse(BaseModel):
     success: bool
     danmaku_enabled: bool | None = None
     paid_enabled: bool | None = None
+
+
+class SwitchRoomRequest(BaseModel):
+    """Request body for switching Bilibili room at runtime"""
+    room_id: int
+    reconnect: bool = True
+    clear_buffers: bool = True

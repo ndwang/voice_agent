@@ -81,6 +81,42 @@
             color: #00d9ff;
         }
 
+        .room-id-clickable {
+            cursor: text;
+            user-select: none;
+        }
+
+        .room-id-input {
+            width: 100%;
+            background: transparent;
+            color: #eee;
+            border: none;
+            border-bottom: 1px solid rgba(0, 217, 255, 0.7);
+            border-radius: 0;
+            padding: 0;
+            outline: none;
+            font-weight: 700;
+            font-size: 1.05em;
+            letter-spacing: 0.2px;
+            text-align: right;
+        }
+
+        .room-id-input:focus {
+            border-bottom-color: #00d9ff;
+            box-shadow: none;
+        }
+
+        /* Hide number input spinners (OBS/Chromium + Firefox) */
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type="number"] {
+            -moz-appearance: textfield;
+            appearance: textfield;
+        }
+
         button {
             background: #00d9ff;
             color: #1a1a2e;
@@ -311,7 +347,10 @@
                 </div>
                 <div class="stat-row">
                     <span>Room ID:</span>
-                    <span class="stat-value" id="room-id">-</span>
+                    <div style="flex:1; min-width:0; display:flex; justify-content:flex-end;">
+                        <span id="room-id-text" class="stat-value room-id-clickable" onclick="startEditRoomId()">-</span>
+                        <input id="room-id-input" class="room-id-input" type="number" min="1" inputmode="numeric" placeholder="" style="display:none; max-width: 220px;">
+                    </div>
                 </div>
                 <div style="margin-top: 15px;">
                     <button id="connect-btn" onclick="doConnect()">Connect</button>
@@ -359,6 +398,9 @@
         const maxReconnectDelay = 30000;
         let autoScroll = true;
         const seenIds = new Set();
+        let currentRoomId = null;
+        let switchingRoom = false;
+        let lastKnownRoomId = null;
 
         const GUARD_NAMES = {1: '总督', 2: '提督', 3: '舰长'};
         // ====================================================================
@@ -368,6 +410,7 @@
             await updateState();
             await updateStats();
             await loadSnapshot();
+            setupRoomIdEditor();
             connectWebSocket();
             setInterval(updateStats, 5000);
             setupScrollPause();
@@ -445,7 +488,14 @@
 
                 document.getElementById('connection-status').textContent = state.connected ? 'Connected' : 'Disconnected';
                 document.getElementById('status-indicator').className = 'status-indicator ' + (state.connected ? 'connected' : 'disconnected');
-                document.getElementById('room-id').textContent = state.room_id;
+                currentRoomId = state.room_id;
+                lastKnownRoomId = state.room_id;
+                document.getElementById('room-id-text').textContent = String(state.room_id ?? '-');
+                const input = document.getElementById('room-id-input');
+                // Don't clobber the user's typing
+                if (document.activeElement !== input) {
+                    input.value = String(state.room_id ?? '');
+                }
             } catch (e) {
                 console.error('Failed to update state:', e);
             }
@@ -495,6 +545,96 @@
                 await updateState();
             } catch (e) {
                 console.error('Failed to disconnect:', e);
+            }
+        }
+
+        function setupRoomIdEditor() {
+            const input = document.getElementById('room-id-input');
+
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    doSwitchRoom();
+                } else if (e.key === 'Escape') {
+                    e.preventDefault();
+                    cancelEditRoomId();
+                }
+            });
+
+            // Do NOT auto-switch on blur; only switch on Enter (requested).
+            input.addEventListener('blur', () => {
+                cancelEditRoomId();
+            });
+        }
+
+        function startEditRoomId() {
+            if (switchingRoom) return;
+            const roomText = document.getElementById('room-id-text');
+            const input = document.getElementById('room-id-input');
+            roomText.style.display = 'none';
+            input.style.display = 'block';
+            input.value = String(currentRoomId ?? lastKnownRoomId ?? '');
+            input.focus();
+            input.select();
+        }
+
+        function cancelEditRoomId() {
+            const roomText = document.getElementById('room-id-text');
+            const input = document.getElementById('room-id-input');
+            input.style.display = 'none';
+            roomText.style.display = 'inline';
+            // Restore the known room id in the input for next edit
+            input.value = String(currentRoomId ?? lastKnownRoomId ?? '');
+        }
+
+        async function doSwitchRoom() {
+            if (switchingRoom) return;
+            try {
+                const input = document.getElementById('room-id-input');
+                const roomId = parseInt(input.value, 10);
+                if (!roomId || roomId <= 0) {
+                    cancelEditRoomId();
+                    return;
+                }
+
+                // Always clear history and reconnect (requested behavior)
+                const clearBuffers = true;
+                const reconnect = true;
+
+                switchingRoom = true;
+                input.disabled = true;
+
+                const res = await fetch('/room/switch', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ room_id: roomId, reconnect, clear_buffers: clearBuffers })
+                });
+
+                if (!res.ok) {
+                    const text = await res.text();
+                    throw new Error(text || `HTTP ${res.status}`);
+                }
+
+                // Update state + stats + chat view after switch
+                await updateState();
+                await updateStats();
+
+                // Always clear UI and dedupe cache (requested behavior)
+                document.getElementById('chat-viewer').innerHTML = '';
+                seenIds.clear();
+                await loadSnapshot();
+
+                // Exit edit mode on success
+                const roomText = document.getElementById('room-id-text');
+                roomText.style.display = 'inline';
+                input.style.display = 'none';
+            } catch (e) {
+                console.error('Failed to switch room:', e);
+                alert('Failed to switch room. Check server logs for details.');
+            } finally {
+                switchingRoom = false;
+                const input = document.getElementById('room-id-input');
+                if (input) input.disabled = false;
             }
         }
 
