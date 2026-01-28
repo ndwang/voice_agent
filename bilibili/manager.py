@@ -125,8 +125,10 @@ class BilibiliManager:
         # State flags
         self.connected: bool = False
         self.running: bool = False
-        self.danmaku_enabled: bool = config.bilibili.danmaku_enabled_default
-        self.paid_enabled: bool = config.bilibili.paid_enabled_default
+        # Always process all message types. UI toggles / disable controls are removed,
+        # but we keep these fields for backwards-compatible state responses.
+        self.danmaku_enabled: bool = True
+        self.paid_enabled: bool = True
 
         # Message buffers
         self.danmaku_buffer: Deque[Dict[str, Any]] = deque(
@@ -240,15 +242,17 @@ class BilibiliManager:
             logger.error(f"Error disconnecting from Bilibili: {e}")
 
     async def set_danmaku_enabled(self, enabled: bool):
-        """Toggle danmaku processing and broadcast state change"""
-        self.danmaku_enabled = enabled
-        logger.info(f"Danmaku processing {'enabled' if enabled else 'disabled'}")
+        """Deprecated: danmaku processing is always enabled."""
+        if not enabled:
+            logger.info("Ignoring danmaku disable request (always enabled)")
+        self.danmaku_enabled = True
         await self._broadcast_state_change()
 
     async def set_paid_enabled(self, enabled: bool):
-        """Toggle paid message processing (superchat/gift/guard) and broadcast state change"""
-        self.paid_enabled = enabled
-        logger.info(f"Paid message processing {'enabled' if enabled else 'disabled'}")
+        """Deprecated: paid message processing is always enabled."""
+        if not enabled:
+            logger.info("Ignoring paid disable request (always enabled)")
+        self.paid_enabled = True
         await self._broadcast_state_change()
 
     # =========================================================================
@@ -257,8 +261,7 @@ class BilibiliManager:
 
     async def _on_danmaku(self, message):
         """Handle incoming danmaku from Bilibili client"""
-        if not self.danmaku_enabled:
-            return
+        # always enabled
 
         medal = None
         if message.medal_name:
@@ -302,8 +305,7 @@ class BilibiliManager:
 
     async def _on_super_chat(self, message):
         """Handle incoming superchat from Bilibili client"""
-        if not self.paid_enabled:
-            return
+        # always enabled
 
         medal = None
         if getattr(message, "medal_name", ""):
@@ -344,8 +346,7 @@ class BilibiliManager:
 
     async def _on_gift(self, message):
         """Handle incoming gift from Bilibili client"""
-        if not self.paid_enabled:
-            return
+        # always enabled
 
         medal = None
         if getattr(message, "medal_name", ""):
@@ -391,8 +392,7 @@ class BilibiliManager:
 
     async def _on_guard(self, message):
         """Handle guard/fleet purchase (UserToastV2)"""
-        if not self.paid_enabled:
-            return
+        # always enabled
 
         guard_name = GUARD_LEVEL_NAMES.get(message.guard_level, f"guard_{message.guard_level}")
 

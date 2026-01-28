@@ -340,18 +340,7 @@
                 </div>
             </div>
 
-            <!-- Controls Card -->
-            <div class="card">
-                <h2>Controls</h2>
-                <div class="stat-row">
-                    <span>Danmaku Processing:</span>
-                    <button class="toggle-btn" id="danmaku-toggle" onclick="toggleDanmaku()">OFF</button>
-                </div>
-                <div class="stat-row">
-                    <span>Paid Processing:</span>
-                    <button class="toggle-btn" id="paid-toggle" onclick="togglePaid()">OFF</button>
-                </div>
-            </div>
+            <!-- Controls Card removed: service always processes all messages -->
         </div>
 
         <!-- Chat Viewer -->
@@ -457,13 +446,6 @@
                 document.getElementById('connection-status').textContent = state.connected ? 'Connected' : 'Disconnected';
                 document.getElementById('status-indicator').className = 'status-indicator ' + (state.connected ? 'connected' : 'disconnected');
                 document.getElementById('room-id').textContent = state.room_id;
-                const danmakuBtn = document.getElementById('danmaku-toggle');
-                danmakuBtn.textContent = state.danmaku_enabled ? 'ON' : 'OFF';
-                danmakuBtn.className = 'toggle-btn' + (state.danmaku_enabled ? ' active' : '');
-
-                const paidBtn = document.getElementById('paid-toggle');
-                paidBtn.textContent = state.paid_enabled ? 'ON' : 'OFF';
-                paidBtn.className = 'toggle-btn' + (state.paid_enabled ? ' active' : '');
             } catch (e) {
                 console.error('Failed to update state:', e);
             }
@@ -516,29 +498,7 @@
             }
         }
 
-        async function toggleDanmaku() {
-            try {
-                const btn = document.getElementById('danmaku-toggle');
-                const isEnabled = btn.classList.contains('active');
-                const action = isEnabled ? 'disable' : 'enable';
-                await fetch(`/state/danmaku/${action}`, { method: 'POST' });
-                await updateState();
-            } catch (e) {
-                console.error('Failed to toggle danmaku:', e);
-            }
-        }
-
-        async function togglePaid() {
-            try {
-                const btn = document.getElementById('paid-toggle');
-                const isEnabled = btn.classList.contains('active');
-                const action = isEnabled ? 'disable' : 'enable';
-                await fetch(`/state/paid/${action}`, { method: 'POST' });
-                await updateState();
-            } catch (e) {
-                console.error('Failed to toggle paid:', e);
-            }
-        }
+        // Processing toggles removed: service always processes all messages.
 
         // ====================================================================
         // WebSocket
