@@ -27,55 +27,135 @@
             justify-content: flex-end;
         }
 
+        /* Regular messages */
         .message {
             background: rgba(0, 0, 0, 0.6);
-            padding: 10px 15px;
-            margin-bottom: 8px;
+            padding: 8px 12px;
+            margin-bottom: 6px;
             border-radius: 8px;
             animation: fadeIn 0.3s ease-in;
-            max-width: 80%;
+            max-width: 90%;
             word-wrap: break-word;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
         }
 
+        .message-avatar {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            object-fit: cover;
+        }
+
+        .message-body {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .message-header {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            flex-wrap: wrap;
+        }
+
+        /* Superchat */
         .message.superchat {
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.9), rgba(255, 140, 0, 0.9));
+            font-weight: bold;
             border-left: 4px solid #ff4500;
+            max-width: 95%;
+        }
+
+        .sc-header-bar {
+            padding: 6px 10px;
+            border-radius: 8px 8px 0 0;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .sc-body-bar {
+            padding: 6px 10px;
+            border-radius: 0 0 8px 8px;
+        }
+
+        .sc-amount {
+            color: #ffeb3b;
+            font-size: 1.1em;
+            margin-left: auto;
+        }
+
+        /* Gift */
+        .message.gift {
+            background: rgba(128, 0, 255, 0.4);
+            border-left: 3px solid #e040fb;
+        }
+
+        .gift-icon {
+            width: 20px;
+            height: 20px;
+            vertical-align: middle;
+        }
+
+        .gift-text {
+            color: #e8b0ff;
+        }
+
+        /* Guard */
+        .message.guard {
+            background: rgba(255, 87, 34, 0.5);
+            border-left: 4px solid #ff5722;
+            font-weight: bold;
+            animation: guardPulse 0.5s ease-out, fadeIn 0.3s ease-in;
+        }
+
+        /* Badges */
+        .badge {
+            display: inline-block;
+            padding: 1px 5px;
+            border-radius: 3px;
+            font-size: 0.7em;
             font-weight: bold;
         }
+
+        .badge-admin { background: #f44336; }
+        .badge-guard-1 { background: linear-gradient(135deg, #ff6b35, #e53935); }
+        .badge-guard-2 { background: linear-gradient(135deg, #ab47bc, #7b1fa2); }
+        .badge-guard-3 { background: linear-gradient(135deg, #42a5f5, #1565c0); }
+        .badge-medal { background: rgba(255,255,255,0.15); font-size: 0.65em; }
 
         .message-user {
             font-weight: bold;
-            margin-right: 8px;
+            margin-right: 4px;
         }
 
         .message-content {
             display: inline;
+            word-break: break-word;
         }
 
-        .superchat-amount {
-            color: #ffeb3b;
-            font-size: 1.1em;
-            margin-left: 5px;
+        .emoticon-img {
+            max-width: 40px;
+            max-height: 40px;
+            vertical-align: middle;
         }
 
+        /* Animations */
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateX(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
         }
 
         @keyframes fadeOut {
-            from {
-                opacity: 1;
-            }
-            to {
-                opacity: 0;
-            }
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+
+        @keyframes guardPulse {
+            0% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
 
         .fading-out {
@@ -87,44 +167,232 @@
     <div id="chat-container"></div>
 
     <script>
-        // Get URL parameters for configuration
+        // URL parameters
         const params = new URLSearchParams(window.location.search);
-        const theme = params.get('theme') || 'dark';
         const showDanmaku = params.get('show_danmaku') !== 'false';
-        const showSuperchat = params.get('show_superchat') !== 'false';
+        const showPaid = params.get('show_paid') !== 'false';
         const fontSize = parseInt(params.get('font_size')) || 16;
         const maxMessages = parseInt(params.get('max_messages')) || 20;
 
-        // Apply font size
         document.body.style.fontSize = fontSize + 'px';
 
-        // WebSocket connection
-        const wsUrl = `ws://${window.location.host}/ws/stream`;
+        const GUARD_NAMES = {1: '总督', 2: '提督', 3: '舰长'};
+
         let ws = null;
         let reconnectDelay = 1000;
         const maxReconnectDelay = 30000;
+        let pingInterval = null;
+        const seenIds = new Set();
 
         const chatContainer = document.getElementById('chat-container');
 
+        function escapeHtml(text) {
+            const d = document.createElement('div');
+            d.textContent = text;
+            return d.innerHTML;
+        }
+
+        function renderSegments(segments) {
+            if (!Array.isArray(segments) || segments.length === 0) return '';
+            let html = '';
+            for (const seg of segments) {
+                if (!seg || typeof seg !== 'object') continue;
+                const t = seg.type;
+                if (t === 'text') {
+                    html += escapeHtml(seg.text || '');
+                } else if (t === 'emoticon' && seg.url) {
+                    const title = seg.text ? ` title="${escapeHtml(seg.text)}"` : '';
+                    html += `<img class="emoticon-img" src="${escapeHtml(seg.url)}" loading="lazy" referrerpolicy="no-referrer"${title}>`;
+                } else {
+                    if (seg.text) html += escapeHtml(seg.text);
+                }
+            }
+            return html;
+        }
+
+        function badgesHtml(msg) {
+            let h = '';
+            if (msg.admin) h += '<span class="badge badge-admin">房管</span>';
+            const gl = msg.guard_level || msg.privilege_type || 0;
+            if (gl === 1) h += '<span class="badge badge-guard-1">总督</span>';
+            else if (gl === 2) h += '<span class="badge badge-guard-2">提督</span>';
+            else if (gl === 3) h += '<span class="badge badge-guard-3">舰长</span>';
+            if (msg.medal && msg.medal.name) {
+                h += `<span class="badge badge-medal">${escapeHtml(msg.medal.name)} ${msg.medal.level}</span>`;
+            }
+            return h;
+        }
+
+        function avatarEl(face) {
+            if (!face) return '';
+            return `<img class="message-avatar" src="${escapeHtml(face)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'">`;
+        }
+
+        function addElement(div) {
+            chatContainer.appendChild(div);
+            while (chatContainer.children.length > maxMessages) {
+                const first = chatContainer.firstChild;
+                first.classList.add('fading-out');
+                setTimeout(() => { if (first.parentNode) first.remove(); }, 500);
+            }
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        // ====================================================================
+        // Renderers
+        // ====================================================================
+        function renderDanmaku(msg) {
+            const div = document.createElement('div');
+            div.className = 'message';
+
+            let content;
+            if (msg.segments && msg.segments.length) {
+                content = renderSegments(msg.segments);
+            } else if (msg.dm_type === 1 && msg.emoticon_url) {
+                content = `<img class="emoticon-img" src="${escapeHtml(msg.emoticon_url)}" loading="lazy" referrerpolicy="no-referrer">`;
+            } else {
+                content = escapeHtml(msg.content);
+            }
+
+            div.innerHTML = `
+                ${avatarEl(msg.face)}
+                <div class="message-body">
+                    <div class="message-header">
+                        ${badgesHtml(msg)}
+                        <span class="message-user">${escapeHtml(msg.user)}:</span>
+                    </div>
+                    <span class="message-content">${content}</span>
+                </div>
+            `;
+            addElement(div);
+        }
+
+        function renderSuperchat(msg) {
+            const div = document.createElement('div');
+            div.className = 'message superchat';
+            if (msg.bili_id) div.dataset.scId = msg.bili_id;
+
+            const bg = msg.background_color || '#e69138';
+            const bgBottom = msg.background_bottom_color || '#d5831b';
+
+            div.innerHTML = `
+                ${avatarEl(msg.face)}
+                <div class="message-body">
+                    <div class="sc-header-bar" style="background:${escapeHtml(bg)}">
+                        ${badgesHtml(msg)}
+                        <span class="message-user">${escapeHtml(msg.user)}</span>
+                        <span class="sc-amount">&#165;${msg.amount}</span>
+                    </div>
+                    <div class="sc-body-bar" style="background:${escapeHtml(bgBottom)}">
+                        ${escapeHtml(msg.content)}
+                        ${msg.message_trans ? `<div style="font-size:0.85em;opacity:0.8;margin-top:2px">${escapeHtml(msg.message_trans)}</div>` : ''}
+                    </div>
+                </div>
+            `;
+            addElement(div);
+        }
+
+        function renderGift(msg) {
+            const div = document.createElement('div');
+            div.className = 'message gift';
+
+            const icon = msg.gift_icon
+                ? `<img class="gift-icon" src="${escapeHtml(msg.gift_icon)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'">`
+                : '';
+
+            div.innerHTML = `
+                ${avatarEl(msg.face)}
+                <div class="message-body">
+                    <span class="message-user" style="color:#e8b0ff">${escapeHtml(msg.user)}</span>
+                    <span class="gift-text">${escapeHtml(msg.action || '赠送')} ${icon} ${escapeHtml(msg.gift_name)} x${msg.num}</span>
+                </div>
+            `;
+            addElement(div);
+        }
+
+        function renderGuard(msg) {
+            const div = document.createElement('div');
+            div.className = 'message guard';
+
+            const guardName = GUARD_NAMES[msg.guard_level] || 'guard';
+
+            div.innerHTML = `
+                <div class="message-body">
+                    <span class="badge badge-guard-${msg.guard_level}">${guardName}</span>
+                    <span class="message-user" style="color:#ff9800">${escapeHtml(msg.user)}</span>
+                    <span>${msg.toast_msg ? escapeHtml(msg.toast_msg) : `开通了 ${guardName}`}</span>
+                </div>
+            `;
+            addElement(div);
+        }
+
+        function handleSuperchatDelete(data) {
+            (data.ids || []).forEach(id => {
+                const el = document.querySelector(`[data-sc-id="${id}"]`);
+                if (el) {
+                    el.classList.add('fading-out');
+                    setTimeout(() => { if (el.parentNode) el.remove(); }, 500);
+                }
+            });
+        }
+
+        // ====================================================================
+        // Snapshot hydration (so refresh doesn't lose history)
+        // ====================================================================
+        async function loadSnapshot() {
+            try {
+                const res = await fetch('/chat');
+                const snapshot = await res.json();
+
+                const items = [];
+                if (showDanmaku) {
+                    for (const m of (snapshot.danmaku || [])) items.push({ type: 'danmaku', data: m });
+                }
+                if (showPaid) {
+                    for (const m of (snapshot.paid || [])) items.push({ type: 'paid', data: m });
+                }
+
+                items.sort((a, b) => (a.data.timestamp || 0) - (b.data.timestamp || 0));
+
+                // Keep only the last maxMessages items
+                const sliced = items.slice(Math.max(0, items.length - maxMessages));
+
+                for (const it of sliced) {
+                    const msg = it.data || {};
+                    if (msg.id && seenIds.has(msg.id)) continue;
+                    if (msg.id) seenIds.add(msg.id);
+
+                    if (it.type === 'danmaku') {
+                        renderDanmaku(msg);
+                    } else if (it.type === 'paid') {
+                        const pt = msg.paid_type;
+                        if (pt === 'superchat') renderSuperchat(msg);
+                        else if (pt === 'gift') renderGift(msg);
+                        else if (pt === 'guard') renderGuard(msg);
+                    }
+                }
+            } catch (e) {
+                console.warn('Failed to load snapshot:', e);
+            }
+        }
+
+        // ====================================================================
+        // WebSocket
+        // ====================================================================
         function connect() {
-            ws = new WebSocket(wsUrl);
+            const wsProto = (window.location.protocol === 'https:') ? 'wss:' : 'ws:';
+            ws = new WebSocket(`${wsProto}//${window.location.host}/ws/stream`);
 
             ws.onopen = () => {
-                console.log('Connected to Bilibili service');
                 reconnectDelay = 1000;
-
-                // Subscribe to channels
                 const channels = [];
                 if (showDanmaku) channels.push('danmaku');
-                if (showSuperchat) channels.push('superchat');
+                if (showPaid) channels.push('paid');
 
-                ws.send(JSON.stringify({
-                    type: 'subscribe',
-                    channels: channels
-                }));
+                ws.send(JSON.stringify({ type: 'subscribe', channels }));
 
-                // Send ping every 30 seconds
-                setInterval(() => {
+                if (pingInterval) clearInterval(pingInterval);
+                pingInterval = setInterval(() => {
                     if (ws.readyState === WebSocket.OPEN) {
                         ws.send(JSON.stringify({ type: 'ping' }));
                     }
@@ -134,17 +402,38 @@
             ws.onmessage = (event) => {
                 const data = JSON.parse(event.data);
 
-                if (data.type === 'danmaku' && showDanmaku) {
-                    addMessage(data.data, false);
-                } else if (data.type === 'superchat' && showSuperchat) {
-                    addMessage(data.data, true);
-                } else if (data.type === 'pong') {
-                    // Pong received
+                switch (data.type) {
+                    case 'danmaku':
+                        if (showDanmaku) {
+                            if (data.data?.id && seenIds.has(data.data.id)) break;
+                            if (data.data?.id) seenIds.add(data.data.id);
+                            renderDanmaku(data.data);
+                        }
+                        break;
+                    case 'paid':
+                        if (showPaid) {
+                            if (data.data?.id && seenIds.has(data.data.id)) break;
+                            if (data.data?.id) seenIds.add(data.data.id);
+                            const pt = data.data.paid_type;
+                            if (pt === 'superchat') renderSuperchat(data.data);
+                            else if (pt === 'gift') renderGift(data.data);
+                            else if (pt === 'guard') renderGuard(data.data);
+                        }
+                        break;
+                    case 'superchat_delete':
+                        handleSuperchatDelete(data.data);
+                        break;
+                    case 'state_changed':
+                        break;
                 }
             };
 
-            ws.onclose = () => {
-                console.log('Disconnected from Bilibili service, reconnecting...');
+            ws.onclose = (ev) => {
+                if (pingInterval) clearInterval(pingInterval);
+                // Helpful for diagnosing OBS browser-source reload/deactivation vs network drops
+                try {
+                    console.warn('WebSocket closed', { code: ev?.code, reason: ev?.reason, wasClean: ev?.wasClean });
+                } catch (e) {}
                 setTimeout(connect, reconnectDelay);
                 reconnectDelay = Math.min(reconnectDelay * 2, maxReconnectDelay);
             };
@@ -154,47 +443,7 @@
             };
         }
 
-        function addMessage(message, isSuperchat) {
-            const div = document.createElement('div');
-            div.className = 'message' + (isSuperchat ? ' superchat' : '');
-
-            const userSpan = document.createElement('span');
-            userSpan.className = 'message-user';
-            userSpan.textContent = message.user + ':';
-
-            const contentSpan = document.createElement('span');
-            contentSpan.className = 'message-content';
-            contentSpan.textContent = message.content;
-
-            div.appendChild(userSpan);
-            div.appendChild(contentSpan);
-
-            if (isSuperchat) {
-                const amountSpan = document.createElement('span');
-                amountSpan.className = 'superchat-amount';
-                amountSpan.textContent = `¥${message.amount}`;
-                div.appendChild(amountSpan);
-            }
-
-            chatContainer.appendChild(div);
-
-            // Limit number of messages
-            while (chatContainer.children.length > maxMessages) {
-                const firstChild = chatContainer.firstChild;
-                firstChild.classList.add('fading-out');
-                setTimeout(() => {
-                    if (firstChild.parentNode) {
-                        firstChild.remove();
-                    }
-                }, 500);
-            }
-
-            // Auto-scroll to bottom
-            chatContainer.scrollTop = chatContainer.scrollHeight;
-        }
-
-        // Start connection
-        connect();
+        loadSnapshot().finally(() => connect());
     </script>
 </body>
 </html>

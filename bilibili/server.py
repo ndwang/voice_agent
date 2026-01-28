@@ -5,7 +5,6 @@ Standalone service for managing Bilibili live stream chat integration.
 
 import uvicorn
 import sys
-import asyncio
 from pathlib import Path
 from contextlib import asynccontextmanager
 
@@ -73,10 +72,11 @@ def main():
     app.include_router(router)
 
     # Serve static files for dashboard
+    # Mounted at root so /dashboard.html and /obs.html work directly
     from fastapi.staticfiles import StaticFiles
     static_dir = Path(__file__).parent / "static"
     if static_dir.exists():
-        app.mount("/static", StaticFiles(directory=static_dir), name="static")
+        app.mount("/", StaticFiles(directory=static_dir), name="static")
         logger.info(f"Serving static files from {static_dir}")
 
     logger.info(f"Starting Bilibili service on {HOST}:{PORT}...")

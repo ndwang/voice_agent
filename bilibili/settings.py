@@ -19,10 +19,13 @@ class BilibiliSettings(BaseModel):
     """Bilibili connection settings"""
     room_id: int
     sessdata: str = ""
-    danmaku_ttl_seconds: int = 60
+    danmaku_max_buffer: int = 60
+    paid_max_buffer: int = 100
     enabled: bool = False
     danmaku_enabled_default: bool = True
-    superchat_enabled_default: bool = True
+    paid_enabled_default: bool = True
+    reconnect_delay_seconds: float = 1.0
+    reconnect_max_delay_seconds: float = 30.0
 
 
 class DashboardSettings(BaseModel):

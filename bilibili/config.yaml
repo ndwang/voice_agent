@@ -6,12 +6,15 @@ service:
   log_level: INFO
 
 bilibili:
-  room_id: 1852504554
-  sessdata: "d10a8829%2C1782692006%2C9540c%2Ac2CjCRf7tmL8kcxPkhHcVlsM3Jgj_zSL2-ZxOx5tj8CFHG3FceyugoVJta1N3bnnHnEwUSVnhVRmsxbmJHQlZabnN0OUx4TnZNVkMydUFUM0R5NDgzSlpRLU1TVjN4OThnbHFucG1ydFNqQk9qRURPX1ZXUGVxMl8yV3J6aXE2eWVyd2ZFa0RwdzhBIIEC"
-  danmaku_ttl_seconds: 60
+  room_id: 1856101651
+  sessdata: ""
+  danmaku_max_buffer: 60
+  paid_max_buffer: 100
   enabled: true  # Auto-start connection on service launch
   danmaku_enabled_default: true
-  superchat_enabled_default: true
+  paid_enabled_default: true
+  reconnect_delay_seconds: 1.0
+  reconnect_max_delay_seconds: 30.0
 
 # Dashboard settings
 dashboard:
