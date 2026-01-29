@@ -7,8 +7,6 @@ import { setStatus } from '../utils/helpers.js';
 import {
   renderActivity,
   updateToggleListeningButton,
-  updateToggleBilibiliDanmakuButton,
-  updateToggleBilibiliSuperChatButton
 } from './activity.js';
 import { fetchHistory, updateStreamingMessage, clearStreamingMessages } from './history.js';
 import { updateHotkeyDisplay } from '../modals/hotkey.js';
@@ -115,19 +113,6 @@ function handleWebSocketEvent(data) {
       addBilibiliMessage(data.message, true);
       break;
 
-    case 'bilibili_danmaku_state_changed':
-      if (data.enabled !== undefined) {
-        state.bilibiliDanmakuEnabled = data.enabled;
-      }
-      updateToggleBilibiliDanmakuButton();
-      break;
-
-    case 'bilibili_superchat_state_changed':
-      if (data.enabled !== undefined) {
-        state.bilibiliSuperChatEnabled = data.enabled;
-      }
-      updateToggleBilibiliSuperChatButton();
-      break;
   }
 }
 
