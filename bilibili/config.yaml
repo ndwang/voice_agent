@@ -9,10 +9,9 @@ bilibili:
   room_id: 1856101651
   sessdata: ""
   danmaku_max_buffer: 60
-  paid_max_buffer: 100
+  superchat_max_buffer: 100
+  gift_max_buffer: 100
   enabled: true  # Auto-start connection on service launch
-  danmaku_enabled_default: true
-  paid_enabled_default: true
   reconnect_delay_seconds: 1.0
   reconnect_max_delay_seconds: 30.0
 

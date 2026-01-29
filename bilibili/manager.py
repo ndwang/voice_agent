@@ -18,7 +18,7 @@ logger = get_logger(__name__)
 
 GUARD_LEVEL_NAMES = {1: "总督", 2: "提督", 3: "舰长"}
 
-VALID_CHANNELS = {"danmaku", "paid"}
+VALID_CHANNELS = {"danmaku", "superchat", "gift"}
 
 
 def _normalize_external_url(url: Any) -> str:
@@ -126,22 +126,22 @@ class BilibiliManager:
         # State flags
         self.connected: bool = False
         self.running: bool = False
-        # Always process all message types. UI toggles / disable controls are removed,
-        # but we keep these fields for backwards-compatible state responses.
-        self.danmaku_enabled: bool = True
-        self.paid_enabled: bool = True
 
         # Message buffers
         self.danmaku_buffer: Deque[Dict[str, Any]] = deque(
             maxlen=config.bilibili.danmaku_max_buffer
         )
-        self.paid_buffer: Deque[Dict[str, Any]] = deque(
-            maxlen=config.bilibili.paid_max_buffer
+        self.superchat_buffer: Deque[Dict[str, Any]] = deque(
+            maxlen=config.bilibili.superchat_max_buffer
+        )
+        self.gift_buffer: Deque[Dict[str, Any]] = deque(
+            maxlen=config.bilibili.gift_max_buffer
         )
 
         # Statistics
         self.total_danmaku_received: int = 0
-        self.total_paid_received: int = 0
+        self.total_superchat_received: int = 0
+        self.total_gift_received: int = 0
         self.total_gift_coins: int = 0
         self.start_time: float = time.time()
 
@@ -286,9 +286,11 @@ class BilibiliManager:
 
             if clear_buffers:
                 self.danmaku_buffer.clear()
-                self.paid_buffer.clear()
+                self.superchat_buffer.clear()
+                self.gift_buffer.clear()
                 self.total_danmaku_received = 0
-                self.total_paid_received = 0
+                self.total_superchat_received = 0
+                self.total_gift_received = 0
                 self.total_gift_coins = 0
                 self.start_time = time.time()
 
@@ -296,20 +298,6 @@ class BilibiliManager:
 
         if reconnect:
             await self.connect()
-
-    async def set_danmaku_enabled(self, enabled: bool):
-        """Deprecated: danmaku processing is always enabled."""
-        if not enabled:
-            logger.info("Ignoring danmaku disable request (always enabled)")
-        self.danmaku_enabled = True
-        await self._broadcast_state_change()
-
-    async def set_paid_enabled(self, enabled: bool):
-        """Deprecated: paid message processing is always enabled."""
-        if not enabled:
-            logger.info("Ignoring paid disable request (always enabled)")
-        self.paid_enabled = True
-        await self._broadcast_state_change()
 
     # =========================================================================
     # Message handlers
@@ -390,13 +378,13 @@ class BilibiliManager:
             "message_trans": getattr(message, "message_trans", ""),
         }
 
-        self.paid_buffer.append(normalized)
-        self.total_paid_received += 1
+        self.superchat_buffer.append(normalized)
+        self.total_superchat_received += 1
 
         await self._broadcast_message({
-            "type": "paid",
+            "type": "superchat",
             "data": normalized
-        }, channel="paid")
+        }, channel="superchat")
 
         logger.info(f"SuperChat: {normalized['user']} (¥{normalized['amount']}): {normalized['content']}")
 
@@ -431,14 +419,14 @@ class BilibiliManager:
             "combo_id": getattr(message, "tid", ""),
         }
 
-        self.paid_buffer.append(normalized)
-        self.total_paid_received += 1
+        self.gift_buffer.append(normalized)
+        self.total_gift_received += 1
         self.total_gift_coins += message.total_coin
 
         await self._broadcast_message({
-            "type": "paid",
+            "type": "gift",
             "data": normalized
-        }, channel="paid")
+        }, channel="gift")
 
         logger.debug(
             f"Gift: {normalized['user']} {normalized['action']} "
@@ -466,13 +454,13 @@ class BilibiliManager:
             "toast_msg": getattr(message, "toast_msg", ""),
         }
 
-        self.paid_buffer.append(normalized)
-        self.total_paid_received += 1
+        self.gift_buffer.append(normalized)
+        self.total_gift_received += 1
 
         await self._broadcast_message({
-            "type": "paid",
+            "type": "guard",
             "data": normalized
-        }, channel="paid")
+        }, channel="gift")
 
         logger.info(
             f"Guard: {normalized['user']} purchased {guard_name} "
@@ -482,19 +470,19 @@ class BilibiliManager:
     async def _on_super_chat_delete(self, message):
         """Handle superchat deletion"""
         deleted_ids = message.ids
-        # Remove matching superchats from paid buffer
-        before_len = len(self.paid_buffer)
-        self.paid_buffer = deque(
-            (m for m in self.paid_buffer
-             if not (m.get("paid_type") == "superchat" and m.get("bili_id") in deleted_ids)),
-            maxlen=self.config.bilibili.paid_max_buffer,
+        # Remove matching superchats from superchat buffer
+        before_len = len(self.superchat_buffer)
+        self.superchat_buffer = deque(
+            (m for m in self.superchat_buffer
+             if m.get("bili_id") not in deleted_ids),
+            maxlen=self.config.bilibili.superchat_max_buffer,
         )
-        removed = before_len - len(self.paid_buffer)
+        removed = before_len - len(self.superchat_buffer)
 
         await self._broadcast_message({
             "type": "superchat_delete",
             "data": {"ids": deleted_ids}
-        }, channel="paid")
+        }, channel="superchat")
 
         if removed:
             logger.info(f"Superchat delete: removed {removed} superchats (ids: {deleted_ids})")
@@ -576,8 +564,6 @@ class BilibiliManager:
             "type": "state_changed",
             "data": {
                 "connected": self.connected,
-                "danmaku_enabled": self.danmaku_enabled,
-                "paid_enabled": self.paid_enabled,
             }
         })
 
@@ -590,10 +576,9 @@ class BilibiliManager:
 
         return {
             "connected": self.connected,
-            "danmaku_enabled": self.danmaku_enabled,
-            "paid_enabled": self.paid_enabled,
             "danmaku": list(self.danmaku_buffer),
-            "paid": list(self.paid_buffer),
+            "superchat": list(self.superchat_buffer),
+            "gift": list(self.gift_buffer),
         }
 
     def get_danmaku_snapshot(self) -> List[Dict[str, Any]]:
@@ -601,18 +586,21 @@ class BilibiliManager:
 
         return list(self.danmaku_buffer)
 
-    def get_paid_snapshot(self) -> List[Dict[str, Any]]:
-        """Get paid messages snapshot (superchat/gift/guard)"""
+    def get_superchat_snapshot(self) -> List[Dict[str, Any]]:
+        """Get superchat-only snapshot"""
 
-        return list(self.paid_buffer)
+        return list(self.superchat_buffer)
+
+    def get_gift_snapshot(self) -> List[Dict[str, Any]]:
+        """Get gift/guard messages snapshot"""
+
+        return list(self.gift_buffer)
 
     def get_state(self) -> Dict[str, Any]:
         """Get current service state"""
         return {
             "connected": self.connected,
             "running": self.running,
-            "danmaku_enabled": self.danmaku_enabled,
-            "paid_enabled": self.paid_enabled,
             "room_id": self.config.bilibili.room_id,
         }
 
@@ -620,10 +608,12 @@ class BilibiliManager:
         """Get service statistics"""
         return {
             "danmaku_buffer_size": len(self.danmaku_buffer),
-            "paid_buffer_size": len(self.paid_buffer),
+            "superchat_buffer_size": len(self.superchat_buffer),
+            "gift_buffer_size": len(self.gift_buffer),
             "uptime_seconds": time.time() - self.start_time,
             "total_danmaku_received": self.total_danmaku_received,
-            "total_paid_received": self.total_paid_received,
+            "total_superchat_received": self.total_superchat_received,
+            "total_gift_received": self.total_gift_received,
             "total_gift_coins": self.total_gift_coins,
         }
 
@@ -635,7 +625,8 @@ class BilibiliManager:
             "uptime": time.time() - self.start_time,
             "buffer_health": {
                 "danmaku_size": len(self.danmaku_buffer),
-                "paid_size": len(self.paid_buffer),
+                "superchat_size": len(self.superchat_buffer),
+                "gift_size": len(self.gift_buffer),
             },
             "client_health": {
                 "ws_clients": len(self.ws_clients),

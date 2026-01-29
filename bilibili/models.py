@@ -100,18 +100,18 @@ class ServiceState(BaseModel):
     """Service state response"""
     connected: bool
     running: bool
-    danmaku_enabled: bool
-    paid_enabled: bool
     room_id: int
 
 
 class ServiceStats(BaseModel):
     """Service statistics"""
     danmaku_buffer_size: int
-    paid_buffer_size: int = 0
+    superchat_buffer_size: int = 0
+    gift_buffer_size: int = 0
     uptime_seconds: float
     total_danmaku_received: int
-    total_paid_received: int = 0
+    total_superchat_received: int = 0
+    total_gift_received: int = 0
     total_gift_coins: int = 0
 
 
@@ -122,10 +122,9 @@ class ServiceStats(BaseModel):
 class ChatSnapshot(BaseModel):
     """Complete chat snapshot (all message types)"""
     connected: bool
-    danmaku_enabled: bool
-    paid_enabled: bool
     danmaku: list[DanmakuMessage]
-    paid: list[dict] = []
+    superchat: list[dict] = []
+    gift: list[dict] = []
 
 
 class DanmakuSnapshot(BaseModel):
@@ -133,9 +132,14 @@ class DanmakuSnapshot(BaseModel):
     danmaku: list[DanmakuMessage]
 
 
-class PaidSnapshot(BaseModel):
-    """Paid messages snapshot (superchat + gift + guard)"""
-    paid: list[dict]
+class SuperchatSnapshot(BaseModel):
+    """Superchat-only snapshot"""
+    superchat: list[dict]
+
+
+class GiftSnapshot(BaseModel):
+    """Gift/guard messages snapshot"""
+    gift: list[dict]
 
 
 # =============================================================================
@@ -149,13 +153,6 @@ class HealthResponse(BaseModel):
     uptime: float
     buffer_health: dict[str, int]
     client_health: dict[str, int]
-
-
-class EnableStateResponse(BaseModel):
-    """Enable/disable state response"""
-    success: bool
-    danmaku_enabled: bool | None = None
-    paid_enabled: bool | None = None
 
 
 class SwitchRoomRequest(BaseModel):

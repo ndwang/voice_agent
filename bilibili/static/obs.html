@@ -170,7 +170,8 @@
         // URL parameters
         const params = new URLSearchParams(window.location.search);
         const showDanmaku = params.get('show_danmaku') !== 'false';
-        const showPaid = params.get('show_paid') !== 'false';
+        const showSuperchat = params.get('show_superchat') !== 'false';
+        const showGift = params.get('show_gift') !== 'false';
         const fontSize = parseInt(params.get('font_size')) || 16;
         const maxMessages = parseInt(params.get('max_messages')) || 20;
 
@@ -348,8 +349,11 @@
                 if (showDanmaku) {
                     for (const m of (snapshot.danmaku || [])) items.push({ type: 'danmaku', data: m });
                 }
-                if (showPaid) {
-                    for (const m of (snapshot.paid || [])) items.push({ type: 'paid', data: m });
+                if (showSuperchat) {
+                    for (const m of (snapshot.superchat || [])) items.push({ type: 'superchat', data: m });
+                }
+                if (showGift) {
+                    for (const m of (snapshot.gift || [])) items.push({ type: 'gift', data: m });
                 }
 
                 items.sort((a, b) => (a.data.timestamp || 0) - (b.data.timestamp || 0));
@@ -364,11 +368,12 @@
 
                     if (it.type === 'danmaku') {
                         renderDanmaku(msg);
-                    } else if (it.type === 'paid') {
+                    } else if (it.type === 'superchat') {
+                        renderSuperchat(msg);
+                    } else if (it.type === 'gift') {
                         const pt = msg.paid_type;
-                        if (pt === 'superchat') renderSuperchat(msg);
-                        else if (pt === 'gift') renderGift(msg);
-                        else if (pt === 'guard') renderGuard(msg);
+                        if (pt === 'guard') renderGuard(msg);
+                        else renderGift(msg);
                     }
                 }
             } catch (e) {
@@ -387,7 +392,8 @@
                 reconnectDelay = 1000;
                 const channels = [];
                 if (showDanmaku) channels.push('danmaku');
-                if (showPaid) channels.push('paid');
+                if (showSuperchat) channels.push('superchat');
+                if (showGift) channels.push('gift');
 
                 ws.send(JSON.stringify({ type: 'subscribe', channels }));
 
@@ -410,14 +416,25 @@
                             renderDanmaku(data.data);
                         }
                         break;
-                    case 'paid':
-                        if (showPaid) {
+                    case 'superchat':
+                        if (showSuperchat) {
                             if (data.data?.id && seenIds.has(data.data.id)) break;
                             if (data.data?.id) seenIds.add(data.data.id);
-                            const pt = data.data.paid_type;
-                            if (pt === 'superchat') renderSuperchat(data.data);
-                            else if (pt === 'gift') renderGift(data.data);
-                            else if (pt === 'guard') renderGuard(data.data);
+                            renderSuperchat(data.data);
+                        }
+                        break;
+                    case 'gift':
+                        if (showGift) {
+                            if (data.data?.id && seenIds.has(data.data.id)) break;
+                            if (data.data?.id) seenIds.add(data.data.id);
+                            renderGift(data.data);
+                        }
+                        break;
+                    case 'guard':
+                        if (showGift) {
+                            if (data.data?.id && seenIds.has(data.data.id)) break;
+                            if (data.data?.id) seenIds.add(data.data.id);
+                            renderGuard(data.data);
                         }
                         break;
                     case 'superchat_delete':

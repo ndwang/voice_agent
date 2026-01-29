@@ -67,7 +67,7 @@ async def health():
 
 @router.get("/chat", response_model=models.ChatSnapshot)
 async def get_chat():
-    """Get complete chat snapshot (danmaku + superchat)"""
+    """Get complete chat snapshot (danmaku + superchat + gift)"""
     manager = get_manager()
     snapshot = manager.get_chat_snapshot()
     return snapshot
@@ -80,11 +80,18 @@ async def get_danmaku():
     return {"danmaku": manager.get_danmaku_snapshot()}
 
 
-@router.get("/chat/paid", response_model=models.PaidSnapshot)
-async def get_paid():
-    """Get paid messages snapshot (superchat + gift + guard)"""
+@router.get("/chat/superchat", response_model=models.SuperchatSnapshot)
+async def get_superchat():
+    """Get superchat-only snapshot"""
     manager = get_manager()
-    return {"paid": manager.get_paid_snapshot()}
+    return {"superchat": manager.get_superchat_snapshot()}
+
+
+@router.get("/chat/gift", response_model=models.GiftSnapshot)
+async def get_gift():
+    """Get gift/guard messages snapshot"""
+    manager = get_manager()
+    return {"gift": manager.get_gift_snapshot()}
 
 
 # ============================================================================
@@ -96,50 +103,6 @@ async def get_state():
     """Get service state"""
     manager = get_manager()
     return manager.get_state()
-
-
-@router.post("/state/danmaku/enable", response_model=models.EnableStateResponse)
-async def enable_danmaku():
-    """Enable danmaku processing"""
-    manager = get_manager()
-    await manager.set_danmaku_enabled(True)
-    return {
-        "success": True,
-        "danmaku_enabled": True
-    }
-
-
-@router.post("/state/danmaku/disable", response_model=models.EnableStateResponse)
-async def disable_danmaku():
-    """Disable danmaku processing"""
-    manager = get_manager()
-    await manager.set_danmaku_enabled(False)
-    return {
-        "success": True,
-        "danmaku_enabled": False
-    }
-
-
-@router.post("/state/paid/enable", response_model=models.EnableStateResponse)
-async def enable_paid():
-    """Enable paid message processing (superchat/gift/guard)"""
-    manager = get_manager()
-    await manager.set_paid_enabled(True)
-    return {
-        "success": True,
-        "paid_enabled": True
-    }
-
-
-@router.post("/state/paid/disable", response_model=models.EnableStateResponse)
-async def disable_paid():
-    """Disable paid message processing (superchat/gift/guard)"""
-    manager = get_manager()
-    await manager.set_paid_enabled(False)
-    return {
-        "success": True,
-        "paid_enabled": False
-    }
 
 
 # ============================================================================
@@ -221,15 +184,17 @@ async def websocket_stream(websocket: WebSocket):
 
     Protocol:
     Client → Server:
-      - {"type": "subscribe", "channels": ["danmaku", "paid"]}
+      - {"type": "subscribe", "channels": ["danmaku", "superchat", "gift"]}
       - {"type": "unsubscribe", "channels": ["danmaku"]}
       - {"type": "ping"}
 
     Server → Client:
-      - {"type": "danmaku", "data": {...}}
-      - {"type": "paid", "data": {"paid_type": "superchat"|"gift"|"guard", ...}}
-      - {"type": "superchat_delete", "data": {"ids": [...]}}
-      - {"type": "state_changed", "data": {...}}
+      - {"type": "danmaku", "data": {...}}                      (channel: danmaku)
+      - {"type": "superchat", "data": {...}}                    (channel: superchat)
+      - {"type": "superchat_delete", "data": {"ids": [...]}}    (channel: superchat)
+      - {"type": "gift", "data": {"paid_type": "gift", ...}}    (channel: gift)
+      - {"type": "guard", "data": {"paid_type": "guard", ...}}  (channel: gift)
+      - {"type": "state_changed", "data": {...}}                (all clients)
       - {"type": "pong"}
       - {"type": "error", "message": "..."}
     """

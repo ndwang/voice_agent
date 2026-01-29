@@ -20,10 +20,9 @@ class BilibiliSettings(BaseModel):
     room_id: int
     sessdata: str = ""
     danmaku_max_buffer: int = 60
-    paid_max_buffer: int = 100
+    superchat_max_buffer: int = 100
+    gift_max_buffer: int = 100
     enabled: bool = False
-    danmaku_enabled_default: bool = True
-    paid_enabled_default: bool = True
     reconnect_delay_seconds: float = 1.0
     reconnect_max_delay_seconds: float = 30.0
 

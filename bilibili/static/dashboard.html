@@ -366,8 +366,12 @@
                     <span class="stat-value" id="danmaku-count">0</span>
                 </div>
                 <div class="stat-row">
-                    <span>Paid (SC/Gift/Guard):</span>
-                    <span class="stat-value" id="paid-count">0</span>
+                    <span>Superchat:</span>
+                    <span class="stat-value" id="superchat-count">0</span>
+                </div>
+                <div class="stat-row">
+                    <span>Gift/Guard:</span>
+                    <span class="stat-value" id="gift-count">0</span>
                 </div>
                 <div class="stat-row">
                     <span>Total Gift Coins:</span>
@@ -423,7 +427,8 @@
 
                 const items = [];
                 for (const m of (snapshot.danmaku || [])) items.push({ type: 'danmaku', data: m });
-                for (const m of (snapshot.paid || [])) items.push({ type: 'paid', data: m });
+                for (const m of (snapshot.superchat || [])) items.push({ type: 'superchat', data: m });
+                for (const m of (snapshot.gift || [])) items.push({ type: 'gift', data: m });
 
                 // Render in chronological order
                 items.sort((a, b) => (a.data.timestamp || 0) - (b.data.timestamp || 0));
@@ -435,11 +440,12 @@
 
                     if (it.type === 'danmaku') {
                         addDanmakuMessage(msg);
-                    } else if (it.type === 'paid') {
+                    } else if (it.type === 'superchat') {
+                        addSuperChatMessage(msg);
+                    } else if (it.type === 'gift') {
                         const paidType = msg.paid_type;
-                        if (paidType === 'superchat') addSuperChatMessage(msg);
-                        else if (paidType === 'gift') addGiftMessage(msg);
-                        else if (paidType === 'guard') addGuardMessage(msg);
+                        if (paidType === 'guard') addGuardMessage(msg);
+                        else addGiftMessage(msg);
                     }
                 }
             } catch (e) {
@@ -507,7 +513,8 @@
                 const stats = await res.json();
 
                 document.getElementById('danmaku-count').textContent = stats.total_danmaku_received;
-                document.getElementById('paid-count').textContent = stats.total_paid_received;
+                document.getElementById('superchat-count').textContent = stats.total_superchat_received;
+                document.getElementById('gift-count').textContent = stats.total_gift_received;
                 document.getElementById('total-gift-coins').textContent = formatNumber(stats.total_gift_coins);
                 document.getElementById('uptime').textContent = formatUptime(stats.uptime_seconds);
             } catch (e) {
@@ -653,7 +660,7 @@
                 reconnectDelay = 1000;
                 ws.send(JSON.stringify({
                     type: 'subscribe',
-                    channels: ['danmaku', 'paid']
+                    channels: ['danmaku', 'superchat', 'gift']
                 }));
             };
 
@@ -664,13 +671,18 @@
                     if (data.data?.id && seenIds.has(data.data.id)) return;
                     if (data.data?.id) seenIds.add(data.data.id);
                     addDanmakuMessage(data.data);
-                } else if (data.type === 'paid') {
+                } else if (data.type === 'superchat') {
                     if (data.data?.id && seenIds.has(data.data.id)) return;
                     if (data.data?.id) seenIds.add(data.data.id);
-                    const paidType = data.data.paid_type;
-                    if (paidType === 'superchat') addSuperChatMessage(data.data);
-                    else if (paidType === 'gift') addGiftMessage(data.data);
-                    else if (paidType === 'guard') addGuardMessage(data.data);
+                    addSuperChatMessage(data.data);
+                } else if (data.type === 'gift') {
+                    if (data.data?.id && seenIds.has(data.data.id)) return;
+                    if (data.data?.id) seenIds.add(data.data.id);
+                    addGiftMessage(data.data);
+                } else if (data.type === 'guard') {
+                    if (data.data?.id && seenIds.has(data.data.id)) return;
+                    if (data.data?.id) seenIds.add(data.data.id);
+                    addGuardMessage(data.data);
                 } else if (data.type === 'superchat_delete') {
                     handleSuperchatDelete(data.data);
                 } else if (data.type === 'state_changed') {

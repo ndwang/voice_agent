@@ -7,10 +7,10 @@ A standalone service for streaming Bilibili live room events via WebSocket. Capt
 - **Message Coverage**: Danmaku (chat), superchat (paid messages), gifts, guard/fleet purchases
 - **Rich Message Data**: User avatars, fan medals, guard badges, admin flags, emoticon images, superchat background colors, gift icons, coin totals
 - **Superchat Lifecycle**: Tracks superchat creation and deletion; deleted superchats are removed from the buffer and broadcast to clients
-- **WebSocket Streaming**: Real-time push with channel-based subscriptions (`danmaku`, `paid`)
+- **WebSocket Streaming**: Real-time push with channel-based subscriptions (`danmaku`, `superchat`, `gift`)
 - **Channel Filtering**: Clients only receive messages for channels they subscribe to; `state_changed` events are always sent
 - **Multiple Clients**: Supports multiple simultaneous WebSocket connections
-- **Configurable Buffers**: Separate max buffer sizes for danmaku and paid messages (bounded deques)
+- **Configurable Buffers**: Separate max buffer sizes for danmaku, superchat, and gift messages (bounded deques)
 - **Auto-Reconnection**: Exponential backoff reconnection on Bilibili WebSocket disconnect (configurable delay/max)
 - **OBS Integration**: Transparent overlay with gift display, guard announcements, emoticon rendering, badge display, superchat colors
 - **Full Dashboard**: Web control panel with live chat viewer, avatars, badges, scroll-pause, and statistics
@@ -32,10 +32,9 @@ bilibili:
   room_id: 21379697            # Your Bilibili room ID
   sessdata: "your_sessdata"    # Get from browser cookies
   danmaku_max_buffer: 60       # Max danmaku messages to retain
-  paid_max_buffer: 100         # Max paid messages (superchat/gift/guard) to retain
+  superchat_max_buffer: 100    # Max superchat messages to retain
+  gift_max_buffer: 100         # Max gift/guard messages to retain
   enabled: true                # Auto-connect on startup
-  danmaku_enabled_default: true
-  paid_enabled_default: true
   reconnect_delay_seconds: 1.0      # Initial reconnect delay
   reconnect_max_delay_seconds: 30.0 # Max reconnect delay (exponential backoff)
 
@@ -86,7 +85,8 @@ curl http://localhost:8002/chat
 |  |  |   +-- on_guard (user_toast_v2), on_super_chat_delete       |  |
 |  |  |   +-- on_client_stopped (triggers auto-reconnect)          |  |
 |  |  +-- danmaku_buffer (Deque, bounded)                          |  |
-|  |  +-- paid_buffer (Deque, bounded)                             |  |
+|  |  +-- superchat_buffer (Deque, bounded)                        |  |
+|  |  +-- gift_buffer (Deque, bounded)                             |  |
 |  |  +-- ws_clients (Dict[WebSocket, Set[channel]])               |  |
 |  +--------------------------------------------------------------+  |
 |                                                                     |
@@ -94,10 +94,10 @@ curl http://localhost:8002/chat
 |  +-- GET /health       /ws/stream             /dashboard.html       |
 |  +-- GET /chat                                /obs.html             |
 |  +-- GET /chat/danmaku                                              |
-|  +-- GET /chat/paid                                                 |
+|  +-- GET /chat/superchat                                            |
+|  +-- GET /chat/gift                                                 |
 |  +-- GET /state                                                     |
 |  +-- GET /stats                                                     |
-|  +-- POST /state/*                                                  |
 +--------------------------------------------------------------------+
                               | WebSocket
         +---------------------+---------------------+
@@ -108,7 +108,7 @@ curl http://localhost:8002/chat
 
 ## Message Types
 
-All paid message types (superchat, gift, guard) share a single `paid` channel and buffer. Each paid message includes a `paid_type` field to distinguish its subtype.
+Superchats use the `superchat` channel and buffer. Gifts and guards share the `gift` channel and buffer. Each message includes a `paid_type` field to distinguish its subtype.
 
 ### Danmaku (Chat Messages)
 
@@ -224,7 +224,8 @@ Detailed health status with buffer sizes.
   "uptime": 3600.5,
   "buffer_health": {
     "danmaku_size": 42,
-    "paid_size": 5
+    "superchat_size": 3,
+    "gift_size": 5
   },
   "client_health": {
     "ws_clients": 3
@@ -240,18 +241,20 @@ Get all message buffers at once.
 ```json
 {
   "connected": true,
-  "danmaku_enabled": true,
-  "paid_enabled": true,
   "danmaku": [ ... ],
-  "paid": [ ... ]
+  "superchat": [ ... ],
+  "gift": [ ... ]
 }
 ```
 
 #### `GET /chat/danmaku`
 Danmaku messages only.
 
-#### `GET /chat/paid`
-Paid messages only (superchat + gift + guard).
+#### `GET /chat/superchat`
+Superchat messages only.
+
+#### `GET /chat/gift`
+Gift and guard messages only.
 
 ### State Management
 
@@ -260,23 +263,9 @@ Paid messages only (superchat + gift + guard).
 {
   "connected": true,
   "running": true,
-  "danmaku_enabled": true,
-  "paid_enabled": true,
   "room_id": 21379697
 }
 ```
-
-#### `POST /state/danmaku/enable`
-Enable danmaku message processing.
-
-#### `POST /state/danmaku/disable`
-Disable danmaku message processing.
-
-#### `POST /state/paid/enable`
-Enable paid message processing (superchat/gift/guard).
-
-#### `POST /state/paid/disable`
-Disable paid message processing (superchat/gift/guard).
 
 ### Connection Control
 
@@ -297,10 +286,9 @@ Returns the service configuration (sessdata excluded).
   "bilibili": {
     "room_id": 21379697,
     "danmaku_max_buffer": 60,
-    "paid_max_buffer": 100,
+    "superchat_max_buffer": 100,
+    "gift_max_buffer": 100,
     "enabled": true,
-    "danmaku_enabled_default": true,
-    "paid_enabled_default": true,
     "reconnect_delay_seconds": 1.0,
     "reconnect_max_delay_seconds": 30.0
   },
@@ -315,10 +303,12 @@ Returns the service configuration (sessdata excluded).
 ```json
 {
   "danmaku_buffer_size": 42,
-  "paid_buffer_size": 5,
+  "superchat_buffer_size": 3,
+  "gift_buffer_size": 5,
   "uptime_seconds": 7200.5,
   "total_danmaku_received": 1420,
-  "total_paid_received": 42,
+  "total_superchat_received": 15,
+  "total_gift_received": 27,
   "total_gift_coins": 2850000
 }
 ```
@@ -334,7 +324,8 @@ Real-time message streaming with channel-based subscriptions. Clients must subsc
 | Channel | Messages |
 |---|---|
 | `danmaku` | Danmaku chat messages |
-| `paid` | Superchat, gift, and guard messages; superchat deletion events |
+| `superchat` | Superchat messages and superchat deletion events |
+| `gift` | Gift and guard purchase messages |
 
 ### Client -> Server Messages
 
@@ -342,11 +333,11 @@ Real-time message streaming with channel-based subscriptions. Clients must subsc
 ```json
 {
   "type": "subscribe",
-  "channels": ["danmaku", "paid"]
+  "channels": ["danmaku", "superchat", "gift"]
 }
 ```
 
-Only valid channel names (`danmaku`, `paid`) are accepted; invalid names are silently ignored.
+Only valid channel names (`danmaku`, `superchat`, `gift`) are accepted; invalid names are silently ignored.
 
 #### Unsubscribe from Channels
 ```json
@@ -388,10 +379,10 @@ Only valid channel names (`danmaku`, `paid`) are accepted; invalid names are sil
 }
 ```
 
-#### Paid Message (Superchat)
+#### Superchat Message
 ```json
 {
-  "type": "paid",
+  "type": "superchat",
   "data": {
     "id": "sc_1_123456",
     "paid_type": "superchat",
@@ -414,10 +405,10 @@ Only valid channel names (`danmaku`, `paid`) are accepted; invalid names are sil
 }
 ```
 
-#### Paid Message (Gift)
+#### Gift Message
 ```json
 {
-  "type": "paid",
+  "type": "gift",
   "data": {
     "id": "gift_2_123456",
     "paid_type": "gift",
@@ -440,10 +431,10 @@ Only valid channel names (`danmaku`, `paid`) are accepted; invalid names are sil
 }
 ```
 
-#### Paid Message (Guard)
+#### Guard Message
 ```json
 {
-  "type": "paid",
+  "type": "guard",
   "data": {
     "id": "guard_3_123456",
     "paid_type": "guard",
@@ -477,9 +468,7 @@ Sent to all connected clients regardless of channel subscription.
 {
   "type": "state_changed",
   "data": {
-    "connected": true,
-    "danmaku_enabled": true,
-    "paid_enabled": true
+    "connected": true
   }
 }
 ```
@@ -514,8 +503,8 @@ Full-featured control panel with:
 - **Guard announcements** with distinct styling
 - **Emoticon rendering** for emoticon-type danmaku (dm_type=1)
 - **Scroll-pause**: auto-scroll pauses when scrolled up, with a click-to-resume banner
-- **Statistics panel**: total danmaku and paid messages received, total gift coin value, uptime
-- **Connection controls**: connect/disconnect buttons, danmaku/paid toggle switches
+- **Statistics panel**: total danmaku, superchat, and gift messages received, total gift coin value, uptime
+- **Connection controls**: connect/disconnect buttons
 - **Connection status indicator**
 
 ### OBS Overlay
@@ -538,15 +527,16 @@ Minimal, transparent overlay for OBS browser source:
 | Parameter | Default | Description |
 |---|---|---|
 | `show_danmaku` | `true` | Show danmaku messages |
-| `show_paid` | `true` | Show paid messages (superchat/gift/guard) |
+| `show_superchat` | `true` | Show superchat messages |
+| `show_gift` | `true` | Show gift and guard messages |
 | `font_size` | `16` | Font size in pixels |
 | `max_messages` | `20` | Max messages to display |
 
 **Example URLs:**
 ```
 http://localhost:8002/obs.html?max_messages=20
-http://localhost:8002/obs.html?show_paid=false&font_size=18
-http://localhost:8002/obs.html?show_danmaku=true&show_paid=true&max_messages=15
+http://localhost:8002/obs.html?show_gift=false&font_size=18
+http://localhost:8002/obs.html?show_danmaku=true&show_superchat=true&show_gift=true&max_messages=15
 ```
 
 ### OBS Setup Guide
@@ -571,7 +561,8 @@ All buffers are in-memory only. Messages are not persisted to disk.
 | Buffer | Max Size | Pruning |
 |---|---|---|
 | Danmaku | 60 (configurable via `danmaku_max_buffer`) | Bounded deque auto-evicts oldest |
-| Paid | 100 (configurable via `paid_max_buffer`) | Bounded deque auto-evicts oldest + superchat deletion events |
+| Superchat | 100 (configurable via `superchat_max_buffer`) | Bounded deque auto-evicts oldest + superchat deletion events |
+| Gift | 100 (configurable via `gift_max_buffer`) | Bounded deque auto-evicts oldest |
 
 ## Auto-Reconnection
 
@@ -604,7 +595,7 @@ class BilibiliClient:
                 # Subscribe to channels
                 await ws.send_json({
                     "type": "subscribe",
-                    "channels": ["danmaku", "paid"]
+                    "channels": ["danmaku", "superchat", "gift"]
                 })
 
                 async for msg in ws:
@@ -618,14 +609,12 @@ class BilibiliClient:
 
         if msg_type == "danmaku":
             print(f"[Chat] {message['user']}: {message['content']}")
-        elif msg_type == "paid":
-            paid_type = message.get("paid_type")
-            if paid_type == "superchat":
-                print(f"[SC ¥{message['amount']}] {message['user']}: {message['content']}")
-            elif paid_type == "gift":
-                print(f"[Gift] {message['user']} {message['action']} {message['gift_name']}x{message['num']}")
-            elif paid_type == "guard":
-                print(f"[Guard] {message['user']}: {message['toast_msg']}")
+        elif msg_type == "superchat":
+            print(f"[SC ¥{message['amount']}] {message['user']}: {message['content']}")
+        elif msg_type == "gift":
+            print(f"[Gift] {message['user']} {message['action']} {message['gift_name']}x{message['num']}")
+        elif msg_type == "guard":
+            print(f"[Guard] {message['user']}: {message['toast_msg']}")
         elif msg_type == "superchat_delete":
             print(f"[SC Delete] IDs: {message['ids']}")
 
@@ -641,7 +630,7 @@ const ws = new WebSocket('ws://localhost:8002/ws/stream');
 ws.onopen = () => {
   ws.send(JSON.stringify({
     type: 'subscribe',
-    channels: ['danmaku', 'paid']
+    channels: ['danmaku', 'superchat', 'gift']
   }));
 };
 
@@ -652,13 +641,14 @@ ws.onmessage = (event) => {
     case 'danmaku':
       console.log(`[Chat] ${data.user}: ${data.content}`);
       break;
-    case 'paid':
-      if (data.paid_type === 'superchat')
-        console.log(`[SC ¥${data.amount}] ${data.user}: ${data.content}`);
-      else if (data.paid_type === 'gift')
-        console.log(`[Gift] ${data.user} ${data.action} ${data.gift_name}x${data.num}`);
-      else if (data.paid_type === 'guard')
-        console.log(`[Guard] ${data.toast_msg}`);
+    case 'superchat':
+      console.log(`[SC ¥${data.amount}] ${data.user}: ${data.content}`);
+      break;
+    case 'gift':
+      console.log(`[Gift] ${data.user} ${data.action} ${data.gift_name}x${data.num}`);
+      break;
+    case 'guard':
+      console.log(`[Guard] ${data.toast_msg}`);
       break;
     case 'superchat_delete':
       console.log(`[SC Delete] IDs: ${data.ids}`);
@@ -672,10 +662,10 @@ ws.onmessage = (event) => {
 The orchestrator connects to the Bilibili service via `BilibiliWebSocketSource` (see `orchestrator/sources/bilibili_websocket_source.py`):
 
 1. **Connection:** Opens WebSocket to `ws://localhost:8002/ws/stream`
-2. **Subscription:** Subscribes to `danmaku` and `paid` channels
+2. **Subscription:** Subscribes to `danmaku` and `superchat` channels
 3. **Event Publishing:** Publishes received messages to orchestrator EventBus as:
    - `BILIBILI_DANMAKU` events (for danmaku)
-   - `BILIBILI_SUPERCHAT` events (for paid messages with `paid_type: "superchat"`)
+   - `BILIBILI_SUPERCHAT` events (for superchat messages)
 4. **Auto-Reconnection:** Handles connection loss with exponential backoff
 
 The orchestrator's `QueueManager` subscribes to these events and enqueues messages with appropriate priorities.
@@ -702,13 +692,12 @@ lsof -ti:8002 | xargs kill
 
 ### No Messages Received
 
-**Issue:** Connected but no danmaku/paid messages appear
+**Issue:** Connected but no messages appear
 
 **Solutions:**
 1. Check if the Bilibili room is live: `curl http://localhost:8002/state`
-2. Verify `danmaku_enabled` and `paid_enabled` are true
-3. Check if SESSDATA cookie is valid (may expire after ~6 months)
-4. Verify room_id is correct: `curl http://localhost:8002/config`
+2. Check if SESSDATA cookie is valid (may expire after ~6 months)
+3. Verify room_id is correct: `curl http://localhost:8002/config`
 
 ### WebSocket Connection Fails
 
