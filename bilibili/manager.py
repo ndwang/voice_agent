@@ -145,6 +145,10 @@ class BilibiliManager:
         self.total_gift_coins: int = 0
         self.start_time: float = time.time()
 
+        # Viewer counts (updated via WATCHED_CHANGE / ONLINE_RANK_COUNT)
+        self.watched_count: int = 0
+        self.online_count: int = 0
+
         # WebSocket clients for real-time streaming
         # Maps WebSocket -> set of subscribed channel names
         self.ws_clients: Dict[WebSocket, Set[str]] = {}
@@ -207,6 +211,8 @@ class BilibiliManager:
                     on_gift=self._on_gift,
                     on_guard=self._on_guard,
                     on_super_chat_delete=self._on_super_chat_delete,
+                    on_watched_change=self._on_watched_change,
+                    on_online_rank_count=self._on_online_rank_count,
                     on_client_stopped=self._on_client_stopped,
                 )
 
@@ -292,6 +298,8 @@ class BilibiliManager:
                 self.total_superchat_received = 0
                 self.total_gift_received = 0
                 self.total_gift_coins = 0
+                self.watched_count = 0
+                self.online_count = 0
                 self.start_time = time.time()
 
             await self._broadcast_state_change()
@@ -487,6 +495,26 @@ class BilibiliManager:
         if removed:
             logger.info(f"Superchat delete: removed {removed} superchats (ids: {deleted_ids})")
 
+    async def _on_watched_change(self, num: int):
+        """Handle watched count update (累计观看人数)"""
+        logger.info(f"WATCHED_CHANGE: {num} (prev={self.watched_count})")
+        if num != self.watched_count:
+            self.watched_count = num
+            await self._broadcast_message({
+                "type": "watched_change",
+                "data": {"num": num}
+            })
+
+    async def _on_online_rank_count(self, online_count: int):
+        """Handle online rank count update (房间观众/CCV)"""
+        logger.info(f"ONLINE_RANK_COUNT: {online_count} (prev={self.online_count})")
+        if online_count != self.online_count:
+            self.online_count = online_count
+            await self._broadcast_message({
+                "type": "online_count",
+                "data": {"online_count": online_count}
+            })
+
     def _on_client_stopped(self, client, exception):
         """Called when the blivedm client stops (connection lost)."""
         if exception:
@@ -602,6 +630,8 @@ class BilibiliManager:
             "connected": self.connected,
             "running": self.running,
             "room_id": self.config.bilibili.room_id,
+            "watched_count": self.watched_count,
+            "online_count": self.online_count,
         }
 
     def get_stats(self) -> Dict[str, Any]:
@@ -615,6 +645,8 @@ class BilibiliManager:
             "total_superchat_received": self.total_superchat_received,
             "total_gift_received": self.total_gift_received,
             "total_gift_coins": self.total_gift_coins,
+            "watched_count": self.watched_count,
+            "online_count": self.online_count,
         }
 
     def get_health(self) -> Dict[str, Any]:

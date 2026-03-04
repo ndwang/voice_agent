@@ -352,6 +352,14 @@
                         <input id="room-id-input" class="room-id-input" type="number" min="1" inputmode="numeric" placeholder="" style="display:none; max-width: 220px;">
                     </div>
                 </div>
+                <div class="stat-row">
+                    <span>Online:</span>
+                    <span class="stat-value" id="online-count">0</span>
+                </div>
+                <div class="stat-row">
+                    <span>Watched:</span>
+                    <span class="stat-value" id="watched-count">0</span>
+                </div>
                 <div style="margin-top: 15px;">
                     <button id="connect-btn" onclick="doConnect()">Connect</button>
                     <button id="disconnect-btn" onclick="doDisconnect()">Disconnect</button>
@@ -497,6 +505,8 @@
                 currentRoomId = state.room_id;
                 lastKnownRoomId = state.room_id;
                 document.getElementById('room-id-text').textContent = String(state.room_id ?? '-');
+                document.getElementById('online-count').textContent = formatNumber(state.online_count || 0);
+                document.getElementById('watched-count').textContent = formatNumber(state.watched_count || 0);
                 const input = document.getElementById('room-id-input');
                 // Don't clobber the user's typing
                 if (document.activeElement !== input) {
@@ -685,6 +695,10 @@
                     addGuardMessage(data.data);
                 } else if (data.type === 'superchat_delete') {
                     handleSuperchatDelete(data.data);
+                } else if (data.type === 'watched_change') {
+                    document.getElementById('watched-count').textContent = formatNumber(data.data?.num || 0);
+                } else if (data.type === 'online_count') {
+                    document.getElementById('online-count').textContent = formatNumber(data.data?.online_count || 0);
                 } else if (data.type === 'state_changed') {
                     updateState();
                 }

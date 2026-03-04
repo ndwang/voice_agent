@@ -12,6 +12,26 @@ logger = get_logger(__name__)
 class BilibiliClientHandler(blivedm.BaseHandler):
     """Handler for Bilibili live events."""
 
+    # Add WATCHED_CHANGE to the command dispatch table
+    _CMD_CALLBACK_DICT = blivedm.BaseHandler._CMD_CALLBACK_DICT.copy()
+
+    def __watched_change_callback(self, client: blivedm.BLiveClient, command: dict):
+        data = command.get('data', {})
+        num = data.get('num', 0)
+        if self._on_watched_change_cb:
+            asyncio.create_task(self._on_watched_change_cb(num))
+
+    def __online_rank_count_callback(self, client: blivedm.BLiveClient, command: dict):
+        data = command.get('data', {})
+        online_count = data.get('online_count', 0)
+        if self._on_online_rank_count_cb:
+            asyncio.create_task(self._on_online_rank_count_cb(online_count))
+        else:
+            logger.debug(f"ONLINE_RANK_COUNT: {data}")
+
+    _CMD_CALLBACK_DICT['WATCHED_CHANGE'] = __watched_change_callback  # noqa
+    _CMD_CALLBACK_DICT['ONLINE_RANK_COUNT'] = __online_rank_count_callback  # noqa
+
     def __init__(
         self,
         on_danmaku: Optional[Callable[[web_models.DanmakuMessage], Awaitable[None]]] = None,
@@ -19,6 +39,8 @@ class BilibiliClientHandler(blivedm.BaseHandler):
         on_gift: Optional[Callable[[web_models.GiftMessage], Awaitable[None]]] = None,
         on_guard: Optional[Callable[[web_models.UserToastV2Message], Awaitable[None]]] = None,
         on_super_chat_delete: Optional[Callable[[web_models.SuperChatDeleteMessage], Awaitable[None]]] = None,
+        on_watched_change: Optional[Callable[[int], Awaitable[None]]] = None,
+        on_online_rank_count: Optional[Callable[[int], Awaitable[None]]] = None,
         on_client_stopped: Optional[Callable] = None,
     ):
         self.on_danmaku = on_danmaku
@@ -26,6 +48,8 @@ class BilibiliClientHandler(blivedm.BaseHandler):
         self.on_gift = on_gift
         self.on_guard = on_guard
         self.on_super_chat_delete = on_super_chat_delete
+        self._on_watched_change_cb = on_watched_change
+        self._on_online_rank_count_cb = on_online_rank_count
         self._on_client_stopped_cb = on_client_stopped
 
     def _on_danmaku(self, client: blivedm.BLiveClient, message: web_models.DanmakuMessage):
@@ -80,6 +104,8 @@ class BilibiliClient:
         self._on_gift_cb: Optional[Callable] = None
         self._on_guard_cb: Optional[Callable] = None
         self._on_super_chat_delete_cb: Optional[Callable] = None
+        self._on_watched_change_cb: Optional[Callable] = None
+        self._on_online_rank_count_cb: Optional[Callable] = None
         self._on_client_stopped_cb: Optional[Callable] = None
 
     def set_handlers(
@@ -89,6 +115,8 @@ class BilibiliClient:
         on_gift: Optional[Callable] = None,
         on_guard: Optional[Callable] = None,
         on_super_chat_delete: Optional[Callable] = None,
+        on_watched_change: Optional[Callable] = None,
+        on_online_rank_count: Optional[Callable] = None,
         on_client_stopped: Optional[Callable] = None,
     ):
         """Set callbacks for all Bilibili live events."""
@@ -97,6 +125,8 @@ class BilibiliClient:
         self._on_gift_cb = on_gift
         self._on_guard_cb = on_guard
         self._on_super_chat_delete_cb = on_super_chat_delete
+        self._on_watched_change_cb = on_watched_change
+        self._on_online_rank_count_cb = on_online_rank_count
         self._on_client_stopped_cb = on_client_stopped
 
     async def start(self):
@@ -121,6 +151,8 @@ class BilibiliClient:
             on_gift=self._on_gift_cb,
             on_guard=self._on_guard_cb,
             on_super_chat_delete=self._on_super_chat_delete_cb,
+            on_watched_change=self._on_watched_change_cb,
+            on_online_rank_count=self._on_online_rank_count_cb,
             on_client_stopped=self._on_client_stopped_cb,
         )
         self.client.set_handler(handler)
