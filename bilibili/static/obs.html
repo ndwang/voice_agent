@@ -183,6 +183,10 @@
         let reconnectDelay = 1000;
         const maxReconnectDelay = 30000;
         let pingInterval = null;
+        let watchdogInterval = null;
+        let lastActivityTime = Date.now();
+        const PING_INTERVAL_MS = 15000;  // send ping every 15s
+        const WATCHDOG_MS = 45000;       // reconnect if no pong within 3x ping interval
         const seenIds = new Set();
 
         const chatContainer = document.getElementById('chat-container');
@@ -390,6 +394,7 @@
 
             ws.onopen = () => {
                 reconnectDelay = 1000;
+                lastActivityTime = Date.now();
                 const channels = [];
                 if (showDanmaku) channels.push('danmaku');
                 if (showSuperchat) channels.push('superchat');
@@ -402,10 +407,19 @@
                     if (ws.readyState === WebSocket.OPEN) {
                         ws.send(JSON.stringify({ type: 'ping' }));
                     }
-                }, 30000);
+                }, PING_INTERVAL_MS);
+
+                if (watchdogInterval) clearInterval(watchdogInterval);
+                watchdogInterval = setInterval(() => {
+                    if (Date.now() - lastActivityTime > WATCHDOG_MS) {
+                        console.warn('WebSocket watchdog: no activity, forcing reconnect');
+                        ws.close();
+                    }
+                }, PING_INTERVAL_MS);
             };
 
             ws.onmessage = (event) => {
+                lastActivityTime = Date.now();
                 const data = JSON.parse(event.data);
 
                 switch (data.type) {
@@ -447,6 +461,7 @@
 
             ws.onclose = (ev) => {
                 if (pingInterval) clearInterval(pingInterval);
+                if (watchdogInterval) clearInterval(watchdogInterval);
                 // Helpful for diagnosing OBS browser-source reload/deactivation vs network drops
                 try {
                     console.warn('WebSocket closed', { code: ev?.code, reason: ev?.reason, wasClean: ev?.wasClean });
@@ -459,6 +474,17 @@
                 console.error('WebSocket error:', error);
             };
         }
+
+        // OBS fires visibilitychange when a scene becomes active/inactive.
+        // Force reconnect when the source becomes visible to avoid stale connections.
+        document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'visible') {
+                if (!ws || ws.readyState === WebSocket.CLOSED || ws.readyState === WebSocket.CLOSING) {
+                    reconnectDelay = 1000;
+                    connect();
+                }
+            }
+        });
 
         loadSnapshot().finally(() => connect());
     </script>
