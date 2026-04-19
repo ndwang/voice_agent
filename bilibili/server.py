@@ -5,7 +5,6 @@ Standalone service for managing Bilibili live stream chat integration.
 
 import uvicorn
 import sys
-import asyncio
 from pathlib import Path
 from contextlib import asynccontextmanager
 
@@ -73,10 +72,11 @@ def main():
     app.include_router(router)
 
     # Serve static files for dashboard
+    # Mounted at root so /dashboard.html and /obs.html work directly
     from fastapi.staticfiles import StaticFiles
     static_dir = Path(__file__).parent / "static"
     if static_dir.exists():
-        app.mount("/static", StaticFiles(directory=static_dir), name="static")
+        app.mount("/", StaticFiles(directory=static_dir), name="static")
         logger.info(f"Serving static files from {static_dir}")
 
     logger.info(f"Starting Bilibili service on {HOST}:{PORT}...")
@@ -84,13 +84,17 @@ def main():
     logger.info(f"OBS Overlay: http://{HOST}:{PORT}/obs.html")
     logger.info(f"WebSocket: ws://{HOST}:{PORT}/ws/stream")
 
-    # Start uvicorn with WebSocket ping configuration
+    # Start uvicorn with WebSocket ping configuration.
+    # ws_ping_interval: server sends a protocol-level ping every N seconds (handled
+    #   by the browser's C++ WebSocket layer, so works even when JS is throttled).
+    # ws_ping_timeout: close the connection if no pong received within N seconds,
+    #   cleaning up zombie connections. Client reconnects in ~1s via onclose.
     uvicorn.run(
         app,
         host=HOST,
         port=PORT,
         ws_ping_interval=5.0,
-        ws_ping_timeout=None
+        ws_ping_timeout=20.0
     )
 
 

@@ -58,7 +58,7 @@ async def cmd_list():
 
     print(f"\nFound {len(memories)} total memories:\n")
     for i, mem in enumerate(memories, 1):
-        print(f"\n[{i}] ID: {mem['id'][:8]}...")
+        print(f"\n[{i}] ID: {mem['id']}")
         print(f"    Time: {format_timestamp(mem['timestamp'])}")
         print(f"    Tags: {', '.join(mem['tags']) if mem['tags'] else '(none)'}")
         print(f"    Content: {mem['content'][:100]}{'...' if len(mem['content']) > 100 else ''}")

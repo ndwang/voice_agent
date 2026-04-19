@@ -67,6 +67,7 @@
         .stat-row {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             padding: 10px 0;
             border-bottom: 1px solid #2a2a4a;
         }
@@ -78,6 +79,42 @@
         .stat-value {
             font-weight: bold;
             color: #00d9ff;
+        }
+
+        .room-id-clickable {
+            cursor: text;
+            user-select: none;
+        }
+
+        .room-id-input {
+            width: 100%;
+            background: transparent;
+            color: #eee;
+            border: none;
+            border-bottom: 1px solid rgba(0, 217, 255, 0.7);
+            border-radius: 0;
+            padding: 0;
+            outline: none;
+            font-weight: 700;
+            font-size: 1.05em;
+            letter-spacing: 0.2px;
+            text-align: right;
+        }
+
+        .room-id-input:focus {
+            border-bottom-color: #00d9ff;
+            box-shadow: none;
+        }
+
+        /* Hide number input spinners (OBS/Chromium + Firefox) */
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type="number"] {
+            -moz-appearance: textfield;
+            appearance: textfield;
         }
 
         button {
@@ -111,6 +148,7 @@
             background: #4caf50;
         }
 
+        /* Chat viewer */
         #chat-viewer {
             background: #16213e;
             border-radius: 12px;
@@ -119,45 +157,182 @@
             overflow-y: auto;
         }
 
+        #chat-viewer.scroll-paused {
+            border: 2px solid #ff9800;
+        }
+
+        .scroll-notice {
+            display: none;
+            text-align: center;
+            padding: 8px;
+            background: #ff9800;
+            color: #1a1a2e;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .scroll-notice.visible {
+            display: block;
+        }
+
+        /* Chat messages */
         .chat-message {
             padding: 10px;
             margin-bottom: 10px;
             background: #1a1a2e;
             border-radius: 8px;
             border-left: 3px solid #00d9ff;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
         }
 
         .chat-message.superchat {
-            background: linear-gradient(135deg, #ff9800, #ff5722);
             border-left-color: #ffeb3b;
+        }
+
+        .chat-message.gift {
+            border-left-color: #e040fb;
+            background: #2a1a3e;
+        }
+
+        .chat-message.guard {
+            border-left-color: #ff5722;
+            background: linear-gradient(135deg, #2e1a00, #1a1a2e);
+            border-width: 4px;
+        }
+
+        .chat-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            object-fit: cover;
+            background: #2a2a4a;
+        }
+
+        .chat-body {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .chat-header {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-bottom: 4px;
         }
 
         .chat-user {
             font-weight: bold;
-            margin-right: 8px;
             color: #00d9ff;
+        }
+
+        .chat-message.guard .chat-user {
+            color: #ff5722;
+        }
+
+        /* Badges */
+        .badge {
+            display: inline-block;
+            padding: 1px 6px;
+            border-radius: 3px;
+            font-size: 0.75em;
+            font-weight: bold;
+            vertical-align: middle;
+        }
+
+        .badge-admin {
+            background: #f44336;
+            color: #fff;
+        }
+
+        .badge-guard-1 {
+            background: linear-gradient(135deg, #ff6b35, #e53935);
+            color: #fff;
+        }
+
+        .badge-guard-2 {
+            background: linear-gradient(135deg, #ab47bc, #7b1fa2);
+            color: #fff;
+        }
+
+        .badge-guard-3 {
+            background: linear-gradient(135deg, #42a5f5, #1565c0);
+            color: #fff;
+        }
+
+        .badge-medal {
+            background: #2a2a4a;
+            color: #aaa;
+            border: 1px solid #444;
+        }
+
+        /* Superchat styling */
+        .sc-container {
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .sc-header {
+            padding: 8px 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .sc-body {
+            padding: 8px 12px;
+        }
+
+        .sc-amount {
+            color: #ffeb3b;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .sc-timer {
+            font-size: 0.8em;
+            opacity: 0.8;
+            margin-left: auto;
+        }
+
+        /* Gift styling */
+        .gift-icon {
+            width: 24px;
+            height: 24px;
+            vertical-align: middle;
+        }
+
+        .gift-info {
+            color: #e040fb;
         }
 
         .chat-content {
             color: #eee;
-        }
-
-        .chat-amount {
-            color: #ffeb3b;
-            font-weight: bold;
-            margin-left: 8px;
+            word-break: break-word;
         }
 
         .chat-time {
             font-size: 0.8em;
             color: #888;
-            margin-left: 10px;
+            margin-left: auto;
+            flex-shrink: 0;
+        }
+
+        .emoticon-img {
+            max-width: 48px;
+            max-height: 48px;
+            vertical-align: middle;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🔴 Bilibili Live Chat Service</h1>
+        <h1>Bilibili Live Chat Service</h1>
 
         <div class="grid">
             <!-- Status Card -->
@@ -172,11 +347,22 @@
                 </div>
                 <div class="stat-row">
                     <span>Room ID:</span>
-                    <span class="stat-value" id="room-id">-</span>
+                    <div style="flex:1; min-width:0; display:flex; justify-content:flex-end;">
+                        <span id="room-id-text" class="stat-value room-id-clickable" onclick="startEditRoomId()">-</span>
+                        <input id="room-id-input" class="room-id-input" type="number" min="1" inputmode="numeric" placeholder="" style="display:none; max-width: 220px;">
+                    </div>
+                </div>
+                <div class="stat-row">
+                    <span>Online:</span>
+                    <span class="stat-value" id="online-count">0</span>
+                </div>
+                <div class="stat-row">
+                    <span>Watched:</span>
+                    <span class="stat-value" id="watched-count">0</span>
                 </div>
                 <div style="margin-top: 15px;">
-                    <button id="connect-btn" onclick="connect()">Connect</button>
-                    <button id="disconnect-btn" onclick="disconnect()">Disconnect</button>
+                    <button id="connect-btn" onclick="doConnect()">Connect</button>
+                    <button id="disconnect-btn" onclick="doDisconnect()">Disconnect</button>
                 </div>
             </div>
 
@@ -184,16 +370,20 @@
             <div class="card">
                 <h2>Statistics</h2>
                 <div class="stat-row">
-                    <span>Danmaku Count:</span>
+                    <span>Danmaku:</span>
                     <span class="stat-value" id="danmaku-count">0</span>
                 </div>
                 <div class="stat-row">
-                    <span>Superchat Count:</span>
+                    <span>Superchat:</span>
                     <span class="stat-value" id="superchat-count">0</span>
                 </div>
                 <div class="stat-row">
-                    <span>Total Received:</span>
-                    <span class="stat-value" id="total-received">0</span>
+                    <span>Gift/Guard:</span>
+                    <span class="stat-value" id="gift-count">0</span>
+                </div>
+                <div class="stat-row">
+                    <span>Total Gift Coins:</span>
+                    <span class="stat-value" id="total-gift-coins">0</span>
                 </div>
                 <div class="stat-row">
                     <span>Uptime:</span>
@@ -201,23 +391,15 @@
                 </div>
             </div>
 
-            <!-- Controls Card -->
-            <div class="card">
-                <h2>Controls</h2>
-                <div class="stat-row">
-                    <span>Danmaku Processing:</span>
-                    <button class="toggle-btn" id="danmaku-toggle" onclick="toggleDanmaku()">OFF</button>
-                </div>
-                <div class="stat-row">
-                    <span>Superchat Processing:</span>
-                    <button class="toggle-btn" id="superchat-toggle" onclick="toggleSuperchat()">OFF</button>
-                </div>
-            </div>
+            <!-- Controls Card removed: service always processes all messages -->
         </div>
 
         <!-- Chat Viewer -->
         <div class="card">
             <h2>Live Chat</h2>
+            <div class="scroll-notice" id="scroll-notice" onclick="resumeScroll()">
+                Auto-scroll paused - click to resume
+            </div>
             <div id="chat-viewer"></div>
         </div>
     </div>
@@ -226,17 +408,93 @@
         let ws = null;
         let reconnectDelay = 1000;
         const maxReconnectDelay = 30000;
+        let autoScroll = true;
+        const seenIds = new Set();
+        let currentRoomId = null;
+        let switchingRoom = false;
+        let lastKnownRoomId = null;
 
-        // Initialize
+        const GUARD_NAMES = {1: '总督', 2: '提督', 3: '舰长'};
+        // ====================================================================
+        // Init
+        // ====================================================================
         async function init() {
             await updateState();
             await updateStats();
+            await loadSnapshot();
+            setupRoomIdEditor();
             connectWebSocket();
-
-            // Poll stats every 5 seconds
             setInterval(updateStats, 5000);
+            setupScrollPause();
         }
 
+        async function loadSnapshot() {
+            try {
+                const res = await fetch('/chat');
+                const snapshot = await res.json();
+
+                const items = [];
+                for (const m of (snapshot.danmaku || [])) items.push({ type: 'danmaku', data: m });
+                for (const m of (snapshot.superchat || [])) items.push({ type: 'superchat', data: m });
+                for (const m of (snapshot.gift || [])) items.push({ type: 'gift', data: m });
+
+                // Render in chronological order
+                items.sort((a, b) => (a.data.timestamp || 0) - (b.data.timestamp || 0));
+
+                for (const it of items) {
+                    const msg = it.data || {};
+                    if (msg.id && seenIds.has(msg.id)) continue;
+                    if (msg.id) seenIds.add(msg.id);
+
+                    if (it.type === 'danmaku') {
+                        addDanmakuMessage(msg);
+                    } else if (it.type === 'superchat') {
+                        addSuperChatMessage(msg);
+                    } else if (it.type === 'gift') {
+                        const paidType = msg.paid_type;
+                        if (paidType === 'guard') addGuardMessage(msg);
+                        else addGiftMessage(msg);
+                    }
+                }
+            } catch (e) {
+                console.warn('Failed to load snapshot:', e);
+            }
+        }
+
+        // ====================================================================
+        // Scroll pause on hover
+        // ====================================================================
+        function setupScrollPause() {
+            const viewer = document.getElementById('chat-viewer');
+            viewer.addEventListener('mouseenter', () => {
+                // Only pause if user has scrolled up
+            });
+            viewer.addEventListener('scroll', () => {
+                const el = viewer;
+                const atBottom = el.scrollHeight - el.scrollTop - el.clientHeight < 50;
+                if (!atBottom) {
+                    autoScroll = false;
+                    document.getElementById('scroll-notice').classList.add('visible');
+                    el.classList.add('scroll-paused');
+                } else {
+                    autoScroll = true;
+                    document.getElementById('scroll-notice').classList.remove('visible');
+                    el.classList.remove('scroll-paused');
+                }
+            });
+        }
+
+        function resumeScroll() {
+            autoScroll = true;
+            const viewer = document.getElementById('chat-viewer');
+            viewer.scrollTop = viewer.scrollHeight;
+            document.getElementById('scroll-notice').classList.remove('visible');
+            viewer.classList.remove('scroll-paused');
+        }
+
+        // ====================================================================
+        // State & Stats
+        // ====================================================================
         async function updateState() {
             try {
                 const res = await fetch('/state');
@@ -244,15 +502,16 @@
 
                 document.getElementById('connection-status').textContent = state.connected ? 'Connected' : 'Disconnected';
                 document.getElementById('status-indicator').className = 'status-indicator ' + (state.connected ? 'connected' : 'disconnected');
-                document.getElementById('room-id').textContent = state.room_id;
-
-                const danmakuBtn = document.getElementById('danmaku-toggle');
-                danmakuBtn.textContent = state.danmaku_enabled ? 'ON' : 'OFF';
-                danmakuBtn.className = 'toggle-btn' + (state.danmaku_enabled ? ' active' : '');
-
-                const superchatBtn = document.getElementById('superchat-toggle');
-                superchatBtn.textContent = state.superchat_enabled ? 'ON' : 'OFF';
-                superchatBtn.className = 'toggle-btn' + (state.superchat_enabled ? ' active' : '');
+                currentRoomId = state.room_id;
+                lastKnownRoomId = state.room_id;
+                document.getElementById('room-id-text').textContent = String(state.room_id ?? '-');
+                document.getElementById('online-count').textContent = formatNumber(state.online_count || 0);
+                document.getElementById('watched-count').textContent = formatNumber(state.watched_count || 0);
+                const input = document.getElementById('room-id-input');
+                // Don't clobber the user's typing
+                if (document.activeElement !== input) {
+                    input.value = String(state.room_id ?? '');
+                }
             } catch (e) {
                 console.error('Failed to update state:', e);
             }
@@ -263,13 +522,19 @@
                 const res = await fetch('/stats');
                 const stats = await res.json();
 
-                document.getElementById('danmaku-count').textContent = stats.danmaku_count;
-                document.getElementById('superchat-count').textContent = stats.superchat_count;
-                document.getElementById('total-received').textContent = stats.total_danmaku_received + stats.total_superchat_received;
+                document.getElementById('danmaku-count').textContent = stats.total_danmaku_received;
+                document.getElementById('superchat-count').textContent = stats.total_superchat_received;
+                document.getElementById('gift-count').textContent = stats.total_gift_received;
+                document.getElementById('total-gift-coins').textContent = formatNumber(stats.total_gift_coins);
                 document.getElementById('uptime').textContent = formatUptime(stats.uptime_seconds);
             } catch (e) {
                 console.error('Failed to update stats:', e);
             }
+        }
+
+        function formatNumber(n) {
+            if (n >= 10000) return (n / 10000).toFixed(1) + '万';
+            return n.toLocaleString();
         }
 
         function formatUptime(seconds) {
@@ -279,7 +544,10 @@
             return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
         }
 
-        async function connect() {
+        // ====================================================================
+        // Controls
+        // ====================================================================
+        async function doConnect() {
             try {
                 await fetch('/connect', { method: 'POST' });
                 await updateState();
@@ -288,7 +556,7 @@
             }
         }
 
-        async function disconnect() {
+        async function doDisconnect() {
             try {
                 await fetch('/disconnect', { method: 'POST' });
                 await updateState();
@@ -297,32 +565,104 @@
             }
         }
 
-        async function toggleDanmaku() {
+        function setupRoomIdEditor() {
+            const input = document.getElementById('room-id-input');
+
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    doSwitchRoom();
+                } else if (e.key === 'Escape') {
+                    e.preventDefault();
+                    cancelEditRoomId();
+                }
+            });
+
+            // Do NOT auto-switch on blur; only switch on Enter (requested).
+            input.addEventListener('blur', () => {
+                cancelEditRoomId();
+            });
+        }
+
+        function startEditRoomId() {
+            if (switchingRoom) return;
+            const roomText = document.getElementById('room-id-text');
+            const input = document.getElementById('room-id-input');
+            roomText.style.display = 'none';
+            input.style.display = 'block';
+            input.value = String(currentRoomId ?? lastKnownRoomId ?? '');
+            input.focus();
+            input.select();
+        }
+
+        function cancelEditRoomId() {
+            const roomText = document.getElementById('room-id-text');
+            const input = document.getElementById('room-id-input');
+            input.style.display = 'none';
+            roomText.style.display = 'inline';
+            // Restore the known room id in the input for next edit
+            input.value = String(currentRoomId ?? lastKnownRoomId ?? '');
+        }
+
+        async function doSwitchRoom() {
+            if (switchingRoom) return;
             try {
-                const btn = document.getElementById('danmaku-toggle');
-                const isEnabled = btn.classList.contains('active');
-                const action = isEnabled ? 'disable' : 'enable';
-                await fetch(`/state/danmaku/${action}`, { method: 'POST' });
+                const input = document.getElementById('room-id-input');
+                const roomId = parseInt(input.value, 10);
+                if (!roomId || roomId <= 0) {
+                    cancelEditRoomId();
+                    return;
+                }
+
+                // Always clear history and reconnect (requested behavior)
+                const clearBuffers = true;
+                const reconnect = true;
+
+                switchingRoom = true;
+                input.disabled = true;
+
+                const res = await fetch('/room/switch', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ room_id: roomId, reconnect, clear_buffers: clearBuffers })
+                });
+
+                if (!res.ok) {
+                    const text = await res.text();
+                    throw new Error(text || `HTTP ${res.status}`);
+                }
+
+                // Update state + stats + chat view after switch
                 await updateState();
+                await updateStats();
+
+                // Always clear UI and dedupe cache (requested behavior)
+                document.getElementById('chat-viewer').innerHTML = '';
+                seenIds.clear();
+                await loadSnapshot();
+
+                // Exit edit mode on success
+                const roomText = document.getElementById('room-id-text');
+                roomText.style.display = 'inline';
+                input.style.display = 'none';
             } catch (e) {
-                console.error('Failed to toggle danmaku:', e);
+                console.error('Failed to switch room:', e);
+                alert('Failed to switch room. Check server logs for details.');
+            } finally {
+                switchingRoom = false;
+                const input = document.getElementById('room-id-input');
+                if (input) input.disabled = false;
             }
         }
 
-        async function toggleSuperchat() {
-            try {
-                const btn = document.getElementById('superchat-toggle');
-                const isEnabled = btn.classList.contains('active');
-                const action = isEnabled ? 'disable' : 'enable';
-                await fetch(`/state/superchat/${action}`, { method: 'POST' });
-                await updateState();
-            } catch (e) {
-                console.error('Failed to toggle superchat:', e);
-            }
-        }
+        // Processing toggles removed: service always processes all messages.
 
+        // ====================================================================
+        // WebSocket
+        // ====================================================================
         function connectWebSocket() {
-            const wsUrl = `ws://${window.location.host}/ws/stream`;
+            const wsProto = (window.location.protocol === 'https:') ? 'wss:' : 'ws:';
+            const wsUrl = `${wsProto}//${window.location.host}/ws/stream`;
             ws = new WebSocket(wsUrl);
 
             ws.onopen = () => {
@@ -330,7 +670,7 @@
                 reconnectDelay = 1000;
                 ws.send(JSON.stringify({
                     type: 'subscribe',
-                    channels: ['danmaku', 'superchat']
+                    channels: ['danmaku', 'superchat', 'gift']
                 }));
             };
 
@@ -338,9 +678,27 @@
                 const data = JSON.parse(event.data);
 
                 if (data.type === 'danmaku') {
-                    addChatMessage(data.data, false);
+                    if (data.data?.id && seenIds.has(data.data.id)) return;
+                    if (data.data?.id) seenIds.add(data.data.id);
+                    addDanmakuMessage(data.data);
                 } else if (data.type === 'superchat') {
-                    addChatMessage(data.data, true);
+                    if (data.data?.id && seenIds.has(data.data.id)) return;
+                    if (data.data?.id) seenIds.add(data.data.id);
+                    addSuperChatMessage(data.data);
+                } else if (data.type === 'gift') {
+                    if (data.data?.id && seenIds.has(data.data.id)) return;
+                    if (data.data?.id) seenIds.add(data.data.id);
+                    addGiftMessage(data.data);
+                } else if (data.type === 'guard') {
+                    if (data.data?.id && seenIds.has(data.data.id)) return;
+                    if (data.data?.id) seenIds.add(data.data.id);
+                    addGuardMessage(data.data);
+                } else if (data.type === 'superchat_delete') {
+                    handleSuperchatDelete(data.data);
+                } else if (data.type === 'watched_change') {
+                    document.getElementById('watched-count').textContent = formatNumber(data.data?.num || 0);
+                } else if (data.type === 'online_count') {
+                    document.getElementById('online-count').textContent = formatNumber(data.data?.online_count || 0);
                 } else if (data.type === 'state_changed') {
                     updateState();
                 }
@@ -353,36 +711,191 @@
             };
         }
 
-        function addChatMessage(message, isSuperchat) {
-            const chatViewer = document.getElementById('chat-viewer');
-            const div = document.createElement('div');
-            div.className = 'chat-message' + (isSuperchat ? ' superchat' : '');
-
-            const time = new Date(message.timestamp * 1000).toLocaleTimeString();
-
-            div.innerHTML = `
-                <span class="chat-user">${escapeHtml(message.user)}:</span>
-                <span class="chat-content">${escapeHtml(message.content)}</span>
-                ${isSuperchat ? `<span class="chat-amount">¥${message.amount}</span>` : ''}
-                <span class="chat-time">${time}</span>
-            `;
-
-            chatViewer.appendChild(div);
-            chatViewer.scrollTop = chatViewer.scrollHeight;
-
-            // Limit to 100 messages
-            while (chatViewer.children.length > 100) {
-                chatViewer.removeChild(chatViewer.firstChild);
-            }
-        }
-
+        // ====================================================================
+        // Message rendering helpers
+        // ====================================================================
         function escapeHtml(text) {
             const div = document.createElement('div');
             div.textContent = text;
             return div.innerHTML;
         }
 
-        // Initialize on load
+        function renderSegments(segments) {
+            if (!Array.isArray(segments) || segments.length === 0) return '';
+            let html = '';
+            for (const seg of segments) {
+                if (!seg || typeof seg !== 'object') continue;
+                const t = seg.type;
+                if (t === 'text') {
+                    html += escapeHtml(seg.text || '');
+                } else if (t === 'emoticon' && seg.url) {
+                    const title = seg.text ? ` title="${escapeHtml(seg.text)}"` : '';
+                    html += `<img class="emoticon-img" src="${escapeHtml(seg.url)}" loading="lazy" referrerpolicy="no-referrer"${title}>`;
+                } else {
+                    // Fallback for unknown segments
+                    if (seg.text) html += escapeHtml(seg.text);
+                }
+            }
+            return html;
+        }
+
+        function makeBadges(msg) {
+            let html = '';
+            if (msg.admin) {
+                html += '<span class="badge badge-admin">房管</span>';
+            }
+            const gl = msg.guard_level || msg.privilege_type || 0;
+            if (gl === 1) html += '<span class="badge badge-guard-1">总督</span>';
+            else if (gl === 2) html += '<span class="badge badge-guard-2">提督</span>';
+            else if (gl === 3) html += '<span class="badge badge-guard-3">舰长</span>';
+
+            if (msg.medal && msg.medal.name) {
+                html += `<span class="badge badge-medal">${escapeHtml(msg.medal.name)} ${msg.medal.level}</span>`;
+            }
+            return html;
+        }
+
+        function avatarHtml(face) {
+            if (face) {
+                return `<img class="chat-avatar" src="${escapeHtml(face)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'">`;
+            }
+            return '';
+        }
+
+        function timeStr(ts) {
+            return new Date(ts * 1000).toLocaleTimeString();
+        }
+
+        function appendMessage(div) {
+            const chatViewer = document.getElementById('chat-viewer');
+            chatViewer.appendChild(div);
+            if (autoScroll) {
+                chatViewer.scrollTop = chatViewer.scrollHeight;
+            }
+            // Limit to 200 messages
+            while (chatViewer.children.length > 200) {
+                chatViewer.removeChild(chatViewer.firstChild);
+            }
+        }
+
+        // ====================================================================
+        // Message type renderers
+        // ====================================================================
+        function addDanmakuMessage(msg) {
+            const div = document.createElement('div');
+            div.className = 'chat-message';
+
+            let contentHtml;
+            if (msg.segments && msg.segments.length) {
+                contentHtml = renderSegments(msg.segments);
+            } else if (msg.dm_type === 1 && msg.emoticon_url) {
+                contentHtml = `<img class="emoticon-img" src="${escapeHtml(msg.emoticon_url)}" loading="lazy" referrerpolicy="no-referrer">`;
+            } else {
+                contentHtml = escapeHtml(msg.content);
+            }
+
+            div.innerHTML = `
+                ${avatarHtml(msg.face)}
+                <div class="chat-body">
+                    <div class="chat-header">
+                        ${makeBadges(msg)}
+                        <span class="chat-user">${escapeHtml(msg.user)}</span>
+                        <span class="chat-time">${timeStr(msg.timestamp)}</span>
+                    </div>
+                    <div class="chat-content">${contentHtml}</div>
+                </div>
+            `;
+            appendMessage(div);
+        }
+
+        function addSuperChatMessage(msg) {
+            const div = document.createElement('div');
+            div.className = 'chat-message superchat';
+            if (msg.bili_id) div.dataset.scId = msg.bili_id;
+
+            const bgColor = msg.background_color || '#e69138';
+            const bgBottom = msg.background_bottom_color || '#d5831b';
+
+            div.innerHTML = `
+                ${avatarHtml(msg.face)}
+                <div class="chat-body">
+                    <div class="sc-container">
+                        <div class="sc-header" style="background:${escapeHtml(bgColor)}">
+                            ${makeBadges(msg)}
+                            <span class="chat-user" style="color:#fff">${escapeHtml(msg.user)}</span>
+                            <span class="sc-amount">&#165;${msg.amount}</span>
+                            <span class="chat-time">${timeStr(msg.timestamp)}</span>
+                        </div>
+                        <div class="sc-body" style="background:${escapeHtml(bgBottom)}">
+                            <div class="chat-content" style="color:#fff">${escapeHtml(msg.content)}</div>
+                            ${msg.message_trans ? `<div style="font-size:0.85em;opacity:0.8;margin-top:4px;color:#fff">${escapeHtml(msg.message_trans)}</div>` : ''}
+                        </div>
+                    </div>
+                </div>
+            `;
+            appendMessage(div);
+        }
+
+        function addGiftMessage(msg) {
+            const div = document.createElement('div');
+            div.className = 'chat-message gift';
+
+            const iconHtml = msg.gift_icon
+                ? `<img class="gift-icon" src="${escapeHtml(msg.gift_icon)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'">`
+                : '';
+
+            const coinLabel = msg.coin_type === 'gold' ? '金瓜子' : '银瓜子';
+
+            div.innerHTML = `
+                ${avatarHtml(msg.face)}
+                <div class="chat-body">
+                    <div class="chat-header">
+                        ${makeBadges(msg)}
+                        <span class="chat-user" style="color:#e040fb">${escapeHtml(msg.user)}</span>
+                        <span class="chat-time">${timeStr(msg.timestamp)}</span>
+                    </div>
+                    <div class="gift-info">
+                        ${escapeHtml(msg.action || '赠送')} ${iconHtml} ${escapeHtml(msg.gift_name)} x${msg.num}
+                        <span style="opacity:0.7;font-size:0.85em">(${msg.total_coin} ${coinLabel})</span>
+                    </div>
+                </div>
+            `;
+            appendMessage(div);
+        }
+
+        function addGuardMessage(msg) {
+            const div = document.createElement('div');
+            div.className = 'chat-message guard';
+
+            const guardName = GUARD_NAMES[msg.guard_level] || `guard_${msg.guard_level}`;
+
+            div.innerHTML = `
+                <div class="chat-body">
+                    <div class="chat-header">
+                        <span class="badge badge-guard-${msg.guard_level}">${guardName}</span>
+                        <span class="chat-user">${escapeHtml(msg.user)}</span>
+                        <span class="chat-time">${timeStr(msg.timestamp)}</span>
+                    </div>
+                    <div class="chat-content" style="color:#ff9800">
+                        ${msg.toast_msg ? escapeHtml(msg.toast_msg) : `${escapeHtml(msg.user)} 开通了 ${guardName}`}
+                    </div>
+                </div>
+            `;
+            appendMessage(div);
+        }
+
+        function handleSuperchatDelete(data) {
+            const ids = data.ids || [];
+            ids.forEach(id => {
+                const el = document.querySelector(`[data-sc-id="${id}"]`);
+                if (el) {
+                    el.style.opacity = '0.3';
+                    el.style.textDecoration = 'line-through';
+                }
+            });
+        }
+
+        // Start
         init();
     </script>
 </body>

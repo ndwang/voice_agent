@@ -7,8 +7,6 @@ import {
   handleCancel,
   handleClearHistory,
   handleToggleListening,
-  handleToggleBilibiliDanmaku,
-  handleToggleBilibiliSuperChat
 } from './components/actions.js';
 import { connect } from './components/websocket.js';
 import { setupSystemPromptModal } from './modals/system-prompt.js';
@@ -22,8 +20,6 @@ function setupEventListeners() {
   elements.cancelBtn.onclick = handleCancel;
   elements.clearHistoryBtn.onclick = handleClearHistory;
   elements.toggleListeningBtn.onclick = handleToggleListening;
-  elements.toggleBilibiliDanmakuBtn.onclick = handleToggleBilibiliDanmaku;
-  elements.toggleBilibiliSuperChatBtn.onclick = handleToggleBilibiliSuperChat;
 
   // Modals
   setupSystemPromptModal();

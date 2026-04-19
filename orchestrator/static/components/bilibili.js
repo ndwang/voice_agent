@@ -112,15 +112,20 @@ export async function fetchBilibiliChat() {
     // Clear existing messages
     messagesContainer.innerHTML = '';
 
-    if (data.danmaku.length === 0 && data.superchats.length === 0) {
+    const danmaku = data.danmaku || [];
+    const superchat = data.superchat || [];
+    const gift = data.gift || [];
+
+    if (danmaku.length === 0 && superchat.length === 0 && gift.length === 0) {
       messagesContainer.innerHTML = '<div class="empty-chat">No messages yet</div>';
       return;
     }
 
     // Render all messages in chronological order
     const allMessages = [
-      ...data.danmaku.map(m => ({ ...m, type: 'danmaku' })),
-      ...data.superchats.map(m => ({ ...m, type: 'superchat' }))
+      ...danmaku.map(m => ({ ...m, type: 'danmaku' })),
+      ...superchat.map(m => ({ ...m, type: 'superchat' })),
+      ...gift.map(m => ({ ...m, type: 'gift' })),
     ].sort((a, b) => a.timestamp - b.timestamp);
 
     allMessages.forEach(msg => {

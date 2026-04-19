@@ -6,12 +6,14 @@ service:
   log_level: INFO
 
 bilibili:
-  room_id: 1852504554
+  room_id: 1856101651
   sessdata: ""
-  danmaku_ttl_seconds: 60
+  danmaku_max_buffer: 60
+  superchat_max_buffer: 100
+  gift_max_buffer: 100
   enabled: true  # Auto-start connection on service launch
-  danmaku_enabled_default: true
-  superchat_enabled_default: true
+  reconnect_delay_seconds: 1.0
+  reconnect_max_delay_seconds: 30.0
 
 # Dashboard settings
 dashboard:

@@ -22,7 +22,7 @@ class BilibiliLLMClient:
 
     This client:
     - Connects to the Bilibili service WebSocket
-    - Subscribes to danmaku and superchat channels
+    - Subscribes to danmaku and paid channels
     - Buffers messages for summarization
     - Can be extended to call an LLM API for summarization
     """
@@ -34,7 +34,7 @@ class BilibiliLLMClient:
 
         # Message buffer for summarization
         self.message_buffer = deque(maxlen=100)  # Last 100 messages
-        self.superchat_buffer = deque(maxlen=20)  # Last 20 superchats
+        self.paid_buffer = deque(maxlen=20)  # Last 20 paid messages
 
         # Summarization settings
         self.summarize_interval = 60  # Summarize every 60 seconds
@@ -82,9 +82,9 @@ class BilibiliLLMClient:
                         # Subscribe to both channels
                         await ws.send_json({
                             "type": "subscribe",
-                            "channels": ["danmaku", "superchat"]
+                            "channels": ["danmaku", "paid"]
                         })
-                        print("📡 Subscribed to danmaku and superchat channels")
+                        print("📡 Subscribed to danmaku and paid channels")
 
                         # Listen for messages
                         async for msg in ws:
@@ -118,14 +118,20 @@ class BilibiliLLMClient:
             # Add to buffer for summarization
             self.message_buffer.append(message)
 
-        elif msg_type == "superchat":
+        elif msg_type == "paid":
             message = data["data"]
             timestamp = datetime.fromtimestamp(message["timestamp"]).strftime("%H:%M:%S")
-            print(f"[{timestamp}] 💰 {message['user']} (¥{message['amount']}): {message['content']}")
+            paid_type = message.get("paid_type", "unknown")
+            if paid_type == "superchat":
+                print(f"[{timestamp}] 💰 {message['user']} (¥{message['amount']}): {message['content']}")
+            elif paid_type == "gift":
+                print(f"[{timestamp}] 🎁 {message['user']} {message.get('action', '赠送')} {message['gift_name']}x{message['num']}")
+            elif paid_type == "guard":
+                print(f"[{timestamp}] 🛡️ {message['user']} {message.get('toast_msg', '')}")
 
-            # Add to both buffers (superchats are higher priority)
+            # Add to both buffers (paid messages are higher priority)
             self.message_buffer.append(message)
-            self.superchat_buffer.append(message)
+            self.paid_buffer.append(message)
 
         elif msg_type == "state_changed":
             state = data["data"]
@@ -165,7 +171,7 @@ class BilibiliLLMClient:
         print("\n" + "="*60)
         print("📝 Generating summary...")
         print(f"Messages in buffer: {len(self.message_buffer)}")
-        print(f"Superchats: {len(self.superchat_buffer)}")
+        print(f"Paid messages: {len(self.paid_buffer)}")
 
         # Example: Extract last N messages
         recent_messages = list(self.message_buffer)[-20:]
