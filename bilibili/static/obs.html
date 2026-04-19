@@ -182,11 +182,10 @@
         let ws = null;
         let reconnectDelay = 1000;
         const maxReconnectDelay = 30000;
-        let pingInterval = null;
         let watchdogInterval = null;
         let lastActivityTime = Date.now();
-        const PING_INTERVAL_MS = 15000;  // send ping every 15s
-        const WATCHDOG_MS = 45000;       // reconnect if no pong within 3x ping interval
+        const WATCHDOG_CHECK_MS = 2000;
+        const WATCHDOG_MS = 15000;
         const seenIds = new Set();
 
         const chatContainer = document.getElementById('chat-container');
@@ -388,7 +387,11 @@
         // ====================================================================
         // WebSocket
         // ====================================================================
-        function connect() {
+        async function connect() {
+            // Catch up on anything missed while disconnected. seenIds dedupes
+            // against already-rendered messages, so this is safe on reconnect.
+            await loadSnapshot();
+
             const wsProto = (window.location.protocol === 'https:') ? 'wss:' : 'ws:';
             ws = new WebSocket(`${wsProto}//${window.location.host}/ws/stream`);
 
@@ -402,20 +405,15 @@
 
                 ws.send(JSON.stringify({ type: 'subscribe', channels }));
 
-                if (pingInterval) clearInterval(pingInterval);
-                pingInterval = setInterval(() => {
-                    if (ws.readyState === WebSocket.OPEN) {
-                        ws.send(JSON.stringify({ type: 'ping' }));
-                    }
-                }, PING_INTERVAL_MS);
-
+                // Server broadcasts a heartbeat every ~5s; if nothing arrives
+                // for WATCHDOG_MS, force a reconnect.
                 if (watchdogInterval) clearInterval(watchdogInterval);
                 watchdogInterval = setInterval(() => {
                     if (Date.now() - lastActivityTime > WATCHDOG_MS) {
                         console.warn('WebSocket watchdog: no activity, forcing reconnect');
                         ws.close();
                     }
-                }, PING_INTERVAL_MS);
+                }, WATCHDOG_CHECK_MS);
             };
 
             ws.onmessage = (event) => {
@@ -460,7 +458,6 @@
             };
 
             ws.onclose = (ev) => {
-                if (pingInterval) clearInterval(pingInterval);
                 if (watchdogInterval) clearInterval(watchdogInterval);
                 // Helpful for diagnosing OBS browser-source reload/deactivation vs network drops
                 try {
@@ -486,7 +483,7 @@
             }
         });
 
-        loadSnapshot().finally(() => connect());
+        connect();
     </script>
 </body>
 </html>

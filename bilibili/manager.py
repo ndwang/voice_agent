@@ -157,6 +157,9 @@ class BilibiliManager:
         self._reconnect_task: Optional[asyncio.Task] = None
         self._intentional_disconnect: bool = False
 
+        # Server-initiated heartbeat (avoids concurrent writes and timer throttling)
+        self._heartbeat_task: Optional[asyncio.Task] = None
+
     async def start(self):
         """Initialize manager and start cleanup task"""
         if self.running:
@@ -164,6 +167,8 @@ class BilibiliManager:
 
         self.running = True
         logger.info("BilibiliManager started")
+
+        self._heartbeat_task = asyncio.create_task(self._heartbeat_loop())
 
         # Auto-connect if enabled
         if self.config.bilibili.enabled:
@@ -175,6 +180,14 @@ class BilibiliManager:
             return
 
         self.running = False
+
+        if self._heartbeat_task:
+            self._heartbeat_task.cancel()
+            try:
+                await self._heartbeat_task
+            except asyncio.CancelledError:
+                pass
+            self._heartbeat_task = None
 
         # Cancel reconnect task
         if self._reconnect_task:
@@ -594,6 +607,20 @@ class BilibiliManager:
                 "connected": self.connected,
             }
         })
+
+    async def _heartbeat_loop(self):
+        # Server-initiated so clients have a single writer (no races with pong)
+        # and liveness doesn't depend on browser-throttled client timers.
+        while self.running:
+            try:
+                await asyncio.sleep(5.0)
+            except asyncio.CancelledError:
+                raise
+            try:
+                if self.ws_clients:
+                    await self._broadcast_message({"type": "heartbeat"})
+            except Exception as e:
+                logger.warning(f"Heartbeat broadcast failed: {e}")
 
     # =========================================================================
     # Public API methods for REST endpoints

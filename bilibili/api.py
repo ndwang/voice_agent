@@ -186,7 +186,6 @@ async def websocket_stream(websocket: WebSocket):
     Client → Server:
       - {"type": "subscribe", "channels": ["danmaku", "superchat", "gift"]}
       - {"type": "unsubscribe", "channels": ["danmaku"]}
-      - {"type": "ping"}
 
     Server → Client:
       - {"type": "danmaku", "data": {...}}                      (channel: danmaku)
@@ -195,7 +194,7 @@ async def websocket_stream(websocket: WebSocket):
       - {"type": "gift", "data": {"paid_type": "gift", ...}}    (channel: gift)
       - {"type": "guard", "data": {"paid_type": "guard", ...}}  (channel: gift)
       - {"type": "state_changed", "data": {...}}                (all clients)
-      - {"type": "pong"}
+      - {"type": "heartbeat"}                                   (all clients, ~5s)
       - {"type": "error", "message": "..."}
     """
     manager = get_manager()
@@ -225,9 +224,6 @@ async def websocket_stream(websocket: WebSocket):
                     channels = message.get("channels", [])
                     manager.unsubscribe_ws_client(websocket, channels)
                     logger.debug(f"Client unsubscribed from: {channels}")
-
-                elif msg_type == "ping":
-                    await websocket.send_json({"type": "pong"})
 
                 else:
                     logger.warning(f"Unknown message type: {msg_type}")
