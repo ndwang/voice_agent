@@ -187,6 +187,8 @@
         const WATCHDOG_CHECK_MS = 2000;
         const WATCHDOG_MS = 15000;
         const seenIds = new Set();
+        let reconnectTimer = null;
+        let isConnecting = false;
 
         const chatContainer = document.getElementById('chat-container');
 
@@ -387,15 +389,63 @@
         // ====================================================================
         // WebSocket
         // ====================================================================
+
+        function scheduleConnect() {
+            if (reconnectTimer !== null) return;
+            const delay = reconnectDelay;
+            reconnectDelay = Math.min(reconnectDelay * 2, maxReconnectDelay);
+            reconnectTimer = setTimeout(() => {
+                reconnectTimer = null;
+                connect();
+            }, delay);
+        }
+
+        // Force an immediate reconnect, cancelling any pending timer.
+        // Used by visibilitychange / pageshow to recover from OBS scene switches
+        // where JS timers may have been throttled or the socket stuck in CONNECTING.
+        function forceReconnect() {
+            if (reconnectTimer !== null) { clearTimeout(reconnectTimer); reconnectTimer = null; }
+            reconnectDelay = 1000;
+            if (ws && ws.readyState === WebSocket.OPEN) return;
+            // If stuck in CONNECTING, detach handlers and let the stale socket die quietly.
+            if (ws && ws.readyState !== WebSocket.CLOSED) {
+                const stale = ws;
+                ws = null;
+                stale.onclose = null;
+                stale.onerror = null;
+                stale.onmessage = null;
+                stale.close();
+            }
+            connect();
+        }
+
         async function connect() {
+            // Guard: skip if a connection is already live or being established.
+            if (isConnecting) return;
+            if (ws && (ws.readyState === WebSocket.CONNECTING || ws.readyState === WebSocket.OPEN)) return;
+            isConnecting = true;
+
             // Catch up on anything missed while disconnected. seenIds dedupes
             // against already-rendered messages, so this is safe on reconnect.
             await loadSnapshot();
 
             const wsProto = (window.location.protocol === 'https:') ? 'wss:' : 'ws:';
-            ws = new WebSocket(`${wsProto}//${window.location.host}/ws/stream`);
+            const sock = new WebSocket(`${wsProto}//${window.location.host}/ws/stream`);
+            ws = sock;
+            isConnecting = false;
 
-            ws.onopen = () => {
+            // If the socket stays CONNECTING for too long (OBS throttling network I/O
+            // while in the background), close it so onclose fires and schedules a retry.
+            const connectTimeout = setTimeout(() => {
+                if (sock.readyState === WebSocket.CONNECTING) {
+                    console.warn('WebSocket connect timeout, retrying...');
+                    sock.close();
+                }
+            }, 10000);
+
+            sock.onopen = () => {
+                clearTimeout(connectTimeout);
+                if (sock !== ws) { sock.close(); return; }
                 reconnectDelay = 1000;
                 lastActivityTime = Date.now();
                 const channels = [];
@@ -403,20 +453,22 @@
                 if (showSuperchat) channels.push('superchat');
                 if (showGift) channels.push('gift');
 
-                ws.send(JSON.stringify({ type: 'subscribe', channels }));
+                sock.send(JSON.stringify({ type: 'subscribe', channels }));
 
                 // Server broadcasts a heartbeat every ~5s; if nothing arrives
                 // for WATCHDOG_MS, force a reconnect.
                 if (watchdogInterval) clearInterval(watchdogInterval);
                 watchdogInterval = setInterval(() => {
+                    if (sock !== ws) { clearInterval(watchdogInterval); return; }
                     if (Date.now() - lastActivityTime > WATCHDOG_MS) {
                         console.warn('WebSocket watchdog: no activity, forcing reconnect');
-                        ws.close();
+                        sock.close();
                     }
                 }, WATCHDOG_CHECK_MS);
             };
 
-            ws.onmessage = (event) => {
+            sock.onmessage = (event) => {
+                if (sock !== ws) return;
                 lastActivityTime = Date.now();
                 const data = JSON.parse(event.data);
 
@@ -457,30 +509,40 @@
                 }
             };
 
-            ws.onclose = (ev) => {
-                if (watchdogInterval) clearInterval(watchdogInterval);
-                // Helpful for diagnosing OBS browser-source reload/deactivation vs network drops
+            sock.onclose = (ev) => {
+                clearTimeout(connectTimeout);
+                if (watchdogInterval) { clearInterval(watchdogInterval); watchdogInterval = null; }
                 try {
                     console.warn('WebSocket closed', { code: ev?.code, reason: ev?.reason, wasClean: ev?.wasClean });
                 } catch (e) {}
-                setTimeout(connect, reconnectDelay);
-                reconnectDelay = Math.min(reconnectDelay * 2, maxReconnectDelay);
+                // Only schedule if this is still the active socket (avoid stale-socket loops).
+                if (sock === ws) scheduleConnect();
             };
 
-            ws.onerror = (error) => {
+            sock.onerror = (error) => {
+                if (sock !== ws) return;
                 console.error('WebSocket error:', error);
             };
         }
 
         // OBS fires visibilitychange when a scene becomes active/inactive.
-        // Force reconnect when the source becomes visible to avoid stale connections.
+        // forceReconnect handles all readyState values, including CONNECTING,
+        // which the old check missed when JS timers were throttled while hidden.
         document.addEventListener('visibilitychange', () => {
-            if (document.visibilityState === 'visible') {
-                if (!ws || ws.readyState === WebSocket.CLOSED || ws.readyState === WebSocket.CLOSING) {
-                    reconnectDelay = 1000;
-                    connect();
-                }
-            }
+            if (document.visibilityState === 'visible') forceReconnect();
+        });
+
+        // pageshow fires when OBS restores the page from the back-forward cache
+        // (persisted=true) — visibilitychange alone may not fire in that case.
+        window.addEventListener('pageshow', (e) => {
+            if (e.persisted) forceReconnect();
+        });
+
+        // When OBS regains focus after being in the background, the scene stays
+        // "visible" the whole time so visibilitychange never fires. Reconnect here
+        // in case the server dropped the connection while OBS was backgrounded.
+        window.addEventListener('focus', () => {
+            if (!ws || ws.readyState !== WebSocket.OPEN) forceReconnect();
         });
 
         connect();

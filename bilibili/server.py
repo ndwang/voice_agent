@@ -84,17 +84,16 @@ def main():
     logger.info(f"OBS Overlay: http://{HOST}:{PORT}/obs.html")
     logger.info(f"WebSocket: ws://{HOST}:{PORT}/ws/stream")
 
-    # Start uvicorn with WebSocket ping configuration.
-    # ws_ping_interval: server sends a protocol-level ping every N seconds (handled
-    #   by the browser's C++ WebSocket layer, so works even when JS is throttled).
-    # ws_ping_timeout: close the connection if no pong received within N seconds,
-    #   cleaning up zombie connections. Client reconnects in ~1s via onclose.
+    # Disable protocol-level WebSocket ping. On a local loopback connection TCP
+    # never drops on its own, so the ping only serves to kill the connection when
+    # OBS suspends its browser process (Windows Efficiency Mode) and CEF stops
+    # responding to PINGs. Application-level keepalive is handled by the server's
+    # heartbeat messages every 5s and the client's 15s watchdog.
     uvicorn.run(
         app,
         host=HOST,
         port=PORT,
-        ws_ping_interval=5.0,
-        ws_ping_timeout=20.0
+        ws_ping_interval=None,
     )
 
 
